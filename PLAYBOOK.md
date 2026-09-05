@@ -626,6 +626,19 @@ edge grades `agency-not-artefact` against a document that is plainly the
 target itself, check the node's title against the publisher's before
 concluding anything about the evidence.
 
+**Naming an organisation does not name the instrument that created it** (Thomas,
+2026-09-05, ruling on the promotion refused in the grader round). The ≥4-character
+acronym rule cannot tell the two apart: `gq-inege-anuario-2024` graded A against
+`afristat-founding-treaty-1993` on a budget-table row reading "Contribuciones del
+Gobierno a AFRISTAT ─ ─ ─ 380", which names the ORGANISATION that the 1993 founding
+TREATY brought into being — a membership subscription, not a citation of the treaty
+text. The promotion was refused and the edge stays at B. This is the acronym-rule
+sibling of "naming the agency is not naming the artefact" and it decides the same
+way: a body and the document constituting it are two artefacts, and a document that
+names the body has not named the instrument. Nothing in the matcher can catch it —
+the acronym is genuinely in the target's own title — so the guard is this paragraph
+and the reviewer.
+
 **Chart/figure-caption sourcing clears the evidence bar** (Thomas,
 2026-08-30) — a figure-source line under a chart is a citation, same
 standing as body-text prose. General ruling for every future round, not

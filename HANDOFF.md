@@ -9,13 +9,14 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 (grader rulings round)
+Last updated: 2026-09-05 (India flips, Assam re-cite, doc-bloat review)
 
 ---
 
 ## 1. Read next
 
-`PLAYBOOK.md` — whole, it is short now. Then, **routed by what you are doing**:
+`PLAYBOOK.md` §2, §6, §7 at minimum — the whole file is 40 KB and its §1
+duplicates the table below (item 10). Then, **routed by what you are doing**:
 
 | doing | read |
 |---|---|
@@ -33,45 +34,51 @@ Then project memory, newest first. Git status: never state it (rule 1).
 
 ## 2. Current state
 
-Corpus **3,343 reports / 2,632 dependencies**. **620 A · 1,335 B · 677 C**,
-A-share **23.6%**. `npm run validate` exits 0, `tsc --noEmit` clean, 123/123
-logic tests, grader selftest **51/51**, `public/corpus-data.json` regenerated.
-**Grade counts come from `validate` only.**
+Corpus **3,344 reports / 2,633 dependencies**. **622 A · 1,336 B · 675 C**,
+A-share 23.6%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
+**51/51**, `public/corpus-data.json` regenerated. **Grade counts come from
+`validate` only.**
 
-**All five grader findings are applied and measured** — the A bar tests any
-matched span, `namesTarget` has a whitespace-insensitive pass, the single-token
-path reads Hangul and `title_aliases`, a whole title tolerates one interpolated
-word, and **a PDF is now read TWICE and graded against both renderings**
-(`pdftotext -layout` primary, pdf.js reading order in `Fetched.altText`;
-Thomas, 2026-09-05, on the measurement that showed a straight swap was a wash).
-45 grades written across two passes (13, then 32 of 34 — two already stood at
-the better grade), one promotion refused with a reason, **nothing written down**;
-the `token-pdf` mislabelling is fixed both places. **`pdfjs-dist` is pinned in
-`devDependencies` — run `npm install` before the next grader run**; without it
-the child process fails and the grader degrades to its old behaviour rather
-than breaking.
+**Thomas's 2026-09-05 rulings are executed.** The five siblings carrying the
+railways defect are **flipped** — `in-mospi-iip`, `in-mospi-hces`,
+`in-rbi-balance-of-payments`, `in-mospi-asuse` and
+`in-des-agricultural-statistics-at-a-glance` now run FROM
+`in-mospi-national-accounts-statistics`, each basis carrying a DIRECTION
+CORRECTED note, all still C — the arrow changed, not the evidence. And
+**`WEAK_BASIS_PATTERNS` stays exactly as it is**: a basis can cap its own edge,
+that is accepted, do not re-open it.
 
-**Uncommitted backlog** (carried forward from the previous handoff, never read
-from git): the Basel III round, the transport round, the PLAYBOOK split,
-browser-pass round 5, and now this round — `scripts/grade-evidence.ts`,
-`package.json`, 28 `src/data/research/` slices, 34 `evidence-cache/` records,
-`public/corpus-data.json`, one new `notes/` file, and ten
-`Claude outputs/{rulings,both}-2026-09-05-*.json`. **Nothing in `src/` outside the
-corpus, and no `scripts/` file except the grader, was modified** — `package.json`
-gained one pinned devDependency. Scratch is in `tmp_work/sandbox-2026-09-04/`.
+**`in-assam-economic-survey -> in-state-gsdp-series` re-cited C→B**, off the
+dead index onto the survey PDF, read through the grader's snapshot strategy. **Cite the LIVE url** — a connection reset is
+`block: 'network'`, which `snapshotRescuable` allows; citing the Wayback url
+instead throws that machinery away.
+
+**The four dead Indian hosts are DOWN, not walled.** `pc.odisha.gov.in`,
+`des.assam.gov.in`, `descg.gov.in`, `www.mod.gov.in` and the
+`finance.odisha.gov.in` mirror reset the bridge VM, the cloud sandbox AND
+Thomas's own Chrome, with `mospi.gov.in` 200 in the same call — **Chrome is not
+a third route for these**. What Wayback holds for each: project memory
+`india_reprobe_2026-09-05`.
+
+**Uncommitted backlog** (carried forward, never read from git): the Basel III
+round, the transport round, the PLAYBOOK split, browser-pass round 5, the
+grader rulings round, the rulings + Basel II round, and now this one —
+`in-india-grok-2026-08.json`, `public/corpus-data.json`, one `evidence-cache/`
+record, `notes/doc-bloat-2026-09-05.md`. Scratch: `tmp_work/sandbox-2026-09-04/`,
+`-2026-09-05/`, `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`.
 
 **Renderer unchanged** — grade-driven opacity, A-only ranking cut,
 `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift
 watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
-2026-09-04). Three reports ISOLATED and shelved:
-`sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`,
-`brics-johannesburg-ii-declaration-2023`.
+2026-09-04). Shelved ISOLATED: `sc-oag-annual-reports-2022-2024`,
+`so-fgs-financial-governance-reports`, `brics-johannesburg-ii-declaration-2023`,
+`tz-dar-es-salaam-city-council-budget-2026`.
 
 **Research debt**: 0 no-URL, 0 dead-URL, 0 `empty:no-extractor`, 0
-`network:curl-3`; 5 bare-homepage edges. **The browser pass is CLOSED.**
+`network:curl-3`; 4 bare-homepage edges. **The browser pass is CLOSED.**
 
-**The 2026-08-31 audit** is at `archive/audits/`: F-01, F-02, F-13 closed,
-F-03 bounded, F-04 closed on its no-URL half. F-06 and F-14 open.
+**The 2026-08-31 audit** (`archive/audits/`): **F-06 and F-14 open**, the rest
+closed or bounded.
 
 ---
 
@@ -79,23 +86,20 @@ F-03 bounded, F-04 closed on its no-URL half. F-06 and F-14 open.
 
 ### [Agent] — in this order
 
-1. **Re-cites: 4 India + 1 Tanzania left, and two of them changed shape.**
-   Himachal Pradesh is done (C→A). **Indian Railways is now a Chrome capture,
-   not research** — the Year Book PDF path is known and written down in the
-   round file; the index page answers the bridge VM, the `/uploads/` path
-   refuses both machines. Odisha, Assam, Chhattisgarh, MoD were dead from both
-   machines on 2026-09-05 — re-probe. All four state-survey edges point at
-   `in-state-gsdp-series`, which passes the naming test at 4/5, so **an A is
-   reachable for each**, as Himachal proved. Tanzania is a drop candidate, not
-   a re-cite (Thomas 3).
+1. **India state surveys — Tamil Nadu and Haryana are UP.** `des.tn.gov.in`
+   and `esaharyana.gov.in` both answered 200 on 2026-09-05; both edges are C and
+   both point at `in-state-gsdp-series`, which passes the naming test at 4/5, so
+   **an A is reachable for each** — Himachal and Assam are the worked examples.
+   Maharashtra, Delhi and Uttarakhand reset today; Odisha, Chhattisgarh and MoD
+   are closed for now (§2). **The railways edge grades off MoSPI's NAS *Sources
+   and Methods* naming the Year Book, not off the Year Book itself.**
 2. **OCR one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure -> imf-sdds`,
    200 / 864,760 bytes / 15 chars of text. Needs `rus.traineddata`; the VM has
    working network. Caps at B.
-3. **Basel II is one fetch from a node.** SBV's Financial Soundness Indicators
-   table (`sbv.gov.vn/en/web/sbv_portal/w/sbv606221`) cites Circulars 41/2016
-   and 22/2019 with explicit "Applying Basel II"; the old drop was on the wrong
-   target (`vn-npl`). Also one fetch: `tw-financial-stability`. No node without
-   an edge; match `basel-iii`'s standalone shape.
+3. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
+   2026-09-05 drop. DCC's budget-summary attachment sits behind a JS fetch never
+   completed; a DCC document naming Cap. 290 mints the edge properly. One
+   browser pass, or shelve it explicitly.
 4. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
    `ess-peer-review-final-report` edges, round 5's 29 reverted quotes, the
    EDP-inventory fragments. Recount first; 58 circabc edges left, and a re-cite
@@ -113,27 +117,28 @@ F-03 bounded, F-04 closed on its no-URL half. F-06 and F-14 open.
 9. Doc hygiene: README:130, REPORTS:9–32, START-HERE:31/37 (its ranking
    sentence is F-07 and is now wrong in a NEW way — `brics-jsp` left the top
    ten); `notes/mint-2026-08-20.md`; retire `check-urls.ts` into the grader.
+10. **Then the doc cleanup — `notes/doc-bloat-2026-09-05.md`, all five trims,
+    Thomas approved 2026-09-05.** Do it AFTER you have moved items above, not
+    instead of them. Measured: §1's reading list is **~220 KB** before the first
+    memory topic file; the trims cut about 60%. REPORTS' 43.8 KB "Decisions"
+    becomes a one-line index with the prose in `archive/decisions/`; REPORTS'
+    "Legibility at scale" and "Still genuinely open" go — both written at 121
+    nodes, and the second claims the graph has no orphans, which §2 contradicts
+    (move anything still live into this todo in the same edit); PLAYBOOK §1's
+    table goes, replaced by a pointer here, and its two dead pointers plus §5's
+    "read `notes/grok-diary.md` FIRST" are fixed — **that file exists nowhere,
+    `archive/` included**; `next-agent-prompt-2026-09-03.md` retires and the
+    -09-04 Standing block stops restating the rules a third time; and the **16
+    orphan `notes/` files** listed in the review move to `_to_delete/`, each
+    logged against the memory entry that supersedes it. Rule 6 throughout.
+    Archive `REPORTS.md` and `PLAYBOOK.md` first, and re-measure afterwards so
+    the number here is real.
 
 ### [Thomas] — only you can
 
-1. **`gq-inege-anuario-2024 -> afristat-founding-treaty-1993` — I refused a
-   promotion, tell me if that was wrong.** It graded A on "Contribuciones del
-   Gobierno a AFRISTAT ─ ─ ─ 380 ─", a budget-table row naming the
-   ORGANISATION, for a node that is the 1993 founding TREATY. Left at B. The
-   general question behind it: the ≥4-character acronym rule cannot tell an
-   institution from the instrument that created it.
-2. **`tz-dar-es-salaam-city-council-budget-2026 -> tz-lgfa-cap290-service-levy`
-   is a drop candidate** (rule 13, so not executed). Its own basis says the
-   budget page "does not quote the Act by name/section — recorded as 'cites' on
-   the strength of the shared revenue-category framework". Self-declared
-   assertion-only.
-3. **`in-railways-yearbook -> in-mospi-national-accounts-statistics` may be
-   pointing the wrong way** — the basis describes railway statistics feeding
-   National Accounts, which is the opposite of `uses_data_from`. Worth settling
-   before someone captures the Year Book for it.
-4. Housekeeping (agents cannot delete — rule 6): `_to_delete/` still holds
-   `sweep-2026-09-04-basel-session/`, and `tmp_work/sandbox-2026-09-04/` has
-   the zip junk named in §2.
+1. Housekeeping (agents cannot delete — rule 6): `tmp_work/sandbox-2026-09-05/`
+   holds one staging tarball, `repo-src-2026-09-05.tgz`; `tmp_work/` also now
+   holds `HANDOFF-backup-before-2026-09-05-edit.md`. All safe to remove.
 
 ---
 

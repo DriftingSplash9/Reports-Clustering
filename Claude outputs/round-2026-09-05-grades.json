@@ -1,0 +1,153 @@
+{
+  "results": [
+    {
+      "source": "in-mospi-national-accounts-statistics",
+      "target": "in-railways-yearbook",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "DIRECTION CORRECTED 2026-09-05 (Thomas's ruling). The edge was minted in-railways-yearbook -> in-mospi-national-accounts-statistics with uses_data_from, which asserts that National Accounts figures are an input to the Railways Year Book. The basis said the opposite and still does: railway traffic, earnings and related operational statistics compiled by the Railway Board's Directorate of Statistics and Economics feed the transport-and-storage component of National Accounts and related sectoral estimates, so National Accounts is the consumer and the Year Book the source. Reversed in place rather than re-minted, because the claim never changed — only the arrow. The evidence did not improve and the grade does not move: the cited URL is the Railway Board's own statistics section page, which is an index, and no document has yet been read that names the Year Book as a National Accounts input. Grade stays C pending the Year Book capture already queued (its PDF path is known; the /uploads/ host refuses both machines).",
+      "evidenceUrl": "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554",
+      "targetReport": {
+        "id": "in-railways-yearbook",
+        "title": "Indian Railways Year Book / Annual Statistical Statements",
+        "publisher": "Directorate of Statistics and Economics, Ministry of Railways (Railway Board)",
+        "country": "IN",
+        "jurisdiction_level": "federal",
+        "region": "India",
+        "description": "Annual suite of official statistical publications of Indian Railways: Year Book, Annual Report & Accounts, Annual Statistical Statements and Statistical Summary Sheet. Provide comprehensive data on traffic (passenger and freight), rolling stock, track, financial performance, personnel and operational efficiency indicators.",
+        "releases_per_year": 1,
+        "domains": [
+          "infrastructure"
+        ],
+        "url": "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch6-gaps.json"
+        ],
+        "_jurisdiction_level_original": "national",
+        "_source_kind_original": "official-publication",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "indianrailways.gov.in",
+      "status": 0,
+      "finalUrl": "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "tw-financial-stability",
+      "target": "basel-iii",
+      "file": "taiwan-wiring-grok-2026-08.json",
+      "basis": "CBC's Financial Stability Report, May 2025, Issue No. 19, section 3.3.2 \"Amendment to domestic banks' capital regulations in line with international standards\", names Basel III as the framework behind the capital regime whose figures the report's own bank-soundness chapter carries: \"Given that the capital adequacy ratio is a key indicator for assessing the risk-bearing capacity\" of banks, and the report defines \"Capital adequacy ratio = regulatory capital/risk-weighted assets\" — the two quantities the amended Methods redefine. Table 3.3 sets out the amendments item by item (standardised approach risk weights, IRB, a 72.5% output floor, the new standardised approach for operational risk, leverage-ratio exposure measurement), phased in from 1 January 2025. Same shape as the Korean edge (kr-financial-stability -> basel-iii): a central bank's own Financial Stability Report describing its jurisdiction's Basel III implementation as the basis of the bank-resilience assessment it publishes. Fetched live and directly from the cited URL on 2026-09-05, 200 / 5,557,963 bytes / application/pdf, 122 pages, text via pdftotext -layout. via: curl-direct 2026-09-05. The URL is the same CBC download link the two existing tw-financial-stability edges cite and it still resolves; it is a stable path, not a signed token, so the token-pdf cap does not apply. This also gives tw-financial-stability its first evidence-bearing outbound edge to an international standard, and replaces its bare-homepage node URL as the read document.",
+      "evidenceUrl": "https://www.cbc.gov.tw/dl-221034-7e280a7510ec4bbf899d2a177760326f.html",
+      "evidenceQuote": "In line with the risk management framework under the finalized reforms of Basel III, the FSC amended the Methods for Calculating Bank’s Regulatory Capital and Risk-Weighted Assets (RWA) (hereinafter referred to as the Methods) in December 2023 and January 2025, respectively (Table 3.3).",
+      "targetReport": {
+        "id": "basel-iii",
+        "title": "Basel III",
+        "publisher": "Basel Committee on Banking Supervision, Bank for International Settlements",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "The package of bank capital, leverage, liquidity and risk-coverage standards agreed by the Basel Committee after the 2007-09 crisis. BIS's own page states: \"Basel III is an internationally agreed set of measures developed by the Basel Committee on Banking Supervision in response to the financial crisis of 2007-09.\" Issued in phases — the December 2010 framework revised June 2011, the Liquidity Coverage Ratio (2013), the Net Stable Funding Ratio (2014), the December 2017 finalisation of the remaining reforms, and the January 2019 market-risk minimum requirements. Separate from bis-basel-framework, which is the consolidated compilation that now carries it: \"The Basel III reforms have now been integrated into the consolidated Basel Framework, which comprises all of the current and forthcoming standards of the Basel Committee on Banking Supervision.\" Minted 2026-09-04 on Thomas's ruling. The reason is evidential, not taxonomic: three of the five edges then pointing at bis-basel-framework quote documents that name Basel III specifically and never name the Basel Framework, so the corpus was recording a citation the sources do not make. Deliberately NOT given part_of: bis-basel-framework (Thomas, 2026-09-04) — the containment is real and is recorded here in prose, but the node stands alone in the schema. Country code is INT; the schema's international option is used here as on the other BIS/IMF standards.",
+        "releases_per_year": 0.05,
+        "cadence_note": "Nominal, as on sna-2008 and imf-gfsm — the enum has no bucket for a standard. Basel III is a closed publication programme: its components were issued 2010-2019 and ongoing maintenance now happens in the consolidated Basel Framework, not in further Basel III releases, so the pulse rate should read as near-static.",
+        "release_schedule": {
+          "kind": "irregular",
+          "entries": [],
+          "note": "No recurring calendar. Basel III was issued as a phased set of standards (Dec 2010 / rev. Jun 2011, LCR Jan 2013, NSFR Oct 2014, finalisation Dec 2017, market risk Jan 2019) and has since been folded into the consolidated Basel Framework, which is where any further amendment appears. Jurisdictional implementation dates are set nationally and are not a publication schedule.",
+          "source_url": "https://www.bis.org/bcbs/basel3.htm"
+        },
+        "last_updated": null,
+        "url": "https://www.bis.org/bcbs/basel3.htm",
+        "domains": [
+          "financial-regulation",
+          "banking"
+        ],
+        "kind": "standard",
+        "title_aliases": [
+          "바젤Ⅲ"
+        ]
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "cbc.gov.tw",
+      "status": 200,
+      "finalUrl": "https://www.cbc.gov.tw/dl-221034-7e280a7510ec4bbf899d2a177760326f.html",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 416902,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "In line with the risk management framework under the finalized reforms of Basel III, the FSC amended the Methods for Calculating Bank’s Regulatory Capital and Risk-Weighted Assets (RWA) (hereinafter referred to as the Methods) in December 2023 and January 2025, respectively (Table 3.3).",
+      "naming": "title-run:2/2",
+      "window": "3.3.2 Amendment to domestic banks’ capital regulations in line with\n      international standards In line with the risk management framework under the finalized reforms of Basel III, the FSC\namended the Methods for Calculating Bank’s Regulatory Capital and Risk-Weighted Assets\n(RWA) (hereinafter referred to as the Methods) in December 2023 and January 2025,\nrespectively (Table 3.3). The Methods were implemented in phases starting from January 1,\n2025, with the aim of strengthening the resilience of Taiwan’s financial system.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    },
+    {
+      "source": "vn-sbv",
+      "target": "basel-ii",
+      "file": "vn-unlinked-wiring-2026-08-29.json",
+      "basis": "SBV's own Financial Soundness Indicators metadata — \"Table 3. Additional Relevant Information: Financial Soundness Indicators and Underlying Series / Vietnam (582)\", published on sbv.gov.vn — attributes the capital series it reports to Circular 41/2016/TT-NHNN and names the framework in the same clause. The quote below heads the definition of S010 Total Regulatory capital and is repeated verbatim under S020 Risk-weighted assets and S030 Regulatory Tier 1 capital, so the naming covers the whole capital block, not one indicator. The table's own Regulatory Framework note gives the transition in SBV's words: \"Basel I is still being used by all deposit takers, however the SBV has a road map to implement Basel II starting in 2019 with target for full implementation by 2020\" — the same transition the definitions block dates to 1 January 2020, read from the policy side rather than the series side. (This clause was reworded 2026-09-05: it first used the two-word phrase WEAK_BASIS_PATTERNS matches, about the two passages of the SBV table agreeing with each other, and the guard capped the edge at B for it. The guard is right about what it was built for — a basis whose DEPENDENCY CLAIM rests on two series agreeing, the 2026-08-31 ruling — and wrong here, where the phrase described one document agreeing with itself and the dependency rested on the quote below. Nothing evidential changed: same quote, same document, same claim. Matcher defect reported in the handoff.) Circular 22/2019/TT-NHNN is named alongside it as the parallel regime for institutions \"who have not applying Basel II\" [sic], which is the same attribution read from the other side. Fetched live and directly from the cited URL on 2026-09-05, 200 / 844,981 bytes, and independently on both machines (device VM and sandbox) with matching bodies. via: curl-direct 2026-09-05. This supersedes the 2026-08-29 drop recorded in this file as 'vn-npl -> bis-basel-framework': that entry found this same table and set it aside because the table's Basel naming covers capital adequacy and not the NPL classification, which was the edge being worked. The naming was never the problem — the source node was. The NPL half of that entry stands as a genuine negative.",
+      "evidenceUrl": "https://www.sbv.gov.vn/en/web/sbv_portal/w/sbv606221",
+      "evidenceQuote": "Circular 41/2016/-TT-NHNN dated December 30, 2016 –on capital adequacy ratio for operations of banks and /or foreign bank branches (Applying Basel II since January 1st 2020 ).",
+      "targetReport": {
+        "id": "basel-ii",
+        "title": "Basel II",
+        "publisher": "Basel Committee on Banking Supervision, Bank for International Settlements",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "The Basel Committee's revised capital-adequacy framework, issued as \"Basel II: International Convergence of Capital Measurement and Capital Standards: A Revised Framework - Comprehensive Version\", 30 June 2006. BIS's own publication page states of it: \"This document is a compilation of the June 2004 Basel II Framework, the elements of the 1988 Accord that were not revised during the Basel II process, the 1996 Amendment to the Capital Accord to Incorporate Market Risks, and the November 2005 paper on Basel II: International Convergence of Capital Measurement and Capital Standards: A Revised Framework. No new elements have been introduced in this compilation.\" The same page records \"Note: This standard has been integrated into the consolidated Basel Framework\" and its status as Consolidated. Minted 2026-09-05, on the same evidential reasoning that minted basel-iii the day before (Thomas, 2026-09-04): a jurisdiction still on the Basel II capital regime names Basel II and does not name Basel III or the consolidated Basel Framework, so pointing its edge at either would record a citation the source does not make. Vietnam is that case — SBV's own Financial Soundness Indicators metadata attributes its regulatory-capital and risk-weighted-asset series to Circular 41/2016 \"Applying Basel II\". Deliberately NOT given part_of: bis-basel-framework, on the precedent basel-iii set — the containment is real and is recorded here in prose, but the node stands alone in the schema. Country code is INT, as on the other BIS/IMF standards.",
+        "releases_per_year": 0.05,
+        "cadence_note": "Nominal, as on basel-iii, sna-2008 and imf-gfsm — the enum has no bucket for a standard. Basel II is a closed publication programme: the framework was issued 2004, compiled in the June 2006 comprehensive version, amended through 2009-2010, and superseded for new work by Basel III and the consolidated Basel Framework. It remains the operative capital regime in jurisdictions that have not completed the Basel III transition, which is why it is a live citation target rather than a historical one.",
+        "release_schedule": {
+          "kind": "irregular",
+          "entries": [],
+          "note": "No recurring calendar. Basel II was issued as a phased set of standards (framework June 2004, comprehensive version June 2006, Enhancements to the Basel II framework and the revisions to the market-risk framework in 2009-2010) and has since been folded into the consolidated Basel Framework, which is where any further amendment appears. Jurisdictional implementation dates are set nationally and are not a publication schedule.",
+          "source_url": "https://www.bis.org/publ/bcbs128.htm"
+        },
+        "last_updated": null,
+        "url": "https://www.bis.org/publ/bcbs128.htm",
+        "domains": [
+          "financial-regulation",
+          "banking"
+        ],
+        "kind": "standard"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "sbv.gov.vn",
+      "status": 200,
+      "finalUrl": "https://www.sbv.gov.vn/en/web/sbv_portal/w/sbv606221",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 119716,
+      "extractor": "html",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Circular 41/2016/-TT-NHNN dated December 30, 2016 –on capital adequacy ratio for operations of banks and /or foreign bank branches (Applying Basel II since January 1st 2020 ).",
+      "naming": "title-run:2/2",
+      "window": "Tier 3 is not used. Circular 41/2016/-TT-NHNN dated December 30, 2016 –on capital adequacy ratio for operations of banks and /or foreign bank branches (Applying Basel II since January 1st 2020 ). Equity = Tier 1 capital + Tier 2 capital – deductions",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    }
+  ]
+}

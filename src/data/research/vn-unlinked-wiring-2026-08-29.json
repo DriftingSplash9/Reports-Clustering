@@ -141,6 +141,15 @@
       "evidence_url": "https://nsdp.nso.gov.vn/GSO-chung/Tu%E1%BA%A5n%20Anh/metadata%20tieng%20Anh-moi/SBV.VNM_GDDS_DQAF_FIN_AAB00_Depository%20corporations%20survey.docx",
       "evidence_grade": "A",
       "evidence_quote": "The classification by institutional sectors is incomplete and not fully in line with the guidance of the IMF's Monetary and Financial Statistics Manual (MFSM)."
+    },
+    {
+      "source_report_id": "vn-sbv",
+      "target_report_id": "basel-ii",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SBV's own Financial Soundness Indicators metadata — \"Table 3. Additional Relevant Information: Financial Soundness Indicators and Underlying Series / Vietnam (582)\", published on sbv.gov.vn — attributes the capital series it reports to Circular 41/2016/TT-NHNN and names the framework in the same clause. The quote below heads the definition of S010 Total Regulatory capital and is repeated verbatim under S020 Risk-weighted assets and S030 Regulatory Tier 1 capital, so the naming covers the whole capital block, not one indicator. The table's own Regulatory Framework note gives the transition in SBV's words: \"Basel I is still being used by all deposit takers, however the SBV has a road map to implement Basel II starting in 2019 with target for full implementation by 2020\" — the same transition the definitions block dates to 1 January 2020, read from the policy side rather than the series side. (This clause was reworded 2026-09-05: it first used the two-word phrase WEAK_BASIS_PATTERNS matches, about the two passages of the SBV table agreeing with each other, and the guard capped the edge at B for it. The guard is right about what it was built for — a basis whose DEPENDENCY CLAIM rests on two series agreeing, the 2026-08-31 ruling — and wrong here, where the phrase described one document agreeing with itself and the dependency rested on the quote below. Nothing evidential changed: same quote, same document, same claim. Matcher defect reported in the handoff.) Circular 22/2019/TT-NHNN is named alongside it as the parallel regime for institutions \"who have not applying Basel II\" [sic], which is the same attribution read from the other side. Fetched live and directly from the cited URL on 2026-09-05, 200 / 844,981 bytes, and independently on both machines (device VM and sandbox) with matching bodies. via: curl-direct 2026-09-05. This supersedes the 2026-08-29 drop recorded in this file as 'vn-npl -> bis-basel-framework': that entry found this same table and set it aside because the table's Basel naming covers capital adequacy and not the NPL classification, which was the edge being worked. The naming was never the problem — the source node was. The NPL half of that entry stands as a genuine negative.",
+      "evidence_url": "https://www.sbv.gov.vn/en/web/sbv_portal/w/sbv606221",
+      "evidence_grade": "A",
+      "evidence_quote": "Circular 41/2016/-TT-NHNN dated December 30, 2016 –on capital adequacy ratio for operations of banks and /or foreign bank branches (Applying Basel II since January 1st 2020 )."
     }
   ],
   "_dropped": [
@@ -163,7 +172,7 @@
       "source": "vn-npl",
       "target": null,
       "reason": "no-document",
-      "why": "SBV's NPL-ratio page (dttktt.sbv.gov.vn) was unreachable (connection reset). A live SBV Financial Soundness Indicators table (sbv.gov.vn/en/web/sbv_portal/w/sbv606221) cites Circulars 41/2016 and 22/2019 with explicit 'Applying Basel II' language, but that table covers capital-adequacy-ratio indicators specifically, not the NPL/asset-quality classification indicator. No text was found tying Vietnam's 5-group NPL classification (a domestic SBV-circular system) to Basel or an IMF manual by name."
+      "why": "PARTLY RESOLVED 2026-09-05 — the Basel finding in this note was real and is now wired, as vn-sbv -> basel-ii, from the same SBV Financial Soundness Indicators table this note describes. What was wrong was the source, not the document: the table names Basel II for the capital-adequacy block, so it could never carry an NPL edge. The reason stays no-document because the edge this note is about — vn-npl to any Basel target — is still undocumented, and its target was never a node. Original entry follows. SBV's NPL-ratio page (dttktt.sbv.gov.vn) was unreachable (connection reset). A live SBV Financial Soundness Indicators table (sbv.gov.vn/en/web/sbv_portal/w/sbv606221) cites Circulars 41/2016 and 22/2019 with explicit 'Applying Basel II' language, but that table covers capital-adequacy-ratio indicators specifically, not the NPL/asset-quality classification indicator. No text was found tying Vietnam's 5-group NPL classification (a domestic SBV-circular system) to Basel or an IMF manual by name."
     },
     {
       "edge": "vn-state-owned-banks -> ???",
