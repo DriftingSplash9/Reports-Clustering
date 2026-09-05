@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 15:50 UTC (regroup + rulings + quote guard + publisher-cluster round 1; DSBB 750 parked; F-14 closed)
+Last updated: 2026-09-05 (Thomas confirmed the CO reversals, no vetoes; publisher-cluster round 1; DSBB 750 parked; F-14 closed)
 
 ---
 
@@ -120,12 +120,12 @@ CAPMAS) unverified.
 
 1. **Commit the backlog** (§2). Housekeeping: `_to_delete/` (README lists
    it) — all junk.
-2. **Confirm two reversals** that supersede your 26 Aug "tossed" ruling:
-   `co-ipi -> co-emmet`, `co-bop -> co-comercio-exterior` — now minted on
-   DANE/Banrep methodology quotes (entries in `andean-wiring-grok-2026-08.json`).
-3. Optional vetoes: hedge-family caps `la-national-accounts -> isic`,
-   `sr-bop -> imf-bpm6`; `ar-eph -> ar-ley-17622` graded A off a questionnaire
-   header (B is arguably the ceiling).
+
+**Settled 2026-09-05 (Thomas):** the two Colombian reversals
+(`co-ipi -> co-emmet`, `co-bop -> co-comercio-exterior`) are confirmed and
+supersede the 26 Aug "tossed" ruling — `_dropped` entries in
+`andean-wiring-grok-2026-08.json` say so. No vetoes: the hedge-family caps and
+`ar-eph -> ar-ley-17622` at A stand as minted.
 
 ---
 
