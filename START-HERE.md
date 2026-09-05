@@ -205,10 +205,15 @@ control should be *for* is an open design question.
 The drawing-size problems that used to sit in this paragraph (nodes at 7 pixels,
 edges a tenth of a pixel wide) were fixed on 2026-08-19.
 
-**The obvious next thing:** more data. Alberta alone has around 330
-municipalities, 60 school authorities and 26 post-secondary institutions, and the
-method for adding a municipality is now proven on two of them. It's a grind
-rather than a puzzle.
+**The obvious next thing** used to be "more data" — Alberta alone has around
+330 municipalities, 60 school authorities and 26 post-secondary institutions, and
+the method for adding one is proven. That is deliberately on hold. Every edge
+now carries an evidence grade (A: the cited document was read and names the
+input; B: it supports the link loosely; C: a lead), and only 29% of edges are
+grade A. The current work is getting what is already here into shape — reading
+the cited documents, tightening the grades, fixing the picture — before the
+corpus grows again. Adding data to a graph whose links are 70% unverified would
+only make the picture bigger, not truer.
 
 ---
 
