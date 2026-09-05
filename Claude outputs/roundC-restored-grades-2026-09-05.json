@@ -1,0 +1,445 @@
+{
+  "results": [
+    {
+      "source": "ab-regulated-property-guidelines",
+      "target": "aer-general-well-data",
+      "file": "alberta-energy.json",
+      "basis": "The 2025 Alberta Linear Property Assessment Minister's Guidelines define 'AER means the Alberta Energy Regulator' and then read assessment inputs straight out of its records: for pipelines and wells licensed by the AER 'the assessment must reflect the characteristics and specifications as of October 31 of the assessment year, as contained in the records of the AER'. Pipeline assessment classification codes are set by 'pipeline material, outside diameter, and the maximum operating pressure ... as contained in the records of the AER', and well depth is taken field by field — 'Total depth (field WELL-TOTAL-DEPTH of AER General Well File record type 010)', 'Deepest shoe set depth (field SHOE-SET-DEPTH of AER General Well File record type 040)', plug tops from record type 055. The guidelines also rely on the AER Insolvency List.",
+      "evidenceUrl": "https://open.alberta.ca/dataset/6c713b0e-1c8a-4d5a-926f-89c3e07f5d6b/resource/22e226ee-647c-4dae-a547-2939af50a9b4/download/ma-alberta-linear-property-assessment-ministers-guidelines-2025.pdf",
+      "evidenceQuote": "Total depth (field WELL-TOTAL-DEPTH of AER General Well File record type 010)",
+      "targetReport": {
+        "id": "aer-general-well-data",
+        "title": "AER General Well Data Report (General Well File)",
+        "publisher": "Alberta Energy Regulator",
+        "country": "CA",
+        "jurisdiction_level": "provincial",
+        "region": "Alberta",
+        "description": "The Alberta Energy Regulator's authoritative record of every oil, gas, oil sands and water well licensed in Alberta, updated daily and distributed as fixed-format record types carrying licence number, well status, total depth, shoe set depth, plug intervals, material and operating pressure. It is the master register the province's regulated well and pipeline assessment reads from.",
+        "releases_per_year": 365,
+        "cadence_note": "Continuously maintained and updated daily; assessment freezes it at October 31 of the assessment year.",
+        "release_schedule": {
+          "kind": "stated-rule",
+          "entries": [
+            {
+              "from": "2026-08-12",
+              "to": "2026-08-12",
+              "precision": "day",
+              "covers": "Next daily update of the General Well Data Report",
+              "evidence": "implied"
+            }
+          ],
+          "rule": "The AER General Well Data Report \"is updated daily and includes basic drilling data for each oil, gas, oil sands, and water well in Alberta, including domestic water wells.\"",
+          "source_url": "https://www.aer.ca/data-and-performance-reports/activity-and-data/lists-and-activities/general-well-data",
+          "note": "This is a continuously/daily-updated dataset rather than a periodic dated release, consistent with the corpus's existing releases_per_year=365 value. There is no single 'next release' in the traditional sense - the file is refreshed every day, so the entry above simply reflects the next daily refresh from today's date (2026-08-11)."
+        },
+        "last_updated": null,
+        "url": "https://www.aer.ca/data-and-performance-reports/activity-and-data/lists-and-activities/general-well-data",
+        "domains": [
+          "energy-royalties",
+          "assessment"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "open.alberta.ca",
+      "status": 200,
+      "finalUrl": "https://open.alberta.ca/dataset/6c713b0e-1c8a-4d5a-926f-89c3e07f5d6b/resource/22e226ee-647c-4dae-a547-2939af50a9b4/download/ma-alberta-linear-property-assessment-ministers-guidelines-2025.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 341838,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Total depth (field WELL-TOTAL-DEPTH of AER General Well File record type 010)",
+      "naming": "title-run:3/5",
+      "window": "(ii)     If the count is less than ten, then the ACC for each of the wells remains WL50. 4.009        PROCESS FOR DETERMINING N* IN TABLE 4.09 FOR WELLS DESCRIBED IN 4.002(C)\n                     The process for determining n* for wells described in 4.002(c) is as follows:\n                     (1)   For each AER well status determine the least of:\n                           (A)     Total depth (field WELL-TOTAL-DEPTH of AER General Well File record type 010)\n                           (B)     Deepest shoe set depth (field SHOE-SET-DEPTH of AER General Well File record type 040)\n                            as contained in the records of the AER for the AER well statuses identified in 4.009(1), where the depth\n                            does not equal zero (0). If the shoe set depth, total depth and plug depth are all zero (0), then n* equals zero\n                            (0).",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    },
+    {
+      "source": "de-destatis-national-accounts",
+      "target": "de-destatis-cpi",
+      "file": "de-destatis-source-surveys.json",
+      "basis": "GNI inventory, Chapter 10.1, Serial No. 31: 'Consumer price index for Germany' marked as a source for the Production and Expenditure approaches.",
+      "evidenceUrl": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+      "evidenceQuote": "Consumer price index for Germany",
+      "targetReport": {
+        "id": "de-destatis-cpi",
+        "title": "Consumer Price Index for Germany",
+        "publisher": "Statistisches Bundesamt (Destatis)",
+        "country": "DE",
+        "jurisdiction_level": "federal",
+        "region": "Germany",
+        "description": "Germany's national consumer price index, EVAS register no. 61111, listed as one of the German GNI calculation's main data sources (production, expenditure and income approaches) in the GNI inventory's own Chapter 10 table. Confirmed live on Destatis's own site: a flash/expected estimate near month-end followed by the confirmed rate roughly ten days into the following month (e.g. 'Inflation rate of +2.8% expected in July 2026' on 30 July 2026, followed by 'Inflation rate at +2.3% in June 2026' on 10 July 2026 for the prior month).",
+        "releases_per_year": 12,
+        "cadence_note": "Live-verified on destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index -- a monthly press-release series, two releases per reference month (flash estimate, then confirmed figure), same two-stage pattern already seen for eurostat-hicp.",
+        "release_schedule": {
+          "kind": "published-calendar",
+          "entries": [
+            {
+              "from": "2026-08-12",
+              "to": "2026-08-12",
+              "precision": "day",
+              "covers": "Final CPI for July 2026",
+              "evidence": "documented"
+            },
+            {
+              "from": "2026-08-31",
+              "to": "2026-08-31",
+              "precision": "day",
+              "covers": "Preliminary CPI for August 2026"
+            },
+            {
+              "from": "2026-09-10",
+              "to": "2026-09-10",
+              "precision": "day",
+              "covers": "Final CPI for August 2026"
+            },
+            {
+              "from": "2026-09-30",
+              "to": "2026-09-30",
+              "precision": "day",
+              "covers": "Preliminary CPI for September 2026"
+            },
+            {
+              "from": "2026-10-13",
+              "to": "2026-10-13",
+              "precision": "day",
+              "covers": "Final CPI for September 2026"
+            },
+            {
+              "from": "2026-10-30",
+              "to": "2026-10-30",
+              "precision": "day",
+              "covers": "Preliminary CPI for October 2026"
+            },
+            {
+              "from": "2026-11-11",
+              "to": "2026-11-11",
+              "precision": "day",
+              "covers": "Final CPI for October 2026"
+            },
+            {
+              "from": "2026-11-30",
+              "to": "2026-11-30",
+              "precision": "day",
+              "covers": "Preliminary CPI for November 2026"
+            },
+            {
+              "from": "2026-12-10",
+              "to": "2026-12-10",
+              "precision": "day",
+              "covers": "Final CPI for November 2026"
+            },
+            {
+              "from": "2027-01-05",
+              "to": "2027-01-05",
+              "precision": "day",
+              "covers": "Preliminary CPI for December 2026"
+            }
+          ],
+          "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_270_611.html",
+          "note": "Destatis publishes both a preliminary estimate (around the last working day of the reference month) and final results (mid-following month) for the German CPI/HICP each month. The August 12, 2026 date is directly confirmed in the July 30, 2026 press release (PD26_270_611): 'Die endgültigen Ergebnisse für Juli 2026 werden am 12. August 2026 veröffentlicht.' Subsequent dates through end of 2026 are taken from Destatis's own release calendar search tool (Terminsuche) filtered for 'verbraucherpreisindex', consistent with the standard preliminary/final monthly pattern."
+        },
+        "last_updated": null,
+        "url": "https://www.destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index/_node.html",
+        "domains": [
+          "inflation"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "destatis.de",
+      "status": 200,
+      "finalUrl": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 1441610,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Consumer price index for Germany",
+      "naming": "title-run:5/5",
+      "window": "53111    Crafts census                                   X            X\n        31. 61111    Consumer price index for Germany                X            X\n        32. 62411    Labour cost survey                                           X            X\n        33.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    },
+    {
+      "source": "de-destatis-national-accounts",
+      "target": "de-destatis-quarterly-production-survey",
+      "file": "de-destatis-source-surveys.json",
+      "basis": "GNI inventory, Chapter 10.1, Serial No. 11: 'Quarterly production survey in manufacturing, mining and quarrying' marked as a source for the Production and Expenditure approaches.",
+      "evidenceUrl": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+      "evidenceQuote": "Quarterly production survey in manufacturing, mining and quarrying",
+      "targetReport": {
+        "id": "de-destatis-quarterly-production-survey",
+        "title": "Quarterly Production Survey in Manufacturing, Mining and Quarrying",
+        "publisher": "Statistisches Bundesamt (Destatis)",
+        "country": "DE",
+        "jurisdiction_level": "federal",
+        "region": "Germany",
+        "description": "EVAS register no. 42131, listed in the GNI inventory's Chapter 10 table as a production- and expenditure-approach source, one of a family of items surveys covering manufacturing/mining/quarrying (alongside the cost structure survey, EVAS 42251, and the investment survey, EVAS 42231). Named directly in Chapter 6's discussion of output calculation: 'Production statistics by products and industries (EVAS 42131)'. CORRECTION 2026-08-09 (EU/G.74.md): domains was ['manufacturing'], which is not a member of the Domain union and never has been — the sole such value corpus-wide, undetected because nothing outside types.ts reads the field. Retagged 'national-accounts', which is the corpus's own convention for a production or manufacturing survey feeding the accounts (statcan-msm, statcan-asml, nl-cbs-sbs, au-abs-australian-industry all carry it) and is what this record's own description says it is — a GNI-inventory production- and expenditure-approach source. No new Domain member was minted: one node is not evidence that the union is missing a category, and 'manufacturing' as used here is the survey's subject matter rather than an economic domain in this field's sense. Nothing about the survey itself is corrected; the original description above is unchanged.",
+        "releases_per_year": 4,
+        "cadence_note": "Cadence stated in the survey's own title as given in the GNI inventory's Chapter 10 table ('Quarterly production survey'); not independently re-verified on a separate Destatis genesis-online page this session.",
+        "release_schedule": {
+          "kind": "stated-rule",
+          "entries": [
+            {
+              "from": "2026-10-15",
+              "to": "2026-10-15",
+              "precision": "month",
+              "covers": "Q2 2026 (April-June) quarterly production results",
+              "evidence": "implied"
+            }
+          ],
+          "rule": "Quartalsergebnisse werden innerhalb von dreieinhalb Monaten nach Abschluss des Berichtsquartals veröffentlicht. (Quarterly results [of the Vierteljährliche Produktionserhebung, EVAS 42131] are published within three and a half months after the end of the reporting quarter.) Reporting deadline for respondents is no later than 12 days after the end of the reference quarter.",
+          "source_url": "https://download.statistik-berlin-brandenburg.de/4ab1766c7144d39b/d21708553166/MD_42121_2024.pdf",
+          "note": "This is the official coordinated federal/Länder metadata report (EVAS 42121/42131) for the 'Monatliche und Vierteljährliche Produktionserhebung im Bereich Verarbeitendes Gewerbe, Bergbau und Gewinnung von Steinen und Erden' survey, which is the German-language name for the report in question (EVAS 42131 = the quarterly survey). Q1 2026 results (ending 2026-03-31) would have been due by roughly 2026-07-15, which has already passed relative to today (2026-08-11); the next unreleased quarter is Q2 2026, due by roughly 2026-10-15. Note the standalone print publication 'Fachserie 4 Reihe 3.1' (dated PDF editions) was discontinued after the Q4/full-year 2018 edition ('Diese Publikation wird letztmalig mit der Jahresausgabe 2018 veröffentlicht'), but the underlying survey/data series (EVAS 42131, GENESIS-Online table 42131) continues on the stated quarterly schedule; results now appear only via GENESIS-Online tables rather than a dated PDF report, so no dated 'published-calendar' entries could be found, only the stated timeliness rule."
+        },
+        "last_updated": null,
+        "url": "https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Industrie-Verarbeitendes-Gewerbe/produktionserhebungen.html",
+        "domains": [
+          "national-accounts"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "destatis.de",
+      "status": 200,
+      "finalUrl": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 1441610,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Quarterly production survey in manufacturing, mining and quarrying",
+      "naming": "title-run:5/8",
+      "window": "31211    Census of buildings and housing                 X            X\n        11. 42131    Quarterly production survey in\n                          manufacturing, mining and quarrying             X            X 12.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    },
+    {
+      "source": "calgary-financial-statements",
+      "target": "calgary-budget",
+      "file": "grok-h1-calgary-municipal.json",
+      "basis": "Note 17 of the 2025 Annual Financial Report: 'Budget data presented in these consolidated financial statements are based upon the 2025 operating and capital budgets as approved by Council', with a full reconciliation of the Council-approved budget to the PSAS budget figures reported on the Consolidated Statement of Operations.",
+      "evidenceUrl": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf",
+      "evidenceQuote": "Budget data presented in these consolidated financial statements are based upon the 2025 operating and capital budgets as approved by Council",
+      "targetReport": {
+        "id": "calgary-budget",
+        "title": "Service Plans and Budgets",
+        "publisher": "City of Calgary",
+        "country": "CA",
+        "jurisdiction_level": "municipal",
+        "region": "Calgary, Alberta",
+        "description": "Multi-year operating and capital budget adopted by Council (the 2023-2026 cycle, adjusted annually — the 2026 Budget Adjustments were approved December 2025 as C2025-0901). Sets the municipal tax revenue requirement the Property Tax Bylaw is then calibrated to raise, and names its population and inflation sources.",
+        "releases_per_year": 1,
+        "release_schedule": {
+          "kind": "observed-pattern",
+          "entries": [
+            {
+              "from": "2026-11-01",
+              "to": "2026-11-30",
+              "precision": "month",
+              "covers": "2027-2030 Business Plans and Budgets (first year of the next four-year Service Plans and Budgets cycle)",
+              "evidence": "implied",
+              "note": "Calgary runs a rolling four-year Service Plans and Budgets cycle with annual adjustments approved by Council each Nov/Dec: original 2023-2026 Service Plans and Budgets deliberated by Council in November 2022; 2024 budget adjustments approved November 2023; 2025 budget approved Nov 22, 2024; 2026 budget approved Dec 3, 2025 (matches corpus's current url). The City is now running the 2027-2030 Business Plans and Budgets process (community engagement in early-mid 2026, base budget to Council in May 2026, early review in July 2026), with the newsroom explicitly stating Council 'will develop and approve the 2027-2030 Business Plans and Budgets in November' 2026, continuing the same annual Nov/Dec pattern. No published calendar gives an exact date yet."
+            }
+          ],
+          "source_url": "https://www.calgary.ca/our-finances/budgets.html"
+        },
+        "last_updated": null,
+        "url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/plans-budgets-and-financial-reports/2023-2026-service-plans-budgets/2026-budget-as-approved-dec-3-2025.pdf",
+        "domains": [
+          "municipal-finance",
+          "taxation"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "calgary.ca",
+      "status": 200,
+      "finalUrl": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 662856,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Budget data presented in these consolidated financial statements are based upon the 2025 operating and capital budgets as approved by Council",
+      "naming": "title-run:4/4",
+      "window": "The City of Calgary 2025 Annual Financial Report   71\n\f     17. 2025 Budget\n           Budget data presented in these consolidated financial statements are based upon the 2025 operating and capital budgets as approved by Council. Council approved budgets\n           are prepared in accordance with the Municipal Government Act, which in some cases is different from budget amounts prepared in accordance with PSAS and reported on\n           the Consolidated Statement of Operations and Accumulated Surplus and Consolidated Statement of Changes in Net Financial Assets.",
+      "grade": "B",
+      "reason": "artefact-named-elsewhere-in-document"
+    },
+    {
+      "source": "ab-aish-benefit-rates",
+      "target": "ab-tbf-fiscal-plan",
+      "file": "provincial-social-programs.json",
+      "basis": "The 2026-29 Fiscal Plan (Budget 2026) is where the new disability assistance rate structure is set out: 'On July 1, 2026, the new Alberta Disability Assistance Program (ADAP) will start ... The maximum ADAP benefit rate will be set at $1,740 per month. Clients who transition from AISH to ADAP will receive a transition benefit of $200 per month, maintaining the maximum total benefit at the same level as AISH until December 31, 2027. As with AISH, ADAP benefit rates will be subject to the Alberta escalator policy annually, and former ADAP clients will continue to receive ongoing health benefits until age 65, regardless of employment income.' The Budget therefore sets the starting level that the escalator subsequently indexes.",
+      "evidenceUrl": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf",
+      "evidenceQuote": "On July 1, 2026, the new Alberta Disability Assistance Program (ADAP) will start ... The maximum ADAP benefit rate will be set at $1,740 per month. Clients who transition from AISH to ADAP will receive a transition benefit of $200 per month, maintaining the maximum total benefit at the same level as AISH until December 31, 2027. As with AISH, ADAP benefit rates will be subject to the Alberta escalator policy annually, and former ADAP clients will continue to receive ongoing health benefits until age 65, regardless of employment income.",
+      "targetReport": {
+        "id": "ab-tbf-fiscal-plan",
+        "title": "Alberta Budget — Fiscal Plan",
+        "publisher": "Alberta Treasury Board and Finance",
+        "country": "CA",
+        "jurisdiction_level": "provincial",
+        "region": "Alberta",
+        "description": "The centrepiece of Alberta's annual budget, setting out revenue, expense and the fiscal position across a three-year horizon. Contains the economic outlook, capital plan and tax plan chapters, and is the source of the provincial revenue figures that statutory funding formulas key off.",
+        "releases_per_year": 1,
+        "cadence_note": "Tabled in late February for the fiscal year beginning 1 April.",
+        "last_updated": null,
+        "url": "https://www.alberta.ca/budget-documents",
+        "domains": [
+          "fiscal-transfers",
+          "taxation"
+        ],
+        "release_schedule": {
+          "kind": "observed-pattern",
+          "note": "Alberta has tabled its fiscal plan in the last week of February in every recent year (27 February 2020, 28 February 2023, 27 February 2024). The Fiscal Planning and Transparency Act is believed to set a statutory deadline of 28 February, but no citation for that provision has been read yet, so this stays observed rather than stated-rule and the whole month is claimed rather than a day. Tighten to 'stated-rule' with a day once the section is quoted.",
+          "entries": [
+            {
+              "from": "2027-02-01",
+              "to": "2027-02-28",
+              "precision": "month",
+              "evidence": "implied",
+              "covers": "Budget 2027, fiscal year beginning 1 April 2027"
+            }
+          ]
+        },
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "open.alberta.ca",
+      "status": 200,
+      "finalUrl": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 727969,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "On July 1, 2026, the new Alberta Disability Assistance Program (ADAP) will start ... The maximum ADAP benefit rate will be set at $1,740 per month. Clients who transition from AISH to ADAP will receive a transition benefit of $200 per month, maintaining the maximum total benefit at the same level as",
+      "naming": "agency-only",
+      "window": "Health-related assisted living and continuing care services account\n        for $5.9 billion of total expense, an increase of $495 million from 2025-26,\n        primarily due to compensation increases within Assisted Living Alberta. On July 1, 2026, the new Alberta Disability Assistance Program (ADAP) will\n        start and disability income assistance applicants will be assessed for both ADAP\n        and Assured Income for the Severely Handicapped (AISH) and placed in the\n        program best suited to their unique situation. Albertans on ADAP will have\n        access to the resources and tools they need to gain skills and work to their full\n        potential, while those permanently unable to work will continue to receive the\n        same benefits under AISH.",
+      "grade": "B",
+      "reason": "agency-not-artefact"
+    },
+    {
+      "source": "ab-child-family-benefit",
+      "target": "ab-tbf-fiscal-plan",
+      "file": "provincial-social-programs.json",
+      "basis": "The 2026-29 Fiscal Plan carries the 'Alberta Child and Family Benefit Program Parameters' table in its Tax Plan chapter, footnoted: 'Benefit amounts and phase-out thresholds have increased by 2% from 2025 due to the Alberta escalator.' The expense chapter explains the same movement in dollar terms: 'The Alberta Child and Family Benefit is budgeted at $405 million in 2026-27, an increase of $30 million, or 8 per cent from 2025-26 reflecting population growth, a 2 per cent escalator to benefit rates, and higher phase-out income thresholds.' The Budget is where the year's ACFB parameter table is authoritatively published.",
+      "evidenceUrl": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf",
+      "evidenceQuote": "The Alberta Child and Family Benefit is budgeted at $405 million in 2026-27, an increase of $30 million, or 8 per cent from 2025-26 reflecting population growth, a 2 per cent escalator to benefit rates, and higher phase-out income thresholds.",
+      "targetReport": {
+        "id": "ab-tbf-fiscal-plan",
+        "title": "Alberta Budget — Fiscal Plan",
+        "publisher": "Alberta Treasury Board and Finance",
+        "country": "CA",
+        "jurisdiction_level": "provincial",
+        "region": "Alberta",
+        "description": "The centrepiece of Alberta's annual budget, setting out revenue, expense and the fiscal position across a three-year horizon. Contains the economic outlook, capital plan and tax plan chapters, and is the source of the provincial revenue figures that statutory funding formulas key off.",
+        "releases_per_year": 1,
+        "cadence_note": "Tabled in late February for the fiscal year beginning 1 April.",
+        "last_updated": null,
+        "url": "https://www.alberta.ca/budget-documents",
+        "domains": [
+          "fiscal-transfers",
+          "taxation"
+        ],
+        "release_schedule": {
+          "kind": "observed-pattern",
+          "note": "Alberta has tabled its fiscal plan in the last week of February in every recent year (27 February 2020, 28 February 2023, 27 February 2024). The Fiscal Planning and Transparency Act is believed to set a statutory deadline of 28 February, but no citation for that provision has been read yet, so this stays observed rather than stated-rule and the whole month is claimed rather than a day. Tighten to 'stated-rule' with a day once the section is quoted.",
+          "entries": [
+            {
+              "from": "2027-02-01",
+              "to": "2027-02-28",
+              "precision": "month",
+              "evidence": "implied",
+              "covers": "Budget 2027, fiscal year beginning 1 April 2027"
+            }
+          ]
+        },
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "open.alberta.ca",
+      "status": 200,
+      "finalUrl": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 727969,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "The Alberta Child and Family Benefit is budgeted at $405 million in 2026-27, an increase of $30 million, or 8 per cent from 2025-26 reflecting population growth, a 2 per cent escalator to benefit rates, and higher phase-out income thresholds.",
+      "naming": "agency-only",
+      "window": "Total expense is estimated at $1.7 billion in 2026-27, an increase of\n     $63 million, or 3.9 per cent from the 2025-26 third quarter forecast. The Alberta Child and Family Benefit is budgeted at $405 million in 2026-27,\n     an increase of $30 million, or 8 per cent from 2025-26 reflecting population\n     growth, a 2 per cent escalator to benefit rates, and higher phase-out income\n     thresholds. Expense grows by $40 million to $415 million by 2028-29.",
+      "grade": "B",
+      "reason": "agency-not-artefact"
+    },
+    {
+      "source": "ug-ubos-cpi",
+      "target": "imf-e-gdds",
+      "file": "ug-cpi-social-protection.json",
+      "basis": "IMF Country Report No. 24/290 (Uganda: Staff Report for the 2024 Article IV Consultation, Informational Annex), Annex V 'Data Issues', Table 2: 'Uganda participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since November 2016.' Corroborated structurally by the IMF's own DSBB e-GDDS participants list (which includes Uganda) and its SDDS subscriber list (which does not). Reuses the imf-e-gdds node, placing Uganda on the same weaker dissemination tier already confirmed for Kenya, Nigeria, Ethiopia and Ghana, rather than the stronger SDDS tier confirmed for South Africa, Egypt and Tanzania.",
+      "evidenceUrl": "https://www.imf.org/en/-/media/files/publications/cr/2024/english/1ugaea2024002-print-pdf.pdf",
+      "evidenceQuote": "Uganda participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since November 2016.",
+      "targetReport": {
+        "id": "imf-e-gdds",
+        "title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+        "publisher": "International Monetary Fund",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "The IMF's data-dissemination tier for countries not on the (stricter) SDDS/SDDS Plus standards already in the graph. Kenya implemented e-GDDS (with a National Summary Data Page) around 2018, per the IMF's own DSBB e-GDDS pages and confirmed via a related IMF press release. A notch below South Africa and Egypt, both confirmed on full SDDS -- worth having as a distinct node so the graph can actually show the tiering rather than treating every country's IMF dissemination status as equivalent.",
+        "releases_per_year": 0.06,
+        "cadence_note": "Standard itself revised rarely; not an annual release, matching the treatment given to imf-sdds.",
+        "release_schedule": {
+          "kind": "irregular",
+          "entries": [],
+          "source_url": "https://dsbb.imf.org/e-gdds/overview",
+          "note": "Standing reporting framework, not a periodic release — no schedule to state. This report's own url field previously pointed to a Kenya-specific DQAF sub-page — corrected here to the e-GDDS framework overview page. (Note: the ke-knbs-cpi -> imf-e-gdds edge's evidence_url, the same Kenya-specific page, is left as-is — that citation is correct evidence for that specific edge's claim.)"
+        },
+        "last_updated": null,
+        "url": "https://dsbb.imf.org/e-gdds/overview",
+        "domains": [
+          "inflation"
+        ],
+        "kind": "standard"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "imf.org",
+      "status": 200,
+      "finalUrl": "https://www.imf.org/en/-/media/files/publications/cr/2024/english/1ugaea2024002-print-pdf.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 617394,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Uganda participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since November 2016.",
+      "naming": "title-run:5/6",
+      "window": "Table 2. Uganda: Data Standards Initiatives\nUganda participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since November 2016. INTERNATIONAL MONETARY FUND                                               61\n\fUGANDA",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    }
+  ]
+}

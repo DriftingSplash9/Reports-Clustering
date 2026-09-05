@@ -17,23 +17,14 @@
       "kind": "instrument"
     }
   ],
-  "dependencies": [
-    {
-      "source_report_id": "km-loi-finances-2026",
-      "target_report_id": "km-loi-organique-05-001-au-2005",
-      "relationship_type": "cites",
-      "basis": "km-loi-finances-2026's own description already quotes the 2016 Loi de Finances (Article 8), which names 'la loi organique portant fixation des quotes-parts' as the legal basis for the residual-revenue split and gives the percentages 'Union / 37,5%... Nqazidja [Ngazidja] / 27,4%... Ndzouani / 25,7%... Mwali / 9,4%'. Those four figures match this organic law's Article 8 formula exactly (Union 37,50% / Ngazidja 27,4% / Anjouan 25,7% / Mohéli 9,4%), and Article 7 of the organic law states the mechanism 'ne peut être modifié que par une loi organique' (can only be amended by [another] organic law) -- i.e. the annual finance law's residual-split percentages are calculated per this organic law's formula, not independently set each year. Note this is distinct from the separate 1,85%-of-internal-revenue 'gouvernorats' pooled-transfer mechanism in the 2026 edition's own Article 4, which is a different, smaller allocation than the Article 8 residual-quote-part split.",
-      "evidence_url": "https://justice.gouv.km/wp-content/uploads/2025/03/loi-organique-n-05-001au-du-16-janvier-2005-fixant-la-quote-part-des-recettes-publiques-a-partager-entre-lunion-et-les-iles-autonomes.pdf",
-      "evidence_grade": "B"
-    }
-  ],
+  "dependencies": [],
   "_dropped": [
     {
       "edge": "km-loi-finances-2026 -> loi organique portant fixation des quotes-parts (AF/G.23 open item)",
       "source": "km-loi-finances-2026",
       "target": "km-loi-organique-05-001-au-2005",
-      "reason": "resolved",
-      "why": "CLOSES the AF/G.23 lead recorded in km-g23-municipal.json's _dropped block ('that named loi organique portant fixation des quotes-parts... was not itself independently located this round'). Found this round as Loi organique N°05-001/AU du 16 janvier 2005, hosted on justice.gouv.km; a live methodology_depends_on edge from km-loi-finances-2026 is recorded above. See the corpus-wide edge itself for the percentage-match evidence."
+      "reason": "note",
+      "why": "SUPERSEDED 2026-09-05 (Round C): the live edge this entry said it closed was dropped the same day as no-document (see the sibling entry below) — the organic law is a real node, located as described here, but the 2026 Loi de Finances does not name it. Reason changed from `resolved` to `note` so the validator's caveat/resolved check reads a live edge that exists. Original text: CLOSES the AF/G.23 lead recorded in km-g23-municipal.json's _dropped block ('that named loi organique portant fixation des quotes-parts... was not itself independently located this round'). Found this round as Loi organique N°05-001/AU du 16 janvier 2005, hosted on justice.gouv.km; a live methodology_depends_on edge from km-loi-finances-2026 is recorded above. See the corpus-wide edge itself for the percentage-match evidence."
     },
     {
       "edge": "km-loi-organique-05-001-au-2005 -> km-constitution-union-2001 (Article 11 cross-reference)",
@@ -41,6 +32,13 @@
       "target": "km-constitution-union-2001",
       "reason": "no-node-yet",
       "why": "This organic law's Article 1 cites 'l'article 11 de la constitution de l'Union des Comores du 23 Décembre 2001' as its constitutional basis for the retrocession/quote-part mechanism -- NOT 'Article 104', which a prior round (AF/G.23) hypothesized and which was in fact used to enrich km-constitution-union-2001 on an unrelated topic (inter-island financial-convention power, not the quote-part formula). The CURRENT consolidated post-2018-revision text hosted at km-constitution-union-2001's url (ILO/NATLEX) does not preserve an Article 11 (or renumbered equivalent at Articles 104-105) that explicitly cross-references a numbered organic law fixing the quote-part -- Articles 104-106 as captured there cover convention-making power, the State grant/local-tax funding split, and the balanced-budget/State-approval rule respectively, none of which is the same cross-reference. This strongly suggests Article 11 of the ORIGINAL (pre-revision) 2001 constitutional text was renumbered or reorganized in later consolidations, and the exact renumbering was not traced this round. Flagged as a fresh lead for a future round: locate an un-consolidated/original-text copy of the 2001 Constitution (as it stood before the 2009/2013/2018 revisions) to confirm precisely what its original Article 11 said and how it maps onto the current Articles 104-106, before drawing a direct edge between this organic law and km-constitution-union-2001."
+    },
+    {
+      "edge": "km-loi-finances-2026 -> km-loi-organique-05-001-au-2005",
+      "source": "km-loi-finances-2026",
+      "target": "km-loi-organique-05-001-au-2005",
+      "reason": "no-document",
+      "why": "DROPPED 2026-09-05 (Round C, companion-document reread; rule 2 'no document, no edge'): the quote came from the 2016 Loi de Finances (Article 8), evidence_url pointed at the organic law (the target), and the source node is the 2026 Loi de Finances. Read the 2026 law in full today (finances.gouv.km decree PDF, 153 pp, 484,912 chars): it never names the loi organique 05-001/AU or any quote-part law, and its own Article 4 splits the governorate transfer 40,27% / 35,02% / 24,71% — not the organic law's 37,5 / 27,4 / 25,7 / 9,4 formula the basis relied on. Neither document names the other, so nothing published states this dependency for the 2026 law. Lead: a km-loi-finances-2016 node would carry the Article 8 citation properly. Original entry preserved verbatim: {\"source_report_id\": \"km-loi-finances-2026\", \"target_report_id\": \"km-loi-organique-05-001-au-2005\", \"relationship_type\": \"cites\", \"basis\": \"km-loi-finances-2026's own description already quotes the 2016 Loi de Finances (Article 8), which names 'la loi organique portant fixation des quotes-parts' as the legal basis for the residual-revenue split and gives the percentages 'Union / 37,5%... Nqazidja [Ngazidja] / 27,4%... Ndzouani / 25,7%... Mwali / 9,4%'. Those four figures match this organic law's Article 8 formula exactly (Union 37,50% / Ngazidja 27,4% / Anjouan 25,7% / Mohéli 9,4%), and Article 7 of the organic law states the mechanism 'ne peut être modifié que par une loi organique' (can only be amended by [another] organic law) -- i.e. the annual finance law's residual-split percentages are calculated per this organic law's formula, not independently set each year. Note this is distinct from the separate 1,85%-of-internal-revenue 'gouvernorats' pooled-transfer mechanism in the 2026 edition's own Article 4, which is a different, smaller allocation than the Article 8 residual-quote-part split.\", \"evidence_url\": \"https://justice.gouv.km/wp-content/uploads/2025/03/loi-organique-n-05-001au-du-16-janvier-2005-fixant-la-quote-part-des-recettes-publiques-a-partager-entre-lunion-et-les-iles-autonomes.pdf\", \"evidence_grade\": \"B\"}"
     }
   ]
 }

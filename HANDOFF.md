@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 07:10 UTC (DSBB SoM import 136 edges 93% A; Rosstat re-cite; KDI A; Minfin OCR; Maharashtra A)
+Last updated: 2026-09-05 07:35 UTC (Round C: items 1, 2, 7 — F-06 closed, 58 EDP edges re-minted, item 7 measured as research)
 
 ---
 
@@ -41,77 +41,59 @@ Then project memory, newest first (index ~8 KB). Git status: never state it
 
 ## 2. Current state
 
-Corpus **3,344 reports / 2,760 dependencies**. **751 A · 1,357 B · 652 C**,
-A-share 27.2%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
-**52/52**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated.
+Corpus **3,344 reports / 2,817 dependencies**. **818 A · 1,375 B · 624 C**,
+A-share 29.0%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
+**53/53**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated.
 **Grade counts come from `validate` only.**
 
 **Grok is retired** (Thomas, 2026-09-05). No prompts, no queue, no Grok todo
-items; PLAYBOOK §5 and rule 9 are retired stubs (numbers kept for references).
-All Grok material is out of `notes/`. The `*-grok-2026-08.json` slices stay as
-data and grade like any other; their `meta.note` now resolves
-(`notes/mint-2026-08-20.md`, written 2026-09-05 from the 08-20 handoff).
+items; PLAYBOOK §5 and rule 9 are retired stubs. The `*-grok-2026-08.json`
+slices stay as data; their `meta.note` resolves to `notes/mint-2026-08-20.md`.
 
-**Grader: Wayback is asked WITHOUT the scheme** (`waybackLookupKey`, 2026-09-05).
-The snapshot-rescue re-run over the 40 C edges blocked `network`/`wall` is
-done: 8 C→B, 32 stay C — the lead is spent (memory `snapshot_rescue_rerun_2026-09-05`).
+**Round C (2026-09-05) done — agent items 1, 2, 7** (memory
+`round_c_companion_reread_2026-09-05`, `round_c_dropped_reeval_2026-09-05`):
+- **F-06 CLOSED.** The 58 EDP-inventory edges dropped 09-04 as DEAD-URL were an
+  SPA-route 404, not rot; re-minted off `s-circabc.europa.eu/rest/download/<id>`,
+  **56 A · 2 B**. PLAYBOOK §6 has the trap.
+- 28 `ess-peer-review-final-report -> xx-report` **C→B** on SWD(2024)136 itself,
+  which **names no member state** — ruling needed (§3).
+- Round 5's 30 regressions closed: 11 A / 17 B / 1 dropped / 1 unreachable; 7 of
+  them were the old 250 KB cap. Reader refused `sz-mbabane -> slgp-icr` (project ≠
+  report).
+- Grader acronym branch whitespace-insensitive (`ESA2010`), selftest 53.
+- **Item 7 measured: nothing mints from the leads' own URLs.** 700 of 1,997
+  lead-type `_dropped` carry a URL; 305 read, 6 span hits (all settled), 288 dead
+  on both networks, 105 JS shells. Probe: `scripts/reeval-dropped/probe.py`,
+  table `Claude outputs/reeval-dropped-probe-2026-09-05.json`. It is research
+  (§3 agent item 5).
+- Item 1: `tz-dar-es-salaam-city-council-budget-2026` **SHELVED** — DCC `/api`
+  hangs on all three machines.
 
-**DSBB scripted import landed** (2026-09-05):
-`src/data/research/dsbb-som-import-2026-09-05.json`, 136 edges (national
-release → international standard), **127 A · 9 B**, graded before merge.
-Tooling + README `scripts/dsbb-som-import/`; review file (750 `no-source-node`
-mint leads, 5 ambiguous) `Claude outputs/dsbb-som-import-2026-09-05-review.json`.
-**Source nodes were auto-matched by country + title pattern** — the match, not
-the citation, is what a reviewer checks. Jamaica/Kazakhstan 1993-SNA NOT minted
-(DSBB metadata is stale there). ESMS half not done.
+**DSBB scripted import** (2026-09-05): `dsbb-som-import-2026-09-05.json`, 136
+edges 127 A · 9 B; source nodes auto-matched by country+title — the match is
+what a reviewer checks. Review file `Claude outputs/dsbb-som-import-2026-09-05-review.json`
+(750 `no-source-node` mint leads). ESMS half not done.
 
-**Rosstat regional re-cite**: 9 of 11 index-page edges dropped `no-document`
-(both sides read, neither names the other); 2 re-cited, B. One carries a
-**direction caveat for Thomas** (§3). KDI edges A via `title_aliases`;
-Minfin 128n B via OCR; Maharashtra A. Memory `followup_round_2026-09-05`.
-**`check-urls.ts` is gone**: `npm run check-urls` → `grade-evidence.ts --urls
-[--dir <path>] [--json <out>]`, judged by `fetchRaw` (only `dead` fails; a
-wall is reported, not failed). Tested on 12 urls.
+**India:** Haryana, Maharashtra `-> in-state-gsdp-series` A; Tamil Nadu B.
+`www.tn.gov.in`, `des.delhi.gov.in`, `www.mod.gov.in` refuse all three machines;
+`pc.odisha.gov.in`, `des.assam.gov.in`, `descg.gov.in` DOWN. The railways edge
+grades off MoSPI's NAS *Sources and Methods*, not the Year Book.
 
-**India:** Haryana and Maharashtra `-> in-state-gsdp-series` are A; Tamil Nadu
-is B — `www.tn.gov.in` refuses VM, sandbox AND Chrome (2026-09-05; so does
-`des.delhi.gov.in`, `www.mod.gov.in`). Uttarakhand's 2024-25 "At a Glance" is a
-scanned bilingual PDF on S3WaaS — OCR would cap at its current B, not pursued. The
-four dead Indian hosts (`pc.odisha.gov.in`, `des.assam.gov.in`, `descg.gov.in`,
-`www.mod.gov.in`) are DOWN, not walled — Chrome is not a third route.
-**The railways edge grades off MoSPI's NAS *Sources and Methods* naming the
-Year Book, not off the Year Book.** Cite the LIVE url always — a reset is
-`block: 'network'`, which the snapshot strategy rescues.
-
-**Doc cleanup (2026-09-05) is done** — all five approved trims plus item 9;
-`notes/doc-bloat-2026-09-05.md` is the record; pre-cleanup `REPORTS.md` /
-`PLAYBOOK.md` are sha-verified in `archive/decisions/` and `archive/playbook/`.
-`notes/` is 32 entries. Two empty directories the bridge cannot remove remain:
-`notes/grok-research-queue-2026-08-22/` (+ `Grok results/`).
-
-**Uncommitted backlog** (carried forward, never read from git): the Basel III
-round, the transport round, the PLAYBOOK split, browser-pass round 5, the
-grader rulings round, the rulings + Basel II round, the TN/Haryana round, the
-snapshot-rescue re-run, the 2026-09-05 follow-up round (DSBB slice +
-`scripts/dsbb-som-import/`, `ru-russia-grok-2026-08.json`, `kr-south-korea-grok-2026-08.json`,
-`za-fiscal-federalism.json`, `ru-g3-international-standards.json`,
-`in-india-grok-2026-08.json`, 11 `_dropped` entries flipped to `resolved` across slices,
-~35 `evidence-cache/` records, `public/corpus-data.json`, two `Claude outputs/` files), the doc cleanup (`REPORTS.md`, `PLAYBOOK.md`,
-`README.md`, `START-HERE.md`, `notes/Midvamp - Revamp.md`, two comment paths in
-`src/components/`, `archive/` ×9 in, `notes/` −19 +1, `_to_delete/`), and
-item 9 (`scripts/grade-evidence.ts`, `package.json`, `scripts/check-urls.ts`
-removed, `notes/mint-2026-08-20.md`).
+**Uncommitted backlog** (carried forward, never read from git): everything in
+the 07:10 handoff (archived) plus Round C — `scripts/grade-evidence.ts`,
+`scripts/reeval-dropped/probe.py`, ~24 slices, ~50 `evidence-cache/` records,
+`public/corpus-data.json`, PLAYBOOK §6, 11 `Claude outputs/` files, `tmp_work/`
+reeval table and `xfer-2026-09-05b/`.
 
 **Renderer unchanged** — grade-driven opacity, A-only ranking cut,
 `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift
-watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
-2026-09-04). Shelved ISOLATED: `sc-oag-annual-reports-2022-2024`,
-`so-fgs-financial-governance-reports`, `brics-johannesburg-ii-declaration-2023`,
-`tz-dar-es-salaam-city-council-budget-2026`.
+watchdog + `__meshes`. **`view.minGrade` stays default `C`**. Shelved ISOLATED:
+`sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`,
+`brics-johannesburg-ii-declaration-2023`, `tz-dar-es-salaam-city-council-budget-2026`.
 
 **Research debt**: 0 no-URL, 0 dead-URL, 0 `empty:no-extractor`, 0
-`network:curl-3`; 4 bare-homepage edges. **The browser pass is CLOSED.**
-**The 2026-08-31 audit** (`archive/audits/`): **F-06 and F-14 open**.
+`network:curl-3`; 5 bare-homepage edges. **The browser
+pass is CLOSED.** **The 2026-08-31 audit**: **F-14 open** (F-06 closed today).
 
 ---
 
@@ -119,43 +101,42 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
 
 ### [Agent] — in this order
 
-1. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
-   2026-09-05 drop. DCC's budget-summary attachment sits behind a JS fetch never
-   completed; a DCC document naming Cap. 290 mints the edge properly. One
-   browser pass, or shelve it explicitly.
-2. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
-   `ess-peer-review-final-report` edges, round 5's 29 reverted quotes, the
-   EDP-inventory fragments. Recount first; 58 circabc edges left, and a re-cite
-   pass on that host clears most of item 7 too.
-3. **DSBB follow-ups:** Thomas reviews the 136 auto-matched source nodes (slice
-   basis lines say what was matched); the 750 `no-source-node` rows are mint
-   leads by country+category; ESMS still unscripted. India remainder is closed
-   until `tn.gov.in` / `des.delhi.gov.in` / `mod.gov.in` answer some machine.
-4. **Link batching — scoped by measurement.** Photons first (1,967 objects, 15
+1. **DSBB follow-ups:** the 750 `no-source-node` rows are mint leads by
+   country+category; ESMS still unscripted. India remainder closed until
+   `tn.gov.in` / `des.delhi.gov.in` / `mod.gov.in` answer some machine.
+2. **Link batching — scoped by measurement.** Photons first (1,967 objects, 15
    materials → ~15 `InstancedMesh` draws), then links and nodes. Blocker: one
    material per object, so instancing means moving colour/opacity/grade/hover
    out of `GradientLinkMaterial` uniforms into per-instance attributes.
    Draw-call bound. Numbers: memory `renderer_perf_measured_2026-09-04`.
-5. Cluster-repulsion sub-round (measured, `measure-forces.ts`, 2+ seeds), then
+3. Cluster-repulsion sub-round (measured, `measure-forces.ts`, 2+ seeds), then
    **F-14** (gate the weighted-vs-raw disagreement list to an authority floor
    ~0.05 so it reads as a check again).
-6. Parked design questions from REPORTS' retired tail, for when the renderer
-   is next open: mutual-pair rank leakage (two pairs measured, opposite signs —
-   watched, not managed); layout re-run on data add; cadence in layout; the
-   default view at scale. START-HERE's "obvious next thing: more data" is a
-   direction statement now out of step with the programme — Thomas's call.
-7. `_dropped` lead re-evaluation (plan §4 step 5) — last (Thomas, 2026-09-05).
+4. Parked design questions from REPORTS' retired tail, for when the renderer
+   is next open: mutual-pair rank leakage; layout re-run on data add; cadence
+   in layout; the default view at scale. START-HERE's "obvious next thing: more
+   data" is out of step with the programme — Thomas's call.
+5. **Lead research by publisher cluster** (what item 7 turned into, only if
+   Thomas wants it): hosts that read fine but whose leads quote nothing —
+   ine.gob.bo 21, indec 15, stats.gov.cn 12, ine.gov.py 10, dane 9. Find the
+   methodology page, quote it, re-mint. Research round, not a re-grade.
 
 ### [Thomas] — only you can
 
 1. Housekeeping (agents cannot delete — rule 6): `_to_delete/notes-2026-09-05/`
-   (13 notes, 3 Grok folders/files, `check-urls.ts`; logged in
-   `_to_delete/README.md`); the two empty `notes/grok-research-queue-…` dirs;
-   `tmp_work/sandbox-2026-09-05/` (`repo-src-2026-09-05.tgz`) and
-   `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`;
-   `tmp_work/xfer-2026-09-05/` (a PDF ferried sandbox→VM). All safe to remove.
+   (logged in `_to_delete/README.md`); the two empty `notes/grok-research-queue-…`
+   dirs; `tmp_work/sandbox-2026-09-05/`, `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`,
+   `tmp_work/xfer-2026-09-05/`, `tmp_work/xfer-2026-09-05b/`,
+   `tmp_work/reeval-leads-2026-09-05.json` (regenerable). All safe to remove.
 2. **Direction ruling:** `ru-krasnoyarskstat-city-and-municipal -> ru-rosstat-municipal-indicators-database`
    — flip, or keep as a two-way exchange (caveat + deferred reverse in `ru-russia-grok-2026-08.json`).
+3. **Ruling: class-level naming.** SWD(2024)136 says it summarises "the
+   peer-review reports for each ESS member" but names no country. The 28
+   `ess-peer-review-final-report -> xx-ess-peer-review-report` edges now sit at
+   B on that sentence. Keep (documented at class level) or drop (§7
+   naming-the-agency shape)?
+4. **Review the DSBB 136 auto-matched source nodes** (slice basis lines say
+   what was matched).
 
 ---
 

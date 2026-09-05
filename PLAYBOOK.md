@@ -360,6 +360,15 @@ here only as a rule, once.
   and none is a superset of the others (see the routing snapshot). Before
   recording a host as walled, **say which machine you were on** — and re-test
   from the other one, which is a 20-second check.
+- **A 404 from a single-page-app route is not link rot.** 58 EDP-inventory edges
+  were dropped as DEAD-URL because CIRCABC's `/ui/.../details` pages 404 to curl —
+  while Eurostat's own listing still linked every one of them and
+  `https://s-circabc.europa.eu/rest/download/<id>` served each PDF (Round C,
+  2026-09-05). Before recording a 404 as rot, check whether the host is an SPA
+  (an Angular/React shell with the same byte count for every path) and whether a
+  first-party page still links the URL; a REST/download endpoint usually exists.
+  The Commission documents-register (`api/files/<ref>_0/<id>`) and DCC Tanzania
+  (`/api/pages/slug/<slug>`) are the same shape.
 - **A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the
   site.** WebFetch obeys robots.txt; curl with a browser UA does not, and
   neither does a browser. An entire Taiwanese cluster was written off this way

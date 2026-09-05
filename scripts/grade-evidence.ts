@@ -625,7 +625,15 @@ export function namesTarget(
       if (!/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/u.test(acr)) continue
       const n = normalizeForMatch(acr)
       if (!n) continue
-      const re = new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(n)}([^\\p{L}\\p{N}]|$)`, 'u')
+      // **The space inside a multi-token acronym is optional** (Round C,
+      // 2026-09-05): 17 of the 28 EDP inventories print their own cover title
+      // as "according to ESA2010", and the literal `esa 2010` never met it, so
+      // the same document graded A for eleven countries and B for seventeen on
+      // typesetting alone. Ruling #2 of 2026-09-05 made `namesTarget`
+      // whitespace-insensitive; this branch had been missed. Both word bounds
+      // still apply, so `esa2010x` and `2esa2010` do not match.
+      const re = new RegExp(
+        `(^|[^\\p{L}\\p{N}])${escapeRe(n).replace(/ /g, '\\s*')}([^\\p{L}\\p{N}]|$)`, 'u')
       if (re.test(hay)) {
         artefact = true
         how = `acronym:${acr}`
@@ -2062,6 +2070,10 @@ function selftest(): void {
   t('a parenthetical acronym glossing only a COMPONENT of the title does not',
     !namesTarget('members would join the Public Service Pension Plan (PSPP) on the same terms',
       { title: 'Public Service Pension Plan (PSPP) Cost-of-Living Adjustment (COLA) Methodology', publisher: 'x', url: '' }).artefact)
+  t('a multi-token acronym printed without its space still names the artefact',
+    namesTarget('government sector accounts according to ESA2010',
+      { title: 'European System of Accounts 2010 (ESA 2010)', publisher: 'x', url: '' }).artefact
+    && !namesTarget('code ESA2010X applies', { title: 'European System of Accounts 2010 (ESA 2010)', publisher: 'x', url: '' }).artefact)
   t('a three-letter parenthetical acronym still does not name the artefact',
     !namesTarget('the EDP notification tables were transmitted in April',
       { title: 'Hellenic fiscal reporting (EDP) tables', publisher: 'x', url: '' }).artefact)
