@@ -59,6 +59,7 @@ import {
 } from './linkVisuals'
 import { PhotonInstancer } from './photonInstancing'
 import { LinkInstancer } from './linkInstancing'
+import { NodeInstancer } from './nodeInstancing'
 
 /**
  * The 3D force graph.
@@ -1023,12 +1024,16 @@ export default function InfluenceGraph({
   const photonInstancer = useRef(new PhotonInstancer())
   /** Link batches — same mirror, for the cylinders; see linkInstancing.ts. */
   const linkInstancer = useRef(new LinkInstancer())
+  /** Node batches — the last third; see nodeInstancing.ts. */
+  const nodeInstancer = useRef(new NodeInstancer())
   useEffect(() => {
     const photons = photonInstancer.current
     const lines = linkInstancer.current
+    const spheres = nodeInstancer.current
     return () => {
       photons.dispose()
       lines.dispose()
+      spheres.dispose()
     }
   }, [])
   /**
@@ -1123,6 +1128,7 @@ export default function InfluenceGraph({
       graph: () => ref.current?.graphData(),
       photons: () => photonInstancer.current.stats(),
       links: () => linkInstancer.current.stats(),
+      nodes: () => nodeInstancer.current.stats(),
       // Fit-loop state, read live — for diagnosing "camera inside the cloud".
       fit: () => ({
         tickCount: tickCount.current,
@@ -3322,6 +3328,8 @@ export default function InfluenceGraph({
       photonInstancer.current.sync(ref.current)
       linkInstancer.current.sync(ref.current)
     }
+    // Nodes are mirrored at the END of this callback, after the breath, the
+    // hover grow and any re-applied focus have written this frame's state.
 
     // Record positions for the next drilldown rebuild — see `lastPositions`.
     const currentNodes = (ref.current?.graphData().nodes ?? []) as PositionedNode[]
@@ -3644,6 +3652,12 @@ export default function InfluenceGraph({
     // without warning. A size change means the set we last styled is not the
     // set now on screen, so the focus has to be laid on again.
     if (meshes.current.size !== appliedMeshCount.current) applyFocus()
+
+    // Mirror the spheres onto the instanced batches LAST, once every writer
+    // in this callback (breath, hover, and the re-applied focus just above)
+    // has had its say — see nodeInstancing.ts for why this is a mirror and
+    // not a replacement.
+    if (ref.current) nodeInstancer.current.sync(ref.current)
   })
 
   /**

@@ -54,10 +54,10 @@ const result = await page.evaluate(async () => {
   let hiddenPhotons = 0
   scene.traverse((o) => { if (o.isMesh && !o.visible && o.geometry?.type === 'LatheGeometry') hiddenPhotons++ })
   const syncMs = []
-  for (let i = 0; i < 30; i++) { await new Promise((r) => requestAnimationFrame(r)); syncMs.push(window.__rig.photons().lastSyncMs + window.__rig.links().lastSyncMs) }
+  for (let i = 0; i < 30; i++) { await new Promise((r) => requestAnimationFrame(r)); syncMs.push(window.__rig.photons().lastSyncMs + window.__rig.links().lastSyncMs + (window.__rig.nodes ? window.__rig.nodes().lastSyncMs : 0)) }
   const tot = (t) => t.reduce((a, r) => a + r.calls, 0)
   const per = ticks.map(tot)
-  return { nodes: g.nodes.length, links: g.links.length, per, tris: ticks.map((t) => t.reduce((a, r) => a + r.tris, 0)), rendersPerTick: ticks.map((t) => t.length), fam, instanced, instancedInstances, hiddenPhotons, photons: window.__rig.photons(), links: window.__rig.links(), syncMs: syncMs.sort((a,b)=>a-b) }
+  return { nodes: g.nodes.length, links: g.links.length, per, tris: ticks.map((t) => t.reduce((a, r) => a + r.tris, 0)), rendersPerTick: ticks.map((t) => t.length), fam, instanced, instancedInstances, hiddenPhotons, photons: window.__rig.photons(), links: window.__rig.links(), nodesInst: window.__rig.nodes ? window.__rig.nodes() : null, syncMs: syncMs.sort((a,b)=>a-b) }
 })
 console.log(JSON.stringify(result, null, 1))
 await browser.close()

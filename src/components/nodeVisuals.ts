@@ -91,7 +91,19 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
      * compile — `onBeforeCompile` is where the uniform comes into existence —
      * so every reader guards on it.
      */
-    uRimColour?: { value: THREE.Color }
+    uRimColour: { value: THREE.Color }
+    /**
+     * The rim's fresnel exponent and alpha top-up, and the soft-edge flag,
+     * resolved at construction (2026-09-05, node instancing). They used to be
+     * computed inside `onBeforeCompile`, which only runs when the mesh is
+     * first RENDERED — and once `nodeInstancing.ts` hides every sphere before
+     * its first frame, that never happens. The instancer reads these off the
+     * material each frame and packs them into per-instance attributes; the
+     * uniform path below reads the same values, so the two draw identically.
+     */
+    rimPower: number
+    rimAlpha: number
+    soft: number
   }
 }
 
@@ -111,6 +123,49 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
  * should stay readable at a glance, not close the gap with a real fill.
  */
 const HOLLOW_FILL_OPACITY = 0.3
+
+/** The soft-edge fresnel exponent — see the long comment at `uSoftPower`
+ * below for why 0.5. Exported so `nodeInstancing.ts` draws the same fade. */
+export const SOFT_POWER = 0.5
+
+/**
+ * The rim + soft-edge fragment tail, appended after `dithering_fragment`.
+ * Written once here and spliced into BOTH shaders — the per-node material
+ * below (uniform-fed) and the instanced batch material in `nodeInstancing.ts`
+ * (varying-fed) — so the two cannot drift. The argument names are the GLSL
+ * expressions each caller has for the five inputs.
+ */
+export function rimFragmentTail(
+  rimColour: string,
+  rimPower: string,
+  rim: string,
+  rimAlpha: string,
+  soft: string,
+  softPower: string,
+): string {
+  return `
+         float facing = abs(dot(normalize(vNormal), normalize(vViewPosition)));
+         float fresnel = pow(1.0 - facing, ${rimPower});
+         // Mixed toward the rim colour, not added to it.
+         //
+         // Adding was the first attempt and it failed for the same reason flag
+         // colours would have: amber light on top of a blue fill resolves to
+         // near-white at the silhouette, so all three countries converged on
+         // the same pale edge — and bloom then amplified it. Mixing replaces
+         // the colour instead of brightening it, so the rim keeps its hue, and
+         // because it adds no luminance the glow pass leaves it alone.
+         gl_FragColor.rgb = mix(gl_FragColor.rgb, ${rimColour}, fresnel * ${rim});
+         // Keep the silhouette from fading out with a dimmed node, or the rim
+         // disappears exactly when the fill is hardest to read.
+         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * ${rim} * ${rimAlpha}, 0.0, 1.0);
+         // Soft edge — a separate fresnel power/term from the rim's, because
+         // it is answering a different question (silhouette width, not rim
+         // colour) and the two happen to share nothing but the geometry term
+         // they both start from. A no-op (mix factor 0) on every ordinary
+         // node — see the file comment's "Soft edge" paragraph.
+         float softFresnel = pow(1.0 - facing, ${softPower});
+         gl_FragColor.a *= mix(1.0, 1.0 - softFresnel, ${soft});`
+}
 
 /**
  * Rim sharpness scales with the node's radius.
@@ -254,24 +309,53 @@ export function nodeMaterial({
   // the node is one of the two kinds that gets a rim at all.
   const rimMax = !drawRim || weight === 'none' ? 0 : 1
   const rim = { value: (lit ? 1 : 0.07) * rimMax }
+  // A hollow node's band is held wide and shallow on purpose. `rimPower`
+  // exists to keep a *thin* highlight constant across node sizes; here the
+  // rim is not a highlight, it is the whole node, so the exponent is pinned
+  // low to give a border with visible thickness instead of a hairline. An
+  // orb keeps its fill but borrows the same wide band, pinned less low than
+  // hollow's — enough to read as a distinct, thicker ring than an ordinary
+  // node's thin fresnel highlight without swallowing the fill entirely.
+  //
+  // Palette v2 adds the family weights on top: 'bold' pulls the exponent
+  // down harder than 'thick', which pulls harder than 'normal' — a lower
+  // exponent is a wider band. Alpha rises with the same ladder so a bold
+  // ring also holds the silhouette more firmly.
+  const base = rimPower(radius)
+  const weighted =
+    weight === 'bold'
+      ? Math.max(1.05, base * 0.4)
+      : weight === 'thick'
+        ? Math.max(1.2, base * 0.55)
+        : base
   material.userData = {
     rim,
     rimMax,
     litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1,
     alwaysTransparent,
+    // Hoisted into userData the way `rim` itself always was, so the rim
+    // colour can be retuned on a live material — the review's "10-line fix".
+    // Before this, `uRimColour` was created inside `onBeforeCompile` with no
+    // handle kept, so nothing could ever change it: a hollow node's ring was
+    // pinned to the ink it was born with, and the lens recolour pass
+    // (lib/modes.ts) would have left family-coloured rings floating over
+    // group-coloured fills. Changing a uniform's *value* does not trigger a
+    // shader recompile.
+    uRimColour: { value: new THREE.Color(rimColour) },
+    rimPower: hollow ? 1.5 : orb ? 2.2 : weighted,
+    // How much the rim contributes to alpha. On a solid node this is a small
+    // top-up that keeps the silhouette from fading out when dimmed. On a hollow
+    // one it is doing all the work, because the fill has been emptied. An orb
+    // sits between the two: a stronger top-up than an ordinary node, short of
+    // hollow's full weight, because the fill is still doing real work here.
+    rimAlpha: hollow ? 0.95 : orb ? 0.75 : weight === 'bold' ? 0.75 : weight === 'thick' ? 0.6 : 0.45,
+    soft: soft ? 1 : 0,
   }
 
   material.onBeforeCompile = (shader) => {
-    shader.uniforms.uRimColour = { value: new THREE.Color(rimColour) }
-    // Hoisted into userData the way `rim` itself always was, so the rim
-    // colour can be retuned on a live material — the review's "10-line fix".
-    // Before this, `uRimColour` was created here with no handle kept, so
-    // nothing could ever change it: a hollow node's ring was pinned to the
-    // ink it was born with, and the lens recolour pass (lib/modes.ts) would
-    // have left family-coloured rings floating over group-coloured fills.
-    // Changing a uniform's *value* does not trigger a shader recompile.
-    material.userData.uRimColour = shader.uniforms.uRimColour
-    // A hollow node's band is held wide and shallow on purpose. `rimPower`
+    shader.uniforms.uRimColour = material.userData.uRimColour
+    // (Rim shape and the soft flag are resolved above, at construction — see
+    // the `rimPower` / `rimAlpha` / `soft` fields on `NodeMaterial`.) `rimPower`
     // exists to keep a *thin* highlight constant across node sizes; here the
     // rim is not a highlight, it is the whole node, so the exponent is pinned
     // low to give a border with visible thickness instead of a hairline. An
@@ -283,23 +367,9 @@ export function nodeMaterial({
     // down harder than 'thick', which pulls harder than 'normal' — a lower
     // exponent is a wider band. Alpha rises with the same ladder so a bold
     // ring also holds the silhouette more firmly.
-    const base = rimPower(radius)
-    const weighted =
-      weight === 'bold'
-        ? Math.max(1.05, base * 0.4)
-        : weight === 'thick'
-          ? Math.max(1.2, base * 0.55)
-          : base
-    shader.uniforms.uRimPower = { value: hollow ? 1.5 : orb ? 2.2 : weighted }
+    shader.uniforms.uRimPower = { value: material.userData.rimPower }
     shader.uniforms.uRim = rim
-    // How much the rim contributes to alpha. On a solid node this is a small
-    // top-up that keeps the silhouette from fading out when dimmed. On a hollow
-    // one it is doing all the work, because the fill has been emptied. An orb
-    // sits between the two: a stronger top-up than an ordinary node, short of
-    // hollow's full weight, because the fill is still doing real work here.
-    shader.uniforms.uRimAlpha = {
-      value: hollow ? 0.95 : orb ? 0.75 : weight === 'bold' ? 0.75 : weight === 'thick' ? 0.6 : 0.45,
-    }
+    shader.uniforms.uRimAlpha = { value: material.userData.rimAlpha }
     // Fixed, not radius-scaled like `rimPower` — the rim wants a THIN band
     // regardless of size (so `rimPower` grows with radius to keep it thin in
     // screen pixels); soft wants the opposite, a WIDE falloff that reads the
@@ -323,8 +393,8 @@ export function nodeMaterial({
     // nodes (see `CONTINUOUS_PULSE_FLOOR` in InfluenceGraph.tsx) so there is
     // a motion cue too, not just a static gradient that still has to be
     // looked at in isolation to register.
-    shader.uniforms.uSoft = { value: soft ? 1 : 0 }
-    shader.uniforms.uSoftPower = { value: 0.5 }
+    shader.uniforms.uSoft = { value: material.userData.soft }
+    shader.uniforms.uSoftPower = { value: SOFT_POWER }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(
@@ -344,28 +414,8 @@ export function nodeMaterial({
       // output_fragment, which was renamed.
       .replace(
         '#include <dithering_fragment>',
-        `#include <dithering_fragment>
-         float facing = abs(dot(normalize(vNormal), normalize(vViewPosition)));
-         float fresnel = pow(1.0 - facing, uRimPower);
-         // Mixed toward the rim colour, not added to it.
-         //
-         // Adding was the first attempt and it failed for the same reason flag
-         // colours would have: amber light on top of a blue fill resolves to
-         // near-white at the silhouette, so all three countries converged on
-         // the same pale edge — and bloom then amplified it. Mixing replaces
-         // the colour instead of brightening it, so the rim keeps its hue, and
-         // because it adds no luminance the glow pass leaves it alone.
-         gl_FragColor.rgb = mix(gl_FragColor.rgb, uRimColour, fresnel * uRim);
-         // Keep the silhouette from fading out with a dimmed node, or the rim
-         // disappears exactly when the fill is hardest to read.
-         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * uRim * uRimAlpha, 0.0, 1.0);
-         // Soft edge — a separate fresnel power/term from the rim's, because
-         // it is answering a different question (silhouette width, not rim
-         // colour) and the two happen to share nothing but the geometry term
-         // they both start from. A no-op (mix factor 0) on every ordinary
-         // node — see the file comment's "Soft edge" paragraph.
-         float softFresnel = pow(1.0 - facing, uSoftPower);
-         gl_FragColor.a *= mix(1.0, 1.0 - softFresnel, uSoft);`,
+        '#include <dithering_fragment>' +
+          rimFragmentTail('uRimColour', 'uRimPower', 'uRim', 'uRimAlpha', 'uSoft', 'uSoftPower'),
       )
   }
 

@@ -318,6 +318,22 @@ slider over `supersedes`.
    frame, triangles identical. The 2,366 node spheres are what is left, and
    they are the hard third (per-node lit material, rim, hollow, breath,
    AND the raycast picker) — a separate sub-round, after Thomas has looked.
+   **Thomas looked and measured 2026-09-05: median 33.40 → 25.00 ms, p95
+   41.7 → 33.4 (one refresh interval bought), no visual defects.** **Nodes
+   done the same evening** as `src/components/nodeInstancing.ts`, same mirror
+   shape: each frame the sphere is hidden and its transform plus its
+   `NodeMaterial`'s state (colour, emissive × intensity, opacity, rim
+   intensity/exponent/alpha/colour, soft flag) go into per-instance
+   attributes of a batch keyed by sphere bucket × (`transparent`,
+   `depthWrite`); the batch material is a `MeshStandardMaterial` whose
+   `onBeforeCompile` swaps `diffuse`/`opacity`/`emissive` for the varyings and
+   appends the same rim tail (`rimFragmentTail`, single source in
+   nodeVisuals.ts). Picking still raycasts the hidden spheres. Headless:
+   **2,401 → ~85 calls a frame** (46 node batches + 15 photon + 1 link + 7
+   sprites + 17 composer), sphere triangles identical, tier-2 plain and trace
+   screenshots indistinguishable (`Claude outputs/node-instancing-2026-09-05/`).
+   Known technical difference: dimmed spheres no longer depth-sort among
+   themselves. Real-hardware frame time not yet measured — Thomas's item.
 
 ## 10. Open from the question round
 

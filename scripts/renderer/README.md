@@ -17,4 +17,9 @@ frame TIMES from swiftshader are not — judge speed on Thomas's machine.
 
 Baseline before link batching (2026-09-05, 2,366 nodes / 2,817 links):
 7,371 calls per frame. After photon + link instancing: 2,401 (2,366 of them
-node spheres), triangles identical (2,070,501).
+node spheres), triangles identical (2,070,501). After node instancing (same
+day, 2,367 / 2,818): **~85 calls per frame** — 46 node batches, 15 photon,
+1 link, 7 sprites, 17 composer passes. Triangles read 2,071,661–2,075,983
+either way; the spread is photon churn (140 tris a teardrop), not spheres.
+`census.mjs` now also prints `nodesInst` and folds the node `sync()` into
+`syncMs`.

@@ -426,6 +426,13 @@ here only as a rule, once.
   comparable / aligned / presumably in a basis, even descriptively.
 - **`zip` on the device mount cannot rename its temp file** onto the target:
   you get a 0-byte zip plus a random-named complete one. `cp` the temp file.
+- **`onBeforeCompile` never fires for a mesh that is hidden before its first
+  render** (2026-09-05, node instancing). Every sphere is now `visible = false`
+  from frame one, so anything a material used to create inside
+  `onBeforeCompile` (the rim uniforms) does not exist — resolve it at
+  construction and put it in `userData`, which is where the instancers read
+  from. The three mirror instancers (`photon`/`link`/`nodeInstancing.ts`)
+  are the only draw path; the library's meshes are state + picking only.
 
 
 ## 7. Standing decisions — do not re-raise

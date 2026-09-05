@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 ~17:10 UTC (photon + link instancing landed, unseen; CO reversals confirmed, no vetoes; DSBB 750 parked)
+Last updated: 2026-09-05 ~18:45 UTC (photon+link instancing MEASURED by Thomas 33.4→25.0 ms; node instancing landed, unseen; kind class fix; cn LFS at A)
 
 ---
 
@@ -28,72 +28,73 @@ this is the only routing table; PLAYBOOK §1 points here:
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
 | a `*-grok-2026-08.json` slice's `meta.note` | `notes/mint-2026-08-20.md` |
 | visual / layout work | `PLAYBOOK.md` §3–§4, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; memory `regroup_rulings_2026-09-05` (core/shell layout) |
-| renderer performance | memory `renderer_perf_measured_2026-09-04` |
+| renderer draw path / instancers | memory `node_instancing_2026-09-05`, `link_batching_2026-09-05`, then `renderer_perf_measured_2026-09-04` |
 | camera / fit · flicker | `notes/camera-fit-measurement-2026-08-19.md` · `notes/flicker-tests-2026-08-19.md` |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
 
 Then project memory, newest first. Git status: never state it (rule 1).
-Round notes from 09-03/04 now live in `archive/notes/` (story is in memory).
 
 ---
 
 ## 2. Current state
 
-Corpus **3,344 reports / 2,817 dependencies**. **812 A · 1,381 B · 624 C**,
-A-share 28.8%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
-**61/61**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated.
-**Grade counts come from `validate` only.**
+Corpus **3,345 reports / 2,818 dependencies**. **813 A · 1,381 B · 624 C**,
+A-share 28.9%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
+**61/61**, `tsc --noEmit` clean, `vite build` ok, `public/corpus-data.json`
+regenerated. **Grade counts come from `validate` only.** `kind`: 2,442
+publication · 33 standard · 870 instrument (40 title-matched "National
+accounts (ESA 2010)" series retyped publication 2026-09-05 — the 09-03
+migration regex matched titles).
 
 **Direction (Thomas, 2026-09-05): "tip-top shape with what we have before
-looking for more data."** No A-share or size target. Grok retired.
+looking for more data."** No A-share or size target. Grok retired. START-HERE
+now says so (line ~208) — **wording not yet approved by Thomas**.
 
-**Quote guard is live**: `NEGATED_QUOTE_PATTERNS` in `grade-evidence.ts` caps
-an edge at B when its own quote denies / diverges / defers / hedges the
-dependency; `--scan-quotes` (no network) lists hits. Corpus scan is clean.
-**The name-match A bar cannot read meaning** — every A rests on the guard now.
+**Quote guard is live**; corpus scan clean; the name-match A bar cannot read
+meaning. **Grader gap found 2026-09-05: `MIN_SPAN = 24` chars is Latin-tuned**
+— a 19-character Chinese sentence grades B `no-quoted-span`; work around by
+quoting two contiguous sentences. **`npm run gen` before grading a freshly
+minted edge** — the grader reads `corpus-data.json`, not the slices.
 
-**DSBB 750 `no-source-node` leads — PARKED** (684 leaf nodes across 180
-countries; matcher misses ≈ 0). Lead file `Claude outputs/dsbb-som-import-2026-09-05-review.json`,
-harvest cache on the VM. ESMS: Eurostat `_esmshi4_<cc>.htm` pages are the
-machine-readable route if ever wanted (wires existing EU nodes).
+**DSBB 750 `no-source-node` leads — PARKED.** Publisher-cluster: LatAm + China
+done; remaining `_dropped` leads are no-URL / dead-host — research, not
+re-grade.
 
-**Publisher-cluster lead research**: LatAm + China done (2 slices, 32 edges;
-memory `publisher_cluster_latam_2026-09-05`). Remaining `_dropped` leads are
-the no-URL / dead-host classes — research, not re-grade.
+**Renderer — all three instancers live (`photon`/`link`/`nodeInstancing.ts`),
+mirror shape: the library's meshes are state + picking only, hidden each
+frame; the batches are the only draw path.** Photon+link **measured by Thomas
+2026-09-05: median 33.40 → 25.00 ms, p95 41.7 → 33.4 (one 120 Hz interval),
+no visual defects.** Node instancing landed the same evening, **UNSEEN by
+Thomas**: headless Everything **2,401 → ~85 draw calls a frame** (46 node
+batches + 15 photon + 1 link + 7 sprites + 17 composer), sphere triangles
+identical, tier-2 plain/trace screenshots indistinguishable (`Claude
+outputs/node-instancing-2026-09-05/`). Rim uniforms moved to `userData` at
+construction (PLAYBOOK §6 trap). Known technical difference: dimmed spheres no
+longer depth-sort individually. Revert = delete the `nodeInstancer.sync` line
+at the end of `useFrame`. Otherwise as before: grade-driven opacity, A-only
+ranking cut, `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE`
+0.8. **`view.minGrade` stays default `C`**. Headless tools: `scripts/renderer/`.
+Shelved ISOLATED: `sc-oag-annual-reports-2022-2024`,
+`so-fgs-financial-governance-reports`, `brics-johannesburg-ii-declaration-2023`,
+`tz-dar-es-salaam-city-council-budget-2026`.
 
-**Uncommitted backlog** (never read from git): everything since the 07:35
-handoff — `scripts/grade-evidence.ts` (guard, `--scan-quotes`), 4
-`edit_scripts/*-2026-09-05*.py`, 2 new slices, ~12 rewritten slices, ~24
-`evidence-cache/` records, `public/corpus-data.json`, `Claude outputs/`
-(review + research files), 12 notes moved to `archive/notes/`, 3 files to
-`_to_delete/`, `notes/Midvamp - Revamp.md` path fixes; **renderer:**
-`InfluenceGraph.tsx`, 2 new `src/components/*Instancing.ts`, `scripts/renderer/`,
-`Claude outputs/link-batching-2026-09-05/`.
+**Research debt**: 0 no-URL, 0 dead-URL, 5 bare-homepage edges. Browser pass
+CLOSED. 2026-08-31 audit: all findings closed.
 
-**Renderer — photon + link instancing landed 2026-09-05, UNSEEN by Thomas**
-(`src/components/photonInstancing.ts`, `linkInstancing.ts`, wired in
-`InfluenceGraph.tsx`'s `useFrame` after `tickFrame()`; `__rig.photons()` /
-`__rig.links()` report batch counts + sync ms). Headless Everything tier:
-**7,371 → 2,401 draw calls**, triangles identical; the 2,366 node spheres are
-the remainder. Real-hardware frame time NOT yet measured. Otherwise as
-before: grade-driven opacity, A-only ranking cut, `rankByLegalBasis`,
-`INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift watchdog + `__meshes`.
-**`view.minGrade` stays default `C`**. Pre-instancing baseline 28 fps /
-33.4 ms median on Thomas's machine. Headless tools: `scripts/renderer/`.
-Shelved ISOLATED:
-`sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`,
-`brics-johannesburg-ii-declaration-2023`, `tz-dar-es-salaam-city-council-budget-2026`.
+**Uncommitted since Thomas's 2026-09-05 commit**: kind-fix edit script + 5
+slices, `publisher-cluster-cn-2026-09-05.json` (+node +edge), `cn-china-grok`
+`_dropped` why, 1 evidence-cache record, `corpus-data.json`, START-HERE,
+PLAYBOOK §6, Revamp §9, `scripts/renderer/`, `Claude outputs/node-instancing-
+2026-09-05/`, one `_to_delete/` zip; **renderer:** `nodeInstancing.ts` (new),
+`nodeVisuals.ts`, `InfluenceGraph.tsx`. `package-lock.json` is out of sync
+(`npm ci` fails, `npm install` works) — one `npm install` + commit fixes it.
 
-**Research debt**: 0 no-URL, 0 dead-URL, 5 bare-homepage edges; 1,126 nodes
-carry a bare-homepage `url` (class, not debt). Browser pass CLOSED.
-**2026-08-31 audit: all findings closed** (F-14 was already implemented —
-floor 0.05, 97 listed / 3,201 suppressed).
-
-**Known node defects**: `pl-gus-national-accounts`, `ch-bfs-national-accounts`
-carry `kind: standard` (they are publications). Egypt IPI compiler (MoP vs
-CAPMAS) unverified.
+**Known node defects**: 9 fractional-cadence `standard` nodes need a ruling
+(GNI/QNA inventories 0.2–0.25, `eu-manual-mgdd`, `eu-manual-rd-esa2010`,
+`naics`, `icd-10-ca`, `icls-work-statistics-resolution`, `rw-nisr-nsdp`).
+Egypt IPI compiler (MoP vs CAPMAS) unverified.
 
 ---
 
@@ -101,43 +102,44 @@ CAPMAS) unverified.
 
 ### [Agent] — in this order
 
-1. **Node instancing** — the last third of Revamp §9 step 6, only after
-   Thomas has looked at the photon/link result and measured it (median/p95,
-   not fps). Harder than the first two: per-node `NodeMaterial` state (rim,
-   hollow, emissive breath, litOpacity, `transparent` toggle) and the
-   raycast picker (`reportIdAt(e.object)`) both have to survive. Same mirror
-   shape (hide the library's mesh, copy into a batch) is the safe route;
-   picking can keep raycasting the hidden spheres — three's Raycaster ignores
-   `visible`, which is also why link/pulse clicks still work today.
-2. **INT-core / country-shell layout** (Thomas's direction from the Everything
+1. **INT-core / country-shell layout** (Thomas's direction from the Everything
    screenshots): at tier 4 the INT nodes are springless and pushed to the edge,
    so every country cluster sits on one side. Generalise `intAnchor` to pull
    the INT family centroid to the global centroid at every tier + a radial
    shell force on country-cluster centroids (direction free). New
    `measure-forces` metric: mean resultant length of cluster-centroid unit
    vectors around the core. Fold in "default view at scale": edges dimmed,
-   pulses off at Everything, both on in trace. Note this bends the "position
-   encodes only edges" doctrine (Q16) — the tier-2 orb already does.
-3. Cluster-repulsion measured sub-round only if 2 leaves clusters overlapping.
+   pulses off at Everything, both on in trace. Bends the "position encodes
+   only edges" doctrine (Q16) — the tier-2 orb already does. Only after
+   Thomas has looked at node instancing (his item 1) — a layout round on an
+   unverified draw path muddles both.
+2. Cluster-repulsion measured sub-round only if 1 leaves clusters overlapping.
+3. **Grader: CJK-aware span floor** — `MIN_SPAN` 24 → e.g. 10 when the span is
+   ≥50% CJK; read `notes/grader-rulings-round-2026-09-05.md` first; re-grade
+   the `no-quoted-span` B's on CJK hosts afterwards (`--edges`, no fetch).
 4. Parked design questions: mutual-pair rank leakage; layout re-run on data
-   add; cadence in layout. START-HERE "obvious next thing: more data" vs
-   programme — Thomas's call.
-5. Small corpus items when convenient: `kind` fix on the two NA nodes; a
-   Labour Force Survey node for China (NBS says the surveyed unemployment rate
-   comes from it); ESMS scripted pass.
+   add; cadence in layout.
+5. Small corpus items when convenient: ESMS scripted pass (Eurostat
+   `_esmshi4_<cc>.htm`); the 9 `kind` rulings once Thomas gives them.
+6. Stale comment: `InfluenceGraph.tsx` near `.linkWidth` still says "The
+   pulses. NOT instanced". Fix when next in that file.
 
 ### [Thomas] — only you can
 
-1. **Look at the instanced renderer** (§2): Everything tier, a trace, hover
-   an edge, Edges/Pulses toggles, a tier flip. Then the 15 s frame-time run
-   from memory `renderer_perf_measured_2026-09-04` for median/p95 against
-   33.4 ms. If anything is wrong the revert is two lines in `useFrame`
-   (the `sync` calls) — the library's own meshes are still there, hidden.
-2. **Commit the backlog** (§2). Housekeeping: `_to_delete/` (README lists
-   it) — all junk, plus today's staging zip.
+1. **Look at node instancing** (§2): Everything tier, a trace (dimmed spheres
+   are the new code path), hover a node (grow + glow), orbs breathing at
+   tier 2, a hollow instrument's ring, the Groups lens recolour, tier flip.
+   Then the same 15 s rAF run as before (3 s lead-in, discard a run with
+   `hidden` > 0 or a 4-second worst): baseline now **25.00 / 33.4**; a real
+   win reads 16.67. Revert is one line if anything's wrong.
+2. **Approve or edit the START-HERE wording** (line ~208, renders under Help).
+3. **Rule on the 9 fractional-cadence `standard` nodes** (§2 known defects):
+   inventories and manuals — standard or publication?
+4. **Commit** the §2 list. `npm install` once to resync `package-lock.json`.
+   `_to_delete/` has one new staging zip.
 
-Settled 2026-09-05: CO reversals confirmed (entries in
-`andean-wiring-grok-2026-08.json`), no vetoes — hedge caps and `ar-eph` A stand.
+Settled 2026-09-05: CO reversals confirmed, no vetoes; photon+link instancing
+accepted on measurement.
 
 ---
 
