@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 04:25 UTC (doc cleanup + item 9 closed; TN/Haryana; Wayback fix; Grok retired)
+Last updated: 2026-09-05 07:10 UTC (DSBB SoM import 136 edges 93% A; Rosstat re-cite; KDI A; Minfin OCR; Maharashtra A)
 
 ---
 
@@ -41,8 +41,8 @@ Then project memory, newest first (index ~8 KB). Git status: never state it
 
 ## 2. Current state
 
-Corpus **3,344 reports / 2,633 dependencies**. **623 A · 1,337 B · 673 C**,
-A-share 23.7%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
+Corpus **3,344 reports / 2,760 dependencies**. **751 A · 1,357 B · 652 C**,
+A-share 27.2%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
 **52/52**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated.
 **Grade counts come from `validate` only.**
 
@@ -52,18 +52,32 @@ All Grok material is out of `notes/`. The `*-grok-2026-08.json` slices stay as
 data and grade like any other; their `meta.note` now resolves
 (`notes/mint-2026-08-20.md`, written 2026-09-05 from the 08-20 handoff).
 
-**Grader: Wayback is asked WITHOUT the scheme** (`waybackLookupKey`,
-2026-09-05). The `https://` form answered "no snapshot" for
-`www.tn.gov.in/deptst/stateincome.pdf` while the scheme-less form found one, so
-earlier "unreadable, no snapshot" verdicts may be wrong — todo 1.
+**Grader: Wayback is asked WITHOUT the scheme** (`waybackLookupKey`, 2026-09-05).
+The snapshot-rescue re-run over the 40 C edges blocked `network`/`wall` is
+done: 8 C→B, 32 stay C — the lead is spent (memory `snapshot_rescue_rerun_2026-09-05`).
+
+**DSBB scripted import landed** (2026-09-05):
+`src/data/research/dsbb-som-import-2026-09-05.json`, 136 edges (national
+release → international standard), **127 A · 9 B**, graded before merge.
+Tooling + README `scripts/dsbb-som-import/`; review file (750 `no-source-node`
+mint leads, 5 ambiguous) `Claude outputs/dsbb-som-import-2026-09-05-review.json`.
+**Source nodes were auto-matched by country + title pattern** — the match, not
+the citation, is what a reviewer checks. Jamaica/Kazakhstan 1993-SNA NOT minted
+(DSBB metadata is stale there). ESMS half not done.
+
+**Rosstat regional re-cite**: 9 of 11 index-page edges dropped `no-document`
+(both sides read, neither names the other); 2 re-cited, B. One carries a
+**direction caveat for Thomas** (§3). KDI edges A via `title_aliases`;
+Minfin 128n B via OCR; Maharashtra A. Memory `followup_round_2026-09-05`.
 **`check-urls.ts` is gone**: `npm run check-urls` → `grade-evidence.ts --urls
 [--dir <path>] [--json <out>]`, judged by `fetchRaw` (only `dead` fails; a
 wall is reported, not failed). Tested on 12 urls.
 
-**India:** Haryana `-> in-state-gsdp-series` is A (live S3WaaS PDF); Tamil Nadu
-is B — its 2021-22 handbook lives on `www.tn.gov.in/deptst/`, which refuses
-both machines (snapshot cap; chapter names *Net* SDP, title-run 3/5). The four
-dead Indian hosts (`pc.odisha.gov.in`, `des.assam.gov.in`, `descg.gov.in`,
+**India:** Haryana and Maharashtra `-> in-state-gsdp-series` are A; Tamil Nadu
+is B — `www.tn.gov.in` refuses VM, sandbox AND Chrome (2026-09-05; so does
+`des.delhi.gov.in`, `www.mod.gov.in`). Uttarakhand's 2024-25 "At a Glance" is a
+scanned bilingual PDF on S3WaaS — OCR would cap at its current B, not pursued. The
+four dead Indian hosts (`pc.odisha.gov.in`, `des.assam.gov.in`, `descg.gov.in`,
 `www.mod.gov.in`) are DOWN, not walled — Chrome is not a third route.
 **The railways edge grades off MoSPI's NAS *Sources and Methods* naming the
 Year Book, not off the Year Book.** Cite the LIVE url always — a reset is
@@ -77,9 +91,12 @@ Year Book, not off the Year Book.** Cite the LIVE url always — a reset is
 
 **Uncommitted backlog** (carried forward, never read from git): the Basel III
 round, the transport round, the PLAYBOOK split, browser-pass round 5, the
-grader rulings round, the rulings + Basel II round, the TN/Haryana round
-(`in-india-grok-2026-08.json`, `public/corpus-data.json`, three
-`evidence-cache/` records), the doc cleanup (`REPORTS.md`, `PLAYBOOK.md`,
+grader rulings round, the rulings + Basel II round, the TN/Haryana round, the
+snapshot-rescue re-run, the 2026-09-05 follow-up round (DSBB slice +
+`scripts/dsbb-som-import/`, `ru-russia-grok-2026-08.json`, `kr-south-korea-grok-2026-08.json`,
+`za-fiscal-federalism.json`, `ru-g3-international-standards.json`,
+`in-india-grok-2026-08.json`, 11 `_dropped` entries flipped to `resolved` across slices,
+~35 `evidence-cache/` records, `public/corpus-data.json`, two `Claude outputs/` files), the doc cleanup (`REPORTS.md`, `PLAYBOOK.md`,
 `README.md`, `START-HERE.md`, `notes/Midvamp - Revamp.md`, two comment paths in
 `src/components/`, `archive/` ×9 in, `notes/` −19 +1, `_to_delete/`), and
 item 9 (`scripts/grade-evidence.ts`, `package.json`, `scripts/check-urls.ts`
@@ -102,39 +119,32 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
 
 ### [Agent] — in this order
 
-1. **Re-run the snapshot rescue over the C edges blocked `network`/`wall`.**
-   The old lookup missed snapshots (§2); the negatives lived only in a scratch
-   `.evidence-fulltext/wayback/`, so only a re-run can count the misses. Select
-   with `--edges` on the C list, no `--write` first; snapshot reads cap at B.
-2. **OCR one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure -> imf-sdds`,
-   200 / 864,760 bytes / 15 chars of text. Needs `rus.traineddata`; the VM has
-   working network. Caps at B.
-3. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
+1. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
    2026-09-05 drop. DCC's budget-summary attachment sits behind a JS fetch never
    completed; a DCC document naming Cap. 290 mints the edge properly. One
    browser pass, or shelve it explicitly.
-4. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
+2. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
    `ess-peer-review-final-report` edges, round 5's 29 reverted quotes, the
    EDP-inventory fragments. Recount first; 58 circabc edges left, and a re-cite
-   pass on that host clears most of item 10 too.
-5. **India remainder:** Tamil Nadu sits at B until `www.tn.gov.in` answers;
-   Maharashtra, Delhi and Uttarakhand reset 2026-09-05; Odisha, Chhattisgarh
-   and MoD closed for now.
-6. DSBB/ESMS scripted import (readable API, already 50 corpus citations).
-7. **Link batching — scoped by measurement.** Photons first (1,967 objects, 15
+   pass on that host clears most of item 7 too.
+3. **DSBB follow-ups:** Thomas reviews the 136 auto-matched source nodes (slice
+   basis lines say what was matched); the 750 `no-source-node` rows are mint
+   leads by country+category; ESMS still unscripted. India remainder is closed
+   until `tn.gov.in` / `des.delhi.gov.in` / `mod.gov.in` answer some machine.
+4. **Link batching — scoped by measurement.** Photons first (1,967 objects, 15
    materials → ~15 `InstancedMesh` draws), then links and nodes. Blocker: one
    material per object, so instancing means moving colour/opacity/grade/hover
    out of `GradientLinkMaterial` uniforms into per-instance attributes.
    Draw-call bound. Numbers: memory `renderer_perf_measured_2026-09-04`.
-8. Cluster-repulsion sub-round (measured, `measure-forces.ts`, 2+ seeds), then
+5. Cluster-repulsion sub-round (measured, `measure-forces.ts`, 2+ seeds), then
    **F-14** (gate the weighted-vs-raw disagreement list to an authority floor
    ~0.05 so it reads as a check again).
-9. Parked design questions from REPORTS' retired tail, for when the renderer
+6. Parked design questions from REPORTS' retired tail, for when the renderer
    is next open: mutual-pair rank leakage (two pairs measured, opposite signs —
    watched, not managed); layout re-run on data add; cadence in layout; the
    default view at scale. START-HERE's "obvious next thing: more data" is a
    direction statement now out of step with the programme — Thomas's call.
-10. `_dropped` lead re-evaluation (plan §4 step 5) — last (Thomas, 2026-09-05).
+7. `_dropped` lead re-evaluation (plan §4 step 5) — last (Thomas, 2026-09-05).
 
 ### [Thomas] — only you can
 
@@ -142,7 +152,10 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
    (13 notes, 3 Grok folders/files, `check-urls.ts`; logged in
    `_to_delete/README.md`); the two empty `notes/grok-research-queue-…` dirs;
    `tmp_work/sandbox-2026-09-05/` (`repo-src-2026-09-05.tgz`) and
-   `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`. All safe to remove.
+   `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`;
+   `tmp_work/xfer-2026-09-05/` (a PDF ferried sandbox→VM). All safe to remove.
+2. **Direction ruling:** `ru-krasnoyarskstat-city-and-municipal -> ru-rosstat-municipal-indicators-database`
+   — flip, or keep as a two-way exchange (caveat + deferred reverse in `ru-russia-grok-2026-08.json`).
 
 ---
 

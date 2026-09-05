@@ -88,7 +88,7 @@
       "relationship_type": "uses_data_from",
       "basis": "Informal employment proportion statistics are derived from Sakernas labour-force survey data (including expanded modules for informal identification). Evidence: \"For the time being, statistics on the informal economy in Indonesia are based on the regular national labour force survey (Sakernas) which only lies on the employment status and occupation ... Phase 1, the Expanded LFS (Sakernas), contains additional questions that can be classified into three categories namely: 1) informal employment module\"",
       "evidence_url": "https://unece.org/sites/default/files/2022-03/8_Informal%20economy%20in%20Indonesia.pdf",
-      "evidence_grade": "C",
+      "evidence_grade": "B",
       "evidence_quote": "For the time being, statistics on the informal economy in Indonesia are based on the regular national labour force survey (Sakernas) which only lies on the employment status and occupation"
     }
   ],
@@ -97,8 +97,8 @@
       "edge": "id-national-accounts -> sna-2008",
       "source": "id-national-accounts",
       "target": "sna-2008",
-      "reason": "no-document",
-      "why": "[SUSPECT] evidence_url (dsbb.imf.org NAG00) returns HTTP 200 via curl but is a client-rendered Angular SPA that serves only the generic DSBB homepage shell regardless of country/category path; confirmed via curl source inspection (jquery/angular/require.js app shell, no country-specific text) and independently via WebFetch, which itself reported it could NOT find this content on the page (no fabrication, but no verification either). 2 WebSearch queries for exact DSBB phrasing returned no indexed hit for this specific page. The underlying fact (Indonesia's 2010 SNA-2008 rebase) is independently well documented elsewhere (multiple BPS regional-office mirror pages), but the specific evidence_url/evidence_quote pairing could not be raw-verified."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-05 (DSBB SoM scripted import): the compiling agency's own IMF DSBB Summary of Methodology names the standard; the edge is now live in src/data/research/dsbb-som-import-2026-09-05.json. Earlier entry: [SUSPECT] evidence_url (dsbb.imf.org NAG00) returns HTTP 200 via curl but is a client-rendered Angular SPA that serves only the generic DSBB homepage shell regardless of country/category path; confirmed via curl source inspection (jquery/angular/require.js app shell, no country-specific text) and independently via WebFetch, which itself reported it could NOT find this content on the page (no fabrication, but no verification either). 2 WebSearch queries for exact DSBB phrasing returned no indexed hit for this specific page. The underlying fact (Indonesia's 2010 SNA-2008 rebase) is independently well documented elsewhere (multiple BPS regional-office mirror pages), but the specific evidence_url/evidence_quote pairing could not be raw-verified."
     },
     {
       "edge": "id-cpi -> un-coicop-2018",
@@ -111,8 +111,8 @@
       "edge": "id-cpi -> cpi-manual",
       "source": "id-cpi",
       "target": "cpi-manual",
-      "reason": "no-document",
-      "why": "[SUSPECT] Shares the same evidence_url as the dependency above (dsbb.imf.org CPI00), which is an inaccessible client-rendered SPA shell to both curl and WebFetch. Same verification failure applies here."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-05 (DSBB SoM scripted import): the compiling agency's own IMF DSBB Summary of Methodology names the standard; the edge is now live in src/data/research/dsbb-som-import-2026-09-05.json. Earlier entry: [SUSPECT] Shares the same evidence_url as the dependency above (dsbb.imf.org CPI00), which is an inaccessible client-rendered SPA shell to both curl and WebFetch. Same verification failure applies here."
     },
     {
       "edge": "id-national-accounts -> id-cpi",
@@ -125,8 +125,8 @@
       "edge": "id-national-accounts -> isic",
       "source": "id-national-accounts",
       "target": "isic",
-      "reason": "no-document",
-      "why": "[SUSPECT] Same dsbb.imf.org NAG00 evidence_url as the earlier national-accounts dependencies in this batch -- confirmed inaccessible client-rendered SPA shell via both curl and WebFetch (WebFetch reported no ISIC/CPC content visible). A WebSearch for the exact ISIC/CPC phrase returned only generic UN classification pages, no hit on the specific DSBB page. Could not raw-verify."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-05 (DSBB SoM scripted import): the compiling agency's own IMF DSBB Summary of Methodology names the standard; the edge is now live in src/data/research/dsbb-som-import-2026-09-05.json. Earlier entry: [SUSPECT] Same dsbb.imf.org NAG00 evidence_url as the earlier national-accounts dependencies in this batch -- confirmed inaccessible client-rendered SPA shell via both curl and WebFetch (WebFetch reported no ISIC/CPC content visible). A WebSearch for the exact ISIC/CPC phrase returned only generic UN classification pages, no hit on the specific DSBB page. Could not raw-verify."
     },
     {
       "edge": "id-sakernas -> icls-work-statistics-resolution",
