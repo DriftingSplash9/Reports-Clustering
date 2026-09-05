@@ -1,0 +1,145 @@
+[
+  {
+    "edge": "cn-energy-statistical-yearbook -> cn-energy-production-monthly",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1907928.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国能源统计年鉴2018》, 内容简介",
+    "fetch": {"status": 200, "bytes": 76584, "extractor": "python html-strip"},
+    "notes": "The NBS description of the Energy Statistical Yearbook lists its sections (综合/能源建设/能源生产/能源消费/能源平衡表) and says the Energy Statistics Department 组织实施能源统计调查, but does not name a monthly energy-production release as a source. Yearbook 编者说明 is not published on stats.gov.cn (print/CNKI only). Not findable under the strict standard."
+  },
+  {
+    "edge": "cn-gdp-national-accounts -> cn-provincial-gdp",
+    "found": true,
+    "reverse": true,
+    "weak": true,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjws/tjzn/202301/t20230101_1903408.html",
+    "quote": "通过统一核算，实现了地区生产总值汇总数与国内生产总值基本衔接。实施统一核算后，各省（区、市）统计局不再上报本地区生产总值数据。",
+    "location": "NBS 统计知识 page 《地区生产总值统一核算如何实施》, section 三 (统一核算工作)",
+    "fetch": {"status": 200, "bytes": 73396, "extractor": "python html-strip; whitespace-normalised grep OK"},
+    "notes": "NBS describes the 2020 unified accounting reform as the NBS organising provincial GDP accounting so that the SUM of provincial GDP is reconciled (衔接) with national GDP, i.e. provincial GDP is aligned to/derived under the national framework (reverse of the candidate direction). The language is 衔接 (reconciliation), not 'compiled from', hence weak=true. Supporting quote from the NBS Q&A (https://www.stats.gov.cn/sj/sjjd/202302/t20230202_1896273.html, status 200, 96079 bytes): 实施统一核算改革后，地区生产总值汇总数将实现与国内生产总值的基本衔接。 A stronger statement of dependency: 从核算方法看，改革后，地区生产总值将依据统一的核算方法，利用地区与国家相衔接的基础资料，进行统一核算 (https://www.stats.gov.cn/sj/sjjd/202302/t20230202_1895929.html, 200, 94723 bytes) — still names only 国内生产总值 in the reconciliation sense."
+  },
+  {
+    "edge": "cn-city-statistical-yearbook -> cn-provincial-gdp",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230220_1913734.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国城市统计年鉴2021》, 内容简介",
+    "fetch": {"status": 200, "bytes": 76873, "extractor": "python html-strip"},
+    "notes": "The only sourcing statement is 数据来源于各城市的相关部门 (data come from the relevant departments of each city); 地区生产总值 is not named. Yearbook 编者说明 not available on stats.gov.cn."
+  },
+  {
+    "edge": "cn-county-statistical-yearbook -> cn-city-statistical-yearbook",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1908004.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国县域统计年鉴（乡镇卷、县市卷）－2021》",
+    "fetch": {"status": 200, "bytes": 82746, "extractor": "python html-strip"},
+    "notes": "Description only lists coverage (2000多个县域单位 / 30000多个乡镇); no source publication named. The two yearbooks are compiled by different NBS departments (农村社会经济调查司 vs 城市社会经济调查司); no NBS text states one draws on the other."
+  },
+  {
+    "edge": "cn-county-statistical-yearbook -> cn-provincial-gdp",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1908004.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国县域统计年鉴（乡镇卷、县市卷）－2021》",
+    "fetch": {"status": 200, "bytes": 82746, "extractor": "python html-strip"},
+    "notes": "No mention of 地区生产总值 as a source on any NBS page found."
+  },
+  {
+    "edge": "cn-urban-surveyed-unemployment -> cn-household-income-expenditure",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjws/zytjzbqs/tcsyl/202501/t20250121_1958390.html",
+    "quote": "调查失业率的基础数据来源于劳动力调查。",
+    "location": "NBS page 《调查失业率的基础数据来源》, section 一、调查样本情况",
+    "fetch": {"status": 200, "bytes": 75081, "extractor": "python html-strip; whitespace-normalised grep OK"},
+    "notes": "COUNTER-EVIDENCE: NBS states explicitly that the surveyed unemployment rate's base data come from the 劳动力调查 (Labour Force Survey), a separate monthly survey (~34万户/月), not the 住户收支与生活状况调查. The candidate edge appears to be factually wrong; recommend dropping it (or re-targeting to a Labour Force Survey node if one exists)."
+  },
+  {
+    "edge": "cn-stat-communique -> cn-urban-surveyed-unemployment",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html",
+    "quote": "全年全国城镇调查失业率平均值为5.2%。年末全国城镇调查失业率为5.1%。",
+    "location": "中华人民共和国2023年国民经济和社会发展统计公报, section 一、综合 (就业 paragraph)",
+    "fetch": {"status": 200, "bytes": 1546241, "extractor": "python html-strip; whitespace-normalised grep OK (page text has spaces around numbers)"},
+    "notes": "The Communiqué names and reports the 城镇调查失业率 figures directly, but does not add a footnote stating the survey source (no 注释 for this indicator). Reporting the indicator by name is a factual use, but not an explicit 'compiled from' statement, hence weak=true."
+  },
+  {
+    "edge": "cn-rural-statistical-yearbook -> cn-grain-production",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1907997.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国农村统计年鉴—2021》, 内容简介",
+    "fetch": {"status": 200, "bytes": 81212, "extractor": "python html-strip"},
+    "notes": "Description lists chapter 七、主要农产品种植（养殖）面积与产量 but does not name the 粮食产量公告. Yearbook 编者说明 not on stats.gov.cn."
+  },
+  {
+    "edge": "cn-rural-statistical-yearbook -> cn-county-statistical-yearbook",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1907997.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国农村统计年鉴—2021》",
+    "fetch": {"status": 200, "bytes": 81212, "extractor": "python html-strip"},
+    "notes": "Both yearbooks are compiled by 国家统计局农村社会经济调查司, but no NBS text states that one draws on the other."
+  },
+  {
+    "edge": "cn-rural-statistical-yearbook -> cn-gdp-national-accounts",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1907997.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国农村统计年鉴—2021》, 内容简介",
+    "fetch": {"status": 200, "bytes": 81212, "extractor": "python html-strip"},
+    "notes": "Description lists chapter 六、农林牧渔业总产值、中间消耗及增加值 but does not name 国内生产总值/国民经济核算 as the source in either direction."
+  },
+  {
+    "edge": "cn-bj-statistical-yearbook -> cn-city-statistical-yearbook",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230220_1913734.html",
+    "quote": null,
+    "location": "NBS publication page for 《中国城市统计年鉴2021》, 内容简介",
+    "fetch": {"status": 200, "bytes": 76873, "extractor": "python html-strip"},
+    "notes": "Closest reverse-direction statement is generic: 数据来源于各城市的相关部门 — does not name 北京统计年鉴 or any municipal yearbook. Not findable under the strict standard."
+  },
+  {
+    "edge": "cn-stat-communique -> cn-population-census",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.stats.gov.cn/sj/zxfb/202302/t20230203_1901393.html",
+    "quote": "根据第七次全国人口普查结果，对2017-2019年年末常住人口城镇化率数据进行了修订。",
+    "location": "中华人民共和国2021年国民经济和社会发展统计公报, 注释 [21]",
+    "fetch": {"status": 200, "bytes": 1544425, "extractor": "python html-strip; whitespace-normalised grep OK"},
+    "notes": "Explicit positive dependency: the Communiqué's urbanisation-rate series is revised on the basis of the Seventh National Population Census. Second supporting quote in the same document, 注释 [5]: 全员劳动生产率为国内生产总值（按2020年价格计算）与全部就业人员的比率，根据第七次全国人口普查结果对历史数据进行了修订。 Also the 2020 Communiqué 注释 [2] (https://www.stats.gov.cn/sj/zxfb/202302/t20230203_1901004.html, 200, 1475371 bytes): 2020年开展第七次全国人口普查，相关数据拟于2021年4月份发布，公报中不再单独发布人口和就业人员相关数据。公报中涉及的人均指标根据人口预计数计算得到。"
+  },
+  {
+    "edge": "cn-stat-communique -> cn-provincial-gdp",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html",
+    "quote": "全年东部地区生产总值652084亿元，比上年增长5.4%；中部地区生产总值269898亿元，增长4.9%；西部地区生产总值269325亿元，增长5.5%；东北地区生产总值59624亿元，增长4.8%。",
+    "location": "中华人民共和国2023年国民经济和社会发展统计公报, section 一、综合 (城乡融合和区域协调发展 paragraph; footnote [20] defines the four regions as groups of provinces)",
+    "fetch": {"status": 200, "bytes": 1546241, "extractor": "python html-strip; whitespace-normalised grep OK (page text has spaces around numbers)"},
+    "notes": "The Communiqué publishes regional 地区生产总值 aggregates (East/Central/West/Northeast), which footnote [20] defines as sums over named provinces, but it does not state in words that these are compiled from the provincial GDP series. 注释 [2] also names the series: 国内生产总值、三次产业及相关行业增加值、地区生产总值、人均国内生产总值和国民总收入绝对数按现价计算，增长速度按不变价格计算。 Both are reporting/definition statements rather than an explicit 'draws on' statement, hence weak=true; caller may prefer to treat as not found."
+  }
+]

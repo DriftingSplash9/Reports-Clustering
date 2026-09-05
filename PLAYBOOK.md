@@ -415,6 +415,17 @@ here only as a rule, once.
   see techniques §6. The two that have burned rounds: `renderer.info.render`
   reads `calls 1, triangles 1` from outside the render loop, and waiting two
   rAFs counts two frames.
+- **The grader's A bar reads presence, not meaning** (found 2026-09-05): it
+  awarded A on "Classifications … are *not in conformity* with … ISIC".
+  `NEGATED_QUOTE_PATTERNS` (denies / diverges / defers / hedges) now caps such
+  quotes at B and `--scan-quotes` lists them without network; but a new
+  phrasing the guard has not seen still grades A. Read the quote, not the grade.
+- **Your own basis prose can cap your edge.** `WEAK_BASIS_PATTERNS` matches
+  anywhere in the basis — "the EH is the *complementary* annual source" turned
+  an A into a B twice on 2026-09-05. Never write consistent / complementary /
+  comparable / aligned / presumably in a basis, even descriptively.
+- **`zip` on the device mount cannot rename its temp file** onto the target:
+  you get a 0-byte zip plus a random-named complete one. `cp` the temp file.
 
 
 ## 7. Standing decisions — do not re-raise

@@ -1,0 +1,167 @@
+[
+  {
+    "edge": "bo-pobreza -> bo-eh",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/UvhSpL1bRZ1Tj3o/download",
+    "quote": "Es necesario mencionar que el ingreso per cápita proviene de la Encuesta de Hogares (EH), puesto que los porcentajes de pobreza se presentan cada año y para ello se requiere de fuentes de información continuas.",
+    "location": "Sección 2 (Marco conceptual), p. 12 of the PDF (page footer 'Instituto Nacional de Estadística 11' precedes it)",
+    "fetch": {
+      "status": 200,
+      "bytes": 3463485,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE (2020), 'Cálculo de Líneas de Pobreza - Documento Metodológico' (linked from https://www.ine.gob.bo/index.php/estadisticas-economicas/actualizacion-lineas-de-pobreza/ ; same PDF also at https://nimbus.ine.gob.bo/s/LX9QXxyocxYkL3R/download). Alternates: Nota técnica POB 001/2020: 'Los indicadores de pobreza y desigualdad, calculados a partir de la información de las EH, consideran el método indirecto, y emplean la variable de ingresos para su medición.' and 'La EH provee la información necesaria para construir una adecuada medida de bienestar para medir pobreza.'; EH 2025 results, Presentación: 'Asimismo, constituye la principal fuente de información para la medición de la pobreza monetaria en Bolivia.' (subject = 'La Encuesta de Hogares (EH)' in the preceding sentence)."
+  },
+  {
+    "edge": "bo-pobreza -> bo-lineas-pobreza",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/qt9Ix1XfCu0Eymp/download",
+    "quote": "En efecto, una persona o un hogar es pobre extremo o indigente si tienen ingresos inferiores al costo de una canasta mínima de alimentos (línea de pobreza extrema), es decir no alcanza a satisfacer las necesidades mínimas en alimentos; en tanto es pobre, cuando su ingreso está por debajo de una canasta básica de consumo total (línea de pobreza), es decir cuando no puede satisfacer sus necesidades básicas (alimentación, educación, vivienda, vestido y servicios básicos).",
+    "location": "Section 'Definiciones' > 'Pobreza monetaria', p. 2",
+    "fetch": {
+      "status": 200,
+      "bytes": 1010994,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE, Nota técnica POB 001/2020 'Indicadores de pobreza monetaria y desigualdad mediante la Encuesta de Hogares' (rev. 6 May 2021), linked from https://www.ine.gob.bo/index.php/estadisticas-economicas/informacion-tecnica-pobreza/. Alternate (EH 2025 results, chap. 6 Pobreza, p. 87): 'La medición de la pobreza monetaria en Bolivia se basa en el método de la línea de pobreza (LP)9, que consiste en contrastar el ingreso per cápita del hogar con el valor de las líneas de pobreza.' (contains inline footnote marker '9' in extracted text)."
+  },
+  {
+    "edge": "bo-lineas-pobreza -> bo-ipc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/UvhSpL1bRZ1Tj3o/download",
+    "quote": "Una vez reducida la CBA, a las variedades cotizadas por el IPC, se calcula el Índice de Precios (IP), y a partir de ello se obtiene los valores de la LPE al período de medición entre noviembre y diciembre, esto por ser los meses de levantamiento de información de la EH.",
+    "location": "Section 5.1 'Actualización de la LPE urbana', p. 27-28",
+    "fetch": {
+      "status": 200,
+      "bytes": 3463485,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE (2020), 'Cálculo de Líneas de Pobreza - Documento Metodológico' (linked from https://www.ine.gob.bo/index.php/estadisticas-economicas/actualizacion-lineas-de-pobreza/ ; same PDF also at https://nimbus.ine.gob.bo/s/LX9QXxyocxYkL3R/download). Also 5.3 'Actualización de la LP': 'Para la valorización de la LP en el tiempo, se incorpora una mejor práctica13 en cuanto a medición de pobreza, esta consiste en actualizar los bienes y servicios aplicando la variación del índice de no alimentos del IPC.' and the LPE ficha in the annex: 'Los componentes de la CBA urbana se valorizan con los precios de alimentos cotizados por el Índice de Precios al Consumidor (IPC) para cada período de medición.' Note the rural line is updated with EH unit prices, not IPC (doc says IPC has no rural coverage). EH 2025 results also: 'Los principales insumos para la estimación de los indicadores de pobreza son el ingreso per cápita del hogar y las líneas o umbrales de pobreza, los cuales deben ser actualizadas periódicamente con información de precios promedio del Índice de Precios al consumidor (IPC)11.'"
+  },
+  {
+    "edge": "bo-gini -> bo-eh",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/qt9Ix1XfCu0Eymp/download",
+    "quote": "Los indicadores de pobreza y desigualdad, calculados a partir de la información de las EH, consideran el método indirecto, y emplean la variable de ingresos para su medición.",
+    "location": "Introducción, p. 1 (document title: 'Indicadores de pobreza monetaria y desigualdad mediante la Encuesta de Hogares'; Paso 5 of the same note defines the 'gini' indicator computed on the EH variable yhogpc)",
+    "fetch": {
+      "status": 200,
+      "bytes": 1010994,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE, Nota técnica POB 001/2020 'Indicadores de pobreza monetaria y desigualdad mediante la Encuesta de Hogares' (rev. 6 May 2021), linked from https://www.ine.gob.bo/index.php/estadisticas-economicas/informacion-tecnica-pobreza/. Weak only because the sentence says 'desigualdad' rather than 'Gini' by name; the same note's 'Paso 5: Se calcula los indicadores de desigualdad \"gini\" ...' makes Gini the inequality indicator meant. Stronger but RAR-packaged evidence: INE ficha técnica 'DES 01 Índice de Gini' (inside https://nube.ine.gob.bo/index.php/s/16vkjHhuMZ6tVjt/download, RAR 3672249 bytes, file 'DES 01 GINI.pdf', extracted with pdftotext raw mode) lists 'Nombre de la fuente de información: Encuesta de Hogares' and states: 'A partir de la Encuesta de Hogares 2011, las estimaciones fueron realizadas con los factores de expansión calculados en base a las proyecciones de población basada en el Censo 2012.' EH 2025 results (PDF above) chap. 5.3: 'Para 2025, el coeficiente de Gini del ingreso per cápita del hogar a nivel nacional alcanzó a 0,426.'"
+  },
+  {
+    "edge": "bo-informalidad -> bo-eh",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/jKB2lcuQeYCVF03/download",
+    "quote": "Con los datos que se tiene desde el año 2016 a partir de la información de la Encuesta de Hogares que ejecuta el INE, se obtuvieron resultados a nivel nacional y además de su desagregación por área urbana y rural.",
+    "location": "Section 4.2 'Encuesta de Hogares (EH)', p. 23",
+    "fetch": {
+      "status": 200,
+      "bytes": 1268522,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE/UDAPE (Abril 2026), 'Propuesta metodológica para medir estadísticas sobre informalidad en Bolivia' ('Documento técnico sobre informalidad'), linked from https://www.ine.gob.bo/index.php/informacion-tecnica/. Also: 'Con base a la Encuesta de Hogares, se obtuvieron los siguientes resultados en cuanto a empleo, recordando que este concepto está relacionado con el cumplimiento de la normativa laboral vigente en nuestro país.' (4.2.2 Empleo u ocupación informal, p. 25). Caveat: the document treats the Encuesta Continua de Empleo (ECE) as the primary quarterly source and the EH as the complementary annual source ('a partir de datos de la Encuesta Continua de Empleo y complementariamente Encuesta de Hogares')."
+  },
+  {
+    "edge": "bo-empleo-formal -> bo-eh",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://nube.ine.gob.bo/index.php/s/jKB2lcuQeYCVF03/download",
+    "quote": "Asimismo, aproximadamente el 28% de la población ocupada tiene empleos en el sector formal; y 2% trabaja en el sector comunitario en hogares que producen para el uso propio. Por tanto, tomando en cuenta los datos de la EH, se tiene a nivel nacional, alrededor del 70% de la población boliviana trabajando en establecimientos que cumplen con la normativa de empresas (Gráfico 7).",
+    "location": "Section 4.2.1 'Sector informal' (EH-based results), p. 23",
+    "fetch": {
+      "status": 200,
+      "bytes": 1268522,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE/UDAPE (Abril 2026), 'Propuesta metodológica para medir estadísticas sobre informalidad en Bolivia' ('Documento técnico sobre informalidad'), linked from https://www.ine.gob.bo/index.php/informacion-tecnica/. Formal employment/sector is treated in this document as the complement of informal employment estimated from the EH (and ECE). Weak because 'empleo formal' is not a stand-alone titled series in the document; the evidence names 'sector formal' and 'datos de la EH'. Same ECE caveat as edge 5."
+  },
+  {
+    "edge": "bo-inseguridad-alimentaria -> bo-eh",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://nimbus.ine.gob.bo/s/ASEzz9QYYttCFxS/download",
+    "quote": "En esta EH se incorporaron además preguntas para medir características de la población ocupada independiente, la escala de inseguridad alimentaria, y el módulo de turismo interno, incorporaciones que responden a la solicitud de sectores para atender a la demanda de información y seguimiento de indicadores del PDES 2016 -2020.",
+    "location": "Chapter 'Antecedentes' (two-column page describing the EH 2016), near the start of the publication",
+    "fetch": {
+      "status": 200,
+      "bytes": 15091104,
+      "extractor": "pdftotext (raw mode, no -layout; two-column page)"
+    },
+    "notes": "INE, 'Encuesta de Hogares 2016 - 2018' results publication, linked from https://www.ine.gob.bo/index.php/publicaciones/encuesta-de-hogares-2016-2018/. Verified with pdftotext in raw (non -layout) mode because the page is two-column; -layout output splits the sentence across columns. Names 'escala de inseguridad alimentaria' rather than the ELCSA acronym; the same publication's thematic-content table lists 'Escala de inseguridad alimentaria basada en la experiencia' (Sección 9/Sección 8 of the EH questionnaire). EH 2025 results (ficha técnica table, p. 7) lists 'seguridad alimentaria' among the EH 'Áreas de estudio'; the EH 2023 Normativa Técnica (ANDA, scanned/OCR) lists 'Sección 7: Acceso a la ... Parte A: Escala de inseguridad alimentaria basada en la ...'. Same file is mirrored at https://siip.produccion.gob.bo/noticias/files/BI_30012020ad314_3hogarine.pdf (byte-identical)."
+  },
+  {
+    "edge": "bo-nbi -> bo-vivienda",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": null,
+    "quote": "",
+    "location": "",
+    "fetch": {
+      "status": null,
+      "bytes": null,
+      "extractor": null
+    },
+    "notes": "No INE document names a housing-conditions/services publication as an input to NBI; NBI is census-based. INE's 'Glosario y Ficha Técnica - Necesidades Básicas Insatisfechas' (XLSX, https://nimbus.ine.gob.bo/index.php/s/D8jbPkzkifHbQBd/download, HTTP 200, 44792 bytes, read with openpyxl; linked from https://www.ine.gob.bo/index.php/estadisticas-economicas/pobreza-por-el-metodo-de-necesidades-basicas-insatisfechas/) states: 'Para esta medición se definen los componentes: Vivienda (materiales de construcción de la vivienda y disponibilidad de espacios de la vivienda), Servicios e insumos básicos (saneamiento básico, insumos energéticos), Educación (años aprobados, alfabetización y asistencia) y Salud (atención de salud).' and its observations refer to 'el día del censo'; the sheet is titled 'GLOSARIO CENSO DE POBLACIÓN Y VIVIENDA 2024'. The housing component is thus computed directly from census variables, not from the 'Condiciones de vivienda y servicios básicos' series (which INE derives from the EH). Suggest dropping or re-targeting this edge to the Censo de Población y Vivienda."
+  },
+  {
+    "edge": "bo-bop -> bo-comercio-exterior",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.bcb.gob.bo/webdocs/Metadatos/sebalanzapagos.pdf",
+    "quote": "Bienes: Los datos sobre exportaciones e importaciones se basan en las estadísticas de comercio exterior proporcionadas por el Instituto Nacional de Estadística (INE), las que a su vez se basan en información proveniente de la Aduana Nacional.",
+    "location": "Section IV 'Naturaleza de las fuentes de datos básicos' > 'Fuentes de datos básicos', p. 4",
+    "fetch": {
+      "status": 200,
+      "bytes": 244505,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "BCB, metadatos 'Sector Externo - Balanza de Pagos' (fecha de preparación: febrero 2007), section IV 'Naturaleza de las fuentes de datos básicos'. Metadata sheet dated Feb 2007 (MBP5 era), still hosted by BCB. Current practice confirmed in BCB 'Reporte de Balanza de Pagos y PII Gestión 2023' (https://www.bcb.gob.bo/webdocs/publicacionesbcb/2024/05/57/BOP%202023.pdf, 200, 2692442 bytes): trade tables carry 'FUENTE: INE, Aduana Nacional' and the note 'Difiere del Saldo Comercial presentado por el INE, ya que se realizan ajustes por fletes y seguros, bienes para transformación, bienes en compraventa y para arrendamiento operativo, de acuerdo al Manual de Balanza de Pagos y Posición de Inversión Internacional, Sexta Edición.' (table note, not a standalone sentence)."
+  },
+  {
+    "edge": "bo-bop -> bo-remesas",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://www.bcb.gob.bo/webdocs/publicacionesbcb/2018/05/52/Bop_2017.pdf",
+    "quote": "Asimismo, se registraron transferencias oficiales ($us153,1 millones) cuyo componente principal son las Donaciones no contempladas en el alivio de deuda; empero los flujos más relevantes son las transferencias personales compuestas principalmente por las remesas familiares.",
+    "location": "Section 3.4 'Ingreso Secundario', p. ~20",
+    "fetch": {
+      "status": 200,
+      "bytes": 2217986,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "BCB, 'Reporte de Balanza de Pagos y Posición de Inversión Internacional, Gestión 2017', section 3.4 Ingreso Secundario. States that BOP's Ingreso Secundario (personal transfers) is composed principally of remesas familiares, i.e. the BOP incorporates the BCB remittances series; marked weak because it describes composition rather than an explicit 'source' statement. Corroboration in BOP 2023 report (Sección I, p. 9): 'La Cuenta Corriente registró un déficit de 2,7% del PIB equivalente a $us1.247 millones explicado por el saldo deficitario de la Cuenta Servicios y del Ingreso Primario, contrarrestado por el superávit en el Ingreso Secundario, gracias a las remesas familiares recibidas, y el superávit comercial en la Cuenta de Bienes.' The remittances charts there cite 'FUENTE: Entidades de Intermediación Financiera, Empresas de transferencia electrónica de dinero y otras fuentes'; the 2007 BCB metadata sheet says 'Transferencias privadas: sistema financiero, empresas de transferencias electrónicas de dinero, organismos internacionales y embajadas y consulados.' No standalone BCB 'Metodología de remesas' document was located."
+  },
+  {
+    "edge": "bo-pobreza-departamental -> bo-pobreza",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://nimbus.ine.gob.bo/index.php/s/3TpH5NTr2trKYHd/download",
+    "quote": "Para 2025, los departamentos de Potosí, Oruro y Chuquisaca registraron las mayores incidencias de pobreza, con tasas de 54,8%, 53,8% Y 52,4% respectivamente, superando el promedio nacional de 47,7%.",
+    "location": "Chapter 6 'Pobreza', 6.1 'Incidencia de pobreza y pobreza extrema (FGT0)', departmental subsection before Gráfico N° 6.5, p. ~90",
+    "fetch": {
+      "status": 200,
+      "bytes": 13369077,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "INE (2026), 'Resultados de la Encuesta de Hogares 2025', linked from https://www.ine.gob.bo/index.php/publicaciones/resultados-de-la-encuesta-de-hogares-2025/. Departmental incidence is presented inside the same 'Pobreza' chapter as a disaggregation of the national pobreza monetaria measure (chapter opens: 'La medición de la pobreza monetaria en Bolivia se basa en el método de la línea de pobreza (LP)9, ...'). Weak because no sentence explicitly says the departmental series is derived from the national series; the INE ficha técnica PBZ 01 (FGT0) gives 'Cobertura geográfica: Nacional urbano rural departamento' and 'La representatividad departamental sólo a partir del año 2011.' The líneas methodology also notes the EH has 'a partir de 2011 ... representatividad estadística a nivel departamental'."
+  }
+]

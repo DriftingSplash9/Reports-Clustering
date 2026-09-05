@@ -165,7 +165,7 @@ the audit's 56-edge grades before it touches the corpus.
   instead was a **generic archived-snapshot strategy on the cited URL**, plus
   running the fetch on the bridge VM rather than through the cloud sandbox's
   egress proxy. **422 → 232 unreadable; 187 documents read, 114 of them only
-  via a snapshot.** Full record: `notes/grader-host-strategies-2026-09-03.md`.
+  via a snapshot.** Full record: `archive/notes/grader-host-strategies-2026-09-03.md`.
 
 - **A fetch strategy is a design decision about evidence, not plumbing, and it
   has one standing rule** (round 3d): a strategy may change where the bytes come
@@ -188,13 +188,13 @@ the audit's 56-edge grades before it touches the corpus.
   which the span extractor deliberately ignores; that is the next backfill and it
   needs no fetching.** Also flagged for a ruling: 17 JP/KR edges whose `basis`
   says the target is the consumer. Full record:
-  `notes/grader-quote-backfill-2026-09-03.md`.
+  `archive/notes/grader-quote-backfill-2026-09-03.md`.
 - **Round 5 (2026-09-03) ran the single-quote backfill and moved the A-share
   to 15.8% (431 A).** The 539 was really 476 once apostrophe pairs were
   excluded; 476 read, 370 accepted, 106 refused with reasons; re-grade B→A 111,
   C→B 38, 30 regressions not written and their quotes reverted (the quote was
   real but from a companion document, not the cited one). No script changed.
-  Full record: `notes/grader-single-quote-backfill-2026-09-03.md`.
+  Full record: `archive/notes/grader-single-quote-backfill-2026-09-03.md`.
 - **Round A (2026-09-03) closed the no-URL class and moved the A-share to
   17.3% (470 A).** The 162 edges with no `evidence_url` were re-researched to
   their documents from the bridge VM: 150 cited (149 quoted), 12 to `_dropped`
@@ -204,7 +204,7 @@ the audit's 56-edge grades before it touches the corpus.
   (a matching-only cap raise, or a `truncated` check in the revert rule, is a
   small build item), and the DSBB `getBaseSummaryofMethodologies` API now
   carries ~50 corpus citations — the scripted import in §9 item 6 has a proven
-  readable source. Full record: `notes/roundA-nourl-reresearch-2026-09-03.md`.
+  readable source. Full record: `archive/notes/roundA-nourl-reresearch-2026-09-03.md`.
 - **The `minGrade` → A flip (§9 item 4) cannot be the default until the
   backfill and the browser pass have run.** The dry run's 18% A-share was a
   sampling artefact of the audit's 56: corpus-wide it is **8.3%** (226 A of

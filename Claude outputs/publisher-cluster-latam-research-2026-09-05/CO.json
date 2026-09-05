@@ -1,0 +1,122 @@
+[
+  {
+    "edge": "co-pobreza-monetaria -> co-geih",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+    "quote": "La Gran Encuesta Integrada de Hogares (GEIH) es un instrumento multipropósito que permite la medición de indicadores del mercado laboral, de la pobreza monetaria y de la desigualdad de ingresos, por lo que incluye información sobre los ingresos de las personas y las condiciones de vida de los hogares, insumos para la construcción del ingreso per cápita de la unidad de gasto",
+    "location": "Boletín técnico Pobreza Monetaria en Colombia (PM) Año 2025, Introducción, p. 2",
+    "fetch": {
+      "status": 200,
+      "bytes": 655966,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Same bulletin also states 'Fuente: DANE, cálculos con base en la Gran Encuesta Integrada de Hogares (2024-2025)' under every chart, and (p. 3) 'a disposición de los usuarios los microdatos anonimizados de la Gran Encuesta Integrada de Hogares (GEIH) utilizada para el cálculo'. DANE's GEIH Metodología General (https://www.dane.gov.co/files/operaciones/GEIH/met-GEIH.pdf, 200, 2405482 bytes) states the reverse-side view: 'a través de esta operación estadística es posible conocer los ingresos de los hogares, tanto en dinero como en especie, que sirven de insumo para las mediciones sobre pobreza monetaria.' The quoted sentence's final footnote marker '2' was dropped."
+  },
+  {
+    "edge": "co-pobreza-monetaria -> co-lineas-pobreza",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+    "quote": "La incidencia de la pobreza monetaria mide el porcentaje de la población que tiene un ingreso per cápita del hogar por debajo de la línea de pobreza según el dominio geográfico.",
+    "location": "Boletín técnico PM Año 2025, section 1.2 Incidencia de la pobreza monetaria, p. 5",
+    "fetch": {
+      "status": 200,
+      "bytes": 655966,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Names the line ('línea de pobreza') rather than the exact publication title 'Líneas de pobreza monetaria y pobreza extrema'. Section 1.1 of the same bulletin is titled 'Línea de pobreza monetaria' and the extreme-poverty analogue (2.2, p. 15) reads: 'La incidencia de la pobreza extrema mide el porcentaje de la población que tiene un ingreso per cápita del hogar por debajo de la línea de pobreza extrema según el dominio geográfico.'"
+  },
+  {
+    "edge": "co-lineas-pobreza -> co-ipc",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://www.dane.gov.co/files/investigaciones/condiciones_vida/pobreza/2019/pobreza_monetaria_actualizacion_metodologica_2019-nuevas-lineas.pdf",
+    "quote": "En el caso del Deflactor de Especial de las Líneas Pobreza es posible comparar la canasta de alimentos incluida en cada dominio con los niveles agregativos calculados por el IPC, con el fin de ubicar el dominio del IPC más cercano al alimento incluido en la canasta básica. De esta forma, la variación ya calculada por el índice se agregaría en función de la estructura de ponderaciones ya definida previamente.",
+    "location": "Actualización metodológica: Construcción de las líneas de pobreza monetaria y pobreza monetaria extrema (Marzo 2021), section on the Deflactor Especial de las Líneas de Pobreza (DELP), p. 32",
+    "fetch": {
+      "status": 200,
+      "bytes": 3053872,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Marked weak because the current method (since 2019) updates the lines with the DELP, which the same document describes as 'independiente del Índice de Precios al Consumidor', although it is built from the IPC's price collection ('información recolectada aprovechando el operativo de campo realizado para atender las necesidades propias del IPC') and from IPC-calculated variations. The pre-2019 dependency is stated unambiguously in the same document (p. 12): 'posteriormente, a partir del Índice de Precios al Consumidor (IPC) total y de alimentos para ingresos bajos, se deflactaban mensualmente las líneas de pobreza monetaria y pobreza extrema, respectivamente.' and (p. 32): 'la metodología definida por la MESEP (2012) consideró como herramienta de deflactación de los valores de las líneas de pobreza y pobreza extrema, el IPC de ingresos bajos y el IPC de alimentos para ingresos bajos, respectivamente.' The 2025 bulletin only says 'La línea de pobreza se actualiza con el deflactor especial de las líneas de pobreza.'"
+  },
+  {
+    "edge": "co-gini -> co-geih",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+    "quote": "La Gran Encuesta Integrada de Hogares (GEIH) es un instrumento multipropósito que permite la medición de indicadores del mercado laboral, de la pobreza monetaria y de la desigualdad de ingresos, por lo que incluye información sobre los ingresos de las personas y las condiciones de vida de los hogares, insumos para la construcción del ingreso per cápita de la unidad de gasto",
+    "location": "Boletín técnico PM Año 2025, Introducción, p. 2; Gini results in section 3 'Coeficiente de Gini', p. 21, whose chart carries 'Fuente: DANE, cálculos con base en la Gran Encuesta Integrada de Hogares (2024-2025).'",
+    "fetch": {
+      "status": 200,
+      "bytes": 655966,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "The Gini coefficient is published inside the same PM bulletin (section 3). The sentence refers to Gini as 'desigualdad de ingresos' rather than by name; the section-3 chart source line names GEIH explicitly but is a caption, not a full sentence."
+  },
+  {
+    "edge": "co-emmet -> co-ipi",
+    "found": true,
+    "reverse": true,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/operaciones/IPI/bol-IPI-jun2026.pdf",
+    "quote": "El Índice de Producción Industrial (IPI) se calcula con base en la información de la producción real, que suministran mensualmente los agentes industriales a la Encuesta Mensual Manufacturera con enfoque territorial (EMMET) y registros administrativos provenientes de entidades externas al DANE.",
+    "location": "Boletín técnico Índice de Producción Industrial (IPI) junio 2026, Introducción, p. 2",
+    "fetch": {
+      "status": 200,
+      "bytes": 453779,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Direction is IPI -> EMMET (the IPI uses EMMET), i.e. the reverse of the candidate. Consistent with DANE's EMMET Metodología General (https://www.dane.gov.co/files/operaciones/EMMET/met-EMMET.pdf, 200, 9273441 bytes): 'Con esta información se obtiene el índice de producción industrial manufacturera (IPIM), el cual permite conocer la estructura y evolución del sector manufacturero en Colombia.' No document found stating EMMET draws on the IPI."
+  },
+  {
+    "edge": "co-comercio-exterior -> co-bop",
+    "found": true,
+    "reverse": true,
+    "weak": false,
+    "evidence_url": "https://www.banrep.gov.co/economia/pli/Metodologia_Balanza_Pagos.pdf",
+    "quote": "Las bases de datos de comercio exterior suministradas mensualmente por el Departamento Administrativo Nacional de Estadísticas (DANE) y la Dirección de Impuestos y Aduanas Nacionales (DIAN) al Banco de la República (BR) son la principal fuente de información empleada en la medición del comercio exterior de bienes.",
+    "location": "Banco de la República, 'Metodología y Fuentes de Información – Actualización metodológica de la balanza de pagos de Colombia (MBP6)', section 'b. Metodología de estimación y fuentes de información, i) Comercio general', p. 4",
+    "fetch": {
+      "status": 200,
+      "bytes": 815506,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Direction is BOP -> comercio exterior (Banrep's balance of payments uses the DANE/DIAN foreign-trade databases), the reverse of the candidate. The artefact is named as 'bases de datos de comercio exterior' of DANE and DIAN, not by the exact title 'Estadísticas de Comercio Exterior'. Same document p. 5: 'La información se obtiene de las estadísticas de la base de datos de comercio exterior del DANE.' No Banrep or DANE document found stating that DANE's trade statistics draw on the BOP."
+  },
+  {
+    "edge": "co-cuentas-nacionales -> co-eam",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/investigaciones/pib/anuales/ccrg_base2005/MetodologiaNuevaBase_Cuentas_Anuales_B2005.pdf",
+    "quote": "La variación de existencias se calculó explícitamente utilizando todas las fuentes de información disponible, especialmente la Encuesta Anual Manufacturera (EAM) y la encuesta de comercio, lo que hace posible su interpretación económica.",
+    "location": "Metodología Nueva Base de las Cuentas Nacionales Año 2005 – Resumen, section 1.6.4 Variación de existencias; the document also has section 3.3 'Estimaciones a partir de la Encuesta Anual Manufacturera (EAM)'",
+    "fetch": {
+      "status": 200,
+      "bytes": 4189659,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "Older base (2005) methodology. Also stated in DANE's Cuentas Nacionales base 2000 methodology (https://www.dane.gov.co/files/investigaciones/fichas/Cuentas_nacionales_b2000.pdf, 200, 5474825 bytes): 'Es el caso de la industria manufacturera que ocupa diez y más empleados, para la cual la EAM suministra los datos necesarios para elaborar las cuentas de producción y de generación del ingreso, o de una parte del comercio y los servicios para los cuales se dispone de encuestas anuales' and in the CN annual ficha metodológica (https://www.dane.gov.co/files/investigaciones/fichas/pib/ficha_ctas_anuales.pdf). From the EAM side, DANE's EAM Metodología General (https://www.dane.gov.co/files/operaciones/EAM/met-EAM.pdf, 200, 1609550 bytes) says: 'La EAM es consultada por usuarios de la academia, investigadores, gremios y entidades del orden público y privado, adicionalmente es insumo para elaborar las estadísticas básicas para el cálculo de los agregados económicos de las cuentas nacionales, debido a la considerable información industrial que presenta.' The base-2015 document (cuentas-nal-anuales-base-2015.pdf) does not name the EAM."
+  },
+  {
+    "edge": "co-pobreza-departamental -> co-pobreza-monetaria",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/cp-PMDepartamental-2025.pdf",
+    "quote": "",
+    "location": "",
+    "fetch": {
+      "status": 200,
+      "bytes": 503955,
+      "extractor": "curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep"
+    },
+    "notes": "No DANE document found that states in its own words that the departmental poverty figures draw on the national 'Pobreza monetaria' publication. The departmental press release (cp-PMDepartamental-2025.pdf, 200, 503955 bytes) and presentation (pres-PMDepartamental-2025.pdf, 200, 2134095 bytes) are computed directly from the GEIH ('Fuente: DANE, cálculos con base en la Gran Encuesta Integrada de Hogares (2024-2025).') and only quote the national rate for context ('En 2025, en el total nacional, el porcentaje de personas en situación de pobreza monetaria fue 28,0%.'). DANE publishes both as products of the same operation (PM), so the relationship is one of shared methodology/source rather than a stated dependency. DANE's Isolucion-hosted 'Metodología estadísticas medidas de pobreza (EMP)' was not accessible (login page)."
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "edge": "ar-pobreza-indigencia -> ar-eph",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+    "quote": "Por un lado, se cumplieron distintas etapas de reconstitución, validación y ajuste de los programas que proveen los insumos básicos para la determinación de esos importantes indicadores: el Índice de Precios al Consumidor (para la determinación de las canastas) y la Encuesta Permanente de Hogares (para la determinación de los ingresos, la estructura de los hogares y el conjunto de variables analíticas para explicar y contextualizar la pobreza y la indigencia).",
+    "location": "Metodología INDEC Nº 22 'La medición de la pobreza y la indigencia en la Argentina' (2016), section 2.2, p. 5-6",
+    "fetch": {
+      "status": 200,
+      "bytes": 37465,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Also in the same doc, section 2.1: 'La suma de ambos conforma la Canasta Básica Total (CBT), la cual es también contrastada con los ingresos de los hogares relevados por la Encuesta Permanente de Hogares (EPH).' The current Informe técnico (eph_pobreza_03_26) repeats: 'Se presenta a continuación la proporción de hogares y personas pobres e indigentes relevados por la Encuesta Permanente de Hogares (EPH) para cada región estadística...'."
+  },
+  {
+    "edge": "ar-pobreza-indigencia -> ar-cba-cbt",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+    "quote": "El concepto de “Línea de Indigencia” (LI) procura establecer si los hogares cuentan con ingresos suficientes para cubrir una canasta de alimentos capaz de satisfacer un umbral mínimo de necesidades energéticas y proteicas, denominada Canasta Básica Alimentaria (CBA).",
+    "location": "Metodología INDEC Nº 22, section 2.1 'Metodología general', p. 5",
+    "fetch": {
+      "status": 200,
+      "bytes": 37465,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Same section continues: 'Para calcular la línea de pobreza, por lo tanto, es necesario contar con el valor de la CBA y ampliarlo con la inclusión de bienes y servicios no alimentarios (vestimenta, transporte, educación, salud, etcétera) con el fin de obtener el valor de la Canasta Básica Total (CBT).'"
+  },
+  {
+    "edge": "ar-cba-cbt -> ar-ipc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/uploads/informesdeprensa/canasta_07_26F3FFC1D5EC.pdf",
+    "quote": "La CBA se valoriza cada mes con los precios relevados por el Índice de precios al consumidor del Gran Buenos Aires (IPC-GBA).",
+    "location": "Informe técnico 'Valorización mensual de la canasta básica alimentaria y de la canasta básica total. Gran Buenos Aires' (julio 2026), 'Aspectos metodológicos' note, last page",
+    "fetch": {
+      "status": 200,
+      "bytes": 1020346,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Corroborated by Metodología INDEC Nº 22 §2.1: 'Los componentes de la CBA se valorizan con los precios relevados por el Índice de Precios al Consumidor (IPC) para cada período de medición.' (verified in EPH_metodologia_22_pobreza.txt)."
+  },
+  {
+    "edge": "ar-emae -> ar-scn",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+    "quote": "Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.",
+    "location": "'Metodología del Estimador Mensual de Actividad Económica (EMAE)', DNCN-INDEC, agosto 2016, Introducción, p. 3",
+    "fetch": {
+      "status": 200,
+      "bytes": 603164,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Same intro: 'En este documento, la Dirección Nacional de Cuentas Nacionales (DNCN) presenta las fuentes de información y los aspectos metodológicos de la elaboración del Estimador Mensual de Actividad Económica (EMAE). Este indicador busca mantener la metodología de estimación del Producto Interno Bruto (PIB) trimestral aplicada al cálculo mensual...' and 'Se trata de replicar los métodos de cálculo del PIB trimestral y/o anual, en la medida en que lo permite la disponibilidad de fuentes de información para un período más corto.'"
+  },
+  {
+    "edge": "ar-ucii -> ar-ipi",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://www.indec.gob.ar/uploads/informesdeprensa/capacidad_06_26EA3331AEEE.pdf",
+    "quote": "En efecto, según el índice de producción industrial manufacturero (IPI manufacturero), la actividad de edición e impresión registra un aumento interanual de 7,6% en el mes bajo análisis.",
+    "location": "Informe técnico 'Utilización de la capacidad instalada en la industria. Abril de 2026', analytical section on sector blocks, p. 4-5",
+    "fetch": {
+      "status": 200,
+      "bytes": 1468378,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "WEAK: this is analytical use of IPI data inside the UCII report, not a methodological input. The UCII methodology documents (sintesis_metodologica_capacidad_instalada.pdf, notas_metodologicas_capacidad_instalada_base2004.pdf, both fetched HTTP 200) do not mention the IPI; the UCII methodology note instead states weights come from national accounts: 'El actual informe utiliza la ponderación de la estructura porcentual del valor agregado bruto a precios básicos de la industria manufacturera, correspondiente a 2004 (año base vigente), publicado por la Dirección Nacional de Cuentas Nacionales.' The IPI methodology (Metodología INDEC, 2019) mentions 'utilización de la capacidad instalada' only as a questionnaire item, not the UCII publication. A second passage in the same UCII report: 'Según datos del IPI manufacturero, la fabricación de maquinaria agropecuaria presenta una disminución interanual de 29,7%, mientras que la fabricación de aparatos de uso doméstico registra una caída de 26,9% para la misma comparación.'"
+  },
+  {
+    "edge": "ar-csc -> ar-scn",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_25_csc.pdf",
+    "quote": "La Cuenta Satélite de Cultura (CSC) es un sistema de información económica cuyo marco de referencia es el Sistema de Cuentas Nacionales (SCN).",
+    "location": "Metodología INDEC Nº 25 'Cuenta satélite de cultura. Metodología de estimación', section 1 'Presentación'",
+    "fetch": {
+      "status": 200,
+      "bytes": 1252955,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Also: 'A su vez, la estimación del VAB cultural se realiza en línea con la metodología utilizada para el cálculo de los indicadores macroeconómicos a nivel nacional (valor bruto de producción, valor agregado bruto y producto interno bruto), desarrollada en el documento Cuentas Nacionales. Metodología de estimación. Base 2004 y serie a precios constantes y corrientes1, realizado por la Dirección Nacional de Cuentas Nacionales del INDEC.' Compiled jointly by DNCN-INDEC and SInCA."
+  },
+  {
+    "edge": "ar-cst -> ar-scn",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/cst_metodologia.pdf",
+    "quote": "El año base de la CST-A necesariamente debió coincidir con el año donde se dispone de la información del cuadro de oferta y utilización (COU) de las cuentas nacionales de la Argentina, lo cual ocurre en el período de referencia, año 2004.",
+    "location": "'Cuenta satélite de turismo de la Argentina. Metodología de estimación' (INDEC / MINTURDEP), footnote 1 to section 2.1",
+    "fetch": {
+      "status": 200,
+      "bytes": 1344837,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Also §2.1: 'Una cuenta satélite hace foco en alguna esfera de actividades o productos dentro de la producción nacional que revierten algún tipo de interés específico dentro del Sistema de Cuentas Nacionales (SCN). De esta manera, el encuadre dentro del marco del SCN le aporta completitud, coherencia e integración al análisis...'; and §5.3: production accounts for 2016-2019 'se realizó sobre la base de estimaciones globales ad hoc realizadas por la DNCN-INDEC'."
+  },
+  {
+    "edge": "ar-comercio-exterior -> ar-bcra-bop",
+    "found": true,
+    "reverse": true,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/bdp_pii_de_metodologia_23.pdf",
+    "quote": "Fuente: cifras de comercio exterior elaboradas por la Dirección Nacional de Estadísticas del Sector Externo del INDEC con base en registros de la Dirección General de Aduanas.",
+    "location": "Metodología INDEC Nº 23 'Balanza de pagos, posición de inversión internacional y deuda externa' (2ª ed., enero 2018), section III.1.A.a.1 'Mercancías generales', p. 12",
+    "fetch": {
+      "status": 200,
+      "bytes": 576411,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "REVERSE: the balance of payments uses the trade statistics, not the other way round. Footnote 2 on the same page names the publication explicitly: 'El Informe de Prensa “Informe Comercial Argentino (ICA)” elaborado por la Dirección Nacional de Estadísticas del Sector Externo del INDEC, presenta las importaciones en valores C.I.F. (costo, seguro y flete)...'. COMPILER: the BOP is compiled by INDEC, not the BCRA — the same document states: 'La Dirección Nacional de Cuentas Internacionales (DNCI) es responsable de la compilación, elaboración y análisis de las cuentas internacionales de Argentina, conformadas por las Estadísticas de Balanza de Pagos (BdP), Posición de Inversión Internacional (PII) y Deuda Externa (DE).' (INDEC took over BOP compilation from the Ministry of Economy in 2017; the BCRA publishes the separate 'Balance cambiario'/exchange-market statistics.) Consider re-labelling node ar-bcra-bop as INDEC-published. English edition also available: bdp_pii_de_metodologia_23_ingles.pdf (HTTP 200, 641348 bytes)."
+  },
+  {
+    "edge": "ar-indices-precios-cantidades-comercio -> ar-comercio-exterior",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_preciosycantidades.pdf",
+    "quote": "La información proveniente de las estadísticas del comercio exterior sirve de base para el cálculo de las ponderaciones de los índices.",
+    "location": "INDEC, 'Índices de precios y cantidades del comercio exterior' methodology, section 5.1 'Elección de las fórmulas de cálculo'",
+    "fetch": {
+      "status": 200,
+      "bytes": 194873,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Also §2 'Información básica': 'En Argentina, como en la mayoría de los países del mundo, se usa como fuente principal de información para la elaboración de los índices, a las estadísticas sobre el intercambio comercial, basadas en los registros aduaneros.' and §1: 'Para la estimación de los precios se utilizan los valores unitarios registrados en la estadística de comercio exterior basada en la documentación aduanera y los índices de precios de exportación de los países líderes en el comercio internacional.'"
+  },
+  {
+    "edge": "ar-censo-agropecuario -> ar-estimaciones-agricolas",
+    "found": true,
+    "reverse": true,
+    "weak": true,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/cna2018_resultados_preliminares.pdf",
+    "quote": "Disponer de datos básicos para efectuar ajustes y control de calidad en los pronósticos y estimaciones periódicas de superficies cultivadas y producción.",
+    "location": "INDEC, 'Censo Nacional Agropecuario 2018. Resultados preliminares', section 'Objetivos del CNA-18' (bullet list)",
+    "fetch": {
+      "status": 200,
+      "bytes": 11468087,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "REVERSE and WEAK: the INDEC census document lists, among the census objectives, providing base data to adjust/quality-control the periodic crop estimates — i.e. the estimates draw on the census, not vice versa. The target is not named by its exact title ('Estimaciones agrícolas'), only as 'pronósticos y estimaciones periódicas de superficies cultivadas y producción'; it is a bullet fragment rather than a full sentence. No INDEC CNA document was found stating that the census draws on the Estimaciones agrícolas. The Secretaría de Agricultura's own methodology page (https://www.magyp.gob.ar/sitio/areas/estimaciones/estimaciones/metodologia/) could not be fetched from this sandbox (curl: connection reset; WebFetch: robots/connect timeout), so the reverse direction could not be confirmed from the compiler's side. Separately, INDEC's national accounts methodology (Metodología Nº 21) states the SCN uses the Dirección de Estimaciones Agrícolas as a source for crop quantities."
+  },
+  {
+    "edge": "ar-scn -> ar-ley-17622",
+    "found": false,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_21_cuentas_nacionales.pdf",
+    "quote": "",
+    "location": "",
+    "fetch": {
+      "status": 200,
+      "bytes": 2131038,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Not found. Three INDEC national-accounts methodology documents were fetched and grepped for '17.622'/'17622' with no hit: metodologia_21_cuentas_nacionales.pdf (HTTP 200, 2131038 bytes), metodologia_cuentas_nacionales_2004.pdf (HTTP 200, 1027425 bytes), metodologia_24_cuentas_nacionales.pdf (HTTP 200, 1637708 bytes); the EMAE methodology and EMAE informe técnico likewise have no reference. INDEC cites Ley 17.622 only in institution-wide texts, e.g. 'Indicadores de coyuntura. Fichas técnicas' (Sept. 2017, https://www.indec.gob.ar/ftp/cuadros/publicaciones/indicadores_coyuntura_fichas_07_17.pdf, HTTP 200, 471128 bytes): 'La Ley 17.622/68, marco normativo para el ejercicio de la actividad estadística oficial de la Argentina, encomienda al Instituto Nacional de Estadística y Censos (INDEC), en su artículo 5 inciso f, la promoción de “la adecuada difusión de toda la información estadística...”' — but that passage does not name the national accounts, so it fails the naming standard."
+  },
+  {
+    "edge": "ar-eph -> ar-ley-17622",
+    "found": true,
+    "reverse": false,
+    "weak": true,
+    "evidence_url": "https://redatam.indec.gob.ar/redarg/encuestas/EPH/EPH_Hogar.pdf",
+    "quote": "ENCUESTA PERMANENTE DE HOGARES INSTITUTO NACIONAL DE ESTADÍSTICA Y CENSOS ESTRICTAMENTE CONFIDENCIAL - Ley 17.622",
+    "location": "EPH household questionnaire (Form. 002/10, applied from 1st quarter 2010), header of page 1",
+    "fetch": {
+      "status": 200,
+      "bytes": 453439,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "WEAK: the questionnaire header invokes Ley 17.622 (statistical secrecy) but it is a header label, not a full sentence, and the layout text reads across columns (whitespace-normalized match). The EPH methodological documents checked — 'Diseño de registro y estructura para las bases preliminares Hogar y Personas' (EPH_registro_1T2024.pdf, HTTP 200, 1116513 bytes) and the 'Mercado de trabajo. Tasas e indicadores socioeconómicos (EPH)' 1T2026 informe técnico (HTTP 200, 2810960 bytes) — contain no reference to Ley 17.622. The IPI manufacturero methodology's annexed questionnaires carry the same kind of header: 'CARÁCTER ESTRICTAMENTE CONFIDENCIAL Y RESERVADO - Ley N° 17.622'."
+  }
+]

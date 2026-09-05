@@ -1,0 +1,279 @@
+{
+  "_slice": "publisher-cluster-latam-2026-09-05",
+  "_researched": "2026-09-05",
+  "_note": "Publisher-cluster lead research, round 1: the 2026-08-31 assertion-only quarantines whose hosts read fine but whose leads quoted nothing (ine.gob.bo, indec.gob.ar, ine.gov.py, dane.gov.co; stats.gov.cn deferred). Method: for each lead, find the compiling agency's own methodology document, read it live, quote the sentence that names the input, mint only what the document states — and in the direction it states. 38 leads worked: 30 minted (4 reversed), 8 left as leads with the reason recorded on the entry.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "co-pobreza-monetaria",
+      "target_report_id": "co-geih",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-pobreza-monetaria -> co-geih'). Document: Boletín técnico Pobreza Monetaria en Colombia (PM) Año 2025, Introducción, p. 2. Read live by curl (200, 655,966 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+      "evidence_quote": "La Gran Encuesta Integrada de Hogares (GEIH) es un instrumento multipropósito que permite la medición de indicadores del mercado laboral, de la pobreza monetaria y de la desigualdad de ingresos, por lo que incluye información sobre los ingresos de las personas y las condiciones de vida de los hogares, insumos para la construcción del ingreso per cápita de la unidad de gasto",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "co-pobreza-monetaria",
+      "target_report_id": "co-lineas-pobreza",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-pobreza-monetaria -> co-lineas-pobreza'). Document: Boletín técnico PM Año 2025, section 1.2 Incidencia de la pobreza monetaria, p. 5. Read live by curl (200, 655,966 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+      "evidence_quote": "La incidencia de la pobreza monetaria mide el porcentaje de la población que tiene un ingreso per cápita del hogar por debajo de la línea de pobreza según el dominio geográfico.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "co-lineas-pobreza",
+      "target_report_id": "co-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-lineas-pobreza -> co-ipc'). Document: Actualización metodológica: Construcción de las líneas de pobreza monetaria y pobreza monetaria extrema (Marzo 2021), section on the Deflactor Especial de las Líneas de Pobreza (DELP), p. 32. Read live by curl (200, 3,053,872 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target. The document also calls the DELP deflator \"independiente del IPC\" — it is built from IPC price relatives with the basket's own weights, so the IPC is an input, not the deflator itself.",
+      "evidence_url": "https://www.dane.gov.co/files/investigaciones/condiciones_vida/pobreza/2019/pobreza_monetaria_actualizacion_metodologica_2019-nuevas-lineas.pdf",
+      "evidence_quote": "En el caso del Deflactor de Especial de las Líneas Pobreza es posible comparar la canasta de alimentos incluida en cada dominio con los niveles agregativos calculados por el IPC, con el fin de ubicar el dominio del IPC más cercano al alimento incluido en la canasta básica. De esta forma, la variación ya calculada por el índice se agregaría en función de la estructura de ponderaciones ya definida previamente.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "co-gini",
+      "target_report_id": "co-geih",
+      "relationship_type": "calculated_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-gini -> co-geih'). Document: Boletín técnico PM Año 2025, Introducción, p. 2; Gini results in section 3 'Coeficiente de Gini', p. 21, whose chart carries 'Fuente: DANE, cálculos con base en la Gran Encuesta Integrada de Hogares (2024-2025).'. Read live by curl (200, 655,966 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target. The Gini section's own source line: \"Fuente: DANE, cálculos con base en la Gran Encuesta Integrada de Hogares (2024-2025).\"",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/bol-PM-2025.pdf",
+      "evidence_quote": "La Gran Encuesta Integrada de Hogares (GEIH) es un instrumento multipropósito que permite la medición de indicadores del mercado laboral, de la pobreza monetaria y de la desigualdad de ingresos, por lo que incluye información sobre los ingresos de las personas y las condiciones de vida de los hogares, insumos para la construcción del ingreso per cápita de la unidad de gasto",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "co-ipi",
+      "target_report_id": "co-emmet",
+      "relationship_type": "calculated_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-emmet -> co-ipi'). Document: Boletín técnico Índice de Producción Industrial (IPI) junio 2026, Introducción, p. 2. Read live by curl (200, 453,779 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target. REVERSED from the lead: the IPI bulletin says the IPI is calculated from EMMET, not the other way.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/IPI/bol-IPI-jun2026.pdf",
+      "evidence_quote": "El Índice de Producción Industrial (IPI) se calcula con base en la información de la producción real, que suministran mensualmente los agentes industriales a la Encuesta Mensual Manufacturera con enfoque territorial (EMMET) y registros administrativos provenientes de entidades externas al DANE.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "co-bop",
+      "target_report_id": "co-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-comercio-exterior -> co-bop'). Document: Banco de la República, 'Metodología y Fuentes de Información – Actualización metodológica de la balanza de pagos de Colombia (MBP6)', section 'b. Metodología de estimación y fuentes de información, i) Comercio general', p. 4. Read live by curl (200, 815,506 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target. REVERSED from the lead: Banrep's BOP methodology names the DANE/DIAN trade databases as its principal source for goods.",
+      "evidence_url": "https://www.banrep.gov.co/economia/pli/Metodologia_Balanza_Pagos.pdf",
+      "evidence_quote": "Las bases de datos de comercio exterior suministradas mensualmente por el Departamento Administrativo Nacional de Estadísticas (DANE) y la Dirección de Impuestos y Aduanas Nacionales (DIAN) al Banco de la República (BR) son la principal fuente de información empleada en la medición del comercio exterior de bienes.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "co-cuentas-nacionales",
+      "target_report_id": "co-eam",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, DANE / Banco de la República; lead was a 2026-08-31 assertion-only quarantine 'co-cuentas-nacionales -> co-eam'). Document: Metodología Nueva Base de las Cuentas Nacionales Año 2005 – Resumen, section 1.6.4 Variación de existencias; the document also has section 3.3 'Estimaciones a partir de la Encuesta Anual Manufacturera (EAM)'. Read live by curl (200, 4,189,659 bytes, curl -A Mozilla/5.0 -L; pdftotext -layout; whitespace-normalised grep); the quote is verbatim from that read and names the target. Base-2005 methodology; the base-2015 document does not name the EAM (checked).",
+      "evidence_url": "https://www.dane.gov.co/files/investigaciones/pib/anuales/ccrg_base2005/MetodologiaNuevaBase_Cuentas_Anuales_B2005.pdf",
+      "evidence_quote": "La variación de existencias se calculó explícitamente utilizando todas las fuentes de información disponible, especialmente la Encuesta Anual Manufacturera (EAM) y la encuesta de comercio, lo que hace posible su interpretación económica.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-eph",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-pobreza-indigencia -> ar-eph'). Document: Metodología INDEC Nº 22 'La medición de la pobreza y la indigencia en la Argentina' (2016), section 2.2, p. 5-6. Read live by curl (200, 37,465 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+      "evidence_quote": "el Índice de Precios al Consumidor (para la determinación de las canastas) y la Encuesta Permanente de Hogares (para la determinación de los ingresos, la estructura de los hogares y el conjunto de variables analíticas para explicar y contextualizar la pobreza y la indigencia).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-cba-cbt",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-pobreza-indigencia -> ar-cba-cbt'). Document: Metodología INDEC Nº 22, section 2.1 'Metodología general', p. 5. Read live by curl (200, 37,465 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+      "evidence_quote": "El concepto de “Línea de Indigencia” (LI) procura establecer si los hogares cuentan con ingresos suficientes para cubrir una canasta de alimentos capaz de satisfacer un umbral mínimo de necesidades energéticas y proteicas, denominada Canasta Básica Alimentaria (CBA).",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "ar-cba-cbt",
+      "target_report_id": "ar-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-cba-cbt -> ar-ipc'). Document: Informe técnico 'Valorización mensual de la canasta básica alimentaria y de la canasta básica total. Gran Buenos Aires' (julio 2026), 'Aspectos metodológicos' note, last page. Read live by curl (200, 1,020,346 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/uploads/informesdeprensa/canasta_07_26F3FFC1D5EC.pdf",
+      "evidence_quote": "La CBA se valoriza cada mes con los precios relevados por el Índice de precios al consumidor del Gran Buenos Aires (IPC-GBA).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ar-emae",
+      "target_report_id": "ar-scn",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-emae -> ar-scn'). Document: 'Metodología del Estimador Mensual de Actividad Económica (EMAE)', DNCN-INDEC, agosto 2016, Introducción, p. 3. Read live by curl (200, 603,164 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+      "evidence_quote": "Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "ar-csc",
+      "target_report_id": "ar-scn",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-csc -> ar-scn'). Document: Metodología INDEC Nº 25 'Cuenta satélite de cultura. Metodología de estimación', section 1 'Presentación'. Read live by curl (200, 1,252,955 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_25_csc.pdf",
+      "evidence_quote": "La Cuenta Satélite de Cultura (CSC) es un sistema de información económica cuyo marco de referencia es el Sistema de Cuentas Nacionales (SCN).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ar-cst",
+      "target_report_id": "ar-scn",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-cst -> ar-scn'). Document: 'Cuenta satélite de turismo de la Argentina. Metodología de estimación' (INDEC / MINTURDEP), footnote 1 to section 2.1. Read live by curl (200, 1,344,837 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/cst_metodologia.pdf",
+      "evidence_quote": "El año base de la CST-A necesariamente debió coincidir con el año donde se dispone de la información del cuadro de oferta y utilización (COU) de las cuentas nacionales de la Argentina, lo cual ocurre en el período de referencia, año 2004.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "ar-bcra-bop",
+      "target_report_id": "ar-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-comercio-exterior -> ar-bcra-bop'). Document: Metodología INDEC Nº 23 'Balanza de pagos, posición de inversión internacional y deuda externa' (2ª ed., enero 2018), section III.1.A.a.1 'Mercancías generales', p. 12. Read live by curl (200, 576,411 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. REVERSED from the lead: Metodología INDEC Nº 23 sources the goods account from INDEC's foreign-trade figures (ICA). NOTE FOR THOMAS: the same document states the BOP is compiled by INDEC's Dirección Nacional de Cuentas Internacionales, not the BCRA — the node `ar-bcra-bop` carries the wrong publisher; BCRA publishes the separate \"Balance cambiario\".",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/bdp_pii_de_metodologia_23.pdf",
+      "evidence_quote": "Fuente: cifras de comercio exterior elaboradas por la Dirección Nacional de Estadísticas del Sector Externo del INDEC con base en registros de la Dirección General de Aduanas.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "ar-indices-precios-cantidades-comercio",
+      "target_report_id": "ar-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-indices-precios-cantidades-comercio -> ar-comercio-exterior'). Document: INDEC, 'Índices de precios y cantidades del comercio exterior' methodology, section 5.1 'Elección de las fórmulas de cálculo'. Read live by curl (200, 194,873 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_preciosycantidades.pdf",
+      "evidence_quote": "La información proveniente de las estadísticas del comercio exterior sirve de base para el cálculo de las ponderaciones de los índices.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "ar-eph",
+      "target_report_id": "ar-ley-17622",
+      "relationship_type": "legal_basis",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INDEC; lead was a 2026-08-31 assertion-only quarantine 'ar-eph -> ar-ley-17622'). Document: EPH household questionnaire (Form. 002/10, applied from 1st quarter 2010), header of page 1. Read live by curl (200, 453,439 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. The EPH household questionnaire header cites the law as the confidentiality basis under which the survey is collected. Questionnaire, not methodology — B is the honest ceiling.",
+      "evidence_url": "https://redatam.indec.gob.ar/redarg/encuestas/EPH/EPH_Hogar.pdf",
+      "evidence_quote": "ENCUESTA PERMANENTE DE HOGARES INSTITUTO NACIONAL DE ESTADÍSTICA Y CENSOS ESTRICTAMENTE CONFIDENCIAL - Ley 17.622",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-pobreza -> bo-eh'). Document: Sección 2 (Marco conceptual), p. 12 of the PDF (page footer 'Instituto Nacional de Estadística 11' precedes it). Read live by curl (200, 3,463,485 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/UvhSpL1bRZ1Tj3o/download",
+      "evidence_quote": "Es necesario mencionar que el ingreso per cápita proviene de la Encuesta de Hogares (EH), puesto que los porcentajes de pobreza se presentan cada año y para ello se requiere de fuentes de información continuas.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-lineas-pobreza",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-pobreza -> bo-lineas-pobreza'). Document: Section 'Definiciones' > 'Pobreza monetaria', p. 2. Read live by curl (200, 1,010,994 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/qt9Ix1XfCu0Eymp/download",
+      "evidence_quote": "En efecto, una persona o un hogar es pobre extremo o indigente si tienen ingresos inferiores al costo de una canasta mínima de alimentos (línea de pobreza extrema), es decir no alcanza a satisfacer las necesidades mínimas en alimentos; en tanto es pobre, cuando su ingreso está por debajo de una canasta básica de consumo total (línea de pobreza), es decir cuando no puede satisfacer sus necesidades básicas (alimentación, educación, vivienda, vestido y servicios básicos).",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "bo-lineas-pobreza",
+      "target_report_id": "bo-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-lineas-pobreza -> bo-ipc'). Document: Section 5.1 'Actualización de la LPE urbana', p. 27-28. Read live by curl (200, 3,463,485 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. Urban LPE only; the rural line is updated from EH unit prices (same document).",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/UvhSpL1bRZ1Tj3o/download",
+      "evidence_quote": "Una vez reducida la CBA, a las variedades cotizadas por el IPC, se calcula el Índice de Precios (IP), y a partir de ello se obtiene los valores de la LPE al período de medición entre noviembre y diciembre, esto por ser los meses de levantamiento de información de la EH.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "bo-gini",
+      "target_report_id": "bo-eh",
+      "relationship_type": "calculated_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-gini -> bo-eh'). Document: Introducción, p. 1 (document title: 'Indicadores de pobreza monetaria y desigualdad mediante la Encuesta de Hogares'; Paso 5 of the same note defines the 'gini' indicator computed on the EH variable yhogpc). Read live by curl (200, 1,010,994 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. The note's Paso 5 defines the \"gini\" indicator on the EH variable yhogpc; the quoted sentence says \"desigualdad\", not \"Gini\".",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/qt9Ix1XfCu0Eymp/download",
+      "evidence_quote": "Los indicadores de pobreza y desigualdad, calculados a partir de la información de las EH, consideran el método indirecto, y emplean la variable de ingresos para su medición.",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "bo-informalidad",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-informalidad -> bo-eh'). Document: Section 4.2 'Encuesta de Hogares (EH)', p. 23. Read live by curl (200, 1,268,522 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. The ECE is the primary informality source in this document; the EH is the annual source used alongside it.",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/jKB2lcuQeYCVF03/download",
+      "evidence_quote": "Con los datos que se tiene desde el año 2016 a partir de la información de la Encuesta de Hogares que ejecuta el INE, se obtuvieron resultados a nivel nacional y además de su desagregación por área urbana y rural.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bo-empleo-formal",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-empleo-formal -> bo-eh'). Document: Section 4.2.1 'Sector informal' (EH-based results), p. 23. Read live by curl (200, 1,268,522 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. Results prose (\"tomando en cuenta los datos de la EH\"), no standalone formal-employment methodology found.",
+      "evidence_url": "https://nube.ine.gob.bo/index.php/s/jKB2lcuQeYCVF03/download",
+      "evidence_quote": "Asimismo, aproximadamente el 28% de la población ocupada tiene empleos en el sector formal; y 2% trabaja en el sector comunitario en hogares que producen para el uso propio. Por tanto, tomando en cuenta los datos de la EH, se tiene a nivel nacional, alrededor del 70% de la población boliviana trabajando en establecimientos que cumplen con la normativa de empresas (Gráfico 7).",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "bo-inseguridad-alimentaria",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-inseguridad-alimentaria -> bo-eh'). Document: Chapter 'Antecedentes' (two-column page describing the EH 2016), near the start of the publication. Read live by curl (200, 15,091,104 bytes, pdftotext (raw mode, no -layout; two-column page)); the quote is verbatim from that read and names the target. Names \"la escala de inseguridad alimentaria\", not the ELCSA acronym.",
+      "evidence_url": "https://nimbus.ine.gob.bo/s/ASEzz9QYYttCFxS/download",
+      "evidence_quote": "En esta EH se incorporaron además preguntas para medir características de la población ocupada independiente, la escala de inseguridad alimentaria, y el módulo de turismo interno, incorporaciones que responden a la solicitud de sectores para atender a la demanda de información y seguimiento de indicadores del PDES 2016 -2020.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bo-bop",
+      "target_report_id": "bo-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Bolivia / BCB; lead was a 2026-08-31 assertion-only quarantine 'bo-bop -> bo-comercio-exterior'). Document: Section IV 'Naturaleza de las fuentes de datos básicos' > 'Fuentes de datos básicos', p. 4. Read live by curl (200, 244,505 bytes, pdftotext -layout); the quote is verbatim from that read and names the target. BCB metadata sheet dated 2007; BOP 2023 tables corroborate with \"FUENTE: INE, Aduana Nacional\".",
+      "evidence_url": "https://www.bcb.gob.bo/webdocs/Metadatos/sebalanzapagos.pdf",
+      "evidence_quote": "Bienes: Los datos sobre exportaciones e importaciones se basan en las estadísticas de comercio exterior proporcionadas por el Instituto Nacional de Estadística (INE), las que a su vez se basan en información proveniente de la Aduana Nacional.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "py-pobreza",
+      "target_report_id": "py-ephc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-pobreza -> py-ephc'). Document: Principales Resultados de Pobreza Monetaria y Distribución de Ingresos 2024 (INE), sección 2.3 'Agregado de los ingresos familiares – Ajustes', p. 6. Read live by curl (200, 635,799 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+      "evidence_quote": "Los ingresos utilizados en la medición de la pobreza se obtienen con la información de la Encuesta Permanente de Hogares Continua (EPHC), que a partir del año 2017 se realiza en forma continua, de enero a diciembre, a nivel nacional.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "py-pobreza",
+      "target_report_id": "py-lineas-pobreza",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-pobreza -> py-lineas-pobreza'). Document: Sección 2.1 'Pobreza monetaria (método de línea de pobreza)', p. 5. Read live by curl (200, 635,799 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+      "evidence_quote": "En base a los datos de las Encuestas de Hogares y el método de la línea de pobreza, se estimó la proporción de población en situación de pobreza y pobreza extrema. En este sentido, se definió como población pobre al conjunto de personas residentes en hogares cuyo nivel de ingresos es inferior al costo de una Canasta Básica de Consumo constituida por el conjunto de bienes y servicios que satisfacen ciertos requerimientos mínimos, tanto alimentarios como no alimentarios. El costo de esta Canasta Básica de Consumo se denomina Línea de pobreza Total (LPT).",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "py-lineas-pobreza",
+      "target_report_id": "py-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-lineas-pobreza -> py-ipc'). Document: Sección 2.1, p. 5; also Cuadro Nº 1 source line p. 6: 'Fuente: Cálculos en base al IPC del BCP y líneas de pobreza INE.'. Read live by curl (200, 635,799 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+      "evidence_quote": "Las medidas oficiales de pobreza extrema y pobreza total son obtenidas a partir de dos fuentes de datos, por un lado, los ingresos provienen de la Encuesta Permanente de Hogares Continua ejecutada de manera continua, y por otro, el costo de las Canasta Básica Alimentaria y de Consumo, cuya estructura se obtuvo de las Encuestas de Ingresos y Gastos 2011/2012 y sus valores son actualizados anualmente por el Índice de Precios al Consumidor (IPC), elaborado por el Banco Central del Paraguay (BCP).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "py-ipm",
+      "target_report_id": "py-ephc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-ipm -> py-ephc'). Document: Boletín Técnico IPM 2025 (INE), Presentación. Read live by curl (200, 1,345,731 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/333/BOLETIN_T%C3%89CNICO_IPM_2025_INE.pdf",
+      "evidence_quote": "El Instituto Nacional de Estadística (INE) presenta, por cuarto año consecutivo, el Índice de Pobreza Multidimensional (IPM). Resultados Anuales basados en la Encuesta Permanente de Hogares Continua (EPHC), 2022–2025, una medición directa de la pobreza basada en el enfoque de derechos humanos y en el enfoque de capacidades desarrollado por el premio Nobel de Economía 1998, Amartya Sen.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "py-gini",
+      "target_report_id": "py-ephc",
+      "relationship_type": "calculated_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-gini -> py-ephc'). Document: Díptico 'Desigualdad de Ingresos 2022-2024' (INE), introductory text; tables sourced 'Fuente: Encuesta Permanente de Hogares Continua 2022-2024. Anual'. Read live by curl (200, 5,394,868 bytes, pdftotext -layout); the quote is verbatim from that read and names the target.",
+      "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/275/Diptico%20Desigualdad%20de%20Ingresos_2022-2024_INE.pdf",
+      "evidence_quote": "El Instituto Nacional de Estadística (INE), presenta las medidas de desigualdad de la distribución del ingreso, en base a los resultados de la Encuesta Permanente de Hogares Continua (EPHC), de los años 2022, 2023 y 2024.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "py-asistencia-escolar",
+      "target_report_id": "py-ephc",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05 (publisher-cluster lead research, INE Paraguay; lead was a 2026-08-31 assertion-only quarantine 'py-asistencia-escolar -> py-ephc'). Document: INE news release 'INE comparte datos de la EPHC sobre la educación en el país' (HTML page), lead paragraph; followed by 'Al observar la tasa de asistencia por grupos de edad...'. Read live by curl (200, 41,777 bytes, python html strip (tags removed, whitespace collapsed)); the quote is verbatim from that read and names the target. INE news release (HTML); no standalone EPHC education bulletin PDF exists on ine.gov.py.",
+      "evidence_url": "https://www.ine.gov.py/noticias/2751/ine-comparte-datos-de-la-ephc-sobre-la-educacion-en-el-pais",
+      "evidence_quote": "De acuerdo a los indicadores de educación de la Encuesta Permanente de Hogares Continua (EPHC) 2025 del Instituto Nacional de Estadística (INE), el promedio de años de estudios de la población de 15 y más años de edad es de 10,2 años en total.",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": []
+}

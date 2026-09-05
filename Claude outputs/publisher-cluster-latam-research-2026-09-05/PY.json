@@ -1,0 +1,107 @@
+[
+  {
+    "edge": "py-pobreza -> py-ephc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+    "quote": "Los ingresos utilizados en la medición de la pobreza se obtienen con la información de la Encuesta Permanente de Hogares Continua (EPHC), que a partir del año 2017 se realiza en forma continua, de enero a diciembre, a nivel nacional.",
+    "location": "Principales Resultados de Pobreza Monetaria y Distribución de Ingresos 2024 (INE), sección 2.3 'Agregado de los ingresos familiares – Ajustes', p. 6",
+    "fetch": {
+      "status": 200,
+      "bytes": 635799,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Alternate quote, Presentación p.1: 'El Instituto Nacional de Estadística (INE) presenta los principales Indicadores de Pobreza Monetaria y Distribución de Ingresos, basados en los Resultados Anuales de la Encuesta Permanente de Hogares Continua (EPHC), de los años 2022 al 2024.' Same wording (2022 al 2025) appears in the 2025 edition, documento/308/Pobreza Monetaria_ EPHC_2025_INE.pdf (HTTP 200, 676026 bytes)."
+  },
+  {
+    "edge": "py-pobreza -> py-lineas-pobreza",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+    "quote": "En base a los datos de las Encuestas de Hogares y el método de la línea de pobreza, se estimó la proporción de población en situación de pobreza y pobreza extrema. En este sentido, se definió como población pobre al conjunto de personas residentes en hogares cuyo nivel de ingresos es inferior al costo de una Canasta Básica de Consumo constituida por el conjunto de bienes y servicios que satisfacen ciertos requerimientos mínimos, tanto alimentarios como no alimentarios. El costo de esta Canasta Básica de Consumo se denomina Línea de pobreza Total (LPT).",
+    "location": "Sección 2.1 'Pobreza monetaria (método de línea de pobreza)', p. 5",
+    "fetch": {
+      "status": 200,
+      "bytes": 635799,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Section 2.2 'Valores de las líneas de pobreza extrema (LPE) y pobreza total (LPT)' gives the line values used; the poverty lines are compiled by INE (table source: 'Fuente: Cálculos en base al IPC del BCP y líneas de pobreza INE.')."
+  },
+  {
+    "edge": "py-lineas-pobreza -> py-ipc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+    "quote": "Las medidas oficiales de pobreza extrema y pobreza total son obtenidas a partir de dos fuentes de datos, por un lado, los ingresos provienen de la Encuesta Permanente de Hogares Continua ejecutada de manera continua, y por otro, el costo de las Canasta Básica Alimentaria y de Consumo, cuya estructura se obtuvo de las Encuestas de Ingresos y Gastos 2011/2012 y sus valores son actualizados anualmente por el Índice de Precios al Consumidor (IPC), elaborado por el Banco Central del Paraguay (BCP).",
+    "location": "Sección 2.1, p. 5; also Cuadro Nº 1 source line p. 6: 'Fuente: Cálculos en base al IPC del BCP y líneas de pobreza INE.'",
+    "fetch": {
+      "status": 200,
+      "bytes": 635799,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "The canasta/línea de pobreza values (LPE = canasta básica de alimentos, LPT = canasta básica de consumo) are updated annually with BCP's IPC. This same sentence also supports edge 1 (ingresos from EPHC)."
+  },
+  {
+    "edge": "py-ipm -> py-ephc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/333/BOLETIN_T%C3%89CNICO_IPM_2025_INE.pdf",
+    "quote": "El Instituto Nacional de Estadística (INE) presenta, por cuarto año consecutivo, el Índice de Pobreza Multidimensional (IPM). Resultados Anuales basados en la Encuesta Permanente de Hogares Continua (EPHC), 2022–2025, una medición directa de la pobreza basada en el enfoque de derechos humanos y en el enfoque de capacidades desarrollado por el premio Nobel de Economía 1998, Amartya Sen.",
+    "location": "Boletín Técnico IPM 2025 (INE), Presentación",
+    "fetch": {
+      "status": 200,
+      "bytes": 1345731,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Methodology section 1.6 'Fuente de Información o de datos' adds: 'La fuente de datos utilizada para el cálculo del IPM es la Encuesta Permanente de Hogares “EPH”, principal encuesta a hogares del INE y del país, es una encuesta multitemática con representatividad nacional y departamental que mantiene una serie desde el año 1997/98.' (uses 'EPH' rather than 'EPHC'). Publication page: https://www.ine.gov.py/publication-single.php?codec=333"
+  },
+  {
+    "edge": "py-gini -> py-ephc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/275/Diptico%20Desigualdad%20de%20Ingresos_2022-2024_INE.pdf",
+    "quote": "El Instituto Nacional de Estadística (INE), presenta las medidas de desigualdad de la distribución del ingreso, en base a los resultados de la Encuesta Permanente de Hogares Continua (EPHC), de los años 2022, 2023 y 2024.",
+    "location": "Díptico 'Desigualdad de Ingresos 2022-2024' (INE), introductory text; tables sourced 'Fuente: Encuesta Permanente de Hogares Continua 2022-2024. Anual'",
+    "fetch": {
+      "status": 200,
+      "bytes": 5394868,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "The díptico is INE's Gini publication: 'En este documento el INE presenta, además del índice de Gini, el índice de Gini top coding (suavizado), el indicador de desviación logarítmica media y la relación de dispersión interdecil (P90/P10).' Note pdftotext renders 'fi' as the ligature 'ﬁ' in 'Coeﬁciente' — the chosen quote avoids ligatures. The annual Pobreza Monetaria report (2023/2024) does not itself contain the word 'Gini'."
+  },
+  {
+    "edge": "py-asistencia-escolar -> py-ephc",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/noticias/2751/ine-comparte-datos-de-la-ephc-sobre-la-educacion-en-el-pais",
+    "quote": "De acuerdo a los indicadores de educación de la Encuesta Permanente de Hogares Continua (EPHC) 2025 del Instituto Nacional de Estadística (INE), el promedio de años de estudios de la población de 15 y más años de edad es de 10,2 años en total. El promedio de años de estudio a nivel nacional muestra un incremento gradual, ya que se encontraba en 9,9 años en 2022. Existe una diferencia entre áreas de residencia; mientras que en la zona urbana el promedio alcanza los 11 años de estudio en 2025, en la zona rural se sitúa en 8,3 años. El porcentaje de la población de 5 y más años de edad que asiste a un centro de enseñanza es de 39,4% (1.745.356 personas).",
+    "location": "INE news release 'INE comparte datos de la EPHC sobre la educación en el país' (HTML page), lead paragraph; followed by 'Al observar la tasa de asistencia por grupos de edad...'",
+    "fetch": {
+      "status": 200,
+      "bytes": 41777,
+      "extractor": "python html strip (tags removed, whitespace collapsed)"
+    },
+    "notes": "No standalone EPHC 'Boletín de Educación' PDF was found on ine.gov.py (the Educación publication page lists only Census 2022 and EPH 2016 items). PDF alternative: 'Principales Resultados Anuales de la EPHC 2017 y 2018' (https://www.ine.gov.py/Publicaciones/Biblioteca/documento/812e_PRINCIPALES%20RESULTADOS%20EPHC%202018.pdf, HTTP 200, 4440867 bytes, pdftotext -layout) Ficha técnica §11 Cuestionario: 'El cuestionario utilizado para la Encuesta Permanente de Hogares Continua consta de 8 secciones bien diferenciadas y son las siguientes:' ... '4. Educación: En esta sección interesa conocer los aspectos relacionados con el nivel educativo, asistencia a centros educativos de todas las personas de 5 y más años de edad.' (both verified verbatim)."
+  },
+  {
+    "edge": "py-pobreza-departamental -> py-pobreza",
+    "found": true,
+    "reverse": false,
+    "weak": false,
+    "evidence_url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/271/Pobreza%20Monetaria_%20EPHC%202024_INE.pdf",
+    "quote": "El Instituto Nacional de Estadística (INE) presenta los principales Indicadores de Pobreza Monetaria y Distribución de Ingresos, basados en los Resultados Anuales de la Encuesta Permanente de Hogares Continua (EPHC), de los años 2022 al 2024. Esta publicación ofrece estimaciones a nivel nacional, por área de residencia (urbana y rural) y para 15 departamentos, incluyendo la capital Asunción, lo que permitirá mejoras en la orientación de las políticas y los programas sociales, a partir de un análisis más preciso y desagregado de la pobreza monetaria en Paraguay.",
+    "location": "Presentación, p. 1; departmental table is Cuadro Nº 2 'Incidencia de pobreza extrema, pobreza no extrema, pobre y no pobre (absoluto y relativo), según departamento y año. Años 2022 - 2024' (p. 18)",
+    "fetch": {
+      "status": 200,
+      "bytes": 635799,
+      "extractor": "pdftotext -layout"
+    },
+    "notes": "Departmental poverty is a disaggregation published inside the Pobreza Monetaria report itself (same methodology/lines), so the evidence is self-referential: the report names itself ('Indicadores de Pobreza Monetaria') and states it provides the 15-department estimates. INE also publishes the departmental table as a spreadsheet: https://www.ine.gov.py/assets/documento/29/Pobreza_Incidencia de pobreza extrema, pobreza no extrema, pobre y no pobre (absoluto y relativo), segun dpto y anho EPHC 2022-2025.xlsx"
+  }
+]
