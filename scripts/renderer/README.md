@@ -23,3 +23,12 @@ day, 2,367 / 2,818): **~85 calls per frame** — 46 node batches, 15 photon,
 either way; the spread is photon churn (140 tris a teardrop), not spheres.
 `census.mjs` now also prints `nodesInst` and folds the node `sync()` into
 `syncMs`.
+
+- `settle.mjs [tier] [runs]` — ms, rAF frames and physics ticks from the
+  first tick to `settledOnce`. Added 2026-09-05 for the tick burst
+  (`TICK_BURST_MAX` in InfluenceGraph.tsx): at tier 2 (299 nodes) a
+  `tickFrame()` costs 10–12 ms under swiftshader, over the 8 ms budget, so
+  the burst does nothing HERE (ticks == frames, 53/57); with the budget
+  raised to 40 ms for the check it ran 4 ticks a frame (212 ticks in 54
+  frames). Whether it fires on real hardware depends on the tick cost there —
+  `window.__rig.tickMs()` reads it live.

@@ -106,8 +106,10 @@ and mean it.
     for "which standard / which source" questions on an EU/EEA country.**
     Filename is versioned per country: `prc_hicp_esmshi4_<cc>.htm` for
     PL/EL/ES/HU/HR/BG/LT, `prc_hicp_esmshi3_<cc>.htm` for
-    SK/SI/EE/LV/MT/CY/IS, 404 for FI (try hi4, fall back to hi3; Greece is
-    `_el` not `_gr`). `employ_simslfs_<cc>.htm` answers "is LFS the
+    SK/SI/EE/LV/MT/CY/IS/CZ/DK/IT/NO/RO/CH/TR/AL, and FI is `hi3` since
+    2026-09-05 (it 404'd on 08-28 — try hi4, fall back to hi3; Greece is
+    `_el` not `_gr`). Section 18.1.1 "Weights" is where the weight-source
+    sentence lives; memory `esms_hicp_pass_2026-09-05` has the pass. `employ_simslfs_<cc>.htm` answers "is LFS the
     national-accounts employment source" as an explicit Y/N field (no such
     page for Iceland). No government-finance equivalent exists
     (`gov_10dd_*_esms_<cc>.htm` 404s everywhere tried) — for deficit/debt
@@ -348,6 +350,27 @@ here only as a rule, once.
   wall says only that this machine could not read it. A 404 says the citation
   has rotted, which is exactly what the dead-URL debt list measures — grading it
   off an archived copy hides link rot behind a good grade.
+- **`--write` has NO "improvements only" guard** (2026-09-05): it writes
+  whatever the run returns, and §7's "a re-grade never writes a grade DOWN" is
+  a process rule, not code. It wrote a B down to C the first time a matcher
+  change was tried that day. Before any `--write` on already-graded edges, run
+  the OLD code and the NEW code `--offline` on the same store and diff; put
+  only the edges that went UP in the write selection.
+- **Every grader run rewrites the `evidence-cache/` record of each URL it
+  touches — dry run or not — and labels the windows with THAT run's grade.**
+  A dry run on a held edge leaves a committed record saying "[A …]" beside a
+  slice that says B. Restore untouched records from the transport zip before
+  committing, or run the write pass last.
+- **`_dropped` entries come in two shapes**: `source_report_id`/
+  `target_report_id`, and `source`/`target` (+ an `edge` string). A collision
+  scan that reads only the first misses the second; validate then fails on a
+  `no-document` note from an older round (rules 10/14). Read both.
+- **A title's parenthetical only counts as its acronym if it abbreviates the
+  title head** — `acronymFitsHead()` in `grade-evidence.ts` (2026-09-05).
+  "(ESA 2010)" on the 31 "National accounts (ESA 2010)" nodes and "(2016)" on
+  the MFSM manual used to name the release for any document that mentioned
+  the standard. Foreign-language acronyms on English titles (RPJMN, EICV4) no
+  longer count either — that is `title_aliases` territory.
 - **Never edit a `basis` or a quote to move a grade.** If an evidence record is
   graded down by a matcher defect, fix or report the matcher. Trimming the
   record is grade-motivated editing and it hides the defect from everyone after

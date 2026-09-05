@@ -327,6 +327,30 @@ const MIN_TICKS_BEFORE_FIRST_PAINT = 30
 const MAX_PREMATURE_REHEATS = 5
 
 /**
+ * Tick burst (2026-09-05, Thomas: "the time it takes to settle is a little
+ * annoying"). three-forcegraph runs exactly ONE physics tick per rendered
+ * frame, so settling takes ~230 ticks × frame time whatever the tick itself
+ * costs — at the Nations tier a tick is a couple of milliseconds and the
+ * layout still needs ~6 s at 25 ms frames, all of it spent waiting for the
+ * renderer. When a tick is cheap, `useFrame` runs up to `TICK_BURST_MAX`
+ * ticks in one frame, stopping as soon as the ticks already run this frame
+ * have cost `TICK_BURST_MAX_MS` in total.
+ *
+ * The final layout is IDENTICAL: the same ticks run in the same order with
+ * the same alphas; only how many land in one frame changes. Measured per-tick
+ * cost of the production force set in the sandbox (`scripts/measure-forces.ts`
+ * instrumented, 2026-09-05): ~7.5 ms at 320 nodes, ~34 ms at 1,000, ~100 ms
+ * at 2,505 — so at the Everything tier the first tick alone blows the budget
+ * and nothing changes there; the burst is a small-tier feature by
+ * construction, and the budget is what keeps a mid-size tier from turning
+ * a 25 ms frame into a 60 ms one. Cosmetic side effect while settling: each
+ * `tickFrame()` also advances the pulses, so they travel faster for those
+ * few seconds. `TICK_BURST_MAX = 1` disables the whole thing.
+ */
+const TICK_BURST_MAX = 4
+const TICK_BURST_MAX_MS = 8
+
+/**
  * How often, and for how long after a rebuild, the camera re-fits while a
  * layout is still actively settling — on top of the original rough-then-
  * precise pair below.
@@ -971,6 +995,16 @@ export default function InfluenceGraph({
   /** Ticks applied since this `forceGraph` was (re)built — gates the first fit. */
   const tickCount = useRef(0)
   /**
+   * Whether three-forcegraph's layout engine is currently ticking — true from
+   * a rebuild or any `d3ReheatSimulation()` until the next `onEngineStop`.
+   * The library keeps this in private state and exposes no getter, so it is
+   * mirrored here from the only three places it can change. Read by the tick
+   * burst in `useFrame`: once the engine has stopped, `tickFrame()` only
+   * moves photons, and calling it more than once a frame would just run the
+   * pulses faster forever. See `TICK_BURST_MAX_MS`.
+   */
+  const engineRunning = useRef(true)
+  /**
    * Whether any fit has ever run this session. Unlike `fitted` this is never
    * reset on rebuild — it distinguishes "the fit that mounts the scene", which
    * must always move the camera, from every rebuild's first fit after it,
@@ -1129,9 +1163,12 @@ export default function InfluenceGraph({
       photons: () => photonInstancer.current.stats(),
       links: () => linkInstancer.current.stats(),
       nodes: () => nodeInstancer.current.stats(),
+      // Cost of one `tickFrame()` right now, ms — drives one extra tick.
+      tickMs: () => { const t = performance.now(); ref.current?.tickFrame(); return performance.now() - t },
       // Fit-loop state, read live — for diagnosing "camera inside the cloud".
       fit: () => ({
         tickCount: tickCount.current,
+        engineRunning: engineRunning.current,
         reheatAttempts: reheatAttempts.current,
         settledOnce: settledOnce.current,
         fitted: fitted.current,
@@ -1898,13 +1935,15 @@ export default function InfluenceGraph({
       // That is a real loss and it is accepted — a second encoding of the same
       // fact, permanently hidden inside the nodes, was not paying for itself.
       //
-      // The pulses. NOT instanced — three-forcegraph builds one small mesh per
-      // photon (confirmed in its source, 2026-08-12; an earlier version of
-      // this comment claimed an instanced system it does not have). What IS
-      // shared is the teardrop geometry and the per-colour material, via the
-      // caches in linkVisuals.ts — so the cost that scales with link count is
-      // draw calls, not geometry memory. Worth knowing before any future
-      // performance hunt starts from a false premise.
+      // The pulses. three-forcegraph itself builds one small mesh per photon
+      // (confirmed in its source, 2026-08-12) and those meshes are still the
+      // library's state — but since 2026-09-05 they are hidden every frame
+      // and drawn by `photonInstancing.ts` as one InstancedMesh per
+      // (geometry, material) pair (mirror, not replacement — see that
+      // file's header). Measured by
+      // Thomas the same day, with link instancing: median 33.4 → 25.0 ms.
+      // The teardrop geometry and per-colour material caches in
+      // linkVisuals.ts are what the instancer batches on.
       //
       // Suppressed entirely outside the focus, rather than dimmed. Motion is
       // the strongest signal on screen — a dim moving dot still pulls the eye
@@ -2214,6 +2253,7 @@ export default function InfluenceGraph({
     ref.current = forceGraph
     fitted.current = false
     tickCount.current = 0
+    engineRunning.current = true
     settledOnce.current = false
     reheatAttempts.current = 0
     settleClock.current = 0
@@ -2240,6 +2280,9 @@ export default function InfluenceGraph({
     // fit. Later ones (from the geo-affinity slider, say) are left to
     // resettle in view, under whatever camera the user has by then.
     forceGraph.onEngineStop(() => {
+      // Before the early return: the engine has stopped whether or not this
+      // is the first convergence, and the tick burst must know either way.
+      engineRunning.current = false
       if (settledOnce.current) return
 
       // `onEngineStop` fires whenever three-forcegraph's own tick loop
@@ -2269,6 +2312,7 @@ export default function InfluenceGraph({
         reheatAttempts.current < MAX_PREMATURE_REHEATS
       ) {
         reheatAttempts.current += 1
+        engineRunning.current = true
         forceGraph.d3ReheatSimulation()
         return
       }
@@ -2924,6 +2968,7 @@ export default function InfluenceGraph({
    * pays once at load, so this stays cheap on every drag.
    */
   useEffect(() => {
+    engineRunning.current = true
     forceGraph.d3ReheatSimulation()
   }, [view.geoAffinity, forceGraph])
 
@@ -2970,6 +3015,7 @@ export default function InfluenceGraph({
    * `geoAffinity`'s reheat was already there to copy.
    */
   useEffect(() => {
+    engineRunning.current = true
     forceGraph.d3ReheatSimulation()
   }, [view.galaxy, forceGraph])
 
@@ -3012,6 +3058,7 @@ export default function InfluenceGraph({
    * anything at all. `PLAYBOOK.md` carries this as a standing rule now.
    */
   useEffect(() => {
+    engineRunning.current = true
     forceGraph.d3ReheatSimulation()
   }, [view.clusterRepulsion, forceGraph])
 
@@ -3316,8 +3363,21 @@ export default function InfluenceGraph({
     // the library reading a property off its own not-yet-built simulation —
     // caught here and skipped for one frame rather than crashing the scene,
     // since the very next frame's digest will have completed by then.
+    let extraTicks = 0
     try {
+      const t0 = performance.now()
       ref.current?.tickFrame()
+      // The burst — see TICK_BURST_MAX. Budget is cumulative over the frame,
+      // measured, never assumed: a tier flip can take a tick from 2 ms to
+      // 100 ms between one frame and the next.
+      while (
+        engineRunning.current &&
+        extraTicks < TICK_BURST_MAX - 1 &&
+        performance.now() - t0 < TICK_BURST_MAX_MS
+      ) {
+        ref.current?.tickFrame()
+        extraTicks += 1
+      }
     } catch {
       return
     }
@@ -3337,7 +3397,7 @@ export default function InfluenceGraph({
       if (Number.isFinite(n.x)) lastPositions.current.set(n.id, { x: n.x, y: n.y, z: n.z })
     }
 
-    tickCount.current += 1
+    tickCount.current += 1 + extraTicks
     // See `MAX_FRAME_DELTA_SECONDS` — a raw `delta` after a backgrounded-tab
     // gap would otherwise end tracking on the very frame it resumes.
     const trackingDelta = Math.min(delta, MAX_FRAME_DELTA_SECONDS)

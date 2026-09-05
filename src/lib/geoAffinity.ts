@@ -218,8 +218,26 @@ const CONFLICT_KEYS = new Set(CONFLICT_PAIRS.map(([a, b]) => [a, b].sort().join(
  */
 export function affinityScore(a: Country, b: Country): number {
   if (a === b || a === 'INT' || b === 'INT') return 0
+  // Memoised (2026-09-05). The force below asks for every ordered pair of
+  // countries on EVERY tick — ~150 countries at the Everything tier is
+  // ~22,000 calls a tick, each allocating a sorted array, a joined string
+  // and a filtered array. Measured in the sandbox at 2,505 nodes: 13.9 ms of
+  // a ~113 ms tick, i.e. this one pure function over two static tables was
+  // 12% of the physics. The tables never change at runtime, so the answer
+  // for a pair never changes either; the cache makes the force O(1) per
+  // pair with output identical to the uncached version by construction.
+  const key = a < b ? `${a}|${b}` : `${b}|${a}`
+  const cached = AFFINITY_CACHE.get(key)
+  if (cached !== undefined) return cached
+  const score = affinityScoreUncached(a, b, key)
+  AFFINITY_CACHE.set(key, score)
+  return score
+}
 
-  if (CONFLICT_KEYS.has([a, b].sort().join('|'))) return CONFLICT_REPULSION
+const AFFINITY_CACHE = new Map<string, number>()
+
+function affinityScoreUncached(a: Country, b: Country, sortedKey: string): number {
+  if (CONFLICT_KEYS.has(sortedKey)) return CONFLICT_REPULSION
 
   const blocsA = COUNTRY_BLOCS[a]
   const blocsB = COUNTRY_BLOCS[b]
@@ -287,16 +305,19 @@ export function countryAffinityForce(strengthRef: { current: number }) {
     }
 
     const countries = [...centroid.keys()]
+    // Which pairs score non-zero is a property of the static tables, not of
+    // this tick (2026-09-05): resolved once per distinct set of countries
+    // present and reused until that set changes (a tier flip, a country
+    // opened). Most of the ~22,000 ordered pairs at the Everything tier score
+    // 0 and used to be visited — and `affinityScore` called — every tick.
+    const partners = partnersFor(countries)
     const pull = new Map<string, [number, number, number]>()
     for (const a of countries) {
       const [ax, ay, az] = centroid.get(a)!
       let px = 0
       let py = 0
       let pz = 0
-      for (const b of countries) {
-        if (a === b) continue
-        const score = affinityScore(a as Country, b as Country)
-        if (!score) continue
+      for (const [b, score] of partners.get(a) ?? []) {
         const [bx, by, bz] = centroid.get(b)!
         const dx = bx - ax
         const dy = by - ay
@@ -324,4 +345,32 @@ export function countryAffinityForce(strengthRef: { current: number }) {
   }
 
   return force
+}
+
+/**
+ * For each country present, the other present countries it has a non-zero
+ * affinity with, and the score. Cached on the (sorted) set of countries;
+ * `affinityScore` is pure over static tables so the answer cannot change
+ * while the set does not. Output of the force is identical to the
+ * pair-by-pair loop it replaced — the zero-score pairs it skips contributed
+ * exactly nothing.
+ */
+let partnersKey = ''
+let partnersCache = new Map<string, [string, number][]>()
+function partnersFor(countries: string[]): Map<string, [string, number][]> {
+  const key = [...countries].sort().join(',')
+  if (key === partnersKey) return partnersCache
+  const out = new Map<string, [string, number][]>()
+  for (const a of countries) {
+    const list: [string, number][] = []
+    for (const b of countries) {
+      if (a === b) continue
+      const score = affinityScore(a as Country, b as Country)
+      if (score) list.push([b, score])
+    }
+    out.set(a, list)
+  }
+  partnersKey = key
+  partnersCache = out
+  return out
 }

@@ -1,0 +1,835 @@
+{
+  "results": [
+    {
+      "source": "jp-national-accounts",
+      "target": "jp-monthly-labour-survey",
+      "file": "jp-japan-grok-2026-08.json",
+      "basis": "ESRI's JSNA manual states compensation of employees by activity is allocated using cash earnings from the Monthly Labour Survey. (Direction flipped 2026-09-04: the basis names jp-national-accounts as the consumer of jp-monthly-labour-survey; the edge was minted the other way round — Thomas's ruling on HANDOFF item 1, list in Claude outputs/direction-suspect-jp-kr-2026-09-03.json.)",
+      "evidenceUrl": "https://www.esri.cao.go.jp/jp/sna/data/reference1/pdf/sakusei_houhou2020_202511.pdf",
+      "evidenceQuote": "経済活動別雇用者報酬は...『毎月勤労統計』に基づく各経済活動別の現金給与額に...を乗じたものの構成比を用いて、分割したものである",
+      "targetReport": {
+        "id": "jp-monthly-labour-survey",
+        "title": "Monthly Labour Survey (毎月勤労統計調査 / Maitsuki Kinrō Tōkei Chōsa)",
+        "publisher": "Ministry of Health, Labour and Welfare (MHLW)",
+        "country": "JP",
+        "jurisdiction_level": "federal",
+        "region": "Japan",
+        "description": "Monthly establishment survey of employment, wages (cash earnings, scheduled and non-scheduled), and hours worked for establishments with 5 or more employees (national and prefectural surveys) plus an annual special survey for smaller establishments. Produces the official wage and hours series used for real-wage calculations and labour-cost analysis.",
+        "releases_per_year": 12,
+        "url": "https://www.mhlw.go.jp/toukei/list/30-1.html",
+        "domains": [
+          "labour",
+          "proposed:hours-worked"
+        ],
+        "_batch": [
+          "2026-08-14_Japan-batch2.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Fundamental statistics (毎月勤労統計). Key source for nominal and real wage growth (the latter using CPI). Widely cited in BOJ Outlook reports, Cabinet Office economic assessments, and spring wage-negotiation analysis. National survey + local survey + special survey structure. June 2026 real wages showed continued positive growth driven by base pay and bonuses.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "esri.cao.go.jp",
+      "status": 200,
+      "finalUrl": "https://www.esri.cao.go.jp/jp/sna/data/reference1/pdf/sakusei_houhou2020_202511.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 124686,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "no",
+      "coverage": 0.5,
+      "bestSpan": "経済活動別雇用者報酬は...『毎月勤労統計』に基づく各経済活動別の現金給与額に...を乗じたものの構成比を用いて、分割したものである",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "quote-not-in-document"
+    },
+    {
+      "source": "jp-national-accounts",
+      "target": "jp-family-income-expenditure",
+      "file": "jp-japan-grok-2026-08.json",
+      "basis": "ESRI's JSNA manual states household final consumption is balanced against a reference figure computed from the FIES and the Survey of Household Economy. (Direction flipped 2026-09-04: the basis names jp-national-accounts as the consumer of jp-family-income-expenditure; the edge was minted the other way round — Thomas's ruling on HANDOFF item 1, list in Claude outputs/direction-suspect-jp-kr-2026-09-03.json.)",
+      "evidenceUrl": "https://www.esri.cao.go.jp/jp/sna/data/reference1/pdf/sakusei_houhou2020_202511.pdf",
+      "evidenceQuote": "『家計統計』、『家計消費状況調査』（総務省）と比較可能な品目については、『家計統計』等から計算される家計最終消費支出...の伸び率を比較し",
+      "targetReport": {
+        "id": "jp-family-income-expenditure",
+        "title": "Family Income and Expenditure Survey (家計調査 / Kakei Chōsa)",
+        "publisher": "Statistics Bureau of Japan (SBJ)",
+        "country": "JP",
+        "jurisdiction_level": "federal",
+        "region": "Japan",
+        "description": "Monthly survey of household income, expenditure, savings and debt for two-or-more-person households (and separately for one-person and total households). Provides detailed consumption structure data used for CPI weights, national accounts private consumption estimates, and living-standards analysis.",
+        "releases_per_year": 12,
+        "url": "https://www.stat.go.jp/english/data/kakei/index.html",
+        "domains": [
+          "living-standards"
+        ],
+        "_batch": [
+          "2026-08-14_Japan-batch1.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Fundamental statistics. Core input into CPI basket weights and into the expenditure-side estimates of GDP. June 2026 real consumption expenditures for two-or-more-person households: −3.3% year-on-year. Complements the quinquennial National Survey of Family Income, Consumption and Wealth.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "esri.cao.go.jp",
+      "status": 200,
+      "finalUrl": "https://www.esri.cao.go.jp/jp/sna/data/reference1/pdf/sakusei_houhou2020_202511.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 124686,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "『家計統計』、『家計消費状況調査』（総務省）と比較可能な品目については、『家計統計』等から計算される家計最終消費支出...の伸び率を比較し",
+      "naming": "neither",
+      "window": "",
+      "grade": "B",
+      "reason": "quote-found-target-not-named"
+    },
+    {
+      "source": "jp-input-output-tables",
+      "target": "jp-services-producer-price-index",
+      "file": "jp-japan-grok-2026-08.json",
+      "basis": "BOJ's CGPI FAQ states SPPI weights are based on MIC's Input-Output Tables.",
+      "evidenceUrl": "https://www.boj.or.jp/statistics/outline/exp/pi/faqcgpi02.htm",
+      "evidenceQuote": "後者が総務省『産業連関表』",
+      "targetReport": {
+        "id": "jp-services-producer-price-index",
+        "title": "Services Producer Price Index (SPPI) / 企業向けサービス価格指数",
+        "publisher": "Bank of Japan (BOJ)",
+        "country": "JP",
+        "jurisdiction_level": "federal",
+        "region": "Japan",
+        "description": "Monthly index measuring price changes of services traded among corporations. Complements the Corporate Goods Price Index (CGPI) on the services side and is used in national-accounts deflation of intermediate consumption of services and in analysis of service-sector inflation.",
+        "releases_per_year": 12,
+        "url": "https://www.boj.or.jp/en/statistics/pi/sppi_2020/index.htm",
+        "domains": [
+          "inflation",
+          "services",
+          "proposed:producer-prices"
+        ],
+        "_batch": [
+          "2026-08-14_Japan-batch2.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "BOJ producer-price family member. Continuously cited together with CGPI and CPI in monetary-policy and national-accounts contexts. Provides the services counterpart to goods producer prices and is essential for comprehensive producer-price analysis in a service-dominated economy.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "boj.or.jp",
+      "status": 200,
+      "finalUrl": "https://www.boj.or.jp/statistics/outline/exp/pi/faqcgpi02.htm",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 43488,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "cjk:企業向けサービス価格指数",
+      "window": "",
+      "grade": "B",
+      "reason": "no-quoted-span"
+    },
+    {
+      "source": "kr-eaps",
+      "target": "kr-gender-statistics",
+      "file": "kr-south-korea-grok-2026-08.json",
+      "basis": "e-나라지표's women's economic-activity indicator cites the Economically Active Population Survey as its source.",
+      "evidenceUrl": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1572",
+      "evidenceQuote": "자료 출처 : 경제활동인구조사",
+      "targetReport": {
+        "id": "kr-gender-statistics",
+        "title": "Gender equality / women’s economic activity statistics and related white papers",
+        "publisher": "Ministry of Gender Equality and Family / Statistics Korea / Ministry of Employment and Labor",
+        "country": "KR",
+        "jurisdiction_level": "federal",
+        "region": "Republic of Korea",
+        "description": "Official statistics and periodic reports on gender gaps in employment, wages, unpaid care work, decision-making, and the National Gender Equality Index. Includes the White Paper on Women’s Economic Activity and related gender statistics.",
+        "url": "https://www.mogef.go.kr/",
+        "domains": [
+          "proposed:gender",
+          "proposed:equality",
+          "proposed:women",
+          "labour"
+        ],
+        "_cadence_original": "annual / periodic",
+        "_batch": [
+          "2026-08-14_SouthKorea-batch3.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Captures the persistent gender structure of Korean society (employment gap, care burden, decision-making representation). Continuously referenced in labour, family and social-policy analysis. Parallel to Japan’s Gender Equality White Paper cluster.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "unknown",
+        "_cadence_evidence": "url not retrievable - mogef.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result.",
+        "kind": "instrument"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "index.go.kr",
+      "status": 200,
+      "finalUrl": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1572",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 9253,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-statistics-act",
+      "target": "tw-population-census",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The Statistics Act mandates DGBAS conduct the Population and Housing Census at least every ten years.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
+      "evidenceQuote": "中央主計機關應每十年至少辦理一次人口及住宅普查",
+      "targetReport": {
+        "id": "tw-population-census",
+        "title": "Population and Housing Census / Population statistics",
+        "publisher": "DGBAS",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Periodic Population and Housing Census together with inter-censal population estimates and vital statistics. Provides the demographic baseline for labour, social and economic statistics.",
+        "url": "https://eng.stat.gov.tw/",
+        "domains": [
+          "population"
+        ],
+        "_cadence_original": "census periodic + continuous estimates",
+        "_batch": [
+          "2026-08-14_Taiwan-batch1.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Core demographic series. Parallel to Japan and Korea census nodes.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "Executive Yuan announcement of the 109年人口及住宅普查方案 states '政府每10年定期舉辦人口及住宅普查'; the 109年普查初步統計結果 PDF on stat.gov.tw gives census standard date 109/11/8 and the decennial series 89年(2000)/99年(2010)/109年(2020).",
+        "releases_per_year": 0.1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 5440,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-statistics-act",
+      "target": "tw-dgbas",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The Statistics Act designates the central accounting/statistics agency as administrator of the Basic National Census.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
+      "evidenceQuote": "基本國勢調查由中央主計機關主辦。",
+      "targetReport": {
+        "id": "tw-dgbas",
+        "title": "Directorate-General of Budget, Accounting and Statistics (DGBAS) / National Statistics system",
+        "publisher": "Directorate-General of Budget, Accounting and Statistics, Executive Yuan",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Central authority for official statistics in Taiwan. Oversees the national statistical system, produces major economic and social statistics, maintains statistical standards and classifications, and coordinates BAS units across government.",
+        "url": "https://eng.stat.gov.tw/",
+        "domains": [
+          "statistical-system"
+        ],
+        "_cadence_original": "continuous",
+        "_batch": [
+          "2026-08-14_Taiwan-batch1.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Institutional core node. Equivalent to Japan’s Statistics Bureau / MIC and Korea’s KOSTAT. Disseminates via National Statistics portal and related platforms.",
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "continuous-database",
+        "_cadence_evidence": "eng.stat.gov.tw is the DGBAS dissemination portal itself, not a titled periodical: the homepage carries a rolling stream of press releases (GDP, earnings, price indices, labour force all dated August 2026) plus query systems and an advance release calendar; no single cadence applies to the site.",
+        "releases_per_year": 250,
+        "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence.",
+        "continuous": true,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 5440,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-cpi",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The Basic Wage Deliberation Measures require the committee to collect and study the Consumer Price Index.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "基本工資審議委員會為審議基本工資，應蒐集下列資料並研究之：...三、消費者物價指數。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "基本工資審議委員會為審議基本工資，應蒐集下列資料並研究之：...三、消費者物價指數。",
+      "naming": "neither",
+      "window": "",
+      "grade": "B",
+      "reason": "quote-found-target-not-named"
+    },
+    {
+      "source": "tw-ppi-wpi",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of domestic and imported goods price indices.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "二、國產與進口品物價指數。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-national-accounts",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of national income and per-capita income data.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "四、國民所得與平均每人所得。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-labour-productivity",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of industry labour productivity data.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "五、各業勞動生產力及就業狀況。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-labour-force",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of industry employment-status data.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "五、各業勞動生產力及就業狀況。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-wage-structure",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of industry wage data.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "六、各業勞工工資。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-household-income-expenditure",
+      "target": "tw-minimum-wage",
+      "file": "tw-taiwan-grok-2026-08.json",
+      "basis": "The same Measures require collection of Family Income and Expenditure Survey statistics.",
+      "evidenceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidenceQuote": "七、家庭收支調查統計。",
+      "targetReport": {
+        "id": "tw-minimum-wage",
+        "title": "Minimum wage / basic wage framework and adjustments",
+        "publisher": "Ministry of Labor",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Statutory minimum (basic) wage level and the periodic adjustment process. Affects a large number of workers and feeds into labour-insurance and pension contribution bases.",
+        "url": "https://www.mol.gov.tw/",
+        "domains": [
+          "labour",
+          "proposed:labour-standards",
+          "governance"
+        ],
+        "_cadence_original": "periodic adjustments + continuous reference",
+        "_batch": [
+          "2026-08-14_Taiwan-batch6.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy anchor for the lower end of the wage distribution. Recurring citation in labour and social-policy documents.",
+        "_referenced_by": [
+          "Earnings structure statistics",
+          "Labour insurance and pension contribution tables",
+          "Low-wage employment and inequality analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "MOL 基本工資之制訂與調整經過 lists adjustments taking effect on 1 January of consecutive years (2021, 2022, 2023, 2024 …), and notes that from 114年1月1日 基本工資 was replaced by 最低工資 under the new act — one review/adjustment per year.",
+        "releases_per_year": 1,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "law.moj.gov.tw",
+      "status": 200,
+      "finalUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 3057,
+      "extractor": "html",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-mac-cross-strait-monthly",
+      "target": "tw-investment-commission",
+      "file": "tw-unlinked-wiring-2026-08-28.json",
+      "basis": "Same MAC table, row for enterprise investment in Mainland China cites \"經濟部投資審議委員會\" (MOEA Investment Commission).",
+      "evidenceUrl": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf",
+      "targetReport": {
+        "id": "tw-investment-commission",
+        "title": "Outbound and inbound investment statistics (Investment Commission)",
+        "publisher": "Investment Commission, Ministry of Economic Affairs",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Official statistics on approved outbound investment (including the large historical stock directed to Mainland China) and inbound FDI. Key source for cross-strait and global investment patterns.",
+        "url": "https://www.moeaic.gov.tw/",
+        "domains": [
+          "investment",
+          "proposed:cross-strait"
+        ],
+        "_cadence_original": "monthly / annual",
+        "_batch": [
+          "2026-08-14_Taiwan-batch5.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Tightens the investment and cross-strait clusters. Historical Mainland China share of outbound investment remains large even as diversification proceeds.",
+        "_referenced_by": [
+          "Cross-Strait Economic Relations Statistics (MAC)",
+          "Balance of Payments financial account",
+          "ECFA and investment-policy analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "經濟部投資審議司 issues 核准僑外投資、陸資來臺投資、國外投資、對中國大陸投資統計月報/速報 once per month, with releases titled by reference month (e.g. 115年6月核准…統計情形).",
+        "releases_per_year": 12,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "ws.mac.gov.tw",
+      "status": 200,
+      "finalUrl": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 2767,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    },
+    {
+      "source": "tw-cross-strait-stats",
+      "target": "tw-investment-commission",
+      "file": "tw-unlinked-wiring-2026-08-28.json",
+      "basis": "Same MAC compilation, investment row sourced from \"經濟部投資審議委員會\" (MOEA Investment Commission).",
+      "evidenceUrl": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf",
+      "targetReport": {
+        "id": "tw-investment-commission",
+        "title": "Outbound and inbound investment statistics (Investment Commission)",
+        "publisher": "Investment Commission, Ministry of Economic Affairs",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan (Republic of China)",
+        "description": "Official statistics on approved outbound investment (including the large historical stock directed to Mainland China) and inbound FDI. Key source for cross-strait and global investment patterns.",
+        "url": "https://www.moeaic.gov.tw/",
+        "domains": [
+          "investment",
+          "proposed:cross-strait"
+        ],
+        "_cadence_original": "monthly / annual",
+        "_batch": [
+          "2026-08-14_Taiwan-batch5.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Tightens the investment and cross-strait clusters. Historical Mainland China share of outbound investment remains large even as diversification proceeds.",
+        "_referenced_by": [
+          "Cross-Strait Economic Relations Statistics (MAC)",
+          "Balance of Payments financial account",
+          "ECFA and investment-policy analysis"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "經濟部投資審議司 issues 核准僑外投資、陸資來臺投資、國外投資、對中國大陸投資統計月報/速報 once per month, with releases titled by reference month (e.g. 115年6月核准…統計情形).",
+        "releases_per_year": 12,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "ws.mac.gov.tw",
+      "status": 200,
+      "finalUrl": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 2767,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "no-quoted-span-target-not-named"
+    }
+  ]
+}

@@ -331,15 +331,61 @@ export function normalizeForMatch(s: string): string {
  * than MIN_SPAN are dropped — a two-word quoted term ("CPI") matches
  * everywhere and proves nothing.
  */
+/**
+ * Han, Hiragana, Katakana, Hangul. Fullwidth forms fold to ASCII under NFKC,
+ * so they are deliberately not counted — after normalisation they ARE Latin.
+ */
+const CJK_CHAR = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u
+
+/**
+ * Is at least half of this span (spaces aside) CJK? Used to pick the span
+ * floors below — a CJK character carries a word's worth of information, not a
+ * letter's, so a length floor tuned for Latin text throws away real sentences.
+ */
+export function isMostlyCjk(s: string): boolean {
+  let cjk = 0
+  let total = 0
+  for (const ch of s) {
+    if (ch === ' ' || ch === '　') continue
+    total++
+    if (CJK_CHAR.test(ch)) cjk++
+  }
+  return total > 0 && cjk * 2 >= total
+}
+
+/**
+ * Minimum length for a span to be worth checking. 24 characters for Latin
+ * text (a two-word quoted term like "CPI" matches everywhere and proves
+ * nothing). **10 when the span is mostly CJK** (2026-09-05): `MIN_SPAN = 24`
+ * was Latin-tuned — a 19-character Chinese sentence ("配合 COICOP 2018
+ * 調整家庭消費歸類" is 20 with its spaces) is a full clause naming the target
+ * and was grading B `no-quoted-span`; the workaround was to quote two
+ * sentences. Ten ideographs is roughly a ten-word Latin sentence, i.e. well
+ * above what the 24-character Latin floor lets through.
+ */
+export function minSpanFor(span: string): number {
+  return isMostlyCjk(span) ? 10 : 24
+}
+
+/**
+ * `locateQuote`'s FALLBACK fragment floor (after splitting on "…"): 12 for
+ * Latin, 6 for a mostly-CJK fragment, for the same reason as `minSpanFor` —
+ * without this a 10-character Chinese span passes the span floor and is then
+ * silently dropped as a too-short fragment, scoring 0. Consulted only when no
+ * fragment clears the 12-character floor — see the note in `locateQuote`.
+ */
+export function minFragmentFor(fragment: string): number {
+  return isMostlyCjk(fragment) ? 6 : 12
+}
+
 export function extractQuotedSpans(...texts: (string | undefined)[]): string[] {
-  const MIN_SPAN = 24
   const out: string[] = []
-  const re = /["“„«]([^"“”„«»]{10,600})["”“»]/g
+  const re = /["“„«]([^"“”„«»]{6,600})["”“»]/g
   for (const text of texts) {
     if (!text) continue
     for (const m of text.matchAll(re)) {
       const span = m[1].trim()
-      if (span.length >= MIN_SPAN) out.push(span)
+      if (span.length >= minSpanFor(span)) out.push(span)
     }
   }
   return out
@@ -364,7 +410,7 @@ export function extractQuotedSpans(...texts: (string | undefined)[]): string[] {
 export function spansForEdge(evidenceQuote: string | undefined, basis: string): string[] {
   const out: string[] = []
   const whole = (evidenceQuote ?? '').trim().replace(/^["\u201c\u201e\u00ab]|["\u201d\u00bb]$/g, '').trim()
-  if (whole.length >= 24) out.push(whole)
+  if (whole.length >= minSpanFor(whole)) out.push(whole)
   for (const span of extractQuotedSpans(evidenceQuote, basis)) if (!out.includes(span)) out.push(span)
   return out
 }
@@ -397,10 +443,18 @@ export interface QuoteHit {
 
 export function locateQuote(needle: string, haystack: string): QuoteHit {
   const hay = normalizeForMatch(haystack)
-  const fragments = normalizeForMatch(needle)
+  const allFragments = normalizeForMatch(needle)
     .split(/\s*(?:…|\.\.\.)\s*/)
     .map((f) => f.trim())
-    .filter((f) => f.length >= 12)
+  // The 12-character floor first; the CJK floor (`minFragmentFor`) ONLY when
+  // nothing clears it. Measured the other way round on 2026-09-05: applying
+  // the lower floor to every fragment let an 8-character tail
+  // ("の伸び率を比較し") join the count on an edge whose long fragment already
+  // matched, and coverage fell 1.0 → 0.5 (B → C). A floor change must only
+  // ever ADD matches, so the short fragments are consulted only for a quote
+  // that would otherwise have no fragment at all.
+  const long = allFragments.filter((f) => f.length >= 12)
+  const fragments = long.length ? long : allFragments.filter((f) => f.length >= minFragmentFor(f))
   if (!fragments.length || !hay) return { coverage: 0, index: -1 }
   let total = 0
   let hit = 0
@@ -696,6 +750,22 @@ export function namesTarget(
       const after = target.title.slice((m.index ?? 0) + m[0].length).trim()
       if (after && !/^[\/|—–]/.test(after)) continue
       if (!/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/u.test(acr)) continue
+      // **The parenthetical must abbreviate THIS title, not name the standard
+      // it follows** (2026-09-05, ESMS pass). Thirty-one national releases are
+      // titled "National accounts (ESA 2010)" and the rule above read "(ESA
+      // 2010)" as their acronym — so any document that mentions ESA 2010 near
+      // the quote graded A for naming, say, Latvia's national accounts, which
+      // is the audit's F-05 shape ("naming the standard is not naming the
+      // release") arriving through this door. Same for "(2016)" on the MFSM
+      // 2016 node: a year is not an acronym. The test is cheap and
+      // deliberately loose — the acronym's letters must start at some word of
+      // the title head (any segment of a bilingual "X / Y" head) and read as
+      // a subsequence of that segment's letters from there — so BPM6, COICOP
+      // 2018, ICD-10, ENIGH, CENTROESTAD all still pass and ESA 2010 / SEC-2010
+      // / 2016 on a national release do not. Measured before shipping on the
+      // 2,622-edge `rulings-2026-09-05-after.json`: see `acronymFitsHead`.
+      const head = target.title.slice(0, m.index ?? 0)
+      if (!acronymFitsHead(acr, head)) continue
       const n = normalizeForMatch(acr)
       if (!n) continue
       // **The space inside a multi-token acronym is optional** (Round C,
@@ -755,6 +825,35 @@ export function namesTarget(
 }
 
 /** Words of a title/publisher, punctuation spaced out, articles kept. */
+/**
+ * Could `acr` be an abbreviation of `head` (the title text before the
+ * parenthetical)? Letters only (digits and punctuation dropped): at least two
+ * of them, starting at the initial of some word of the head, and the whole
+ * run a subsequence of the head's letters from that word on. See the acronym
+ * branch in `namesTarget` for why this exists and what it was measured on.
+ */
+export function acronymFitsHead(acr: string, head: string): boolean {
+  const letters = normalizeForMatch(acr).replace(/[^\p{L}]/gu, '')
+  if (letters.length < 2) return false
+  const words = tokenise(head)
+  // The acronym may start at ANY word of the head, not only the first —
+  // "IMF Special Data Dissemination Standard (SDDS)", "OPEC Monthly Oil
+  // Market Report (MOMR)", "Retail Price Index (RPI) and Harmonised Index of
+  // Consumer Prices (HICP)" and a bilingual "Volkswirtschaftliche
+  // Gesamtrechnungen / National accounts" all carry words the acronym skips.
+  // From that word on, the letters must read as a subsequence. The head is
+  // deliberately NOT split on dashes: "Pesquisa Industrial Mensal – Produção
+  // Física (PIM-PF)" spans its own dash.
+  for (let w = 0; w < words.length; w++) {
+    if (words[w][0] !== letters[0]) continue
+    const joined = words.slice(w).join('')
+    let i = 0
+    for (const ch of joined) if (ch === letters[i]) i++
+    if (i === letters.length) return true
+  }
+  return false
+}
+
 function tokenise(s: string): string[] {
   return normalizeForMatch(s.replace(/[^\p{L}\p{N}\/.º°-]+/gu, ' '))
     .split(' ')
@@ -2145,6 +2244,21 @@ function selftest(): void {
     spansForEdge('The basket weights were derived from the 2025 HFCE series.', 'no span here')
       .includes('The basket weights were derived from the 2025 HFCE series.'))
   t('a short evidence_quote is still dropped', spansForEdge('CPI weights', 'no span here').length === 0)
+  // The CJK span floor (2026-09-05, HANDOFF item 3). Four assertions: the
+  // floor drops for a CJK span, stays for Latin, a mixed span is judged by its
+  // majority, and a short CJK quote is not just kept but LOCATED (the
+  // fragment floor in `locateQuote` had to move with it or coverage was 0).
+  t('CJK floor: a 19-character Chinese sentence is a span',
+    spansForEdge('配合 COICOP 2018 調整家庭消費歸類', 'no span here').length === 1)
+  t('CJK floor: a 19-character Latin fragment is still not one',
+    spansForEdge('based on the SNA 2008', 'no span here').length === 0)
+  t('CJK floor: mostly-Latin with a few ideographs keeps the Latin floor',
+    !isMostlyCjk('Statistics Act 統計法 as amended') && isMostlyCjk('統計法 (Act No. 53)') === false
+      && isMostlyCjk('國際疾病分類統計標準 ICD'))
+  t('CJK floor: a 10-character Chinese quote is located at coverage 1',
+    locateQuote('採用國際疾病分類統計', 'intro 本年採用國際疾病分類統計標準 end').coverage === 1)
+  t('CJK floor: a 5-character Chinese quote is still too short',
+    spansForEdge('統計標準。', 'no span here').length === 0)
   // The whitespace-insensitive second pass (2026-09-04). Four assertions,
   // because the change has four ways to go wrong: it can fail to fire, it can
   // fire with the wrong position, it can invent a match, or it can lower a
@@ -2162,6 +2276,20 @@ function selftest(): void {
       'x'.repeat(500) + ' les ponderations de l IPCH').index > 400)
   t('a landing page whose quote came from the PDF behind it caps at B',
     routeCapsGrade('token-pdf 2026-09-04') && !routeCapsGrade('chrome 2026-09-04'))
+  t('acronym must abbreviate the title head: "(ESA 2010)" on a national release does not',
+    !namesTarget('compiled according to ESA 2010 rules', { title: 'National accounts (ESA 2010)', publisher: 'x', url: '' }).artefact
+      && !acronymFitsHead('ESA 2010', 'National accounts / Gross Domestic Product ')
+      && !acronymFitsHead('2016', 'Monetary and Financial Statistics Manual and Compilation Guide '))
+  t('acronym still glosses its own standard, a bilingual head, and a loose Spanish acronym',
+    acronymFitsHead('ESA 2010', 'European System of Accounts 2010 ')
+      && acronymFitsHead('SDDS', 'IMF Special Data Dissemination Standard ')
+      && acronymFitsHead('HICP', 'Retail Price Index (RPI) and Harmonised Index of Consumer Prices ')
+      && !acronymFitsHead('KOSTAT', 'Statistics Korea ')
+      && acronymFitsHead('BPM6', 'Balance of Payments and International Investment Position Manual, Sixth Edition ')
+      && acronymFitsHead('SPPI', 'Services Producer Price Index ')
+      && acronymFitsHead('CENTROESTAD', 'Comisión Centroamericana de Estadística ')
+      && acronymFitsHead('COICOP 2018', 'Classification of Individual Consumption According to Purpose ')
+      && acronymFitsHead('PIM-PF', 'Pesquisa Industrial Mensal – Produção Física '))
   t('a parenthetical acronym glossing the whole title names the artefact',
     namesTarget('deaths are coded to ICD-10 throughout',
       { title: 'International Statistical Classification of Diseases (ICD-10)', publisher: 'WHO', url: '' }).artefact)
