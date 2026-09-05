@@ -94,6 +94,17 @@ const UA =
 
 /** Per-URL ceiling. Government statistics sites are often slow, not dead. */
 const TIMEOUT_S = 45
+
+/**
+ * The second PDF text extractor, run out of process. Written for the transport
+ * round and proven there to reproduce a Chrome in-page pdf.js capture byte for
+ * byte (BPS Energy Balances, 89,289 characters, sha256 `6b2db200…`, both
+ * sides). See the PDF branch in `fetchRaw` for why a PDF gets read twice.
+ */
+const PDFJS_EXTRACTOR = join(HERE, 'capture', 'extract-pdfjs.cjs')
+
+/** A PDF that has not yielded text in three minutes is not going to. */
+const PDF_EXTRACT_TIMEOUT_MS = 180_000
 const CONNECT_TIMEOUT_S = 15
 
 /**
@@ -521,23 +532,39 @@ export function namesTarget(
   // the tolerance has to stay narrow enough that it cannot assemble a title
   // out of scattered words. Runs here need >= 3 title words rather than the
   // spaced pass's 2, for the same reason.
+  //
+  // **The tolerance applies to a WHOLE name or a whole title-lead, never to a
+  // partial run** — and that restriction is not caution, it is measured. The
+  // first cut allowed a gap inside any run clearing the 60% bar, and the
+  // corpus-wide pass turned up three false A grades against one true one:
+  //   * `nz-statsnz-aes -> anzsic` anchored on "New Zealand Standard
+  //     Industrial **Output** Classification (NZSIOC)" — a DIFFERENT
+  //     classification, 5 of the 7 words of ANZSIC's title with one inserted;
+  //   * `vqc-reglement-taxation -> vqc-budget-fonctionnement` on "de la Ville
+  //     de Québec", 5 of 8 — the city, not its operating budget;
+  //   * `ng-lagos-mtef -> ng-nbs-cpi-rebasing` on "rebasing of the Consumer
+  //     Price Index (CPI)", 4 of 6 — the ACT of rebasing, not NBS's release
+  //     titled "Highlights of Consumer Price Index (CPI) Rebasing". PLAYBOOK
+  //     §7's naming-the-agency shape, arriving through a new door.
+  // A partial run plus an interpolation is two liberties at once, and the
+  // second pays for the first. Whole-name-bar-one-word keeps the two cases the
+  // ruling was made for — INEGI's census with `Nacional` inserted, and the CPI
+  // Manual written "Consumer Price Index **(CPI)** Manual" — and refuses all
+  // three of those.
   if (!artefact) {
     for (let i = 0; i < names.length && !artefact; i++) {
       const noParens = names[i].replace(/\([^)]*\)/g, ' ')
       const words = tokenise(noParens)
       const tag = i === 0 ? '' : `alias${i}:`
-      if (words.length >= 3) {
-        const run = longestRunWithOneGap(words, hay)
-        if (run >= 3 && run / words.length >= 0.6) {
-          artefact = true
-          how = `${tag}title-run-gap:${run}/${words.length}`
-          break
-        }
+      if (words.length >= 3 && phraseWithOneGap(words, hay)) {
+        artefact = true
+        how = `${tag}title-whole-gap:${words.length}`
+        break
       }
       const lead = tokenise(noParens.split(/[—–\-,;:\/|]/)[0] ?? '')
-      if (lead.length >= 3 && phraseWithOneGap(lead, hay)) {
+      if (lead.length >= 3 && lead.length < words.length && phraseWithOneGap(lead, hay)) {
         artefact = true
-        how = `${tag}title-lead-gap`
+        how = `${tag}title-lead-gap:${lead.length}`
         break
       }
     }
@@ -747,21 +774,6 @@ function phraseWithOneGap(words: string[], hay: string): boolean {
   return false
 }
 
-/** `longestRun`, tolerating one interpolated token. See `phraseWithOneGap`. */
-function longestRunWithOneGap(words: string[], hay: string): number {
-  let best = 0
-  for (let i = 0; i < words.length; i++) {
-    for (let j = words.length; j > i + best; j--) {
-      if (j - i < 3) continue
-      if (phraseWithOneGap(words.slice(i, j), hay)) {
-        best = j - i
-        break
-      }
-    }
-  }
-  return best
-}
-
 const PUBLISHER_STOPWORDS = new Set(['the', 'and', 'for', 'of', 'de', 'la', 'le', 'les', 'des', 'du', 'da', 'do', 'und', 'der', 'die'])
 
 
@@ -845,6 +857,31 @@ export interface Fetched {
   textChars: number
   truncated: boolean
   textSha: string
+  /**
+   * **A SECOND faithful rendering of the same bytes** (Thomas, 2026-09-05).
+   * Only PDFs have one: `text` is `pdftotext -layout`, `altText` is pdf.js
+   * reading order, and `gradeEdge` grades against both and keeps the better
+   * result.
+   *
+   * Why both rather than the better one. `-layout` reconstructs the page's
+   * visual columns, and on a bilingual two-column PDF it interleaves the two
+   * languages word by word, so a correctly copied sentence exists in no
+   * extraction of the document (measured on BPS: 17 probe spans, `-layout` 6,
+   * pdf.js 17). But swapping to pdf.js alone was measured too, over 658 PDFs
+   * and 1,060 edges, and it is a WASH — 34 edges up and **32 down**, the
+   * regressions almost all `A -> B partial-quote`. The cause is not a defect in
+   * either extractor: **a large share of this corpus's PDF quotes were written
+   * and verified against `-layout` output**, so changing the rendering unmatches
+   * them. Both renderings are faithful to the same bytes, so a quote found in
+   * either really is in the document — and reading both restores the property
+   * this whole script rests on, that a matcher change can only ever ADD
+   * matches. Measured: 306/602/152 on `-layout`, 311/592/157 on pdf.js,
+   * **334 A · 584 B · 142 C on both**.
+   *
+   * Empty for every non-PDF, and for a PDF whose pdf.js read failed.
+   */
+  altExtractor: 'pdfjs' | 'none'
+  altText: string
   fromCache: boolean
   /**
    * Empty when the text came from the cited URL itself. Otherwise the name of
@@ -874,6 +911,10 @@ function headerLines(f: Fetched): string {
     `text-chars: ${f.textChars}`,
     `text-sha256: ${f.textSha}`,
     `truncated: ${f.truncated}`,
+    // Emitted only when a second rendering exists, for the same reason `via`
+    // is: every record written before 2026-09-05 stays byte-identical when it
+    // is re-recorded.
+    ...(f.altText ? [`alt-extractor: ${f.altExtractor}`, `alt-text-chars: ${f.altText.length}`] : []),
     // Omitted entirely on a direct read, so the 1,670 records written before
     // fetch strategies existed stay byte-identical when they are re-recorded.
     ...(f.via ? [`via: ${f.via}`] : []),
@@ -894,6 +935,12 @@ function writeFullText(root: string, f: Fetched): void {
   const dir = join(root, FULLTEXT_DIR)
   mkdirSync(dir, { recursive: true })
   writeFileSync(join(dir, `${urlKey(f.url)}.txt.gz`), gzipSync(Buffer.from(headerLines(f) + CACHE_SEP + f.text, 'utf8')))
+  // The second rendering lives in its OWN file rather than after a second
+  // separator in the first: a sentinel inside the record could occur in a
+  // document's own text, and a store written before 2026-09-05 then reads back
+  // exactly as it did, with no alt file and no alt text.
+  const altPath = join(dir, `${urlKey(f.url)}.alt.txt.gz`)
+  if (f.altText) writeFileSync(altPath, gzipSync(Buffer.from(f.altText, 'utf8')))
 }
 
 function readFullText(root: string, url: string): Fetched | null {
@@ -905,6 +952,8 @@ function readFullText(root: string, url: string): Fetched | null {
   const head = parseHeader(raw.slice(0, at))
   const blockRaw = head.get('block') ?? 'none'
   const text = raw.slice(at + CACHE_SEP.length)
+  const altPath = join(root, FULLTEXT_DIR, `${urlKey(url)}.alt.txt.gz`)
+  const altText = existsSync(altPath) ? gunzipSync(readFileSync(altPath)).toString('utf8') : ''
   return {
     url,
     fetchedAt: head.get('fetched-at') ?? '',
@@ -919,6 +968,8 @@ function readFullText(root: string, url: string): Fetched | null {
     textChars: Number(head.get('text-chars') ?? text.length),
     textSha: head.get('text-sha256') ?? '',
     truncated: head.get('truncated') === 'true',
+    altExtractor: (altText ? (head.get('alt-extractor') ?? 'pdfjs') : 'none') as Fetched['altExtractor'],
+    altText,
     fromCache: true,
     via: head.get('via') ?? '',
   }
@@ -1126,15 +1177,41 @@ async function fetchRaw(url: string): Promise<Fetched> {
   const body = existsSync(bodyPath) ? readFileSync(bodyPath) : Buffer.alloc(0)
   let extractor: Fetched['extractor'] = 'none'
   let text = ''
+  let altExtractor: Fetched['altExtractor'] = 'none'
+  let altText = ''
   const isPdf = body.subarray(0, 5).toString('latin1') === '%PDF-' || /pdf/i.test(meta.ctype)
   const isZip = body.subarray(0, 2).toString('latin1') === 'PK'
   try {
     if (isPdf && body.length) {
+      // **A PDF is read TWICE** (Thomas, 2026-09-05) — see `Fetched.altText`
+      // for the measurement that decided it. `-layout` stays PRIMARY so that
+      // `text`, `textSha`, `extractor` and every already-committed
+      // `evidence-cache/` header keep meaning exactly what they meant before;
+      // pdf.js reading order is the addition. The second read runs out of
+      // process because a 365-page PDF is not something to hold in the
+      // grader's own heap ten at a time, and because a malformed or encrypted
+      // file then takes the child down rather than the run.
       const { stdout } = await execFileAsync('pdftotext', ['-layout', '-q', bodyPath, '-'], {
         maxBuffer: 64 << 20,
       })
       text = stdout
       extractor = 'pdftotext'
+      const pdfOut = join(dir, 'pdfjs.txt')
+      try {
+        await execFileAsync(process.execPath, [PDFJS_EXTRACTOR, bodyPath, pdfOut], {
+          maxBuffer: 64 << 20,
+          timeout: PDF_EXTRACT_TIMEOUT_MS,
+        })
+        const alt = existsSync(pdfOut) ? readFileSync(pdfOut, 'utf8') : ''
+        // Identical output is not worth storing or grading twice, and on a
+        // plain single-column PDF the two agree often enough to matter.
+        if (alt.trim() && alt !== text) {
+          altText = alt
+          altExtractor = 'pdfjs'
+        }
+      } catch {
+        /* pdf.js is the second opinion, never the one the run depends on */
+      }
     } else if (isZip && (/spreadsheetml/i.test(meta.ctype) || /\.xls[xm](\?|#|$)/i.test(url))) {
       // Ahead of the docx branch on purpose. An xlsx content-type is
       // `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`,
@@ -1178,7 +1255,15 @@ async function fetchRaw(url: string): Promise<Fetched> {
   // A 200 with a few hundred characters of text is the other wall shape — the
   // audit's own OK-TINY-BODY class. Judged on extracted text, not body bytes,
   // because a JS shell is a large file containing nothing.
-  if (block === 'none' && meta.code >= 200 && meta.code < 300 && text.trim().length < 200) {
+  // Judged on the LONGER of the two renderings: a PDF whose `-layout` pass
+  // yields nothing while pdf.js yields a document is not an empty body.
+  if (
+    block === 'none' &&
+    meta.code >= 200 &&
+    meta.code < 300 &&
+    text.trim().length < 200 &&
+    altText.trim().length < 200
+  ) {
     block = 'empty'
     blockLabel = extractor === 'none' ? 'no-extractor' : 'tiny-body'
   }
@@ -1203,6 +1288,10 @@ async function fetchRaw(url: string): Promise<Fetched> {
     textChars: full.length,
     truncated,
     textSha: createHash('sha256').update(full).digest('hex'),
+    altExtractor,
+    altText: Buffer.byteLength(altText, 'utf8') > TEXT_CAP_BYTES
+      ? Buffer.from(altText, 'utf8').subarray(0, TEXT_CAP_BYTES).toString('utf8')
+      : altText,
     fromCache: false,
     via: '',
   }
@@ -1459,6 +1548,8 @@ function blank(url: string, now: string, over: Partial<Fetched>): Fetched {
     textChars: 0,
     truncated: false,
     textSha: '',
+    altExtractor: 'none',
+    altText: '',
     fromCache: false,
     via: '',
     ...over,
@@ -1550,160 +1641,184 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
   if (isIndexPage(input.evidenceUrl)) return C('index-page')
   if (!fetched) return C('not-fetched')
   if (fetched.block !== 'none') return C(`${fetched.block}:${fetched.blockLabel}`)
-  if (!fetched.text.trim()) return C('no-text')
+  if (!fetched.text.trim() && !fetched.altText.trim()) return C('no-text')
+  // Narrowed by the guard above; a property narrowing does not survive into a
+  // closure, so it is captured here rather than re-asserted inside one.
+  const evidenceUrl = input.evidenceUrl
 
-  // Quote location. **Every span is located, not only the winner** — the A
-  // bar below asks whether the artefact is named beside a matched span, and
-  // until 2026-09-04 it could only ever ask about the highest-scoring one.
-  const hits = spans.map((span) => ({ span, ...locateQuote(span, fetched.text) }))
-  let coverage = 0
-  let bestSpan = ''
-  for (const h of hits) {
-    if (h.coverage > coverage) {
-      coverage = h.coverage
-      bestSpan = h.span
+
+  // **A document can have TWO faithful renderings, and the edge is graded
+  // against both** (Thomas, 2026-09-05). See `Fetched.altText` for the
+  // measurement. Everything below runs once per rendering and the better
+  // result is returned, so adding the second rendering can only ever ADD
+  // matches — the property the whole script rests on, and the property a
+  // straight extractor swap would have broken.
+  const gradeAgainst = (docText: string, extractorUsed: string): GradeResult => {
+    // Quote location. **Every span is located, not only the winner** — the A
+    // bar below asks whether the artefact is named beside a matched span, and
+    // until 2026-09-04 it could only ever ask about the highest-scoring one.
+    const hits = spans.map((span) => ({ span, ...locateQuote(span, docText) }))
+    let coverage = 0
+    let bestSpan = ''
+    for (const h of hits) {
+      if (h.coverage > coverage) {
+        coverage = h.coverage
+        bestSpan = h.span
+      }
     }
-  }
-  const quote = spans.length ? verdictFor(coverage) : 'no'
-  const naming = input.targetReport
-    ? namesTarget(fetched.text, input.targetReport)
-    : { artefact: false, agency: false, how: 'no-target-node' }
-  const metadataWaiver = isMetadataHost(input.evidenceUrl)
+    const quote = spans.length ? verdictFor(coverage) : 'no'
+    const naming = input.targetReport
+      ? namesTarget(docText, input.targetReport)
+      : { artefact: false, agency: false, how: 'no-target-node' }
+    const metadataWaiver = isMetadataHost(evidenceUrl)
 
-  // **The A bar tests the window around ANY fully-matched span, not only the
-  // highest-scoring one** (Thomas, 2026-09-04, ruling on the Basel round's
-  // finding 1). The artefact still has to be named IN the passage the quote
-  // came from — that requirement is the whole point of the bar and is
-  // unchanged. What changed is which passage gets asked about.
-  //
-  // The defect: a great many bases in this corpus open by naming the source
-  // document ("The official press release for 'X' states: …") and then quote
-  // the substantive sentence. Both spans match at coverage 1.00, the tie broke
-  // to whichever came first, and `bestSpan` became the headline — whose ±400
-  // characters are page navigation chrome where the artefact name of course
-  // never appears. `frb-regulation-q -> basel-iii` graded B
-  // `artefact-named-elsewhere-in-document` on coverage 1.00 with naming true,
-  // on an arbitrary tie-break between two equally perfect quotes.
-  //
-  // Only spans that are themselves `yes` may anchor (>= 0.95 coverage). A
-  // partial span must not be able to hand an A to an edge whose substantive
-  // sentence is only half present, and restricting candidates this way is also
-  // what keeps `quote` — computed above from the best coverage — consistent
-  // with the span finally recorded.
-  //
-  // The anchoring span then BECOMES `bestSpan`, so the window in the evidence
-  // record is the passage the grade actually rests on, and `writeGrades` fills
-  // `evidence_quote` from it rather than from a press release's headline.
-  const QUOTE_WINDOW = 400
-  const hayNorm = normalizeForMatch(fetched.text)
-  const namesArtefactNear = (index: number, span: string): boolean => {
-    if (index < 0 || !input.targetReport) return false
-    const from = Math.max(0, index - QUOTE_WINDOW)
-    const around = hayNorm.slice(from, index + normalizeForMatch(span).length + QUOTE_WINDOW)
-    return namesTarget(around, input.targetReport).artefact
-  }
-  let nearQuote = metadataWaiver
-  if (!nearQuote && naming.artefact) {
-    const anchors = hits.filter(
-      (h) => h.index >= 0 && verdictFor(h.coverage) === 'yes' && namesArtefactNear(h.index, h.span),
-    )
-    if (anchors.length) {
-      nearQuote = true
-      const anchor = anchors.reduce((a, b) => (b.coverage > a.coverage ? b : a))
-      coverage = anchor.coverage
-      bestSpan = anchor.span
-    }
-  }
-
-  const sentences = splitSentences(fetched.text)
-  const window = bestSpan ? (windowAround(sentences, bestSpan) ?? '') : ''
-
-  const out: GradeResult = {
-    ...base,
-    quote,
-    coverage: Math.round(coverage * 100) / 100,
-    bestSpan: bestSpan.slice(0, 300),
-    naming: naming.how,
-    window,
-    grade: 'C',
-    reason: '',
-  }
-
-  // No quoted span anywhere in `basis` or `evidence_quote`. Nothing to check
-  // the document against, so this can never be better than B — and is only B
-  // at all when the document at least names the input artefact. The audit
-  // graded several of these PASS on a reading of the page ("paraphrase only,
-  // but the claim is directly supported"); this script does not read, so it
-  // stops one grade short by design. Expect this to be the single largest
-  // class in the corpus — `evidence_quote` was empty on all 56 sampled edges.
-  if (!spans.length) {
-    if (naming.artefact || metadataWaiver) return { ...out, grade: 'B', reason: 'no-quoted-span' }
-    // Agency named, artefact not, nothing to check a quote against. The
-    // schema's own B definition is "names the agency not the release", so
-    // this is a B — the weakest one the vocabulary has.
-    if (naming.agency) return { ...out, grade: 'B', reason: 'no-quoted-span-agency-only' }
-    return { ...out, grade: 'C', reason: 'no-quoted-span-target-not-named' }
-  }
-
-  if (quote === 'no') {
-    // The document resolves and says something, but not this. The audit's
-    // FAIL-CONTENT class.
-    return { ...out, grade: 'C', reason: 'quote-not-in-document' }
-  }
-  if (!naming.artefact && !naming.agency && !metadataWaiver) {
-    // The quoted sentence IS in this document and the document names neither
-    // the target artefact nor its publisher. That is the audit's WEAK shape
-    // ("'based on the audited financial statements' with Kingston never
-    // named"), not its FAIL shape — something was verified, just not the link
-    // to this particular target. B, with its own reason string so the class
-    // stays greppable for a research round.
-    return { ...out, grade: 'B', reason: 'quote-found-target-not-named' }
-  }
-
-  // The A bar. The artefact must be named IN THE PASSAGE the quote came from,
-  // not merely somewhere in a 200-page document: all three of the dry run's
-  // first-pass false A grades were a verbatim quote about one artefact in a
-  // document that mentions the target's name in an unrelated paragraph (or
-  // not at all — "ABS GFS Manual" for the target release "Government Finance
-  // Statistics, Australia"). `nearQuote` is decided above, where the anchoring
-  // span is picked; the window is that span plus 400 characters either side,
-  // which is a long paragraph.
-  if (quote === 'yes' && naming.artefact && nearQuote && !weakFlags.length) {
-    // **A document read by a fetch strategy caps at B** (Thomas, 2026-09-03,
-    // ruling on round 3d). An archived snapshot says "this quote was in this
-    // document on <timestamp>", which is a weaker claim than "this quote is in
-    // this document" — and the difference is invisible on screen once the grade
-    // is written. Rather than let one A mean two things, the snapshot-read case
-    // takes the grade below the line and keeps its own reason string, so the
-    // class stays greppable if the live host ever becomes readable again.
+    // **The A bar tests the window around ANY fully-matched span, not only the
+    // highest-scoring one** (Thomas, 2026-09-04, ruling on the Basel round's
+    // finding 1). The artefact still has to be named IN the passage the quote
+    // came from — that requirement is the whole point of the bar and is
+    // unchanged. What changed is which passage gets asked about.
     //
-    // Deliberately placed AFTER the A bar rather than inside it: the bar itself
-    // is unchanged, and an edge landing here has cleared every evidence test an
-    // A clears. The only thing against it is where the bytes came from.
-    if (fetched.via && routeCapsGrade(fetched.via)) {
-      // **The reason names the ROUTE, not "snapshot" for all three** (fixed
-      // 2026-09-04, Thomas's ruling on the transport round's finding 2). Every
-      // capped route reported `…-via-snapshot`, which is false for `token-pdf`
-      // (a live read of the PDF the cited page hands you, capped because the
-      // quote sits one step from the citation) and false for `ocr` (a live read
-      // of a scanned page). PLAYBOOK §6 condemns exactly this shape — one label
-      // for two routes reads as a lie in the round's own output. `wayback`
-      // keeps the original string so §7's greppable class survives untouched.
-      const route = fetched.via.split(' ')[0]
-      const label = route === 'wayback' ? 'snapshot' : route
-      return { ...out, grade: 'B', reason: `quote-found-artefact-named-via-${label}` }
+    // The defect: a great many bases in this corpus open by naming the source
+    // document ("The official press release for 'X' states: …") and then quote
+    // the substantive sentence. Both spans match at coverage 1.00, the tie broke
+    // to whichever came first, and `bestSpan` became the headline — whose ±400
+    // characters are page navigation chrome where the artefact name of course
+    // never appears. `frb-regulation-q -> basel-iii` graded B
+    // `artefact-named-elsewhere-in-document` on coverage 1.00 with naming true,
+    // on an arbitrary tie-break between two equally perfect quotes.
+    //
+    // Only spans that are themselves `yes` may anchor (>= 0.95 coverage). A
+    // partial span must not be able to hand an A to an edge whose substantive
+    // sentence is only half present, and restricting candidates this way is also
+    // what keeps `quote` — computed above from the best coverage — consistent
+    // with the span finally recorded.
+    //
+    // The anchoring span then BECOMES `bestSpan`, so the window in the evidence
+    // record is the passage the grade actually rests on, and `writeGrades` fills
+    // `evidence_quote` from it rather than from a press release's headline.
+    const QUOTE_WINDOW = 400
+    const hayNorm = normalizeForMatch(docText)
+    const namesArtefactNear = (index: number, span: string): boolean => {
+      if (index < 0 || !input.targetReport) return false
+      const from = Math.max(0, index - QUOTE_WINDOW)
+      const around = hayNorm.slice(from, index + normalizeForMatch(span).length + QUOTE_WINDOW)
+      return namesTarget(around, input.targetReport).artefact
     }
-    return { ...out, grade: 'A', reason: 'quote-found-artefact-named' }
+    let nearQuote = metadataWaiver
+    if (!nearQuote && naming.artefact) {
+      const anchors = hits.filter(
+        (h) => h.index >= 0 && verdictFor(h.coverage) === 'yes' && namesArtefactNear(h.index, h.span),
+      )
+      if (anchors.length) {
+        nearQuote = true
+        const anchor = anchors.reduce((a, b) => (b.coverage > a.coverage ? b : a))
+        coverage = anchor.coverage
+        bestSpan = anchor.span
+      }
+    }
+
+    const sentences = splitSentences(docText)
+    const window = bestSpan ? (windowAround(sentences, bestSpan) ?? '') : ''
+
+    const out: GradeResult = {
+      ...base,
+      extractor: extractorUsed,
+      quote,
+      coverage: Math.round(coverage * 100) / 100,
+      bestSpan: bestSpan.slice(0, 300),
+      naming: naming.how,
+      window,
+      grade: 'C',
+      reason: '',
+    }
+
+    // No quoted span anywhere in `basis` or `evidence_quote`. Nothing to check
+    // the document against, so this can never be better than B — and is only B
+    // at all when the document at least names the input artefact. The audit
+    // graded several of these PASS on a reading of the page ("paraphrase only,
+    // but the claim is directly supported"); this script does not read, so it
+    // stops one grade short by design. Expect this to be the single largest
+    // class in the corpus — `evidence_quote` was empty on all 56 sampled edges.
+    if (!spans.length) {
+      if (naming.artefact || metadataWaiver) return { ...out, grade: 'B', reason: 'no-quoted-span' }
+      // Agency named, artefact not, nothing to check a quote against. The
+      // schema's own B definition is "names the agency not the release", so
+      // this is a B — the weakest one the vocabulary has.
+      if (naming.agency) return { ...out, grade: 'B', reason: 'no-quoted-span-agency-only' }
+      return { ...out, grade: 'C', reason: 'no-quoted-span-target-not-named' }
+    }
+
+    if (quote === 'no') {
+      // The document resolves and says something, but not this. The audit's
+      // FAIL-CONTENT class.
+      return { ...out, grade: 'C', reason: 'quote-not-in-document' }
+    }
+    if (!naming.artefact && !naming.agency && !metadataWaiver) {
+      // The quoted sentence IS in this document and the document names neither
+      // the target artefact nor its publisher. That is the audit's WEAK shape
+      // ("'based on the audited financial statements' with Kingston never
+      // named"), not its FAIL shape — something was verified, just not the link
+      // to this particular target. B, with its own reason string so the class
+      // stays greppable for a research round.
+      return { ...out, grade: 'B', reason: 'quote-found-target-not-named' }
+    }
+
+    // The A bar. The artefact must be named IN THE PASSAGE the quote came from,
+    // not merely somewhere in a 200-page document: all three of the dry run's
+    // first-pass false A grades were a verbatim quote about one artefact in a
+    // document that mentions the target's name in an unrelated paragraph (or
+    // not at all — "ABS GFS Manual" for the target release "Government Finance
+    // Statistics, Australia"). `nearQuote` is decided above, where the anchoring
+    // span is picked; the window is that span plus 400 characters either side,
+    // which is a long paragraph.
+    if (quote === 'yes' && naming.artefact && nearQuote && !weakFlags.length) {
+      // **A document read by a fetch strategy caps at B** (Thomas, 2026-09-03,
+      // ruling on round 3d). An archived snapshot says "this quote was in this
+      // document on <timestamp>", which is a weaker claim than "this quote is in
+      // this document" — and the difference is invisible on screen once the grade
+      // is written. Rather than let one A mean two things, the snapshot-read case
+      // takes the grade below the line and keeps its own reason string, so the
+      // class stays greppable if the live host ever becomes readable again.
+      //
+      // Deliberately placed AFTER the A bar rather than inside it: the bar itself
+      // is unchanged, and an edge landing here has cleared every evidence test an
+      // A clears. The only thing against it is where the bytes came from.
+      if (fetched.via && routeCapsGrade(fetched.via)) {
+        // **The reason names the ROUTE, not "snapshot" for all three** (fixed
+        // 2026-09-04, Thomas's ruling on the transport round's finding 2). Every
+        // capped route reported `…-via-snapshot`, which is false for `token-pdf`
+        // (a live read of the PDF the cited page hands you, capped because the
+        // quote sits one step from the citation) and false for `ocr` (a live read
+        // of a scanned page). PLAYBOOK §6 condemns exactly this shape — one label
+        // for two routes reads as a lie in the round's own output. `wayback`
+        // keeps the original string so §7's greppable class survives untouched.
+        const route = fetched.via.split(' ')[0]
+        const label = route === 'wayback' ? 'snapshot' : route
+        return { ...out, grade: 'B', reason: `quote-found-artefact-named-via-${label}` }
+      }
+      return { ...out, grade: 'A', reason: 'quote-found-artefact-named' }
+    }
+    const why =
+      quote === 'partial'
+        ? 'partial-quote'
+        : !naming.artefact
+          ? 'agency-not-artefact'
+          : !nearQuote
+            ? 'artefact-named-elsewhere-in-document'
+            : weakFlags.join('+')
+    return { ...out, grade: 'B', reason: why }
   }
-  const why =
-    quote === 'partial'
-      ? 'partial-quote'
-      : !naming.artefact
-        ? 'agency-not-artefact'
-        : !nearQuote
-          ? 'artefact-named-elsewhere-in-document'
-          : weakFlags.join('+')
-  return { ...out, grade: 'B', reason: why }
+
+  const primary = gradeAgainst(fetched.text, fetched.extractor)
+  if (!fetched.altText.trim() || fetched.altText === fetched.text) return primary
+  const alternate = gradeAgainst(fetched.altText, fetched.altExtractor)
+  // Better grade wins; on a tie the better coverage does; on a tie there, the
+  // primary rendering, so a document whose two readings agree records the same
+  // extractor it always did.
+  const rank = (g: EvidenceGrade): number => (g === 'A' ? 0 : g === 'B' ? 1 : 2)
+  if (rank(alternate.grade) < rank(primary.grade)) return alternate
+  if (rank(alternate.grade) === rank(primary.grade) && alternate.coverage > primary.coverage) return alternate
+  return primary
 }
 
 /* ------------------------------------------------------------------ *
@@ -1979,7 +2094,7 @@ function selftest(): void {
     url: 'https://x.test/doc.pdf', fetchedAt: '', status: 200, finalUrl: 'https://x.test/doc.pdf',
     contentType: 'application/pdf', bodyBytes: 10, extractor: 'pdftotext', block: 'none', blockLabel: '',
     text: 'The Consumer Price Index is compiled monthly under the Statistics Act.', textChars: 68,
-    truncated: false, textSha: '', fromCache: false, via: '',
+    truncated: false, textSha: '', altExtractor: 'none', altText: '', fromCache: false, via: '',
   }
   const target = { title: 'Consumer Price Index (CPI)', publisher: 'Stats Co', url: 'https://x.test/cpi' }
   const a = gradeEdge(
@@ -2049,6 +2164,30 @@ function selftest(): void {
   t('a wayback or OCR route caps the grade; a Chrome or direct read does not',
     routeCapsGrade('wayback 20250908003713') && routeCapsGrade('ocr tesseract 2026-09-04') &&
     !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
+  // Grading against both renderings (2026-09-05). Three ways it can go wrong:
+  // it can fail to use the second rendering at all, it can let the second
+  // rendering LOWER a grade the first one earned, or it can report the wrong
+  // extractor for the reading the grade actually rests on.
+  const bothInput = {
+    source: 's', target: 't', file: 'f.json',
+    basis: 'It states "the Consumer Price Index is compiled monthly".',
+    evidenceUrl: 'https://x.test/doc.pdf', targetReport: target,
+  }
+  const onlyAltHasIt: Fetched = {
+    ...fetched, extractor: 'pdftotext',
+    text: 'The Consumer P r i c e I n d e x is compiled under interleaved column junk.',
+    altExtractor: 'pdfjs', altText: 'The Consumer Price Index is compiled monthly under the Statistics Act.',
+  }
+  const bothGraded = gradeEdge(bothInput, onlyAltHasIt)
+  t('a quote only the second rendering contains still grades A, and names its extractor',
+    bothGraded.grade === 'A' && bothGraded.extractor === 'pdfjs')
+  const altIsWorse: Fetched = {
+    ...fetched, extractor: 'pdftotext', altExtractor: 'pdfjs',
+    altText: 'This rendering lost the sentence entirely and says nothing of the kind.',
+  }
+  t('a second rendering can never LOWER the grade the first one earned',
+    gradeEdge(bothInput, altIsWorse).grade === 'A' &&
+    gradeEdge(bothInput, altIsWorse).extractor === 'pdftotext')
   t('a url with spaces and non-ascii is percent-encoded for curl',
     encodeForCurl('https://cbos.gov.sd/files/\u0627\u0644\u0639\u0631\u0636 2024 .pdf') ===
       'https://cbos.gov.sd/files/%D8%A7%D9%84%D8%B9%D8%B1%D8%B6%202024%20.pdf')
