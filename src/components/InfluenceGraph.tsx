@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
 import type { Country, EvidenceGrade, Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
-import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
+import { RELATIONSHIP_WEIGHT, orbSizeFactor, radiusFor } from '../lib/graph'
 import {
   glowInk,
   inkFor,
@@ -1819,7 +1819,10 @@ export default function InfluenceGraph({
             (lensColourFor(n.country, lensRef.current) ??
               levelColoursRef.current?.[scopeOf(n)])) ||
           colourForReport(n)
-        const radius = radiusFor(n.size_score)
+        // Orbs grow with what they hold — see `orbSizeFactor`.
+        const radius =
+          radiusFor(n.size_score) *
+          (orbNode ? orbSizeFactor((n as OrbNode).members?.length ?? 1) : 1)
 
         // No disposal of a superseded mesh here: three-forcegraph deallocates
         // objects it removes from its digest, so a node hidden by a filter is
@@ -2158,7 +2161,11 @@ export default function InfluenceGraph({
     fg.d3Force(
       'collide',
       forceCollide(
-        (node: unknown) => radiusFor((node as ScoredReport).size_score) * 1.5 + 4 + 4 * m,
+        (node: unknown) => {
+          const n = node as ScoredReport
+          const orb = isOrbId(n.id) ? orbSizeFactor((n as OrbNode).members?.length ?? 1) : 1
+          return radiusFor(n.size_score) * orb * 1.5 + 4 + 4 * m
+        },
       )
         .strength(0.85)
         .iterations(2) as unknown as never,

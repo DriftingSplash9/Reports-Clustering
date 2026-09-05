@@ -1546,3 +1546,18 @@ export function disclosureByReport(
 export function radiusFor(sizeScore: number, min = 3.4, max = 8): number {
   return min + Math.sqrt(Math.max(0, sizeScore)) * (max - min)
 }
+
+/**
+ * How much bigger a folded orb draws than its largest member (2026-09-05,
+ * Thomas on the Condensed-INT orb: "it should be bigger"). An orb used to
+ * take exactly `radiusFor(max member size_score)`, so the international orb
+ * — ~200 standards folded into one sphere — was the size of one of them and
+ * disappeared against the country orbs around it. Logarithmic in the member
+ * count so a two-report country barely grows (×1.24) while the INT orb
+ * (~200) draws at ~×2.9, capped at ×4 so nothing becomes a planet. Applied
+ * in BOTH the mesh and the collide force (InfluenceGraph.tsx), so a bigger
+ * orb also keeps its neighbours off.
+ */
+export function orbSizeFactor(members: number): number {
+  return Math.min(4, Math.max(1, 1 + 0.35 * Math.log(Math.max(1, members))))
+}

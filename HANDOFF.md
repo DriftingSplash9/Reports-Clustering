@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 ~21:40 UTC (flips, aliases, six price indexes, Condensed INT, faint-edge fix — all landed; layout force round superseded)
+Last updated: 2026-09-05 ~23:30 UTC (kind rulings, orb sizing, HBS/LU/CH/AL nodes landed; layout speed levers handed to the next agent)
 
 ---
 
@@ -42,38 +42,38 @@ Then project memory, newest first. Git status: never state it (rule 1).
 
 ## 2. Current state
 
-Corpus **3,352 reports / 2,832 dependencies**. **853 A · 1,366 B · 613 C**,
-A-share 30.1%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
+Corpus **3,361 reports / 2,845 dependencies**. **865 A · 1,367 B · 613 C**,
+A-share 30.4%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
 **68/68**, `tsc --noEmit` clean, `vite build` ok, `public/corpus-data.json`
-regenerated. **Grade counts come from `validate` only.** `kind`: 2,449
-publication · 33 standard · 870 instrument.
+regenerated. **Grade counts come from `validate` only.** `kind`: 2,464
+publication · 27 standard · 870 instrument.
 
 **Direction (Thomas, 2026-09-05): "tip-top shape with what we have before
 looking for more data."** No A-share or size target. Grok retired. START-HERE
-"obvious next thing" ¶ reworded and approved 2026-09-05.
+approved 2026-09-05.
 
-**Grader:** CJK span floor (`minSpanFor()` 10), `acronymFitsHead()` ("(ESA
-2010)" no longer names a national release), **national releases may carry
-`title_aliases`** (Thomas 2026-09-05 — types.ts doc comment is the rule).
-**`--write` has NO improvements-only guard** — dry-run old vs new code on the
-same store first. 26 ESMS edges and the 6 new price-index chains all A.
+**Grader:** CJK span floor, `acronymFitsHead()`, national `title_aliases`
+allowed (types.ts doc comment is the rule). **`--write` has NO
+improvements-only guard** — dry-run old vs new code on the same store first.
 
+**EU price-index chains complete for FR IT NL DK CZ NO LU CH AL** (slices
+`eu-price-indices-2026-09-05.json`, `eu-hbs-and-price-index-gaps-2026-09-05.
+json`: CPI/HICP → national accounts → HBS, `eurostat-hicp` → national where
+the ESMS page says "transmitted"). Leads left: CH and AL HBS nodes; no
+eurostat edge for FR/CZ/AL (no transmission sentence on their pages).
 **DSBB 750 `no-source-node` leads — PARKED.** Remaining `_dropped` leads are
-no-URL / dead-host — research, not re-grade. Price indexes now exist for FR,
-IT, NL, DK, CZ, NO (`eu-price-indices-2026-09-05.json`, + `nl-cbs-national-
-accounts`); their HBS nodes are leads in that slice's `_dropped`; CH/AL still
-have no price index; LU has no NA/HBS node.
+no-URL / dead-host — research, not re-grade. `lu-statec-ipch <-> eurostat-
+hicp` is a deliberate `mutual` pair.
 
-**Renderer — three instancers live**, node instancing **seen and accepted by
-Thomas** ("looks great"); settle "seems faster" (tick burst + geoAffinity
-cache). **Condensed INT (2026-09-05):** View panel → "International layer:
-Condensed / Open" (`'INT'` in `openedCountries` IS the state), double-click
-an INT node folds, auto-unfold leaves `corb:INT` shut; at Everything the
-INT orb sits at the cloud's centre — **this replaced the INT-core/country-
-shell force round.** **Faint-edges bug fixed** (`pendingLinkRescale` in
-`runFit`: a rate-limited link rescale was refused and never retried);
-timing-dependent, unverified live. Otherwise as before: grade-driven
-opacity, A-only ranking, `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`,
+**Renderer:** three instancers live and accepted; tick burst + geoAffinity
+cache accepted ("seems faster"). **Condensed INT accepted** ("so much better
+to read"): View panel → "International layer: Condensed / Open", double-
+click an INT node folds, auto-unfold leaves `corb:INT` shut. **Orbs scale
+with member count** (`orbSizeFactor()` in graph.ts, mesh + collide; INT
+≈ ×2.9). **Faint-edges fix** (`pendingLinkRescale` in `runFit`) — Thomas
+had not seen it recur by end of session. **Cluster repulsion: Thomas says
+it reads right — no sub-round.** Otherwise as before: grade-driven opacity,
+A-only ranking, `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`,
 `CORE_PERCENTILE` 0.8, `view.minGrade` `C`, `TICK_BURST_MAX` 4 / 8 ms.
 Headless: `scripts/renderer/` (`census`, `shot`, `settle`). Shelved ISOLATED:
 `sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`,
@@ -85,20 +85,22 @@ CLOSED. 2026-08-31 audit: all findings closed.
 
 **Uncommitted since Thomas's second 2026-09-05 commit** (all on disk, shas
 compared): `src/App.tsx`, `ViewControls.tsx`, `InfluenceGraph.tsx`,
-`hierarchy.ts`, `autoUnfold.ts`, `types.ts`; `scripts/grade-evidence.ts`;
-slices `eu-price-indices-2026-09-05.json` (new), `eu-national-chains`,
-`eurostat-esms-hicp`, `grok-r6`/`r7`, `jp-japan-grok`, `kr-south-korea-grok`,
-`tw-taiwan-grok`; two `edit_scripts/*-2026-09-05.py`; `evidence-cache/`
-records; `corpus-data.json`; START-HERE; `notes/Midvamp - Revamp.md`
-(pointer); `archive/revamp-questions/` (the two docx, moved);
+`hierarchy.ts`, `autoUnfold.ts`, `types.ts`, `graph.ts`;
+`scripts/grade-evidence.ts`; slices `eu-price-indices-2026-09-05.json`,
+`eu-hbs-and-price-index-gaps-2026-09-05.json` (new), `eu-national-chains`,
+`eurostat-esms-hicp`, `lu-statec-cpi`, `grok-r1`/`r3`/`r6`/`r7`/`r8`,
+`esa-2010`, `esa2010-methodology-stack`, `rw-cpi-social-protection`,
+`jp-japan-grok`, `kr-south-korea-grok`, `tw-taiwan-grok`; three
+`edit_scripts/*-2026-09-05.py`; `evidence-cache/` records; `corpus-data.json`;
+START-HERE; `notes/Midvamp - Revamp.md`; `archive/revamp-questions/`;
 `Claude outputs/condensed-int-2026-09-05/`, `esms-hicp-2026-09-05/`,
-`cjk-span-floor-2026-09-05/`. `package-lock.json` still needs one
-`npm install` (explained to Thomas).
+`cjk-span-floor-2026-09-05/`. `package-lock.json`: run `setup-and-run.bat`
+once (it reinstalls and rewrites the lock), then commit.
 
-**Known node defects**: 9 fractional-cadence `standard` nodes need a ruling
-(GNI/QNA inventories 0.2–0.25, `eu-manual-mgdd`, `eu-manual-rd-esa2010`,
-`naics`, `icd-10-ca`, `icls-work-statistics-resolution`, `rw-nisr-nsdp`).
-Egypt IPI compiler (MoP vs CAPMAS) unverified.
+**Known node defects**: none open. `naics`, `icd-10-ca`,
+`icls-work-statistics-resolution` deliberately stay `standard` (classification
+instruments, same class as ISIC/COICOP) — flip if Thomas says so. Egypt IPI
+compiler (MoP vs CAPMAS) unverified.
 
 ---
 
@@ -106,33 +108,27 @@ Egypt IPI compiler (MoP vs CAPMAS) unverified.
 
 ### [Agent] — in this order
 
-1. **Condensed-INT follow-ups if Thomas asks**: the INT orb is drawn at
-   ordinary orb size (not a "monster"); a size-by-members orb is a
-   `nodeVisuals` change. Consider whether tier 1 should honour the toggle.
-2. **HBS nodes for FR/IT/DK/CZ/NO** and **NA/HBS for LU**, **price index for
-   CH/AL** — leads with quotes already in `eu-price-indices-2026-09-05.json`
-   and `eurostat-esms-hicp-2026-09-05.json` `_dropped`; each needs the NSI's
-   own release page as `url`.
-3. Cluster-repulsion measured sub-round only if Thomas still sees clusters
-   overlapping with INT condensed.
-4. Parked design questions: mutual-pair rank leakage; layout re-run on data
-   add; cadence in layout; collide `iterations` 2→1 and charge `theta`
-   0.9→1.5 (each measured, each moves the layout — memory
-   `settle_time_tick_burst_2026-09-05`).
-5. Small corpus items when convenient: the 9 `kind` rulings once Thomas
-   gives them.
+1. **Layout speed levers, Thomas's explicit hand-off to the next agent:**
+   collide `iterations` 2→1 (−17 ms/tick at 2,505 nodes, metrics identical
+   to 4 s.f., positions move ≤35 units) and charge `theta` 0.9→1.5 (−30
+   ms/tick, cloud ~15% tighter). Each moves the layout: run
+   `scripts/measure-forces.ts` before/after (2+ seeds), ship behind Thomas's
+   eyes. Memory `settle_time_tick_burst_2026-09-05`.
+2. CH and AL household-budget-survey nodes (leads with quotes in
+   `eu-hbs-and-price-index-gaps-2026-09-05.json` `_dropped`; FSO pages are
+   JS shells — use an FSO PDF as url).
+3. Parked design questions: mutual-pair rank leakage; layout re-run on data
+   add; cadence in layout; whether tier 1 should honour the INT toggle.
 
 ### [Thomas] — only you can
 
-1. **Watch for faint edges** at Everything after a settle — if it recurs the
-   `pendingLinkRescale` fix missed a path; say what you did just before.
-2. **Try Condensed / Open** and the INT double-clicks; say whether the INT
-   orb should be bigger.
-3. **Rule on the 9 fractional-cadence `standard` nodes** (§2 known defects).
-4. **Commit** the §2 list; `npm install` once for `package-lock.json`.
+1. `setup-and-run.bat` once, then **commit** the §2 list.
+2. Say if the bigger orbs (INT ≈ 3× a node) are right, or too big.
+3. Watch for faint edges recurring at Everything after a settle.
 
-Settled 2026-09-05: CO reversals confirmed; photon+link and node instancing
-accepted; 9 CJK flips done; national aliases allowed; START-HERE approved.
+Settled 2026-09-05: CO reversals; photon+link and node instancing; 9 CJK
+flips; national aliases; START-HERE; 6 kind rulings; Condensed INT; cluster
+repulsion as is.
 
 ---
 

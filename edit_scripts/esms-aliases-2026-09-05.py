@@ -27,3 +27,6 @@ for f in sorted(glob.glob('src/data/research/*.json')):
             done.add(r['id'])
     if touched: open(f, 'w', encoding='utf-8').write(json.dumps(d, ensure_ascii=False, indent=2) + '\n'); print('wrote', f)
 print('missing', set(A) - done)
+
+# 2026-09-05 (later, gaps round): 'National Accounts' also on ch-bfs-national-accounts and
+# al-instat-national-accounts — Eurostat's CH/AL HICP metadata pages use the name.
