@@ -1,0 +1,73 @@
+=== fit-probe.mjs — off-frame cost by fit percentile, live settled positions, 1280x800 ===
+
+--- Everything tier, every country unfolded (2,385 nodes) ---
+spread=1 tier=4 all-unfolded nodes=2385 medianRadius=1019
+  P=0.95  fitRadius=  1621  camDist=  9201  off-frame     0%
+  P=0.80  fitRadius=  1313  camDist=  7453  off-frame   0.3%
+  P=0.70  fitRadius=  1204  camDist=  6834  off-frame   0.8%
+  P=0.60  fitRadius=  1111  camDist=  6308  off-frame   1.3%
+  P=0.50  fitRadius=  1018  camDist=  5777  off-frame   2.2%
+  P=0.40  fitRadius=   918  camDist=  5208  off-frame   3.5%
+  P=0.30  fitRadius=   814  camDist=  4622  off-frame   6.3%
+spread=12 tier=4 all-unfolded nodes=2385 medianRadius=5623
+  P=0.95  fitRadius=  8513  camDist= 48314  off-frame   0.1%
+  P=0.80  fitRadius=  6748  camDist= 38297  off-frame   0.1%
+  P=0.70  fitRadius=  6339  camDist= 35975  off-frame   0.1%
+  P=0.60  fitRadius=  5998  camDist= 34043  off-frame   0.4%
+  P=0.50  fitRadius=  5631  camDist= 31961  off-frame   0.8%
+  P=0.40  fitRadius=  5252  camDist= 29810  off-frame   1.7%
+  P=0.30  fitRadius=  4704  camDist= 26696  off-frame     4%
+
+--- Nations tier (299 nodes), spreads 1 / 3 / 12 ---
+spread=1 tier=2 nodes=299 medianRadius=949
+  P=0.95  fitRadius=  1591  camDist=  9031  off-frame     0%
+  P=0.80  fitRadius=  1339  camDist=  7597  off-frame     0%
+  P=0.70  fitRadius=  1211  camDist=  6872  off-frame     0%
+  P=0.60  fitRadius=  1104  camDist=  6266  off-frame   1.3%
+  P=0.50  fitRadius=   935  camDist=  5307  off-frame   5.7%
+  P=0.40  fitRadius=   832  camDist=  4721  off-frame  11.4%
+  P=0.30  fitRadius=   656  camDist=  3726  off-frame  23.7%
+spread=3 tier=2 nodes=299 medianRadius=1381
+  P=0.95  fitRadius=  2225  camDist= 12629  off-frame     0%
+  P=0.80  fitRadius=  1848  camDist= 10489  off-frame     0%
+  P=0.70  fitRadius=  1695  camDist=  9618  off-frame   0.3%
+  P=0.60  fitRadius=  1547  camDist=  8782  off-frame   2.3%
+  P=0.50  fitRadius=  1406  camDist=  7982  off-frame     4%
+  P=0.40  fitRadius=  1246  camDist=  7072  off-frame   6.7%
+  P=0.30  fitRadius=  1102  camDist=  6257  off-frame  13.4%
+spread=12 tier=2 nodes=299 medianRadius=3851
+  P=0.95  fitRadius=  5786  camDist= 32839  off-frame     0%
+  P=0.80  fitRadius=  4873  camDist= 27659  off-frame   0.7%
+  P=0.70  fitRadius=  4423  camDist= 25103  off-frame   1.7%
+  P=0.60  fitRadius=  4154  camDist= 23575  off-frame   1.7%
+  P=0.50  fitRadius=  3807  camDist= 21607  off-frame     3%
+  P=0.40  fitRadius=  3498  camDist= 19852  off-frame   4.3%
+  P=0.30  fitRadius=  2903  camDist= 16474  off-frame  11.4%
+
+=== what spread does on its own — measure-forces, 2 seeds, 3,363 nodes ===
+read `ratio` (inter/intra) and `onscreen` (inter/p95): ratio climbs 18.0 -> 36.0
+across the slider while onscreen FALLS 0.777 -> 0.717, and intra/p95 halves.
+The clusters tighten; the picture does not open out. That is the gap the
+spread-linked percentile fills.
+
+corpus 3363 nodes / 2847 edges · spread=0.5 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7774  ratio=18.00  inter=2583 intra=144 p95=3323  nodeScaleWanted=10.8  ms/tick=106.7  nan=0
+seed=2 cr= 1  onscreen=0.9034  ratio=15.53  inter=2240 intra=144 p95=2480  nodeScaleWanted=8.1  ms/tick=102.4  nan=0
+corpus 3363 nodes / 2847 edges · spread=1 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7618  ratio=17.05  inter=3966 intra=233 p95=5207  nodeScaleWanted=16.9  ms/tick=103.8  nan=0
+seed=2 cr= 1  onscreen=0.8862  ratio=14.29  inter=3355 intra=235 p95=3786  nodeScaleWanted=12.3  ms/tick=104.6  nan=0
+corpus 3363 nodes / 2847 edges · spread=3 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7339  ratio=21.47  inter=10558 intra=492 p95=14386  nodeScaleWanted=46.8  ms/tick=104.5  nan=0
+seed=2 cr= 1  onscreen=0.8479  ratio=17.83  inter=8846 intra=496 p95=10433  nodeScaleWanted=33.9  ms/tick=107.2  nan=0
+corpus 3363 nodes / 2847 edges · spread=6 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7232  ratio=27.41  inter=20801 intra=759 p95=28764  nodeScaleWanted=93.5  ms/tick=103.8  nan=0
+seed=2 cr= 1  onscreen=0.8386  ratio=22.85  inter=17439 intra=763 p95=20796  nodeScaleWanted=67.6  ms/tick=104.2  nan=0
+corpus 3363 nodes / 2847 edges · spread=12 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7170  ratio=36.03  inter=41405 intra=1149 p95=57743  nodeScaleWanted=187.7  ms/tick=101.9  nan=0
+seed=2 cr= 1  onscreen=0.8263  ratio=29.97  inter=34729 intra=1159 p95=42029  nodeScaleWanted=136.6  ms/tick=99.7  nan=0
+
+=== the shipped pair, Everything at spread 1200% ===
+flat P=0.80   fitDistance 37,082  nodeScale 21.23   (spread12-flat.png)
+linked P=0.41 fitDistance 27,442  nodeScale 15.71   (spread12-linked.png)
+camera 26% closer, node meshes 26% smaller -> apparent node size unchanged,
+apparent separation +35%.

@@ -220,20 +220,30 @@ export function resolveId(
   if (tier >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has(report.country)) {
     return countryOrbId(report.country)
   }
-  // **The international layer folds too, once nations are open (2026-08-31,
-  // Thomas: "the international nodes choke everything to the centre and
-  // they are indistinguishable").** Tier 1 is the opening view and the 200
-  // INT reports ARE its content, so they stay individual there. From tier 2
-  // on they are one more group among ~140 country groups, and 200 identical
-  // white spheres in a knot — with ~700 spokes to every country — said
-  // nothing a single "International — 200 folded reports" orb does not say
-  // better. Same fold, same orb machinery, same double-click to open;
-  // `openedCountries` carries 'INT' like any other code. Since 2026-09-05
-  // the fold is also an explicit two-way control (View panel → International
-  // layer, "Condensed"/"Open"), a double-click on any INT node re-folds it
-  // (the one gesture that removes detail — see `handleToggleNode` in
-  // App.tsx), and auto-unfold leaves this orb shut (autoUnfold.ts).
-  if (report.country === 'INT' && drilldown >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has('INT')) {
+  // **The international layer folds too (2026-08-31, Thomas: "the
+  // international nodes choke everything to the centre and they are
+  // indistinguishable").** 200 identical white spheres in a knot — with ~700
+  // spokes to every country — said nothing a single "International — 200
+  // folded reports" orb does not say better. Same fold, same orb machinery,
+  // same double-click to open; `openedCountries` carries 'INT' like any
+  // other code. Since 2026-09-05 the fold is also an explicit two-way
+  // control (View panel → International layer, "Condensed"/"Open"), a
+  // double-click on any INT node re-folds it (the one gesture that removes
+  // detail — see `handleToggleNode` in App.tsx), and auto-unfold leaves this
+  // orb shut (autoUnfold.ts).
+  //
+  // **Tier 1 honours the toggle too, since 2026-09-06** (Thomas: "tier 1
+  // should honour the condensed/open toggle"). It did not until then, on the
+  // reasoning that tier 1 is the opening view and the INT reports ARE its
+  // content. What settled it was counting: tier 1 renders 389 nodes and 205
+  // of them — 53% — are INT reports, so the complaint that produced this
+  // fold in the first place describes the opening view at least as well as
+  // it describes tier 2. Condensed leaves 184 nodes plus the one orb; the
+  // toggle and the double-click are both live there, so nothing is hidden
+  // that a viewer cannot get back in one click. Note this makes the DEFAULT
+  // opening frame condensed, because "not in `openedCountries`" is the
+  // default state.
+  if (report.country === 'INT' && !openedCountries.has('INT')) {
     return countryOrbId('INT')
   }
   return report.id

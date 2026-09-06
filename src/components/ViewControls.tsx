@@ -236,7 +236,9 @@ export default function ViewControls({
    * (`'INT'` in `openedCountries`, hierarchy.ts `resolveId`), surfaced as an
    * explicit two-way control beside the lens — the graph gesture (double-
    * click) goes both ways for INT and only for INT, see `handleToggleNode`.
-   * At tier 1 the international layer IS the view, so the row is inert there.
+   * Live at every tier since 2026-09-06 — it was inert at tier 1 until then,
+   * on the reasoning that the international layer IS the Global view; see
+   * `resolveId` in hierarchy.ts for the count that changed Thomas's mind.
    */
   intCondensed: boolean
   onCondenseInt: (condensed: boolean) => void
@@ -375,25 +377,20 @@ export default function ViewControls({
             { key: true, label: 'Condensed', hint: 'One orb for the international standards — every country\'s edges into SNA, ESA, COICOP, ISIC… become one bundle each. Double-click the orb to open it' },
             { key: false, label: 'Open', hint: 'Every international standard as its own node, with its edges to every country that cites it. Double-click any international node to condense them again' },
           ] as { key: boolean; label: string; hint: string }[]
-        ).map(({ key, label, hint }) => {
-          const inert = tier === 1
-          return (
-            <button
-              key={String(key)}
-              type="button"
-              disabled={inert}
-              title={inert ? `${hint} — at the Global tier the international layer is the view itself and stays open` : hint}
-              onClick={() => onCondenseInt(key)}
-              style={{
-                ...lensButton,
-                ...(intCondensed === key ? lensButtonActive : null),
-                ...(inert ? lensButtonInert : null),
-              }}
-            >
-              {label}
-            </button>
-          )
-        })}
+        ).map(({ key, label, hint }) => (
+          <button
+            key={String(key)}
+            type="button"
+            title={hint}
+            onClick={() => onCondenseInt(key)}
+            style={{
+              ...lensButton,
+              ...(intCondensed === key ? lensButtonActive : null),
+            }}
+          >
+            {label}
+          </button>
+        ))}
       </div>
       <div style={{ ...heading, marginTop: 14 }}>Evidence</div>
       {/*

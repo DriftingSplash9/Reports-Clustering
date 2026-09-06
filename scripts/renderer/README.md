@@ -30,6 +30,11 @@ either way; the spread is photon churn (140 tris a teardrop), not spheres.
   the shot to take before and after a force change — `shot.mjs`'s tier-4 view
   opens no countries and shows 289 nodes.
 
+- `fit-probe.mjs [spread] [tier] [all]` — the fit percentile's cost curve at
+  one spread: fit radius, camera distance and off-frame share for P from 0.95
+  down to 0.30, computed from live settled positions. This is what
+  `fitPercentileFor` was calibrated on.
+
 - `settle.mjs [tier] [runs]` — ms, rAF frames and physics ticks from the
   first tick to `settledOnce`. Added 2026-09-05 for the tick burst
   (`TICK_BURST_MAX` in InfluenceGraph.tsx): at tier 2 (299 nodes) a

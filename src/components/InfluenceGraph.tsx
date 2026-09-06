@@ -507,6 +507,29 @@ const CONTINUOUS_PULSE_FLOOR = 0.55
 const TARGET_LARGEST_FRACTION = 0.026
 const MAX_BASE_RADIUS = 8
 
+/**
+ * The percentile of the node-distance distribution the camera frames, as a
+ * function of the layout `spread` (2026-09-06, Thomas). Flat at 0.8 up to
+ * spread 1 — the default framing is untouched — then falling with log2 of the
+ * spread to a floor of 0.4. The reasoning, the measured off-frame cost and the
+ * measured size of the effect are all at the `CORE_PERCENTILE` use site in
+ * `measureFit`; read that before changing either constant.
+ *
+ *   spread   0.5   1     2     3     6     12
+ *   P        0.80  0.80  0.69  0.63  0.52  0.41
+ */
+export function fitPercentileFor(spread: number): number {
+  if (!Number.isFinite(spread) || spread <= 1) return FIT_PERCENTILE_MAX
+  const p = FIT_PERCENTILE_MAX - FIT_PERCENTILE_SLOPE * Math.log2(spread)
+  return Math.max(FIT_PERCENTILE_MIN, Math.min(FIT_PERCENTILE_MAX, p))
+}
+/** The framing Thomas approved 2026-09-01; the curve above never exceeds it. */
+export const FIT_PERCENTILE_MAX = 0.8
+/** Floor, reached at the top of the spread slider. See the cost table at the use site. */
+export const FIT_PERCENTILE_MIN = 0.4
+/** Percentile lost per doubling of `spread`. 0.11 puts the floor at spread ~12, the slider's ceiling. */
+export const FIT_PERCENTILE_SLOPE = 0.11
+
 function nodeScaleFor(cloudRadius: number): number {
   const wanted = (cloudRadius * TARGET_LARGEST_FRACTION) / MAX_BASE_RADIUS
   // Never below 1: at small corpus sizes the original constants are already
@@ -2638,7 +2661,60 @@ export default function InfluenceGraph({
     // keeps ~99% of connected nodes on a 16:9 window. The p95 rationale
     // below (two-estimator agreement) described the old value; it is kept
     // because the measurement method is the part worth rereading.
-    const CORE_PERCENTILE = 0.8
+    //
+    // **Since 2026-09-06 the percentile falls as `spread` rises**
+    // (Thomas: "I wonder if we should decrease the p95 as we increase the
+    // cluster spread? it would enhance the effect").
+    //
+    // Why it works, and why it is the RIGHT lever rather than just zooming:
+    // both the camera distance and `nodeScaleFor` read this same
+    // `nodeRadius`, and both are proportional to it — so apparent node size
+    // (`radiusFor × nodeScale / distance`) is invariant under a change of
+    // percentile, while apparent SEPARATION is not. Lowering the percentile
+    // therefore buys air between nodes at constant node size, which is
+    // exactly what the spread slider is asking for. `view.zoom` cannot do
+    // that: it moves the camera without touching `nodeScale`, so it
+    // magnifies the blobs along with the gaps.
+    //
+    // Why it is needed at all: raising `spread` is close to a uniform
+    // rescale of the layout, and a fit that renormalises by a percentile of
+    // that same layout undoes it. Measured over 2 seeds at 3,363 nodes
+    // (`scripts/measure-forces.ts`, SPREAD 0.5 → 12): `ratio` (inter-cluster
+    // distance over intra-cluster spread) climbs 18.0 → 36.0, so the slider
+    // is doing real work — but `onscreen` (inter / p95) FALLS 0.777 → 0.717,
+    // and intra-cluster spread as a share of the framed radius halves
+    // (0.043 → 0.020). On screen the clusters tighten into smaller knots
+    // instead of the graph opening out. This curve spends some of that
+    // tightening on magnification instead.
+    //
+    // The cost, measured with the fit's own arithmetic on live positions at
+    // 1280×800 (`scripts/renderer/fit-probe.mjs`) — share of rendered nodes
+    // falling outside the frame:
+    //
+    //            Everything, all unfolded      Nations
+    //   P        spread 1     spread 12        spread 1   spread 12
+    //   0.80        0.3%          0.1%            0%         0.7%
+    //   0.60        1.3%          0.4%          1.3%         1.7%
+    //   0.50        2.2%          0.8%          5.7%         3.0%
+    //   0.40        3.5%          1.7%         11.4%         4.3%
+    //   0.30        6.3%          4.0%         23.7%        11.4%
+    //
+    // So the floor is 0.4 and it is only reached at the top of the slider,
+    // where the cloud is flattest and the cost is smallest. `spread` ≤ 1
+    // keeps 0.8 exactly, so the default framing Thomas signed off on
+    // 2026-09-01 is untouched; the whole curve is a no-op until the slider
+    // is moved above 100%. What it buys at the top: the camera comes in 22%
+    // at spread 12 (38,297 → 29,810 units at Everything), i.e. ~28% more
+    // apparent separation at unchanged apparent node size. That is the
+    // honest size of the effect — a fifth to a quarter, not a doubling.
+    //
+    // **What it costs conceptually**: the fit stops meaning "the frame
+    // always contains the graph" and starts meaning "the frame contains the
+    // core, and how much core depends on the spread slider". Two screenshots
+    // at different spreads are no longer framed by the same rule. If that
+    // turns out to matter more than the effect, delete `fitPercentileFor`
+    // and put 0.8 back — nothing else reads it.
+    const CORE_PERCENTILE = fitPercentileFor(spreadApplied)
 
     // One refinement pass: the box centre is itself pulled off the bulk by the
     // same stragglers, so re-centre on the mean of whatever fell inside the

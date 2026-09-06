@@ -169,7 +169,8 @@ export default function Onboarding({
           {tier <= 1 ? (
             <>
               You are looking at tier 1 — the international, supranational and commercial reports.
-              Everything below them is packed into the glowing orbs, one per region.
+              Everything below them is packed into the glowing orbs, one per region, and the
+              international standards start packed into one of their own (View ▸ International layer).
             </>
           ) : (
             <>
