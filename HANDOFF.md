@@ -1,7 +1,8 @@
 # HANDOFF — working document
 
 **One handoff file, top level, ever.** State only — what's live, blocked,
-next. Rules and traps: `PLAYBOOK.md`. Recipes: `notes/techniques-2026-09-04.md`.
+next. Rules and traps: `PLAYBOOK.md` (core) + `PLAYBOOK-CORPUS.md` or
+`PLAYBOOK-RENDER.md`. Recipes: `notes/techniques-2026-09-04.md`.
 Host reachability: `notes/routing-snapshot-2026-09-04.md` (dated, expected to
 be wrong). Design of the current programme: `notes/Midvamp - Revamp.md`.
 Finished-round narrative: project memory and `archive/Previous Handoffs/`.
@@ -16,19 +17,22 @@ Last updated: 2026-09-06 ~09:15 UTC (thin-coverage round 1 — GB national core 
 ## 1. Read next
 
 **The project's only read order — `PLAYBOOK.md` §1 and `REPORTS.md`'s 🛑 block
-point here.** This file first, then `PLAYBOOK.md` §2, §6, §7 at minimum. Then,
-**routed by what you are doing**:
+point here.** This file first, then `PLAYBOOK.md` in full — it is short, and
+its §1 hands you the one lane playbook you need. Then, **routed by what you
+are doing**:
 
 | doing | read |
 |---|---|
-| anything | `PLAYBOOK.md` §2 rules, §6 traps, §7 standing decisions |
+| anything | `PLAYBOOK.md` — all of it; it binds every task |
+| corpus work: research · minting · wiring · quotes · grading · schema | `PLAYBOOK-CORPUS.md` §2 rules, §6 traps, §7 standing decisions |
+| renderer work: visuals · forces · camera · panels · perf | `PLAYBOOK-RENDER.md` §2 rules, §3–§4 what exists, §6 invariants |
 | fetching / capturing / extracting | `notes/techniques-2026-09-04.md`; for "can I reach host X?" `notes/routing-snapshot-2026-09-04.md` — **re-probe, don't believe it** |
 | **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md`, then memory `esms_hicp_pass_2026-09-05` (acronym rule), `cjk_span_floor_2026-09-05`, `quote_guard_round_2026-09-05` |
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
 | a `*-grok-2026-08.json` slice's `meta.note` | `notes/mint-2026-08-20.md` |
 | Eurostat metadata / EU price-index / HBS chains | memory `layout_levers_and_hbs_2026-09-05`, `esms_hicp_pass_2026-09-05`, `eu_national_chains_2026-08-28` |
-| visual / layout work · INT fold | `PLAYBOOK.md` §3–§4, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; memory `condensed_int_and_rulings_2026-09-05` |
+| visual / layout work · INT fold | `PLAYBOOK-RENDER.md` §3–§4, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; memory `condensed_int_and_rulings_2026-09-05` |
 | renderer draw path / instancers | memory `node_instancing_2026-09-05`, `link_batching_2026-09-05`, then `renderer_perf_measured_2026-09-04` |
 | settle time / physics cost / force tuning | memory `layout_levers_and_hbs_2026-09-05`, then `settle_time_tick_burst_2026-09-05`; `scripts/measure-forces.ts` (`ITER`/`THETA`); `scripts/renderer/settle.mjs`, `shot-all.mjs` |
 | camera fit · the spread slider · INT fold | memory `fit_percentile_and_tier1_2026-09-06`; `scripts/renderer/fit-probe.mjs`; `notes/camera-fit-measurement-2026-08-19.md` · `notes/flicker-tests-2026-08-19.md` |
@@ -72,7 +76,8 @@ SG · ID · IN · CN · RU · INT. Census and method: memory `gb_national_core_2
 **Grader:** CJK span floor, `acronymFitsHead()`, national `title_aliases`
 allowed (types.ts doc comment is the rule). **`--write` has NO
 improvements-only guard** — dry-run old vs new code on the same store first.
-A re-grade touching a URL must select **every** live edge on it (PLAYBOOK §6).
+A re-grade touching a URL must select **every** live edge on it
+(`PLAYBOOK-CORPUS.md` §6).
 
 **EU price-index / HBS chains: closed** — FR IT NL DK CZ NO LU CH AL all have
 CPI → national accounts → HBS. No `eurostat-hicp` edge for FR/CZ/AL: no
@@ -165,7 +170,8 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    Keep this §4 verbatim so the next agent knows the procedure.
 4. A finished round's story goes to **project memory** (write it as you
    go; if memory is down, park a note in `notes/` and say so here). A new
-   standing rule or trap goes to `PLAYBOOK.md`. A design change goes to
+   standing rule or trap goes to whichever playbook binds it (`PLAYBOOK.md`
+   §1 has the test). A design change goes to
    `notes/Midvamp - Revamp.md` (or `REPORTS.md` if it changes direction).
 5. If §1–§3 are over ~7k characters, trim before adding to them.
 6. Never state git status here. Never delete anything — `_to_delete/`.

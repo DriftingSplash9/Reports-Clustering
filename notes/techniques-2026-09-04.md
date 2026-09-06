@@ -1,7 +1,8 @@
 # Techniques — 2026-09-04
 
 **The recipes.** Read the section for the job you are doing; you do not need
-the rest. These are the parts of the old `PLAYBOOK.md` §6 that are still true
+the rest. These are the parts of the old `PLAYBOOK.md` §6 (now
+`PLAYBOOK-CORPUS.md` §6) that are still true
 and still worth following — dated because they were written from the rounds up
 to 2026-09-04, not because they are expected to rot (that is
 `notes/routing-snapshot-2026-09-04.md`).

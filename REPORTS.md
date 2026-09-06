@@ -14,7 +14,8 @@ Exactly one `HANDOFF.md`, always at the top level; superseded ones are in
 
 The rules that bind everything — never run git from an agent session; no
 document, no edge; a pointer is not a source; nothing is deleted, it goes to
-`_to_delete/` — live in `PLAYBOOK.md` §2, §6 and §7, not here.
+`_to_delete/` — live in `PLAYBOOK.md`, and the lane rules in
+`PLAYBOOK-CORPUS.md` / `PLAYBOOK-RENDER.md`, not here.
 
 **What this file is:** from "The one-line version" down, what the system is
 trying to be and what is out of scope. It changes when the *direction*
@@ -234,7 +235,7 @@ rather than a value:
 The prose of every decision below (43.8 KB of design archaeology from the
 33-to-121-node era) lives verbatim in
 `archive/decisions/REPORTS-decisions-2026-09-05.md`. The live do-not-re-raise
-ledger for corpus work is `PLAYBOOK.md` §7; nothing here needs reading before
+ledger for corpus work is `PLAYBOOK-CORPUS.md` §7; nothing here needs reading before
 a research round. One line each, oldest first as written:
 
 - Palette is continent-based, not bloc-based; `ColourFamily` is `CA | US | INT | EU | XEU | AFR | ASIA | SAO | SA` (2026-08-05).

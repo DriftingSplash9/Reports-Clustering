@@ -8,7 +8,7 @@ sweep with a browser UA and a ~20 s timeout reclassified a dozen hosts in a
 single call; that is cheaper than reading this file and believing it.
 
 The durable rules that used to be buried in these entries now live in
-`PLAYBOOK.md` §6 (a "walled" verdict is a claim about one network; robots is a
+`PLAYBOOK-CORPUS.md` §6 (a "walled" verdict is a claim about one network; robots is a
 claim about the fetch tool; say which machine you were on) and the recipes in
 `notes/techniques-2026-09-04.md`.
 

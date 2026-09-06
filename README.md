@@ -105,7 +105,9 @@ else is filed by what it *is*:
 ```
 HANDOFF.md                 current state and the live todo — read this first
 REPORTS.md                 the design rules and direction; standing rules are PLAYBOOK.md
-PLAYBOOK.md                standing rules, traps, do-not-re-raise ledger, architecture crib
+PLAYBOOK.md                the core standing rules — short, binds every task
+PLAYBOOK-CORPUS.md         research lane: evidence, quotes, grading, schema, traps, rulings
+PLAYBOOK-RENDER.md         renderer lane: what the app is, architecture crib, invariants
 START-HERE.md              plain-language explanation, for sending to people
 README.md                  this file
 

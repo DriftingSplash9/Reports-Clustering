@@ -3,7 +3,7 @@
 Both need `npm run dev` on :5173 (they read `window.__rig`, DEV-only) and
 `playwright` installed OUTSIDE package.json (`npm i --no-save playwright`;
 the Chromium is the sandbox's preinstalled one at `/opt/pw-browsers/chromium`).
-Draw-call and object counts are resolution-independent (PLAYBOOK rule 7);
+Draw-call and object counts are resolution-independent (PLAYBOOK-RENDER rule 7);
 frame TIMES from swiftshader are not — judge speed on Thomas's machine.
 
 - `census.mjs` — Everything tier, every country unfolded (deep link built
