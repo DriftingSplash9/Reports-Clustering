@@ -1,0 +1,251 @@
+{
+ "_slice": "gb-ons-registers-2026-09-06",
+ "_researched": "2026-09-06",
+ "_note": "Thomas, 2026-09-06: 'chase all of the round 3 leads' — the three ONS candidates round 2 recorded as un-researched (UK House Price Index, ASHE, BRES), plus the two registers that turned out to be what they all actually depend on. The scope call round 2 parked for Thomas — is the Inter-Departmental Business Register a publication or something else? — answers itself against corpus precedent: statcan-business-register, nl-cbs-sbr and it-istat-asia-enterprises are all statistical business registers already carried as kind 'publication', so gb-ons-idbr is minted the same way. That decision is what makes ASHE and BRES worth having: BRES's only real dependency is the IDBR sampling frame, and without the register it would have arrived on a Code-of-Practice compliance edge alone. Two findings changed the shape of this round. The predicted CPI edge landed at A but not on the artefact expected: CPIH's owner-occupier component is sourced from the Price Index of Private Rents, not the UK House Price Index — ONS explicitly rules house prices OUT of CPIH in the same methodology article, which is a documented negative rather than a silence. And ASHE's sampling frame is PAYE, not the IDBR; the IDBR enters afterwards to match employer contact details onto the drawn sample. Every url and evidence_url was raw-verified HTTP 200 and every quote re-fetched and substring-checked against the live cited URL after this file was written.",
+ "reports": [
+  {
+   "id": "gb-ons-idbr",
+   "title": "Inter-Departmental Business Register",
+   "publisher": "Office for National Statistics",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "United Kingdom",
+   "description": "The comprehensive list of UK businesses used across government for statistical purposes, and the main sampling frame for business surveys run by ONS and other departments. Its two main inputs are VAT and PAYE records from HMRC, supplemented by Companies House, Dun and Bradstreet and ONS business surveys; it covers around 2.7 million businesses, and because the two tax sources have thresholds, very small businesses below them are generally not included. ONS states it is fully compliant with EC Regulation No 177/2008 on the harmonisation of business registers for statistical purposes.",
+   "releases_per_year": 1,
+   "cadence_note": "A continuously maintained register rather than a periodic release; releases_per_year is nominal, so that its absence would keep meaning 'one-off' (types.ts). ONS publishes from it annually — 'UK Business: Activity, Size and Location' and 'Business Demography' — alongside a data analysis service and a disclosive-microdata route through the Microdata Release Panel.",
+   "last_updated": null,
+   "url": "https://www.ons.gov.uk/aboutus/whatwedo/paidservices/interdepartmentalbusinessregisteridbr",
+   "domains": [
+    "industry",
+    "statistical-system"
+   ],
+   "kind": "publication",
+   "title_aliases": [
+    "IDBR"
+   ]
+  },
+  {
+   "id": "gb-hmlr-ppd",
+   "title": "Price Paid Data",
+   "publisher": "HM Land Registry",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "England and Wales",
+   "description": "HM Land Registry's dataset of all property sales in England and Wales sold for value and lodged for registration, published in text and CSV form under the Open Government Licence and updated on the 20th working day of each month. It carries address data processed against Ordnance Survey's AddressBase Premium, and is the price source the UK House Price Index is built from.",
+   "releases_per_year": 12,
+   "cadence_note": "HM Land Registry: 'We update the data on the 20th working day of each month.'",
+   "last_updated": null,
+   "url": "https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads",
+   "domains": [
+    "housing"
+   ],
+   "kind": "publication",
+   "title_aliases": [
+    "Price Paid Dataset"
+   ]
+  },
+  {
+   "id": "gb-ons-ukhpi",
+   "title": "UK House Price Index",
+   "publisher": "HM Land Registry",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "United Kingdom",
+   "description": "The monthly index of residential property price change for the UK, produced from administrative land-registration records rather than a survey and published by HM Land Registry on behalf of a joint production with Registers of Scotland, Land & Property Services Northern Ireland and ONS. It combines price data with property-attribute data in a hedonic regression model, with the attributes for England and Wales taken from the Valuation Office Agency's Council Tax Valuation List. Data run from 1995 for England and Wales, 2004 for Scotland and 2005 for Northern Ireland. ONS places house prices outside the scope of consumer price inflation, so this index is not a CPIH input.",
+   "releases_per_year": 12,
+   "last_updated": null,
+   "url": "https://www.gov.uk/government/collections/uk-house-price-index-reports",
+   "domains": [
+    "housing"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "gb-ons-pipr",
+   "title": "Price Index of Private Rents",
+   "publisher": "Office for National Statistics",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "United Kingdom",
+   "description": "The monthly measure of private rental price inflation across the whole privately rented stock, new and existing tenancies, published in the 'Private rent and house prices, UK' bulletin from March 2024 and extended to the whole UK from March 2025. It replaced the Index of Private Housing Rental Prices, ONS's lead measure of rental price change before that. It is built from administrative rental data collected by Rent Officers at the HMRC Valuation Office, the Scottish and Welsh Governments and the Northern Ireland Housing Executive, and the same rental data construct the owner-occupiers' housing costs component of CPIH under the rental equivalence approach.",
+   "releases_per_year": 12,
+   "last_updated": null,
+   "url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/latest",
+   "domains": [
+    "housing",
+    "inflation"
+   ],
+   "kind": "publication",
+   "title_aliases": [
+    "Index of Private Housing Rental Prices"
+   ]
+  },
+  {
+   "id": "gb-ons-ashe",
+   "title": "Annual Survey of Hours and Earnings",
+   "publisher": "Office for National Statistics",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "United Kingdom",
+   "description": "The annual survey of the levels, distribution and make-up of employee earnings and paid hours in the UK, published as the 'Employee earnings in the UK' bulletin. It is based on a 1% random sample of employee jobs drawn from HMRC Pay As You Earn records, with employers supplying the earnings and hours information; the drawn sample is matched against the Inter-Departmental Business Register for employer contact details, and returned data are weighted to UK population totals from the Labour Force Survey. It does not cover the self-employed or employees not paid in the reference period.",
+   "releases_per_year": 1,
+   "last_updated": null,
+   "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/latest",
+   "domains": [
+    "labour",
+    "living-standards"
+   ],
+   "kind": "publication",
+   "title_aliases": [
+    "ASHE"
+   ]
+  },
+  {
+   "id": "gb-ons-bres",
+   "title": "Business Register and Employment Survey",
+   "publisher": "Office for National Statistics",
+   "country": "GB",
+   "jurisdiction_level": "federal",
+   "region": "United Kingdom",
+   "description": "The annual business survey giving employee and employment estimates at detailed industrial and geographical levels, which ONS regards as the definitive source of official employee statistics by industry. Its sample of roughly 87,000 businesses is drawn from the Inter-Departmental Business Register, stratified by SIC 2007, country and register employment size; NISRA collects the same information independently in Northern Ireland and the two are combined for UK estimates. BRES results are also fed back to update the employment data held on the IDBR.",
+   "releases_per_year": 1,
+   "last_updated": null,
+   "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/latest",
+   "domains": [
+    "labour",
+    "industry"
+   ],
+   "kind": "publication",
+   "title_aliases": [
+    "BRES"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "gb-ons-ukhpi",
+   "target_report_id": "gb-hmlr-ppd",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The UK HPI's own About page names the Price Paid Dataset by title as where the price information it uses is published. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.gov.uk/government/publications/about-the-uk-house-price-index/about-the-uk-house-price-index",
+   "evidence_quote": "All this information is currently published by HM Land Registry in its Price Paid Dataset (PPD), with the exception of the funding status indicator.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-ukhpi",
+   "target_report_id": "gb-voa-rating-lists",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The UK HPI's own quality and methodology page names the Council Tax Valuation List by title as the main source of the property-attribute data fed into the hedonic regression. Wires a node the corpus already held but had only in an English local-government-finance context. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology",
+   "evidence_quote": "The main source of property attributes data that is used to supplement house price data for England and Wales is administrative data taken from the Council Tax Valuation list maintained by the Valuation Office Agency (VOA).",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-cpi",
+   "target_report_id": "gb-ons-pipr",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The PIPR quality and methodology information names both artefacts by title and states directly that PIPR statistics feed the CPI and CPIH calculations; the same page adds that the same rental data construct the owner-occupiers' housing costs component of CPIH under rental equivalence. This is the CPI source edge round 3 went looking for — it just is not the UK House Price Index, which ONS explicitly rules out of scope. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/methodologies/priceindexofprivaterentsqmi",
+   "evidence_quote": "As Price Index of Private Rents (PIPR) statistics contribute to the calculation of the Consumer Prices Index (CPI), Retail Prices Index (RPI) and Consumer Prices Index including owner-occupier housing costs (CPIH), it is essential that we produce timely estimates.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-ashe",
+   "target_report_id": "gb-ons-lfs",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The ASHE bulletin's own data sources and quality section names the Labour Force Survey by title as the source of the population totals ASHE estimates are weighted to; the ASHE QMI repeats it. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
+   "evidence_quote": "ASHE data are weighted to UK population totals from the Labour Force Survey (LFS), based on classes defined by region, occupation, age and sex.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-ashe",
+   "target_report_id": "gb-ons-idbr",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The ASHE QMI names the Inter-Departmental Business Register by title and states what ASHE takes from it. Note the distinction, which is easy to get backwards: the IDBR is ASHE's employer-matching source, NOT its sampling frame — the QMI's summary table gives the sample frame as the HMRC PAYE system. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/methodologies/annualsurveyofhoursandearningslowpayandannualsurveyofhoursandearningspensionresultsqmi",
+   "evidence_quote": "The sample is matched against the Office for National Statistics's (ONS's) Inter-Departmental Business Register (IDBR) in order to obtain contact and address details for the employers.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-ashe",
+   "target_report_id": "gb-uksa-code-of-practice",
+   "relationship_type": "methodology_depends_on",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The ASHE bulletin names the Code of Practice for Statistics by title as the standard it complies with. Graded B: a compliance framework rather than a data-sourcing dependency. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
+   "evidence_quote": "They comply with the standards of trustworthiness, quality, and value in the Code of Practice for Statistics and should be labelled \"accredited official statistics\".",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "gb-ons-bres",
+   "target_report_id": "gb-ons-idbr",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The BRES QMI names the Inter-Departmental Business Register by title as the sampling frame the BRES sample is drawn from. This is BRES's one substantive dependency, and the reason gb-ons-idbr had to be minted for the node to be worth having. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/businessregisteremploymentsurveybresqmi",
+   "evidence_quote": "The Inter-Departmental Business Register (IDBR) is used as the sampling frame from which a stratified random sample is drawn.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "gb-ons-crpsf",
+   "target_report_id": "gb-ons-idbr",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The country and regional public sector finances methodology guide names the IDBR by title as one of the two datasets combined to apportion corporation tax to the ITL1 regions. This is the lead round 2 recorded as no-node-yet on that slice. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/methodologies/countryandregionalpublicsectorfinancesmethodologyguide",
+   "evidence_quote": "Inter-Departmental Business Register (IDBR) have been combined to provide percentage shares for the ITL1 regions.",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "gb-ons-bres",
+   "target_report_id": "gb-uksa-code-of-practice",
+   "relationship_type": "methodology_depends_on",
+   "basis": "RESEARCHED 2026-09-06 (ONS registers round). The BRES bulletin names the Code of Practice for Statistics by title as the standard it complies with. Graded B: a compliance framework rather than a data-sourcing dependency. Read live from the cited URL (HTTP 200), quote verbatim.",
+   "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/latest",
+   "evidence_quote": "They comply with the standards of trustworthiness, quality and value in the Code of Practice for Statistics and should be labelled",
+   "evidence_grade": "B"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "gb-ons-ukhpi -> gb-ons-cpi",
+   "source": "gb-ons-ukhpi",
+   "target": "gb-ons-cpi",
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-06 — the document says the opposite, and this is the round's most useful negative. ONS's CPIH housing methodology page explicitly excludes house prices from CPIH: 'OOH measures do not seek to capture increases in house prices. The inclusion of an asset price and therefore capital gains are generally defined as being out of scope of any kind of consumer price index. ... Property price changes are instead measured in the UK House Price Index.' The only documented CPIH-family use of UK HPI is in the net acquisitions index, discontinued from March 2020 — a different publication. The CPI bulletin names the UK HPI only in its 'Related links' block, which is navigation, not sourcing. The real CPI source edge is to the Price Index of Private Rents, minted this round."
+  },
+  {
+   "edge": "gb-ons-pipr -> gb-voa-rating-lists",
+   "source": "gb-ons-pipr",
+   "target": "gb-voa-rating-lists",
+   "reason": "no-document",
+   "why": "NEAR MISS 2026-09-06, flagged rather than forced. The PIPR QMI's Table 1 has a column headed 'Valuation Office Council Tax' with note 1 reading 'The linking rate to HM Revenue and Customs Valuation Office Council Tax has increased over time...'. Under the 2026-09-06 ruling a methodology table cell naming a source counts, so the shape qualifies — but the string is 'Valuation Office Council Tax', not the artefact title 'Council Tax Valuation List', so the agency-not-artefact rule was applied strictly. PIPR's own rental data come from VOA Rent Officers administering Housing Benefit and Universal Credit, a different VOA function from the rating and council tax valuation lists. Wants a sentence naming the list."
+  },
+  {
+   "edge": "gb-ons-ashe / gb-ons-bres -> gb-ons-labour-market-overview (either direction)",
+   "source": null,
+   "target": null,
+   "reason": "no-document",
+   "why": "NOT FOUND 2026-09-06. The Labour market overview, UK bulletin was read in full (HTTP 200) including its data sources and quality section: no occurrence of 'Annual Survey of Hours and Earnings', 'ASHE', 'Business Register' or 'BRES' anywhere. Its named earnings and jobs sources are the Labour Force Survey, workforce jobs, the Claimant Count and HMRC PAYE RTI. Documented negative in both directions."
+  },
+  {
+   "edge": "gb-ons-ashe -> gb-ons-national-accounts / gb-ons-gdp-qna",
+   "source": null,
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "NOT FOUND, but for a locatable reason 2026-09-06. No national accounts or Blue Book page names ASHE as a source. ASHE's documented downstream consumer is Average Weekly Earnings, which has no corpus node: the AWE QMI says in body text 'The Annual Survey of Hours and Earnings (ASHE) is also an input, providing estimates of pay for employees of small businesses.' That is a grade-A edge waiting for an AWE node. BRES has the same shape — its named downstream consumer is Workforce Jobs ('Workforce Jobs benchmarks the private sector employee component to the BRES private sector employee estimates on an annual basis'), also not a node. Two nodes, two A-grade edges, one small round."
+  },
+  {
+   "edge": "gb-ons-bres -> gb-ons-lfs",
+   "source": "gb-ons-bres",
+   "target": "gb-ons-lfs",
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-06 — named, but to recommend against. The BRES bulletin and QMI both name the Labour Force Survey by title, never as an input: 'The BRES industry data are recommended in preference to industry data from household surveys such as the Annual Population Survey and Labour Force Survey (LFS).' A preference or comparison statement is not a dependency. Worth recording as a shape: a title-keyword sweep would have minted this backwards."
+  },
+  {
+   "edge": "gb-ons-ukhpi -> Registers of Scotland / Land & Property Services NI",
+   "source": null,
+   "target": null,
+   "reason": "no-document",
+   "why": "NOT FOUND 2026-09-06. The UK HPI About page names Registers of Scotland and LPS Northern Ireland as the agencies supplying Scottish and Northern Irish price data, but names no RoS or LPS publication by title — so both would fail the agency-not-artefact rule even if nodes existed. Only the England and Wales price source, HM Land Registry's Price Paid Data, is named as an artefact, and that edge is minted."
+  }
+ ]
+}

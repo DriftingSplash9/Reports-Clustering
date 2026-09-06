@@ -1,851 +1,847 @@
 {
-  "_slice": "id-unlinked-wiring-round3-2026-08-30",
-  "_researched": "2026-08-30",
-  "_status": "verified",
-  "_note": "Indonesia wiring round (post-triage full sweep of the 74 measured orphans, per project memory triage_2026-08-30 and unlinked_nodes_cleared). Method: 6 parallel research subagents (one per theme: trade/ports, energy/mining/climate, agriculture/fisheries/environment, population/social/health, fiscal/finance/governance, regional/local/digital), each independently fetching primary sources and reporting structured findings (not writing files). Every proposed edge and every new-node citation was then independently re-fetched and verified by the orchestrating session before minting -- including, for the two BPS Cloudflare-walled PDFs backing the largest edge clusters (Energy Balances of Indonesia; the GHG/Energy-Flow Accounts), by opening the BPS page in a real browser (Claude in Chrome), reading the signed web-api.bps.go.id download link out of the DOM, and curling the PDF directly with a Referer header -- confirming every quote verbatim on the actual extracted PDF text, not the landing-page abstract. No fabricated or unverifiable quote survived into this file. id-energy-balance-detail was deliberately left unwired and flagged instead as a likely duplicate of id-energy-balances (see _dropped) rather than minting the same evidence onto both nodes. Two containment relationships (id-export-partners, id-commodity-partner-matrix as part_of id-foreign-trade-exports) were recorded as a part_of field patch to the existing id-indonesia-grok-2026-08.json seed file, not as edges here -- per project convention, part_of does not reduce the isolated-node count.",
-  "reports": [
-    {
-      "id": "id-esdm",
-      "title": "Ministry of Energy and Mineral Resources (ESDM) — statistical and policy publications",
-      "publisher": "Ministry of Energy and Mineral Resources (ESDM)",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Indonesia's national ministry for energy and mineral resources. Named as a source institution (generically, not by a specific document title) in BPS's Energy Balance of Indonesia (\"Sumber data ... berasal dari berbagai publikasi yang diterbitkan oleh ... Kementerian Energi dan Sumber Daya Mineral\") and its GHG Emissions Accounts (\"Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM)\"). Modelled as a broad institutional node, matching the existing id-bank-indonesia / id-bps / id-ojk convention, since neither citation names one specific ESDM publication.",
-      "url": "https://www.esdm.go.id/",
-      "domains": [
-        "energy",
-        "mining"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "id-pln-statistics",
-      "title": "Statistics PLN",
-      "publisher": "PT PLN (Persero)",
-      "country": "ID",
-      "jurisdiction_level": "institutional",
-      "region": "Indonesia",
-      "description": "PT PLN's own annual statistical report on generation capacity, generation mix, sales and distribution. Cited by exact title in BPS's Electricity Statistics 2020-2024 bibliography: \"PT PLN (Persero). 2025. Statistics PLN 2024.\"",
-      "releases_per_year": 1,
-      "url": "https://web.pln.co.id/statistik",
-      "domains": [
-        "energy"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "id-pgn",
-      "title": "PT Perusahaan Gas Negara (PGN) Tbk",
-      "publisher": "PT Perusahaan Gas Negara (PGN) Tbk",
-      "country": "ID",
-      "jurisdiction_level": "institutional",
-      "region": "Indonesia",
-      "description": "Indonesia's state-owned natural gas transmission and distribution company. Named (generically, not by a specific document title) as one of the institutional data sources for BPS's Energy Balance of Indonesia.",
-      "url": "https://www.pgn.co.id/",
-      "domains": [
-        "energy"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "id-bph-migas",
-      "title": "BPH Migas (Badan Pengatur Hilir Minyak dan Gas Bumi)",
-      "publisher": "BPH Migas",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Indonesia's downstream oil and gas regulatory agency. Named (generically, not by a specific document title) as one of the institutional data sources for BPS's Energy Balance of Indonesia.",
-      "url": "https://www.bphmigas.go.id/",
-      "domains": [
-        "energy"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "id-kai",
-      "title": "PT Kereta Api Indonesia (KAI) (Persero)",
-      "publisher": "PT Kereta Api Indonesia (Persero)",
-      "country": "ID",
-      "jurisdiction_level": "institutional",
-      "region": "Indonesia",
-      "description": "Indonesia's state railway operator. Named (generically, not by a specific document title) as one of the institutional data sources — rail fuel consumption — for BPS's Energy Balance of Indonesia.",
-      "url": "https://www.kai.id/",
-      "domains": [
-        "energy",
-        "infrastructure"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "id-ditjen-migas",
-      "title": "Direktorat Jenderal Minyak dan Gas Bumi (Ditjen Migas)",
-      "publisher": "Ministry of Energy and Mineral Resources (ESDM)",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "ESDM's Directorate General of Oil and Gas. Its own oil and gas production statistics are cited as a chart-level source (\"Sumber/Source: Dirjen Migas ESDM 2023\") in BPS's Mining Statistics of Petroleum and Natural Gas 2019-2023, alongside BPS's own primary Annual Survey of Petroleum and Natural Gas Mining Companies.",
-      "url": "https://migas.esdm.go.id/",
-      "domains": [
-        "energy"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "id-klhk-ghg-inventory",
-      "title": "National GHG Inventory Report and MRV (SIGN SMART)",
-      "publisher": "Ministry of Environment and Forestry (KLHK), Directorate General of Climate Change Control",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Indonesia's official national greenhouse gas inventory and Monitoring-Reporting-Verification report (e.g. \"Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023\"), maintained via the SIGN SMART platform. Cited as a named source in BPS's GHG Emissions Accounts and referenced (as \"National GHGs Inventory System (SIGNSMART)\") in Indonesia's Second NDC.",
-      "releases_per_year": 1,
-      "url": "https://signsmart.menlhk.go.id/",
-      "domains": [
-        "environment"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "id-dukcapil-siak",
-      "title": "Population Administration Information System (SIAK) — Dukcapil Civil Registry Data",
-      "publisher": "Directorate General of Population and Civil Registration (Ditjen Dukcapil), Ministry of Home Affairs",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "National civil-registration/vital-statistics administrative database (Sistem Informasi Administrasi Kependudukan) maintained by Ditjen Dukcapil, Kemendagri. Its semester population counts, including religion breakdowns, are distributed via the Satu Data Indonesia portal (Kementerian Agama dataset listing \"Sumber Data: Dukcapil\") and used to reconcile BPS/Kemensos's DTSEN social registry.",
-      "releases_per_year": 2,
-      "url": "https://dukcapil.kemendagri.go.id/",
-      "domains": [
-        "population",
-        "proposed:civil-registration",
-        "proposed:religion"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "id-dtsen",
-      "title": "Data Tunggal Sosial Ekonomi Nasional (DTSEN)",
-      "publisher": "BPS – Statistics Indonesia (jointly with Ministry of Social Affairs)",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Single integrated individual/household socio-economic registry built and quarterly updated by BPS — combining Susenas, Sakernas, administrative data and reconciled with Dukcapil population records — that since 2025 serves as the unified targeting basis for Indonesia's social-protection programmes (PKH, Sembako food assistance, JKN/BPJS Kesehatan subsidies, Sekolah Rakyat, housing assistance), replacing the earlier DTKS system.",
-      "releases_per_year": 4,
-      "url": "https://kemensos.go.id/",
-      "domains": [
-        "benefits",
-        "poverty",
-        "proposed:social-registry",
-        "proposed:targeting"
-      ],
-      "kind": "publication"
-    }
-  ],
-  "dependencies": [
-    {
-      "source_report_id": "id-energy-balances",
-      "target_report_id": "id-esdm",
-      "relationship_type": "uses_data_from",
-      "basis": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero). / The data used was a compilation of the energy data obtained from all related divisions in Central Board of Statistics, Ministry of Energy and Mineral Resources, State Electricity Company, State Gas Company, Agency Specific Downstream Oil & Gas, Indonesia Railways.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
-    },
-    {
-      "source_report_id": "id-energy-balances",
-      "target_report_id": "id-pln-statistics",
-      "relationship_type": "uses_data_from",
-      "basis": "Same \"Sumber Data / The Data Used\" section as above, p.11 of the publication PDF, naming PT PLN (Persero) as an input source.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
-    },
-    {
-      "source_report_id": "id-energy-balances",
-      "target_report_id": "id-pgn",
-      "relationship_type": "uses_data_from",
-      "basis": "Same \"Sumber Data / The Data Used\" section, naming PT PGN (Persero) as an input source.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
-    },
-    {
-      "source_report_id": "id-energy-balances",
-      "target_report_id": "id-bph-migas",
-      "relationship_type": "uses_data_from",
-      "basis": "Same \"Sumber Data / The Data Used\" section, naming BPH Migas as an input source.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
-    },
-    {
-      "source_report_id": "id-energy-balances",
-      "target_report_id": "id-kai",
-      "relationship_type": "uses_data_from",
-      "basis": "Same \"Sumber Data / The Data Used\" section, naming PT KAI (Persero) as an input source.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
-    },
-    {
-      "source_report_id": "id-oil-production",
-      "target_report_id": "id-ditjen-migas",
-      "relationship_type": "uses_data_from",
-      "basis": "Chart-level footnote: \"Sumber/Source: Dirjen Migas ESDM 2023\", on a national oil production figure in BPS's Mining Statistics of Petroleum and Natural Gas 2019-2023 (most of the publication's own tables are sourced to BPS's own Annual Survey of Petroleum and Natural Gas Mining Companies instead).",
-      "evidence_url": "https://www.bps.go.id/en/publication/2025/01/31/455db7c47d02471e6c05fa5f/statistik-pertambangan-minyak-dan-gas-bumi-2019-2023.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber/Source: Dirjen Migas ESDM 2023"
-    },
-    {
-      "source_report_id": "id-gas-production",
-      "target_report_id": "id-ditjen-migas",
-      "relationship_type": "uses_data_from",
-      "basis": "Same publication and same \"Sumber/Source: Dirjen Migas ESDM 2023\" footnote, which covers gas as well as oil production figures.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2025/01/31/455db7c47d02471e6c05fa5f/statistik-pertambangan-minyak-dan-gas-bumi-2019-2023.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber/Source: Dirjen Migas ESDM 2023"
-    },
-    {
-      "source_report_id": "id-electricity-mix",
-      "target_report_id": "id-pln-statistics",
-      "relationship_type": "cites",
-      "basis": "Bibliography entry in BPS's Statistik Listrik 2020-2024 (14th edition): \"PT PLN (Persero). 2025. Statistics PLN 2024.\" (the publication's own generation-by-plant-type tables are sourced to BPS's own Annual Survey of Electricity Companies).",
-      "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/c4f7aade5d4801236ec79b81/statistik-listrik-2020-2024.html",
-      "evidence_grade": "B",
-      "evidence_quote": "PT PLN (Persero). 2025. Statistics PLN 2024."
-    },
-    {
-      "source_report_id": "id-geothermal",
-      "target_report_id": "id-pln-statistics",
-      "relationship_type": "cites",
-      "basis": "Same publication and bibliography entry, which also covers the geothermal-power tables in the same document.",
-      "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/c4f7aade5d4801236ec79b81/statistik-listrik-2020-2024.html",
-      "evidence_grade": "B",
-      "evidence_quote": "PT PLN (Persero). 2025. Statistics PLN 2024."
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-energy-balances",
-      "relationship_type": "uses_data_from",
-      "basis": "Sumber data utama adalah Neraca Energi yang dipublikasikan oleh BPS RI... / The main data source are Energy Balance published by BPS-Statistics Indonesia... (Section 1.4, Data Sources and Methodology).",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Sumber data utama adalah Neraca Energi yang dipublikasikan oleh BPS RI serta Inventori GRK dari Kementerian Lingkungan Hidup dan Kehutanan (KLHK)."
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-klhk-ghg-inventory",
-      "relationship_type": "uses_data_from",
-      "basis": "...serta Inventori GRK dari Kementerian Lingkungan Hidup dan Kehutanan (KLHK). / ...and GHG Inventory from the Ministry of Environment and Forestry (MoEF). Bibliography cites the specific title: \"Kementerian Lingkungan Hidup dan Kehutanan. 2024. Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023.\"",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Kementerian Lingkungan Hidup dan Kehutanan. 2024. Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023."
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-bop",
-      "relationship_type": "uses_data_from",
-      "basis": "...terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia... / ...there were also other supporting data sources, such as SUT from BPS, Balance of Payment from Bank Indonesia... (Section 1.4).",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-national-accounts",
-      "relationship_type": "uses_data_from",
-      "basis": "...seperti TPP dari BPS... / ...such as SUT [Supply-Use Table] from BPS... (Section 1.4) — the Tabel Penyediaan dan Penggunaan is BPS's national-accounts supply-use table.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-esdm",
-      "relationship_type": "uses_data_from",
-      "basis": "...Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM... / ...Energy Statistics from Ministry of Energy and Mineral Resources (MEMR), emission factors from MEMR... (Section 1.4).",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "legal_basis",
-      "basis": "...dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006... / ...and 2006 Intergovernmental Panel on Climate Change (IPCC) Guidelines... (Section 1.4). Bibliography: \"IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories.\"",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories."
-    },
-    {
-      "source_report_id": "id-ndc-climate",
-      "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "legal_basis",
-      "basis": "Emission in reference year is estimated emission from the GHG Inventory using 2006 IPCC-GL. (Section 4.2, Scope and Coverage, Indonesia's Second NDC as filed with UNFCCC.)",
-      "evidence_url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-ndc-climate",
-      "target_report_id": "id-klhk-ghg-inventory",
-      "relationship_type": "uses_data_from",
-      "basis": "National GHGs Inventory System (SIGNSMART) — identified in Section V as part of Indonesia's National Registry System (SRN) underpinning the NDC's emissions reporting.",
-      "evidence_url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-ndc-climate",
-      "target_report_id": "id-deforestation",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Deforestation rate under BAU scenario for 2013-2020 is in line with the 1st FREL for REDD+, which is about 0.920 million ha/year, and consist of planned and unplanned deforestation. (Annex 1, FOLU section, Indonesia's Enhanced NDC 2022.)",
-      "evidence_url": "https://unfccc.int/sites/default/files/NDC/2022-09/23.09.2022_Enhanced%20NDC%20Indonesia.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-deforestation",
-      "target_report_id": "id-reforestation",
-      "relationship_type": "calculated_from",
-      "basis": "Angka deforestasi netto tahun 2024 tercatat sebesar 175,4 ribu hektar, hasil dari deforestasi bruto sebesar 216,2 ribu hektare dikurangi hasil reforestasi yang mencapai 40,8 ribu hektare. (Net deforestation = gross deforestation minus reforestation result.)",
-      "evidence_url": "https://www.kehutanan.go.id/news/article-10",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-forest-cover",
-      "target_report_id": "id-reforestation",
-      "relationship_type": "uses_data_from",
-      "basis": "Kementerian Kehutanan telah melaksanakan upaya reforestasi melalui Rehabilitasi Hutan dan Lahan seluas 217,9 ribu hektar pada tahun 2024, recorded as additions to forest and mixed agroforestry cover.",
-      "evidence_url": "https://www.kehutanan.go.id/news/article-10",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-ghg-inventory",
-      "target_report_id": "id-forest-cover",
-      "relationship_type": "uses_data_from",
-      "basis": "Table 1-7: \"Forest land cover of Indonesia in 2019 (Thousand Ha) (Source: KLHK 2020 – Recalculation of Indonesia 2019 land cover)\"; Figure 1-11: \"Map of Indonesian Land Cover 2019 (Source: MoEF 2020)\". (Indonesia's Third Biennial Update Report, its official GHG inventory report.)",
-      "evidence_url": "https://unfccc.int/sites/default/files/resource/IndonesiaBUR%203_FINAL%20REPORT_2.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-construction",
-      "target_report_id": "id-pdrb",
-      "relationship_type": "uses_data_from",
-      "basis": "Informasi yang disajikan meliputi ... Produk Domestik Regional Bruto (PDRB) sektor konstruksi ... Data yang dimuat dalam publikasi ini bersumber dari Badan Pusat Statistik (BPS), kementerian/lembaga/instansi pemerintah, serta lembaga internasional. (Konstruksi Dalam Angka 2025.)",
-      "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/20472bbffea268af42cc5c4d/konstruksi-dalam-angka-2025.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Data yang dimuat dalam publikasi ini bersumber dari Badan Pusat Statistik (BPS), kementerian/lembaga/instansi pemerintah, serta lembaga internasional."
-    },
-    {
-      "source_report_id": "id-religion-composition",
-      "target_report_id": "id-dukcapil-siak",
-      "relationship_type": "uses_data_from",
-      "basis": "Satu Data Indonesia dataset \"Jumlah Penduduk Menurut Agama\": Producer/Instansi \"Kementerian Agama\"; Sumber Data: \"Dukcapil\".",
-      "evidence_url": "https://data.go.id/dataset/dataset/jumlah-penduduk-menurut-agama6",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-ethnic-groups",
-      "target_report_id": "id-population-census",
-      "relationship_type": "uses_data_from",
-      "basis": "BPS publication \"Profile of Ethnic Groups and Local Languages Diversity in Indonesia: Results of the 2020 Long Form Population Census\" — provides socio-demographic profiles of ten ethnic groups compiled from the 2020 census long form.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/12/12/6feb932e24186429686fb57b/profil-suku-dan-keragaman-bahasa-daerah-hasil-long-form-sensus-penduduk-2020.html",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-regional-languages",
-      "target_report_id": "id-population-census",
-      "relationship_type": "uses_data_from",
-      "basis": "Same joint publication (\"Profil Suku dan Keragaman Bahasa Daerah... Long Form Sensus Penduduk 2020\") covers local-language diversity from the same 2020 census long form.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/12/12/6feb932e24186429686fb57b/profil-suku-dan-keragaman-bahasa-daerah-hasil-long-form-sensus-penduduk-2020.html",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-disaster-risk-index",
-      "target_report_id": "id-disaster-occurrence",
-      "relationship_type": "uses_data_from",
-      "basis": "Menurut data yang dihimpun dalam Data Informasi Bencana Indonesia (DIBI)-BNPB, terlihat bahwa dari lebih dari 1.800 kejadian bencana pada periode tahun 2005 hingga 2015... (BNPB's Risiko Bencana Indonesia / IRBI methodology book.)",
-      "evidence_url": "https://www.bnpb.go.id/storage/app/media//uploads/24/buku-rbi-1.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-internal-migration",
-      "target_report_id": "id-population-census",
-      "relationship_type": "uses_data_from",
-      "basis": "In an effort to meet the need for more complete migration data, we have prepared this Publication of Migration Statistics as a result of the 2020 Population Census. (BPS provincial migration-statistics series.)",
-      "evidence_url": "https://babel.bps.go.id/en/publication/2023/07/14/06e1fdbe4bcb304c43c059c1/statistik-migrasi-provinsi-kepulauan-bangka-belitung-hasil-long-form-sensus-penduduk-2020.html",
-      "evidence_grade": "B",
-      "evidence_quote": "In an effort to meet the need for more complete migration data, we have prepared this Publication of Migration Statistics as a result of the 2020 Population Census."
-    },
-    {
-      "source_report_id": "id-internal-migration",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "Profil Migran dari Survei Sosial Ekonomi Nasional 2024 (Susenas Maret 2024) merupakan publikasi yang bertujuan untuk memberikan gambaran umum tentang volume, laju, pola, dan arus migrasi berdasarkan hasil Susenas Maret 2024.",
-      "evidence_url": "https://www.bps.go.id/id/publication/2025/10/24/377adcf24286b49052c0fd20/profil-migran-hasil-survei-sosial-ekonomi-nasional-2024.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Profil Migran dari Survei Sosial Ekonomi Nasional 2024 (Susenas Maret 2024) merupakan publikasi yang bertujuan untuk memberikan gambaran umum tentang volume, laju, pola, dan arus migrasi berdasarkan hasil Susenas Maret 2024."
-    },
-    {
-      "source_report_id": "id-health-stats",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "The 2022 Health Statistics presents statistics and indicators in the health sector derived from the 2022 National Socioeconomic Survey Health and Housing Module.",
-      "evidence_url": "https://www.bps.go.id/en/publication/2023/08/31/923a16f1d75232565f1e0446/statistik-kesehatan-2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "The 2022 Health Statistics presents statistics and indicators in the health sector derived from the 2022 National Socioeconomic Survey Health and Housing Module."
-    },
-    {
-      "source_report_id": "id-bpjs-kesehatan",
-      "target_report_id": "id-dtsen",
-      "relationship_type": "uses_data_from",
-      "basis": "DTSEN menjadi basis data berbagai program perlindungan sosial (Perlinsos), termasuk Program Keluarga Harapan (PKH), program Sembako, Jaminan Kesehatan Nasional (JKN), program Sekolah Rakyat, serta program bantuan perumahan.",
-      "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-dtsen",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "BPS turut melakukan pemutakhiran DTSEN melalui survei rumah tangga yang dilaksanakan secara rutin, seperti Survei Sosial Ekonomi Nasional (Susenas) dan Survei Angkatan Kerja Nasional (Sakernas).",
-      "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-dtsen",
-      "target_report_id": "id-sakernas",
-      "relationship_type": "uses_data_from",
-      "basis": "Same sentence: BPS updates DTSEN through routine household surveys including Susenas and Sakernas.",
-      "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-dtsen",
-      "target_report_id": "id-dukcapil-siak",
-      "relationship_type": "uses_data_from",
-      "basis": "DTSEN memuat data unik individu dan keluarga di Indonesia yang telah padan atau sesuai dengan data kependudukan yang dimiliki oleh Dukcapil.",
-      "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-social-protection",
-      "target_report_id": "id-dtsen",
-      "relationship_type": "uses_data_from",
-      "basis": "DTSEN menjadi basis data berbagai program perlindungan sosial (Perlinsos), termasuk Program Keluarga Harapan (PKH), program Sembako... serta program bantuan perumahan.",
-      "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-tertiary-ger",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "Data presented includes several main indicators of educational processes and achievements based on the results of the National Socio-Economic Survey conducted in March 2024. (Statistik Pendidikan 2024.)",
-      "evidence_url": "https://www.bps.go.id/en/publication/2024/11/22/c20eb87371b77ee79ea1fa86/statistik-pendidikan-2024.html",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-dau-dak",
-      "target_report_id": "id-bps",
-      "relationship_type": "uses_data_from",
-      "basis": "DJPK's \"Formulasi DAU 2022\" variable/source table lists: Jumlah Penduduk -> BPS; IPM -> BPS & Kemendagri; PDRB Per Kapita -> BPS & Kemendagri, as inputs to the Fiscal Need (Kebutuhan Fiskal) component of the DAU formula.",
-      "evidence_url": "https://djpk.kemenkeu.go.id/wp-content/uploads/2022/03/Formulasi-DAU-2022.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-anticorruption",
-      "target_report_id": "id-rpjmn",
-      "relationship_type": "legal_basis",
-      "basis": "Renstra KPK 2025-2029 disusun dengan memperhatikan ... Rencana Pembangunan Jangka Menengah Nasional 2025-2029 (RPJMN 2025-2029) sebagaimana diatur dalam Peraturan Presiden Nomor 12 Tahun 2025. (KPK's Strategic Plan, which documents and continues the three implementation periods of Stranas PK 2019-2024.)",
-      "evidence_url": "https://cms.kpk.go.id/storage/8707/33.-Peraturan-KPK-Nomor-2-Tahun-2025-tentang-Renstra-KPK-Tahun-2025-2029.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-anticorruption",
-      "target_report_id": "id-asset-declaration",
-      "relationship_type": "uses_data_from",
-      "basis": "Table 5, \"Persentase Tingkat Kepatuhan LHKPN Berdasarkan Lembaga 2020-2024\", and Figure 15, \"Grafik Perkembangan Tingkat Kepatuhan Pelaporan LHKPN\" — LHKPN (asset-declaration) compliance data tracked as a strategy performance indicator.",
-      "evidence_url": "https://cms.kpk.go.id/storage/8707/33.-Peraturan-KPK-Nomor-2-Tahun-2025-tentang-Renstra-KPK-Tahun-2025-2029.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-islamic-finance",
-      "target_report_id": "id-bank-indonesia",
-      "relationship_type": "uses_data_from",
-      "basis": "Data Source: Bank Indonesia and Financial Services Authority unless mentioned otherwise. Data from Integrated Commercial Bank Reports (LBUT) which submitted by the reporting banks to Bank Indonesia... is processed on the web server LBUT and LBBPRS. (OJK Statistik Perbankan Syariah.)",
-      "evidence_url": "https://ojk.go.id/id/kanal/syariah/data-dan-statistik/statistik-perbankan-syariah/Documents/Pages/Statistik-Perbankan-Syariah---Maret-2024/STATISTIK%20PERBANKAN%20SYARIAH%20-%20MARET%202024.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-financial-inclusion",
-      "target_report_id": "id-bps",
-      "relationship_type": "uses_data_from",
-      "basis": "Untuk pertama kalinya, SNLIK diselenggarakan OJK bersama dengan Badan Pusat Statistik (BPS). (OJK official press release on the 2024 National Financial Literacy and Inclusion Survey.)",
-      "evidence_url": "https://ojk.go.id/id/berita-dan-kegiatan/siaran-pers/Pages/OJK-dan-BPS-Umumkan-Hasil-Survei-Nasional-Literasi-dan-Inklusi-Keuangan-Tahun-2024.aspx",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-msme-broader",
-      "target_report_id": "id-bps",
-      "relationship_type": "uses_data_from",
-      "basis": "Pendataan Lengkap Koperasi dan UMKM 2023: data dikumpulkan dengan metode door-to-door ... oleh petugas BPS ... untuk keperluan perencanaan dan evaluasi [Kemenkopukm's programmes]. (BPS official news article on the joint BPS-KemenkopUKM enumeration.)",
-      "evidence_url": "https://www.bps.go.id/en/news/2023/09/15/533/kemenkopukm-gandeng-bps-lakukan-pendataan-lengkap-koperasi-dan-umkm-2023.html",
-      "evidence_grade": "A",
-      "evidence_quote": "Kementerian Koperasi dan UKM (KemenKopUKM) berkolaborasi dengan Badan Pusat Statistik (BPS) melakukan Pendataan Lengkap Koperasi dan UMKM (PL-KUMKM) 2023 sebagai upaya mendorong terciptanya basis data tunggal Koperasi dan UMKM di Indonesia."
-    },
-    {
-      "source_report_id": "id-manufacturing-ipi",
-      "target_report_id": "id-manufacturing-directory",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Direktori Perusahaan Industri Manufaktur ... bertujuan menghasilkan kerangka sampel industri manufaktur skala besar dan sedang ... serta menjadi dasar pengambilan sampel untuk kegiatan survei-survei lain yang berbasis industri manufaktur.",
-      "evidence_url": "https://bondowosokab.bps.go.id/id/publication/2025/11/21/eabddf59a5286c3c5ef83853/direktori-industri-manufaktur-kabupaten-bondowoso-2025.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Direktori Perusahaan Industri Manufaktur Tahun 2025 merupakan hasil kegiatan Pemutakhiran Direktori Perusahaan Awal (DPA) yang bertujuan menghasilkan kerangka sampel industri manufaktur skala besar dan sedang sebagai pendukung kegiatan pemutakhiran Statistical Business Register (SBR) yang dibangun oleh Badan Pusat Statistik (BPS) serta menjadi dasar pengambilan sampel untuk kegiatan survei-survei lain yang berbasis industri manufaktur."
-    },
-    {
-      "source_report_id": "id-malang",
-      "target_report_id": "id-population-census",
-      "relationship_type": "uses_data_from",
-      "basis": "Menurut hasil Sensus Penduduk 2010 jumlah penduduk Kota Malang sebanyak 820.243 jiwa. (Kota Malang Dalam Angka 2014, Chapter 3.)",
-      "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-malang",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "Berdasarkan hasil Survei Sosial Ekonomi Nasional (Susenas) tahun 2013 ... penduduk usia 15 tahun ke atas yang bekerja berdasarkan lapangan usaha... (Kota Malang Dalam Angka 2014, Chapter 3.)",
-      "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-malang",
-      "target_report_id": "id-pdrb",
-      "relationship_type": "calculated_from",
-      "basis": "Pertumbuhan ekonomi tersebut dapat dihitung dari perubahan PDRB atas dasar harga konstan. (Kota Malang Dalam Angka 2014, Chapter 10.)",
-      "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-ikn-framework",
-      "target_report_id": "id-rpjmn",
-      "relationship_type": "cites",
-      "basis": "Dalam Rencana Pembangunan Jangka Menengah Nasional (RPJMN) Tahun 2025-2029, Ibu Kota Nusantara dirancang sebagai Superhub Ekonomi. (OIKN Peraturan Kepala Otorita IKN No. 11/2025, Rencana Strategis Otorita IKN 2025-2029.)",
-      "evidence_url": "https://ikn.go.id/storage/regulasi/20251010-perka-oikn-11-2025-tentang-rencana-strategis-otorita-ikn-tahun-2025-2029.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-digital-economy",
-      "target_report_id": "id-susenas",
-      "relationship_type": "uses_data_from",
-      "basis": "According to BPS data from the results of the 2024 National Socio-economic Survey (Susenas) data collection, 72.78 percent of the Indonesian population has accessed the internet in 2024. (Statistik Telekomunikasi Indonesia 2024.)",
-      "evidence_url": "https://www.bps.go.id/en/publication/2025/08/29/beaa2be400eda6ce6c636ef8/statistik-telekomunikasi-indonesia-2024.html",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-labour-productivity",
-      "target_report_id": "id-national-accounts",
-      "relationship_type": "calculated_from",
-      "basis": "SDG indicator 8.2.1 metadata, \"Sumber dan Cara Pengumpulan Data\": Badan Pusat Statistik: 1. Publikasi PDB Triwulanan dan Pendapatan Nasional Indonesia sesuai tahun berjalan; dan 2. Survei Angkatan Kerja Nasional (Sakernas). (DKI Jakarta government's reproduction of BPS's national SDG-indicator metadata template.)",
-      "evidence_url": "https://sdgs.jakarta.go.id/storage/01JYNJQ8V02G6NBHKHSPYXQHY6.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "id-labour-productivity",
-      "target_report_id": "id-sakernas",
-      "relationship_type": "calculated_from",
-      "basis": "Same SDG indicator 8.2.1 metadata source line, naming Sakernas as the second data input alongside quarterly GDP.",
-      "evidence_url": "https://sdgs.jakarta.go.id/storage/01JYNJQ8V02G6NBHKHSPYXQHY6.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "id-pdrb",
-      "target_report_id": "id-interprovincial-trade",
-      "relationship_type": "uses_data_from",
-      "basis": "Trade data between regions obtained in a complete and continuous manner can support the preparation of the GRDP of Provincial Expenditures. (BPS Bali/Badung interregional trade survey (PAW) 2022 news article.)",
-      "evidence_url": "https://badungkab.bps.go.id/en/news/2022/04/21/408/interregional-trade-survey--paw--2022.html",
-      "evidence_grade": "B",
-      "evidence_quote": "Trade data between regions obtained in a complete and continuous manner can support the preparation of the GRDP of Provincial Expenditures."
-    }
-  ],
-  "_dropped": [
-    {
-      "edge": "id-energy-balance-detail -> (possible duplicate of id-energy-balances)",
-      "source": "id-energy-balance-detail",
-      "target": "id-energy-balances",
-      "reason": "note",
-      "why": "RESOLVED 2026-08-30 (Thomas ruling): confirmed duplicate, merge into id-energy-balances. Node `id-energy-balance-detail` removed from the corpus. Flagging for Thomas's ruling, not asserting as resolved: 2026-08-30 research could not find any BPS publication distinctly titled/scoped as a 'detailed production-consumption' energy balance separate from 'Neraca Energi Indonesia' (which is what id-energy-balances' new edges this round cite). The two nodes' own descriptions ('Annual energy balance covering production, conversion and consumption' vs 'covering production through final consumption... extends the earlier Energy Balances node with fuller multi-year detail') read as the same underlying BPS product described twice from the 2026-08-14 Indonesia Grok batch import. Left id-energy-balance-detail unwired this round rather than duplicate the same edges onto both nodes without a document distinguishing them — a genuine duplicate-node merge call, not a research gap."
-    },
-    {
-      "edge": "id-interisland-trade -> (unresearched)",
-      "source": "id-interisland-trade",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS provincial/kota statistics-table pages (Sultra, Kendari, Kolaka) for inter-island trade volume returned landing-page metadata only, no source/methodology text. A BPS Belitung training-news article suggested inter-island trade data collection may be organisationally bundled with the interprovincial-trade (PAW) survey, but did not explicitly state a derivation/containment relationship — too ambiguous to assert."
-    },
-    {
-      "edge": "id-sez -> (unresearched)",
-      "source": "id-sez",
-      "target": null,
-      "reason": "no-document",
-      "why": "KEK.go.id/BPS coordination-meeting articles describe an intent to integrate KEK statistics ahead of the 2026 Economic Census but name no existing BPS/BKPM product as a current data source. BKPM's LKPM dataset lists KEK names only as a form dropdown, not a structured linkage."
-    },
-    {
-      "edge": "id-ftz -> (unresearched)",
-      "source": "id-ftz",
-      "target": null,
-      "reason": "no-document",
-      "why": "jdih.kemenkeu.go.id's KPBPB legal glossary names no data-source agency. A BPS Batam 'Import Statistics of Batam' publication sources from Batam Customs forms (PIB-BC 2.0 / PPBI-BC 2.3), a customs-forms-level detail about a non-cataloged BPS sub-product, not a documented statement that id-ftz itself derives from id-customs-tariff."
-    },
-    {
-      "edge": "id-sea-transport -> (unresearched)",
-      "source": "id-sea-transport",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS 'Statistik Transportasi Laut' publication abstracts state only that data is 'bersourced from Indonesian seaports generally', naming no institution. SIRUSA metadata (kd=2168) 500-errored/robots-disallowed on every attempt."
-    },
-    {
-      "edge": "id-transport-multimodal -> (unresearched)",
-      "source": "id-transport-multimodal",
-      "target": null,
-      "reason": "deferred",
-      "why": "BPS 'Statistik Transportasi Provinsi DKI Jakarta 2024' abstract names real institutional data providers (Dinas Perhubungan DKI Jakarta, Ditlantas Polda Metro Jaya, PT Transportasi Jakarta, PT KAI, PT Pelindo, PT Angkasa Pura II) but none of these institutions are cataloged report-nodes in the graph. A real lead if/when institution-level transport nodes are minted."
-    },
-    {
-      "edge": "id-tanjung-priok -> (unresearched)",
-      "source": "id-tanjung-priok",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS publishes genuine Tanjung Priok-specific statistics tables, but every fetch returned landing/navigation chrome only, no footnote/source line. A Databoks secondary article citing 'BPS' sourced itself to 'Katadata Insight Center', not a specific BPS publication."
-    },
-    {
-      "edge": "id-tanjung-perak -> (unresearched)",
-      "source": "id-tanjung-perak",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "Same class of BPS statistics-table landing pages as Tanjung Priok — body text unretrievable on every attempt."
-    },
-    {
-      "edge": "id-major-ports -> (unresearched)",
-      "source": "id-major-ports",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS runs city-level port-transport editions (e.g. 'Statistik Transportasi Laut Kota Makassar 2024') analogous in structure to id-cpi/id-cpi-provincial, but no document states a dependency relationship between the city editions and this national node — a title-pattern similarity only, not a citation."
-    },
-    {
-      "edge": "id-defence-budget -> (unresearched)",
-      "source": "id-defence-budget",
-      "target": null,
-      "reason": "deferred",
-      "why": "Kemenkeu's 'Nota Keuangan RAPBN TA 2024' PDF is the right primary-document type (state-budget financial note allocating spending per ministry including Kemhan) but only front-matter/table-of-contents was retrieved, not the Belanja Negara chapter itself — needs a follow-up fetch targeting later PDF pages, not a dead end."
-    },
-    {
-      "edge": "id-nickel -> (unresearched)",
-      "source": "id-nickel",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS's 'Statistik Pertambangan Non Minyak dan Gas Bumi 2019-2023' states its own data is from BPS's Survei Perusahaan Pertambangan Non Migas (a primary BPS survey). Its foreword names Ditjen Minerba/ESDM only as general cooperation/access-facilitation language, not as a specific cited data source — too weak to assert an edge."
-    },
-    {
-      "edge": "id-coal -> (unresearched)",
-      "source": "id-coal",
-      "target": null,
-      "reason": "no-document",
-      "why": "Same publication and same reasoning as id-nickel above — BPS primary-collection product, ESDM cooperation language only."
-    },
-    {
-      "edge": "id-mining-stats -> (unresearched)",
-      "source": "id-mining-stats",
-      "target": null,
-      "reason": "no-document",
-      "why": "'Statistik Pertambangan Bahan Galian Indonesia 2023' (quarrying) states its data is from BPS's own Survei Tahunan Perusahaan Penggalian — a primary BPS survey, no named external dependency."
-    },
-    {
-      "edge": "id-land-use-change -> (unresearched)",
-      "source": "id-land-use-change",
-      "target": null,
-      "reason": "no-document",
-      "why": "All land-cover/land-use-change data found (KLHK/BPS Statistik Lingkungan Hidup, FRL, BUR3) is attributed generically to 'MoEF/KLHK land cover' and matches the id-forest-cover node rather than a distinct land-use-change publication tied to agriculture/estates."
-    },
-    {
-      "edge": "id-rice-paddy -> (unresearched)",
-      "source": "id-rice-paddy",
-      "target": null,
-      "reason": "no-document",
-      "why": "KSA (Kerangka Sampel Area) survey methodology is a BPS+BPPT/LAPAN+ATR/BPN+BIG collaboration, but none of those agencies are corpus nodes, and no document states id-national-accounts/id-poverty/id-agriculture-stats are calculated specifically from this publication rather than raw BPS crop data generally."
-    },
-    {
-      "edge": "id-agriculture-stats -> (unresearched)",
-      "source": "id-agriculture-stats",
-      "target": null,
-      "reason": "no-document",
-      "why": "Ministry of Agriculture's 'Buku Statistik Pertanian 2023' preface names BPS/BKPM/BMKG as general 'data producers' without a specific citable sentence tying it to an existing/new corpus node."
-    },
-    {
-      "edge": "id-palm-oil -> (unresearched)",
-      "source": "id-palm-oil",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS 'Statistik Kelapa Sawit Indonesia 2023' sources from its own Plantation Estate Survey, Ministry of Agriculture's Ditjenbun (not a corpus node) for smallholder data, and 'custom documents from Directorate General of Customs' for trade figures — the trade sentence does not name id-foreign-trade-exports/imports specifically."
-    },
-    {
-      "edge": "id-water-supply -> (unresearched)",
-      "source": "id-water-supply",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS 'Statistik Air Bersih' methodology (via a neliti.com mirror) states it is BPS's own Annual Survey of Water Supply Establishments, with its sampling frame drawn from the 2006 Economic Census — not a node in this graph."
-    },
-    {
-      "edge": "id-water-resources -> (unresearched)",
-      "source": "id-water-resources",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS's SIRUSA metadata system, which would carry the 'sumber data' field for irrigation-network indicators, was consistently ROBOTS_DISALLOWED on both sirusa.web.bps.go.id and sirusa.bps.go.id. No alternate ministry (pu.go.id) page with an explicit sourcing statement found in the time available."
-    },
-    {
-      "edge": "id-marine-coastal -> (unresearched)",
-      "source": "id-marine-coastal",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS 'Statistik Sumber Daya Laut dan Pesisir' (2023 and 2025 editions) abstracts state only 'compiled from BPS and related central/regional agencies' — too generic to name a specific node. Full PDF body not retrievable."
-    },
-    {
-      "edge": "id-fishing-ports -> (unresearched)",
-      "source": "id-fishing-ports",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS 'Statistik Pelabuhan Perikanan 2022/2023' abstract gives only definitional/scope text, no data-source statement retrievable."
-    },
-    {
-      "edge": "id-fisheries-production -> (unresearched)",
-      "source": "id-fisheries-production",
-      "target": null,
-      "reason": "no-document",
-      "why": "No document was retrievable (SIRUSA blocked; KKP fisheries PDFs not reachable within budget) explicitly stating fisheries production is calculated from fishing-port or marine-coastal statistics — declined to assert the plausible-sounding link without a document."
-    },
-    {
-      "edge": "id-health-facilities -> (unresearched)",
-      "source": "id-health-facilities",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS statistics-tables and SIRUSA metadata for hospital/puskesmas counts returned JS app-shell only. Kemenkes's facility portal and Profil Kesehatan Indonesia 2024 PDF excerpt did not name a source system or data-flow relationship."
-    },
-    {
-      "edge": "id-provinces-structure -> (unresearched)",
-      "source": "id-provinces-structure",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS 'Luas Daerah dan Jumlah Pulau Menurut Provinsi' table is JS app-shell only. Statistical Yearbook of Indonesia abstract states data comes from 'BPS and other agencies' generically, not naming Kemendagri specifically. ditjenbinaadwil.kemendagri.go.id pages ROBOTS_DISALLOWED/timed out on every attempt."
-    },
-    {
-      "edge": "id-apbn -> (unresearched)",
-      "source": "id-apbn",
-      "target": null,
-      "reason": "no-document",
-      "why": "Nota Keuangan (Buku II APBN 2025/2026), APBN KiTa monthly reports, KEM-PPKF, and DJPb's GFS pages were fetched and searched directly; none contained an explicit 'Sumber: BPS'/'berdasarkan data BPS' style sourcing statement meeting the evidence bar. BPS appears only in a glossary, never cited as a data source for a specific APBN figure."
-    },
-    {
-      "edge": "id-msme-manufacturing -> (unresearched)",
-      "source": "id-msme-manufacturing",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS's VIMK (quarterly micro/small industry survey) sampling method is confirmed as two-stage PPS selection of Census Blocks from updated household listings — explicitly not drawn from the Manufacturing Industry Directory (which the directory's own abstract scopes to medium/large firms only)."
-    },
-    {
-      "edge": "id-producer-prices -> (unresearched)",
-      "source": "id-producer-prices",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS PPI abstracts/press releases state only 'dilaksanakan oleh Badan Pusat Statistik' (BPS-conducts-BPS-survey), not a dependency on another node. SIRUSA metadata pages for PPI persistently 500-errored/ROBOTS_DISALLOWED."
-    },
-    {
-      "edge": "id-jakarta -> (unresearched)",
-      "source": "id-jakarta",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "Two independently-hosted mirrors of 'Provinsi DKI Jakarta Dalam Angka' PDFs were found; the 2011 edition gives only generic sourcing language, and the 2022 edition's PDF returned only its table of contents on repeated fetches — no chapter-level sourcing sentence retrieved."
-    },
-    {
-      "edge": "id-java-west -> (unresearched)",
-      "source": "id-java-west",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS Jabar abstract pages give no methodology detail; the one full-PDF mirror found (bappelitbangda.purwakartakab.go.id) 502'd/robots-blocked on every attempt."
-    },
-    {
-      "edge": "id-java-central -> (unresearched)",
-      "source": "id-java-central",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "A 'Jawa Tengah Dalam Angka 2025' PDF was located (owncloud.jatengprov.go.id via bappeda.jatengprov.go.id) but is robots-disallowed to WebFetch; no alternate accessible copy found."
-    },
-    {
-      "edge": "id-java-east -> (unresearched)",
-      "source": "id-java-east",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "No non-BPS-hosted full-text 'Jawa Timur Dalam Angka' PDF was located; BPS Jatim publication pages returned abstracts only, same pattern as the other provinces."
-    },
-    {
-      "edge": "id-magelang -> (unresearched)",
-      "source": "id-magelang",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "A 2011 'Kota Magelang Dalam Angka' PDF loaded but only returned body text through Chapter III (Population); later economy/PDRB chapters were not retrievable across repeated fetches. The only concrete sourcing found was a local civil-registry table footnote, not a BPS national-survey citation. No containment language found either (reads as a standalone publication, like Malang)."
-    },
-    {
-      "edge": "id-java-municipal -> (unresearched)",
-      "source": "id-java-municipal",
-      "target": null,
-      "reason": "note",
-      "why": "This node is a generic/categorical placeholder for the Dalam Angka publication pattern, which this round evidenced concretely via a specific city (id-malang). No additional document specific to this generic node (as opposed to one particular city) was found or expected."
-    },
-    {
-      "edge": "id-ikn-population -> (unresearched)",
-      "source": "id-ikn-population",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS press releases on the 2025 IKN special population enumeration (Pendataan Penduduk IKN) explicitly frame it as novel and standalone ('wilayah IKN belum pernah tercatat secara khusus dalam sensus penduduk sebelumnya') rather than derived from the existing Population Census. Results-announcement article does not name Podes, PDRB or RPJMN as sources it draws on (checked and confirmed absent)."
-    },
-    {
-      "edge": "id-tourism-domestic -> (unresearched)",
-      "source": "id-tourism-domestic",
-      "target": null,
-      "reason": "no-document",
-      "why": "BPS 'Statistik Wisatawan Nusantara 2024' describes its own sources as Mobile Positioning Data (telco big-data) and a standalone 'Survei Digital Wisatawan Nusantara 2024' web-questionnaire — not Susenas-derived. No document ties its sampling frame to Susenas, Podes or the Population Census."
-    },
-    {
-      "edge": "id-tourism-attractions -> (unresearched)",
-      "source": "id-tourism-attractions",
-      "target": null,
-      "reason": "no-document",
-      "why": "SIRUSA metadata (kegiatan/50171) confirms the 'Statistik Objek Daya Tarik Wisata' collection unit is a standalone business/establishment survey ('Usaha/perusahaan'), not one drawing on Podes as hypothesized."
-    },
-    {
-      "edge": "id-ecommerce -> (unresearched)",
-      "source": "id-ecommerce",
-      "target": null,
-      "reason": "unreadable-source",
-      "why": "BPS 'Statistik E-Commerce 2023' abstract has topic-coverage language only. Every attempt to reach the full PDF failed (web-api.bps.go.id 403 on two URLs, a dataindonesia.id mirror 403'd, a Scribd copy rendered a JS-disabled error shell, AllStats Search returned zero indexed results)."
-    },
-    {
-      "edge": "id-dau-dak -> id-own-source-revenue",
-      "source": "id-dau-dak",
-      "target": "id-own-source-revenue",
-      "reason": "no-document",
-      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://djpk.kemenkeu.go.id/?ufaq=data-apa-saja-yang-diperhitungkan-digunakan-dalam-pengalokasian-dau. Original basis: \"Data yang digunakan untuk perhitungan kapasitas fiskal terdiri dari: Pendapatan Asli Daerah (PAD), Dana Bagi Hasil (DBH) Sumber Daya Alam, dan DBH Pajak.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
-    },
-    {
-      "edge": "id-tax-ratio -> id-national-accounts",
-      "source": null,
-      "target": "id-national-accounts",
-      "reason": "note",
-      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Tax ratio merupakan formula untuk mengukur kinerja perpajakan dengan membandingkan antara penerimaan perpajakan dan Pendapatan Domestik Bruto (PDB) dalam kurun waktu tertentu. (Directorate General of Taxes / Ministry of Finance.)\""
-    },
-    {
-      "edge": "id-tax-ratio -> id-tax-revenues",
-      "source": null,
-      "target": "id-tax-revenues",
-      "reason": "note",
-      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Same formula definition: tax ratio compares penerimaan perpajakan (tax revenue) against PDB over a given period — tax revenue is the explicit numerator.\""
-    }
-  ]
+ "_slice": "id-unlinked-wiring-round3-2026-08-30",
+ "_researched": "2026-08-30",
+ "_status": "verified",
+ "_note": "Indonesia wiring round (post-triage full sweep of the 74 measured orphans, per project memory triage_2026-08-30 and unlinked_nodes_cleared). Method: 6 parallel research subagents (one per theme: trade/ports, energy/mining/climate, agriculture/fisheries/environment, population/social/health, fiscal/finance/governance, regional/local/digital), each independently fetching primary sources and reporting structured findings (not writing files). Every proposed edge and every new-node citation was then independently re-fetched and verified by the orchestrating session before minting -- including, for the two BPS Cloudflare-walled PDFs backing the largest edge clusters (Energy Balances of Indonesia; the GHG/Energy-Flow Accounts), by opening the BPS page in a real browser (Claude in Chrome), reading the signed web-api.bps.go.id download link out of the DOM, and curling the PDF directly with a Referer header -- confirming every quote verbatim on the actual extracted PDF text, not the landing-page abstract. No fabricated or unverifiable quote survived into this file. id-energy-balance-detail was deliberately left unwired and flagged instead as a likely duplicate of id-energy-balances (see _dropped) rather than minting the same evidence onto both nodes. Two containment relationships (id-export-partners, id-commodity-partner-matrix as part_of id-foreign-trade-exports) were recorded as a part_of field patch to the existing id-indonesia-grok-2026-08.json seed file, not as edges here -- per project convention, part_of does not reduce the isolated-node count.",
+ "reports": [
+  {
+   "id": "id-esdm",
+   "title": "Ministry of Energy and Mineral Resources (ESDM) — statistical and policy publications",
+   "publisher": "Ministry of Energy and Mineral Resources (ESDM)",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "Indonesia's national ministry for energy and mineral resources. Named as a source institution (generically, not by a specific document title) in BPS's Energy Balance of Indonesia (\"Sumber data ... berasal dari berbagai publikasi yang diterbitkan oleh ... Kementerian Energi dan Sumber Daya Mineral\") and its GHG Emissions Accounts (\"Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM)\"). Modelled as a broad institutional node, matching the existing id-bank-indonesia / id-bps / id-ojk convention, since neither citation names one specific ESDM publication.",
+   "url": "https://www.esdm.go.id/",
+   "domains": [
+    "energy",
+    "mining"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "id-pln-statistics",
+   "title": "Statistics PLN",
+   "publisher": "PT PLN (Persero)",
+   "country": "ID",
+   "jurisdiction_level": "institutional",
+   "region": "Indonesia",
+   "description": "PT PLN's own annual statistical report on generation capacity, generation mix, sales and distribution. Cited by exact title in BPS's Electricity Statistics 2020-2024 bibliography: \"PT PLN (Persero). 2025. Statistics PLN 2024.\"",
+   "releases_per_year": 1,
+   "url": "https://web.pln.co.id/statistik",
+   "domains": [
+    "energy"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "id-pgn",
+   "title": "PT Perusahaan Gas Negara (PGN) Tbk",
+   "publisher": "PT Perusahaan Gas Negara (PGN) Tbk",
+   "country": "ID",
+   "jurisdiction_level": "institutional",
+   "region": "Indonesia",
+   "description": "Indonesia's state-owned natural gas transmission and distribution company. Named (generically, not by a specific document title) as one of the institutional data sources for BPS's Energy Balance of Indonesia.",
+   "url": "https://www.pgn.co.id/",
+   "domains": [
+    "energy"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "id-bph-migas",
+   "title": "BPH Migas (Badan Pengatur Hilir Minyak dan Gas Bumi)",
+   "publisher": "BPH Migas",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "Indonesia's downstream oil and gas regulatory agency. Named (generically, not by a specific document title) as one of the institutional data sources for BPS's Energy Balance of Indonesia.",
+   "url": "https://www.bphmigas.go.id/",
+   "domains": [
+    "energy"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "id-kai",
+   "title": "PT Kereta Api Indonesia (KAI) (Persero)",
+   "publisher": "PT Kereta Api Indonesia (Persero)",
+   "country": "ID",
+   "jurisdiction_level": "institutional",
+   "region": "Indonesia",
+   "description": "Indonesia's state railway operator. Named (generically, not by a specific document title) as one of the institutional data sources — rail fuel consumption — for BPS's Energy Balance of Indonesia.",
+   "url": "https://www.kai.id/",
+   "domains": [
+    "energy",
+    "infrastructure"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "id-ditjen-migas",
+   "title": "Direktorat Jenderal Minyak dan Gas Bumi (Ditjen Migas)",
+   "publisher": "Ministry of Energy and Mineral Resources (ESDM)",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "ESDM's Directorate General of Oil and Gas. Its own oil and gas production statistics are cited as a chart-level source (\"Sumber/Source: Dirjen Migas ESDM 2023\") in BPS's Mining Statistics of Petroleum and Natural Gas 2019-2023, alongside BPS's own primary Annual Survey of Petroleum and Natural Gas Mining Companies.",
+   "url": "https://migas.esdm.go.id/",
+   "domains": [
+    "energy"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "id-klhk-ghg-inventory",
+   "title": "National GHG Inventory Report and MRV (SIGN SMART)",
+   "publisher": "Ministry of Environment and Forestry (KLHK), Directorate General of Climate Change Control",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "Indonesia's official national greenhouse gas inventory and Monitoring-Reporting-Verification report (e.g. \"Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023\"), maintained via the SIGN SMART platform. Cited as a named source in BPS's GHG Emissions Accounts and referenced (as \"National GHGs Inventory System (SIGNSMART)\") in Indonesia's Second NDC.",
+   "releases_per_year": 1,
+   "url": "https://signsmart.menlhk.go.id/",
+   "domains": [
+    "environment"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "id-dukcapil-siak",
+   "title": "Population Administration Information System (SIAK) — Dukcapil Civil Registry Data",
+   "publisher": "Directorate General of Population and Civil Registration (Ditjen Dukcapil), Ministry of Home Affairs",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "National civil-registration/vital-statistics administrative database (Sistem Informasi Administrasi Kependudukan) maintained by Ditjen Dukcapil, Kemendagri. Its semester population counts, including religion breakdowns, are distributed via the Satu Data Indonesia portal (Kementerian Agama dataset listing \"Sumber Data: Dukcapil\") and used to reconcile BPS/Kemensos's DTSEN social registry.",
+   "releases_per_year": 2,
+   "url": "https://dukcapil.kemendagri.go.id/",
+   "domains": [
+    "population"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "id-dtsen",
+   "title": "Data Tunggal Sosial Ekonomi Nasional (DTSEN)",
+   "publisher": "BPS – Statistics Indonesia (jointly with Ministry of Social Affairs)",
+   "country": "ID",
+   "jurisdiction_level": "federal",
+   "region": "Indonesia",
+   "description": "Single integrated individual/household socio-economic registry built and quarterly updated by BPS — combining Susenas, Sakernas, administrative data and reconciled with Dukcapil population records — that since 2025 serves as the unified targeting basis for Indonesia's social-protection programmes (PKH, Sembako food assistance, JKN/BPJS Kesehatan subsidies, Sekolah Rakyat, housing assistance), replacing the earlier DTKS system.",
+   "releases_per_year": 4,
+   "url": "https://kemensos.go.id/",
+   "domains": [
+    "benefits",
+    "poverty"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "id-energy-balances",
+   "target_report_id": "id-esdm",
+   "relationship_type": "uses_data_from",
+   "basis": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero). / The data used was a compilation of the energy data obtained from all related divisions in Central Board of Statistics, Ministry of Energy and Mineral Resources, State Electricity Company, State Gas Company, Agency Specific Downstream Oil & Gas, Indonesia Railways.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
+  },
+  {
+   "source_report_id": "id-energy-balances",
+   "target_report_id": "id-pln-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "Same \"Sumber Data / The Data Used\" section as above, p.11 of the publication PDF, naming PT PLN (Persero) as an input source.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
+  },
+  {
+   "source_report_id": "id-energy-balances",
+   "target_report_id": "id-pgn",
+   "relationship_type": "uses_data_from",
+   "basis": "Same \"Sumber Data / The Data Used\" section, naming PT PGN (Persero) as an input source.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
+  },
+  {
+   "source_report_id": "id-energy-balances",
+   "target_report_id": "id-bph-migas",
+   "relationship_type": "uses_data_from",
+   "basis": "Same \"Sumber Data / The Data Used\" section, naming BPH Migas as an input source.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
+  },
+  {
+   "source_report_id": "id-energy-balances",
+   "target_report_id": "id-kai",
+   "relationship_type": "uses_data_from",
+   "basis": "Same \"Sumber Data / The Data Used\" section, naming PT KAI (Persero) as an input source.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/12/21/a4822df8ddc9b338be718e58/neraca-energi-indonesia-2018-2022-.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data yang digunakan untuk penyusunan neraca energi ini berasal dari berbagai publikasi yang diterbitkan oleh Badan Pusat Statistik, Kementerian Energi dan Sumber Daya Mineral, PT PLN (Persero), PT PGN (Persero), BPH Migas, PT KAI (Persero)."
+  },
+  {
+   "source_report_id": "id-oil-production",
+   "target_report_id": "id-ditjen-migas",
+   "relationship_type": "uses_data_from",
+   "basis": "Chart-level footnote: \"Sumber/Source: Dirjen Migas ESDM 2023\", on a national oil production figure in BPS's Mining Statistics of Petroleum and Natural Gas 2019-2023 (most of the publication's own tables are sourced to BPS's own Annual Survey of Petroleum and Natural Gas Mining Companies instead).",
+   "evidence_url": "https://www.bps.go.id/en/publication/2025/01/31/455db7c47d02471e6c05fa5f/statistik-pertambangan-minyak-dan-gas-bumi-2019-2023.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber/Source: Dirjen Migas ESDM 2023"
+  },
+  {
+   "source_report_id": "id-gas-production",
+   "target_report_id": "id-ditjen-migas",
+   "relationship_type": "uses_data_from",
+   "basis": "Same publication and same \"Sumber/Source: Dirjen Migas ESDM 2023\" footnote, which covers gas as well as oil production figures.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2025/01/31/455db7c47d02471e6c05fa5f/statistik-pertambangan-minyak-dan-gas-bumi-2019-2023.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber/Source: Dirjen Migas ESDM 2023"
+  },
+  {
+   "source_report_id": "id-electricity-mix",
+   "target_report_id": "id-pln-statistics",
+   "relationship_type": "cites",
+   "basis": "Bibliography entry in BPS's Statistik Listrik 2020-2024 (14th edition): \"PT PLN (Persero). 2025. Statistics PLN 2024.\" (the publication's own generation-by-plant-type tables are sourced to BPS's own Annual Survey of Electricity Companies).",
+   "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/c4f7aade5d4801236ec79b81/statistik-listrik-2020-2024.html",
+   "evidence_grade": "B",
+   "evidence_quote": "PT PLN (Persero). 2025. Statistics PLN 2024."
+  },
+  {
+   "source_report_id": "id-geothermal",
+   "target_report_id": "id-pln-statistics",
+   "relationship_type": "cites",
+   "basis": "Same publication and bibliography entry, which also covers the geothermal-power tables in the same document.",
+   "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/c4f7aade5d4801236ec79b81/statistik-listrik-2020-2024.html",
+   "evidence_grade": "B",
+   "evidence_quote": "PT PLN (Persero). 2025. Statistics PLN 2024."
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-energy-balances",
+   "relationship_type": "uses_data_from",
+   "basis": "Sumber data utama adalah Neraca Energi yang dipublikasikan oleh BPS RI... / The main data source are Energy Balance published by BPS-Statistics Indonesia... (Section 1.4, Data Sources and Methodology).",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Sumber data utama adalah Neraca Energi yang dipublikasikan oleh BPS RI serta Inventori GRK dari Kementerian Lingkungan Hidup dan Kehutanan (KLHK)."
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-klhk-ghg-inventory",
+   "relationship_type": "uses_data_from",
+   "basis": "...serta Inventori GRK dari Kementerian Lingkungan Hidup dan Kehutanan (KLHK). / ...and GHG Inventory from the Ministry of Environment and Forestry (MoEF). Bibliography cites the specific title: \"Kementerian Lingkungan Hidup dan Kehutanan. 2024. Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023.\"",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Kementerian Lingkungan Hidup dan Kehutanan. 2024. Laporan Inventarisasi Gas Rumah Kaca (GRK) dan Monitoring, Pelaporan, Verifikasi (MPV) 2023."
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-bop",
+   "relationship_type": "uses_data_from",
+   "basis": "...terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia... / ...there were also other supporting data sources, such as SUT from BPS, Balance of Payment from Bank Indonesia... (Section 1.4).",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-national-accounts",
+   "relationship_type": "uses_data_from",
+   "basis": "...seperti TPP dari BPS... / ...such as SUT [Supply-Use Table] from BPS... (Section 1.4) — the Tabel Penyediaan dan Penggunaan is BPS's national-accounts supply-use table.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-esdm",
+   "relationship_type": "uses_data_from",
+   "basis": "...Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM... / ...Energy Statistics from Ministry of Energy and Mineral Resources (MEMR), emission factors from MEMR... (Section 1.4).",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Selain itu, juga terdapat data-data pendukung lainnya seperti TPP dari BPS, Neraca Pembayaran dari Bank Indonesia, Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006"
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "ipcc-ghg-guidelines",
+   "relationship_type": "legal_basis",
+   "basis": "...dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006... / ...and 2006 Intergovernmental Panel on Climate Change (IPCC) Guidelines... (Section 1.4). Bibliography: \"IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories.\"",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/06/21/87d30b44adc5c5eed7581f4b/neraca-arus-energi-dan-neraca-emisi-gas-rumah-kaca-indonesia-2018-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories."
+  },
+  {
+   "source_report_id": "id-ndc-climate",
+   "target_report_id": "ipcc-ghg-guidelines",
+   "relationship_type": "legal_basis",
+   "basis": "Emission in reference year is estimated emission from the GHG Inventory using 2006 IPCC-GL. (Section 4.2, Scope and Coverage, Indonesia's Second NDC as filed with UNFCCC.)",
+   "evidence_url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-ndc-climate",
+   "target_report_id": "id-klhk-ghg-inventory",
+   "relationship_type": "uses_data_from",
+   "basis": "National GHGs Inventory System (SIGNSMART) — identified in Section V as part of Indonesia's National Registry System (SRN) underpinning the NDC's emissions reporting.",
+   "evidence_url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-ndc-climate",
+   "target_report_id": "id-deforestation",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Deforestation rate under BAU scenario for 2013-2020 is in line with the 1st FREL for REDD+, which is about 0.920 million ha/year, and consist of planned and unplanned deforestation. (Annex 1, FOLU section, Indonesia's Enhanced NDC 2022.)",
+   "evidence_url": "https://unfccc.int/sites/default/files/NDC/2022-09/23.09.2022_Enhanced%20NDC%20Indonesia.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-deforestation",
+   "target_report_id": "id-reforestation",
+   "relationship_type": "calculated_from",
+   "basis": "Angka deforestasi netto tahun 2024 tercatat sebesar 175,4 ribu hektar, hasil dari deforestasi bruto sebesar 216,2 ribu hektare dikurangi hasil reforestasi yang mencapai 40,8 ribu hektare. (Net deforestation = gross deforestation minus reforestation result.)",
+   "evidence_url": "https://www.kehutanan.go.id/news/article-10",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-forest-cover",
+   "target_report_id": "id-reforestation",
+   "relationship_type": "uses_data_from",
+   "basis": "Kementerian Kehutanan telah melaksanakan upaya reforestasi melalui Rehabilitasi Hutan dan Lahan seluas 217,9 ribu hektar pada tahun 2024, recorded as additions to forest and mixed agroforestry cover.",
+   "evidence_url": "https://www.kehutanan.go.id/news/article-10",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-ghg-inventory",
+   "target_report_id": "id-forest-cover",
+   "relationship_type": "uses_data_from",
+   "basis": "Table 1-7: \"Forest land cover of Indonesia in 2019 (Thousand Ha) (Source: KLHK 2020 – Recalculation of Indonesia 2019 land cover)\"; Figure 1-11: \"Map of Indonesian Land Cover 2019 (Source: MoEF 2020)\". (Indonesia's Third Biennial Update Report, its official GHG inventory report.)",
+   "evidence_url": "https://unfccc.int/sites/default/files/resource/IndonesiaBUR%203_FINAL%20REPORT_2.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-construction",
+   "target_report_id": "id-pdrb",
+   "relationship_type": "uses_data_from",
+   "basis": "Informasi yang disajikan meliputi ... Produk Domestik Regional Bruto (PDRB) sektor konstruksi ... Data yang dimuat dalam publikasi ini bersumber dari Badan Pusat Statistik (BPS), kementerian/lembaga/instansi pemerintah, serta lembaga internasional. (Konstruksi Dalam Angka 2025.)",
+   "evidence_url": "https://www.bps.go.id/id/publication/2025/12/31/20472bbffea268af42cc5c4d/konstruksi-dalam-angka-2025.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Data yang dimuat dalam publikasi ini bersumber dari Badan Pusat Statistik (BPS), kementerian/lembaga/instansi pemerintah, serta lembaga internasional."
+  },
+  {
+   "source_report_id": "id-religion-composition",
+   "target_report_id": "id-dukcapil-siak",
+   "relationship_type": "uses_data_from",
+   "basis": "Satu Data Indonesia dataset \"Jumlah Penduduk Menurut Agama\": Producer/Instansi \"Kementerian Agama\"; Sumber Data: \"Dukcapil\".",
+   "evidence_url": "https://data.go.id/dataset/dataset/jumlah-penduduk-menurut-agama6",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-ethnic-groups",
+   "target_report_id": "id-population-census",
+   "relationship_type": "uses_data_from",
+   "basis": "BPS publication \"Profile of Ethnic Groups and Local Languages Diversity in Indonesia: Results of the 2020 Long Form Population Census\" — provides socio-demographic profiles of ten ethnic groups compiled from the 2020 census long form.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/12/12/6feb932e24186429686fb57b/profil-suku-dan-keragaman-bahasa-daerah-hasil-long-form-sensus-penduduk-2020.html",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-regional-languages",
+   "target_report_id": "id-population-census",
+   "relationship_type": "uses_data_from",
+   "basis": "Same joint publication (\"Profil Suku dan Keragaman Bahasa Daerah... Long Form Sensus Penduduk 2020\") covers local-language diversity from the same 2020 census long form.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/12/12/6feb932e24186429686fb57b/profil-suku-dan-keragaman-bahasa-daerah-hasil-long-form-sensus-penduduk-2020.html",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-disaster-risk-index",
+   "target_report_id": "id-disaster-occurrence",
+   "relationship_type": "uses_data_from",
+   "basis": "Menurut data yang dihimpun dalam Data Informasi Bencana Indonesia (DIBI)-BNPB, terlihat bahwa dari lebih dari 1.800 kejadian bencana pada periode tahun 2005 hingga 2015... (BNPB's Risiko Bencana Indonesia / IRBI methodology book.)",
+   "evidence_url": "https://www.bnpb.go.id/storage/app/media//uploads/24/buku-rbi-1.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-internal-migration",
+   "target_report_id": "id-population-census",
+   "relationship_type": "uses_data_from",
+   "basis": "In an effort to meet the need for more complete migration data, we have prepared this Publication of Migration Statistics as a result of the 2020 Population Census. (BPS provincial migration-statistics series.)",
+   "evidence_url": "https://babel.bps.go.id/en/publication/2023/07/14/06e1fdbe4bcb304c43c059c1/statistik-migrasi-provinsi-kepulauan-bangka-belitung-hasil-long-form-sensus-penduduk-2020.html",
+   "evidence_grade": "B",
+   "evidence_quote": "In an effort to meet the need for more complete migration data, we have prepared this Publication of Migration Statistics as a result of the 2020 Population Census."
+  },
+  {
+   "source_report_id": "id-internal-migration",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "Profil Migran dari Survei Sosial Ekonomi Nasional 2024 (Susenas Maret 2024) merupakan publikasi yang bertujuan untuk memberikan gambaran umum tentang volume, laju, pola, dan arus migrasi berdasarkan hasil Susenas Maret 2024.",
+   "evidence_url": "https://www.bps.go.id/id/publication/2025/10/24/377adcf24286b49052c0fd20/profil-migran-hasil-survei-sosial-ekonomi-nasional-2024.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Profil Migran dari Survei Sosial Ekonomi Nasional 2024 (Susenas Maret 2024) merupakan publikasi yang bertujuan untuk memberikan gambaran umum tentang volume, laju, pola, dan arus migrasi berdasarkan hasil Susenas Maret 2024."
+  },
+  {
+   "source_report_id": "id-health-stats",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "The 2022 Health Statistics presents statistics and indicators in the health sector derived from the 2022 National Socioeconomic Survey Health and Housing Module.",
+   "evidence_url": "https://www.bps.go.id/en/publication/2023/08/31/923a16f1d75232565f1e0446/statistik-kesehatan-2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "The 2022 Health Statistics presents statistics and indicators in the health sector derived from the 2022 National Socioeconomic Survey Health and Housing Module."
+  },
+  {
+   "source_report_id": "id-bpjs-kesehatan",
+   "target_report_id": "id-dtsen",
+   "relationship_type": "uses_data_from",
+   "basis": "DTSEN menjadi basis data berbagai program perlindungan sosial (Perlinsos), termasuk Program Keluarga Harapan (PKH), program Sembako, Jaminan Kesehatan Nasional (JKN), program Sekolah Rakyat, serta program bantuan perumahan.",
+   "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-dtsen",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "BPS turut melakukan pemutakhiran DTSEN melalui survei rumah tangga yang dilaksanakan secara rutin, seperti Survei Sosial Ekonomi Nasional (Susenas) dan Survei Angkatan Kerja Nasional (Sakernas).",
+   "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-dtsen",
+   "target_report_id": "id-sakernas",
+   "relationship_type": "uses_data_from",
+   "basis": "Same sentence: BPS updates DTSEN through routine household surveys including Susenas and Sakernas.",
+   "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-dtsen",
+   "target_report_id": "id-dukcapil-siak",
+   "relationship_type": "uses_data_from",
+   "basis": "DTSEN memuat data unik individu dan keluarga di Indonesia yang telah padan atau sesuai dengan data kependudukan yang dimiliki oleh Dukcapil.",
+   "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-social-protection",
+   "target_report_id": "id-dtsen",
+   "relationship_type": "uses_data_from",
+   "basis": "DTSEN menjadi basis data berbagai program perlindungan sosial (Perlinsos), termasuk Program Keluarga Harapan (PKH), program Sembako... serta program bantuan perumahan.",
+   "evidence_url": "https://www.cnnindonesia.com/ekonomi/20260212114544-537-1327401/data-penduduk-cepat-berubah-bps-terus-perkuat-dan-perbarui-dtsen",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-tertiary-ger",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "Data presented includes several main indicators of educational processes and achievements based on the results of the National Socio-Economic Survey conducted in March 2024. (Statistik Pendidikan 2024.)",
+   "evidence_url": "https://www.bps.go.id/en/publication/2024/11/22/c20eb87371b77ee79ea1fa86/statistik-pendidikan-2024.html",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-dau-dak",
+   "target_report_id": "id-bps",
+   "relationship_type": "uses_data_from",
+   "basis": "DJPK's \"Formulasi DAU 2022\" variable/source table lists: Jumlah Penduduk -> BPS; IPM -> BPS & Kemendagri; PDRB Per Kapita -> BPS & Kemendagri, as inputs to the Fiscal Need (Kebutuhan Fiskal) component of the DAU formula.",
+   "evidence_url": "https://djpk.kemenkeu.go.id/wp-content/uploads/2022/03/Formulasi-DAU-2022.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-anticorruption",
+   "target_report_id": "id-rpjmn",
+   "relationship_type": "legal_basis",
+   "basis": "Renstra KPK 2025-2029 disusun dengan memperhatikan ... Rencana Pembangunan Jangka Menengah Nasional 2025-2029 (RPJMN 2025-2029) sebagaimana diatur dalam Peraturan Presiden Nomor 12 Tahun 2025. (KPK's Strategic Plan, which documents and continues the three implementation periods of Stranas PK 2019-2024.)",
+   "evidence_url": "https://cms.kpk.go.id/storage/8707/33.-Peraturan-KPK-Nomor-2-Tahun-2025-tentang-Renstra-KPK-Tahun-2025-2029.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-anticorruption",
+   "target_report_id": "id-asset-declaration",
+   "relationship_type": "uses_data_from",
+   "basis": "Table 5, \"Persentase Tingkat Kepatuhan LHKPN Berdasarkan Lembaga 2020-2024\", and Figure 15, \"Grafik Perkembangan Tingkat Kepatuhan Pelaporan LHKPN\" — LHKPN (asset-declaration) compliance data tracked as a strategy performance indicator.",
+   "evidence_url": "https://cms.kpk.go.id/storage/8707/33.-Peraturan-KPK-Nomor-2-Tahun-2025-tentang-Renstra-KPK-Tahun-2025-2029.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-islamic-finance",
+   "target_report_id": "id-bank-indonesia",
+   "relationship_type": "uses_data_from",
+   "basis": "Data Source: Bank Indonesia and Financial Services Authority unless mentioned otherwise. Data from Integrated Commercial Bank Reports (LBUT) which submitted by the reporting banks to Bank Indonesia... is processed on the web server LBUT and LBBPRS. (OJK Statistik Perbankan Syariah.)",
+   "evidence_url": "https://ojk.go.id/id/kanal/syariah/data-dan-statistik/statistik-perbankan-syariah/Documents/Pages/Statistik-Perbankan-Syariah---Maret-2024/STATISTIK%20PERBANKAN%20SYARIAH%20-%20MARET%202024.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-financial-inclusion",
+   "target_report_id": "id-bps",
+   "relationship_type": "uses_data_from",
+   "basis": "Untuk pertama kalinya, SNLIK diselenggarakan OJK bersama dengan Badan Pusat Statistik (BPS). (OJK official press release on the 2024 National Financial Literacy and Inclusion Survey.)",
+   "evidence_url": "https://ojk.go.id/id/berita-dan-kegiatan/siaran-pers/Pages/OJK-dan-BPS-Umumkan-Hasil-Survei-Nasional-Literasi-dan-Inklusi-Keuangan-Tahun-2024.aspx",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-msme-broader",
+   "target_report_id": "id-bps",
+   "relationship_type": "uses_data_from",
+   "basis": "Pendataan Lengkap Koperasi dan UMKM 2023: data dikumpulkan dengan metode door-to-door ... oleh petugas BPS ... untuk keperluan perencanaan dan evaluasi [Kemenkopukm's programmes]. (BPS official news article on the joint BPS-KemenkopUKM enumeration.)",
+   "evidence_url": "https://www.bps.go.id/en/news/2023/09/15/533/kemenkopukm-gandeng-bps-lakukan-pendataan-lengkap-koperasi-dan-umkm-2023.html",
+   "evidence_grade": "A",
+   "evidence_quote": "Kementerian Koperasi dan UKM (KemenKopUKM) berkolaborasi dengan Badan Pusat Statistik (BPS) melakukan Pendataan Lengkap Koperasi dan UMKM (PL-KUMKM) 2023 sebagai upaya mendorong terciptanya basis data tunggal Koperasi dan UMKM di Indonesia."
+  },
+  {
+   "source_report_id": "id-manufacturing-ipi",
+   "target_report_id": "id-manufacturing-directory",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Direktori Perusahaan Industri Manufaktur ... bertujuan menghasilkan kerangka sampel industri manufaktur skala besar dan sedang ... serta menjadi dasar pengambilan sampel untuk kegiatan survei-survei lain yang berbasis industri manufaktur.",
+   "evidence_url": "https://bondowosokab.bps.go.id/id/publication/2025/11/21/eabddf59a5286c3c5ef83853/direktori-industri-manufaktur-kabupaten-bondowoso-2025.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Direktori Perusahaan Industri Manufaktur Tahun 2025 merupakan hasil kegiatan Pemutakhiran Direktori Perusahaan Awal (DPA) yang bertujuan menghasilkan kerangka sampel industri manufaktur skala besar dan sedang sebagai pendukung kegiatan pemutakhiran Statistical Business Register (SBR) yang dibangun oleh Badan Pusat Statistik (BPS) serta menjadi dasar pengambilan sampel untuk kegiatan survei-survei lain yang berbasis industri manufaktur."
+  },
+  {
+   "source_report_id": "id-malang",
+   "target_report_id": "id-population-census",
+   "relationship_type": "uses_data_from",
+   "basis": "Menurut hasil Sensus Penduduk 2010 jumlah penduduk Kota Malang sebanyak 820.243 jiwa. (Kota Malang Dalam Angka 2014, Chapter 3.)",
+   "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-malang",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "Berdasarkan hasil Survei Sosial Ekonomi Nasional (Susenas) tahun 2013 ... penduduk usia 15 tahun ke atas yang bekerja berdasarkan lapangan usaha... (Kota Malang Dalam Angka 2014, Chapter 3.)",
+   "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-malang",
+   "target_report_id": "id-pdrb",
+   "relationship_type": "calculated_from",
+   "basis": "Pertumbuhan ekonomi tersebut dapat dihitung dari perubahan PDRB atas dasar harga konstan. (Kota Malang Dalam Angka 2014, Chapter 10.)",
+   "evidence_url": "https://malangkota.go.id/wp-content/uploads/2017/06/Kota-Malang-Dalam-Angka-2014.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-ikn-framework",
+   "target_report_id": "id-rpjmn",
+   "relationship_type": "cites",
+   "basis": "Dalam Rencana Pembangunan Jangka Menengah Nasional (RPJMN) Tahun 2025-2029, Ibu Kota Nusantara dirancang sebagai Superhub Ekonomi. (OIKN Peraturan Kepala Otorita IKN No. 11/2025, Rencana Strategis Otorita IKN 2025-2029.)",
+   "evidence_url": "https://ikn.go.id/storage/regulasi/20251010-perka-oikn-11-2025-tentang-rencana-strategis-otorita-ikn-tahun-2025-2029.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-digital-economy",
+   "target_report_id": "id-susenas",
+   "relationship_type": "uses_data_from",
+   "basis": "According to BPS data from the results of the 2024 National Socio-economic Survey (Susenas) data collection, 72.78 percent of the Indonesian population has accessed the internet in 2024. (Statistik Telekomunikasi Indonesia 2024.)",
+   "evidence_url": "https://www.bps.go.id/en/publication/2025/08/29/beaa2be400eda6ce6c636ef8/statistik-telekomunikasi-indonesia-2024.html",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-labour-productivity",
+   "target_report_id": "id-national-accounts",
+   "relationship_type": "calculated_from",
+   "basis": "SDG indicator 8.2.1 metadata, \"Sumber dan Cara Pengumpulan Data\": Badan Pusat Statistik: 1. Publikasi PDB Triwulanan dan Pendapatan Nasional Indonesia sesuai tahun berjalan; dan 2. Survei Angkatan Kerja Nasional (Sakernas). (DKI Jakarta government's reproduction of BPS's national SDG-indicator metadata template.)",
+   "evidence_url": "https://sdgs.jakarta.go.id/storage/01JYNJQ8V02G6NBHKHSPYXQHY6.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "id-labour-productivity",
+   "target_report_id": "id-sakernas",
+   "relationship_type": "calculated_from",
+   "basis": "Same SDG indicator 8.2.1 metadata source line, naming Sakernas as the second data input alongside quarterly GDP.",
+   "evidence_url": "https://sdgs.jakarta.go.id/storage/01JYNJQ8V02G6NBHKHSPYXQHY6.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "id-pdrb",
+   "target_report_id": "id-interprovincial-trade",
+   "relationship_type": "uses_data_from",
+   "basis": "Trade data between regions obtained in a complete and continuous manner can support the preparation of the GRDP of Provincial Expenditures. (BPS Bali/Badung interregional trade survey (PAW) 2022 news article.)",
+   "evidence_url": "https://badungkab.bps.go.id/en/news/2022/04/21/408/interregional-trade-survey--paw--2022.html",
+   "evidence_grade": "B",
+   "evidence_quote": "Trade data between regions obtained in a complete and continuous manner can support the preparation of the GRDP of Provincial Expenditures."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "id-energy-balance-detail -> (possible duplicate of id-energy-balances)",
+   "source": "id-energy-balance-detail",
+   "target": "id-energy-balances",
+   "reason": "note",
+   "why": "RESOLVED 2026-08-30 (Thomas ruling): confirmed duplicate, merge into id-energy-balances. Node `id-energy-balance-detail` removed from the corpus. Flagging for Thomas's ruling, not asserting as resolved: 2026-08-30 research could not find any BPS publication distinctly titled/scoped as a 'detailed production-consumption' energy balance separate from 'Neraca Energi Indonesia' (which is what id-energy-balances' new edges this round cite). The two nodes' own descriptions ('Annual energy balance covering production, conversion and consumption' vs 'covering production through final consumption... extends the earlier Energy Balances node with fuller multi-year detail') read as the same underlying BPS product described twice from the 2026-08-14 Indonesia Grok batch import. Left id-energy-balance-detail unwired this round rather than duplicate the same edges onto both nodes without a document distinguishing them — a genuine duplicate-node merge call, not a research gap."
+  },
+  {
+   "edge": "id-interisland-trade -> (unresearched)",
+   "source": "id-interisland-trade",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS provincial/kota statistics-table pages (Sultra, Kendari, Kolaka) for inter-island trade volume returned landing-page metadata only, no source/methodology text. A BPS Belitung training-news article suggested inter-island trade data collection may be organisationally bundled with the interprovincial-trade (PAW) survey, but did not explicitly state a derivation/containment relationship — too ambiguous to assert."
+  },
+  {
+   "edge": "id-sez -> (unresearched)",
+   "source": "id-sez",
+   "target": null,
+   "reason": "no-document",
+   "why": "KEK.go.id/BPS coordination-meeting articles describe an intent to integrate KEK statistics ahead of the 2026 Economic Census but name no existing BPS/BKPM product as a current data source. BKPM's LKPM dataset lists KEK names only as a form dropdown, not a structured linkage."
+  },
+  {
+   "edge": "id-ftz -> (unresearched)",
+   "source": "id-ftz",
+   "target": null,
+   "reason": "no-document",
+   "why": "jdih.kemenkeu.go.id's KPBPB legal glossary names no data-source agency. A BPS Batam 'Import Statistics of Batam' publication sources from Batam Customs forms (PIB-BC 2.0 / PPBI-BC 2.3), a customs-forms-level detail about a non-cataloged BPS sub-product, not a documented statement that id-ftz itself derives from id-customs-tariff."
+  },
+  {
+   "edge": "id-sea-transport -> (unresearched)",
+   "source": "id-sea-transport",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS 'Statistik Transportasi Laut' publication abstracts state only that data is 'bersourced from Indonesian seaports generally', naming no institution. SIRUSA metadata (kd=2168) 500-errored/robots-disallowed on every attempt."
+  },
+  {
+   "edge": "id-transport-multimodal -> (unresearched)",
+   "source": "id-transport-multimodal",
+   "target": null,
+   "reason": "deferred",
+   "why": "BPS 'Statistik Transportasi Provinsi DKI Jakarta 2024' abstract names real institutional data providers (Dinas Perhubungan DKI Jakarta, Ditlantas Polda Metro Jaya, PT Transportasi Jakarta, PT KAI, PT Pelindo, PT Angkasa Pura II) but none of these institutions are cataloged report-nodes in the graph. A real lead if/when institution-level transport nodes are minted."
+  },
+  {
+   "edge": "id-tanjung-priok -> (unresearched)",
+   "source": "id-tanjung-priok",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS publishes genuine Tanjung Priok-specific statistics tables, but every fetch returned landing/navigation chrome only, no footnote/source line. A Databoks secondary article citing 'BPS' sourced itself to 'Katadata Insight Center', not a specific BPS publication."
+  },
+  {
+   "edge": "id-tanjung-perak -> (unresearched)",
+   "source": "id-tanjung-perak",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "Same class of BPS statistics-table landing pages as Tanjung Priok — body text unretrievable on every attempt."
+  },
+  {
+   "edge": "id-major-ports -> (unresearched)",
+   "source": "id-major-ports",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS runs city-level port-transport editions (e.g. 'Statistik Transportasi Laut Kota Makassar 2024') analogous in structure to id-cpi/id-cpi-provincial, but no document states a dependency relationship between the city editions and this national node — a title-pattern similarity only, not a citation."
+  },
+  {
+   "edge": "id-defence-budget -> (unresearched)",
+   "source": "id-defence-budget",
+   "target": null,
+   "reason": "deferred",
+   "why": "Kemenkeu's 'Nota Keuangan RAPBN TA 2024' PDF is the right primary-document type (state-budget financial note allocating spending per ministry including Kemhan) but only front-matter/table-of-contents was retrieved, not the Belanja Negara chapter itself — needs a follow-up fetch targeting later PDF pages, not a dead end."
+  },
+  {
+   "edge": "id-nickel -> (unresearched)",
+   "source": "id-nickel",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS's 'Statistik Pertambangan Non Minyak dan Gas Bumi 2019-2023' states its own data is from BPS's Survei Perusahaan Pertambangan Non Migas (a primary BPS survey). Its foreword names Ditjen Minerba/ESDM only as general cooperation/access-facilitation language, not as a specific cited data source — too weak to assert an edge."
+  },
+  {
+   "edge": "id-coal -> (unresearched)",
+   "source": "id-coal",
+   "target": null,
+   "reason": "no-document",
+   "why": "Same publication and same reasoning as id-nickel above — BPS primary-collection product, ESDM cooperation language only."
+  },
+  {
+   "edge": "id-mining-stats -> (unresearched)",
+   "source": "id-mining-stats",
+   "target": null,
+   "reason": "no-document",
+   "why": "'Statistik Pertambangan Bahan Galian Indonesia 2023' (quarrying) states its data is from BPS's own Survei Tahunan Perusahaan Penggalian — a primary BPS survey, no named external dependency."
+  },
+  {
+   "edge": "id-land-use-change -> (unresearched)",
+   "source": "id-land-use-change",
+   "target": null,
+   "reason": "no-document",
+   "why": "All land-cover/land-use-change data found (KLHK/BPS Statistik Lingkungan Hidup, FRL, BUR3) is attributed generically to 'MoEF/KLHK land cover' and matches the id-forest-cover node rather than a distinct land-use-change publication tied to agriculture/estates."
+  },
+  {
+   "edge": "id-rice-paddy -> (unresearched)",
+   "source": "id-rice-paddy",
+   "target": null,
+   "reason": "no-document",
+   "why": "KSA (Kerangka Sampel Area) survey methodology is a BPS+BPPT/LAPAN+ATR/BPN+BIG collaboration, but none of those agencies are corpus nodes, and no document states id-national-accounts/id-poverty/id-agriculture-stats are calculated specifically from this publication rather than raw BPS crop data generally."
+  },
+  {
+   "edge": "id-agriculture-stats -> (unresearched)",
+   "source": "id-agriculture-stats",
+   "target": null,
+   "reason": "no-document",
+   "why": "Ministry of Agriculture's 'Buku Statistik Pertanian 2023' preface names BPS/BKPM/BMKG as general 'data producers' without a specific citable sentence tying it to an existing/new corpus node."
+  },
+  {
+   "edge": "id-palm-oil -> (unresearched)",
+   "source": "id-palm-oil",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS 'Statistik Kelapa Sawit Indonesia 2023' sources from its own Plantation Estate Survey, Ministry of Agriculture's Ditjenbun (not a corpus node) for smallholder data, and 'custom documents from Directorate General of Customs' for trade figures — the trade sentence does not name id-foreign-trade-exports/imports specifically."
+  },
+  {
+   "edge": "id-water-supply -> (unresearched)",
+   "source": "id-water-supply",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS 'Statistik Air Bersih' methodology (via a neliti.com mirror) states it is BPS's own Annual Survey of Water Supply Establishments, with its sampling frame drawn from the 2006 Economic Census — not a node in this graph."
+  },
+  {
+   "edge": "id-water-resources -> (unresearched)",
+   "source": "id-water-resources",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS's SIRUSA metadata system, which would carry the 'sumber data' field for irrigation-network indicators, was consistently ROBOTS_DISALLOWED on both sirusa.web.bps.go.id and sirusa.bps.go.id. No alternate ministry (pu.go.id) page with an explicit sourcing statement found in the time available."
+  },
+  {
+   "edge": "id-marine-coastal -> (unresearched)",
+   "source": "id-marine-coastal",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS 'Statistik Sumber Daya Laut dan Pesisir' (2023 and 2025 editions) abstracts state only 'compiled from BPS and related central/regional agencies' — too generic to name a specific node. Full PDF body not retrievable."
+  },
+  {
+   "edge": "id-fishing-ports -> (unresearched)",
+   "source": "id-fishing-ports",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS 'Statistik Pelabuhan Perikanan 2022/2023' abstract gives only definitional/scope text, no data-source statement retrievable."
+  },
+  {
+   "edge": "id-fisheries-production -> (unresearched)",
+   "source": "id-fisheries-production",
+   "target": null,
+   "reason": "no-document",
+   "why": "No document was retrievable (SIRUSA blocked; KKP fisheries PDFs not reachable within budget) explicitly stating fisheries production is calculated from fishing-port or marine-coastal statistics — declined to assert the plausible-sounding link without a document."
+  },
+  {
+   "edge": "id-health-facilities -> (unresearched)",
+   "source": "id-health-facilities",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS statistics-tables and SIRUSA metadata for hospital/puskesmas counts returned JS app-shell only. Kemenkes's facility portal and Profil Kesehatan Indonesia 2024 PDF excerpt did not name a source system or data-flow relationship."
+  },
+  {
+   "edge": "id-provinces-structure -> (unresearched)",
+   "source": "id-provinces-structure",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS 'Luas Daerah dan Jumlah Pulau Menurut Provinsi' table is JS app-shell only. Statistical Yearbook of Indonesia abstract states data comes from 'BPS and other agencies' generically, not naming Kemendagri specifically. ditjenbinaadwil.kemendagri.go.id pages ROBOTS_DISALLOWED/timed out on every attempt."
+  },
+  {
+   "edge": "id-apbn -> (unresearched)",
+   "source": "id-apbn",
+   "target": null,
+   "reason": "no-document",
+   "why": "Nota Keuangan (Buku II APBN 2025/2026), APBN KiTa monthly reports, KEM-PPKF, and DJPb's GFS pages were fetched and searched directly; none contained an explicit 'Sumber: BPS'/'berdasarkan data BPS' style sourcing statement meeting the evidence bar. BPS appears only in a glossary, never cited as a data source for a specific APBN figure."
+  },
+  {
+   "edge": "id-msme-manufacturing -> (unresearched)",
+   "source": "id-msme-manufacturing",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS's VIMK (quarterly micro/small industry survey) sampling method is confirmed as two-stage PPS selection of Census Blocks from updated household listings — explicitly not drawn from the Manufacturing Industry Directory (which the directory's own abstract scopes to medium/large firms only)."
+  },
+  {
+   "edge": "id-producer-prices -> (unresearched)",
+   "source": "id-producer-prices",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS PPI abstracts/press releases state only 'dilaksanakan oleh Badan Pusat Statistik' (BPS-conducts-BPS-survey), not a dependency on another node. SIRUSA metadata pages for PPI persistently 500-errored/ROBOTS_DISALLOWED."
+  },
+  {
+   "edge": "id-jakarta -> (unresearched)",
+   "source": "id-jakarta",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "Two independently-hosted mirrors of 'Provinsi DKI Jakarta Dalam Angka' PDFs were found; the 2011 edition gives only generic sourcing language, and the 2022 edition's PDF returned only its table of contents on repeated fetches — no chapter-level sourcing sentence retrieved."
+  },
+  {
+   "edge": "id-java-west -> (unresearched)",
+   "source": "id-java-west",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS Jabar abstract pages give no methodology detail; the one full-PDF mirror found (bappelitbangda.purwakartakab.go.id) 502'd/robots-blocked on every attempt."
+  },
+  {
+   "edge": "id-java-central -> (unresearched)",
+   "source": "id-java-central",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "A 'Jawa Tengah Dalam Angka 2025' PDF was located (owncloud.jatengprov.go.id via bappeda.jatengprov.go.id) but is robots-disallowed to WebFetch; no alternate accessible copy found."
+  },
+  {
+   "edge": "id-java-east -> (unresearched)",
+   "source": "id-java-east",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "No non-BPS-hosted full-text 'Jawa Timur Dalam Angka' PDF was located; BPS Jatim publication pages returned abstracts only, same pattern as the other provinces."
+  },
+  {
+   "edge": "id-magelang -> (unresearched)",
+   "source": "id-magelang",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "A 2011 'Kota Magelang Dalam Angka' PDF loaded but only returned body text through Chapter III (Population); later economy/PDRB chapters were not retrievable across repeated fetches. The only concrete sourcing found was a local civil-registry table footnote, not a BPS national-survey citation. No containment language found either (reads as a standalone publication, like Malang)."
+  },
+  {
+   "edge": "id-java-municipal -> (unresearched)",
+   "source": "id-java-municipal",
+   "target": null,
+   "reason": "note",
+   "why": "This node is a generic/categorical placeholder for the Dalam Angka publication pattern, which this round evidenced concretely via a specific city (id-malang). No additional document specific to this generic node (as opposed to one particular city) was found or expected."
+  },
+  {
+   "edge": "id-ikn-population -> (unresearched)",
+   "source": "id-ikn-population",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS press releases on the 2025 IKN special population enumeration (Pendataan Penduduk IKN) explicitly frame it as novel and standalone ('wilayah IKN belum pernah tercatat secara khusus dalam sensus penduduk sebelumnya') rather than derived from the existing Population Census. Results-announcement article does not name Podes, PDRB or RPJMN as sources it draws on (checked and confirmed absent)."
+  },
+  {
+   "edge": "id-tourism-domestic -> (unresearched)",
+   "source": "id-tourism-domestic",
+   "target": null,
+   "reason": "no-document",
+   "why": "BPS 'Statistik Wisatawan Nusantara 2024' describes its own sources as Mobile Positioning Data (telco big-data) and a standalone 'Survei Digital Wisatawan Nusantara 2024' web-questionnaire — not Susenas-derived. No document ties its sampling frame to Susenas, Podes or the Population Census."
+  },
+  {
+   "edge": "id-tourism-attractions -> (unresearched)",
+   "source": "id-tourism-attractions",
+   "target": null,
+   "reason": "no-document",
+   "why": "SIRUSA metadata (kegiatan/50171) confirms the 'Statistik Objek Daya Tarik Wisata' collection unit is a standalone business/establishment survey ('Usaha/perusahaan'), not one drawing on Podes as hypothesized."
+  },
+  {
+   "edge": "id-ecommerce -> (unresearched)",
+   "source": "id-ecommerce",
+   "target": null,
+   "reason": "unreadable-source",
+   "why": "BPS 'Statistik E-Commerce 2023' abstract has topic-coverage language only. Every attempt to reach the full PDF failed (web-api.bps.go.id 403 on two URLs, a dataindonesia.id mirror 403'd, a Scribd copy rendered a JS-disabled error shell, AllStats Search returned zero indexed results)."
+  },
+  {
+   "edge": "id-dau-dak -> id-own-source-revenue",
+   "source": "id-dau-dak",
+   "target": "id-own-source-revenue",
+   "reason": "no-document",
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://djpk.kemenkeu.go.id/?ufaq=data-apa-saja-yang-diperhitungkan-digunakan-dalam-pengalokasian-dau. Original basis: \"Data yang digunakan untuk perhitungan kapasitas fiskal terdiri dari: Pendapatan Asli Daerah (PAD), Dana Bagi Hasil (DBH) Sumber Daya Alam, dan DBH Pajak.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+  },
+  {
+   "edge": "id-tax-ratio -> id-national-accounts",
+   "source": null,
+   "target": "id-national-accounts",
+   "reason": "note",
+   "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Tax ratio merupakan formula untuk mengukur kinerja perpajakan dengan membandingkan antara penerimaan perpajakan dan Pendapatan Domestik Bruto (PDB) dalam kurun waktu tertentu. (Directorate General of Taxes / Ministry of Finance.)\""
+  },
+  {
+   "edge": "id-tax-ratio -> id-tax-revenues",
+   "source": null,
+   "target": "id-tax-revenues",
+   "reason": "note",
+   "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Same formula definition: tax ratio compares penerimaan perpajakan (tax revenue) against PDB over a given period — tax revenue is the explicit numerator.\""
+  }
+ ]
 }

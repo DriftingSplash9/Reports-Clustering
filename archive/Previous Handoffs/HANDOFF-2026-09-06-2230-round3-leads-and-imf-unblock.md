@@ -34,7 +34,6 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 | renderer draw path / instancers | memory `node_instancing_2026-09-05`, `link_batching_2026-09-05`, then `renderer_perf_measured_2026-09-04` |
 | settle time / physics cost / force tuning | memory `layout_levers_and_hbs_2026-09-05`, then `settle_time_tick_burst_2026-09-05`; `scripts/measure-forces.ts` (`ITER`/`THETA`); `scripts/renderer/settle.mjs`, `shot-all.mjs` |
 | camera fit · the spread slider · INT fold | memory `fit_percentile_and_tier1_2026-09-06`; `scripts/renderer/fit-probe.mjs`; `notes/camera-fit-measurement-2026-08-19.md` · `notes/flicker-tests-2026-08-19.md` |
-| "what is still broken that nobody is fixing?" | `notes/standing-issues.md` — items that outlived five handoffs; not on the mandatory read path |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
@@ -48,32 +47,27 @@ state it (rule 1).
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 15.8k | everyone, first |
+| `HANDOFF.md` | 14.3k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
-| `PLAYBOOK.md` | 8.2k | everyone |
-| `PLAYBOOK-CORPUS.md` | 32.5k | corpus lane — §7 now splits 7a/7b/7c by question |
-| `PLAYBOOK-RENDER.md` | 13.0k | renderer lane |
+| `PLAYBOOK.md` | 6.5k | everyone |
+| `PLAYBOOK-CORPUS.md` | 30.5k | corpus lane |
+| `PLAYBOOK-RENDER.md` | 11.9k | renderer lane |
 | `REPORTS.md` | 24.0k | scope/direction questions |
 | `START-HERE.md` | 13.0k | humans, not agents |
-| **a corpus round reads** | **58.0k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **38.5k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **52.8k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **34.2k** | HANDOFF + CLAUDE + core + RENDER |
 
-§1-§3 is 11.1k. **This file is the fast layer and is supposed to turn over** —
-watch whether §2 still describes the lane being worked, not its size. Both
-playbooks were reviewed 2026-09-06 against `PLAYBOOK.md` §1's two tests. Neither
-got much smaller and that is the honest result: what both passes actually found
-was rules filed where their audience never reads them, and facts that had gone
-stale. **The §7 reorganisation is the read-cost win that does not show up here** —
-a round now reads one of 7a/7b/7c, roughly 5-6k, instead of 17k of interleaved
-rulings.
+§1–§3 is 11.1k against this file's own ~10k cap (2026-09-06, after three rounds
+in one day). What is left is live state; the next handoff should cut a paragraph
+of it rather than add. `PLAYBOOK-CORPUS.md` grew 28.4k → 30.5k for the two
+rulings, which is the pruning decision below getting more expensive, not less.
 
 ---
 
 ## 2. Current state
 
-Corpus **3,417 reports / 2,951 dependencies**. **943 A · 1,394 B · 614 C**,
-A-share 31.9%. **Domains: 46 approved, 0 proposed** (was 40/624 — see §3).
-**Zero bare-homepage edges**, and 0 no-URL / 0 dead-URL: the URL debt is closed. `validate` exits 0, 123/123 logic tests, grader selftest
+Corpus **3,417 reports / 2,951 dependencies**. **941 A · 1,394 B · 616 C**,
+A-share 31.9%. `validate` exits 0, 123/123 logic tests, grader selftest
 **68/68**, `tsc --noEmit` clean, `vite build` ok. **Grade counts come from
 `validate` only.** `kind`: 2,507 publication · 30 standard · 880 instrument.
 `public/corpus-data.json` regenerated, current as of 2026-09-06.
@@ -89,12 +83,20 @@ all just price-index → NA → HBS) remain. (b) 978 of 3,345 nodes with zero ed
 in EG · IR · TW · SG · ID · IN · CN · RU · INT. Census and method: memory
 `gb_national_core_2026-09-06`.
 
-**Rounds 1–3 (2026-09-06) added 54 reports and 104 dependencies** — GB, AU, IE,
-the devolved UK, the UK census statutory chain, IMTS, COFOG and the ONS
-registers. What each round found, and every lead it left, is in memory
-`gb_national_core_2026-09-06`, `thin_coverage_round2_2026-09-06` and
-`round3_leads_and_imf_2026-09-06`. (§4 step 3: no changelog here — this line is
-scope, not history, and goes at the next review.)
+**Rounds 1–3 are done, 2026-09-06.** Round 1 GB national core (9 reports · 10
+deps); round 2 AU · IE · devolved UK · GB fill (32 · 60); round 3, chasing every
+lead round 2 left (13 · 34) — `un-imts-2010`, `un-cofog-1999`, the UK census
+statutory chain in all three jurisdictions (5 instruments, 9 edges, all A) and
+the ONS registers (`gb-ons-idbr`, `gb-hmlr-ppd`, `gb-ons-ukhpi`, `gb-ons-pipr`,
+`gb-ons-ashe`, `gb-ons-bres`). Narrative: memory `thin_coverage_round2_2026-09-06`
+and `round3_leads_and_imf_2026-09-06`.
+
+**Both 2026-09-06 rulings are executed into `PLAYBOOK-CORPUS.md` §7.** (1) A
+methodology table cell naming a source is caption-equivalent, grade B — it
+reopened exactly ONE edge corpus-wide (`sct-gers -> gb-ons-lcf`) and does NOT
+reopen agency-only table entries. (2) The ICLS class is closed on purpose: four
+rounds refused the same edge for the same reason, so do not re-test it per
+country.
 
 **`elibrary.imf.org` is open and `www.imf.org` is not** (Thomas found it,
 2026-09-06). `?bot=bot` plus `/downloadpdf/display/book/<isbn>/<isbn>.pdf` serves
@@ -105,21 +107,45 @@ Recipe and the ISBN table for nine documents:
 `notes/imf-elibrary-2026-09-06.md`. It bought `imf-gfsm -> un-cofog-1999` and
 `imf-gfsm -> sna-2008` the same hour.
 
-**Renderer:** three instancers (the only draw path), tick burst, geoAffinity
-cache, Condensed INT, member-scaled orbs, faint-edges fix. Shipped levers: collide
-`iterations` 1 + charge **`theta` 1.5** (123.9 → 65.9 ms/tick; a layout change the
-fit renormalises, `THETA=0.9` is the old layout), every lens live at every tier,
-and a fit percentile that falls with `spread`. Tier 1 folds INT, so the DEFAULT
-opening frame is condensed. Every constant, and why, is in `PLAYBOOK-RENDER.md`
-sections 3-4 with dated code comments; the round narrative is in memory
-(`fit_percentile_and_tier1_2026-09-06`, `condensed_int_and_rulings_2026-09-05`).
-Headless: `scripts/renderer/`. **Unmeasured on Thomas's hardware**: node
-instancing (target 25.00 → 16.67 ms/frame) and the tick burst.
+**The OBR block is closed by going around it.** `obr.uk` still 403s every curl
+variant from both networks, but HM Treasury publishes the Economic and fiscal
+outlook first-party on `assets.publishing.service.gov.uk`, so `gb-obr-efo` is
+minted and graded normally. Host readings from both rounds are appended to
+`notes/routing-snapshot-2026-09-04.md`, including **gov.scot rate-limiting to
+HTTP 202 and recovering** — a trap that reads as "every quote is missing".
 
-**Ranking:** `mutual: true` edges are out of `rankedEdges` — live and on screen,
-but not feeding PageRank, because a mutual pair is a 2-cycle that pumps its own
-rank. Four pairs, curated not computed. `measure-mutual-rank.ts` printing
-identical shipped and both-halves columns IS the fix, not a broken script.
+**Grader:** CJK span floor, `acronymFitsHead()`, national `title_aliases`
+allowed (the types.ts doc comment is the rule). Before any `--write` on graded
+edges, read `PLAYBOOK-CORPUS.md` §6 — there is no improvements-only guard, and a
+re-grade touching a URL must select every live edge on it.
+
+**EU price-index / HBS chains: closed** (no `eurostat-hicp` edge for FR/CZ/AL —
+a finding, not a gap). **DSBB 750 `no-source-node` leads: PARKED.** Remaining
+`_dropped` leads are no-URL / dead-host — research, not re-grade.
+
+**Renderer:** three instancers (the only draw path), tick burst, geoAffinity
+cache, Condensed INT, member-scaled orbs, faint-edges fix (`pendingLinkRescale`,
+holding). Shipped levers: collide `iterations` 1 + charge **`theta` 1.5**
+(123.9 → 65.9 ms/tick; a layout change the fit renormalises, `THETA=0.9` is the
+old layout), every lens live at every tier, and a fit percentile that falls with
+`spread` (`fitPercentileFor`: flat 0.8 to spread 1, then −0.11 per doubling,
+floor 0.4). Tier 1 honours the INT toggle, so the DEFAULT opening frame is
+condensed; **orb size is settled** (Thomas, 2026-09-06). Every other constant is
+as `PLAYBOOK-RENDER.md` §3–§4 describes it. Headless: `scripts/renderer/`.
+Detail and the four shelved ISOLATED ids: memory
+`fit_percentile_and_tier1_2026-09-06`.
+
+**Ranking:** `mutual: true` edges are out of `rankedEdges` (Thomas, 2026-09-06)
+— live and on screen, but no longer feeding PageRank, because a mutual pair is a
+2-cycle that pumps its own rank. Four pairs, curated not computed.
+`measure-mutual-rank.ts` printing identical shipped and both-halves columns IS
+the fix, not a broken script.
+
+**Research debt**: 0 no-URL, 0 dead-URL, 5 bare-homepage edges; no open node
+defects. `naics` and `icd-10-ca` deliberately stay `standard` (classification
+instruments) — flip if Thomas says so. Egypt IPI compiler unverified.
+
+---
 
 ---
 
@@ -127,37 +153,18 @@ identical shipped and both-halves columns IS the fix, not a broken script.
 
 ### [Thomas]
 
-**Three live edges came back weaker than their citation, and dropping a live
-edge is your call.** All three were re-pointed at real documents on 2026-09-06
-and none had its grade written down (§7b), but the quote names an agency or a
-class rather than the target artefact — the 2026-08-31 F-05 shape that dropped
-six edges then. `nt-bureau-statistics -> statcan-population-estimates` (C): the
-NWT release's only attribution is "Source: Statistics Canada, Demography
-Division" — no publication, no table number. `nt-bureau-statistics ->
-statcan-national-accounts` (B, so currently overstated): the GDP page's one
-mention of Statistics Canada names the agency and nothing else.
-`gn-cns-snds-2016-2020 -> afristat-ihpc-guide-2014` (C): the Guinea SNDS names
-AFRISTAT the organisation and its member-state nomenclatures — "IHPC" appears
-only in its acronym list — which is the 2026-09-05 organisation-vs-instrument
-ruling exactly, so the TARGET is probably wrong rather than the edge. Drop all
-three, or retarget the Guinea one to an AFRISTAT nomenclatures artefact. A
-fourth, `mz-sadc-hcpi-bulletin -> mz-ine-ipc` (C), names "the National HCPIs of
-the Member States" as a class with Mozambique only a row label; same question,
-weaker case for dropping since the bulletin does carry Mozambique's values.
+Nothing outstanding but the pruning decision below — both 2026-09-06 rulings are
+executed and described in §2.
 
-**Four tags cleared your 8-use threshold and I stripped them anyway — say if
-that was wrong.** `legal` (12 uses), `ageing` (10), `payments` (9) and
-`resources` (9) all passed the bar, but every node carrying them already carried
-an approved domain that covers them (`statistical-system`, `population`,
-`banking`/`monetary-policy`, `energy`/`mining`/`environment`), so promoting them
-would have imported the duplication instead of removing it. Six were promoted
-instead of fifteen. Reversing any of the four is a line in `types.ts` plus a
-lookup in `notes/proposed-tags-retired-2026-09-06.json`, which holds every
-node's before and after.
-
-**Decided 2026-09-06, recorded so it is not re-opened:** the `PLAYBOOK-CORPUS.md`
-worked-examples move is **leave it for now** — §7's reorganisation already took
-the read cost down where it mattered. §6 stays unpruned by the same decision.
+**Pruning `PLAYBOOK-CORPUS.md` §6/§7 — a decision, not a task.** Mechanical
+pruning is worth nothing: the only two true duplicates are already merged. §6 is
+9.6k of 24 traps, §7 is 14.7k of 21 rulings, and every one still decides
+something; the 3–4k that could come out is the *evidence* inside each ruling,
+which is what makes it believed. Options: move the worked examples to
+`notes/rulings-evidence.md`, leaving rule and date in §7 (~4k off the mandatory
+read, one agent-hour); move "One-off scope calls" (881 chars, 8 calls) into the
+data's own `_dropped` entries, where §7's own bar says they belong; or
+line-by-line yourself. Nothing here expires.
 
 ### [Agent]
 
@@ -188,8 +195,14 @@ the Eurostat COFOG compilation manual 2019, a distinct artefact in the same fami
 as `eu-manual-mgdd`; and an IMTS Revision 2 node, which is what several older
 Latin American methodologies actually cite.
 
-**Settled, do not re-raise:** everything in §2 is executed, and everything older
-is in project memory and in `PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.
+The two design questions still parked — layout re-run on data add, cadence in
+layout — have no numbers behind them and no round has needed them.
+
+**Settled, do not re-raise:** the 2026-09-06 rulings (charge theta 1.5, mutual
+pairs out of the ranking, lens at every tier, orb size, fit percentile, tier-1
+INT fold) are executed and described in §2, each a one-line revert if a lever
+turns out wrong on your hardware. Everything older is in project memory and in
+`PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.
 
 ---
 
@@ -213,44 +226,21 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
 3. Write the new `HANDOFF.md` at the top level, same name, overwriting.
    Edit **Current state** and **Todo** directly — overwrite, don't
    append. State only, present tense, no changelog, no "DONE" entries.
-   **This file is the fast layer and is meant to turn over** — §2's
-   weight follows whatever lane is actually being worked, so if the work
-   moves to the renderer, the corpus paragraphs shrink to a pointer and
-   the renderer ones expand, not the reverse (`PLAYBOOK.md` §1, second
-   test). Keep this §4 verbatim so the next agent knows the procedure.
+   Keep this §4 verbatim so the next agent knows the procedure.
 4. **Sweep what is finished out.** A todo that is done, a lever that is
    settled and already described in §2, a "Settled:" entry from an
    earlier round — all leave. The round's project-memory entry is their
    record, and this file is state, not history. Nothing accumulates here
    by default; if you would not act on it next session, it goes.
-5. **Every fifth handoff, review the last five.** The trigger is
-   arithmetic, not memory: after your copy in step 2, if
-   `ls -1 "archive/Previous Handoffs"/HANDOFF-*.md | wc -l` is divisible
-   by 5, run the review. Read this file's §2/§3 and the four archived
-   handoffs before it, and find the paragraphs that appear in all five
-   unchanged. Each one is then exactly one of three things. **Finished**
-   — delete it, memory is its record (step 4 already says so, and this
-   is the pass that catches what step 4 missed). **A restatement of a
-   playbook or a note** — delete it and let §1 route there instead; a
-   second copy of a rule is how the two drift apart. **A real open item
-   nobody has acted on in five handoffs** — it goes to
-   `notes/standing-issues.md`, which carries the bar in both directions.
-   That is a demotion, not a deletion: it was costing every agent a read
-   and buying nothing. **Introduced by Thomas, 2026-09-06**, from a
-   practice that worked on another project; the first review ran the same
-   day, off-cycle at 67, because §1-§3 was already over its own cap, and
-   what it removed is recorded in the §1 note. If a review finds nothing
-   to cut, say so and move on — "nothing" is a real answer, and forcing a
-   cut to justify the pass is how good state gets destroyed.
-6. **Refresh the read-cost table in §1** and repeat those numbers to
+5. **Refresh the read-cost table in §1** and repeat those numbers to
    Thomas in the handoff message — it is how he sees bloat arriving:
    `wc -c HANDOFF.md CLAUDE.md PLAYBOOK.md PLAYBOOK-CORPUS.md
    PLAYBOOK-RENDER.md REPORTS.md START-HERE.md`. If §1–§3 is over 10k, trim before adding.
-7. A finished round's story goes to **project memory** (write it as you
+6. A finished round's story goes to **project memory** (write it as you
    go; if memory is down, park a note in `notes/` and say so here). A new
    standing rule or trap goes to whichever playbook binds it (`PLAYBOOK.md`
    §1 has the test). A design change goes to `notes/Midvamp - Revamp.md`
    (or `REPORTS.md` if it changes direction).
-8. Never state git status here. Never delete anything — `_to_delete/`.
+7. Never state git status here. Never delete anything — `_to_delete/`.
 
 Only one `HANDOFF.md` at the top level, ever.

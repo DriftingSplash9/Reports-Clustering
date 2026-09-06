@@ -64,3 +64,20 @@ resolve from the VM and returns 200 from the sandbox.
 | `ipdp.cdmx.gob.mx` | **dead on all three networks** — TCP reset from VM and sandbox, `ERR_CONNECTION_TIMED_OUT` in Chrome, and no Wayback snapshot (2026-09-04, round 5) |
 | `resource.capetown.gov.za`, `mfma.treasury.gov.za` | dead the same way from all three. `www.capetown.gov.za` and `www.treasury.gov.za` both answer 200 — only these hosts refuse (2026-09-04, round 5) |
 | Chrome extension, pending grant | a domain awaiting approval leaves the tab WHERE IT WAS while `navigate` reports success — indistinguishable from a permanent block until the grant lands. After it, the host behaves normally (`chrome-error://` if dead). **Ask, then re-probe, then record** (2026-09-04, round 5) |
+
+## Added 2026-09-06 (thin-coverage rounds 1 and 2)
+
+The file's date stays 2026-09-04 because `HANDOFF.md` §1 and `PLAYBOOK.md` §1 both point at
+that name; these are additions, not a new snapshot, and they are as stale-on-arrival as
+everything above.
+
+| host | reading |
+|---|---|
+| `ons.gov.uk`, `legislation.gov.uk`, `gov.uk`, `assets.publishing.service.gov.uk` | 200 to a browser-UA curl from the cloud sandbox, clean text. `legislation.gov.uk` wants `/section/N/data.xht?view=snippet&wrap=true` — the plain section page renders thin |
+| `obr.uk` | **403 to every curl variant** — plain, browser UA, and a full Chrome header set over HTTP/1.1, homepage and document paths, from BOTH networks. Not a wall: **HM Treasury publishes the Economic and fiscal outlook first-party on `assets.publishing.service.gov.uk`**, which is where the corpus's `gb-obr-efo` evidence comes from. Go there first; do not re-run the 403 ladder |
+| `bankofengland.co.uk`, `rba.gov.au` | JavaScript shells to a text fetcher (the RBA says so out loud: "It appears JavaScript is currently blocked"). PDF paths are the way in — BoE `/-/media/boe/files/monetary-policy-report/<year>/<month>/monetary-policy-report-<month>-<year>.pdf`, RBA `/publications/smp/<year>/<mon>/pdf/statement-on-monetary-policy-<year>-<mm>.pdf` |
+| `abs.gov.au` | 200 for `/statistics/...` and `/methodologies/...`, which convert cleanly. **`/census/*` is a JavaScript shell** (1–4 KB of nav, no body) — for census facts use `/about/legislation-and-policy/legislative-framework`, which fetches. Methodology slugs are versioned per issue and guessing the period 404s constantly |
+| `gov.scot` | **rate-limits under repeated rapid fetches: HTTP 202 with a ~2 KB challenge body, then 200 again after a pause.** Neither a wall nor link rot. Space requests ~20 s and retry; a verification pass that hammers it will report every quote missing (2026-09-06) |
+| `cso.ie`, `irishstatutebook.ie`, `centralbank.ie` | 200, no trouble. CSO "Background Notes" pages, one per release edition, are the highest-yield Irish methodology source |
+| `nrscotland.gov.uk`, `nisra.gov.uk`, `datavis.nisra.gov.uk`, `gov.wales`, `scotlandscensus.gov.uk`, `fiscalcommission.scot` | all 200. `nrscotland.gov.uk/publications/mid-<year>-population-estimates/` 302s to an `-outdated` slug once superseded; NISRA's census hub is `/statistics/census/census-2021` |
+| `legislation.gov.au` | 200; `/C1905A00015/latest/text` gives the whole Census and Statistics Act 1905 as clean text |

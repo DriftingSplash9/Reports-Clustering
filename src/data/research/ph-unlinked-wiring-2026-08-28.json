@@ -1,244 +1,242 @@
 {
-  "_slice": "ph-unlinked-wiring-2026-08-28",
-  "_researched": "2026-08-28",
-  "_status": "verified",
-  "_note": "Deepest wiring pass yet on the Philippines' unlinked-node backlog (61/68 unlinked as of this round's start). PSA's technical-notes pages were unusually forthcoming about classification standards (PSIC/ISIC, PSCC/HS, PCOICOP/COICOP) and SNA 2008 adoption; BSP's own primer PDFs supplied the BPM6/SDDS/WEO bridges. Two new classification nodes minted (PSIC, PSCC) since PSA's own industrial and commodity classifications sit between the national series and the UN standards they're patterned after. UPDATE 2026-08-28 (Grok follow-up, raw-verified by the orchestrating session via direct fetch of both PDFs, byte sizes matched exactly): ph-financial-system -> imf-mfsmcg-2016 closed — the robots-blocked SitePages/Lists paths turned out not to be needed, two other BSP PDFs name MFSMCG (one names the 2016 edition specifically) and were reachable all along.",
-  "reports": [
-    {
-      "id": "ph-psic",
-      "title": "Philippine Standard Industrial Classification (PSIC)",
-      "publisher": "Philippine Statistics Authority",
-      "country": "PH",
-      "jurisdiction_level": "federal",
-      "region": "Philippines",
-      "description": "PSA's national industry classification system, used to classify establishments by economic activity across PSA establishment surveys (ASPBI, MISSI, census of business). Explicitly patterned after the UN's ISIC.",
-      "url": "https://psa.gov.ph/classification/psic",
-      "domains": [
-        "industry",
-        "proposed:classification"
-      ],
-      "releases_per_year": 0.05,
-      "cadence_note": "Revised on a multi-decade cycle (currently Revision 5), not a periodic release.",
-      "last_updated": null,
-      "kind": "publication"
-    },
-    {
-      "id": "ph-pscc",
-      "title": "Philippine Standard Commodity Classification (PSCC)",
-      "publisher": "Philippine Statistics Authority",
-      "country": "PH",
-      "jurisdiction_level": "federal",
-      "region": "Philippines",
-      "description": "PSA's national commodity classification used to code merchandise export/import statistics at the 11-digit level; an integration of the ASEAN Harmonized Tariff Nomenclature (AHTN), itself based on the WCO Harmonized System (HS).",
-      "url": "https://psa.gov.ph/classification/pscc",
-      "domains": [
-        "trade",
-        "proposed:classification"
-      ],
-      "releases_per_year": 0.05,
-      "cadence_note": "Revised irregularly alongside the AHTN/HS revision cycle, not a periodic release.",
-      "last_updated": null,
-      "kind": "publication"
-    }
-  ],
-  "dependencies": [
-    {
-      "source_report_id": "ph-external-debt",
-      "target_report_id": "imf-bpm6",
-      "relationship_type": "methodology_depends_on",
-      "basis": "BSP's own External Debt FAQ: data are compiled \"in accordance with the concepts and methodology set out in the International Monetary Fund's (IMF) latest External Debt Statistics: Guide for Compilers and Users (2014) and Balance of Payments and International Investment Position Manual, 6th edition.\"",
-      "evidence_url": "https://www.bsp.gov.ph/Lists/Download%20Section/Attachments/139/FAQsExternalDebt.pdf",
-      "evidence_grade": "A",
-      "evidence_quote": "in accordance with the concepts and methodology set out in the International Monetary Fund's (IMF) latest External Debt Statistics: Guide for Compilers and Users ( External Debt Guide ) and Balance of Payments and International Investment Position Manual, 6th edition (BPM6)"
-    },
-    {
-      "source_report_id": "ph-iip",
-      "target_report_id": "imf-bpm6",
-      "relationship_type": "methodology_depends_on",
-      "basis": "BSP's combined BOP/IIP primer, covering both series: \"In March 2014, the BSP fully implemented the shift of the BOP compilation to BPM6 framework in compliance with the recommendations set out in the BOP manual.\"",
-      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/bop.pdf",
-      "evidence_grade": "B",
-      "evidence_quote": "the compilation of IIP data based on BPM6 framework was completed last September 2014 with the simultaneous release of the quarterly IIP data as of end - March 2013 to end - June 2014"
-    },
-    {
-      "source_report_id": "ph-reserves",
-      "target_report_id": "imf-sdds",
-      "relationship_type": "cites",
-      "basis": "PSA's National Summary Data Page lists \"Gross International Reserves (Official Reserve Assets)\" and \"International Reserves and Foreign Currency Liquidity (Complete template)\" as BSP-sourced entries, stated to correspond to \"the International Monetary Fund's (IMF) Dissemination Standards Bulletin Board (DSBB)\" — the SDDS registry.",
-      "evidence_url": "https://psa.gov.ph/national-summary-data-page",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-poverty",
-      "target_report_id": "ph-fies",
-      "relationship_type": "uses_data_from",
-      "basis": "FIES's own technical notes state its objective is \"to provide inputs in the estimation of the country's poverty threshold and incidence,\" listing measurement of poverty as a main use of the data.",
-      "evidence_url": "https://psa.gov.ph/statistics/income-expenditure/fies/technical-notes",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-cpi-detail",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PCOICOP technical notes: PCOICOP is \"an input in the formulation of basket of goods for the Consumer Price Index (CPI)\" and \"the 2020 Philippine Classification of Individual Consumption According to Purpose (PCOICOP)... [is] patterned after the 2018 Classification of Individual Consumption According to Purpose (COICOP) developed by the United Nations Statistics Division (UNSD) in 2018.\" Corroborated in the CPI's own 2018-based technical notes.",
-      "evidence_url": "https://psa.gov.ph/classification/pcoicop/technical-notes",
-      "evidence_grade": "A",
-      "evidence_quote": "the 2020 Philippine Classification of Individual Consumption According to Purpose (PCOICOP)... [is] patterned after the 2018 Classification of Individual Consumption According to Purpose (COICOP) developed by the United Nations Statistics Division (UNSD) in 2018."
-    },
-    {
-      "source_report_id": "ph-fies",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Same PCOICOP technical notes page: PCOICOP serves as a \"guide in the classification of goods and services for the Family Income and Expenditure Survey (FIES),\" and PCOICOP is patterned after COICOP 2018.",
-      "evidence_url": "https://psa.gov.ph/classification/pcoicop/technical-notes",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-gfcf",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's GDP Sources and Methods document: \"The framework is based on the 2008 System of National Accounts (SNA)\"; corroborated by PSA's National Accounts FAQ: \"The PSNA adheres to the System of National Accounts 2008 (2008 SNA) which is an international standard for national accounting.\"",
-      "evidence_url": "https://psa.gov.ph/system/files/eiad/Quarterly-and-Annual-Gross-Domestic-Product-Sources-and-Methods.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-health-indicators",
-      "target_report_id": "who-icd-10",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's 2024 Cause of Death press release: \"Causes of death are coded based on the ICD-10 Rules and Guidelines and mortality grouping is based on the Mortality Tabulation List of ICD-10.\"",
-      "evidence_url": "https://psa.gov.ph/system/files/vsd/2_Press%20Release_2024%20Cause%20of%20Death%20Statistics_as%20of%2031%20August%202024-signed.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-bsp-mpr",
-      "target_report_id": "ph-cpi",
-      "relationship_type": "uses_data_from",
-      "basis": "BSP Monetary Policy Report: \"The BSP's target for monetary policy is the average annual Consumer Price Index (CPI) — or headline — inflation rate, which is compiled and released to the public by the Philippine Statistics Authority (PSA).\"",
-      "evidence_url": "https://www.bsp.gov.ph/Price%20Stability/MonetaryPolicyReport/FullReport_2023_3.pdf",
-      "evidence_grade": "B",
-      "evidence_quote": "The BSP’s target for monetary policy is the average annual Consumer Price Index (CPI) — or headline — inflation rate, which is compiled and released to the public by the Philippine Statistics Authority (PSA)."
-    },
-    {
-      "source_report_id": "ph-bsp-mpr",
-      "target_report_id": "imf-weo",
-      "relationship_type": "uses_data_from",
-      "basis": "Same Monetary Policy Report: \"The latest global growth assumptions were based on the July IMF World Economic Outlook (WEO) Update and June 2023 GPM Network forecasts.\"",
-      "evidence_url": "https://www.bsp.gov.ph/Price%20Stability/MonetaryPolicyReport/FullReport_2023_3.pdf",
-      "evidence_grade": "A",
-      "evidence_quote": "The latest global growth assumptions were based on the July IMF World Economic Outlook (WEO) Update and June 2023 GPM Network forecasts."
-    },
-    {
-      "source_report_id": "ph-manufacturing-aspbi",
-      "target_report_id": "ph-psic",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's ASPBI page: \"The 2009 Philippine Standard Industrial Classification (PSIC)... was utilized to classify economic units according to their economic activities.\"",
-      "evidence_url": "https://psa.gov.ph/statistics/manufacturing/aspbi",
-      "evidence_grade": "A",
-      "evidence_quote": "The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC)"
-    },
-    {
-      "source_report_id": "ph-msme",
-      "target_report_id": "ph-psic",
-      "relationship_type": "methodology_depends_on",
-      "basis": "The ASPBI-All-Establishments release (ph-msme's own listed source): \"The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC).\"",
-      "evidence_url": "https://psa.gov.ph/content/2022-annual-survey-philippine-business-and-industry-aspbi-all-establishments-employment",
-      "evidence_grade": "A",
-      "evidence_quote": "The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC)"
-    },
-    {
-      "source_report_id": "ph-psic",
-      "target_report_id": "isic",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's PSIC classification page: \"PSIC Revision 5 is patterned after the United Nations International Standard Industrial Classification of All Economic Activities (ISIC) Revision 5, with modifications to reflect the country's economic structure.\"",
-      "evidence_url": "https://psa.gov.ph/classification/psic",
-      "evidence_grade": "A",
-      "evidence_quote": "PSIC Revision 5 is patterned after the United Nations International Standard Industrial Classification of All Economic Activities (ISIC) Revision 5, with modifications to reflect the country's economic structure."
-    },
-    {
-      "source_report_id": "ph-trade-partners",
-      "target_report_id": "ph-pscc",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's export/import technical notes: \"The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes.\"",
-      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684065182",
-      "evidence_grade": "A",
-      "evidence_quote": "The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes."
-    },
-    {
-      "source_report_id": "ph-electronics-trade",
-      "target_report_id": "ph-pscc",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Same PSA trade technical notes page — electronics trade is a commodity breakdown of the same PSA export/import release series, coded with the same PSCC classification.",
-      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684065182",
-      "evidence_grade": "A",
-      "evidence_quote": "The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes."
-    },
-    {
-      "source_report_id": "ph-pscc",
-      "target_report_id": "hs",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's PSCC classification page: \"The existing PSCC is patterned from the ASEAN Harmonized Tariff Nomenclature (AHTN) that is based on the Harmonized Commodity Description and Coding System (HS) issued by the World Customs Organization (WCO).\"",
-      "evidence_url": "https://psa.gov.ph/classification/pscc",
-      "evidence_grade": "A",
-      "evidence_quote": "The existing PSCC is patterned from the ASEAN Harmonized Tariff Nomenclature (AHTN) that is based on the Harmonized Commodity Description and Coding System (HS) issued by the World Customs Organization (WCO)."
-    },
-    {
-      "source_report_id": "ph-grdp-ncr",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's GRDP Technical Notes cite \"2008 SNA, para 7.10\" for value-added definition and describe GRDP as compiled within the System of National Accounts, \"an internationally agreed standard.\"",
-      "evidence_url": "https://psa.gov.ph/system/files/technical-notes/GRDP-Technical-Notes_0.pdf",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "ph-grdp-calabarzon",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Same GRDP Technical Notes as the NCR edge above; the methodology applies uniformly across all regions, CALABARZON included.",
-      "evidence_url": "https://psa.gov.ph/system/files/technical-notes/GRDP-Technical-Notes_0.pdf",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "ph-tourism",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA Tourism Satellite Account technical notes: \"It adopts the basic system of the System of National Accounts 2008 (SNA 2008).\"",
-      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/167991",
-      "evidence_grade": "A",
-      "evidence_quote": "It adopts the basic system of the System of National Accounts 2008 (SNA 2008), the international standard for a systematic summary of national economic activity from a functional perspective."
-    },
-    {
-      "source_report_id": "ph-pop-projections",
-      "target_report_id": "ph-population-census",
-      "relationship_type": "calculated_from",
-      "basis": "PSA's own press release: \"The 2020 Census-Based National Population Projections are available in three fertility scenarios\" — projections are explicitly built from the 2020 Census of Population counts using the cohort-component method.",
-      "evidence_url": "https://psa.gov.ph/content/philippine-population-projected-be-around-13867-million-2055-under-scenario-2",
-      "evidence_grade": "B",
-      "evidence_quote": "The 2020 Census-Based National Population Projections are available in three fertility scenarios."
-    },
-    {
-      "source_report_id": "ph-financial-system",
-      "target_report_id": "imf-mfsmcg-2016",
-      "relationship_type": "legal_basis",
-      "basis": "CLOSED via a Grok follow-up pass, raw-verified by the orchestrating session (both PDFs fetched directly, byte sizes match exactly what was reported: CBSandDCS.pdf 64,739 bytes, OFCS.pdf 66,316 bytes). BSP's own primer: \"The Department of Economic Statistics (DES) of the Bangko Sentral ng Pilipinas (BSP) compiles monetary statistics in accordance with framework as set forth in the Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) of the International Monetary Fund (IMF).\" The specific 2016 edition is named on BSP's own Other Financial Corporations Survey table notes: \"It is based on the framework of the International Monetary Fund (IMF)'s Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) 2016.\" The robots-blocked SitePages/Lists paths named in the original round were not needed — these two primer/table-notes PDFs were reachable directly all along.",
-      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/CBSandDCS.pdf",
-      "evidence_grade": "A",
-      "evidence_quote": "The Department of Economic Statistics (DES) of the Bangko Sentral ng Pilipinas (BSP) compiles monetary statistics in accordance with framework as set forth in the Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) of the International Monetary Fund (IMF)."
-    }
-  ],
-  "_dropped": [
-    {
-      "edge": "ph-underemployment -> icls-work-statistics-resolution",
-      "source": "ph-underemployment",
-      "target": "icls-work-statistics-resolution",
-      "reason": "denied",
-      "why": "PSA's own Labor Force Survey Technical Notes PDF (fetched directly) cite a domestic NSCB Resolution as the basis for the unemployment/underemployment redefinition, explicitly not ICLS/ILO. A real relationship was checked and found not to hold — recorded so this isn't re-attempted."
-    },
-    {
-      "edge": "ph-rd-statistics -> (Frascati Manual, no corpus node)",
-      "source": "ph-rd-statistics",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "The Philippine Statistician (the Philippine Statistical Association's own journal) states DOST's R&D survey follows \"guidelines indicated in the Frascati Manual (OECD, 2015),\" but this is a secondary academic-journal citation, not DOST's or PSA's own site — checked both directly, neither states it. Also moot for now since no OECD Frascati Manual node exists in this corpus."
-    }
-  ]
+ "_slice": "ph-unlinked-wiring-2026-08-28",
+ "_researched": "2026-08-28",
+ "_status": "verified",
+ "_note": "Deepest wiring pass yet on the Philippines' unlinked-node backlog (61/68 unlinked as of this round's start). PSA's technical-notes pages were unusually forthcoming about classification standards (PSIC/ISIC, PSCC/HS, PCOICOP/COICOP) and SNA 2008 adoption; BSP's own primer PDFs supplied the BPM6/SDDS/WEO bridges. Two new classification nodes minted (PSIC, PSCC) since PSA's own industrial and commodity classifications sit between the national series and the UN standards they're patterned after. UPDATE 2026-08-28 (Grok follow-up, raw-verified by the orchestrating session via direct fetch of both PDFs, byte sizes matched exactly): ph-financial-system -> imf-mfsmcg-2016 closed — the robots-blocked SitePages/Lists paths turned out not to be needed, two other BSP PDFs name MFSMCG (one names the 2016 edition specifically) and were reachable all along.",
+ "reports": [
+  {
+   "id": "ph-psic",
+   "title": "Philippine Standard Industrial Classification (PSIC)",
+   "publisher": "Philippine Statistics Authority",
+   "country": "PH",
+   "jurisdiction_level": "federal",
+   "region": "Philippines",
+   "description": "PSA's national industry classification system, used to classify establishments by economic activity across PSA establishment surveys (ASPBI, MISSI, census of business). Explicitly patterned after the UN's ISIC.",
+   "url": "https://psa.gov.ph/classification/psic",
+   "domains": [
+    "industry"
+   ],
+   "releases_per_year": 0.05,
+   "cadence_note": "Revised on a multi-decade cycle (currently Revision 5), not a periodic release.",
+   "last_updated": null,
+   "kind": "publication"
+  },
+  {
+   "id": "ph-pscc",
+   "title": "Philippine Standard Commodity Classification (PSCC)",
+   "publisher": "Philippine Statistics Authority",
+   "country": "PH",
+   "jurisdiction_level": "federal",
+   "region": "Philippines",
+   "description": "PSA's national commodity classification used to code merchandise export/import statistics at the 11-digit level; an integration of the ASEAN Harmonized Tariff Nomenclature (AHTN), itself based on the WCO Harmonized System (HS).",
+   "url": "https://psa.gov.ph/classification/pscc",
+   "domains": [
+    "trade"
+   ],
+   "releases_per_year": 0.05,
+   "cadence_note": "Revised irregularly alongside the AHTN/HS revision cycle, not a periodic release.",
+   "last_updated": null,
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "ph-external-debt",
+   "target_report_id": "imf-bpm6",
+   "relationship_type": "methodology_depends_on",
+   "basis": "BSP's own External Debt FAQ: data are compiled \"in accordance with the concepts and methodology set out in the International Monetary Fund's (IMF) latest External Debt Statistics: Guide for Compilers and Users (2014) and Balance of Payments and International Investment Position Manual, 6th edition.\"",
+   "evidence_url": "https://www.bsp.gov.ph/Lists/Download%20Section/Attachments/139/FAQsExternalDebt.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "in accordance with the concepts and methodology set out in the International Monetary Fund's (IMF) latest External Debt Statistics: Guide for Compilers and Users ( External Debt Guide ) and Balance of Payments and International Investment Position Manual, 6th edition (BPM6)"
+  },
+  {
+   "source_report_id": "ph-iip",
+   "target_report_id": "imf-bpm6",
+   "relationship_type": "methodology_depends_on",
+   "basis": "BSP's combined BOP/IIP primer, covering both series: \"In March 2014, the BSP fully implemented the shift of the BOP compilation to BPM6 framework in compliance with the recommendations set out in the BOP manual.\"",
+   "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/bop.pdf",
+   "evidence_grade": "B",
+   "evidence_quote": "the compilation of IIP data based on BPM6 framework was completed last September 2014 with the simultaneous release of the quarterly IIP data as of end - March 2013 to end - June 2014"
+  },
+  {
+   "source_report_id": "ph-reserves",
+   "target_report_id": "imf-sdds",
+   "relationship_type": "cites",
+   "basis": "PSA's National Summary Data Page lists \"Gross International Reserves (Official Reserve Assets)\" and \"International Reserves and Foreign Currency Liquidity (Complete template)\" as BSP-sourced entries, stated to correspond to \"the International Monetary Fund's (IMF) Dissemination Standards Bulletin Board (DSBB)\" — the SDDS registry.",
+   "evidence_url": "https://psa.gov.ph/national-summary-data-page",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-poverty",
+   "target_report_id": "ph-fies",
+   "relationship_type": "uses_data_from",
+   "basis": "FIES's own technical notes state its objective is \"to provide inputs in the estimation of the country's poverty threshold and incidence,\" listing measurement of poverty as a main use of the data.",
+   "evidence_url": "https://psa.gov.ph/statistics/income-expenditure/fies/technical-notes",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-cpi-detail",
+   "target_report_id": "un-coicop-2018",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PCOICOP technical notes: PCOICOP is \"an input in the formulation of basket of goods for the Consumer Price Index (CPI)\" and \"the 2020 Philippine Classification of Individual Consumption According to Purpose (PCOICOP)... [is] patterned after the 2018 Classification of Individual Consumption According to Purpose (COICOP) developed by the United Nations Statistics Division (UNSD) in 2018.\" Corroborated in the CPI's own 2018-based technical notes.",
+   "evidence_url": "https://psa.gov.ph/classification/pcoicop/technical-notes",
+   "evidence_grade": "A",
+   "evidence_quote": "the 2020 Philippine Classification of Individual Consumption According to Purpose (PCOICOP)... [is] patterned after the 2018 Classification of Individual Consumption According to Purpose (COICOP) developed by the United Nations Statistics Division (UNSD) in 2018."
+  },
+  {
+   "source_report_id": "ph-fies",
+   "target_report_id": "un-coicop-2018",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Same PCOICOP technical notes page: PCOICOP serves as a \"guide in the classification of goods and services for the Family Income and Expenditure Survey (FIES),\" and PCOICOP is patterned after COICOP 2018.",
+   "evidence_url": "https://psa.gov.ph/classification/pcoicop/technical-notes",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-gfcf",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's GDP Sources and Methods document: \"The framework is based on the 2008 System of National Accounts (SNA)\"; corroborated by PSA's National Accounts FAQ: \"The PSNA adheres to the System of National Accounts 2008 (2008 SNA) which is an international standard for national accounting.\"",
+   "evidence_url": "https://psa.gov.ph/system/files/eiad/Quarterly-and-Annual-Gross-Domestic-Product-Sources-and-Methods.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-health-indicators",
+   "target_report_id": "who-icd-10",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's 2024 Cause of Death press release: \"Causes of death are coded based on the ICD-10 Rules and Guidelines and mortality grouping is based on the Mortality Tabulation List of ICD-10.\"",
+   "evidence_url": "https://psa.gov.ph/system/files/vsd/2_Press%20Release_2024%20Cause%20of%20Death%20Statistics_as%20of%2031%20August%202024-signed.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-bsp-mpr",
+   "target_report_id": "ph-cpi",
+   "relationship_type": "uses_data_from",
+   "basis": "BSP Monetary Policy Report: \"The BSP's target for monetary policy is the average annual Consumer Price Index (CPI) — or headline — inflation rate, which is compiled and released to the public by the Philippine Statistics Authority (PSA).\"",
+   "evidence_url": "https://www.bsp.gov.ph/Price%20Stability/MonetaryPolicyReport/FullReport_2023_3.pdf",
+   "evidence_grade": "B",
+   "evidence_quote": "The BSP’s target for monetary policy is the average annual Consumer Price Index (CPI) — or headline — inflation rate, which is compiled and released to the public by the Philippine Statistics Authority (PSA)."
+  },
+  {
+   "source_report_id": "ph-bsp-mpr",
+   "target_report_id": "imf-weo",
+   "relationship_type": "uses_data_from",
+   "basis": "Same Monetary Policy Report: \"The latest global growth assumptions were based on the July IMF World Economic Outlook (WEO) Update and June 2023 GPM Network forecasts.\"",
+   "evidence_url": "https://www.bsp.gov.ph/Price%20Stability/MonetaryPolicyReport/FullReport_2023_3.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "The latest global growth assumptions were based on the July IMF World Economic Outlook (WEO) Update and June 2023 GPM Network forecasts."
+  },
+  {
+   "source_report_id": "ph-manufacturing-aspbi",
+   "target_report_id": "ph-psic",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's ASPBI page: \"The 2009 Philippine Standard Industrial Classification (PSIC)... was utilized to classify economic units according to their economic activities.\"",
+   "evidence_url": "https://psa.gov.ph/statistics/manufacturing/aspbi",
+   "evidence_grade": "A",
+   "evidence_quote": "The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC)"
+  },
+  {
+   "source_report_id": "ph-msme",
+   "target_report_id": "ph-psic",
+   "relationship_type": "methodology_depends_on",
+   "basis": "The ASPBI-All-Establishments release (ph-msme's own listed source): \"The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC).\"",
+   "evidence_url": "https://psa.gov.ph/content/2022-annual-survey-philippine-business-and-industry-aspbi-all-establishments-employment",
+   "evidence_grade": "A",
+   "evidence_quote": "The 2022 ASPBI covered establishments engaged in 18 sections classified according to the 2009 Philippine Standard Industrial Classification (PSIC)"
+  },
+  {
+   "source_report_id": "ph-psic",
+   "target_report_id": "isic",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's PSIC classification page: \"PSIC Revision 5 is patterned after the United Nations International Standard Industrial Classification of All Economic Activities (ISIC) Revision 5, with modifications to reflect the country's economic structure.\"",
+   "evidence_url": "https://psa.gov.ph/classification/psic",
+   "evidence_grade": "A",
+   "evidence_quote": "PSIC Revision 5 is patterned after the United Nations International Standard Industrial Classification of All Economic Activities (ISIC) Revision 5, with modifications to reflect the country's economic structure."
+  },
+  {
+   "source_report_id": "ph-trade-partners",
+   "target_report_id": "ph-pscc",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's export/import technical notes: \"The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes.\"",
+   "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684065182",
+   "evidence_grade": "A",
+   "evidence_quote": "The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes."
+  },
+  {
+   "source_report_id": "ph-electronics-trade",
+   "target_report_id": "ph-pscc",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Same PSA trade technical notes page — electronics trade is a commodity breakdown of the same PSA export/import release series, coded with the same PSCC classification.",
+   "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684065182",
+   "evidence_grade": "A",
+   "evidence_quote": "The 2022 Philippine Standard Commodity Classification (PSCC) is used to classify the commodities at the 11-digit code level for statistical purposes."
+  },
+  {
+   "source_report_id": "ph-pscc",
+   "target_report_id": "hs",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's PSCC classification page: \"The existing PSCC is patterned from the ASEAN Harmonized Tariff Nomenclature (AHTN) that is based on the Harmonized Commodity Description and Coding System (HS) issued by the World Customs Organization (WCO).\"",
+   "evidence_url": "https://psa.gov.ph/classification/pscc",
+   "evidence_grade": "A",
+   "evidence_quote": "The existing PSCC is patterned from the ASEAN Harmonized Tariff Nomenclature (AHTN) that is based on the Harmonized Commodity Description and Coding System (HS) issued by the World Customs Organization (WCO)."
+  },
+  {
+   "source_report_id": "ph-grdp-ncr",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA's GRDP Technical Notes cite \"2008 SNA, para 7.10\" for value-added definition and describe GRDP as compiled within the System of National Accounts, \"an internationally agreed standard.\"",
+   "evidence_url": "https://psa.gov.ph/system/files/technical-notes/GRDP-Technical-Notes_0.pdf",
+   "evidence_grade": "C"
+  },
+  {
+   "source_report_id": "ph-grdp-calabarzon",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Same GRDP Technical Notes as the NCR edge above; the methodology applies uniformly across all regions, CALABARZON included.",
+   "evidence_url": "https://psa.gov.ph/system/files/technical-notes/GRDP-Technical-Notes_0.pdf",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "ph-tourism",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "PSA Tourism Satellite Account technical notes: \"It adopts the basic system of the System of National Accounts 2008 (SNA 2008).\"",
+   "evidence_url": "https://psa.gov.ph/statistics/technical-notes/167991",
+   "evidence_grade": "A",
+   "evidence_quote": "It adopts the basic system of the System of National Accounts 2008 (SNA 2008), the international standard for a systematic summary of national economic activity from a functional perspective."
+  },
+  {
+   "source_report_id": "ph-pop-projections",
+   "target_report_id": "ph-population-census",
+   "relationship_type": "calculated_from",
+   "basis": "PSA's own press release: \"The 2020 Census-Based National Population Projections are available in three fertility scenarios\" — projections are explicitly built from the 2020 Census of Population counts using the cohort-component method.",
+   "evidence_url": "https://psa.gov.ph/content/philippine-population-projected-be-around-13867-million-2055-under-scenario-2",
+   "evidence_grade": "B",
+   "evidence_quote": "The 2020 Census-Based National Population Projections are available in three fertility scenarios."
+  },
+  {
+   "source_report_id": "ph-financial-system",
+   "target_report_id": "imf-mfsmcg-2016",
+   "relationship_type": "legal_basis",
+   "basis": "CLOSED via a Grok follow-up pass, raw-verified by the orchestrating session (both PDFs fetched directly, byte sizes match exactly what was reported: CBSandDCS.pdf 64,739 bytes, OFCS.pdf 66,316 bytes). BSP's own primer: \"The Department of Economic Statistics (DES) of the Bangko Sentral ng Pilipinas (BSP) compiles monetary statistics in accordance with framework as set forth in the Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) of the International Monetary Fund (IMF).\" The specific 2016 edition is named on BSP's own Other Financial Corporations Survey table notes: \"It is based on the framework of the International Monetary Fund (IMF)'s Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) 2016.\" The robots-blocked SitePages/Lists paths named in the original round were not needed — these two primer/table-notes PDFs were reachable directly all along.",
+   "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/CBSandDCS.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "The Department of Economic Statistics (DES) of the Bangko Sentral ng Pilipinas (BSP) compiles monetary statistics in accordance with framework as set forth in the Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) of the International Monetary Fund (IMF)."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "ph-underemployment -> icls-work-statistics-resolution",
+   "source": "ph-underemployment",
+   "target": "icls-work-statistics-resolution",
+   "reason": "denied",
+   "why": "PSA's own Labor Force Survey Technical Notes PDF (fetched directly) cite a domestic NSCB Resolution as the basis for the unemployment/underemployment redefinition, explicitly not ICLS/ILO. A real relationship was checked and found not to hold — recorded so this isn't re-attempted."
+  },
+  {
+   "edge": "ph-rd-statistics -> (Frascati Manual, no corpus node)",
+   "source": "ph-rd-statistics",
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "The Philippine Statistician (the Philippine Statistical Association's own journal) states DOST's R&D survey follows \"guidelines indicated in the Frascati Manual (OECD, 2015),\" but this is a secondary academic-journal citation, not DOST's or PSA's own site — checked both directly, neither states it. Also moot for now since no OECD Frascati Manual node exists in this corpus."
+  }
+ ]
 }

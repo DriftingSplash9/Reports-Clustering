@@ -494,6 +494,18 @@ export type Country = 'CA' | 'US' | 'INT' | 'EU' | (string & {})
  * grey an unmapped country falls back to. `DOMAINS` below is now that consumer.
  */
 export type Domain =
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'semiconductors'
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'human-capital'
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'food'
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'exchange-rate'
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'gender'
+  /** Promoted from `proposed:` 2026-09-06 (Thomas). */
+  | 'culture'
   | 'inflation'
   | 'labour'
   | 'monetary-policy'
@@ -537,6 +549,12 @@ export type Domain =
 
 /** See the cast-not-parsed note under `SOURCE_KINDS`. */
 export const DOMAINS: readonly Domain[] = [
+  'semiconductors',
+  'human-capital',
+  'food',
+  'exchange-rate',
+  'gender',
+  'culture',
   'inflation',
   'labour',
   'monetary-policy',

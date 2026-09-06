@@ -10,6 +10,12 @@ schema is in `PLAYBOOK-CORPUS.md`.
 **Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 7 and 18, and
 the gaps are rules that live in one of the other two.
 
+**Reviewed 2026-09-06** against `PLAYBOOK.md` §1's two tests, the first pass
+since the three-way split. Three traps were misfiled here and moved to the
+lane that needs them; three facts had gone stale and are corrected in place
+with the old wording shown, because a doc that quietly changes its mind is
+harder to trust than one that says what it got wrong.
+
 **House habit, restated because it bites hardest here: the code is the design
 doc.** Read the dated comment at the constant before changing the number.
 Several say "do not raise this" and mean it.
@@ -60,7 +66,7 @@ Assume all of this exists and works; each has a dated comment at the site.
 - **Edges/pulses have SET SIZES** (`baseLinkWidth()` = 1); weight lives in
   rest length + opacity. Never reintroduce additive/white pulse cores or
   faceted node geometry (fresnel rims). **Continuous-database nodes/edges**
-  (`Report.continuous`, 35 nodes) draw with a soft boundary-fading sphere
+  (the `Report.continuous` set) draw with a soft boundary-fading sphere
   (alpha only, no colour) and an animated beam flow instead of teardrop
   particles.
 - **No distance fog/haze** — removed outright (too hard on the eyes): no
@@ -112,8 +118,23 @@ Assume all of this exists and works; each has a dated comment at the site.
 - **Loading curtain**: opaque until settled+fitted; 25s safety timeout is
   load-bearing; a corpus-fetch failure pins it with an error instead of an
   empty scene.
-- **Sliders**: cluster spread 200%–10000% (opens 200%), geo-affinity
-  0–500% (opens 150%), zoom 0.25–2.6 of fit.
+- **The three mirror instancers are the only draw path** (`photon`,
+  `link`, `nodeInstancing.ts`); the library's own meshes are state and
+  picking only. Landed 2026-09-05, headless 7,371 → ~85 draw calls.
+- **INT is condensed and tier 1 honours the toggle**, so the DEFAULT opening
+  frame is folded; orbs scale with member count (`orbSizeFactor`); every lens
+  is live at every tier (the `tier` prop was deleted, not left unused).
+- **Physics levers shipped 2026-09-05/06**: collide `iterations` 1, charge
+  `theta` 1.5 (together 123.9 → 65.9 ms/tick), a geoAffinity position cache,
+  and `TICK_BURST_MAX` 4 / 8 ms. `THETA=0.9` restores the old layout.
+  **Node instancing and the tick burst are still unmeasured on Thomas's
+  hardware** — that is a `HANDOFF.md` item, not a fact about the app.
+- **`mutual: true` edges are excluded from `rankedEdges`** — still drawn, but
+  not feeding PageRank, so they do not inflate node size.
+- **Sliders**: cluster spread 50%–1200%, geo-affinity 0–500%, zoom 0.25–2.6
+  of fit. The bounds live in `ViewControls.tsx` and `view.ts` and have moved
+  three times — read them there, never from here. *(This line said
+  200%–10000% until 2026-09-06; both bounds were wrong.)*
 
 
 ---
@@ -145,12 +166,9 @@ Assume all of this exists and works; each has a dated comment at the site.
   `browserCorpus.ts`; Node scripts via `src/data/index.ts` (never import
   from browser code); both share `assembleCorpus.ts`. Validation:
   `scripts/validate-data.ts` + `scripts/test-logic.ts` (live counts in
-  `HANDOFF.md` §2).
-  id-collision and edge-collision checks must include `src/data/reports.ts`
-  and `src/data/dependencies.ts`, and edges must also be checked against the
-  `part_of` containment map (rules 10-12 above).
-
----
+  `HANDOFF.md` §2). The collision and `part_of` rules that bind a data change
+  are `PLAYBOOK-CORPUS.md` rules 10-12 — not "above", which is what this line
+  said until 2026-09-06, a dangling reference left by the three-way split.
 
 ---
 
@@ -170,8 +188,14 @@ in `HANDOFF.md` until Thomas rules on it.
   edge-pick path always OPENS, never toggles.
 - **A cap that silently binds costs twice** (node size AND edge width) —
   whenever a slider ceiling moves, recompute `nodeScaleFor`'s cap.
-- **Camera cannot end up inside the cluster by raising spread** (fit = 5.675 ×
-  p95; measured ratios ≤ ~2). Spread saturates past ~1000%.
+- **The fit percentile is NOT fixed and this bullet used to say it was.**
+  `fitPercentileFor(spread)` runs 0.80 (spread ≤ 1) down to a 0.40 floor at
+  the slider's ceiling, −0.11 per doubling — so raising spread reframes the
+  shot as well as moving the nodes. 5.675× is the ratio that WOULD put the
+  camera inside the cloud; measured ratios stay comfortably under it. Read
+  `fitPercentileFor` and the cost table at the `CORE_PERCENTILE` use site in
+  `measureFit` before reasoning about framing. *(Corrected 2026-09-06: the
+  percentile changed that morning and this file still said p95.)*
 - **`PanelShell` supports one panel per edge; the bottom edge belongs to the
   dock.** A new bottom panel is a one-line dock-cell addition. Reserve dock
   space with an empty grid TRACK, never an item margin.
@@ -182,17 +206,6 @@ in `HANDOFF.md` until Thomas rules on it.
   see techniques §6. The two that have burned rounds: `renderer.info.render`
   reads `calls 1, triangles 1` from outside the render loop, and waiting two
   rAFs counts two frames.
-- **The grader's A bar reads presence, not meaning** (found 2026-09-05): it
-  awarded A on "Classifications … are *not in conformity* with … ISIC".
-  `NEGATED_QUOTE_PATTERNS` (denies / diverges / defers / hedges) now caps such
-  quotes at B and `--scan-quotes` lists them without network; but a new
-  phrasing the guard has not seen still grades A. Read the quote, not the grade.
-- **Your own basis prose can cap your edge.** `WEAK_BASIS_PATTERNS` matches
-  anywhere in the basis — "the EH is the *complementary* annual source" turned
-  an A into a B twice on 2026-09-05. Never write consistent / complementary /
-  comparable / aligned / presumably in a basis, even descriptively.
-- **`zip` on the device mount cannot rename its temp file** onto the target:
-  you get a 0-byte zip plus a random-named complete one. `cp` the temp file.
 - **`onBeforeCompile` never fires for a mesh that is hidden before its first
   render** (2026-09-05, node instancing). Every sphere is now `visible = false`
   from frame one, so anything a material used to create inside

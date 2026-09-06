@@ -5,10 +5,9 @@ Current corpus numbers and the live todo list belong in `HANDOFF.md`.
 
 **Three playbooks, and a session reads two of them: this one, then the one
 for what you are doing.** This file is short on purpose — everything in it
-binds every task, whatever the task is. It was split three ways on
-2026-09-06, from 43.8k characters of which a renderer round read 27k of
-evidence rulings it could not use and a research round read 11k of renderer
-internals it could not use.
+binds every task, whatever the task is. (Why it was split three ways on
+2026-09-06: memory `doc_consolidation_2026-09-06`. That is round narrative,
+not a rule, which is why it is no longer here.)
 
 ---
 
@@ -33,8 +32,9 @@ older reference to "PLAYBOOK §6" (known traps) or "§7" (standing decisions)
 resolves to that section of CORPUS, or of RENDER where its subject is the
 renderer; both files keep those section numbers.
 
-**Where a new paragraph goes** — the test is whether an agent who never reads
-it makes a WRONG DECISION, and on what task:
+**Two questions decide where a new paragraph goes, and the second one is the one
+that gets skipped.** First: would an agent who never reads it make a WRONG
+DECISION, and on what task?
 
 - **here** — only if that agent could have been doing ANY task;
 - **`PLAYBOOK-CORPUS.md` / `PLAYBOOK-RENDER.md`** — if it binds one lane;
@@ -42,6 +42,22 @@ it makes a WRONG DECISION, and on what task:
   doing that job;
 - **`notes/routing-snapshot-<date>.md`** — anything about which host answered
   which machine, which is stale on arrival.
+
+Second: **how fast does it stop being true?** (Thomas, 2026-09-06.) The doc set
+is two layers moving at different speeds. **`HANDOFF.md` is the fast layer** — it
+answers "what are we working on right now" and is *supposed* to turn over: if the
+work switches from corpus research to the renderer, §2 and §3 should look
+different within a handoff or two, and §2's weight follows the active lane.
+**Everything else is the slow layer** — the playbooks, `REPORTS.md` and
+`START-HERE.md` carry the big picture and every part of the project, and they do
+evolve, but over weeks rather than sessions.
+
+So a paragraph that will be wrong in a week goes in `HANDOFF.md` even if it binds
+every task, and a rule that will still be right in a month goes in a playbook even
+if only today's round needed it. **The failure this prevents is specific: nothing
+sweeps a playbook.** `HANDOFF.md` §4 sweeps the fast layer and has no counterpart
+here, so live counts, "currently blocked" and "the next round should" rot in place
+if they land in this file.
 
 An unapplied finding awaiting a ruling lives in `HANDOFF.md`, not in a
 playbook, and arrives as a rule only once Thomas has ruled. A trap now
@@ -83,8 +99,12 @@ index.html vite.config.ts START-HERE.md` (full `src/data/research/`
 corpus included) into a Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to
 move 270+ research JSONs across the bridge: zip `src/data/research/`
 on-device into `_to_delete/`, stage that one file, unzip in the
-sandbox. Reuse a live sandbox with `node_modules` already installed
-across rounds in the same session. Any `tsx`/`vite`-driven script fails
+sandbox — but **`zip` on the device mount cannot rename its temp file onto
+the target**: you get a 0-byte zip plus a random-named complete one, so `cp`
+the temp file. (That trap sat in `PLAYBOOK-RENDER.md` §6 until 2026-09-06,
+where a corpus round staging 270 JSONs would never have seen it.) Reuse a
+live sandbox with `node_modules` already installed across rounds in the same
+session. Any `tsx`/`vite`-driven script fails
 via `device_bash` (Windows `node_modules` vs. the bridge's Linux shell
 needing `@esbuild/linux-x64`) — same recipe fixes it. Plain
 `tsc --noEmit` is unaffected and runs fine directly via `device_bash`.
@@ -92,6 +112,13 @@ needing `@esbuild/linux-x64`) — same recipe fixes it. Plain
 **5. `public/corpus-data.json` is generated** (`npm run gen` /
 `scripts/gen-slices.ts`) — never hand-edit it. Fresh sandbox → run
 `npm run gen` first.
+
+**5b. `diary.csv` is Thomas's personal file — leave it alone.** Not a
+   corpus artefact, not generated, not yours to tidy. (Was parked in
+   `PLAYBOOK-CORPUS.md` §7 until 2026-09-06, where a renderer round
+   would never have seen it. Numbered 5b rather than 19 because it is a
+   footnote to the don't-touch-generated-files rule, and rule numbers
+   are permanent.)
 
 **6. Agents cannot delete device files** — `mv` into `_to_delete/`, log it
 in `_to_delete/README.md`. Emptying it is Thomas's job.

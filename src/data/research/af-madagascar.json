@@ -1,103 +1,104 @@
 {
-  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Madagascar — 4th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Reuses the shared comesa-treaty-establishing node minted in af-sudan.json this same round.",
-  "reports": [
-    {
-      "id": "mg-instat-nipc",
-      "title": "Nouvel Indice des Prix à la Consommation (NIPC)",
-      "publisher": "Institut National de la Statistique (INSTAT), Madagascar",
-      "country": "MG",
-      "jurisdiction_level": "federal",
-      "region": "Madagascar",
-      "description": "Madagascar's national CPI, published monthly by INSTAT (January 2026 release confirmed, ~4-6 week publication lag). Base year 2016=100, confirmed via the actual downloadable .xlsx data file (source cell \"INSTAT/DSCVM/SSPC\"). No explicit \"COICOP\" or \"IMF CPI Manual\" citation was found anywhere in INSTAT's own materials this round — only a structural resemblance to COICOP's 12-division structure, not a quoted citation.",
-      "releases_per_year": 12,
-      "cadence_note": "Monthly, roughly 4-6 week publication lag confirmed via the January 2026 release.",
-      "last_updated": null,
-      "url": "https://www.instat.mg/",
-      "domains": [
-        "inflation"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "mg-instat-snds-ii",
-      "title": "Stratégie Nationale de Développement de la Statistique (SNDS) Deuxième génération 2023-2030",
-      "publisher": "Institut National de la Statistique (INSTAT), Madagascar",
-      "country": "MG",
-      "jurisdiction_level": "federal",
-      "region": "Madagascar",
-      "description": "INSTAT's own second-generation national statistics development strategy. Paragraph 67 states verbatim: \"Madagascar a entrepris les travaux d'extension de cet indicateur au niveau national avec l'appui de COMESA\" [Madagascar undertook work to extend this indicator nationally with COMESA's support] — referring to the 2019 national-coverage extension of the CPI, which replaced the old Antananarivo-only, base-2000 series. This is the strongest Layer-2 finding for Madagascar: INSTAT's OWN document naming COMESA specifically in connection with its CPI. Also names \"SHaSA 2\" (a continental, AU-wide statistical-harmonisation strategy, not bloc-specific) and lists SADC/COMESA as \"facilités sous-régionales d'intégration\" for funding purposes. The Indian Ocean Commission (COI) was searched for and NOT FOUND anywhere in INSTAT's materials.",
-      "cadence_note": "One-off foundational strategy document (2023-2030 planning horizon).",
-      "last_updated": null,
-      "url": "https://www.instat.mg/",
-      "domains": [
-        "inflation"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "mg-constitution-ctd",
-      "title": "Constitution de la IVᵉ République de Madagascar (telle qu'amendée en 2010)",
-      "publisher": "République de Madagascar",
-      "country": "MG",
-      "jurisdiction_level": "federal",
-      "region": "Madagascar",
-      "description": "Madagascar's Constitution. Article 143: \"Les Collectivités Territoriales décentralisées... sont les Communes, les Régions et les Provinces.\" Article 142 establishes financial autonomy for these decentralised territorial units. Article 147 lists their revenue sources, including \"la part qui lui revient de droit sur le produit des impôts et taxes perçus au profit du budget de l'Etat\" [its rightful share of taxes and duties collected for the State budget].",
-      "cadence_note": "One-off foundational instrument.",
-      "last_updated": null,
-      "url": "https://www.hcc.gov.mg/",
-      "domains": [
-        "fiscal-transfers"
-      ],
-      "kind": "instrument"
-    },
-    {
-      "id": "mg-loi-organique-2014-018",
-      "title": "Loi Organique n°2014-018",
-      "publisher": "Assemblée Nationale, Madagascar",
-      "country": "MG",
-      "jurisdiction_level": "federal",
-      "region": "Madagascar",
-      "description": "Organic law of 12 September 2014 implementing Constitution Article 88(4), per its own Exposé des Motifs. Article 10: \"La Province regroupe deux ou plusieurs Régions\" [The Province groups together two or more Regions]. Articles 25/45 require the State to transfer resources concomitant with transferred competencies. A Ministry of Finance page (dgfag.mg) lists two further relevant texts by title only, not independently opened this round: Décret n°2015-959 and Loi n°2018-011. UPDATE 2026-08-13 (AF/G.18, municipal-tier round): Article 25's actual substance is now confirmed via a Ministry/FDL report (mg-fnp-rapport-2025, af-madagascar-commune-finance.json) quoting it directly (as amended by Loi organique n°2016-030): \"il est institué un mécanisme dénommé Fonds National de Péréquation, destiné à atténuer les inégalités entre les Collectivités Territoriales Décentralisées\" [a mechanism called the National Equalisation Fund is established, intended to reduce inequalities between decentralized territorial collectivities] — i.e. this branch's own prior paraphrase ('require the State to transfer resources concomitant with transferred competencies') was a generalization; Article 25 specifically institutes the FNP, whose funding percentages and actual disbursement record are documented in mg-fnp-rapport-2025. Décret n°2015-959 and Loi n°2018-011 (mentioned above, still not independently opened) turn out to be exactly the FNP's own funding-formula amendments per that same report.",
-      "cadence_note": "One-off foundational legal instrument.",
-      "last_updated": null,
-      "url": "https://www.dgfag.mg/",
-      "domains": [
-        "fiscal-transfers"
-      ],
-      "kind": "instrument"
-    }
-  ],
-  "dependencies": [
-    {
-      "source_report_id": "mg-loi-organique-2014-018",
-      "target_report_id": "mg-constitution-ctd",
-      "relationship_type": "cites",
-      "basis": "The organic law's own Exposé des Motifs states it implements \"l'article 88 point 4\" of the Constitution — a direct citation by article number.",
-      "evidence_url": "https://www.hcc.gov.mg/",
-      "evidence_grade": "C"
-    }
-  ],
-  "_dropped": [
-    {
-      "edge": "mg-instat-nipc -> mg-region-budget",
-      "source": "mg-instat-nipc",
-      "target": null,
-      "reason": "no-document",
-      "why": "Could not reach an individual region's own budget document this round (Région Vakinankaratra's site returned HTTP 406). No region-level fiscal document minted."
-    },
-    {
-      "edge": "mg-instat-nipc -> coi-statistics",
-      "source": "mg-instat-nipc",
-      "target": null,
-      "reason": "no-document",
-      "why": "The Indian Ocean Commission (COI), the other major regional bloc Madagascar belongs to, was searched for a statistical-harmonisation citation comparable to the COMESA one — none found this round."
-    },
-    {
-      "edge": "mg-instat-snds-ii -> comesa-treaty-establishing",
-      "source": "mg-instat-snds-ii",
-      "target": null,
-      "reason": "note",
-      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): comesa-treaty-establishing is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.instat.mg/). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"INSTAT's own SNDS-II strategy document (§67) names COMESA specifically as the source of support for extending the CPI to national coverage in 2019: \"avec l'appui de COMESA.\" relationship_type is 'cites' rather than 'methodology_depends_on' because the quote credits COMESA's support for a coverage EXTENSION, not the CPI's underlying methodology itself — matching the established convention (e.g. mr-ons-inpc's institutional-support citations) of using 'cites' when an institution is named as providing assistance without a specific methodology-article basis.\""
-    }
-  ]
+ "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Madagascar — 4th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Reuses the shared comesa-treaty-establishing node minted in af-sudan.json this same round.",
+ "reports": [
+  {
+   "id": "mg-instat-nipc",
+   "title": "Nouvel Indice des Prix à la Consommation (NIPC)",
+   "publisher": "Institut National de la Statistique (INSTAT), Madagascar",
+   "country": "MG",
+   "jurisdiction_level": "federal",
+   "region": "Madagascar",
+   "description": "Madagascar's national CPI, published monthly by INSTAT (January 2026 release confirmed, ~4-6 week publication lag). Base year 2016=100, confirmed via the actual downloadable .xlsx data file (source cell \"INSTAT/DSCVM/SSPC\"). No explicit \"COICOP\" or \"IMF CPI Manual\" citation was found anywhere in INSTAT's own materials this round — only a structural resemblance to COICOP's 12-division structure, not a quoted citation.",
+   "releases_per_year": 12,
+   "cadence_note": "Monthly, roughly 4-6 week publication lag confirmed via the January 2026 release.",
+   "last_updated": null,
+   "url": "https://www.instat.mg/",
+   "domains": [
+    "inflation"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "mg-instat-snds-ii",
+   "title": "Stratégie Nationale de Développement de la Statistique (SNDS) Deuxième génération 2023-2030",
+   "publisher": "Institut National de la Statistique (INSTAT), Madagascar",
+   "country": "MG",
+   "jurisdiction_level": "federal",
+   "region": "Madagascar",
+   "description": "INSTAT's own second-generation national statistics development strategy. Paragraph 67 states verbatim: \"Madagascar a entrepris les travaux d'extension de cet indicateur au niveau national avec l'appui de COMESA\" [Madagascar undertook work to extend this indicator nationally with COMESA's support] — referring to the 2019 national-coverage extension of the CPI, which replaced the old Antananarivo-only, base-2000 series. This is the strongest Layer-2 finding for Madagascar: INSTAT's OWN document naming COMESA specifically in connection with its CPI. Also names \"SHaSA 2\" (a continental, AU-wide statistical-harmonisation strategy, not bloc-specific) and lists SADC/COMESA as \"facilités sous-régionales d'intégration\" for funding purposes. The Indian Ocean Commission (COI) was searched for and NOT FOUND anywhere in INSTAT's materials.",
+   "cadence_note": "One-off foundational strategy document (2023-2030 planning horizon).",
+   "last_updated": null,
+   "url": "https://www.instat.mg/",
+   "domains": [
+    "inflation"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "mg-constitution-ctd",
+   "title": "Constitution de la IVᵉ République de Madagascar (telle qu'amendée en 2010)",
+   "publisher": "République de Madagascar",
+   "country": "MG",
+   "jurisdiction_level": "federal",
+   "region": "Madagascar",
+   "description": "Madagascar's Constitution. Article 143: \"Les Collectivités Territoriales décentralisées... sont les Communes, les Régions et les Provinces.\" Article 142 establishes financial autonomy for these decentralised territorial units. Article 147 lists their revenue sources, including \"la part qui lui revient de droit sur le produit des impôts et taxes perçus au profit du budget de l'Etat\" [its rightful share of taxes and duties collected for the State budget].",
+   "cadence_note": "One-off foundational instrument.",
+   "last_updated": null,
+   "url": "https://www.hcc.gov.mg/",
+   "domains": [
+    "fiscal-transfers"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "mg-loi-organique-2014-018",
+   "title": "Loi Organique n°2014-018",
+   "publisher": "Assemblée Nationale, Madagascar",
+   "country": "MG",
+   "jurisdiction_level": "federal",
+   "region": "Madagascar",
+   "description": "Organic law of 12 September 2014 implementing Constitution Article 88(4), per its own Exposé des Motifs. Article 10: \"La Province regroupe deux ou plusieurs Régions\" [The Province groups together two or more Regions]. Articles 25/45 require the State to transfer resources concomitant with transferred competencies. A Ministry of Finance page (dgfag.mg) lists two further relevant texts by title only, not independently opened this round: Décret n°2015-959 and Loi n°2018-011. UPDATE 2026-08-13 (AF/G.18, municipal-tier round): Article 25's actual substance is now confirmed via a Ministry/FDL report (mg-fnp-rapport-2025, af-madagascar-commune-finance.json) quoting it directly (as amended by Loi organique n°2016-030): \"il est institué un mécanisme dénommé Fonds National de Péréquation, destiné à atténuer les inégalités entre les Collectivités Territoriales Décentralisées\" [a mechanism called the National Equalisation Fund is established, intended to reduce inequalities between decentralized territorial collectivities] — i.e. this branch's own prior paraphrase ('require the State to transfer resources concomitant with transferred competencies') was a generalization; Article 25 specifically institutes the FNP, whose funding percentages and actual disbursement record are documented in mg-fnp-rapport-2025. Décret n°2015-959 and Loi n°2018-011 (mentioned above, still not independently opened) turn out to be exactly the FNP's own funding-formula amendments per that same report.",
+   "cadence_note": "One-off foundational legal instrument.",
+   "last_updated": null,
+   "url": "https://www.dgfag.mg/",
+   "domains": [
+    "fiscal-transfers"
+   ],
+   "kind": "instrument"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "mg-loi-organique-2014-018",
+   "target_report_id": "mg-constitution-ctd",
+   "relationship_type": "cites",
+   "basis": "RE-POINTED 2026-09-06 (bare-homepage debt round). Was cited to https://www.hcc.gov.mg/, a bare homepage. The full text of Loi organique n° 2014-018 du 12 septembre 2014 is published first-party by the Direction Générale du Budget et des Finances (dgfag.mg, HTTP 200), carrying its Journal Officiel provenance line 'J.O. n° 3578 du 03 octobre 2014, page 3690'. The opening line of the Exposé des Motifs names the instrument by title and date and the exact provision it implements, so C -> A. A second first-party copy exists on tresorpublic.mg with the trivial variant 'dispose en son article 88 point 4'; the quote here matches the URL cited. || ORIGINAL BASIS PRESERVED: The organic law's own Exposé des Motifs states it implements \"l'article 88 point 4\" of the Constitution — a direct citation by article number.",
+   "evidence_url": "https://www.dgfag.mg/wp-content/uploads/2021/04/Loi_organique_2014-018_regissant_les_competences_des_CTD.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "La Constitution du 11 décembre 2010 dispose à son article 88 point 4 que les règles régissant les compétences, les modalités d'organisation et de fonctionnement des Collectivités territoriales décentralisées, ainsi que celles de la gestion de leurs propres affaires relèvent d'une loi organique."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "mg-instat-nipc -> mg-region-budget",
+   "source": "mg-instat-nipc",
+   "target": null,
+   "reason": "no-document",
+   "why": "Could not reach an individual region's own budget document this round (Région Vakinankaratra's site returned HTTP 406). No region-level fiscal document minted."
+  },
+  {
+   "edge": "mg-instat-nipc -> coi-statistics",
+   "source": "mg-instat-nipc",
+   "target": null,
+   "reason": "no-document",
+   "why": "The Indian Ocean Commission (COI), the other major regional bloc Madagascar belongs to, was searched for a statistical-harmonisation citation comparable to the COMESA one — none found this round."
+  },
+  {
+   "edge": "mg-instat-snds-ii -> comesa-treaty-establishing",
+   "source": "mg-instat-snds-ii",
+   "target": null,
+   "reason": "note",
+   "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): comesa-treaty-establishing is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.instat.mg/). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"INSTAT's own SNDS-II strategy document (§67) names COMESA specifically as the source of support for extending the CPI to national coverage in 2019: \"avec l'appui de COMESA.\" relationship_type is 'cites' rather than 'methodology_depends_on' because the quote credits COMESA's support for a coverage EXTENSION, not the CPI's underlying methodology itself — matching the established convention (e.g. mr-ons-inpc's institutional-support citations) of using 'cites' when an institution is named as providing assistance without a specific methodology-article basis.\""
+  }
+ ]
 }
