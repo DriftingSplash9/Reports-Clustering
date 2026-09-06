@@ -11,7 +11,7 @@
       "country": "CA",
       "jurisdiction_level": "federal",
       "region": "Canada",
-      "description": "The annual provincial and territorial counterpart of the national income and expenditure accounts (IMDB record 1902), producing GDP by income and by expenditure, household income and consumption, and government sector accounts for each province and territory. SOR/2007-303 adopts its definitions by name in the DIVISION 1 interpretation section that governs the all-provinces Equalization formula, which is what makes this the highest-value node in the equalization cluster.",
+      "description": "The annual provincial and territorial counterpart of the national income and expenditure accounts (IMDB record 1902), producing GDP by income and by expenditure, household income and consumption, and government sector accounts for each province and territory. SOR/2007-303 adopts its definitions by name in the DIVISION 1 interpretation section that governs the all-provinces Equalization formula, which is what makes this the highest-value node in the equalization cluster. Table number added 2026-09-06 under §7a's table-number ruling. Resolved at www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610022201, which returns 'Gross domestic product, expenditure-based, provincial and territorial, annual' — the expenditure-based half of this node's accounts. NOT aliased: 36-10-0711-01 (GDP by industry, provinces and territories) is a different product with no node, and 36-10-0434-01 is the corpus's own statcan-gdp-monthly.",
       "releases_per_year": 1,
       "cadence_note": "Annual, released as part of the provincial and territorial economic accounts cycle (typically November for the preceding reference year).",
       "release_schedule": {
@@ -34,7 +34,10 @@
         "national-accounts",
         "fiscal-transfers"
       ],
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "36-10-0222-01"
+      ]
     },
     {
       "id": "statcan-government-finance-statistics",
@@ -112,7 +115,7 @@
       "country": "CA",
       "jurisdiction_level": "federal",
       "region": "Canada",
-      "description": "Annual net and gross sales of gasoline and net sales of diesel fuel for road use by province and territory, produced from the Gasoline and Other Petroleum Fuels Sold programme (survey 2746); formerly CANSIM 405-0002. SOR/2007-303 cites the table by its modern number in the general Interpretation section at s. 1(1), where the defined fuel quantities used throughout the instrument's motive-fuel tax bases are pinned to it.",
+      "description": "Annual net and gross sales of gasoline and net sales of diesel fuel for road use by province and territory, produced from the Gasoline and Other Petroleum Fuels Sold programme (survey 2746); formerly CANSIM 405-0002. SOR/2007-303 cites the table by its modern number in the general Interpretation section at s. 1(1), where the defined fuel quantities used throughout the instrument's motive-fuel tax bases are pinned to it. Table number added 2026-09-06 under §7a's table-number ruling; it is already in this node's own title, and the alias makes it matchable on its own.",
       "releases_per_year": 1,
       "release_schedule": {
         "kind": "observed-pattern",
@@ -134,7 +137,10 @@
         "taxation",
         "fiscal-transfers"
       ],
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "23-10-0066-01"
+      ]
     },
     {
       "id": "statcan-alcohol-sales",
@@ -143,7 +149,7 @@
       "country": "CA",
       "jurisdiction_level": "federal",
       "region": "Canada",
-      "description": "Annual value and volume of spirits, wine and beer sold by liquor authorities and other retail outlets, by province and territory, from the Control and Sale of Alcoholic Beverages programme (IMDB record 1726). The live table is the direct successor of CANSIM 183-0024, and SOR/2007-303 cites it under both numbers: the Territorial Formula Financing part uses the modern number at s. 19(1)(f) while the unrevised Nova Scotia division still cites the retired CANSIM number at s. 8(1)(j).",
+      "description": "Annual value and volume of spirits, wine and beer sold by liquor authorities and other retail outlets, by province and territory, from the Control and Sale of Alcoholic Beverages programme (IMDB record 1726). The live table is the direct successor of CANSIM 183-0024, and SOR/2007-303 cites it under both numbers: the Territorial Formula Financing part uses the modern number at s. 19(1)(f) while the unrevised Nova Scotia division still cites the retired CANSIM number at s. 8(1)(j). Table number added 2026-09-06 under §7a's table-number ruling; already in this node's title, aliased so it matches standalone.",
       "releases_per_year": 1,
       "release_schedule": {
         "kind": "observed-pattern",
@@ -186,7 +192,10 @@
         "taxation",
         "fiscal-transfers"
       ],
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "10-10-0011-01"
+      ]
     },
     {
       "id": "statcan-agriculture-balance-sheet",
@@ -367,19 +376,19 @@
       "source_report_id": "fiscal-equalization-program",
       "target_report_id": "statcan-road-fuel-sales",
       "relationship_type": "calculated_from",
-      "basis": "SOR/2007-303 s. 1(1), the general Interpretation section, defines the fuel quantities used across the instrument's motive-fuel tax bases against the table by its modern number: the 'adjusted number of litres of diesel fuel taxed at road-use rate' and 'adjusted number of litres of gasoline taxed at road-use rate' are each the quantities 'sold in the province or territory during the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (x 1,000)'. Being a s. 1 definition, the citation applies wherever those defined terms are used in the Regulations.",
+      "basis": "SOR/2007-303 s. 1(1), the general Interpretation section, defines the fuel quantities used across the instrument's motive-fuel tax bases against the table by its modern number: the 'adjusted number of litres of diesel fuel taxed at road-use rate' and 'adjusted number of litres of gasoline taxed at road-use rate' are each the quantities 'sold in the province or territory during the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (x 1,000)'. Being a s. 1 definition, the citation applies wherever those defined terms are used in the Regulations. || UPGRADED B -> A 2026-09-06 on Thomas's ruling that a Statistics Canada table NUMBER names the artefact (PLAYBOOK-CORPUS §7a). The number was resolved against Statistics Canada's own product page in this round, which is condition 1 of that ruling, and the number is now a `title_aliases` entry on the target so the grader sees what the reader does. Re-read live from the cited URL the same day. **THE STORED QUOTE WAS NOT VERBATIM AND IS FIXED**: it wrote the multiplication sign as an ASCII 'x' where SOR/2007-303 uses U+00D7 ('× 1,000'), so it never matched the document byte for byte. Third instance of this class in one round, after the Guinea SNDS apostrophes — an ASCII substitution for a typographic character reads as a MISSING quote to any checker, not as a near miss.",
       "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-1.html",
-      "evidence_grade": "B",
-      "evidence_quote": "sold in the province or territory during the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (x 1,000)"
+      "evidence_grade": "A",
+      "evidence_quote": "sold in the province or territory during the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (× 1,000)"
     },
     {
       "source_report_id": "fiscal-equalization-program",
       "target_report_id": "statcan-alcohol-sales",
       "relationship_type": "calculated_from",
-      "basis": "SOR/2007-303 s. 19(1)(f) (Territorial Formula Financing) measures the alcohol revenue base against the modern table three times over: the volume of spirits, of wine and of beer 'sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (x 1,000)'. The Nova Scotia division cites the same product under its retired predecessor number at s. 8(1)(j), 'as determined by Statistics Canada for the purpose of CANSIM table 183-0024' — StatCan's own table page confirms 10-10-0011-01 was 'formerly CANSIM 183-0024', so both citations resolve to this node.",
+      "basis": "SOR/2007-303 s. 19(1)(f) (Territorial Formula Financing) measures the alcohol revenue base against the modern table three times over: the volume of spirits, of wine and of beer 'sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (x 1,000)'. The Nova Scotia division cites the same product under its retired predecessor number at s. 8(1)(j), 'as determined by Statistics Canada for the purpose of CANSIM table 183-0024' — StatCan's own table page confirms 10-10-0011-01 was 'formerly CANSIM 183-0024', so both citations resolve to this node. || UPGRADED B -> A 2026-09-06 on Thomas's ruling that a Statistics Canada table NUMBER names the artefact (PLAYBOOK-CORPUS §7a). The number was resolved against Statistics Canada's own product page in this round, which is condition 1 of that ruling, and the number is now a `title_aliases` entry on the target so the grader sees what the reader does. Re-read live from the cited URL the same day. Same ASCII-for-U+00D7 quote defect as the road-fuel edge, fixed the same way.",
       "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html",
-      "evidence_grade": "B",
-      "evidence_quote": "sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (x 1,000)"
+      "evidence_grade": "A",
+      "evidence_quote": "sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (× 1,000)"
     },
     {
       "source_report_id": "fiscal-equalization-program",

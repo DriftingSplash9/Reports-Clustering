@@ -11,7 +11,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 verbatim. State only, no changelog, no round narrative. Finished items LEAVE
 (§4 step 4); the round's memory entry is their record.
 
-Last updated: 2026-09-07 ~02:10 UTC (round 4 closed — ONS registers, the IMF seam opened, six rulings executed, the dsbb write-offs swept)
+Last updated: 2026-09-07 ~01:50 UTC (round 4 — ONS registers, the IMF seam, six rulings executed, the dsbb write-offs re-opened)
 
 ---
 
@@ -30,7 +30,10 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
 | a `*-grok-2026-08.json` slice's `meta.note` | `notes/mint-2026-08-20.md` |
 | Eurostat metadata / EU price-index / HBS chains | memory `layout_levers_and_hbs_2026-09-05`, `esms_hicp_pass_2026-09-05`, `eu_national_chains_2026-08-28` |
-| **anything in the renderer** | `PLAYBOOK-RENDER.md` §3–§4 first — it routes the lane. Then the round memory for your bit: `node_instancing_2026-09-05` / `link_batching_2026-09-05` (draw path), `layout_levers_and_hbs_2026-09-05` + `settle_time_tick_burst_2026-09-05` (forces), `fit_percentile_and_tier1_2026-09-06` (camera fit), `condensed_int_and_rulings_2026-09-05` (INT fold). Instruments: `scripts/measure-forces.ts`, `scripts/renderer/`. *(Four rows collapsed to one on 2026-09-07 — they restated PLAYBOOK-RENDER's own routing, which is how the two drift apart.)* |
+| visual / layout work · INT fold | `PLAYBOOK-RENDER.md` §3–§4, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; memory `condensed_int_and_rulings_2026-09-05` |
+| renderer draw path / instancers | memory `node_instancing_2026-09-05`, `link_batching_2026-09-05`, then `renderer_perf_measured_2026-09-04` |
+| settle time / physics cost / force tuning | memory `layout_levers_and_hbs_2026-09-05`, then `settle_time_tick_burst_2026-09-05`; `scripts/measure-forces.ts` (`ITER`/`THETA`); `scripts/renderer/settle.mjs`, `shot-all.mjs` |
+| camera fit · the spread slider · INT fold | memory `fit_percentile_and_tier1_2026-09-06`; `scripts/renderer/fit-probe.mjs`; `notes/camera-fit-measurement-2026-08-19.md` · `notes/flicker-tests-2026-08-19.md` |
 | "what is still broken that nobody is fixing?" | `notes/standing-issues.md` — items that outlived five handoffs; not on the mandatory read path |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
@@ -45,21 +48,20 @@ state it (rule 1).
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 14.0k | everyone, first |
+| `HANDOFF.md` | 14.2k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
 | `PLAYBOOK.md` | 8.2k | everyone |
-| `PLAYBOOK-CORPUS.md` | 36.2k | corpus lane — §7 splits 7a/7b/7c by question |
+| `PLAYBOOK-CORPUS.md` | 33.6k | corpus lane — §7 splits 7a/7b/7c by question |
 | `PLAYBOOK-RENDER.md` | 13.0k | renderer lane |
 | `REPORTS.md` | 24.0k | scope/direction questions |
 | `START-HERE.md` | 13.0k | humans, not agents |
-| **a corpus round reads** | **59.9k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **36.7k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **57.5k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **36.9k** | HANDOFF + CLAUDE + core + RENDER |
 
-**§1-§3 is 10.6k, over this file's own 10k cap.** Trimmed four times writing this
-handoff (renderer read-order rows 4→1, the IMF endpoint table moved to
-`notes/imf-dsbb-2026-09-06.md`, two §3 lists compressed into their memory entry);
-what is left is load-bearing. **Next handoff should cut, not add** — and watch
-whether §2 still describes the lane being worked, not its size.
+§1-§3 is 10.1k, at its own cap. **This file is the fast layer and is supposed to
+turn over** — watch whether §2 still describes the lane being worked, not its
+size. `PLAYBOOK-CORPUS.md` grew 1.1k on 2026-09-06 and a round still reads only
+one third of its §7.
 
 ---
 
@@ -70,47 +72,41 @@ A-share 32.8%. **Domains: 46 approved, 0 proposed.** Zero bare-homepage edges,
 0 no-URL / 0 dead-URL. `validate` exits 0, 123/123 logic tests, grader selftest
 **68/68**, `tsc --noEmit` clean, `vite build` ok. **Grade counts come from
 `validate` only.** `kind`: 2,509 publication · 39 standard · 880 instrument.
-`public/corpus-data.json` regenerated, current as of 2026-09-07.
+`public/corpus-data.json` regenerated, current as of 2026-09-06.
 
 **Direction (Thomas, 2026-09-06): gathering data.** The target is THIN
 COVERAGE — regions and nations oddly short on reports or dependencies, with the
 well-covered nations as the template. No A-share or size target.
 
-**Thin splits two ways**, and the split is what scopes a round: (a) big economies
-reached through one narrow template — **GB and AU are done**, DE and
-FR/IT/ES/SE/BE/AT/PL/FI remain; (b) 978 of 3,345 nodes with zero edges, in
-EG · IR · TW · SG · ID · IN · CN · RU · INT. The coverage census and the method
-are in memory `gb_national_core_2026-09-06`; §3 carries what to do next.
+**Thin splits two ways.** (a) Big economies reached through one narrow template
+— **GB and AU are done**; DE (13 nodes) and FR/IT/ES/SE/BE/AT/PL/FI (7–9 each,
+all just price-index → NA → HBS) remain. (b) 978 of 3,345 nodes with zero edges,
+in EG · IR · TW · SG · ID · IN · CN · RU · INT. Census and method: memory
+`gb_national_core_2026-09-06`.
 
-**THE IMF IS THE ACTIVE SEAM AND IT IS WIDE OPEN.** Three hosts, three problems,
-all solved; both recipes are written down and **must not be re-derived**:
-`www.imf.org` 403s every path from every network, `/-/media/` included — so at
-least one live A-grade edge cites a URL that no longer answers;
-`elibrary.imf.org` serves the manuals AND the flagships, which are shelved as
-books (`notes/imf-elibrary-2026-09-06.md` and its periodical addendum);
-`dsbb.imf.org` is an AngularJS shell read through its own REST API
-(`notes/imf-dsbb-2026-09-06.md`, which now carries all four endpoints that
-matter). The two found on 2026-09-06 evening are the ones round 5 turns on:
-`api/country/getcountrybytype` gives the definitive tier lists (**110 e-GDDS ·
-49 SDDS · 32 SDDS Plus**) and `api/country/getsubscriptiondateInfos` gives the
-per-country e-GDDS dates, where **`ComplianceDate` is the NSDP first-posted date
-and null means never implemented** — so list membership alone is not evidence.
+**The IMF is now readable end to end, and this is the live seam.** Three hosts,
+three problems, all solved and both recipes written down: `www.imf.org` 403s every
+path from every network, `/-/media/` included — so a live A-grade edge cites a URL
+that no longer answers; `elibrary.imf.org` serves books AND the flagships, which
+are shelved as books (`notes/imf-elibrary-2026-09-06.md`, plus the periodical
+addendum in the file below); `dsbb.imf.org` is an AngularJS shell whose prose comes
+from one REST call (`notes/imf-dsbb-2026-09-06.md`). **Do not re-derive either —
+read the notes.** `imf-sdds`, `imf-sdds-plus`, `imf-dqaf`, `imf-weo` and
+`imf-fiscal-monitor` were all pure sinks before round 4 and now have outgoing
+edges; `imf-e-gdds` is still a sink, and the round establishes why — e-GDDS has no
+methodology table to wire from.
 
-`imf-sdds`, `imf-sdds-plus`, `imf-dqaf`, `imf-weo` and `imf-fiscal-monitor` were
-all pure sinks before round 4 and now have outgoing edges. `imf-e-gdds` is still
-a sink, and the round established why: e-GDDS has no methodology table to wire
-from.
-
-**Renderer — no work this round.** Every shipped constant and its reason is in
-`PLAYBOOK-RENDER.md` §3–§4 and in dated code comments; harness in
-`scripts/renderer/`; narrative in memory. **One open item**: node instancing
-(target 25.00 → 16.67 ms/frame) and the tick burst are still unmeasured on
-Thomas's hardware.
+**Renderer — no work this round.** Everything shipped is described, with its
+reason, in `PLAYBOOK-RENDER.md` §3–§4 and in dated code comments; the headless
+harness is `scripts/renderer/`; the round narrative is in memory
+(`fit_percentile_and_tier1_2026-09-06`, `condensed_int_and_rulings_2026-09-05`).
+**The one open item**: node instancing (target 25.00 → 16.67 ms/frame) and the
+tick burst are still unmeasured on Thomas's hardware.
 
 **Ranking:** `mutual: true` edges stay live and on screen but out of
 `rankedEdges` — a mutual pair is a 2-cycle that pumps its own rank. **Five
-pairs**, curated not computed. `measure-mutual-rank.ts` printing identical
-shipped and both-halves columns IS the fix, not a broken script.
+pairs** since 2026-09-06, curated not computed. `measure-mutual-rank.ts` printing
+identical shipped and both-halves columns IS the fix, not a broken script.
 
 ---
 
@@ -118,56 +114,61 @@ shipped and both-halves columns IS the fix, not a broken script.
 
 ### [Thomas]
 
-**Nothing is waiting on you.** All six rulings of 2026-09-06 are executed: the
-four weak live edges, the caption fix (§7a says A, and the 14 table-cell edges
-moved with it), and the table-number ruling (§7a, three conditions, three edges
-upgraded and two refused on the conditions).
+**Nothing waiting on you.** The six rulings of 2026-09-06 are all executed: the
+four weak live edges, the caption fix (§7a now says A, and the 14 table-cell edges
+moved with it), and the StatCan table-number ruling, which is written into §7a with
+its three conditions and applied to three edges.
+
+**Two Canadian edges NOT upgraded under the table-number ruling, both for a
+reason rather than an oversight.** `fiscal-equalization-program ->
+statcan-vehicle-registrations` cites "CANSIM table 405-0004" and the current
+`23-10-0308-01` page shows no former-number mapping, so condition 3 of the ruling
+refuses it. `yt-statistical-review -> statcan-population-estimates` has the best
+quote of the set — a Sources line naming six 17-10-* tables — but yukon.ca sits
+behind a Cloudflare interstitial from the cloud sandbox, and a grade is not moved
+on a document that was not read. Both want one Chrome read.
+
+**Three nodes that do not exist are each blocking edges already found and
+quoted.** Minting them is a small round: the **2004 CPI Manual** (*Theory and
+Practice* — the corpus has only the 2020 *Concepts and Methods*), **MFSM 2000**
+plus the 2008 Compilation Guide (the corpus has only the 2016 document that
+merged them), and **IRIP 2009** (the corpus has IRIP 2010, and the SDDS table
+cites the 2009 draft). Also queued behind a node: the **Eurostat COFOG
+compilation manual 2019** and an **IMTS Revision 2**.
 
 ### [Agent]
 
-**Round 5, in the order Thomas set: the little things, then the IMF pool.**
+**Round 5 unscoped.** Cheapest first.
 
-**The little things.** All evidenced already; none needs new research.
+*Sweep the whole corpus against the dsbb tier lists.* The eight write-offs are
+settled (three minted, three refused with a documented reason, two confirmed
+already right). What is NOT done is the corpus-wide pass:
+`api/country/getcountrybytype` and `api/country/getsubscriptiondateInfos` give the
+definitive membership and NSDP date of all three tiers for every country, so the
+~50 existing `-> imf-e-gdds` and ~30 `-> imf-sdds` edges could be checked in one
+pass — including for edges that are wrong in the other direction. Nothing else on
+this page is that cheap per edge.
 
-1. *Two Chrome reads, four grades.* `dsbb.imf.org/e-gdds/important-dates-history`
-   renders the heading and the country row on one page, taking this round's three
-   e-GDDS edges from B to A. And **yukon.ca serves a Cloudflare interstitial to
-   the cloud sandbox** — the only thing holding `yt-statistical-review ->
-   statcan-population-estimates` at B, on a Sources line naming six 17-10-* tables.
-2. *Three nodes, each blocking edges already found and quoted*: the **2004 CPI
-   Manual** (*Theory and Practice*; the corpus has only the 2020 *Concepts and
-   Methods*), **MFSM 2000** plus the 2008 Compilation Guide (the corpus has only
-   the 2016 merger), and **IRIP 2009**. Older-edition siblings are established
-   corpus practice — `sna-1968`, `sna-1993`, `sna-2008` and `sna-2025` all exist.
-3. *Three more nodes, one alias, one bad edge* — detail in memory
-   `round4b_rulings_and_dsbb_reopen_2026-09-06`: the **Eurostat COFOG manual
-   2019**, an **IMTS Revision 2**, AFRISTAT's **NCOA-IHPC** (2008, the likely real
-   target for West African CPI edges now defaulting to `afristat-ihpc-guide-2014`);
-   `title_aliases` "Sistema Armonizado" on `hs`, which lifts several Latin American
-   edges; and `cmhc-residential-mortgage-industry-report ->
-   statcan-national-accounts`, which has no `evidence_quote` at all and names a
-   balance-sheet table, not the quarterly accounts — a probable wrong target.
+*Three B's that a browser turns into A's.* The three e-GDDS edges minted this
+round cite an API endpoint whose payload does not spell out the standard's name.
+A Chrome read of `dsbb.imf.org/e-gdds/important-dates-history`, where the heading
+and the country row render on one page, clears the A bar under the 2026-09-04
+direct-read ruling.
 
-**The IMF pool.** Biggest first.
+*The IMF flagships, half-worked*: the Global Financial Stability Report was not
+read at all (April 2025 is ISBN `9798229003261`, whole-issue PDF downloads to a
+plain curl). `imf-weo -> imf-bpm6` is deferred on a real finding — the only
+statement is in the WEO's Table G, which `pdftotext` renders as column soup with
+no quotable span, and wants a Chrome read.
 
-1. *Sweep the whole corpus against the tier endpoints.* The ~50 existing
-   `-> imf-e-gdds` and ~30 `-> imf-sdds` edges have never been checked against
-   `getcountrybytype` and `getsubscriptiondateInfos`. One pass verifies all of
-   them — **and catches any that are wrong in the direction nobody looks**, i.e.
-   a country wired to a tier it is not in, or wired to e-GDDS on a null NSDP.
-   Nothing else on this page is that cheap per edge.
-2. *The per-country metadata seam.* `getBaseSummaryofMethodologies` and the
-   DQAF-base country pages cover 191 countries across ~20 data categories each.
-   A 2026-09-05 round took 136 edges out of it before the recipe was understood;
-   it is the largest untapped source of A-grade national methodology edges.
-3. *Finish the flagships.* The **GFSR** was never read — April 2025 is ISBN
-   `9798229003261`, whole-issue PDF to a plain curl. `imf-weo -> imf-bpm6` is
-   deferred on a real finding: the only statement is in the WEO's Table G, which
-   `pdftotext` renders as column soup with no quotable span. Chrome read.
-
-**Then back to thin coverage**: DE, then FR/IT/ES/SE/BE/AT/PL/FI. The CA/US/GB/AU
+*Same shape as rounds 1–3*: DE has 13 nodes and FR/IT/ES/SE/BE/AT/PL/FI have 7–9
+each, all the same narrow price-index → NA → HBS template. The CA/US/GB/AU
 pattern transfers directly and Eurostat's national metadata
 (`PLAYBOOK-CORPUS.md` rule 16) does half the work.
+
+*Small and evidenced*: `ar-comercio-exterior -> hs` sits at B only because INDEC
+writes "Sistema Armonizado" — `title_aliases` territory on `hs`, and it would
+likely lift several Latin American edges at once.
 
 **Settled, do not re-raise:** everything in §2 is executed, and everything older
 is in project memory and in `PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.

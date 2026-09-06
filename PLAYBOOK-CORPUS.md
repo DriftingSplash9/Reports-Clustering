@@ -210,6 +210,17 @@ here only as a rule, once.
 *(Both bullets lived in `PLAYBOOK-RENDER.md` §6 until 2026-09-06 — filed where
 the lane that needs them never reads. Moved, not copied.)*
 
+- **An ASCII substitution for a typographic character makes a stored quote read as
+  MISSING, not as a near miss** (found three times in one round, 2026-09-06). The
+  Guinea SNDS quote used `'` where the PDF has U+2019; two SOR/2007-303 quotes wrote
+  `(x 1,000)` where the regulation has `(× 1,000)`, U+00D7. All three had passed an
+  earlier review. Nothing downstream can tell a non-matching quote from an absent
+  one, so these look like unquoted edges forever. **When a quote "isn't in the
+  document", diff it character by character before concluding anything** — and when
+  writing one, copy the span out of the extracted text rather than retyping it.
+  Candidates to sweep: any quote containing `(x 1,000)`, a straight apostrophe next
+  to a letter, or straight double quotes.
+
 - **Never edit a `basis` or a quote to move a grade.** If an evidence record is
   graded down by a matcher defect, fix or report the matcher. Trimming the
   record is grade-motivated editing and it hides the defect from everyone after
@@ -330,13 +341,27 @@ agreements).
 **Chart/figure-caption sourcing clears the evidence bar** (Thomas,
 2026-08-30) — a figure-source line under a chart is a citation, same
 standing as body-text prose. General ruling for every future round, not
-just the edge that prompted it.
+just the edge that prompted it. **Confirmed and made explicit 2026-09-06:
+this means grade A, not B.** A round found this paragraph and the
+table-cell one below saying different things, graded two edges B on the
+later wording, and asked; Thomas: *"i think the caption sourcing is ok and
+both can be A's. we need to fix that line for consistency."* His caveat is
+the operative half — *"a chart doesn't always mean anything official. i can
+make whatever chart I want but it should be sourced to be credible"* — so
+what carries the citation is the **source line**, not the chart, and an
+unsourced or self-made chart carries nothing. Read the attribution before
+grading on it.
 
 **A methodology table cell that names a source is caption-equivalent** (Thomas,
 2026-09-06, extending the chart-caption ruling above). A table whose purpose is to
 disclose sources discloses them: a cell reading "Scottish share is estimated using the
-Living Costs and Food Survey (LCF)" is a citation, and grades **B**, the same as a
-figure caption. This reopened exactly one edge on the day it was ruled
+Living Costs and Food Survey (LCF)" is a citation, and grades **A**, the same as a
+figure caption. *(This clause read "grades **B**" until 2026-09-06 evening, which
+contradicted the chart-caption ruling it says it extends. Thomas resolved it that day
+in favour of A — see that paragraph. "Caption-equivalent" means equivalent, so the two
+now move together; if a caption is ever regraded, this moves with it. The correction
+lifted 14 live edges from B to A: the 13 SDDS/SDDS Plus methodology-table edges in
+`int-imf-dsbb-2026-09-06.json` and `sct-gers -> gb-ons-lcf`.)* This reopened exactly one edge on the day it was ruled
 (`sct-gers -> gb-ons-lcf`, where all six LCF mentions in the GERS revenue methodology
 are in table cells and none in prose), and a corpus-wide sweep of `_dropped` entries
 refused on that shape found only one other candidate, blocked for an unrelated reason.
@@ -344,6 +369,33 @@ refused on that shape found only one other candidate, blocked for an unrelated r
 `on-ompf`'s Appendix F attributes five measures to "Statistics Canada" with no
 publication named, in a table whose entire purpose is to disclose sources, and that
 stays refused. The two rules compose; the weaker one does not dissolve the stronger.
+
+**A statistical agency's own product NUMBER names the artefact** (Thomas,
+2026-09-06). A Statistics Canada table number — `36-10-0222-01`, or the legacy
+CANSIM form `405-0004` — is not the target's title, so `namesTarget` cannot see
+it and the A bar refuses it; but it is a precise, checkable identifier of one
+specific release, which is strictly MORE specific than the title and is the exact
+thing the agency-not-artefact rule was asking for. Ruled to name the artefact.
+Three conditions, and they are what keep this from becoming "any number counts":
+
+1. **The number must be verified against the agency's own product page**, in the
+   round that uses it, and the page's title must be the target node's artefact.
+   `36-10-0222-01` was checked at `www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610022201`
+   and returns "Gross domestic product, expenditure-based, provincial and
+   territorial, annual". A number nobody resolved is a guess.
+2. **The mechanism is `title_aliases`**, so the grader can see what the reader
+   can. A table number is neither an acronym nor an agency name, so it clears
+   that field's rule 3; it is the name the citing documents actually use, so it
+   clears rule 2.
+3. **A legacy number that the modern table page does not itself acknowledge does
+   NOT qualify.** SOR/2007-303 cites "CANSIM table 405-0004, Road motor vehicles,
+   registrations"; the current `23-10-0308-01` page shows no former-number
+   mapping, so `fiscal-equalization-program -> statcan-vehicle-registrations`
+   stays at B. Equating the two would be the researcher's own knowledge, not the
+   document's.
+
+Generalises beyond Canada to any agency that numbers its releases and is cited by
+number — but each agency's numbering wants its own check against condition 1.
 
 **A document that names the target artefact IN ANOTHER LANGUAGE names it**
 (Thomas, 2026-09-04). `namesTarget()` matches a run of the target's own title

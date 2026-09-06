@@ -1,0 +1,76 @@
+{
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "tj-agency-statistics",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4 re-open pass) from the IMF's own e-GDDS Important Dates table — the page headed 'Enhanced General Data Dissemination System / Important Dates', whose three columns are 'Participant', 'Date Metadata First Posted on the DSBB' and 'Date e-GDDS NSDP First Posted'. The page is at https://dsbb.imf.org/e-gdds/important-dates-history and is client-rendered; the row is served by the endpoint cited, read direct with a plain browser-UA curl 2026-09-06. A non-null ComplianceDate in that row IS the e-GDDS NSDP first-posted date, which is what makes this a participation record rather than a list membership. Cross-checked against api/country/getcountrybytype?countryType=EGDDS (110 participants) — and the same list carries every country the corpus already wires to imf-e-gdds at A, so these stand on the same footing as ten existing edges. GRADED B, NOT A, DELIBERATELY: the endpoint's payload does not itself spell out 'Enhanced General Data Dissemination System' — the artefact is named by the page that consumes it and by the request. A Chrome read of https://dsbb.imf.org/e-gdds/important-dates-history, where the heading and the country row are on one rendered page, would clear the A bar under the 2026-09-04 direct-read ruling; that is the one cheap upgrade left on all three of these. REOPENS a 2026-08 `unreadable-source` refusal. That round found the IMF press release 'Tajikistan Implements the International Monetary Fund's Enhanced General Data Dissemination System' (March 2020, pr20/96) by search but could not fetch its body text, and recorded the edge as real-but-unquotable. The date table gives the same fact as a first-party record: NSDP first posted 2020-03-17, which is that press release's month.",
+      "evidence_url": "https://dsbb.imf.org/api/country/getsubscriptiondateInfos?countryType=EGDDS&ContainerID=HistoryImportantDateGDDS",
+      "evidence_grade": "B",
+      "evidence_quote": "{\"CountryDisplayName\":\"Tajikistan\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2004-11-17T00:00:00\",\"ComplianceDate\":\"2020-03-17T00:00:00\",\"ExternalDebtDate\":null}"
+    },
+    {
+      "source_report_id": "vu-bos",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4 re-open pass) from the IMF's own e-GDDS Important Dates table — the page headed 'Enhanced General Data Dissemination System / Important Dates', whose three columns are 'Participant', 'Date Metadata First Posted on the DSBB' and 'Date e-GDDS NSDP First Posted'. The page is at https://dsbb.imf.org/e-gdds/important-dates-history and is client-rendered; the row is served by the endpoint cited, read direct with a plain browser-UA curl 2026-09-06. A non-null ComplianceDate in that row IS the e-GDDS NSDP first-posted date, which is what makes this a participation record rather than a list membership. Cross-checked against api/country/getcountrybytype?countryType=EGDDS (110 participants) — and the same list carries every country the corpus already wires to imf-e-gdds at A, so these stand on the same footing as ten existing edges. GRADED B, NOT A, DELIBERATELY: the endpoint's payload does not itself spell out 'Enhanced General Data Dissemination System' — the artefact is named by the page that consumes it and by the request. A Chrome read of https://dsbb.imf.org/e-gdds/important-dates-history, where the heading and the country row are on one rendered page, would clear the A bar under the 2026-09-04 direct-read ruling; that is the one cheap upgrade left on all three of these. REOPENS a 2026-08 `unreadable-source` refusal. That round could not render PR19/131 ('Vanuatu Implements the IMF's Enhanced General Data Dissemination System') and found that the DSBB NSDP page it could reach carried an unfilled template placeholder reading 'the enhanced General Data Dissemination System in which Country participates' — a genuinely careful refusal. The date table has the real record: NSDP first posted 2019-04-30, matching PR19/131.",
+      "evidence_url": "https://dsbb.imf.org/api/country/getsubscriptiondateInfos?countryType=EGDDS&ContainerID=HistoryImportantDateGDDS",
+      "evidence_grade": "B",
+      "evidence_quote": "{\"CountryDisplayName\":\"Vanuatu\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2004-04-08T00:00:00\",\"ComplianceDate\":\"2019-04-30T00:00:00\",\"ExternalDebtDate\":null}"
+    },
+    {
+      "source_report_id": "hn-ine",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4 re-open pass) from the IMF's own e-GDDS Important Dates table — the page headed 'Enhanced General Data Dissemination System / Important Dates', whose three columns are 'Participant', 'Date Metadata First Posted on the DSBB' and 'Date e-GDDS NSDP First Posted'. The page is at https://dsbb.imf.org/e-gdds/important-dates-history and is client-rendered; the row is served by the endpoint cited, read direct with a plain browser-UA curl 2026-09-06. A non-null ComplianceDate in that row IS the e-GDDS NSDP first-posted date, which is what makes this a participation record rather than a list membership. Cross-checked against api/country/getcountrybytype?countryType=EGDDS (110 participants) — and the same list carries every country the corpus already wires to imf-e-gdds at A, so these stand on the same footing as ten existing edges. GRADED B, NOT A, DELIBERATELY: the endpoint's payload does not itself spell out 'Enhanced General Data Dissemination System' — the artefact is named by the page that consumes it and by the request. A Chrome read of https://dsbb.imf.org/e-gdds/important-dates-history, where the heading and the country row are on one rendered page, would clear the A bar under the 2026-09-04 direct-read ruling; that is the one cheap upgrade left on all three of these. REOPENS a 2026-08 `unreadable-source` refusal made on the agent's own initiative rather than on a Grok claim. That round looked for a Honduras press release analogous to Guatemala's and Panama's, found none, and noted that the URL path on Honduras's CPI DQAF page implied e-GDDS classification without stating the status. The date table states it: NSDP first posted 2016-06-01. Wired at the NSO level, per that round's own ruling that e-GDDS participation is a country-wide dissemination tier and not a property of one release.",
+      "evidence_url": "https://dsbb.imf.org/api/country/getsubscriptiondateInfos?countryType=EGDDS&ContainerID=HistoryImportantDateGDDS",
+      "evidence_grade": "B",
+      "evidence_quote": "{\"CountryDisplayName\":\"Honduras\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2005-09-29T00:00:00\",\"ComplianceDate\":\"2016-06-01T00:00:00\",\"ExternalDebtDate\":null}"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ly-bsc-cpi -> imf-e-gdds",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "THE ORIGINAL REFUSAL WAS RIGHT, AND NOW FOR A DOCUMENTED REASON 2026-09-06. `ly-cpi-social-protection.json` recorded that dsbb.imf.org 'returned only navigation shell content to every fetch attempt' — a claim about the fetcher, and the site reads fine through the API. Read properly, it confirms the refusal rather than overturning it. Libya IS on the e-GDDS participating list (110 countries), but its Important Dates row is {\"CountryDisplayName\":\"Libya\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2009-12-07T00:00:00\",\"ComplianceDate\":null,\"ExternalDebtDate\":null} — metadata posted to the DSBB in December 2009, which is GDDS-era, and **ComplianceDate null, meaning no e-GDDS NSDP has ever been posted**. The three countries in this pass with a null ComplianceDate (Libya, Lebanon, Haiti) are exactly the three whose edges stay refused, and the three with a date are exactly the three minted. Libya's separate SDDS/SDDS Plus refusal also stands: LBY appears in neither list (49 and 32 countries respectively)."
+    },
+    {
+      "edge": "lb-national-accounts / lb-cas -> imf-e-gdds",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "THE ORIGINAL REFUSAL WAS RIGHT 2026-09-06. `gulf-levant-new-grok-2026-08.json` refused this because the DSBB country page was a JS shell and because Lebanon's DSBB national-accounts metadata is visibly stale ('The last set of estimates was compiled for 1994/1995'). Read through the API, the Important Dates row is {\"CountryDisplayName\":\"Lebanon\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2003-01-16T00:00:00\",\"ComplianceDate\":null,\"ExternalDebtDate\":null} — DSBB metadata posted January 2003, **ComplianceDate null, so no e-GDDS NSDP has ever been posted**. The staleness that round noticed and the missing NSDP are the same fact. No edge, at either the lb-cas or lb-national-accounts level."
+    },
+    {
+      "edge": "ht-ihsi -> imf-e-gdds",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "THE ORIGINAL REFUSAL WAS RIGHT 2026-09-06. `caribbean-oecs-new-grok-2026-08.json` refused it on the grounds that only old GDDS-era DQAF pages exist for HTI and that ihsi.ht 302-redirects away from IHSI content. The Important Dates row confirms exactly that shape: {\"CountryDisplayName\":\"Haiti\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2009-12-28T00:00:00\",\"ComplianceDate\":null,\"ExternalDebtDate\":null} — metadata posted December 2009, **ComplianceDate null, no e-GDDS NSDP ever posted**. That round's reasoning was correct on evidence it could not fully see."
+    },
+    {
+      "edge": "ga-instat-ihpc -> imf-sdds / imf-sdds-plus",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "[reason corrected to `note` 2026-09-06: this describes an edge that is NOT live — `caveat` is reserved for notes about edges that DO exist in the graph, and the validator checks it.] CONFIRMED, NOT CHANGED, 2026-09-06. `ga-cpi-social-protection.json` denied these after a live browser render of the SDDS and SDDS Plus country lists, noting the site 'intermittently served other countries' content under Gabon's URL' — so the finding was made under conditions that could have produced a false negative. The API settles it: GAB is in neither api/country/getcountrybytype?countryType=SDDS (49) nor countryType=SDDSPlus (32), and IS in EGDDS with NSDP first posted 2019-10-11 ({\"CountryDisplayName\":\"Gabon\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2002-10-01T00:00:00\",\"ComplianceDate\":\"2019-10-11T00:00:00\",\"ExternalDebtDate\":null}). The denial stands and the live e-GDDS edge is right. Recorded because a browser finding made on a flaky page deserves a second, independent confirmation and now has one."
+    },
+    {
+      "edge": "gt-banguat-national-accounts -> imf-e-gdds",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "[reason corrected to `note` 2026-09-06: this describes an edge that is NOT live — `caveat` is reserved for notes about edges that DO exist in the graph, and the validator checks it.] ALREADY RESOLVED, CONFIRMED 2026-09-06. `centralamerica-new-grok-2026-08.json` refused this at the national-accounts level as JS-walled AND as the wrong node level, and re-attached it as gt-ine -> imf-e-gdds, which is live. Both halves of that judgement hold: Guatemala's Important Dates row is {\"CountryDisplayName\":\"Guatemala\",\"CountryName\":null,\"CountryCode\":null,\"ObsFlag\":false,\"SubscriptionDate\":null,\"DSBBPostedDate\":\"2004-12-06T00:00:00\",\"ComplianceDate\":\"2020-11-18T00:00:00\",\"ExternalDebtDate\":null}, NSDP first posted 2020-11-18, and the tier is country-wide, so the NSO is the right source node. Nothing to change."
+    },
+    {
+      "edge": "the remaining dsbb.imf.org `unreadable-source` refusals",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "SWEEP STATUS 2026-09-06. The eight dsbb.imf.org write-offs named in `notes/imf-dsbb-2026-09-06.md` were all read through the API this round and all eight are now settled: three minted (Tajikistan, Vanuatu, Honduras), three confirmed refused with a documented reason (Libya, Lebanon, Haiti — null ComplianceDate), two confirmed as already correct (Gabon denied on SDDS/SDDS Plus, Guatemala already live via gt-ine). **The class is closed for these eight, but not for the corpus**: `api/country/getcountrybytype` and `api/country/getsubscriptiondateInfos` between them give the definitive membership and implementation date of all three tiers for every country, and no round has ever swept the corpus's e-GDDS/SDDS edges against them. That sweep would check every one of the ~50 existing `-> imf-e-gdds` and ~30 `-> imf-sdds` edges in one pass, and would catch any that are wrong in the other direction."
+    }
+  ]
+}

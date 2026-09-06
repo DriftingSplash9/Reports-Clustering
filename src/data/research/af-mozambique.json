@@ -1,90 +1,90 @@
 {
- "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Mozambique — 3rd-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. INE's main site (ine.gov.mz) was largely unreachable (TLS resets) all round; the mozdata.ine.gov.mz DDI/NADA metadata catalog subdomain was used instead and is treated as INE's own material since it is INE's own catalog on INE's own domain.",
- "reports": [
-  {
-   "id": "mz-ine-ipc",
-   "title": "Índice de Preços no Consumidor (IPC)",
-   "publisher": "Instituto Nacional de Estatística (INE), Moçambique",
-   "country": "MZ",
-   "jurisdiction_level": "federal",
-   "region": "Mozambique",
-   "description": "Mozambique's national CPI, confirmed via INE's own DDI/NADA metadata catalog (mozdata.ine.gov.mz — the main ine.gov.mz site returned TLS resets throughout this round). Published monthly, one bulletin per provincial capital plus a national \"Nota de Imprensa.\" INE's own Nota Metodológica (base 2016=100, updated February 2020) explicitly names BOTH the UN COICOP standard AND the \"Manual do IPC das Nações Unidas 2009\" [UN/ILO/World Bank/IMF CPI Handbook 2009] by name — one of the most explicit methodology-manual citations found anywhere in this branch.",
-   "releases_per_year": 12,
-   "cadence_note": "Monthly; one bulletin per provincial capital plus a national press note.",
-   "last_updated": null,
-   "url": "https://mozdata.ine.gov.mz/",
-   "domains": [
-    "inflation"
-   ],
-   "kind": "publication"
-  },
-  {
-   "id": "mz-sadc-hcpi-bulletin",
-   "title": "SADC Harmonised Consumer Price Indices (HCPI) News Release, Issue No. 75",
-   "publisher": "SADC Secretariat",
-   "country": "INT",
-   "jurisdiction_level": "supranational",
-   "region": "Southern Africa (SADC)",
-   "description": "A SADC-Secretariat-authored HCPI bulletin, hosted on ine.gov.mz's own domain (under \"Estatísticas / Anuário e Outras Publicações\"). Lists Mozambique's monthly HCPI values by name and states: \"The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States.\" CAVEAT: this is SADC's own authorial voice, not an INE-authored statement — INE hosts/files it as one of its own official publications, but no INE-authored (not merely hosted) document naming SADC directly could be found this round (the more likely candidate page on the live ine.gov.mz site was unreachable). Distinct from the existing corpus-wide sadc-hcpi-newsletter node — kept separate rather than merged, since the underlying document (Issue No. 75) and the hosting/authorship situation are both different from the Stage-1 SADC bulletin already wired to the other 8 SADC countries.",
-   "cadence_note": "Recurring numbered issue series (\"Issue No. 75\" implies at least 75 prior editions).",
-   "last_updated": null,
-   "url": "https://www.ine.gov.mz/",
-   "domains": [
-    "inflation"
-   ],
-   "kind": "instrument"
-  },
-  {
-   "id": "mz-decreto-40-2023-mining-revenue",
-   "title": "Decreto n.º 40/2023",
-   "publisher": "Conselho de Ministros, Moçambique",
-   "country": "MZ",
-   "jurisdiction_level": "federal",
-   "region": "Mozambique",
-   "description": "Decree of 7 July 2023 (Boletim da República), establishing a revenue-sharing mechanism from mining and oil taxes to provinces, districts, and local communities. Article 5 states verbatim: \"7.25% destinados à província e distritos... 2.75% destinados às comunidades locais\" [7.25% allocated to the province and districts... 2.75% allocated to local communities]. Cites Lei n.º 20/2014 (Lei de Minas) and Lei n.º 21/2014 (Lei de Petróleo) as its statutory basis. Verified via downloaded PDF + pdftotext extraction, not AI-summarized.",
-   "cadence_note": "One-off foundational legal instrument.",
-   "last_updated": null,
-   "url": "https://www.mirem.gov.mz/",
-   "domains": [
-    "fiscal-transfers"
-   ],
-   "kind": "instrument"
-  },
-  {
-   "id": "mz-lei-3-2019-provincial-elections",
-   "title": "Lei n.º 5/2023 (alterando a Lei n.º 3/2019)",
-   "publisher": "Assembleia da República, Moçambique",
-   "country": "MZ",
-   "jurisdiction_level": "federal",
-   "region": "Mozambique",
-   "description": "Mozambique's 2024 decentralisation reform: the legal framework for directly electing Provincial Governors and Provincial Assembly members, established by Lei n.º 3/2019 and amended by Lei n.º 5/2023. Corroborated by a CIP (Centro de Integridade Pública) civil-society report quoting Constitution Article 278 and Lei n.º 6/2019. Verified via downloaded PDF + pdftotext extraction, not AI-summarized.",
-   "cadence_note": "One-off foundational legal instrument.",
-   "last_updated": null,
-   "url": "https://www.cip.org.mz/",
-   "domains": [
-    "fiscal-transfers"
-   ],
-   "kind": "instrument"
-  }
- ],
- "dependencies": [
-  {
-   "source_report_id": "mz-sadc-hcpi-bulletin",
-   "target_report_id": "mz-ine-ipc",
-   "relationship_type": "uses_data_from",
-   "basis": "RE-POINTED 2026-09-06 (bare-homepage debt round), GRADE HELD AT C DELIBERATELY. Was cited to https://www.ine.gov.mz/, which is a bare homepage AND returns HTTP 000 from both of this session's networks. Re-sourced to the SADC Secretariat's own host: 'SADC Harmonised Consumer Price Indices (HCPI) June 2020', News Release Issue No. 102 (sadc.int, HTTP 200), where the sentence is verbatim. That is a strictly better citation — a live host and the actual document. **The grade does not move, because the evidence is weaker than the citation now looks**: the sentence names an artefact CLASS ('the National HCPIs of the Member States'), Mozambique appears only as a country label in the data tables, and INE's Índice de Preços ao Consumidor is never named by title. Under PLAYBOOK-CORPUS §7a this is agency/class-not-artefact and the edge is a candidate for dropping; that is a live-edge decision for Thomas, and rule 13 says defer rather than override. || ORIGINAL BASIS PRESERVED: Same direction/type as the established sadc-hcpi-newsletter -> country-CPI pattern (the regional bulletin aggregates national HCPIs). Basis quote: \"The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States,\" from a bulletin hosted on INE's own domain listing Mozambique's values by name.",
-   "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/SADC_HCPI_June_2020.pdf",
-   "evidence_grade": "C",
-   "evidence_quote": "The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States."
-  }
- ],
- "_dropped": [
-  {
-   "edge": "mz-ine-ipc-provincial-budget",
-   "source": "mz-ine-ipc",
-   "target": null,
-   "reason": "no-document",
-   "why": "Could not find an individual Mozambican province's own budget document this round — provincial web presence was largely offline or unindexed. mz-decreto-40-2023-mining-revenue is a national-level revenue-sharing rule, not a province's own budget."
-  }
- ]
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Mozambique — 3rd-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. INE's main site (ine.gov.mz) was largely unreachable (TLS resets) all round; the mozdata.ine.gov.mz DDI/NADA metadata catalog subdomain was used instead and is treated as INE's own material since it is INE's own catalog on INE's own domain.",
+  "reports": [
+    {
+      "id": "mz-ine-ipc",
+      "title": "Índice de Preços no Consumidor (IPC)",
+      "publisher": "Instituto Nacional de Estatística (INE), Moçambique",
+      "country": "MZ",
+      "jurisdiction_level": "federal",
+      "region": "Mozambique",
+      "description": "Mozambique's national CPI, confirmed via INE's own DDI/NADA metadata catalog (mozdata.ine.gov.mz — the main ine.gov.mz site returned TLS resets throughout this round). Published monthly, one bulletin per provincial capital plus a national \"Nota de Imprensa.\" INE's own Nota Metodológica (base 2016=100, updated February 2020) explicitly names BOTH the UN COICOP standard AND the \"Manual do IPC das Nações Unidas 2009\" [UN/ILO/World Bank/IMF CPI Handbook 2009] by name — one of the most explicit methodology-manual citations found anywhere in this branch.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; one bulletin per provincial capital plus a national press note.",
+      "last_updated": null,
+      "url": "https://mozdata.ine.gov.mz/",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "mz-sadc-hcpi-bulletin",
+      "title": "SADC Harmonised Consumer Price Indices (HCPI) News Release, Issue No. 75",
+      "publisher": "SADC Secretariat",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Southern Africa (SADC)",
+      "description": "A SADC-Secretariat-authored HCPI bulletin, hosted on ine.gov.mz's own domain (under \"Estatísticas / Anuário e Outras Publicações\"). Lists Mozambique's monthly HCPI values by name and states: \"The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States.\" CAVEAT: this is SADC's own authorial voice, not an INE-authored statement — INE hosts/files it as one of its own official publications, but no INE-authored (not merely hosted) document naming SADC directly could be found this round (the more likely candidate page on the live ine.gov.mz site was unreachable). Distinct from the existing corpus-wide sadc-hcpi-newsletter node — kept separate rather than merged, since the underlying document (Issue No. 75) and the hosting/authorship situation are both different from the Stage-1 SADC bulletin already wired to the other 8 SADC countries.",
+      "cadence_note": "Recurring numbered issue series (\"Issue No. 75\" implies at least 75 prior editions).",
+      "last_updated": null,
+      "url": "https://www.ine.gov.mz/",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "mz-decreto-40-2023-mining-revenue",
+      "title": "Decreto n.º 40/2023",
+      "publisher": "Conselho de Ministros, Moçambique",
+      "country": "MZ",
+      "jurisdiction_level": "federal",
+      "region": "Mozambique",
+      "description": "Decree of 7 July 2023 (Boletim da República), establishing a revenue-sharing mechanism from mining and oil taxes to provinces, districts, and local communities. Article 5 states verbatim: \"7.25% destinados à província e distritos... 2.75% destinados às comunidades locais\" [7.25% allocated to the province and districts... 2.75% allocated to local communities]. Cites Lei n.º 20/2014 (Lei de Minas) and Lei n.º 21/2014 (Lei de Petróleo) as its statutory basis. Verified via downloaded PDF + pdftotext extraction, not AI-summarized.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.mirem.gov.mz/",
+      "domains": [
+        "fiscal-transfers"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "mz-lei-3-2019-provincial-elections",
+      "title": "Lei n.º 5/2023 (alterando a Lei n.º 3/2019)",
+      "publisher": "Assembleia da República, Moçambique",
+      "country": "MZ",
+      "jurisdiction_level": "federal",
+      "region": "Mozambique",
+      "description": "Mozambique's 2024 decentralisation reform: the legal framework for directly electing Provincial Governors and Provincial Assembly members, established by Lei n.º 3/2019 and amended by Lei n.º 5/2023. Corroborated by a CIP (Centro de Integridade Pública) civil-society report quoting Constitution Article 278 and Lei n.º 6/2019. Verified via downloaded PDF + pdftotext extraction, not AI-summarized.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.cip.org.mz/",
+      "domains": [
+        "fiscal-transfers"
+      ],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mz-sadc-hcpi-bulletin",
+      "target_report_id": "mz-ine-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "THOMAS'S RULING 2026-09-06: KEPT AT C. The class-not-artefact reading stands — the bulletin names 'the National HCPIs of the Member States' and never INE's Índice de Preços ao Consumidor by title — but the bulletin does carry Mozambique's own values, which is why this was the weakest case for dropping of the four reviewed. C is the grade that says exactly that. No change to citation, quote or type. || RE-POINTED 2026-09-06 (bare-homepage debt round), GRADE HELD AT C DELIBERATELY. Was cited to https://www.ine.gov.mz/, which is a bare homepage AND returns HTTP 000 from both of this session's networks. Re-sourced to the SADC Secretariat's own host: 'SADC Harmonised Consumer Price Indices (HCPI) June 2020', News Release Issue No. 102 (sadc.int, HTTP 200), where the sentence is verbatim. That is a strictly better citation — a live host and the actual document. **The grade does not move, because the evidence is weaker than the citation now looks**: the sentence names an artefact CLASS ('the National HCPIs of the Member States'), Mozambique appears only as a country label in the data tables, and INE's Índice de Preços ao Consumidor is never named by title. Under PLAYBOOK-CORPUS §7a this is agency/class-not-artefact and the edge is a candidate for dropping; that is a live-edge decision for Thomas, and rule 13 says defer rather than override. || ORIGINAL BASIS PRESERVED: Same direction/type as the established sadc-hcpi-newsletter -> country-CPI pattern (the regional bulletin aggregates national HCPIs). Basis quote: \"The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States,\" from a bulletin hosted on INE's own domain listing Mozambique's values by name.",
+      "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/SADC_HCPI_June_2020.pdf",
+      "evidence_grade": "C",
+      "evidence_quote": "The SADC HCPI is compiled by the SADC Secretariat by aggregating the National HCPIs of the Member States."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mz-ine-ipc-provincial-budget",
+      "source": "mz-ine-ipc",
+      "target": null,
+      "reason": "no-document",
+      "why": "Could not find an individual Mozambican province's own budget document this round — provincial web presence was largely offline or unindexed. mz-decreto-40-2023-mining-revenue is a national-level revenue-sharing rule, not a province's own budget."
+    }
+  ]
 }

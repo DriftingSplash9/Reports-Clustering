@@ -1,0 +1,153 @@
+{
+  "reports": [
+    {
+      "id": "gb-ons-awe",
+      "title": "Average weekly earnings",
+      "publisher": "Office for National Statistics",
+      "country": "GB",
+      "jurisdiction_level": "federal",
+      "region": "Great Britain",
+      "description": "The lead monthly measure of average weekly earnings per employee in Great Britain, published as the 'Average weekly earnings in Great Britain' bulletin and as the EARN datasets. AWE is the ratio of estimated total pay for the whole economy to the total number of employees, calculated from the Monthly Wages and Salaries Survey, whose sample is drawn from the Inter-Departmental Business Register; pay for employees of businesses below the MWSS size threshold is estimated from the Annual Survey of Hours and Earnings. Published for total pay and regular pay, and in real terms deflated by consumer price inflation. Excludes the self-employed, HM armed forces and government-supported trainees.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/averageweeklyearningsingreatbritain/latest",
+      "domains": [
+        "labour",
+        "living-standards"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gb-ons-workforce-jobs",
+      "title": "Workforce jobs",
+      "publisher": "Office for National Statistics",
+      "country": "GB",
+      "jurisdiction_level": "federal",
+      "region": "United Kingdom",
+      "description": "The quarterly measure of the number of jobs in the UK and ONS's preferred measure of short-term employment change by industry, published as the workforce jobs element of the 'Vacancies and jobs in the UK' bulletin and as the JOBS datasets. WFJ is the sum of employee jobs, self-employment jobs, government-supported trainees and HM forces. Employee jobs come from the Quarterly Business Survey and the Quarterly Public Sector Employment Survey and are benchmarked annually to the Business Register and Employment Survey; self-employment jobs and the England government-supported-trainee component come from the Labour Force Survey; the public-sector boundary is the one defined by the UK National Accounts.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "domains": [
+        "labour",
+        "industry"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gb-ons-awe",
+      "target_report_id": "gb-ons-ashe",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4). The edge the 2026-09-06 registers round recorded as no-node-yet: AWE is ASHE's documented downstream consumer, and the node did not exist until now. The AWE QMI states the input twice, once in the executive summary and once in section 5, naming the artefact by its full title both times. The second occurrence gives the mechanism: 'Employment at these businesses is taken from the IDBR, and pay is estimated using a factor derived from the Annual Survey of Hours and Earnings (ASHE), which does cover small businesses.' Read direct from the live ONS host. via: direct read, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/methodologies/averageweeklyearningsqmi",
+      "evidence_grade": "A",
+      "evidence_quote": "The Annual Survey of Hours and Earnings (ASHE) is also an input, providing estimates of pay for employees of small businesses."
+    },
+    {
+      "source_report_id": "gb-ons-awe",
+      "target_report_id": "gb-ons-idbr",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4), found alongside the ASHE edge in the same QMI section. The IDBR is the sampling frame for the Monthly Wages and Salaries Survey, which is AWE's main data source, and the QMI also states that the register is used to weight the data and that updates to it can shorten a business's time in sample. Named by full title in three separate places on the page. via: direct read, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/methodologies/averageweeklyearningsqmi",
+      "evidence_grade": "A",
+      "evidence_quote": "The sample is drawn at the individual business level from the Inter-Departmental Business Register (IDBR)."
+    },
+    {
+      "source_report_id": "gb-ons-awe",
+      "target_report_id": "gb-ons-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4) on a chart source line, which clears the evidence bar under the 2026-08-30 caption ruling. Figure 3 of the AWE bulletin plots real earnings growth and attributes it to two ONS releases by name. The accompanying figure note says the deflator is CPIH: 'Real pay adjusted for inflation using the Consumer Prices Index including owner occupiers housing costs (CPIH).' CPIH is published in the Consumer price inflation, UK bulletin, which is the node cited. via: direct read, cloud sandbox browser-UA curl, 2026-09-06 REGRADED WITHIN THE ROUND, A -> B: PLAYBOOK-CORPUS §7a's 2026-09-06 table-cell ruling states in terms that a caption grades B ('is a citation, and grades B, the same as a figure caption'), which the 2026-08-30 chart-caption ruling it extends does not say — that one says caption sourcing has the same standing as body-text prose. Where the two disagree the later ruling governs, so a chart source line caps at B. Flagged in HANDOFF §3 because the two paragraphs cannot both be right as written. || THOMAS'S RULING 2026-09-06, B -> A: 'i think the caption sourcing is ok and both can be A's. we need to fix that line for consistency.' The §7a contradiction is resolved in favour of the 2026-08-30 chart-caption ruling — a figure source line has the same standing as body-text prose and grades A. His caveat is the part worth keeping: 'a chart doesn't always mean anything official. i can make whatever chart I want but it should be sourced to be credible' — so the source LINE is what carries the citation, not the chart, and each case wants a reader. This one is a formal Source: attribution under a numbered figure in an accredited ONS statistical bulletin.",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/averageweeklyearningsingreatbritain/latest",
+      "evidence_grade": "A",
+      "evidence_quote": "Source: Monthly Wages and Salaries Survey, and Consumer price inflation from the Office for National Statistics"
+    },
+    {
+      "source_report_id": "gb-ons-workforce-jobs",
+      "target_report_id": "gb-ons-bres",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4). The second edge the registers round left as no-node-yet: BRES's documented downstream consumer is Workforce jobs, which had no node. The WFJ quality and methods guide states the benchmarking in section 4 and again in section 5 under 'Quarterly Business Survey benchmarking': 'Benchmarking is an annual process used to align the quarterly Great Britain employee jobs (EJ) series to the latest estimates from the Business Register and Employment Survey (BRES).' Full artefact title both times. via: direct read, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "evidence_grade": "A",
+      "evidence_quote": "Each year, the private sector element of WFJ is benchmarked to the latest estimates from the annual Business Register and Employment Survey (BRES)."
+    },
+    {
+      "source_report_id": "gb-ons-workforce-jobs",
+      "target_report_id": "gb-ons-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4). The WFJ quality and methods guide has a section headed 'Labour Force Survey methods' whose opening sentence enumerates exactly which WFJ components the LFS supplies. Section 4's component list says the same thing twice over ('self-employment jobs - from the Labour Force Survey (LFS)'). Named by full title throughout. via: direct read, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "evidence_grade": "A",
+      "evidence_quote": "The Labour Force Survey (LFS) provides WFJ with self-employment jobs data, employee jobs data for agriculture, forestry and fishing (SIC07 section A), and activities of households as employers (SIC07 section T), government-supported trainees (GSTs) data for England, and the industry and sex breakdown for use in apportionment for all GSTs data."
+    },
+    {
+      "source_report_id": "gb-ons-workforce-jobs",
+      "target_report_id": "gb-ons-idbr",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4). The Quarterly Business Survey, which supplies the largest WFJ component, draws its sample from the IDBR, and the WFJ guide's definitions section carries a dedicated 'Inter-Departmental Business Register' entry describing what the register is used for. This makes IDBR a shared upstream of ASHE, BRES, AWE and WFJ, all four now wired. via: direct read, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "evidence_grade": "A",
+      "evidence_quote": "The required details on these businesses are obtained from the Inter-Departmental Business Register (IDBR), which is then used as the survey sampling frame."
+    },
+    {
+      "source_report_id": "gb-ons-workforce-jobs",
+      "target_report_id": "gb-ons-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4) as a definitional dependency, not a data one: the public sector employment component of WFJ takes its sector boundary from the UK National Accounts rather than deciding it itself. The guide's definitions section repeats the point ('The public sector is made up of central government, local government, and public corporations as defined in our Public sector classification guide and forward work plan for UK National Accounts'). relationship_type is methodology_depends_on because what crosses is the classification, not a data series. The reverse direction is documented too and is left in _dropped for a ruling, because minting both would make this a mutual pair. via: direct read, cloud sandbox browser-UA curl, 2026-09-06 || MUTUAL 2026-09-06 on Thomas's 'mint both' ruling. Companion edge: gb-ons-national-accounts -> gb-ons-workforce-jobs, in this same slice, evidenced from section 9 of the same WFJ quality and methods guide. The two directions carry different relations — this one is the classification boundary WFJ takes FROM the National Accounts, the companion is the employment data the National Accounts take FROM WFJ. Both edges stay live and on screen; `mutual: true` takes the pair out of `rankedEdges` so a 2-cycle cannot pump its own PageRank.",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "evidence_grade": "B",
+      "evidence_quote": "The PSE sources form a quarterly census of the public sector as defined by the UK National Accounts.",
+      "mutual": true
+    },
+    {
+      "source_report_id": "gb-ons-labour-market-overview",
+      "target_report_id": "gb-ons-workforce-jobs",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4) on a chart source line, under the 2026-08-30 caption ruling. The registers round read the Labour market overview bulletin in full and recorded that its named jobs sources are the Labour Force Survey, workforce jobs, the Claimant Count and HMRC PAYE RTI; workforce jobs had no node then and does now. The bulletin's employee-measures comparison chart is attributed to WFJ by name, and the body text recommends the LFS be read 'alongside workforce jobs, Claimant Count and Pay As You Earn (PAYE) Real Time Information (RTI) estimates'. via: direct read, cloud sandbox browser-UA curl, 2026-09-06 REGRADED WITHIN THE ROUND, A -> B: PLAYBOOK-CORPUS §7a's 2026-09-06 table-cell ruling states in terms that a caption grades B ('is a citation, and grades B, the same as a figure caption'), which the 2026-08-30 chart-caption ruling it extends does not say — that one says caption sourcing has the same standing as body-text prose. Where the two disagree the later ruling governs, so a chart source line caps at B. Flagged in HANDOFF §3 because the two paragraphs cannot both be right as written. || THOMAS'S RULING 2026-09-06, B -> A: 'i think the caption sourcing is ok and both can be A's. we need to fix that line for consistency.' The §7a contradiction is resolved in favour of the 2026-08-30 chart-caption ruling — a figure source line has the same standing as body-text prose and grades A. His caveat is the part worth keeping: 'a chart doesn't always mean anything official. i can make whatever chart I want but it should be sourced to be credible' — so the source LINE is what carries the citation, not the chart, and each case wants a reader. This one is a formal Source: attribution under a numbered figure in an accredited ONS statistical bulletin.",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/latest",
+      "evidence_grade": "A",
+      "evidence_quote": "Source: Labour Force Survey (LFS) and workforce jobs (WFJ) from the Office for National Statistics"
+    },
+    {
+      "source_report_id": "gb-ons-national-accounts",
+      "target_report_id": "gb-ons-workforce-jobs",
+      "relationship_type": "uses_data_from",
+      "basis": "MINTED 2026-09-06 (round 4) on THOMAS'S RULING 'the wfj guide - mint both'. This is the reverse of gb-ons-workforce-jobs -> gb-ons-national-accounts and the round had held it in _dropped as `deferred`, because minting both makes the pair MUTUAL and a mutual pair is excluded from `rankedEdges` (it is a 2-cycle that pumps its own authority). Thomas ruled to mint anyway: both directions are real and different — WFJ takes its public-sector boundary from the National Accounts, and the National Accounts consume WFJ employment data — and the corpus should say so even at the cost of the pair's PageRank contribution. The evidence is section 9 of the WFJ quality and methods guide, 'Users and uses of these statistics', whose governing sentence immediately above the quoted item reads: 'Workforce jobs estimates are delivered to, and used by, a variety of other Office for National Statistics (ONS) users within our own outputs, such as:'. The quoted span is the list item that names this target. GRADED B, not A: a source-disclosure list is thinner than a figure source line, and Thomas's caption ruling was about captions, not bullets — under-claimed deliberately. Note for a future round: the same list would support edges to Productivity and to Household Income, neither of which is a node. Read direct from the live ONS host, cloud sandbox browser-UA curl, 2026-09-06. || MUTUAL 2026-09-06. Companion edge: gb-ons-workforce-jobs -> gb-ons-national-accounts, in this same slice, methodology_depends_on, evidenced from section 5 of the same guide ('The PSE sources form a quarterly census of the public sector as defined by the UK National Accounts'). See that edge's basis for why both are live.",
+      "evidence_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/methodologies/workforcejobsqmi",
+      "evidence_grade": "B",
+      "evidence_quote": "UK National Accounts, The Blue Book",
+      "mutual": true
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gb-ons-national-accounts -> gb-ons-workforce-jobs",
+      "source": "gb-ons-national-accounts",
+      "target": "gb-ons-workforce-jobs",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-06 by Thomas — 'the wfj guide - mint both'. The edge is live in this slice's dependencies at B and the pair with gb-ons-workforce-jobs -> gb-ons-national-accounts is now mutual, which was the whole reason it was held. ORIGINAL ENTRY FOLLOWS. || DOCUMENTED BUT NOT MINTED 2026-09-06 (round 4) — a live-edge shape decision for Thomas, not an evidence problem. The WFJ quality and methods guide's section 9 'Users and uses' states: 'Workforce jobs estimates are delivered to, and used by, a variety of other Office for National Statistics (ONS) users within our own outputs, such as: Regional labour market Business Register and Employment Survey Productivity Monthly and quarterly gross domestic product (GDP) UK National Accounts, The Blue Book Welsh Short-Term Indicators Household Income'. That names the target artefact and states use, so it would grade. It is held back because the round mints gb-ons-workforce-jobs -> gb-ons-national-accounts (the public-sector classification boundary), and minting both makes the pair mutual, which takes both out of rankedEdges. The two are different relations in different directions and both look real; whether this corpus wants that pair mutual is a modelling call. The same list would also support edges to Productivity and Household Income, neither of which is a node."
+    },
+    {
+      "edge": "gb-ons-awe -> gb-ons-national-accounts",
+      "source": null,
+      "target": null,
+      "reason": "wrong-target",
+      "why": "REFUSED 2026-09-06 (round 4). The AWE QMI's concepts section says 'This classification follows the UK National Accounts Sector Classifications conventions', describing how the MWSS sample is stratified by public or private legal status. That names the sector classification conventions, which ONS publishes as the Public sector classification guide, not the UK National Accounts / Blue Book that gb-ons-national-accounts stands for. Under the 2026-09-05 organisation-versus-instrument ruling the named artefact is the classification guide, which has no node. Recorded so the sentence is not re-derived as a Blue Book edge."
+    },
+    {
+      "edge": "gb-ons-awe -> a statutory legal_basis",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "DOCUMENTED NEGATIVE 2026-09-06 (round 4), and worth having as one. The AWE QMI's concepts and definitions section says in consecutive sentences: 'The main source for average weekly earnings (AWE), the Monthly Wages and Salaries Survey, is a statutory survey carried out in accordance with the 1947 Statistics of Trade Act. The production of AWE is not specifically required by any legislation, but is driven primarily by the requirements of HM Treasury and the Bank of England.' The Statistics of Trade Act 1947 is the legal basis of the SURVEY, not of the statistic, and ONS says explicitly that no legislation requires AWE. So no legal_basis edge from gb-ons-awe, and the Act (no node) would be the wrong target for one anyway. The GB legislation family gained five instruments this week; this records why AWE is not a sixth customer."
+    },
+    {
+      "edge": "gb-ons-awe -> Monthly Wages and Salaries Survey",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "NO NODE POSSIBLE 2026-09-06 (round 4). MWSS is AWE's main data source and is named as such on every AWE chart, but it is a collection instrument, not a published recurring release: ONS publishes its results AS average weekly earnings and issues no MWSS output of its own. Same class as the FR 2644 form behind the Fed's H.8. Recorded so a future round reading 'Source: Monthly Wages and Salaries Survey' on the AWE charts does not try to mint it."
+    }
+  ]
+}

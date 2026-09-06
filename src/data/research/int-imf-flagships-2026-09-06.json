@@ -1,0 +1,69 @@
+{
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "imf-weo",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4). The opening paragraph of the World Economic Outlook April 2025 Statistical Appendix, which is the WEO's own statement of what its database is built on. First outgoing edge this node has ever had. elibrary.imf.org periodicals are shelved as books, one ISBN PER ISSUE PER LANGUAGE, at /downloadpdf/display/book/<isbn>/<isbn>.pdf for the whole issue and /downloadpdf/display/book/<isbn>/CH00N.pdf per chapter; the serial landing page (/display/serial/<slug>) lists no ISBNs to curl, so the issue ISBN comes from a dated search such as ?q=Fiscal+Monitor+April+2025&bot=bot. Recipe in notes/imf-dsbb-2026-09-06.md. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9798400289583/CH004.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Most countries’ macroeconomic data as presented in the WEO conform broadly to the 2008 version of the System of National Accounts (SNA 2008)."
+    },
+    {
+      "source_report_id": "imf-weo",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4). GRADED B, NOT A, DELIBERATELY: the sentence is the WEO's own account of its debt data and names the target through the parenthetical of the target's own title, but it is hedged twice over — 'attempts are made', 'can sometimes deviate' — and a hedged statement of practice is weaker than a statement of practice. The Statistical Appendix's other GFSM 2014 sentence was NOT used: it says the IMF's sector standards 'have been aligned with the SNA 2008', which describes the standards to each other and is the shape PLAYBOOK-CORPUS section 7a refuses. elibrary.imf.org periodicals are shelved as books, one ISBN PER ISSUE PER LANGUAGE, at /downloadpdf/display/book/<isbn>/<isbn>.pdf for the whole issue and /downloadpdf/display/book/<isbn>/CH00N.pdf per chapter; the serial landing page (/display/serial/<slug>) lists no ISBNs to curl, so the issue ISBN comes from a dated search such as ?q=Fiscal+Monitor+April+2025&bot=bot. Recipe in notes/imf-dsbb-2026-09-06.md. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9798400289583/CH004.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "While attempts are made to align data on gross and net debt with the definitions in the GFSM 2014, as a result of data limitations or specific country circumstances, these data can sometimes deviate from the formal definitions."
+    },
+    {
+      "source_report_id": "imf-fiscal-monitor",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 4), the same sentence's other half: where fiscal data are not on the GFSM they are produced on a national accounts basis, and the appendix names which. The document writes the year first, '2008 System of National Accounts', where the node title writes it last; the contiguous four-word run 'System of National Accounts' is 80 percent of the title's words, above the matcher's 60 percent bar. elibrary.imf.org periodicals are shelved as books, one ISBN PER ISSUE PER LANGUAGE, at /downloadpdf/display/book/<isbn>/<isbn>.pdf for the whole issue and /downloadpdf/display/book/<isbn>/CH00N.pdf per chapter; the serial landing page (/display/serial/<slug>) lists no ISBNs to curl, so the issue ISBN comes from a dated search such as ?q=Fiscal+Monitor+April+2025&bot=bot. Recipe in notes/imf-dsbb-2026-09-06.md. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9798229002516/CH005.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "In most advanced economies, and in some large emerging market and middle-income economies, fiscal data follow the GFSM 2014 or are produced using a national accounts methodology that follows the 2008 System of National Accounts (SNA) or ESA 2010"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "imf-fiscal-monitor -> imf-gfsm",
+      "source": "imf-fiscal-monitor",
+      "target": "imf-gfsm",
+      "reason": "caveat",
+      "why": "ALREADY LIVE — caught by the validator's SUPERSEDED check, not by my collision scan, which is the finding. grok-h1-international-reports.json carries this edge at A on the same document, quoting the same appendix's other sentence. What is worth recording is the ROUTE, not the edge: the live edge cites https://www.imf.org/-/media/files/publications/fiscal-monitor/2025/english/msa.pdf, which returns HTTP 403 to a browser-UA curl from the cloud sandbox today, 2026-09-06 — the /-/media/ path is walled like every other www.imf.org path. The identical text is readable at https://www.elibrary.imf.org/downloadpdf/display/book/9798229002516/CH005.pdf, which is the Fiscal Monitor April 2025 Methodological and Statistical Appendix as elibrary shelves it. Nothing is written down (PLAYBOOK-CORPUS section 7b), and the grade is already A so there is nothing to write up either; this entry exists so that whoever next finds that 403 knows there is a live second copy and does not record the citation as rotted."
+    },
+    {
+      "edge": "imf-fiscal-monitor -> imf-weo",
+      "source": "imf-fiscal-monitor",
+      "target": "imf-weo",
+      "reason": "caveat",
+      "why": "ALREADY LIVE, and the existing evidence is better than what this round found. grok-h1-international-reports.json carries it at B on 'Country-specific data and projections for key fiscal variables are based on the April 2025 World Economic Outlook database, unless indicated otherwise, and compiled by IMF staff' — a direct statement of sourcing. This round independently reached the same edge from the weaker sentence about what the WEO database does NOT cover. Not re-minted, and not re-graded: the existing quote is the stronger one and a re-grade never writes down. Same 403-versus-elibrary route note as the GFSM entry above applies to its evidence_url."
+    },
+    {
+      "edge": "imf-weo -> imf-bpm6",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "DEFERRED 2026-09-06 (round 4). BPM6 appears twice in the WEO April 2025 Statistical Appendix and neither occurrence is quite the edge. The prose one says the IMF's sector standards 'have been aligned with the SNA 2008' — a claim about two standards, not about the WEO, and the shape PLAYBOOK-CORPUS section 7a refuses. The other is Table G, 'Key Data Documentation', whose 'Statistics Manual in Use at Source Country' column carries 'BPM 6' or 'BPM 5' on every country row. That table's whole purpose is to disclose which manual each country's source data follow, so under the 2026-09-06 methodology-table-cell ruling the shape qualifies and would grade B — but the cell content is the two-token string 'BPM 6', which is the acronym with a space in it, not the artefact's title, and pdftotext renders the table as column soup with no quotable contiguous span. Wants a Chrome read of the table, or the same statement in a different issue's prose."
+    },
+    {
+      "edge": "imf-gfsr -> any methodology",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "NOT ATTEMPTED 2026-09-06 (round 4) — recorded so the next round starts where this one stopped rather than re-deriving the route. The Global Financial Stability Report April 2025 is ISBN 9798229003261 on elibrary.imf.org and its whole-issue PDF downloads to a plain curl at /downloadpdf/display/book/9798229003261/9798229003261.pdf. It was not read. The GFSR is the weakest of the three flagships for this corpus because its data annexes lean on commercial market data and IMF internal databases rather than on the statistical manuals, so expect fewer edges than the WEO or the Fiscal Monitor returned."
+    },
+    {
+      "edge": "imf-fiscal-monitor / imf-weo -> imf-mfsmcg-2016",
+      "source": null,
+      "target": null,
+      "reason": "wrong-target",
+      "why": "REFUSED 2026-09-06 (round 4). The WEO Statistical Appendix names 'the Monetary and Financial Statistics Manual and Compilation Guide' by full title, which IS the corpus node's title, in the same sentence as BPM6 and GFSM 2014 — but that sentence says those standards 'have been aligned with the SNA 2008', which is a statement about the standards and not about the WEO's own data. No other occurrence in either appendix. Refused on the sentence, not on the edition, unlike the three MFSM refusals in int-imf-dsbb-2026-09-06.json."
+    }
+  ]
+}
