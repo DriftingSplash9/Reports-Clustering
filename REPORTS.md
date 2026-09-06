@@ -21,10 +21,12 @@ document, no edge; a pointer is not a source; nothing is deleted, it goes to
 trying to be and what is out of scope. It changes when the *direction*
 changes, and `HANDOFF.md` says whether it has drifted since.
 
-There is no `CLAUDE.md`. Two standing-rules sources sit outside the repo and
-reach an agent before any file does: this project's Claude project
-instructions, and project memory. Both are summaries — where either disagrees
-with a file, the file wins.
+`CLAUDE.md` exists only as a router for a local Claude Code session, which
+loads it automatically and would otherwise get nothing; it carries no rules of
+its own beyond the three that must bind before any file is read. Two more
+standing-rules sources sit outside the repo and reach an agent before any file
+does: this project's Claude project instructions, and project memory. All
+three are summaries — where any of them disagrees with a file, the file wins.
 
 The per-branch hand-off chains (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, and the BRICS `G.*` files)
 are finished and live under `archive/`; the corpus now moves as a whole,

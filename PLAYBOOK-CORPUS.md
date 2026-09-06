@@ -44,8 +44,9 @@ notes.** Minting an edge some earlier round recorded as `no-document`
 makes that note a lie, and validate fails on it. Read the older note
 before assuming your new edge wins — it may have the better evidence.
 
-**15. A page title is not evidence.** Read the body, not just the
-title/heading.
+**15. A page title is not evidence, and neither is a node description.** Read
+the body, not just the title/heading. Grok's imported descriptions naming a
+standard are leads to verify, not citable bases.
 
 **16. Eurostat's national reference metadata is the highest-yield source
 for "which standard / which source" questions on an EU/EEA country.**
@@ -155,10 +156,11 @@ here only as a rule, once.
   ASCII** — `Ⅲ` (U+2162) becomes `III`. Useful, and a trap: `바젤Ⅲ` normalizes to
   the single token `바젤iii`, and since Hangul and Latin are both `\p{L}` there
   is no split for the ≥2-word run rule to use.
-- **A document read by a second route caps at B** (§7). Any new fetch strategy
-  inherits it: if the bytes did not come from the cited URL on the live host,
-  the edge cannot be an A however cleanly it clears every other bar. Record
-  WHICH route in the committed evidence record (`via:`).
+- **Bytes that did not come from the cited URL on the live host cannot make an
+  A**, however cleanly the edge clears every other bar — §7's archived-copy
+  ruling, which every new fetch strategy inherits. A read in Thomas's own
+  Chrome IS the cited URL and is not a second route (§7). Record WHICH route in
+  the committed evidence record (`via:`).
 - **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
   wall says only that this machine could not read it. A 404 says the citation
   has rotted, which is exactly what the dead-URL debt list measures — grading it
@@ -222,9 +224,6 @@ here only as a rule, once.
   characters and refuses full reproduction. It can establish a negative or
   locate text; a mintable quote needs a real browser or another host carrying
   the same document.
-- **A page title is not evidence, and neither is a node description.** Read the
-  body. Grok's imported descriptions naming a standard are leads to verify, not
-  citable bases.
 - **The Grok-derived slices carry Grok's habits** (Grok itself is retired,
   §5): ids and enum values that were inventions, one jurisdiction's exact
   quote and URL reused as evidence for another — the tell is a quote naming a
