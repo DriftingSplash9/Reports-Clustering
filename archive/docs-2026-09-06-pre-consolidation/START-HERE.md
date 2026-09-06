@@ -31,10 +31,10 @@ of them.
 The BRICS branch opened in August 2026 — Brazil, Russia, China and India all
 have real chains now, and South Africa arrived earlier with the African push —
 and a bulk import the same month widened the map to well over a hundred
-countries. Since then the work has gone in two passes: first the evidence
-behind what was already drawn — every line in the graph now carries a grade for
-how well its cited document actually supports it — and now, that pass done,
-back to filling in the map where it is thinnest.
+countries. Since then the work has been less about new territory and more
+about the evidence behind what is already drawn: every line in the graph now
+carries a grade for how well its cited document actually supports it, and the
+current effort is raising those grades one document at a time.
 
 ---
 
@@ -205,24 +205,17 @@ control should be *for* is an open design question.
 The drawing-size problems that used to sit in this paragraph (nodes at 7 pixels,
 edges a tenth of a pixel wide) were fixed on 2026-08-19.
 
-**The next thing is filling in the thin parts.** Every edge now carries an
-evidence grade — A means the cited document was read and names the input in so
-many words; B means it supports the link but stops short of that (names the
-agency, not the release, or hedges); C is a lead nobody has confirmed. That
-grading pass came first on purpose: adding data to a graph whose links had not
-been read back to their documents would only have made the picture bigger, not
-truer.
-
-What it exposed is how unevenly the map is drawn. Some countries are here in
-depth; others are a single thread — a price index feeding the national accounts
-feeding a household survey — with nothing else attached, and that is a fact
-about who has looked, not about the country. The United Kingdom, a G7 economy,
-sat in the graph for months with no inflation release, no labour release and no
-central bank publication in it at all. Several hundred reports still sit with no
-line into or out of them. So the work now is going back into those places, with
-the well-covered countries as the template for what ought to be there. Alberta's
-330 municipalities, 60 school authorities and 26 post-secondary institutions are
-still on the list for whenever depth beats breadth again.
+**The obvious next thing** used to be "more data" — Alberta alone has around
+330 municipalities, 60 school authorities and 26 post-secondary institutions, and
+the method for adding one is proven. That is deliberately on hold. Every edge
+now carries an evidence grade — A means the cited document was read by a
+machine and names the input in so many words; B means it supports the link
+but stops short of that (names the agency, not the release, or hedges); C is
+a lead nobody has confirmed — and fewer than a third of the edges are grade A.
+The current work is getting what is already here into shape: reading the
+cited documents, tightening the grades, fixing the picture. Adding data to a
+graph where most links have not yet been read back to their document would
+only make the picture bigger, not truer.
 
 ---
 

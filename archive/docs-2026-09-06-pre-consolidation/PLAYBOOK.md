@@ -25,9 +25,9 @@ you would remove** — the previous three months added and never removed.
 
 ## 1. Read these, routed by task
 
-**The read order lives in `HANDOFF.md` §1 and nowhere else.** Go there. It
-sends you back to §2, §6 and §7 of this file, and into the rest of this file
-and `notes/` only where its table says.
+**Routing lives in `HANDOFF.md` §1 — one table, not two.** Read `HANDOFF.md`
+first, then §2, §6 and §7 of this file; go to the rest of this file and to
+`notes/` only where that table sends you.
 
 **House habit: the code is the design doc.** `palette.ts`, `nodeVisuals.ts`,
 `linkVisuals.ts`, `view.ts`, `modes.ts`, `savedViews.ts`, `hierarchy.ts`,
@@ -39,11 +39,9 @@ and mean it.
 
 ## 2. Standing rules
 
-1. **Never run git from an agent session — not even read-only.** Any git
-   command leaves a `.git/index.lock` that blocks Thomas's own commits in
-   GitHub Desktop until he clears it by hand, and an agent cannot delete it
-   (rule 6). Never state git status in any doc; ask Thomas or read a
-   screenshot, and delete any git-status claim you find. **And never tell Thomas to
+1. **Never run git from an agent session — not even read-only.** Never
+   state git status in any doc; ask Thomas or read a screenshot, and
+   delete any git-status claim you find. **And never tell Thomas to
    commit** (Thomas, 2026-09-06: "you need to stop reminding me to
    commit"). No "uncommitted since ..." inventory in `HANDOFF.md`, no
    "then commit" todo item, no closing line about committing. Committing
@@ -57,12 +55,11 @@ and mean it.
    dead URL — raw-verify before trusting any quote. Applies to the Grok-derived
    slices too, including node descriptions: a description naming a standard is a
    lead to verify, not a citable basis.
-4. **`npm run validate` before and after any data change** — generator,
-   logic tests, then the data checks; the live count of each is in
-   `HANDOFF.md` §2 and nowhere else. It can't run through the device
-   bridge. Recipe: stage `src/ scripts/ package.json tsconfig.json
-   index.html vite.config.ts START-HERE.md` (full `src/data/research/`
-   corpus included) into a Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to
+4. **`npm run validate` before and after any data change** (120+ checks);
+   it can't run through the device bridge. Recipe: stage `src/ scripts/
+   package.json tsconfig.json index.html vite.config.ts START-HERE.md`
+   (full `src/data/research/` corpus included) into a Linux sandbox,
+   `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to
    move 270+ research JSONs across the bridge: zip `src/data/research/`
    on-device into `_to_delete/`, stage that one file, unzip in the
    sandbox. Reuse a live sandbox with `node_modules` already installed
@@ -145,12 +142,16 @@ and mean it.
     dragging the slider, not by measuring the force in a script.
 
 **Process rule.** `HANDOFF.md` stays short — edit its Current State/Todo
-directly (overwrite, don't append) each turn. **The handoff procedure itself
-is `HANDOFF.md` §4 and is not repeated here.** It is archive-first because
-there is no git safety net (rule 1), and it was missed on 2026-08-29/30:
-HANDOFF.md was overwritten three times in one session and archived only
-retrospectively, from a copy that happened to still be in the session's
-context. A new standing rule or trap goes here, not `HANDOFF.md`. Hand off rather than
+directly (overwrite, don't append) each turn; copy to
+`archive/Previous Handoffs/` only before a structural rewrite. **A wholesale
+rewrite of the file counts as structural even when the section headings are
+unchanged** — the test is whether the prose you are replacing would be
+unrecoverable afterwards, not whether §1-§4 still exist. There is no git
+safety net here (rule 1), so an un-archived overwrite destroys the previous
+state permanently. Missed on 2026-08-29/30: HANDOFF.md was overwritten three
+times in one session and archived only retrospectively, from a copy that
+happened to still be in the session's context. Archive first, then rewrite. A new
+standing rule or trap goes here, not `HANDOFF.md`. Hand off rather than
 push on when you re-derive something already settled, contradict an
 earlier answer, retry a tool past its documented once-only policy, or the
 session has been through a compaction. Project memory: write entries as

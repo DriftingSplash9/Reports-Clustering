@@ -7,25 +7,20 @@
 
 ## 🛑 Agent: read this before doing any work
 
-**Go to `HANDOFF.md` §1. It is the read order for the whole project, this
-block included** — live state, the todo, and what to read next routed by task.
-Exactly one `HANDOFF.md`, always at the top level; superseded ones are in
-`archive/Previous Handoffs/`. Nothing here duplicates that list.
+1. **`HANDOFF.md`** at the top level — live state and the todo. Exactly one,
+   always at the top level; superseded ones are in `archive/Previous Handoffs/`.
+   Its §1 is the reading list, routed by task — follow it and stop.
+2. **`PLAYBOOK.md`** §2 (standing rules), §6 (traps), §7 (do-not-re-raise).
+   The rules that bind everything — never run git from an agent session; no
+   document, no edge; a pointer is not a source; nothing is deleted, it goes to
+   `_to_delete/` — live there, not here.
+3. **This file from "The one-line version"** — what the system is trying to be
+   and what is out of scope. It changes when the *direction* changes.
+4. **Project memory**, newest first, as a hint: where memory and `HANDOFF.md`
+   disagree, the file wins.
 
-The rules that bind everything — never run git from an agent session; no
-document, no edge; a pointer is not a source; nothing is deleted, it goes to
-`_to_delete/` — live in `PLAYBOOK.md` §2, §6 and §7, not here.
-
-**What this file is:** from "The one-line version" down, what the system is
-trying to be and what is out of scope. It changes when the *direction*
-changes, and `HANDOFF.md` says whether it has drifted since.
-
-There is no `CLAUDE.md`. Two standing-rules sources sit outside the repo and
-reach an agent before any file does: this project's Claude project
-instructions, and project memory. Both are summaries — where either disagrees
-with a file, the file wins.
-
-The per-branch hand-off chains (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, and the BRICS `G.*` files)
+There is no `CLAUDE.md` and no other standing-rules file. The per-branch
+hand-off chains (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, and the BRICS `G.*` files)
 are finished and live under `archive/`; the corpus now moves as a whole,
 through `HANDOFF.md`. The old `sessions/` log is archived unedited at
 `archive/sessions/` and is not being resumed.
@@ -223,7 +218,7 @@ rather than a value:
 | 2 | Directed influence | done |
 | 3 | Update simulation on real cadence | cadence model built; the pulse still runs on the wrong quantity |
 | 4 | Readable detail panel | done, on hover |
-| 5 | Curated real-world seed set | done — live count in `HANDOFF.md` §2 |
+| 5 | Curated real-world seed set | done — the corpus is now ~3,300 reports |
 | 6 | Search, filters & domains | done for name, scope, source kind and evidence grade; domain filter removed 2026-08-05; cadence filter not built |
 | 7 | Polish & export | in progress — the Midvamp Revamp (`notes/Midvamp - Revamp.md`) is the plan of record; live state in `HANDOFF.md` |
 

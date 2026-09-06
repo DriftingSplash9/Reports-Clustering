@@ -15,9 +15,8 @@ Last updated: 2026-09-06 ~09:15 UTC (thin-coverage round 1 — GB national core 
 
 ## 1. Read next
 
-**The project's only read order — `PLAYBOOK.md` §1 and `REPORTS.md`'s 🛑 block
-point here.** This file first, then `PLAYBOOK.md` §2, §6, §7 at minimum. Then,
-**routed by what you are doing**:
+`PLAYBOOK.md` §2, §6, §7 at minimum. Then, **routed by what you are doing** —
+this is the only routing table; PLAYBOOK §1 points here:
 
 | doing | read |
 |---|---|
@@ -36,10 +35,7 @@ point here.** This file first, then `PLAYBOOK.md` §2, §6, §7 at minimum. Then
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
 
-Then `REPORTS.md` from *The one-line version* for scope, and project memory,
-newest first. Project instructions and memory are summaries written outside the
-repo: where either disagrees with a file, the file wins. Git status: never
-state it (rule 1).
+Then project memory, newest first. Git status: never state it (rule 1).
 
 ---
 
@@ -143,12 +139,6 @@ tier; orb size.
 ---
 
 ## 4. How to hand off
-
-**This is the only copy of this procedure — `PLAYBOOK.md` points here rather
-than restating it.** Editing a line of §2/§3 during a round is not a handoff
-and needs no archive. Writing a new handoff — replacing the state prose
-wholesale — always does, and the test is whether the prose being replaced
-would be unrecoverable afterwards, not whether §1–§4 still exist.
 
 **Thomas asks for a handoff; the agent does all of this, in this order:**
 
