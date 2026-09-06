@@ -24,6 +24,12 @@ either way; the spread is photon churn (140 tris a teardrop), not spheres.
 `census.mjs` now also prints `nodesInst` and folds the node `sync()` into
 `syncMs`.
 
+- `shot-all.mjs <out.png> [settle budget ms]` — the same, at Everything with
+  every country unfolded (2,385 nodes). Waits for `fit().settledOnce` rather
+  than a fixed timer; budget 600000 is about right under swiftshader. This is
+  the shot to take before and after a force change — `shot.mjs`'s tier-4 view
+  opens no countries and shows 289 nodes.
+
 - `settle.mjs [tier] [runs]` — ms, rAF frames and physics ticks from the
   first tick to `settledOnce`. Added 2026-09-05 for the tick burst
   (`TICK_BURST_MAX` in InfluenceGraph.tsx): at tier 2 (299 nodes) a

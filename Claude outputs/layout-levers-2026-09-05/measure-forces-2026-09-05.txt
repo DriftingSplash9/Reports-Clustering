@@ -1,0 +1,43 @@
+### PASS 1 — layout metrics, 3 seeds, current corpus
+collide iterations=2 charge theta=0.9
+corpus 3363 nodes / 2847 edges · spread=2 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7414  ratio=19.21  inter=7194 intra=374 p95=9704  nodeScaleWanted=31.5  ms/tick=233.1  nan=0
+seed=2 cr= 1  onscreen=0.8599  ratio=15.96  inter=6034 intra=378 p95=7017  nodeScaleWanted=22.8  ms/tick=101.8  nan=0
+seed=3 cr= 1  onscreen=0.5776  ratio=13.80  inter=5200 intra=377 p95=9003  nodeScaleWanted=29.3  ms/tick=102.4  nan=0
+wrote /tmp/forces/base.json
+collide iterations=1 charge theta=0.9
+corpus 3363 nodes / 2847 edges · spread=2 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7414  ratio=19.21  inter=7194 intra=375 p95=9704  nodeScaleWanted=31.5  ms/tick=92.1  nan=0
+seed=2 cr= 1  onscreen=0.8599  ratio=15.96  inter=6034 intra=378 p95=7017  nodeScaleWanted=22.8  ms/tick=121.2  nan=0
+seed=3 cr= 1  onscreen=0.5776  ratio=13.80  inter=5200 intra=377 p95=9003  nodeScaleWanted=29.3  ms/tick=84.3  nan=0
+wrote /tmp/forces/iter1.json
+collide iterations=2 charge theta=1.5
+corpus 3363 nodes / 2847 edges · spread=2 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7179  ratio=17.85  inter=6010 intra=337 p95=8371  nodeScaleWanted=27.2  ms/tick=106.0  nan=0
+seed=2 cr= 1  onscreen=0.8596  ratio=14.63  inter=4966 intra=340 p95=5777  nodeScaleWanted=18.8  ms/tick=120.7  nan=0
+seed=3 cr= 1  onscreen=0.5485  ratio=13.07  inter=4397 intra=336 p95=8017  nodeScaleWanted=26.1  ms/tick=72.4  nan=0
+wrote /tmp/forces/theta15.json
+collide iterations=1 charge theta=1.5
+corpus 3363 nodes / 2847 edges · spread=2 geo=1.5 galaxy=1 ticks=400
+seed=1 cr= 1  onscreen=0.7178  ratio=17.85  inter=6010 intra=337 p95=8372  nodeScaleWanted=27.2  ms/tick=68.6  nan=0
+seed=2 cr= 1  onscreen=0.8602  ratio=14.63  inter=4966 intra=340 p95=5773  nodeScaleWanted=18.8  ms/tick=133.5  nan=0
+seed=3 cr= 1  onscreen=0.5483  ratio=13.07  inter=4397 intra=336 p95=8019  nodeScaleWanted=26.1  ms/tick=74.7  nan=0
+wrote /tmp/forces/both.json
+### PASS 2 — interleaved timing, 4 repeats, TICKS=150 seed 1 (take the MIN per config)
+rep1 base ms/tick=123.9
+rep1 iter1 ms/tick=102.8
+rep1 theta15 ms/tick=83.0
+rep1 both ms/tick=70.2
+rep2 base ms/tick=152.8
+rep2 iter1 ms/tick=137.0
+rep2 theta15 ms/tick=313.5
+rep2 both ms/tick=145.1
+rep3 base ms/tick=128.1
+rep3 iter1 ms/tick=105.6
+rep3 theta15 ms/tick=80.6
+rep3 both ms/tick=65.9
+rep4 base ms/tick=132.3
+rep4 iter1 ms/tick=152.5
+rep4 theta15 ms/tick=160.6
+rep4 both ms/tick=71.0
+### DONE

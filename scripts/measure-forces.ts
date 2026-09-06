@@ -14,7 +14,8 @@
  * from the `forceGraph` memo in `InfluenceGraph.tsx`:
  *   link      distance (40 + (1-weight)*28 + hubRoom) * m * 2, strength = stiffness
  *   charge    strength -399*m, distanceMax 420*m
- *   collide   radiusFor(size_score)*1.5 + 4 + 4*m, strength .85, iterations 2
+ *   collide   radiusFor(size_score)*1.5 + 4 + 4*m, strength .85, iterations 1
+ *             (shipped 2 until 2026-09-05; `ITER=2` reproduces the old one)
  *   centre    strength 0 (a true no-op, as shipped)
  *   plus galaxyForce / countryAffinityForce / clusterRepulsionForce imported
  *   unmodified from src/lib
@@ -37,6 +38,8 @@
  * Usage:
  *   npx tsx scripts/measure-forces.ts
  *   SPREAD=100 GEO=0 SEEDS=1,2,3 CRS=0,15 npx tsx scripts/measure-forces.ts
+ *   ITER=2 THETA=1.5 npx tsx scripts/measure-forces.ts   # the two speed levers
+ *   OUT=/tmp/run.json ... # rows, each carrying every node's final position
  *   INTSTIFF=1 npx tsx scripts/measure-forces.ts   # the pre-2026-08-31 layout, INT springs live
  *
  * Read `onscreen` (inter / p95), not `ratio`. The camera fits the 95th
@@ -76,7 +79,7 @@ interface D3Force3d {
     distance(fn: (l: never) => number): ReturnType<D3Force3d['forceLink']>
     strength(fn: (l: never) => number): ReturnType<D3Force3d['forceLink']>
   }
-  forceManyBody(): { strength(n: number): { distanceMax(n: number): unknown } }
+  forceManyBody(): { strength(n: number): { distanceMax(n: number): { theta(n: number): unknown } } }
   forceCollide(r: (node: never) => number): {
     strength(n: number): { iterations(n: number): unknown }
   }
@@ -92,6 +95,21 @@ const TICKS = Number(process.env.TICKS ?? 400)
 const SEEDS = (process.env.SEEDS ?? '1,2').split(',').map(Number)
 const CRS = (process.env.CRS ?? '0,1,3,6,10,15,30').split(',').map(Number)
 const OUT = process.env.OUT ?? ''
+/**
+ * The two layout speed levers, 2026-09-05.
+ *
+ * `ITER` — collide iterations. Shipped 2 until 2026-09-05, 1 since: measured
+ * here at 3 seeds, every metric identical to 3-4 s.f. and node positions moving
+ * a median 1.6-2.3 units in a p95-7,000-to-9,700 cloud, for ~17% off the tick.
+ * `THETA` — charge Barnes-Hut opening angle; d3's default 0.9 is what ships.
+ * 1.5 takes another ~35% off the tick and tightens the cloud ~14% (p95), which
+ * IS a layout change and needs a reader's eyes before it goes in.
+ *
+ * Timing here is sandbox-CPU and noisy under load: take the MINIMUM of several
+ * interleaved runs, never a single reading.
+ */
+const ITER = Number(process.env.ITER ?? 1)
+const THETA = Number(process.env.THETA ?? 0.9)
 
 /** Seeded PRNG so two runs at different strengths start from identical positions. */
 function mulberry32(a: number) {
@@ -166,9 +184,9 @@ function run(clusterRep: number, seed: number) {
     .id(((d: { id: string }) => d.id) as never)
     .distance(((l: L) => (40 + (1 - l.weight) * 28 + l.hubRoom) * m * LINK_LENGTH_SCALE) as never)
     .strength(((l: L) => l.stiffness) as never))
-  sim.force('charge', forceManyBody().strength(-399 * m).distanceMax(420 * m))
+  sim.force('charge', forceManyBody().strength(-399 * m).distanceMax(420 * m).theta(THETA))
   sim.force('collide', forceCollide(((n: { size_score: number }) =>
-    radiusFor(n.size_score) * 1.5 + 4 + 4 * m) as never).strength(0.85).iterations(2))
+    radiusFor(n.size_score) * 1.5 + 4 + 4 * m) as never).strength(0.85).iterations(ITER))
   sim.force('geoAffinity', countryAffinityForce({ current: GEO }) as unknown as Force)
   sim.force('galaxy', galaxyForce({ current: GALAXY }) as unknown as Force)
   sim.force('clusterRepulsion', clusterRepulsionForce({ current: clusterRep }) as unknown as Force)
@@ -178,11 +196,13 @@ function run(clusterRep: number, seed: number) {
   const alphaMin = 0.001
   const decay = 1 - Math.pow(alphaMin, 1 / TICKS)
   let alpha = 1
+  const t0 = performance.now()
   for (let i = 0; i < TICKS; i++) {
     alpha += (0 - alpha) * decay
     sim.alpha(alpha)
     sim.tick(1)
   }
+  const msPerTick = (performance.now() - t0) / TICKS
 
   const nan = nodes.filter((n) => !Number.isFinite(n.x) || !Number.isFinite(n.y) || !Number.isFinite(n.z)).length
   const byC = new Map<string, typeof nodes>()
@@ -219,7 +239,8 @@ function run(clusterRep: number, seed: number) {
   // sizes are being silently clipped (PLAYBOOK §6).
   const wantedScale = (p95 * 0.026) / 8
   return {
-    spread: SPREAD, geo: GEO, galaxy: GALAXY, clusterRep, seed, nan,
+    spread: SPREAD, geo: GEO, galaxy: GALAXY, clusterRep, seed, nan, iterations: ITER, theta: THETA, msPerTick,
+    positions: nodes.map((n) => [n.id, n.x, n.y, n.z] as const),
     ratio: interMean / intraMean,
     onscreen: interMean / p95,
     intraOnscreen: intraMean / p95,
@@ -229,6 +250,7 @@ function run(clusterRep: number, seed: number) {
 }
 
 const rows: ReturnType<typeof run>[] = []
+console.log(`collide iterations=${ITER} charge theta=${THETA}`)
 console.log(`corpus ${g.nodes.length} nodes / ${g.edges.length} edges · spread=${SPREAD} geo=${GEO} galaxy=${GALAXY} ticks=${TICKS}`)
 for (const s of SEEDS) {
   for (const cr of CRS) {
@@ -240,8 +262,12 @@ for (const s of SEEDS) {
       `  ratio=${r.ratio.toFixed(2)}` +
       `  inter=${r.interMean.toFixed(0)} intra=${r.intraMean.toFixed(0)} p95=${r.p95.toFixed(0)}` +
       `  nodeScaleWanted=${r.wantedScale.toFixed(1)}${r.capBinding ? ' CAP BINDING' : ''}` +
+      `  ms/tick=${r.msPerTick.toFixed(1)}` +
       `  nan=${r.nan}`,
     )
   }
 }
-if (OUT) { writeFileSync(OUT, JSON.stringify(rows, null, 1)); console.log(`wrote ${OUT}`) }
+if (OUT) {
+  writeFileSync(OUT, JSON.stringify(rows, null, 1))
+  console.log(`wrote ${OUT}`)
+}

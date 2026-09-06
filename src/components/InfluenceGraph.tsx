@@ -2168,7 +2168,20 @@ export default function InfluenceGraph({
         },
       )
         .strength(0.85)
-        .iterations(2) as unknown as never,
+        // Iterations 2 -> 1, 2026-09-05. `scripts/measure-forces.ts` at the
+        // production force set, 3,363 nodes, spread 2, seeds 1-3: every
+        // reported metric (onscreen, ratio, inter, intra, p95, wantedScale)
+        // is identical to 3-4 significant figures at 1 and at 2, and node
+        // positions move a median 1.6-2.3 units in a cloud whose p95 radius
+        // is 7,000-9,700 (worst single node 175, ~1.8% of that radius). The
+        // tick gets ~17% cheaper (123.9 -> 102.8 ms/tick, minimum of four
+        // interleaved runs on the sandbox CPU), which is settle time: the
+        // simulation runs one tick per rendered frame. Collide's second
+        // iteration is a relaxation pass that this graph does not need
+        // because the layout is decided by charge and the link springs, not
+        // by contact resolution. Raise it back to 2 if nodes start visibly
+        // overlapping after a spread or node-size change.
+        .iterations(1) as unknown as never,
     )
 
     // No vertical sorting force. Height is not an encoding — see the note on

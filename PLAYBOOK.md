@@ -357,9 +357,12 @@ here only as a rule, once.
   the OLD code and the NEW code `--offline` on the same store and diff; put
   only the edges that went UP in the write selection.
 - **Every grader run rewrites the `evidence-cache/` record of each URL it
-  touches — dry run or not — and labels the windows with THAT run's grade.**
-  A dry run on a held edge leaves a committed record saying "[A …]" beside a
-  slice that says B. Restore untouched records from the transport zip before
+  touches — dry run or not — and labels the windows with THAT run's grade, and
+  the rewritten record holds ONLY the edges that run selected.** A dry run on a
+  held edge leaves a committed record saying "[A …]" beside a slice that says
+  B; grading one new edge on a URL that already backs three others leaves a
+  record with one window where there were four. Select every live edge on the
+  URL (2026-09-05), restore untouched records from the transport zip before
   committing, or run the write pass last.
 - **`_dropped` entries come in two shapes**: `source_report_id`/
   `target_report_id`, and `source`/`target` (+ an `edge` string). A collision
