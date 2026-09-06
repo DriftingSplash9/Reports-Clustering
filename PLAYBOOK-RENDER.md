@@ -144,7 +144,8 @@ Assume all of this exists and works; each has a dated comment at the site.
   `public/corpus-data.json` (generated). Browser loads it via
   `browserCorpus.ts`; Node scripts via `src/data/index.ts` (never import
   from browser code); both share `assembleCorpus.ts`. Validation:
-  `scripts/validate-data.ts` + `scripts/test-logic.ts` (120+ checks).
+  `scripts/validate-data.ts` + `scripts/test-logic.ts` (live counts in
+  `HANDOFF.md` §2).
   id-collision and edge-collision checks must include `src/data/reports.ts`
   and `src/data/dependencies.ts`, and edges must also be checked against the
   `part_of` containment map (rules 10-12 above).

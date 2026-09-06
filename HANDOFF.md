@@ -17,15 +17,12 @@ Last updated: 2026-09-06 ~09:15 UTC (thin-coverage round 1 — GB national core 
 ## 1. Read next
 
 **The project's only read order — `PLAYBOOK.md` §1 and `REPORTS.md`'s 🛑 block
-point here.** This file first, then `PLAYBOOK.md` in full — it is short, and
-its §1 hands you the one lane playbook you need. Then, **routed by what you
-are doing**:
+point here.** This file first, then `PLAYBOOK.md` in full — it is short and
+routes you to one lane playbook. Then, **routed by what you are doing**:
 
 | doing | read |
 |---|---|
-| anything | `PLAYBOOK.md` — all of it; it binds every task |
-| corpus work: research · minting · wiring · quotes · grading · schema | `PLAYBOOK-CORPUS.md` §2 rules, §6 traps, §7 standing decisions |
-| renderer work: visuals · forces · camera · panels · perf | `PLAYBOOK-RENDER.md` §2 rules, §3–§4 what exists, §6 invariants |
+| anything | `PLAYBOOK.md` — short, binds every task, and its §1 hands you the one lane playbook (CORPUS or RENDER) |
 | fetching / capturing / extracting | `notes/techniques-2026-09-04.md`; for "can I reach host X?" `notes/routing-snapshot-2026-09-04.md` — **re-probe, don't believe it** |
 | **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md`, then memory `esms_hicp_pass_2026-09-05` (acronym rule), `cjk_span_floor_2026-09-05`, `quote_guard_round_2026-09-05` |
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
