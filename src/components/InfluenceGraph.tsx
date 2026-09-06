@@ -2088,7 +2088,11 @@ export default function InfluenceGraph({
     // default 1); the baseline below is where 335 nodes read as clusters.
     const m = spreadApplied
     const charge = fg.d3Force('charge') as unknown as
-      | { strength(s: number): void; distanceMax(d: number): void }
+      | {
+          strength(s: number): void
+          distanceMax(d: number): void
+          theta(t: number): void
+        }
       | undefined
     // Bumped -300 -> -399 2026-08-26 (Thomas, HANDOFF item 5 — first tried
     // +10%/-330, Thomas asked for +33% instead): a bigger increase to the
@@ -2101,6 +2105,19 @@ export default function InfluenceGraph({
     // Without a cap, repulsion never falls off and linear chains get flung
     // out — but the cap has to grow with the layout or it recreates the pile.
     charge?.distanceMax(420 * m)
+    // Barnes-Hut opening angle, 0.9 (d3-force-3d's default) -> 1.5, 2026-09-06
+    // (Thomas, HANDOFF item 1). A coarser approximation: more distant nodes get
+    // lumped into one octree cell instead of being summed individually, so the
+    // charge force costs less per tick. Measured with
+    // `THETA=1.5 npx tsx scripts/measure-forces.ts`: -35% per tick on top of
+    // collide `iterations` 1 (123.9 -> 65.9 ms/tick together, min of four
+    // interleaved runs). It IS a layout change, not a free win — cloud p95
+    // -14%, intra-cluster spread -10% — but the camera fit renormalises most
+    // of it (`onscreen` 0.741->0.718, 0.860->0.860, 0.578->0.549). Shots:
+    // `Claude outputs/layout-levers-2026-09-05/`. Raise it further only with
+    // fresh shots; theta is the one force constant here whose cost and whose
+    // layout both move with the same number.
+    charge?.theta(1.5)
 
     // Force-centre (three-forcegraph's default, unmodified since the app's
     // first commit): `d3-force-3d`'s forceCenter does NOT pull individual

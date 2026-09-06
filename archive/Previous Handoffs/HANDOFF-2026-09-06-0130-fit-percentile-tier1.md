@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-06 ~09:15 UTC (thin-coverage round 1 — GB national core — minted and validated)
+Last updated: 2026-09-06 ~01:30 UTC (collide 1 accepted; fit percentile now falls with spread; tier 1 honours the INT toggle; theta 1.5 and mutual pairs still Thomas's)
 
 ---
 
@@ -41,29 +41,13 @@ Then project memory, newest first. Git status: never state it (rule 1).
 
 ## 2. Current state
 
-Corpus **3,372 reports / 2,857 dependencies**. **876 A · 1,368 B · 613 C**,
-A-share 30.7%. `validate` exits 0, 123/123 logic tests, grader selftest
+Corpus **3,363 reports / 2,847 dependencies**. **867 A · 1,367 B · 613 C**,
+A-share 30.5%. `validate` exits 0, 123/123 logic tests, grader selftest
 **68/68**, `tsc --noEmit` clean, `vite build` ok. **Grade counts come from
-`validate` only.** `kind`: 2,473 publication · 28 standard · 871 instrument.
+`validate` only.** `kind`: 2,466 publication · 27 standard · 870 instrument.
 
-**Direction (Thomas, 2026-09-06): back to gathering data.** The polish pass is done; the
-target now is THIN COVERAGE — regions and nations oddly short on reports or
-dependencies, with the well-covered nations as the template for what to go
-looking for there. No A-share or size target. `REPORTS.md`'s scope section
-still carries the old direction.
-
-**Round 1 — GB national core — done** (`gb-national-core-2026-09-06.json`, 9 reports ·
-10 dependencies · 9 A + 1 B, all wired, none shelved). The UK's 13 nodes were all
-local-government finance plus the Blue Book, census, population estimates and a
-dead-obligation EDP inventory — a G7 economy with no CPI, labour release, balance of
-payments, public sector finances or central bank publication. Minted those plus the
-statutory spine (Code of Practice → Statistics and Registration Service Act 2007), and
-wired population estimates → Census 2021.
-
-**Thin splits two ways, wanting different rounds**: (a) big economies reached through one
-narrow template — AU 23 nodes, DE 13, FR/IT/ES/SE/BE/AT/PL/FI/IE all 7–9 and all just the
-price-index → NA → HBS chain; (b) 978 of 3,345 nodes with zero edges, in EG · IR · TW ·
-SG · ID · IN · CN · RU · INT. Census and method: memory `gb_national_core_2026-09-06`.
+**Direction (Thomas, 2026-09-05): "tip-top shape with what we have before
+looking for more data."** No A-share or size target.
 
 **Grader:** CJK span floor, `acronymFitsHead()`, national `title_aliases`
 allowed (types.ts doc comment is the rule). **`--write` has NO
@@ -77,32 +61,32 @@ transmission sentence on their ESMS pages, a finding, not a gap. **DSBB 750
 dead-host — research, not re-grade.
 
 **Renderer:** three instancers, tick burst, geoAffinity cache, Condensed INT,
-member-scaled orbs, the faint-edges fix (`pendingLinkRescale`, holding — Thomas watched for a
-recurrence at Everything through 2026-09-06 and saw none), collide
-`iterations` 1 and — 2026-09-06, Thomas's rulings — charge **`theta` 1.5**
-(−35%/tick on top of collide, 123.9 → 65.9 ms together; a layout change the fit
-renormalises; `measure-forces.ts` defaults to it, `THETA=0.9` is the old
-layout) and **every lens live at every tier** (Condensed INT ended the
-mostly-INT tier 1; shots in `Claude outputs/lens-tier1-2026-09-06/`; orbs still
-stay out of lens recolour by design). The fit percentile falls with `spread`
-(`fitPercentileFor`: flat 0.8 to spread 1, then −0.11 per doubling, floor 0.4 —
-apparent node size unchanged, only the gaps grow), and tier 1 honours the INT
-toggle, so the DEFAULT opening frame is condensed. Otherwise as before: grade-driven opacity, A-only ranking, `rankByLegalBasis`,
-`INT_LINK_STIFFNESS = 0`, `view.minGrade` `C`, `TICK_BURST_MAX` 4 / 8 ms.
-Headless: `scripts/renderer/` (`census`, `shot`, `shot-all`, `fit-probe`,
-`settle`). Four shelved ISOLATED nodes are listed in memory
-`fit_percentile_and_tier1_2026-09-06`. **Orb size is settled** — Thomas,
-2026-09-06: the INT ≈ 3× orbs are right as they are.
-
-**Ranking:** `mutual: true` edges are excluded from `rankedEdges` (2026-09-06,
-Thomas's ruling), so they stay live in the graph and on screen but no longer
-feed PageRank. A mutual pair is a 2-cycle that pumps its own rank: the NZ Acts
-ranked 23rd/24th of 3,363 on each other's support, now 376th/415th. Four pairs;
-`mutual` is curated, not computed. `measure-mutual-rank.ts` now prints identical
-shipped and both-halves columns — the fix landing, not a broken script.
+member-scaled orbs, the faint-edges fix (`pendingLinkRescale`) and **collide
+`iterations` 1** (−17%/tick, layout-identical at 3 seeds) all live and
+accepted. **The fit percentile now falls with `spread`** (`fitPercentileFor`,
+2026-09-06): flat 0.8 to spread 1, then −0.11 per doubling, floor 0.4. Camera
+and `nodeScaleFor` both read the same radius, so apparent node size is
+unchanged and only the gaps grow (26% closer camera at spread 1200%). **Tier 1
+now honours the INT toggle**, so the DEFAULT opening frame is condensed (it was
+53% INT reports). Otherwise as before: grade-driven opacity, A-only ranking,
+`rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `view.minGrade` `C`,
+`TICK_BURST_MAX` 4 / 8 ms. Headless: `scripts/renderer/` (`census`, `shot`,
+`shot-all`, `fit-probe`, `settle`). Four shelved ISOLATED nodes are listed in
+memory `fit_percentile_and_tier1_2026-09-06`.
 
 **Research debt**: 0 no-URL, 0 dead-URL, 5 bare-homepage edges. Browser pass
 and the 2026-08-31 audit both closed.
+
+**Uncommitted since Thomas's second 2026-09-05 commit** (on disk, shas
+compared): everything the archived 23:30 handoff listed, plus — from the two
+2026-09-06 rounds — `InfluenceGraph.tsx`, `hierarchy.ts`, `ViewControls.tsx`,
+`Onboarding.tsx`; `scripts/measure-forces.ts` and three new scripts
+(`measure-mutual-rank.ts`, `renderer/shot-all.mjs`, `renderer/fit-probe.mjs`)
+with `renderer/README.md`; the slice `eu-hbs-and-price-index-gaps-2026-09-05
+.json`, two `edit_scripts/*-2026-09-05.py`, two `evidence-cache/` records,
+`PLAYBOOK.md`, and two `Claude outputs/` folders. `public/corpus-data.json` is
+gitignored and rebuilt by the hooks; the copy on disk is one round stale.
+`package-lock.json`: run `setup-and-run.bat` once, then commit.
 
 **Known node defects**: none open. `naics`, `icd-10-ca`,
 `icls-work-statistics-resolution` deliberately stay `standard` (classification
@@ -112,29 +96,40 @@ instruments) — flip if Thomas says so. Egypt IPI compiler unverified.
 
 ## 3. Todo (live items only)
 
-### [Thomas]
+### [Thomas] — only you can. Two rulings, two looks, and a commit.
 
-Nothing open. The four 2026-09-06 rulings are executed and described in §2, and
-each is a one-line revert if a lever turns out wrong on your hardware
-(`charge?.theta(1.5)` in `InfluenceGraph.tsx`, `d.mutual === true` in
-`graph.ts`'s `rankedEdges`, the `LENSES.map` in `ViewControls.tsx`).
+1. **Charge `theta` 0.9 → 1.5?** Another −35% per tick on top of collide
+   (both together 123.9 → 65.9 ms/tick, min of four interleaved runs). A
+   layout change — cloud p95 −14%, intra-cluster spread −10% — but the fit
+   renormalises most of it (`onscreen` 0.741→0.718, 0.860→0.860, 0.578→0.549).
+   Shots in `Claude outputs/layout-levers-2026-09-05/`. One line beside
+   `charge?.distanceMax(420 * m)`.
+2. **Mutual-pair rank leakage.** `npx tsx scripts/measure-mutual-rank.ts`.
+   Four pairs; the NZ Acts are the finding — `nz-public-audit-act-2001` and
+   `nz-public-finance-act-1989` rank **23rd and 24th of 3,363**, and 376th /
+   415th with both halves out of the ranking. Options: leave it; exclude
+   `mutual` edges from `rankedEdges` only (they stay live on screen); damp
+   them. The script says why that drop is an upper bound, not a measurement.
+3. **Look at the two shipped-on-your-word changes** in
+   `Claude outputs/fit-percentile-and-tier1-2026-09-06/`: the tier-1 fold
+   (before/after) and the spread-1200% fit pair. Both are one-line reverts.
+4. **Should the lens row go live at tier 1 too?** It is inert there because
+   "the real nodes are mostly INT — white in every lens". With INT condensed
+   by default that is no longer true; the 184 nodes left are family-coloured.
+5. `setup-and-run.bat` once, then **commit** the §2 list.
+6. Still watching: faint edges recurring at Everything after a settle; and
+   whether the bigger orbs (INT ≈ 3×) are right.
 
 ### [Agent]
 
-**Two leads from the GB round**, both in that slice's `_dropped`: `obr.uk` 403s to a
-browser-UA curl from BOTH this session's networks, so the OBR *Economic and fiscal outlook*
-is `no-node-yet` — read it in Thomas's Chrome (§7: direct read) or find a first-party PDF.
-And `gb-ons-lfs -> icls-work-statistics-resolution` is `no-document`: the LFS QMI names the
-ILO, not the resolution. **Round 2 unscoped**; AU is the same shape GB was.
-
-The two design questions still parked — layout re-run on data add, cadence in
-layout — have no numbers behind them and no round has needed them.
+Nothing queued. The two design questions still parked — layout re-run on data
+add, cadence in layout — have no numbers behind them and no round has needed
+them.
 
 Settled: CO reversals; photon+link and node instancing; 9 CJK flips; national
 aliases; START-HERE; 6 kind rulings; Condensed INT; cluster repulsion as is;
-collide iterations 1; tier 1 honours the INT toggle; fit percentile falls with
-spread; charge theta 1.5; mutual pairs out of the ranking; lens live at every
-tier; orb size.
+collide iterations 1 (accepted 2026-09-06); tier 1 honours the INT toggle;
+fit percentile falls with spread.
 
 ---
 

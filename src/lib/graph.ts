@@ -1249,6 +1249,19 @@ export function buildGraph(
   const officialById = new Map(official.map((r) => [r.id, r]))
   const rankedEdges = dependencies.filter((d) => {
     if (!isDocumented(d)) return false
+    // Mutual pairs are excluded from the RANKING only (Thomas, 2026-09-06,
+    // HANDOFF item 2) — both halves stay live in the graph and on screen, they
+    // just stop feeding PageRank. A `mutual: true` pair is a 2-cycle: each half
+    // sends the other its rank every iteration, so the pair pumps itself on its
+    // own support. Measured by `scripts/measure-mutual-rank.ts`:
+    // `nz-public-audit-act-2001` and `nz-public-finance-act-1989` ranked 23rd
+    // and 24th of 3,363 shipped, and 376th / 415th with both halves out — an
+    // upper bound on the leakage, not a measurement of it (dropping a half also
+    // drops a real documented dependency), which is why the cut lands here and
+    // not on the edges themselves. Only four pairs exist corpus-wide; `mutual`
+    // is a curated flag, not a computed one (see its doc comment in types.ts),
+    // so this cannot quietly widen as data lands.
+    if (d.mutual === true) return false
     if (!officialIds.has(d.source_report_id) || !officialIds.has(d.target_report_id)) return false
     // Grade gate — 'A' only, and only once the viewer has switched to it.
     // See this function's own doc comment and evidence_grade's in types.ts.

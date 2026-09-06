@@ -1699,7 +1699,6 @@ export default function App() {
           hasSelection={!!selected}
           onReset={handleReset}
           onExportPng={() => setExportRequest((n) => n + 1)}
-          tier={drilldown}
           intCondensed={intCondensed}
           onCondenseInt={handleCondenseInt}
         />

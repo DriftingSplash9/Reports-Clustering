@@ -184,7 +184,7 @@ rather than a value:
   Publication rates are fractional below annual on purpose: 0.05 is "about once
   a generation", and that is a fact a bucket cannot hold.
 - **`relationship_type`** is ordered strongest to weakest — `calculated_from`,
-  `uses_data_from`, `methodology_depends_on`, `cites` — and the order sets edge
+  `uses_data_from`, `methodology_depends_on`, `legal_basis`, `cites` — and the order sets edge
   weight in the authority calculation. Choosing the right one is a judgement
   about what a document actually says, not a formality: the Bank Rate is
   `calculated_from` the policy rate because it is arithmetic, while the prime

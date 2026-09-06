@@ -38,7 +38,7 @@
  * Usage:
  *   npx tsx scripts/measure-forces.ts
  *   SPREAD=100 GEO=0 SEEDS=1,2,3 CRS=0,15 npx tsx scripts/measure-forces.ts
- *   ITER=2 THETA=1.5 npx tsx scripts/measure-forces.ts   # the two speed levers
+ *   ITER=2 THETA=0.9 npx tsx scripts/measure-forces.ts   # the pre-2026-09-06 layout
  *   OUT=/tmp/run.json ... # rows, each carrying every node's final position
  *   INTSTIFF=1 npx tsx scripts/measure-forces.ts   # the pre-2026-08-31 layout, INT springs live
  *
@@ -101,7 +101,9 @@ const OUT = process.env.OUT ?? ''
  * `ITER` — collide iterations. Shipped 2 until 2026-09-05, 1 since: measured
  * here at 3 seeds, every metric identical to 3-4 s.f. and node positions moving
  * a median 1.6-2.3 units in a p95-7,000-to-9,700 cloud, for ~17% off the tick.
- * `THETA` — charge Barnes-Hut opening angle; d3's default 0.9 is what ships.
+ * `THETA` — charge Barnes-Hut opening angle. d3's default 0.9 shipped until
+ * 2026-09-06, 1.5 since (Thomas's call on the -35%/tick measurement below);
+ * `THETA=0.9` reproduces the old layout.
  * 1.5 takes another ~35% off the tick and tightens the cloud ~14% (p95), which
  * IS a layout change and needs a reader's eyes before it goes in.
  *
@@ -109,7 +111,7 @@ const OUT = process.env.OUT ?? ''
  * interleaved runs, never a single reading.
  */
 const ITER = Number(process.env.ITER ?? 1)
-const THETA = Number(process.env.THETA ?? 0.9)
+const THETA = Number(process.env.THETA ?? 1.5)
 
 /** Seeded PRNG so two runs at different strengths start from identical positions. */
 function mulberry32(a: number) {

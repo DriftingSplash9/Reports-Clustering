@@ -41,7 +41,14 @@ and mean it.
 
 1. **Never run git from an agent session — not even read-only.** Never
    state git status in any doc; ask Thomas or read a screenshot, and
-   delete any git-status claim you find.
+   delete any git-status claim you find. **And never tell Thomas to
+   commit** (Thomas, 2026-09-06: "you need to stop reminding me to
+   commit"). No "uncommitted since ..." inventory in `HANDOFF.md`, no
+   "then commit" todo item, no closing line about committing. Committing
+   is his routine and he does not need it tracked for him; a list of
+   changed files is also a git-status claim in disguise, which rule 1
+   already forbids. Say what changed on disk if a round needs it stated;
+   stop there.
 2. **No document, no edge.** If nothing published says the dependency
    exists, it doesn't go in the graph.
 3. **A pointer is not a source.** WebFetch can fabricate content for a
@@ -291,8 +298,12 @@ here only as a rule, once.
 
 ### Schema and closed unions
 
-- **`RelationshipType` is a closed 4-value union** (`calculated_from` /
-  `uses_data_from` / `methodology_depends_on` / `cites`). An off-union value →
+- **`RelationshipType` is a closed 5-value union** (`calculated_from` /
+  `uses_data_from` / `methodology_depends_on` / `legal_basis` / `cites`).
+  *(Corrected 2026-09-06 — this bullet said "4-value" and omitted `legal_basis`
+  since the split; `types.ts` is the authority and ~10 live edges, the Japan
+  Statistics Act family among them, already use it. An agent trusting the old
+  count would have dropped a legitimate statutory edge.)* An off-union value →
   NaN edge weight → NaN PageRank corpus-wide, silent and total. `Relation` is
   only `audits`/`supersedes`. Same for `Domain` and every closed union: check
   `types.ts` before inventing a value, cast rather than parse.
