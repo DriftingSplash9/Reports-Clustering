@@ -11,8 +11,8 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 verbatim. State only, no changelog, no round narrative. Finished items LEAVE
 (§4 step 4); the round's memory entry is their record.
 
-Last updated: 2026-09-07 ~02:40 UTC (round 8 — the NSDP block: 70 nodes, 71 edges,
-and two matcher findings waiting on Thomas in §3)
+Last updated: 2026-09-07 ~03:20 UTC (round 8 — the NSDP block: 70 nodes, 71 edges,
+two matcher findings and the first slow-layer doc audit, all waiting on Thomas in §3)
 
 ---
 
@@ -34,6 +34,7 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 | anything IMF | `notes/imf-dsbb-2026-09-06.md` (dsbb REST API), `notes/imf-elibrary-2026-09-06.md` (books, flagships, and both 2026-09-06 addenda — the second corrects the first) |
 | **anything in the renderer** | `PLAYBOOK-RENDER.md` §3–§4 first — it routes the lane. Then the round memory for your bit: `node_instancing_2026-09-05` / `link_batching_2026-09-05` (draw path), `layout_levers_and_hbs_2026-09-05` + `settle_time_tick_burst_2026-09-05` (forces), `fit_percentile_and_tier1_2026-09-06` (camera fit), `condensed_int_and_rulings_2026-09-05` (INT fold). Instruments: `scripts/measure-forces.ts`, `scripts/renderer/`. |
 | "what is still broken that nobody is fixing?" | `notes/standing-issues.md` — items that outlived five handoffs; not on the mandatory read path |
+| **editing any doc in the slow layer** | `notes/doc-audit-2026-09-07.md` — the first slow-layer audit: every root `.md` section by section, EDIT/DROP/KEEP/MOVE with the exact text. Read it before rewriting a playbook paragraph |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
@@ -56,8 +57,11 @@ repo: where either disagrees with a file, the file wins.
 | **a corpus round reads** | **65.5k** | HANDOFF + CLAUDE + core + CORPUS |
 | **a renderer round reads** | **36.8k** | HANDOFF + CLAUDE + core + RENDER |
 
-**§1-§3 is at the cap and is trimmed every round to stay there.** State and
-pointers only; the narrative is in project memory.
+**§1-§3 is normally trimmed every round to stay under 10k. It is 11.9k right
+now, deliberately** — Thomas lifted the cap for the doc audit (2026-09-07: "do not
+worry about the size constraints, there are none for any of this"). Item 4 in §3
+is the overage and it goes when he has ruled on it. State and pointers only
+otherwise; the narrative is in project memory.
 
 ---
 
@@ -128,6 +132,27 @@ old. If you want one per country, the older REGISTER edge is the one to drop and
 is a single pass — list in the block's own `_dropped` note.
 
 **3. Four extension permissions**, named in §2 — one more edge each.
+
+**4. The doc audit is written and nothing has been changed on the strength of it:
+`notes/doc-audit-2026-09-07.md`.** Method: the 25 most recent archived handoffs
+(§2/§3 only, 167k characters), every root `.md`, and three mechanical counts —
+citations by document, by rule number and by section, across the last 25 handoffs
+and again over all 448 repo files; plus the near-duplicate-paragraph test §4 step 5
+runs by eye. **`HANDOFF.md` came out clean** — exactly one paragraph repeats across
+four or more of the 25, and it is the corpus-state line, which is supposed to. The
+sweep works. **The slow layer has never been swept and the pass found seven live
+false statements in it**, every one true when written: §7d's domain-tag paragraph
+(settled 2026-09-06, still described as open with 624 tags), rule 19's coverage
+count (71 edges out of date since this round), `PLAYBOOK-RENDER.md` §3's pointer to
+a `HANDOFF.md` item that no longer exists, `REPORTS.md`'s "8 edges lack an
+evidence_url" (zero do) and its `ColourFamily` union (two values short, one wrong),
+`README.md`'s duplicate sandbox recipe (drifted from rule 4), and
+`notes/standing-issues.md`'s claim that no edge cites a bare homepage (round 8
+minted two). **The structural recommendation is one line: a step 5b in §4, same
+arithmetic trigger as step 5 but divisible by 25, that checks the slow layer
+against what `validate` and the code actually say.** Full list: 7 corrective edits,
+4 moves, 3 drops, 4 additions, and an explicit keep-list — the audit found no
+section that should not exist.
 
 ### [Agent]
 
