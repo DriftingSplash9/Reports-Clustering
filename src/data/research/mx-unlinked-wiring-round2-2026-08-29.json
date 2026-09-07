@@ -1,514 +1,514 @@
 {
- "_note": "Mexico unlinked-node wiring, round 2 — self-directed (no Grok), via 2 parallel themed subagents (INEGI/Banxico national surveys; subnational/municipal profiles) 2026-08-29. Every proposed dependency was fetched directly from the cited primary source and quoted verbatim. See project memory unlinked_nodes_wiring_round6_2026-08-29.",
- "reports": [
-  {
-   "id": "mx-renem",
-   "title": "Registro Estadístico de Negocios de México (RENEM)",
-   "publisher": "Instituto Nacional de Estadística y Geografía (INEGI)",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "INEGI's statistical business register (successor sampling-frame directory of economic units), updated annually and used as the population frame for INEGI's business-opinion and economic surveys.",
-   "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
-   "domains": [],
-   "last_updated": null,
-   "kind": "instrument"
-  },
-  {
-   "id": "mx-registro-civil",
-   "title": "Registro Civil de México — Actas del Estado Civil",
-   "publisher": "Secretaría de Gobernación / Oficialías del Registro Civil (RENAPO)",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "Mexico's federated civil-registration system that issues birth, death and marriage certificates; INEGI compiles copies of these records to build the country's vital statistics.",
-   "url": "https://www.inegi.org.mx/programas/natalidad/",
-   "domains": [
-    "population"
-   ],
-   "last_updated": null,
-   "kind": "instrument"
-  },
-  {
-   "id": "mx-programa-sectorial-bienestar-2025-2030",
-   "title": "Programa Sectorial de Bienestar 2025-2030",
-   "publisher": "Secretaría de Bienestar",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "Sectoral welfare programme that the operating rules of Pensión Mujeres Bienestar and Pensión para el Bienestar de las Personas con Discapacidad Permanente explicitly align to.",
-   "url": "https://www.gob.mx/bienestar",
-   "domains": [
-    "general-statistics"
-   ],
-   "last_updated": null,
-   "kind": "instrument"
-  }
- ],
- "dependencies": [
-  {
-   "source_report_id": "mx-ensanut",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENSANUT's sampling design paper states INEGI built the survey's primary sampling units from the cartographic and demographic information of the 2010 Population and Housing Census.",
-   "evidence_url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0036-36342019000600917",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "El INEGI construyó un conjunto de unidades primarias de muestreo (UPM) a partir de la información cartográfica y demográfica del Censo de Población y Vivienda 2010."
-  },
-  {
-   "source_report_id": "mx-encig",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENCIG's sampling-design PDF states the sample was drawn from INEGI's National Housing Frame, built from cartographic and demographic data of the 2010 Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Para la selección de la muestra se utilizó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica que se obtuvo del Censo de Población y Vivienda 2010."
-  },
-  {
-   "source_report_id": "mx-encig",
-   "target_report_id": "mx-lsnieg",
-   "relationship_type": "cites",
-   "basis": "The same document states INEGI conducts ENCIG under the authority granted to it by the LSNIEG.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-envipe",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENVIPE 2025's sampling-design document states the sample was selected using the Master Sample / National Housing Frame, constructed from the most recent Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envipe/2025/doc/889463926689.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Para la selección de la muestra de la encuesta se utilizó la Muestra Maestra también conocida como Marco Nacional de Viviendas, este último, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda."
-  },
-  {
-   "source_report_id": "mx-ensu",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENSU 2024's methodology document states its National Housing Frame was constructed from cartographic and demographic information of the most recent Population and Housing Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Para la selección de la muestra de la encuesta se utilizó la Muestra Maestra también conocida como Marco Nacional de Viviendas, este último, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda."
-  },
-  {
-   "source_report_id": "mx-ensu",
-   "target_report_id": "mx-lsnieg",
-   "relationship_type": "cites",
-   "basis": "The ENSU document invokes the same LSNIEG-attribution clause as other INEGI household surveys as its legal basis.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-ena",
-   "target_report_id": "mx-censo-agropecuario",
-   "relationship_type": "uses_data_from",
-   "basis": "INEGI's ENA 2017 catalog documentation states the survey's production-unit universe came from the Actualización del Marco Censal Agropecuario (AMCA 2016), derived from the agricultural census frame.",
-   "evidence_url": "https://www.inegi.org.mx/rnm/index.php/catalog/498",
-   "evidence": "documented",
-   "evidence_grade": "C"
-  },
-  {
-   "source_report_id": "mx-enadid",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENADID 2018's sampling-design PDF states the survey used the National Housing Frame, constructed from the 2010 Population and Housing Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/enadid/2018/doc/dm_enadid18.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "2.1 Marco de la encuesta Se empleó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica obtenida del Censo de Población y Vivienda 2010."
-  },
-  {
-   "source_report_id": "mx-endutih",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "ENDUTIH 2024's methodological synthesis states the survey used the Master Sample / National Housing Frame, built from the most recent Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/endutih/2024/doc/889463924562.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Asimismo, es importante resaltar que la Endutih 2024 es una encuesta en hogares y para la selección de la muestra se utilizó el Marco Nacional de Viviendas, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda, del cual se obtiene de manera directa la información."
-  },
-  {
-   "source_report_id": "mx-enh",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "INEGI's National Housing Survey (ENVI) sampling-design PDF states its sample was drawn from the National Housing Frame, built from the 2010 Census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envi/2020/doc/envi_2020_diseno_muestral.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Para la selección de la muestra se utilizó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica que se obtuvo del Censo de Población y Vivienda 2010."
-  },
-  {
-   "source_report_id": "mx-igae-actividades",
-   "target_report_id": "mx-scnm",
-   "relationship_type": "methodology_depends_on",
-   "basis": "INEGI's IGAE methodology document states IGAE (including its by-activity breakdown) is built using the same conceptual/methodological framework used for the Goods and Services Accounts of the SCNM.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/igae/2013/doc/met_igae.pdf",
-   "evidence": "documented",
-   "evidence_grade": "A",
-   "evidence_quote": "Las mediciones se realizan a partir de los criterios metodológicos del año base 2013 del Sistema de Cuentas Nacionales de México y sustituyen a los cálculos que se habían publicado con base en los precios del año 2008."
-  },
-  {
-   "source_report_id": "mx-emoe",
-   "target_report_id": "mx-renem",
-   "relationship_type": "uses_data_from",
-   "basis": "INEGI's EMOE bulletin states the survey's population frame is the business directory of RENEM, updated annually.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-edos-nacimientos",
-   "target_report_id": "mx-registro-civil",
-   "relationship_type": "uses_data_from",
-   "basis": "INEGI's natalidad program page states the source document for birth statistics has been a copy of the birth certificate (acta de nacimiento) issued by the civil registry since 1986.",
-   "evidence_url": "https://www.inegi.org.mx/programas/natalidad/",
-   "evidence": "documented",
-   "evidence_grade": "B",
-   "evidence_quote": "Originalmente, las estadísticas de natalidad eran captadas mediante una boleta colectiva en la cual las fuentes informantes reportaban cada mes los nacimientos registrados el mes anterior. En 1984 este formato cambió por un cuaderno estadístico conformado por varios formatos individuales y, a partir de 1986, se ha empleado una copia del acta de nacimiento."
-  },
-  {
-   "source_report_id": "mx-guerrero-judicial",
-   "target_report_id": "mx-cnije",
-   "relationship_type": "cites",
-   "basis": "INEGI's CNIJE 2023 results document states its unit of analysis is each state's Poder Judicial, with national coverage by entity — Guerrero is a covered unit.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-guerrero-judicial",
-   "target_report_id": "mx-cnpje",
-   "relationship_type": "cites",
-   "basis": "INEGI's CNPJE 2023 results document states its unit of analysis is each state's Fiscalía/Procuraduría, with tables reporting Guerrero.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-oaxaca-judicial",
-   "target_report_id": "mx-cnije",
-   "relationship_type": "cites",
-   "basis": "Same CNIJE 2023 document; Oaxaca's judicial power is a covered unit of this national census.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-oaxaca-judicial",
-   "target_report_id": "mx-cnpje",
-   "relationship_type": "cites",
-   "basis": "Same CNPJE 2023 document; tables reference Oaxaca.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-oaxaca-de-juarez",
-   "target_report_id": "mx-censo-poblacion",
-   "relationship_type": "uses_data_from",
-   "basis": "Oaxaca de Juárez municipal income-law initiative cites the 2020 census for the capital's official population.",
-   "evidence_url": "https://transparencia.municipiodeoaxaca.gob.mx/t/LGTAIP/70/XXI/LGCG/OB/2025/1-Iniciativa-a-la-Ley-de-Ingresos.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B",
-   "evidence_quote": "La Ciudad de Oaxaca de Juárez, es uno de los 100 municipios más poblados de la República Mexicana, con 270 mil 955 mil habitantes, conformado por una población de 145 mil 103 mujeres (53.55%) y 125 mil 852 hombres (46.44%), de acuerdo con los indicadores del Censo Nacional de Población y Vivienda 2020"
-  },
-  {
-   "source_report_id": "mx-enoe-informalidad",
-   "target_report_id": "icls-work-statistics-resolution",
-   "relationship_type": "methodology_depends_on",
-   "basis": "ENOE informality measurement follows ICLS/International Conference of Labour Statisticians resolutions.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/enoe/enoe2026_08.pdf",
-   "evidence": "documented",
-   "evidence_grade": "C"
-  },
-  {
-   "source_report_id": "mx-scnm-sectores-institucionales",
-   "target_report_id": "sna-2008",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Institutional sector accounts methodology adopts the SNA 2008 framework (1968/1993/2008 sequence).",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/programas/si/2008/doc/702825004893.pdf",
-   "evidence": "documented",
-   "evidence_grade": "C"
-  },
-  {
-   "source_report_id": "mx-banxico-reservas",
-   "target_report_id": "imf-sdds",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Net international reserves are disseminated per the IMF Data Template on International Reserves and Foreign Currency Liquidity under SDDS.",
-   "evidence_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CF456&sectorDescripcion=Banco+de+M%C3%A9xico&locale=en",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-pension-discapacidad",
-   "target_report_id": "mx-programa-sectorial-bienestar-2025-2030",
-   "relationship_type": "cites",
-   "basis": "Disability pension operating rules align to the sectoral welfare program's objectives.",
-   "evidence_url": "https://www.guerrero.gob.mx/wp-content/uploads/2026/03/16.-Programa-de-Atencion-a-Personas-con-Discapacidad.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "mx-endutih",
-   "target_report_id": "mx-lsnieg",
-   "relationship_type": "legal_basis",
-   "basis": "ENDUTIH methodology is grounded in national statistical law (LSNIEG) alongside ITU household ICT guidance.",
-   "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463930877.pdf",
-   "evidence": "documented",
-   "evidence_grade": "B"
-  }
- ],
- "_dropped": [
-  {
-   "edge": "mx-issste-anuarios -> ???",
-   "source": "mx-issste-anuarios",
-   "target": null,
-   "reason": "unreadable-source",
-   "why": "Still access-blocked, with a sharper diagnosis. issste.gob.mx returns curl exit 35 (Recv failure: connection reset by peer) on every path including /datosabiertos/anuarios/. An official ISSSTE document IS reachable on an accessible mirror (https://gaceta.diputados.gob.mx/PDF/66/2025/jul/Issste-20250708.pdf, the Informe Financiero y Actuarial 2025, 331pp, fetched OK) but was deliberately not used: the IFA is a different product from the Anuario Estadístico this node represents, and its lineage is not the Anuario's. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-pension-bienestar-mujeres -> ???",
-   "source": "mx-pension-bienestar-mujeres",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The Reglas de Operación 2026 (DOF, 12 February 2026) downloaded cleanly at https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf (2,116,283 bytes, 24pp) and two edges are now minted from this node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-pension-discapacidad -> ???",
-   "source": "mx-pension-discapacidad",
-   "target": null,
-   "reason": "note",
-   "why": "Access verdict superseded — Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. This node was already wired in round 2 (mx-pension-discapacidad -> mx-programa-sectorial-bienestar-2025-2030) and is not a zero-edge node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-infonavit-estadisticas -> ???",
-   "source": "mx-infonavit-estadisticas",
-   "target": null,
-   "reason": "no-document",
-   "why": "Reclassified to a clean negative reached on real bytes. The Infonavit domains are all blocked (portal.mx.infonavit.org.mx: proxy CONNECT tunnel failed 502; portal.infonavit.org.mx: timeout; infonavit.org.mx: HTTP/2 INTERNAL_ERROR), but an official Infonavit publication was read in full on an accessible mirror — Informe Anual de Actividades 2023, https://gaceta.diputados.gob.mx/PDF/66/2024/oct/Infonavit-20241022.pdf, 5.24 MB. Every source line under Infonavit's credit, portfolio and housing-finance tables names an internal unit (Fuente: Coordinación General de Riesgos; Subdirección General de Operaciones; Coordinación General de Inversiones), with no external statistical source anywhere in the statistical annex; INEGI and IMSS appear only as macroeconomic backdrop in the entorno económico chapter. See the fuller entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-banxico-reservas -> ???",
-   "source": "mx-banxico-reservas",
-   "target": null,
-   "reason": "no-document",
-   "why": "Banxico SIE dynamic pages and guessed static URLs all 404'd or returned no content."
-  },
-  {
-   "edge": "mx-banxico-tipo-cambio -> ???",
-   "source": "mx-banxico-tipo-cambio",
-   "target": null,
-   "reason": "no-document",
-   "why": "Banxico's FIX definition (Circular 3/2012) describes wholesale-market-quote averaging but names no data source matching any allowed target."
-  },
-  {
-   "edge": "mx-banxico-tasas-interes -> ???",
-   "source": "mx-banxico-tasas-interes",
-   "target": null,
-   "reason": "no-document",
-   "why": "Banxico's Cetes/Bondes auction table contained only price data, no methodology/lineage statement; guessed TIIE-reform-circular URLs 404'd."
-  },
-  {
-   "edge": "mx-nuevo-leon-imss-municipal -> mx-imss-puestos",
-   "source": "mx-nuevo-leon-imss-municipal",
-   "target": "mx-imss-puestos",
-   "reason": "note",
-   "why": "RESOLVED as containment, and it should come out of the access-blocked pile entirely. The node already carries part_of: 'mx-imss-puestos', so a dependency edge between the pair is a validator error regardless of what datos.imss.gob.mx would say — the access block was never the binding constraint. Identical shape to mx-jalisco-imss-municipal -> mx-imss-puestos. For the record the hosts do remain dead: datos.imss.gob.mx returns 403 from an Imperva/Incapsula WAF, datos.nl.gob.mx fails with OpenSSL SSL_ERROR_SYSCALL. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-alcaldia-benito-juarez -> ???",
-   "source": "mx-alcaldia-benito-juarez",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED. The access verdict was wrong — alcaldiabenitojuarez.gob.mx serves fine to plain curl (697 KB homepage), and the Programa de Gobierno 2024-2027 (https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf, 2,882,984 bytes, 2,703 lines of extracted text) carries sourced body text. Two edges minted from this node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-acapulco-metro -> ???",
-   "source": "mx-acapulco-metro",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. Acapulco's own Plan Municipal de Desarrollo Urbano was retrieved at https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf (8,380,974 bytes, 16,992 lines) — the bitacoraterritorial.guerrero.gob.mx mirror is dead, the acapulco.gob.mx copy serves fine — and its sections 4.5.3 and 4.5.6 yielded two minted edges. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-acapulco-metro -> ???",
-   "source": "mx-acapulco-metro",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED, and the duplicate suspicion is confirmed. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The census edge is minted from this node on the PMDU's population-count sentence, corroborated independently by the Bienestar municipal profile at https://www.gob.mx/cms/uploads/attachment/file/1061187/12001_AcapulcoDeJuarez_2026.pdf. On the modelling question: a field-by-field diff confirms mx-acapulco-metro and mx-guerrero-acapulco-detail are duplicates from two overlapping batches — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-tuxtla -> ???",
-   "source": "mx-tuxtla",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED, by a different document than the one this lead chased. The CEIEG 'Perfiles Municipales' SPA redirect loop was never the only route: the Secretaría de Bienestar's Informe Anual sobre la Situación de Pobreza y Rezago Social 2026 for Tuxtla Gutiérrez (07101) downloads cleanly from Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. at https://www.gob.mx/cms/uploads/attachment/file/1060940/07101_TuxtlaGutierrez_2026.pdf (888,485 bytes, 4pp), and its numbered Fuentes section carries the ENIGH and census citations. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-tuxtla -> ???",
-   "source": "mx-tuxtla",
-   "target": null,
-   "reason": "note",
-   "why": "RESOLVED, and the duplicate suspicion is confirmed. Same document as the entry above. A field-by-field diff confirms mx-tuxtla and mx-chiapas-tuxtla-detail are duplicates from two overlapping batches — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Worth reconciling on merge: both list publisher 'INEGI / CEIEG Chiapas / Ayuntamiento' and a url on inegi.org.mx, but the document that carries the dependency is published by the Secretaría de Bienestar. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-oaxaca-de-juarez -> ???",
-   "source": "mx-oaxaca-de-juarez",
-   "target": null,
-   "reason": "no-document",
-   "why": "Municipio de Oaxaca de Juárez PMD path 403'd; homepage had no visible statistical-profile link; COPLADE Oaxaca page was unrelated content."
-  },
-  {
-   "edge": "mx-cdmx-ipdp-indicadores -> mx-censo-poblacion",
-   "source": "mx-cdmx-ipdp-indicadores",
-   "target": "mx-censo-poblacion",
-   "reason": "deferred",
-   "why": "Unchanged verdict, but the access picture is now precise and worse than recorded: the ENTIRE *.cdmx.gob.mx domain family is unreachable from this environment, not just one host. indicadores.cdmx.gob.mx fails curl exit 60 (certificate verification); ipdp.cdmx.gob.mx, www.ipdp.cdmx.gob.mx and datos.cdmx.gob.mx all fail curl exit 35 (connection reset); sideso.cdmx.gob.mx fails curl exit 56 (CONNECT tunnel 502). Needs a different network route, not a different tool. The separate evidentiary objection recorded here still stands independently: IPDP's SI CDMX announcement attributes indicators generically to official government sources without naming INEGI or a specific census. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-enigh-salud -> mx-enigh",
-   "source": "mx-enigh-salud",
-   "target": "mx-enigh",
-   "reason": "note",
-   "why": "Not minted as a dependency edge -- mx-enigh-salud is already modeled as part_of mx-enigh (containment metadata, not a RelationshipType edge; a dependency edge between a node and its container is a validator error, PLAYBOOK rule 12). The underlying fact this round's research confirmed is real (ENIGH 2024's own results report tabulates household health-care spending as a line item of the same survey) -- it is just already represented structurally rather than as an edge."
-  },
-  {
-   "edge": "mx-enigh-transferencias -> mx-enigh",
-   "source": "mx-enigh-transferencias",
-   "target": "mx-enigh",
-   "reason": "note",
-   "why": "Same shape as mx-enigh-salud -> mx-enigh: already part_of mx-enigh. ENIGH 2024's results report tabulates transfer income as a line item of the same survey -- structural containment, not a dependency edge."
-  },
-  {
-   "edge": "mx-scnm-sectores-institucionales -> mx-scnm",
-   "source": "mx-scnm-sectores-institucionales",
-   "target": "mx-scnm",
-   "reason": "note",
-   "why": "Not minted as a dependency edge -- mx-scnm-sectores-institucionales is already modeled as part_of mx-scnm (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (INEGI's own methodology document says the institutional-sector accounts share SCNM's conceptual/methodological framework) -- already represented structurally."
-  },
-  {
-   "edge": "mx-jalisco-imss-municipal -> mx-imss-puestos",
-   "source": "mx-jalisco-imss-municipal",
-   "target": "mx-imss-puestos",
-   "reason": "note",
-   "why": "Not minted as a dependency edge -- mx-jalisco-imss-municipal is already modeled as part_of mx-imss-puestos (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (two IIEG Jalisco documents state IMSS as the raw data source for the municipal breakdown) -- already represented structurally."
-  },
-  {
-   "edge": "mx-nuevo-leon-imss-municipal->mx-imss-puestos",
-   "source": "mx-nuevo-leon-imss-municipal",
-   "target": "mx-imss-puestos",
-   "reason": "note",
-   "why": "Superseded — this is a containment case, not an access case. See the fuller entry above at the same pair: the node already carries part_of: 'mx-imss-puestos', so the edge cannot be minted whatever datos.imss.gob.mx says. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-acapulco-metro->mx-censo-poblacion",
-   "source": "mx-acapulco-metro",
-   "target": "mx-censo-poblacion",
-   "reason": "resolved",
-   "why": "RESOLVED. The oversized-PDF block was real but irrelevant — the atlas was never the only carrier. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. Acapulco's Plan Municipal de Desarrollo Urbano (https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf) states verbatim: \"El Censo de Población y Vivienda del Instituto Nacional de Estadística, Geografía e Informática (INEGI) (2020) contabilizó una población de 779,566 habitantes en el municipio de Acapulco de Juárez\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-tuxtla->mx-censo-poblacion",
-   "source": "mx-tuxtla",
-   "target": "mx-censo-poblacion",
-   "reason": "resolved",
-   "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The Tuxtla Gutiérrez (07101) municipal profile downloaded cleanly and its Fuentes footnotes [3] and [4] name the 2020 census extended and basic questionnaires verbatim. Edge minted. The duplicate-node concern flagged here is confirmed — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-tuxtla->mx-enigh",
-   "source": "mx-tuxtla",
-   "target": "mx-enigh",
-   "reason": "resolved",
-   "why": "RESOLVED. Same document and same access fix as the census edge above; Fuentes footnote [2] names ENIGH 2024 verbatim. Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-pension-bienestar-mujeres->mx-programa-sectorial-bienestar-2025-2030",
-   "source": "mx-pension-bienestar-mujeres",
-   "target": "mx-programa-sectorial-bienestar-2025-2030",
-   "reason": "resolved",
-   "why": "RESOLVED, and the Estrategia 1.3 quote is confirmed verbatim rather than inferred by analogy. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf (DOF, 12 February 2026) states: \"En el marco del Programa Sectorial de Bienestar 2025-2030, este Programa se vincula con el Objetivo 1... en su Estrategia 1.3 Fortalecer la independencia económica y el bienestar integral de las mujeres\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-cdmx-ipdp-indicadores->mx-censo-poblacion",
-   "source": "mx-cdmx-ipdp-indicadores",
-   "target": "mx-censo-poblacion",
-   "reason": "deferred",
-   "why": "Unchanged verdict; see the fuller access note at the mx-cdmx-ipdp-indicadores -> mx-censo-poblacion entry above — the whole *.cdmx.gob.mx family is unreachable from this environment, on four distinct failure modes. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-cdmx-ipdp-indicadores->mx-enoe",
-   "source": "mx-cdmx-ipdp-indicadores",
-   "target": "mx-enoe",
-   "reason": "deferred",
-   "why": "Unchanged verdict; same whole-domain *.cdmx.gob.mx unreachability as above. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-acapulco-metro->mx-censo-poblacion",
-   "source": "mx-acapulco-metro",
-   "target": "mx-censo-poblacion",
-   "reason": "resolved",
-   "why": "RESOLVED. The body text the fetch tool could not reach was recovered: PMDU section 4.5.3 states \"Del Censo de Población y Vivienda (2020) y de los Tabulados de INEGI, se señala que para el municipio de Acapulco la PEA3 representa el 66% de la población total de más de 15 años\", and Table 27's source line reads \"Fuente: Elaboración propia CONURBA, 2021; con base en Tabulados de Ocupación, INEGI; Censo de Población y Vivienda INEGI, 2020\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-acapulco-metro->mx-denue",
-   "source": "mx-acapulco-metro",
-   "target": "mx-denue",
-   "reason": "resolved",
-   "why": "RESOLVED. Section 4.5.6 body text recovered: \"El Directorio Estadístico Nacional de Unidades Económicas (DENUE) (INEGI (b), 2019) señala que para el año 2019 el municipio de Acapulco tenía 37,614 unidades económicas.\" DENUE also has a formal bibliography entry in the plan and is the operative input to its economic-centrality method. Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-cnpje->mx-guerrero-judicial",
-   "source": "mx-cnpje",
-   "target": "mx-guerrero-judicial",
-   "reason": "wrong-direction",
-   "why": "Grok candidate asserting the national CNPJE census 'uses_data_from' the Guerrero state judicial report — reversed. This round's own research already established and minted the correct direction (mx-guerrero-judicial->mx-cnpje, state feeds the national census), sourced from the same real INEGI CNPJE 2025 results PDF. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
-  },
-  {
-   "edge": "mx-cnpje->mx-oaxaca-judicial",
-   "source": "mx-cnpje",
-   "target": "mx-oaxaca-judicial",
-   "reason": "wrong-direction",
-   "why": "Same reversed-direction issue as mx-cnpje->mx-guerrero-judicial; correct direction (mx-oaxaca-judicial->mx-cnpje) already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
-  },
-  {
-   "edge": "mx-cnijf->mx-guerrero-judicial",
-   "source": "mx-cnijf",
-   "target": "mx-guerrero-judicial",
-   "reason": "wrong-direction",
-   "why": "Grok candidate; mx-cnijf (Censo Nacional de Impartición de Justicia FEDERAL) is a distinct node from mx-cnije (the STATE census) — it covers SCJN/circuit/district federal courts, not the state judiciary, so a dependency on a state-level Guerrero judicial report is not plausible as either federal-census input or output. The correct state-level relationship (mx-guerrero-judicial->mx-cnije/mx-cnpje) is already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
-  },
-  {
-   "edge": "mx-cnijf->mx-oaxaca-judicial",
-   "source": "mx-cnijf",
-   "target": "mx-oaxaca-judicial",
-   "reason": "wrong-direction",
-   "why": "Same mx-cnijf/mx-cnije confusion as mx-cnijf->mx-guerrero-judicial above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
-  },
-  {
-   "edge": "mx-igae-actividades->sna-2008",
-   "source": "mx-igae-actividades",
-   "target": "sna-2008",
-   "reason": "resolved",
-   "why": "RESOLVED, though the JS-rendering diagnosis was correct — inegi.org.mx/temas/igae/ genuinely is a 4,267-byte React shell. The route around it is INEGI's monthly IGAE boletín PDF, which carries a full FICHA METODOLÓGICA in plain text: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017\" (https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf, confirmed in a second independent issue). Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-igae-actividades->naics",
-   "source": "mx-igae-actividades",
-   "target": "naics",
-   "reason": "resolved",
-   "why": "RESOLVED via the same boletín ficha: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" Edge minted. The same ficha also yielded a third edge, mx-igae-actividades -> mx-enoe, from its Fuentes row. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
-  },
-  {
-   "edge": "mx-encig->mx-censo-poblacion",
-   "source": "mx-encig",
-   "target": "mx-censo-poblacion",
-   "reason": "resolved",
-   "why": "Grok candidate proposed this as new (via a duplicate node name mx-censo-poblacion-vivienda), but mx-encig->mx-censo-poblacion already exists live in the graph from earlier research. No action needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
-  }
- ]
+  "_note": "Mexico unlinked-node wiring, round 2 — self-directed (no Grok), via 2 parallel themed subagents (INEGI/Banxico national surveys; subnational/municipal profiles) 2026-08-29. Every proposed dependency was fetched directly from the cited primary source and quoted verbatim. See project memory unlinked_nodes_wiring_round6_2026-08-29.",
+  "reports": [
+    {
+      "id": "mx-renem",
+      "title": "Registro Estadístico de Negocios de México (RENEM)",
+      "publisher": "Instituto Nacional de Estadística y Geografía (INEGI)",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "INEGI's statistical business register (successor sampling-frame directory of economic units), updated annually and used as the population frame for INEGI's business-opinion and economic surveys.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
+      "domains": [],
+      "last_updated": null,
+      "kind": "instrument"
+    },
+    {
+      "id": "mx-registro-civil",
+      "title": "Registro Civil de México — Actas del Estado Civil",
+      "publisher": "Secretaría de Gobernación / Oficialías del Registro Civil (RENAPO)",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Mexico's federated civil-registration system that issues birth, death and marriage certificates; INEGI compiles copies of these records to build the country's vital statistics.",
+      "url": "https://www.inegi.org.mx/programas/natalidad/",
+      "domains": [
+        "population"
+      ],
+      "last_updated": null,
+      "kind": "instrument"
+    },
+    {
+      "id": "mx-programa-sectorial-bienestar-2025-2030",
+      "title": "Programa Sectorial de Bienestar 2025-2030",
+      "publisher": "Secretaría de Bienestar",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Sectoral welfare programme that the operating rules of Pensión Mujeres Bienestar and Pensión para el Bienestar de las Personas con Discapacidad Permanente explicitly align to.",
+      "url": "https://www.gob.mx/bienestar",
+      "domains": [
+        "general-statistics"
+      ],
+      "last_updated": null,
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mx-ensanut",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENSANUT's sampling design paper states INEGI built the survey's primary sampling units from the cartographic and demographic information of the 2010 Population and Housing Census.",
+      "evidence_url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0036-36342019000600917",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "El INEGI construyó un conjunto de unidades primarias de muestreo (UPM) a partir de la información cartográfica y demográfica del Censo de Población y Vivienda 2010."
+    },
+    {
+      "source_report_id": "mx-encig",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENCIG's sampling-design PDF states the sample was drawn from INEGI's National Housing Frame, built from cartographic and demographic data of the 2010 Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Para la selección de la muestra se utilizó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica que se obtuvo del Censo de Población y Vivienda 2010."
+    },
+    {
+      "source_report_id": "mx-encig",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "cites",
+      "basis": "The same document states INEGI conducts ENCIG under the authority granted to it by the LSNIEG.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-envipe",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENVIPE 2025's sampling-design document states the sample was selected using the Master Sample / National Housing Frame, constructed from the most recent Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envipe/2025/doc/889463926689.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Para la selección de la muestra de la encuesta se utilizó la Muestra Maestra también conocida como Marco Nacional de Viviendas, este último, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda."
+    },
+    {
+      "source_report_id": "mx-ensu",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENSU 2024's methodology document states its National Housing Frame was constructed from cartographic and demographic information of the most recent Population and Housing Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Para la selección de la muestra de la encuesta se utilizó la Muestra Maestra también conocida como Marco Nacional de Viviendas, este último, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda."
+    },
+    {
+      "source_report_id": "mx-ensu",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "cites",
+      "basis": "The ENSU document invokes the same LSNIEG-attribution clause as other INEGI household surveys as its legal basis.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-ena",
+      "target_report_id": "mx-censo-agropecuario",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's ENA 2017 catalog documentation states the survey's production-unit universe came from the Actualización del Marco Censal Agropecuario (AMCA 2016), derived from the agricultural census frame.",
+      "evidence_url": "https://www.inegi.org.mx/rnm/index.php/catalog/498",
+      "evidence": "documented",
+      "evidence_grade": "C"
+    },
+    {
+      "source_report_id": "mx-enadid",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENADID 2018's sampling-design PDF states the survey used the National Housing Frame, constructed from the 2010 Population and Housing Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/enadid/2018/doc/dm_enadid18.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "2.1 Marco de la encuesta Se empleó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica obtenida del Censo de Población y Vivienda 2010."
+    },
+    {
+      "source_report_id": "mx-endutih",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENDUTIH 2024's methodological synthesis states the survey used the Master Sample / National Housing Frame, built from the most recent Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/endutih/2024/doc/889463924562.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Asimismo, es importante resaltar que la Endutih 2024 es una encuesta en hogares y para la selección de la muestra se utilizó el Marco Nacional de Viviendas, construido a partir de la información cartográfica y demográfica del último Censo de Población y Vivienda, del cual se obtiene de manera directa la información."
+    },
+    {
+      "source_report_id": "mx-enh",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's National Housing Survey (ENVI) sampling-design PDF states its sample was drawn from the National Housing Frame, built from the 2010 Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envi/2020/doc/envi_2020_diseno_muestral.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Para la selección de la muestra se utilizó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica que se obtuvo del Censo de Población y Vivienda 2010."
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "mx-scnm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEGI's IGAE methodology document states IGAE (including its by-activity breakdown) is built using the same conceptual/methodological framework used for the Goods and Services Accounts of the SCNM.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/igae/2013/doc/met_igae.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Las mediciones se realizan a partir de los criterios metodológicos del año base 2013 del Sistema de Cuentas Nacionales de México y sustituyen a los cálculos que se habían publicado con base en los precios del año 2008."
+    },
+    {
+      "source_report_id": "mx-emoe",
+      "target_report_id": "mx-renem",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's EMOE bulletin states the survey's population frame is the business directory of RENEM, updated annually.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-edos-nacimientos",
+      "target_report_id": "mx-registro-civil",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's natalidad program page states the source document for birth statistics has been a copy of the birth certificate (acta de nacimiento) issued by the civil registry since 1986.",
+      "evidence_url": "https://www.inegi.org.mx/programas/natalidad/",
+      "evidence": "documented",
+      "evidence_grade": "B",
+      "evidence_quote": "Originalmente, las estadísticas de natalidad eran captadas mediante una boleta colectiva en la cual las fuentes informantes reportaban cada mes los nacimientos registrados el mes anterior. En 1984 este formato cambió por un cuaderno estadístico conformado por varios formatos individuales y, a partir de 1986, se ha empleado una copia del acta de nacimiento."
+    },
+    {
+      "source_report_id": "mx-guerrero-judicial",
+      "target_report_id": "mx-cnije",
+      "relationship_type": "cites",
+      "basis": "INEGI's CNIJE 2023 results document states its unit of analysis is each state's Poder Judicial, with national coverage by entity — Guerrero is a covered unit.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-guerrero-judicial",
+      "target_report_id": "mx-cnpje",
+      "relationship_type": "cites",
+      "basis": "INEGI's CNPJE 2023 results document states its unit of analysis is each state's Fiscalía/Procuraduría, with tables reporting Guerrero.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-oaxaca-judicial",
+      "target_report_id": "mx-cnije",
+      "relationship_type": "cites",
+      "basis": "Same CNIJE 2023 document; Oaxaca's judicial power is a covered unit of this national census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-oaxaca-judicial",
+      "target_report_id": "mx-cnpje",
+      "relationship_type": "cites",
+      "basis": "Same CNPJE 2023 document; tables reference Oaxaca.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-oaxaca-de-juarez",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Oaxaca de Juárez municipal income-law initiative cites the 2020 census for the capital's official population.",
+      "evidence_url": "https://transparencia.municipiodeoaxaca.gob.mx/t/LGTAIP/70/XXI/LGCG/OB/2025/1-Iniciativa-a-la-Ley-de-Ingresos.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B",
+      "evidence_quote": "La Ciudad de Oaxaca de Juárez, es uno de los 100 municipios más poblados de la República Mexicana, con 270 mil 955 mil habitantes, conformado por una población de 145 mil 103 mujeres (53.55%) y 125 mil 852 hombres (46.44%), de acuerdo con los indicadores del Censo Nacional de Población y Vivienda 2020"
+    },
+    {
+      "source_report_id": "mx-enoe-informalidad",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ENOE informality measurement follows ICLS/International Conference of Labour Statisticians resolutions.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/enoe/enoe2026_08.pdf",
+      "evidence": "documented",
+      "evidence_grade": "C"
+    },
+    {
+      "source_report_id": "mx-scnm-sectores-institucionales",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Institutional sector accounts methodology adopts the SNA 2008 framework (1968/1993/2008 sequence).",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/si/2008/doc/702825004893.pdf",
+      "evidence": "documented",
+      "evidence_grade": "C"
+    },
+    {
+      "source_report_id": "mx-banxico-reservas",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: Net international reserves are disseminated per the IMF Data Template on International Reserves and Foreign Currency Liquidity under SDDS.",
+      "evidence_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CF456&sectorDescripcion=Banco+de+M%C3%A9xico&locale=en",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-pension-discapacidad",
+      "target_report_id": "mx-programa-sectorial-bienestar-2025-2030",
+      "relationship_type": "cites",
+      "basis": "Disability pension operating rules align to the sectoral welfare program's objectives.",
+      "evidence_url": "https://www.guerrero.gob.mx/wp-content/uploads/2026/03/16.-Programa-de-Atencion-a-Personas-con-Discapacidad.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-endutih",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "legal_basis",
+      "basis": "ENDUTIH methodology is grounded in national statistical law (LSNIEG) alongside ITU household ICT guidance.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463930877.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mx-issste-anuarios -> ???",
+      "source": "mx-issste-anuarios",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Still access-blocked, with a sharper diagnosis. issste.gob.mx returns curl exit 35 (Recv failure: connection reset by peer) on every path including /datosabiertos/anuarios/. An official ISSSTE document IS reachable on an accessible mirror (https://gaceta.diputados.gob.mx/PDF/66/2025/jul/Issste-20250708.pdf, the Informe Financiero y Actuarial 2025, 331pp, fetched OK) but was deliberately not used: the IFA is a different product from the Anuario Estadístico this node represents, and its lineage is not the Anuario's. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-pension-bienestar-mujeres -> ???",
+      "source": "mx-pension-bienestar-mujeres",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The Reglas de Operación 2026 (DOF, 12 February 2026) downloaded cleanly at https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf (2,116,283 bytes, 24pp) and two edges are now minted from this node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-pension-discapacidad -> ???",
+      "source": "mx-pension-discapacidad",
+      "target": null,
+      "reason": "note",
+      "why": "Access verdict superseded — Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. This node was already wired in round 2 (mx-pension-discapacidad -> mx-programa-sectorial-bienestar-2025-2030) and is not a zero-edge node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-infonavit-estadisticas -> ???",
+      "source": "mx-infonavit-estadisticas",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reclassified to a clean negative reached on real bytes. The Infonavit domains are all blocked (portal.mx.infonavit.org.mx: proxy CONNECT tunnel failed 502; portal.infonavit.org.mx: timeout; infonavit.org.mx: HTTP/2 INTERNAL_ERROR), but an official Infonavit publication was read in full on an accessible mirror — Informe Anual de Actividades 2023, https://gaceta.diputados.gob.mx/PDF/66/2024/oct/Infonavit-20241022.pdf, 5.24 MB. Every source line under Infonavit's credit, portfolio and housing-finance tables names an internal unit (Fuente: Coordinación General de Riesgos; Subdirección General de Operaciones; Coordinación General de Inversiones), with no external statistical source anywhere in the statistical annex; INEGI and IMSS appear only as macroeconomic backdrop in the entorno económico chapter. See the fuller entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-banxico-reservas -> ???",
+      "source": "mx-banxico-reservas",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico SIE dynamic pages and guessed static URLs all 404'd or returned no content."
+    },
+    {
+      "edge": "mx-banxico-tipo-cambio -> ???",
+      "source": "mx-banxico-tipo-cambio",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico's FIX definition (Circular 3/2012) describes wholesale-market-quote averaging but names no data source matching any allowed target."
+    },
+    {
+      "edge": "mx-banxico-tasas-interes -> ???",
+      "source": "mx-banxico-tasas-interes",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico's Cetes/Bondes auction table contained only price data, no methodology/lineage statement; guessed TIIE-reform-circular URLs 404'd."
+    },
+    {
+      "edge": "mx-nuevo-leon-imss-municipal -> mx-imss-puestos",
+      "source": "mx-nuevo-leon-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "note",
+      "why": "RESOLVED as containment, and it should come out of the access-blocked pile entirely. The node already carries part_of: 'mx-imss-puestos', so a dependency edge between the pair is a validator error regardless of what datos.imss.gob.mx would say — the access block was never the binding constraint. Identical shape to mx-jalisco-imss-municipal -> mx-imss-puestos. For the record the hosts do remain dead: datos.imss.gob.mx returns 403 from an Imperva/Incapsula WAF, datos.nl.gob.mx fails with OpenSSL SSL_ERROR_SYSCALL. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-alcaldia-benito-juarez -> ???",
+      "source": "mx-alcaldia-benito-juarez",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED. The access verdict was wrong — alcaldiabenitojuarez.gob.mx serves fine to plain curl (697 KB homepage), and the Programa de Gobierno 2024-2027 (https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf, 2,882,984 bytes, 2,703 lines of extracted text) carries sourced body text. Two edges minted from this node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-acapulco-metro -> ???",
+      "source": "mx-acapulco-metro",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. Acapulco's own Plan Municipal de Desarrollo Urbano was retrieved at https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf (8,380,974 bytes, 16,992 lines) — the bitacoraterritorial.guerrero.gob.mx mirror is dead, the acapulco.gob.mx copy serves fine — and its sections 4.5.3 and 4.5.6 yielded two minted edges. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-acapulco-metro -> ???",
+      "source": "mx-acapulco-metro",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED, and the duplicate suspicion is confirmed. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The census edge is minted from this node on the PMDU's population-count sentence, corroborated independently by the Bienestar municipal profile at https://www.gob.mx/cms/uploads/attachment/file/1061187/12001_AcapulcoDeJuarez_2026.pdf. On the modelling question: a field-by-field diff confirms mx-acapulco-metro and mx-guerrero-acapulco-detail are duplicates from two overlapping batches — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-tuxtla -> ???",
+      "source": "mx-tuxtla",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED, by a different document than the one this lead chased. The CEIEG 'Perfiles Municipales' SPA redirect loop was never the only route: the Secretaría de Bienestar's Informe Anual sobre la Situación de Pobreza y Rezago Social 2026 for Tuxtla Gutiérrez (07101) downloads cleanly from Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. at https://www.gob.mx/cms/uploads/attachment/file/1060940/07101_TuxtlaGutierrez_2026.pdf (888,485 bytes, 4pp), and its numbered Fuentes section carries the ENIGH and census citations. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-tuxtla -> ???",
+      "source": "mx-tuxtla",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED, and the duplicate suspicion is confirmed. Same document as the entry above. A field-by-field diff confirms mx-tuxtla and mx-chiapas-tuxtla-detail are duplicates from two overlapping batches — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Worth reconciling on merge: both list publisher 'INEGI / CEIEG Chiapas / Ayuntamiento' and a url on inegi.org.mx, but the document that carries the dependency is published by the Secretaría de Bienestar. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-oaxaca-de-juarez -> ???",
+      "source": "mx-oaxaca-de-juarez",
+      "target": null,
+      "reason": "no-document",
+      "why": "Municipio de Oaxaca de Juárez PMD path 403'd; homepage had no visible statistical-profile link; COPLADE Oaxaca page was unrelated content."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores -> mx-censo-poblacion",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Unchanged verdict, but the access picture is now precise and worse than recorded: the ENTIRE *.cdmx.gob.mx domain family is unreachable from this environment, not just one host. indicadores.cdmx.gob.mx fails curl exit 60 (certificate verification); ipdp.cdmx.gob.mx, www.ipdp.cdmx.gob.mx and datos.cdmx.gob.mx all fail curl exit 35 (connection reset); sideso.cdmx.gob.mx fails curl exit 56 (CONNECT tunnel 502). Needs a different network route, not a different tool. The separate evidentiary objection recorded here still stands independently: IPDP's SI CDMX announcement attributes indicators generically to official government sources without naming INEGI or a specific census. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-enigh-salud -> mx-enigh",
+      "source": "mx-enigh-salud",
+      "target": "mx-enigh",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-enigh-salud is already modeled as part_of mx-enigh (containment metadata, not a RelationshipType edge; a dependency edge between a node and its container is a validator error, PLAYBOOK rule 12). The underlying fact this round's research confirmed is real (ENIGH 2024's own results report tabulates household health-care spending as a line item of the same survey) -- it is just already represented structurally rather than as an edge."
+    },
+    {
+      "edge": "mx-enigh-transferencias -> mx-enigh",
+      "source": "mx-enigh-transferencias",
+      "target": "mx-enigh",
+      "reason": "note",
+      "why": "Same shape as mx-enigh-salud -> mx-enigh: already part_of mx-enigh. ENIGH 2024's results report tabulates transfer income as a line item of the same survey -- structural containment, not a dependency edge."
+    },
+    {
+      "edge": "mx-scnm-sectores-institucionales -> mx-scnm",
+      "source": "mx-scnm-sectores-institucionales",
+      "target": "mx-scnm",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-scnm-sectores-institucionales is already modeled as part_of mx-scnm (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (INEGI's own methodology document says the institutional-sector accounts share SCNM's conceptual/methodological framework) -- already represented structurally."
+    },
+    {
+      "edge": "mx-jalisco-imss-municipal -> mx-imss-puestos",
+      "source": "mx-jalisco-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-jalisco-imss-municipal is already modeled as part_of mx-imss-puestos (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (two IIEG Jalisco documents state IMSS as the raw data source for the municipal breakdown) -- already represented structurally."
+    },
+    {
+      "edge": "mx-nuevo-leon-imss-municipal->mx-imss-puestos",
+      "source": "mx-nuevo-leon-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "note",
+      "why": "Superseded — this is a containment case, not an access case. See the fuller entry above at the same pair: the node already carries part_of: 'mx-imss-puestos', so the edge cannot be minted whatever datos.imss.gob.mx says. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-acapulco-metro->mx-censo-poblacion",
+      "source": "mx-acapulco-metro",
+      "target": "mx-censo-poblacion",
+      "reason": "resolved",
+      "why": "RESOLVED. The oversized-PDF block was real but irrelevant — the atlas was never the only carrier. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. Acapulco's Plan Municipal de Desarrollo Urbano (https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf) states verbatim: \"El Censo de Población y Vivienda del Instituto Nacional de Estadística, Geografía e Informática (INEGI) (2020) contabilizó una población de 779,566 habitantes en el municipio de Acapulco de Juárez\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-tuxtla->mx-censo-poblacion",
+      "source": "mx-tuxtla",
+      "target": "mx-censo-poblacion",
+      "reason": "resolved",
+      "why": "RESOLVED. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. The Tuxtla Gutiérrez (07101) municipal profile downloaded cleanly and its Fuentes footnotes [3] and [4] name the 2020 census extended and basic questionnaires verbatim. Edge minted. The duplicate-node concern flagged here is confirmed — see the DUPLICATE-NODE FLAG entry in mx-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-tuxtla->mx-enigh",
+      "source": "mx-tuxtla",
+      "target": "mx-enigh",
+      "reason": "resolved",
+      "why": "RESOLVED. Same document and same access fix as the census edge above; Fuentes footnote [2] names ENIGH 2024 verbatim. Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-pension-bienestar-mujeres->mx-programa-sectorial-bienestar-2025-2030",
+      "source": "mx-pension-bienestar-mujeres",
+      "target": "mx-programa-sectorial-bienestar-2025-2030",
+      "reason": "resolved",
+      "why": "RESOLVED, and the Estrategia 1.3 quote is confirmed verbatim rather than inferred by analogy. Access finding that unblocked this: gob.mx serves its /cms/uploads/attachment/file/ PDFs to plain curl while Akamai-challenging its HTML pages, so every 'gob.mx 403' in the round-1 and round-2 drop lists is worth re-testing against the direct attachment URL. https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf (DOF, 12 February 2026) states: \"En el marco del Programa Sectorial de Bienestar 2025-2030, este Programa se vincula con el Objetivo 1... en su Estrategia 1.3 Fortalecer la independencia económica y el bienestar integral de las mujeres\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores->mx-censo-poblacion",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Unchanged verdict; see the fuller access note at the mx-cdmx-ipdp-indicadores -> mx-censo-poblacion entry above — the whole *.cdmx.gob.mx family is unreachable from this environment, on four distinct failure modes. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores->mx-enoe",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-enoe",
+      "reason": "deferred",
+      "why": "Unchanged verdict; same whole-domain *.cdmx.gob.mx unreachability as above. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-acapulco-metro->mx-censo-poblacion",
+      "source": "mx-acapulco-metro",
+      "target": "mx-censo-poblacion",
+      "reason": "resolved",
+      "why": "RESOLVED. The body text the fetch tool could not reach was recovered: PMDU section 4.5.3 states \"Del Censo de Población y Vivienda (2020) y de los Tabulados de INEGI, se señala que para el municipio de Acapulco la PEA3 representa el 66% de la población total de más de 15 años\", and Table 27's source line reads \"Fuente: Elaboración propia CONURBA, 2021; con base en Tabulados de Ocupación, INEGI; Censo de Población y Vivienda INEGI, 2020\". Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-acapulco-metro->mx-denue",
+      "source": "mx-acapulco-metro",
+      "target": "mx-denue",
+      "reason": "resolved",
+      "why": "RESOLVED. Section 4.5.6 body text recovered: \"El Directorio Estadístico Nacional de Unidades Económicas (DENUE) (INEGI (b), 2019) señala que para el año 2019 el municipio de Acapulco tenía 37,614 unidades económicas.\" DENUE also has a formal bibliography entry in the plan and is the operative input to its economic-centrality method. Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-cnpje->mx-guerrero-judicial",
+      "source": "mx-cnpje",
+      "target": "mx-guerrero-judicial",
+      "reason": "wrong-direction",
+      "why": "Grok candidate asserting the national CNPJE census 'uses_data_from' the Guerrero state judicial report — reversed. This round's own research already established and minted the correct direction (mx-guerrero-judicial->mx-cnpje, state feeds the national census), sourced from the same real INEGI CNPJE 2025 results PDF. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnpje->mx-oaxaca-judicial",
+      "source": "mx-cnpje",
+      "target": "mx-oaxaca-judicial",
+      "reason": "wrong-direction",
+      "why": "Same reversed-direction issue as mx-cnpje->mx-guerrero-judicial; correct direction (mx-oaxaca-judicial->mx-cnpje) already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnijf->mx-guerrero-judicial",
+      "source": "mx-cnijf",
+      "target": "mx-guerrero-judicial",
+      "reason": "wrong-direction",
+      "why": "Grok candidate; mx-cnijf (Censo Nacional de Impartición de Justicia FEDERAL) is a distinct node from mx-cnije (the STATE census) — it covers SCJN/circuit/district federal courts, not the state judiciary, so a dependency on a state-level Guerrero judicial report is not plausible as either federal-census input or output. The correct state-level relationship (mx-guerrero-judicial->mx-cnije/mx-cnpje) is already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnijf->mx-oaxaca-judicial",
+      "source": "mx-cnijf",
+      "target": "mx-oaxaca-judicial",
+      "reason": "wrong-direction",
+      "why": "Same mx-cnijf/mx-cnije confusion as mx-cnijf->mx-guerrero-judicial above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-igae-actividades->sna-2008",
+      "source": "mx-igae-actividades",
+      "target": "sna-2008",
+      "reason": "resolved",
+      "why": "RESOLVED, though the JS-rendering diagnosis was correct — inegi.org.mx/temas/igae/ genuinely is a 4,267-byte React shell. The route around it is INEGI's monthly IGAE boletín PDF, which carries a full FICHA METODOLÓGICA in plain text: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017\" (https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf, confirmed in a second independent issue). Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-igae-actividades->naics",
+      "source": "mx-igae-actividades",
+      "target": "naics",
+      "reason": "resolved",
+      "why": "RESOLVED via the same boletín ficha: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" Edge minted. The same ficha also yielded a third edge, mx-igae-actividades -> mx-enoe, from its Fuentes row. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+    },
+    {
+      "edge": "mx-encig->mx-censo-poblacion",
+      "source": "mx-encig",
+      "target": "mx-censo-poblacion",
+      "reason": "resolved",
+      "why": "Grok candidate proposed this as new (via a duplicate node name mx-censo-poblacion-vivienda), but mx-encig->mx-censo-poblacion already exists live in the graph from earlier research. No action needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    }
+  ]
 }

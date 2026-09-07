@@ -152,6 +152,15 @@ const CONTINENT_OF: Partial<Record<string, Continent>> = {
   // Belarus — Europe, alongside Moldova/Ukraine/Serbia (non-EU Europe).
   BY: 'Europe',
 
+  // **Three countries staffed by the NSDP block, 2026-09-07 (round 8)**, the
+  // first nodes this corpus has carried for any of them. `HK` is Asia beside
+  // CN, whose colour family it also shares; `PS` is Middle East beside IL and
+  // JO; `SV` is North America, the bucket this scheme already uses for Central
+  // America (CR, GT, HN, NI, PA, BZ). Added with their COUNTRY_FAMILY entries
+  // in palette.ts, in the same round, for the reason the header note gives:
+  // a code the corpus gains and this map lacks falls back to 'International'.
+  HK: 'Asia', PS: 'Middle East', SV: 'North America',
+
   // Pacific Island states — Oceania & Pacific, alongside AU/NZ/the Realm
   // and Compact states.
   FJ: 'Oceania & Pacific', PG: 'Oceania & Pacific', SB: 'Oceania & Pacific',

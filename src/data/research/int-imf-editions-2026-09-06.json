@@ -1,0 +1,172 @@
+{
+  "_slice": "int-imf-editions-2026-09-06",
+  "_researched": "2026-09-06",
+  "_note": "Round 5, little thing 2. Round 4 refused six dsbb.imf.org edges and three more on the DQAF Monetary PDF on the edition rule: the SDDS and SDDS Plus 'Internationally Accepted Statistical Methodologies' tables and the DQAF for Monetary Statistics all name the 2004 CPI Manual, the 2000 MFSM and the 2008 MFS Compilation Guide by title and year, while the corpus carried only their successors (cpi-manual, the 2020 edition; imf-mfsmcg-2016, the 2016 merger of the other two). This slice mints the three superseded editions the documents actually cite, wires the nine edges, and records the three supersedes relations that tie each old edition to the node that replaced it. Every quote below was verified character-for-character against the document on 2026-09-06: the two dsbb methodology pages from Thomas's own Chrome capture (dsbb.imf.org is an AngularJS shell; recipe in notes/imf-dsbb-2026-09-06.md), the DQAF PDF and the four elibrary book PDFs by plain browser-UA curl from the cloud sandbox (recipe in notes/imf-elibrary-2026-09-06.md). One refusal from the same pass produced no node and stays recorded on its original entry in int-imf-dsbb-2026-09-06.json rather than being copied here: the SDDS tables' 2009 draft International Recommendations for the Index of Industrial Production has no live address, and a document with no live address cannot be a node.",
+  "reports": [
+    {
+      "id": "cpi-manual-2004",
+      "title": "Consumer Price Index Manual: Theory and Practice (2004)",
+      "publisher": "ILO, IMF, OECD, Eurostat, United Nations and the World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The 2004 edition of the internationally agreed manual of concepts, methods and practice for compiling a consumer price index, managed by the ILO and published jointly by six international organisations whose names appear on its title page. Superseded in 2020 by the Consumer Price Index Manual: Concepts and Methods (the corpus node cpi-manual), which describes itself as an update of this edition. Minted as its own node because the IMF's SDDS and SDDS Plus methodology tables cite this edition by title and year rather than the 2020 successor, and the corpus models editions as separate nodes.",
+      "last_updated": null,
+      "url": "https://www.elibrary.imf.org/downloadpdf/display/book/9789221136996/9789221136996.pdf",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "imf-mfsm-2000",
+      "title": "Monetary and Financial Statistics Manual (2000)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's 2000 manual of concepts, definitions and classifications for monetary and financial statistics — the sectorisation of the financial corporations sector, the classification of financial assets, and the surveys of the central bank, other depository corporations and other financial corporations that the standard monetary statistics are built from. Superseded in 2016 by the Monetary and Financial Statistics Manual and Compilation Guide (the corpus node imf-mfsmcg-2016), which states in its first chapter that it combines and updates this Manual and the 2008 Compilation Guide. Minted as its own node because the SDDS, SDDS Plus and DQAF for Monetary Statistics all cite the 2000 edition by title and year.",
+      "last_updated": null,
+      "url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781557759740/9781557759740.pdf",
+      "domains": [
+        "monetary-policy",
+        "banking"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "imf-mfs-compilation-guide-2008",
+      "title": "Monetary and Financial Statistics: Compilation Guide (2008)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's 2008 companion to the 2000 Monetary and Financial Statistics Manual, written for national compilers: it takes the Manual's methodology and statistical frameworks down to the level of source data, account-by-account classification and the standardised report forms the IMF collects monetary data on. Superseded in 2016 by the Monetary and Financial Statistics Manual and Compilation Guide (imf-mfsmcg-2016), which merged it with the Manual. Cited by the SDDS and SDDS Plus methodology tables under its full title and by the DQAF for Monetary Statistics as the 'MFS Compilation Guide', which is the alias below.",
+      "title_aliases": [
+        "MFS Compilation Guide"
+      ],
+      "last_updated": null,
+      "url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781589065840/9781589065840.pdf",
+      "domains": [
+        "monetary-policy",
+        "banking"
+      ],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "imf-sdds",
+      "target_report_id": "cpi-manual-2004",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). The SDDS page 'Internationally Accepted Statistical Methodologies' is a table whose whole purpose is to name, per data category, the manual a subscriber's statistics are to follow; its Price Indices row names this edition by title and year. Round 4 refused this against the 2020 cpi-manual node on the edition rule and asked for a 2004 node, which this slice mints. via: chrome 2026-09-06 (Thomas's own Chrome; dsbb.imf.org is an AngularJS shell that curl reads as an empty page).",
+      "evidence_url": "https://dsbb.imf.org/sdds/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(CPI Manual 2004) - Consumer Price Index Manual: Theory and Practice 2004 (ILO, IMF, OECD, Eurostat, United Nations, and the World Bank)"
+    },
+    {
+      "source_report_id": "imf-sdds",
+      "target_report_id": "imf-mfsm-2000",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). The SDDS 'Internationally Accepted Statistical Methodologies' table names this Manual by title and year in its analytical-accounts rows. via: chrome 2026-09-06 (Thomas's own Chrome).",
+      "evidence_url": "https://dsbb.imf.org/sdds/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(MFSM 2000) Monetary and Financial Statistics Manual, 2000 (Washington, D.C: IMF, 2000)"
+    },
+    {
+      "source_report_id": "imf-sdds",
+      "target_report_id": "imf-mfs-compilation-guide-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). The SDDS 'Internationally Accepted Statistical Methodologies' table names the Compilation Guide by full title beside the Manual it accompanies. via: chrome 2026-09-06 (Thomas's own Chrome).",
+      "evidence_url": "https://dsbb.imf.org/sdds/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(MFS Compilation Guide) Monetary and Financial Statistics: Compilation Guide (Washington, D.C: IMF, 2008)"
+    },
+    {
+      "source_report_id": "imf-sdds-plus",
+      "target_report_id": "cpi-manual-2004",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). SDDS Plus carries its own copy of the methodology table, and its Price Indices row names this edition by title and year. Kept as a separate edge from the SDDS one because the two are separate tiers with separate obligations and separate pages. via: chrome 2026-09-06 (Thomas's own Chrome).",
+      "evidence_url": "https://dsbb.imf.org/sdds-plus/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(CPI Manual 2004) - Consumer Price Index Manual: Theory and Practice 2004 (ILO, IMF, OECD, Eurostat, United Nations, and the World Bank)"
+    },
+    {
+      "source_report_id": "imf-sdds-plus",
+      "target_report_id": "imf-mfsm-2000",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). The SDDS Plus methodology table names the Manual by title and year on its Other Financial Corporations Survey row. The SDDS Plus page prints a hyphen after each parenthetical short name where the SDDS page does not, which is why the two quotes differ by three characters. via: chrome 2026-09-06 (Thomas's own Chrome).",
+      "evidence_url": "https://dsbb.imf.org/sdds-plus/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(MFSM 2000) - Monetary and Financial Statistics Manual, 2000 (Washington, D.C: IMF, 2000)"
+    },
+    {
+      "source_report_id": "imf-sdds-plus",
+      "target_report_id": "imf-mfs-compilation-guide-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). The SDDS Plus methodology table names the Compilation Guide by full title beside the Manual. via: chrome 2026-09-06 (Thomas's own Chrome).",
+      "evidence_url": "https://dsbb.imf.org/sdds-plus/statistical-methodology",
+      "evidence_grade": "A",
+      "evidence_quote": "(MFS Compilation Guide) - Monetary and Financial Statistics: Compilation Guide (Washington, D.C: IMF, 2008)"
+    },
+    {
+      "source_report_id": "imf-dqaf-mfs",
+      "target_report_id": "imf-mfsm-2000",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). Body-text sentence in the framework's own Methodological Soundness section, which exists to state which international manual the dimension is assessed against; it names this Manual by title and year. Round 4 refused the same sentence against imf-mfsmcg-2016 on the edition rule and asked for a 2000 node. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://dsbb.imf.org/content/pdfs/dqrs_MonetaryAcc.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "The methodological soundness dimension is assessed against the guidelines outlined in the Monetary and Financial Statistics Manual, 2000 (MFSM) and MFS Compilation Guide, 2008 (Guide)."
+    },
+    {
+      "source_report_id": "imf-dqaf-mfs",
+      "target_report_id": "imf-mfs-compilation-guide-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). Same Methodological Soundness sentence as the MFSM edge, which names the Guide alongside the Manual and dates it 2008. The DQAF prints the short form 'MFS Compilation Guide' rather than the full title, which is why the target carries that string in title_aliases. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://dsbb.imf.org/content/pdfs/dqrs_MonetaryAcc.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "The methodological soundness dimension is assessed against the guidelines outlined in the Monetary and Financial Statistics Manual, 2000 (MFSM) and MFS Compilation Guide, 2008 (Guide)."
+    },
+    {
+      "source_report_id": "imf-mfs-compilation-guide-2008",
+      "target_report_id": "imf-mfsm-2000",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 2). Opening sentence of the Guide's own Preface, which names the Manual by full title and publication year and says the Guide was built to accompany it; the next sentence adds 'The Manual set forth the broad frameworks for the collection, compilation, and presentation of monetary and financial statistics.' The dependency is stated more directly still in Chapter 1 paragraph 1.1 — 'The Monetary and Financial Statistics: Compilation Guide is aimed at providing direct assistance to data compilers who are responsible at the national level for implementing the methodology and statistical frameworks contained in the Monetary and Financial Statistics Manual (MFSM; IMF, 2000b).' — and that sentence is NOT the cited span for a matcher reason worth recording: the chapter is two-column and breaks 'Compi-lation' and 'sta-tistical' across lines, and both of the grader's renderings (pdftotext -layout and pdf.js) keep the hyphens, so the span grades partial-quote at coverage 0.76. Only plain pdftotext reading order rejoins them. The Preface is single-column and has no such break. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06; the whole-book PDF on this ISBN served all 372 pages today, correcting the front-matter-only reading taken earlier the same day.",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781589065840/9781589065840.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "The Monetary and Financial Statistics: Compilation Guide (the Guide) has been designed to accompany the Monetary and Financial Statistics Manual (the Manual), which was published by the International Monetary Fund in 2000."
+    }
+  ],
+  "relations": [
+    {
+      "source_report_id": "cpi-manual",
+      "target_report_id": "cpi-manual-2004",
+      "relation_type": "supersedes",
+      "basis": "Preface of the 2020 edition: 'The Consumer Price Index Manual: Concepts and Methods, herewith referred to simply as the Manual, is an update of the 2004 publication Consumer Price Index Manual: Theory and Practice.' Verified verbatim in the English PDF (ISBN 9781484354841), cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781484354841/9781484354841.pdf"
+    },
+    {
+      "source_report_id": "imf-mfsmcg-2016",
+      "target_report_id": "imf-mfsm-2000",
+      "relation_type": "supersedes",
+      "basis": "Paragraph 1.2 of the 2016 Manual: 'This Manual combines and updates the concepts, definitions, and recommendations contained in the 2000 Monetary and Financial Statistics Manual (MFSM) and the 2008 Monetary and Financial Statistics Compilation Guide (MFS Guide).' Verified verbatim in the English PDF (ISBN 9781513579191), cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781513579191/9781513579191.pdf"
+    },
+    {
+      "source_report_id": "imf-mfsmcg-2016",
+      "target_report_id": "imf-mfs-compilation-guide-2008",
+      "relation_type": "supersedes",
+      "basis": "Paragraph 1.2 of the 2016 Manual: 'This Manual combines and updates the concepts, definitions, and recommendations contained in the 2000 Monetary and Financial Statistics Manual (MFSM) and the 2008 Monetary and Financial Statistics Compilation Guide (MFS Guide).' Verified verbatim in the English PDF (ISBN 9781513579191), cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://www.elibrary.imf.org/downloadpdf/display/book/9781513579191/9781513579191.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "imf-dqaf-cpi -> cpi-manual-2004",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "REFUSED 2026-09-06 (round 5, little thing 2), re-checked now that a 2004 node exists. The DQAF for the Consumer Price Index names 'the Consumer Price Index Manual (CPI Manual)' with no year and no edition anywhere in its Methodological Soundness section, so it names the family rather than an edition, and the edition rule treats a family reference as naming no edition (Report.title_aliases rule 1). This is a refusal on the citing document's own wording, not on the absence of a node, so minting cpi-manual-2004 does not change it. Re-open only if a DQAF revision dates the manual it assesses against."
+    }
+  ]
+}

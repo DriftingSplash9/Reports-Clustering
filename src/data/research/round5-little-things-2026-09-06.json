@@ -1,0 +1,114 @@
+{
+  "_slice": "round5-little-things-2026-09-06",
+  "_researched": "2026-09-06",
+  "_note": "Round 5, little thing 3 — five unrelated leads left over from rounds 3 and 4, worked to a decision each, in one slice because none is big enough to be its own. Closed by minting here: the Eurostat COFOG manual (2019 edition, a distinct artefact from the UN classification), AFRISTAT's NCOA-IHPC consumption nomenclature (the companion document to the UEMOA IHPC methodology guide, and the real target for West African CPI edges that currently point at the guide by default), and Statistics Canada's monthly Credit liabilities of households table, which is what the CMHC mortgage report actually cites. Closed WITHOUT minting: IMTS Revision 2 — the document is real and live but nothing in the corpus names that revision (see _dropped, and the matching entry in int-imts-cofog-2026-09-06.json). Also done outside this file: `Sistema Armonizado` added to `hs`'s title_aliases in grok-h1-classification-hubs.json. Every url and evidence_url here was raw-verified HTTP 200 from the cloud sandbox on 2026-09-06 and every quote substring-checked against the fetched bytes.",
+  "reports": [
+    {
+      "id": "eu-manual-cofog-2019",
+      "title": "Manual on sources and methods for the compilation of COFOG statistics",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Catalogue number KS-GQ-19-010, 2019 edition. Eurostat's guidance to EU and EFTA compilers on producing government expenditure broken down by function: user requirements, the analytical framework, the bridge tables national compilers use to map their own budget classifications onto COFOG, and a country-by-country account of recording practice, with an appendix reproducing COFOG 1999 with Task Force commentary. Its own back cover: it is 'developed and agreed by the Task Force on COFOG'. Distinct from the UN classification it implements (the corpus node un-cofog-1999), and a sibling of the corpus's eu-manual-mgdd and eu-manual-qfagg.",
+      "releases_per_year": 0.13,
+      "cadence_note": "Three editions, stated in the manual's own text: 'This Manual on sources and methods for the compilation of COFOG statistics is in its third edition, the first having been produced in 2007 and the second in 2011.' Latest observed interval 2011 to 2019, 8 years, so releases_per_year 1/8 = 0.13, following the convention eu-manual-mgdd uses.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/w/ks-gq-19-010",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "afristat-ncoa-ihpc",
+      "title": "Nomenclature de consommation ouest-africaine adaptée pour l'indice harmonisé des prix à la consommation (NCOA-IHPC)",
+      "publisher": "AFRISTAT",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "International",
+      "description": "The consumption nomenclature the harmonised consumer price indices of the UEMOA member states are built on. Derived from the international COICOP and adapted for the UEMOA zone as the Nomenclature de consommation ouest africaine (NCOA), then adapted again for the index itself as NCOA-IHPC: 12 functions, 41 groups, 78 sub-groups and 126 consumption items, with imputed rents and prostitution excluded by the index's own scope. Published by AFRISTAT under the UEMOA IHPC renovation project as the companion document to the methodology guide (the corpus node afristat-ihpc-guide-2014), which lists it among the reference documents for producing the renovated index. Carries no publication date of its own: an earlier corpus note dated it 2008, which the document does not state — its text places it in the IHPC96-to-renovated-base generation (it cites COICOP alongside the SCN 1993), before the NCOA 2018 that the current base-2023 series uses.",
+      "releases_per_year": 0.06,
+      "cadence_note": "A nomenclature, revised only when the index is rebased; nominal rate matching the corpus's other AFRISTAT nomenclature node.",
+      "last_updated": null,
+      "url": "https://www.afristat.org/wp-content/uploads/2022/04/Nomenclature-NCOA-IHPC.pdf",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "standard"
+    },
+    {
+      "id": "statcan-credit-liabilities-households",
+      "title": "Credit liabilities of households (table 36-10-0639-01)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Monthly outstanding household credit liabilities — mortgage and non-mortgage debt — released from the National Balance Sheet Accounts. Statistics Canada's own product page names the source programme: 'Source (Surveys and statistical programs) National Balance Sheet Accounts'. Minted 2026-09-06 because the corpus was pointing a CMHC edge at the quarterly National Economic Accounts for figures that come from this table instead; the two are different releases of the Canadian System of Macroeconomic Accounts and the balance-sheet one is monthly.",
+      "releases_per_year": 12,
+      "cadence_note": "The product page states 'Frequency: Monthly'.",
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610063901",
+      "domains": [
+        "banking",
+        "national-accounts"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eu-manual-cofog-2019",
+      "target_report_id": "un-cofog-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 3). The manual's own statement of what it is for, printed on its back cover and repeated in section 1.1: it is guidance for compiling government expenditure statistics under the UN functional classification, and its appendix reproduces COFOG 1999 in full with Task Force commentary. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/10142242/KS-GQ-19-010-EN-N.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "This manual has been developed and agreed by the Task Force on COFOG in response to an increasing interest in high quality, comparable statistics on government expenditure broken down by purpose, according to the Classification of the Functions of Government (COFOG)."
+    },
+    {
+      "source_report_id": "eu-manual-cofog-2019",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 3). Section 2.1, 'The ESA 2010 Transmission Programme and the publication of government finance statistics', opening sentence: the manual reads COFOG through the national-accounts framework ESA 2010 defines, and the COFOG data it governs are reported under Annex B of that Regulation. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/10142242/KS-GQ-19-010-EN-N.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "This manual considers COFOG in the context of national accounts as defined by the European System of Accounts 2010 (ESA 2010), which is based on the world-wide System of National Accounts 2008 (2008 SNA)."
+    },
+    {
+      "source_report_id": "afristat-ihpc-guide-2014",
+      "target_report_id": "afristat-ncoa-ihpc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MINTED 2026-09-06 (round 5, little thing 3). The guide's avant-propos lists the reference documents that go with it for producing the renovated IHPC, and the nomenclature document is the last of them; the body then states that household consumption within the index scope is described using that nomenclature, and that the published indices are presented by its groupings down to sub-group level. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://www.afristat.org/wp-content/uploads/2022/04/APA11_GUIDE-METHODOLOGIQUE-IHPC-RENOVE-VF.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "le document de nomenclature de consommation ouest africaine adaptée aux besoins de l’IHPC (NCOA-IHPC)."
+    },
+    {
+      "source_report_id": "cmhc-residential-mortgage-industry-report",
+      "target_report_id": "statcan-credit-liabilities-households",
+      "relationship_type": "uses_data_from",
+      "basis": "RETARGETED 2026-09-06 (round 5, little thing 3) from statcan-national-accounts, which was the wrong release. The figure-source line under the report's household-debt charts names the table by number and title, and the number resolves at Statistics Canada's own product page to 'Credit liabilities of households (x 1,000,000)', Frequency: Monthly, source programme National Balance Sheet Accounts — not the quarterly National Economic Accounts the edge used to point at. Product number verified in this round per the 2026-09-06 ruling's condition 1. The report's other Statistics Canada footnote, table 10-10-0006-01 (funds advanced and interest rates, Bank of Canada), has no node and is not wired. via: direct read of the live host, cloud sandbox browser-UA curl, 2026-09-06.",
+      "evidence_url": "https://assets.cmhc-schl.gc.ca/sites/cmhc/professional/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report/2024/residential-mortgage-industry-report-fall-2024-en.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Source: Statistics Canada. Table 36-10-0639-01 Credit liabilities of households (x 1,000,000)."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bo-comercio-exterior -> International Merchandise Trade Statistics, Rev.2 (1998) — no node minted",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "REFUSED 2026-09-06 (round 5, little thing 3). Round 3 deferred bo-comercio-exterior -> un-imts-2010 on edition and asked for an IMTS Revision 2 node. The document is real and live — 'Studies in Methods, Series M, No.52, Rev.2, INTERNATIONAL MERCHANDISE TRADE STATISTICS: CONCEPTS AND DEFINITIONS, United Nations, New York, 1998', https://unstats.un.org/unsd/publication/SeriesM/SeriesM_52rev2E.pdf, HTTP 200, title page read — and it is NOT minted, because nothing names it. The Bolivian citation the lead rests on says 'Informes Estadísticos M 52', which is the series number without a revision, and Series M No.52 has three of them; reading Rev.2 out of the neighbouring SCN 1993 and MBP5 citations is the researcher's inference, not the document's statement, and the edition rule refuses exactly that. Checked in the same pass and also short: Bolivia's own IMF DSBB Summary of Methodology for MET00 (api/report/getBaseSummaryofMethodologies?countryCode=BOL&categoryCode=MET00, HTTP 200) says INE 'uses the United Nations' International Trade Statistics Manual' — no title, no series number, no edition. A node with no edge would be an orphan, so none was minted. To re-open: find a document that names a revision, and the node can be minted then."
+    },
+    {
+      "edge": "bf-insd-ihpc / other UEMOA IHPC releases -> afristat-ncoa-ihpc",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "LEAD 2026-09-06 (round 5, little thing 3), left open on purpose. Thirteen UEMOA and CEMAC CPI edges currently point at afristat-ihpc-guide-2014 or uemoa-ihpc-note-2023 as the nearest available target, and the nomenclature minted here is the better target for any of them whose own bulletin names NCOA-IHPC rather than the guide. Burkina Faso is the visible case: the existing bf-insd-ihpc edge's basis already records that INSD's own tables are headed 'Tableau 5: Évolution des indices nationaux suivant les groupes de la NCOA-IHPC', but that sentence was read in AFRISTAT's guide, not in INSD's bulletin, and no INSD document was fetched this round. Each retarget needs the national bulletin read; this is a research pass, not a little thing. Note also the vintage split found here: Senegal, Niger and Côte d'Ivoire have already moved to NCOA 2018 for the base-2023 series and are correctly wired to un-coicop-2018, so the node minted here is the target for the older base only."
+    }
+  ]
+}

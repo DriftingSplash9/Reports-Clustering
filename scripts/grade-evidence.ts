@@ -720,6 +720,38 @@ export function namesTarget(
       }
     }
   }
+  // **A statistical agency's own product NUMBER, carried as a `title_aliases`
+  // entry, names the artefact** (Thomas, 2026-09-06, PLAYBOOK-CORPUS §7a; this
+  // path added 2026-09-06 evening, round 5). The ruling said "the mechanism is
+  // `title_aliases`, so the grader can see what the reader can" — and the
+  // grader could NOT: `36-10-0222-01` tokenises to ONE word, the run rule above
+  // needs two, the title-lead rule needs three, and the CJK path wants CJK.
+  // The three round-4b upgrades on this ruling were written by hand with no
+  // grader record behind them, and `yt-statistical-review ->
+  // statcan-population-estimates` graded `agency-not-artefact` with the number
+  // sitting inside its own matched quote. Four conditions keep this from
+  // becoming "any number counts": ALIASES ONLY (i >= 1 — a title is never a
+  // bare number); a single token; at least two hyphen-separated digit groups
+  // and 8+ characters (so a year, an ISBN-less "2016" or a section number can
+  // never qualify — condition 3 of the ruling, that the number is one specific
+  // release, is enforced at the data layer by the alias's own rules); and
+  // word-bounded in the body, so `17-10-0009-01` cannot match inside
+  // `17-10-0009-012`. Additive only: it runs after every other door has failed.
+  if (!artefact) {
+    for (let i = 1; i < names.length && !artefact; i++) {
+      const toks = tokenise(names[i])
+      if (toks.length !== 1) continue
+      const tok = toks[0]
+      if (tok.length < 8 || !/^\d+(?:-\d+){2,}$/.test(tok)) continue
+      // `tok` is digits and hyphens only (tested above), so it needs no escaping.
+      const re = new RegExp(`(?<![\\p{L}\\p{N}-])${tok}(?![\\p{L}\\p{N}-])`, 'u')
+      if (re.test(hay)) {
+        artefact = true
+        how = `alias${i}:product-number:${tok}`
+        break
+      }
+    }
+  }
   if (!artefact) {
     // **A parenthetical acronym from the target's OWN title, four characters
     // or more** (Thomas, 2026-09-04). The doc comment above still stands for
@@ -1040,8 +1072,8 @@ export interface Fetched {
   /**
    * **A SECOND faithful rendering of the same bytes** (Thomas, 2026-09-05).
    * Only PDFs have one: `text` is `pdftotext -layout`, `altText` is pdf.js
-   * reading order, and `gradeEdge` grades against both and keeps the better
-   * result.
+   * reading order, `alt2Text` is plain `pdftotext` reading order, and
+   * `gradeEdge` grades against all of them and keeps the better result.
    *
    * Why both rather than the better one. `-layout` reconstructs the page's
    * visual columns, and on a bilingual two-column PDF it interleaves the two
@@ -1062,6 +1094,39 @@ export interface Fetched {
    */
   altExtractor: 'pdfjs' | 'none'
   altText: string
+  /**
+   * **A THIRD faithful rendering: plain `pdftotext`, reading order** (Thomas,
+   * 2026-09-06, ruling on round 5's matcher finding). Neither of the two
+   * renderings above rejoins a word the typesetter broke across a line, so a
+   * two-column book's own sentence can grade `partial-quote` while a reader
+   * sees it whole. Measured on the 2008 MFS Compilation Guide (¶1.1, coverage
+   * 0.76): `-layout` prints `Compi-\nlation` and `sta-\ntistical` AND
+   * interleaves the two columns word by word; pdf.js prints `Finan-cial` and
+   * `interna-tional` and drops the space at a line join (`Monetary andFinancial`);
+   * plain `pdftotext` prints `Compilation Guide is aimed` and `statistical
+   * frameworks contained`, with zero `Compi-` or `sta-` remnants in 1.48 MB of
+   * text. Re-measured 2026-09-06 on the same 2,925,084-byte PDF before this was
+   * added, rather than inherited from the note that proposed it (rule 8).
+   *
+   * Additive by construction, exactly like the second rendering: every
+   * rendering is graded and the BEST result wins, so a third reading can only
+   * ever add matches — it can never unmatch a quote written against `-layout`,
+   * which is what a straight extractor swap would do.
+   *
+   * What it costs, and why it was Thomas's call rather than just done: a
+   * committed `evidence-cache/` header for a PDF gains `alt2-extractor` and
+   * `alt2-text-chars` and now means "read three ways" rather than two. Records
+   * written before this stay byte-identical until something re-fetches them —
+   * the fields are omitted entirely when empty, the same discipline `via` and
+   * the pdf.js fields already follow — and a CACHED record has no third
+   * rendering, so an offline re-grade of the existing store sees no change at
+   * all. The third reading appears only on a fresh fetch.
+   *
+   * Empty for every non-PDF, for a PDF whose plain read failed, and whenever
+   * it is byte-identical to either rendering above it.
+   */
+  alt2Extractor: 'pdftotext-flow' | 'none'
+  alt2Text: string
   fromCache: boolean
   /**
    * Empty when the text came from the cited URL itself. Otherwise the name of
@@ -1095,6 +1160,10 @@ function headerLines(f: Fetched): string {
     // is: every record written before 2026-09-05 stays byte-identical when it
     // is re-recorded.
     ...(f.altText ? [`alt-extractor: ${f.altExtractor}`, `alt-text-chars: ${f.altText.length}`] : []),
+    // Same discipline as the pair above (2026-09-06): omitted entirely when
+    // there is no third rendering, so every record written before it stays
+    // byte-identical when it is re-recorded.
+    ...(f.alt2Text ? [`alt2-extractor: ${f.alt2Extractor}`, `alt2-text-chars: ${f.alt2Text.length}`] : []),
     // Omitted entirely on a direct read, so the 1,670 records written before
     // fetch strategies existed stay byte-identical when they are re-recorded.
     ...(f.via ? [`via: ${f.via}`] : []),
@@ -1121,6 +1190,9 @@ function writeFullText(root: string, f: Fetched): void {
   // exactly as it did, with no alt file and no alt text.
   const altPath = join(dir, `${urlKey(f.url)}.alt.txt.gz`)
   if (f.altText) writeFileSync(altPath, gzipSync(Buffer.from(f.altText, 'utf8')))
+  // The third rendering gets its own file for the same reason (2026-09-06).
+  const alt2Path = join(dir, `${urlKey(f.url)}.alt2.txt.gz`)
+  if (f.alt2Text) writeFileSync(alt2Path, gzipSync(Buffer.from(f.alt2Text, 'utf8')))
 }
 
 function readFullText(root: string, url: string): Fetched | null {
@@ -1134,6 +1206,8 @@ function readFullText(root: string, url: string): Fetched | null {
   const text = raw.slice(at + CACHE_SEP.length)
   const altPath = join(root, FULLTEXT_DIR, `${urlKey(url)}.alt.txt.gz`)
   const altText = existsSync(altPath) ? gunzipSync(readFileSync(altPath)).toString('utf8') : ''
+  const alt2Path = join(root, FULLTEXT_DIR, `${urlKey(url)}.alt2.txt.gz`)
+  const alt2Text = existsSync(alt2Path) ? gunzipSync(readFileSync(alt2Path)).toString('utf8') : ''
   return {
     url,
     fetchedAt: head.get('fetched-at') ?? '',
@@ -1150,6 +1224,8 @@ function readFullText(root: string, url: string): Fetched | null {
     truncated: head.get('truncated') === 'true',
     altExtractor: (altText ? (head.get('alt-extractor') ?? 'pdfjs') : 'none') as Fetched['altExtractor'],
     altText,
+    alt2Extractor: (alt2Text ? (head.get('alt2-extractor') ?? 'pdftotext-flow') : 'none') as Fetched['alt2Extractor'],
+    alt2Text,
     fromCache: true,
     via: head.get('via') ?? '',
   }
@@ -1359,6 +1435,8 @@ async function fetchRaw(url: string): Promise<Fetched> {
   let text = ''
   let altExtractor: Fetched['altExtractor'] = 'none'
   let altText = ''
+  let alt2Extractor: Fetched['alt2Extractor'] = 'none'
+  let alt2Text = ''
   const isPdf = body.subarray(0, 5).toString('latin1') === '%PDF-' || /pdf/i.test(meta.ctype)
   const isZip = body.subarray(0, 2).toString('latin1') === 'PK'
   try {
@@ -1391,6 +1469,25 @@ async function fetchRaw(url: string): Promise<Fetched> {
         }
       } catch {
         /* pdf.js is the second opinion, never the one the run depends on */
+      }
+      // **A PDF IS READ A THIRD TIME** (Thomas, 2026-09-06) — see
+      // `Fetched.alt2Text` for the measurement that decided it and for what it
+      // costs a committed record. Plain `pdftotext`, no `-layout`: reading
+      // order, and the only one of the three that rejoins a line-break hyphen.
+      // Its own try/catch, not the outer one: a failure here must not reset
+      // `text` and `extractor` and turn a good `-layout` read into `no-text`.
+      try {
+        const { stdout: flow } = await execFileAsync('pdftotext', ['-q', bodyPath, '-'], {
+          maxBuffer: 64 << 20,
+        })
+        // Identical output is not worth storing or grading again. On a plain
+        // single-column PDF this rendering often equals one of the two above.
+        if (flow.trim() && flow !== text && flow !== altText) {
+          alt2Text = flow
+          alt2Extractor = 'pdftotext-flow'
+        }
+      } catch {
+        /* third opinion, never the one the run depends on */
       }
     } else if (isZip && (/spreadsheetml/i.test(meta.ctype) || /\.xls[xm](\?|#|$)/i.test(url))) {
       // Ahead of the docx branch on purpose. An xlsx content-type is
@@ -1442,7 +1539,8 @@ async function fetchRaw(url: string): Promise<Fetched> {
     meta.code >= 200 &&
     meta.code < 300 &&
     text.trim().length < 200 &&
-    altText.trim().length < 200
+    altText.trim().length < 200 &&
+    alt2Text.trim().length < 200
   ) {
     block = 'empty'
     blockLabel = extractor === 'none' ? 'no-extractor' : 'tiny-body'
@@ -1472,6 +1570,10 @@ async function fetchRaw(url: string): Promise<Fetched> {
     altText: Buffer.byteLength(altText, 'utf8') > TEXT_CAP_BYTES
       ? Buffer.from(altText, 'utf8').subarray(0, TEXT_CAP_BYTES).toString('utf8')
       : altText,
+    alt2Extractor,
+    alt2Text: Buffer.byteLength(alt2Text, 'utf8') > TEXT_CAP_BYTES
+      ? Buffer.from(alt2Text, 'utf8').subarray(0, TEXT_CAP_BYTES).toString('utf8')
+      : alt2Text,
     fromCache: false,
     via: '',
   }
@@ -1743,6 +1845,8 @@ function blank(url: string, now: string, over: Partial<Fetched>): Fetched {
     textSha: '',
     altExtractor: 'none',
     altText: '',
+    alt2Extractor: 'none',
+    alt2Text: '',
     fromCache: false,
     via: '',
     ...over,
@@ -1838,18 +1942,19 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
   if (isIndexPage(input.evidenceUrl)) return C('index-page')
   if (!fetched) return C('not-fetched')
   if (fetched.block !== 'none') return C(`${fetched.block}:${fetched.blockLabel}`)
-  if (!fetched.text.trim() && !fetched.altText.trim()) return C('no-text')
+  if (!fetched.text.trim() && !fetched.altText.trim() && !fetched.alt2Text.trim()) return C('no-text')
   // Narrowed by the guard above; a property narrowing does not survive into a
   // closure, so it is captured here rather than re-asserted inside one.
   const evidenceUrl = input.evidenceUrl
 
 
-  // **A document can have TWO faithful renderings, and the edge is graded
-  // against both** (Thomas, 2026-09-05). See `Fetched.altText` for the
-  // measurement. Everything below runs once per rendering and the better
-  // result is returned, so adding the second rendering can only ever ADD
-  // matches — the property the whole script rests on, and the property a
-  // straight extractor swap would have broken.
+  // **A document can have SEVERAL faithful renderings, and the edge is graded
+  // against every one of them** (Thomas, 2026-09-05 for the second, 2026-09-06
+  // for the third). See `Fetched.altText` and `Fetched.alt2Text` for the two
+  // measurements. Everything below runs once per rendering and the BEST result
+  // is returned, so adding a rendering can only ever ADD matches — the property
+  // the whole script rests on, and the property a straight extractor swap would
+  // have broken.
   const gradeAgainst = (docText: string, extractorUsed: string): GradeResult => {
     // Quote location. **Every span is located, not only the winner** — the A
     // bar below asks whether the artefact is named beside a matched span, and
@@ -2007,15 +2112,32 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
   }
 
   const primary = gradeAgainst(fetched.text, fetched.extractor)
-  if (!fetched.altText.trim() || fetched.altText === fetched.text) return primary
-  const alternate = gradeAgainst(fetched.altText, fetched.altExtractor)
+  // Every rendering after the primary, in the order they were added, and only
+  // where it is a genuinely different reading of the same bytes. A rendering
+  // identical to one already graded is not worth grading twice, and on a plain
+  // single-column PDF that is the common case.
+  const others: Array<[string, string]> = []
+  if (fetched.altText.trim() && fetched.altText !== fetched.text) {
+    others.push([fetched.altText, fetched.altExtractor])
+  }
+  if (fetched.alt2Text.trim() && fetched.alt2Text !== fetched.text && fetched.alt2Text !== fetched.altText) {
+    others.push([fetched.alt2Text, fetched.alt2Extractor])
+  }
+  if (!others.length) return primary
   // Better grade wins; on a tie the better coverage does; on a tie there, the
-  // primary rendering, so a document whose two readings agree records the same
-  // extractor it always did.
+  // EARLIER rendering, so a document whose readings agree records the same
+  // extractor it always did — `-layout` before pdf.js before plain reading
+  // order. Both comparisons are strict, which is what makes that hold.
   const rank = (g: EvidenceGrade): number => (g === 'A' ? 0 : g === 'B' ? 1 : 2)
-  if (rank(alternate.grade) < rank(primary.grade)) return alternate
-  if (rank(alternate.grade) === rank(primary.grade) && alternate.coverage > primary.coverage) return alternate
-  return primary
+  let best = primary
+  for (const [text, extractorUsed] of others) {
+    const candidate = gradeAgainst(text, extractorUsed)
+    const better =
+      rank(candidate.grade) < rank(best.grade) ||
+      (rank(candidate.grade) === rank(best.grade) && candidate.coverage > best.coverage)
+    if (better) best = candidate
+  }
+  return best
 }
 
 /* ------------------------------------------------------------------ *
@@ -2300,6 +2422,12 @@ function selftest(): void {
     namesTarget('government sector accounts according to ESA2010',
       { title: 'European System of Accounts 2010 (ESA 2010)', publisher: 'x', url: '' }).artefact
     && !namesTarget('code ESA2010X applies', { title: 'European System of Accounts 2010 (ESA 2010)', publisher: 'x', url: '' }).artefact)
+  t('a product-number alias names the artefact, word-bounded, aliases only',
+    namesTarget('Sources: Statistics Canada. Tables 17\u201110\u20110009\u201101, 17\u201110\u20110059\u201101 (quarterly)',
+      { title: 'Quarterly Demographic Estimates (Population estimates, quarterly)', publisher: 'Statistics Canada', url: '', title_aliases: ['17-10-0009-01'] }).how === 'alias1:product-number:17-10-0009-01'
+    && !namesTarget('see table 17-10-0009-012 and 117-10-0009-01', { title: 'x y z', publisher: 'x', url: '', title_aliases: ['17-10-0009-01'] }).artefact
+    && !namesTarget('the 2016 edition', { title: 'x y z', publisher: 'x', url: '', title_aliases: ['2016'] }).artefact
+    && !namesTarget('cited as 36-10-0222-01', { title: '36-10-0222-01', publisher: 'x', url: '' }).artefact)
   t('a three-letter parenthetical acronym still does not name the artefact',
     !namesTarget('the EDP notification tables were transmitted in April',
       { title: 'Hellenic fiscal reporting (EDP) tables', publisher: 'x', url: '' }).artefact)
@@ -2351,7 +2479,8 @@ function selftest(): void {
     url: 'https://x.test/doc.pdf', fetchedAt: '', status: 200, finalUrl: 'https://x.test/doc.pdf',
     contentType: 'application/pdf', bodyBytes: 10, extractor: 'pdftotext', block: 'none', blockLabel: '',
     text: 'The Consumer Price Index is compiled monthly under the Statistics Act.', textChars: 68,
-    truncated: false, textSha: '', altExtractor: 'none', altText: '', fromCache: false, via: '',
+    truncated: false, textSha: '', altExtractor: 'none', altText: '',
+    alt2Extractor: 'none', alt2Text: '', fromCache: false, via: '',
   }
   const target = { title: 'Consumer Price Index (CPI)', publisher: 'Stats Co', url: 'https://x.test/cpi' }
   const a = gradeEdge(
@@ -2448,6 +2577,49 @@ function selftest(): void {
   t('a second rendering can never LOWER the grade the first one earned',
     gradeEdge(bothInput, altIsWorse).grade === 'A' &&
     gradeEdge(bothInput, altIsWorse).extractor === 'pdftotext')
+  // The THIRD rendering (2026-09-06), guarded the same three ways — and a
+  // fourth: the hyphen case it was added for. `-layout` and pdf.js both keep a
+  // word the typesetter broke across a line; plain `pdftotext` rejoins it, and
+  // an edge whose quote spans that break must reach A off the third reading
+  // alone.
+  const onlyFlowHasIt: Fetched = {
+    ...fetched, extractor: 'pdftotext',
+    text: 'The Consumer Price In- dex is compiled monthly under interleaved column junk.',
+    altExtractor: 'pdfjs', altText: 'The Consumer Price In-dex is compiledmonthly under the Statistics Act.',
+    alt2Extractor: 'pdftotext-flow',
+    alt2Text: 'The Consumer Price Index is compiled monthly under the Statistics Act.',
+  }
+  const flowGraded = gradeEdge(bothInput, onlyFlowHasIt)
+  t('a quote only the THIRD rendering rejoins still grades A, and names its extractor',
+    flowGraded.grade === 'A' && flowGraded.extractor === 'pdftotext-flow')
+  t('a third rendering can never LOWER a grade either of the first two earned',
+    gradeEdge(bothInput, {
+      ...fetched, extractor: 'pdftotext', altExtractor: 'none', altText: '',
+      alt2Extractor: 'pdftotext-flow',
+      alt2Text: 'This rendering lost the sentence entirely and says nothing of the kind.',
+    }).grade === 'A' &&
+    gradeEdge(bothInput, {
+      ...fetched, extractor: 'pdftotext', altExtractor: 'none', altText: '',
+      alt2Extractor: 'pdftotext-flow',
+      alt2Text: 'This rendering lost the sentence entirely and says nothing of the kind.',
+    }).extractor === 'pdftotext')
+  t('a third rendering identical to the primary is not graded twice and does not steal the extractor',
+    gradeEdge(bothInput, {
+      ...fetched, extractor: 'pdftotext', altExtractor: 'none', altText: '',
+      alt2Extractor: 'pdftotext-flow', alt2Text: fetched.text,
+    }).extractor === 'pdftotext')
+  t('a document readable ONLY in the third rendering is not a no-text C',
+    gradeEdge(bothInput, {
+      ...fetched, extractor: 'pdftotext', text: '', altExtractor: 'none', altText: '',
+      alt2Extractor: 'pdftotext-flow',
+      alt2Text: 'The Consumer Price Index is compiled monthly under the Statistics Act.',
+    }).grade === 'A')
+  // The committed-record discipline is the whole cost of the third rendering,
+  // so it is guarded rather than described: a record with no third rendering
+  // must be byte-identical to what it was before this existed.
+  t('a header with no third rendering carries no alt2 lines',
+    !headerLines({ ...fetched, alt2Extractor: 'none', alt2Text: '' }).includes('alt2-') &&
+    headerLines({ ...fetched, alt2Extractor: 'pdftotext-flow', alt2Text: 'xy' }).includes('alt2-text-chars: 2'))
   t('a url with spaces and non-ascii is percent-encoded for curl',
     encodeForCurl('https://cbos.gov.sd/files/\u0627\u0644\u0639\u0631\u0636 2024 .pdf') ===
       'https://cbos.gov.sd/files/%D8%A7%D9%84%D8%B9%D8%B1%D8%B6%202024%20.pdf')

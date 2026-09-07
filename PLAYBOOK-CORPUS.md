@@ -6,7 +6,7 @@ deletes, measure before believing — are there, with the test for where a new
 paragraph goes. This file is for finding, minting, wiring, quoting and
 grading edges; the renderer's rules are in `PLAYBOOK-RENDER.md`.
 
-**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3 and 10-17,
+**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3, 10-17 and 19,
 and the gaps are rules that live in one of the other two.
 
 ---
@@ -68,6 +68,50 @@ basis and Thailand's SNA 2008 basis when their own domains were dead.
 compliance when an NSO's own pages are blocked (supplied Iraq's and
 Vietnam's ICLS edges). The old ILO microdata catalogue
 (`webapps.ilo.org/surveyLib`) is retired.
+
+
+**19. Stamp every `basis` with WHO IS SPEAKING** (Thomas, 2026-09-07). The first
+token of a basis is one of three, followed by a colon:
+
+- **`SELF-DECLARED:`** — the document is published or authored by the SOURCE's own
+  statistical system, and says the source follows the target. The strongest kind of
+  edge there is: specific to the release, and still true if the target's membership
+  list changes. Judge by AUTHORSHIP, not by host — Uzbekistan's own NSDS hosted on
+  `documents1.worldbank.org` and Togo's own data portal on `opendataforafrica.org`
+  are both self-declared.
+- **`REGISTER:`** — the document is published by the TARGET's own publisher and
+  records the relationship: a membership table, an adherence page, a press release
+  announcing a subscription, a staff report classifying the country. First-party and
+  real, but it evidences a MEMBERSHIP, not a methodology.
+- **`THIRD-PARTY:`** — neither end published it. Weakest, whatever the quote.
+
+**Why this is not a fourth grade.** `evidence_grade` measures whether the document
+was READ and whether it NAMES the artefact — a property of the citation. All three
+tiers can and do grade A on the same rules, correctly. What the grade cannot express
+is that a register saying "country X is a subscriber" and a national methodology note
+saying "this index is compiled under X" are different claims, and only the second is
+what `methodology_depends_on` asserts. One greppable token at the head of the basis
+separates them for every future round without refetching a single document, and it
+changes no schema and no grade.
+
+**Two consequences to act on, not just to know.** Prefer a self-declared document
+even when a register would grade the same. And when writing a quote, prefer a
+sentence that states a DEPENDENCY over one that states a STATUS: "compiled in
+accordance with X" over "is a participant in X" — the round-7 ruling that dropped
+six e-GDDS edges turned on exactly that distinction (a membership is not a
+dependency), and the tag is what would have made the class visible four rounds
+earlier.
+
+**Coverage, so an absent tag is not misread: only the 101 edges into `imf-e-gdds` /
+`imf-sdds` / `imf-sdds-plus` are stamped** (round 7 — 61 REGISTER, 40 SELF-DECLARED,
+0 THIRD-PARTY). Everywhere else an unstamped basis means NOT YET CLASSIFIED, never
+"unknown tier". Stamp what you touch; nobody should run a corpus-wide stamping pass
+as a job of its own.
+
+**What this replaced: nothing, and that is a considered answer** to §1's
+say-what-you-would-remove rule. No existing rule covers who authored the evidence,
+and the §6 bullets this sits beside are all live.
+
 
 ---
 
@@ -220,6 +264,25 @@ the lane that needs them never reads. Moved, not copied.)*
   writing one, copy the span out of the extracted text rather than retyping it.
   Candidates to sweep: any quote containing `(x 1,000)`, a straight apostrophe next
   to a letter, or straight double quotes.
+
+- **A `title_aliases` entry that is a bare product number only reaches the grader
+  through the `product-number` path in `namesTarget`** (added 2026-09-06 evening,
+  guarded by a selftest). Before it, a one-token alias could never fire — the run
+  rule needs two words — and the three round-4b table-number A's were written by
+  hand with no grader record. The path is aliases-only, ≥8 characters, ≥2
+  hyphen-separated digit groups, word-bounded, and runs only after every other
+  door has failed; it can only add matches.
+
+- **A PDF is read THREE ways and the best reading wins** (2026-09-06, Thomas's
+  ruling on round 5's matcher finding; guard is `Fetched.alt2Text` and the
+  rendering loop at the foot of `gradeEdge`). `pdftotext -layout`, pdf.js, and
+  plain `pdftotext` — the last is the only one that rejoins a word the typesetter
+  broke across a line with a hyphen, which is why a two-column book's own sentence
+  used to grade `partial-quote`. Two things it changes for a round: a PDF's
+  committed `evidence-cache/` header now carries `alt2-extractor` /
+  `alt2-text-chars`, and **a CACHED `.evidence-fulltext/` record has no third
+  rendering at all** — an offline re-grade of the old store sees none of this, so
+  `--refetch` is what gets it. Additive by construction: it can only add matches.
 
 - **Never edit a `basis` or a quote to move a grade.** If an evidence record is
   graded down by a matcher defect, fix or report the matcher. Trimming the
@@ -396,6 +459,26 @@ Three conditions, and they are what keep this from becoming "any number counts":
 
 Generalises beyond Canada to any agency that numbers its releases and is cited by
 number — but each agency's numbering wants its own check against condition 1.
+
+**A nomenclature the document says is BASED ON the target standard names the target**
+(Thomas, 2026-09-06, ruling on the `Sistema Armonizado` alias). A methodology that says
+its classification rests on a national or bloc nomenclature — Argentina's NCM, Colombia's
+NANDINA, Chile's tariff codes — and says in the same breath that the nomenclature is based
+on the standard, is citing the standard. The intermediate nomenclature does not break the
+chain, and a source line in a glossary or a footnote is a citation like any other source
+line (§7a's caption ruling, which this one leans on). Four Spanish-language edges moved on
+it: `co-comercio-exterior -> hs`, `co-comercio-exterior -> un-imts-2010`,
+`ar-comercio-exterior -> hs` (B to A) and `cl-comercio-exterior -> hs` (C to A, read in
+Thomas's Chrome because bcentral.cl is a JS shell to both machines).
+
+**The guard, and it is the whole rule: the DOCUMENT has to state the derivation.** "The
+statistics use the NCM" plus the researcher's own knowledge that the NCM derives from the
+HS is an inference, and it is refused — that is the agency-not-artefact bar arriving from
+a different direction. What moved these four is that each methodology says *basada en el
+Sistema Armonizado* / *está basado en el Sistema Armonizado* / *del Sistema Armonizado
+vigente* in its own words. Nothing else changes: the standard still has to be NAMED, by
+title or by a sourced `title_aliases` entry, and a bare tariff-code reference still names
+no artefact.
 
 **A document that names the target artefact IN ANOTHER LANGUAGE names it**
 (Thomas, 2026-09-04). `namesTarget()` matches a run of the target's own title

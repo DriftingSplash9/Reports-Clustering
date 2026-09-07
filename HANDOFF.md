@@ -11,7 +11,8 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 verbatim. State only, no changelog, no round narrative. Finished items LEAVE
 (§4 step 4); the round's memory entry is their record.
 
-Last updated: 2026-09-07 ~02:10 UTC (round 4 closed — ONS registers, the IMF seam opened, six rulings executed, the dsbb write-offs swept)
+Last updated: 2026-09-07 ~02:40 UTC (round 8 — the NSDP block: 70 nodes, 71 edges,
+and two matcher findings waiting on Thomas in §3)
 
 ---
 
@@ -25,12 +26,13 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 |---|---|
 | anything | `PLAYBOOK.md` — short, binds every task, and its §1 hands you the one lane playbook (CORPUS or RENDER) |
 | fetching / capturing / extracting | `notes/techniques-2026-09-04.md`; for "can I reach host X?" `notes/routing-snapshot-2026-09-04.md` — **re-probe, don't believe it** |
-| **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md`, then memory `esms_hicp_pass_2026-09-05` (acronym rule), `cjk_span_floor_2026-09-05`, `quote_guard_round_2026-09-05` |
+| **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md`, then memory `esms_hicp_pass_2026-09-05` (acronym rule), `cjk_span_floor_2026-09-05`, `quote_guard_round_2026-09-05`, `round5_little_things_paused_2026-09-06` (product-number path) and `third_pdf_rendering_2026-09-06` (three renderings) · `round6_rulings_2026-09-06` |
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
 | a `*-grok-2026-08.json` slice's `meta.note` | `notes/mint-2026-08-20.md` |
 | Eurostat metadata / EU price-index / HBS chains | memory `layout_levers_and_hbs_2026-09-05`, `esms_hicp_pass_2026-09-05`, `eu_national_chains_2026-08-28` |
-| **anything in the renderer** | `PLAYBOOK-RENDER.md` §3–§4 first — it routes the lane. Then the round memory for your bit: `node_instancing_2026-09-05` / `link_batching_2026-09-05` (draw path), `layout_levers_and_hbs_2026-09-05` + `settle_time_tick_burst_2026-09-05` (forces), `fit_percentile_and_tier1_2026-09-06` (camera fit), `condensed_int_and_rulings_2026-09-05` (INT fold). Instruments: `scripts/measure-forces.ts`, `scripts/renderer/`. *(Four rows collapsed to one on 2026-09-07 — they restated PLAYBOOK-RENDER's own routing, which is how the two drift apart.)* |
+| anything IMF | `notes/imf-dsbb-2026-09-06.md` (dsbb REST API), `notes/imf-elibrary-2026-09-06.md` (books, flagships, and both 2026-09-06 addenda — the second corrects the first) |
+| **anything in the renderer** | `PLAYBOOK-RENDER.md` §3–§4 first — it routes the lane. Then the round memory for your bit: `node_instancing_2026-09-05` / `link_batching_2026-09-05` (draw path), `layout_levers_and_hbs_2026-09-05` + `settle_time_tick_burst_2026-09-05` (forces), `fit_percentile_and_tier1_2026-09-06` (camera fit), `condensed_int_and_rulings_2026-09-05` (INT fold). Instruments: `scripts/measure-forces.ts`, `scripts/renderer/`. |
 | "what is still broken that nobody is fixing?" | `notes/standing-issues.md` — items that outlived five handoffs; not on the mandatory read path |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
@@ -38,79 +40,75 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 
 Then `REPORTS.md` from *The one-line version* for scope, and project memory,
 newest first. Project instructions and memory are summaries written outside the
-repo: where either disagrees with a file, the file wins. Git status: never
-state it (rule 1).
+repo: where either disagrees with a file, the file wins.
 
-**Read cost, refreshed every handoff** (§4 step 5) — this is the bloat gauge:
+**Read cost, refreshed every handoff** (§4 step 6) — this is the bloat gauge:
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 14.0k | everyone, first |
+| `HANDOFF.md` | 14.1k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
 | `PLAYBOOK.md` | 8.2k | everyone |
-| `PLAYBOOK-CORPUS.md` | 36.2k | corpus lane — §7 splits 7a/7b/7c by question |
+| `PLAYBOOK-CORPUS.md` | 41.7k | corpus lane — §7 splits 7a/7b/7c by question |
 | `PLAYBOOK-RENDER.md` | 13.0k | renderer lane |
 | `REPORTS.md` | 24.0k | scope/direction questions |
 | `START-HERE.md` | 13.0k | humans, not agents |
-| **a corpus round reads** | **59.9k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **36.7k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **65.5k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **36.8k** | HANDOFF + CLAUDE + core + RENDER |
 
-**§1-§3 is 10.6k, over this file's own 10k cap.** Trimmed four times writing this
-handoff (renderer read-order rows 4→1, the IMF endpoint table moved to
-`notes/imf-dsbb-2026-09-06.md`, two §3 lists compressed into their memory entry);
-what is left is load-bearing. **Next handoff should cut, not add** — and watch
-whether §2 still describes the lane being worked, not its size.
+**§1-§3 is at the cap and is trimmed every round to stay there.** State and
+pointers only; the narrative is in project memory.
 
 ---
 
 ## 2. Current state
 
-Corpus **3,428 reports / 2,991 dependencies**. **980 A · 1,398 B · 613 C**,
-A-share 32.8%. **Domains: 46 approved, 0 proposed.** Zero bare-homepage edges,
-0 no-URL / 0 dead-URL. `validate` exits 0, 123/123 logic tests, grader selftest
-**68/68**, `tsc --noEmit` clean, `vite build` ok. **Grade counts come from
-`validate` only.** `kind`: 2,509 publication · 39 standard · 880 instrument.
-`public/corpus-data.json` regenerated, current as of 2026-09-07.
+Corpus **3,505 reports / 3,071 dependencies**. **1,050 A · 1,409 B · 612 C**, A-share
+34.2%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, 123/123 logic tests,
+`tsc --noEmit` clean; the grader was untouched, so its selftest stands at round 6's
+74/74, not re-run. `vite build` NOT run. `public/corpus-data.json`
+regenerated and copied back, current as of 2026-09-07 02:32 UTC. Two bare-homepage
+edges now exist, both this round's — `is-nsdp` and `mn-nsdp`, whose own NSDP address IS
+a host root; both C, which keeps that warning an error no longer.
 
-**Direction (Thomas, 2026-09-06): gathering data.** The target is THIN
-COVERAGE — regions and nations oddly short on reports or dependencies, with the
-well-covered nations as the template. No A-share or size target.
+**The NSDP block is done: 70 nodes and 71 edges.** All 81 first-party NSDP URLs from
+the IMF's list endpoints were fetched — 66 from the sandbox, 10 in Thomas's own Chrome,
+9 still unread. Records in `src/data/research/int-imf-nsdp-2026-09-07.json`, narrative
+in memory `round8_nsdp_block_2026-09-07`. **HK, PS and SV** entered the corpus for the
+first time and carry new `COUNTRY_FAMILY` / `CONTINENT_OF` / `COUNTRY_LABEL` entries.
 
-**Thin splits two ways**, and the split is what scopes a round: (a) big economies
-reached through one narrow template — **GB and AU are done**, DE and
-FR/IT/ES/SE/BE/AT/PL/FI remain; (b) 978 of 3,345 nodes with zero edges, in
-EG · IR · TW · SG · ID · IN · CN · RU · INT. The coverage census and the method
-are in memory `gb_national_core_2026-09-06`; §3 carries what to do next.
+**Every grade in the block is the grader's, not a hand grade.** Nineteen edges
+moved down when `grade-evidence.ts --slice` was run over them and the reader took
+its verdict each time. Six edges whose host refuses the grader's own fetcher
+(Colombia, Malta, Brazil, the Netherlands, Tunisia, China) are kept on a §7b
+reader's ruling recorded in each basis.
 
-**THE IMF IS THE ACTIVE SEAM AND IT IS WIDE OPEN.** Three hosts, three problems,
-all solved; both recipes are written down and **must not be re-derived**:
-`www.imf.org` 403s every path from every network, `/-/media/` included — so at
-least one live A-grade edge cites a URL that no longer answers;
-`elibrary.imf.org` serves the manuals AND the flagships, which are shelved as
-books (`notes/imf-elibrary-2026-09-06.md` and its periodical addendum);
-`dsbb.imf.org` is an AngularJS shell read through its own REST API
-(`notes/imf-dsbb-2026-09-06.md`, which now carries all four endpoints that
-matter). The two found on 2026-09-06 evening are the ones round 5 turns on:
-`api/country/getcountrybytype` gives the definitive tier lists (**110 e-GDDS ·
-49 SDDS · 32 SDDS Plus**) and `api/country/getsubscriptiondateInfos` gives the
-per-country e-GDDS dates, where **`ComplianceDate` is the NSDP first-posted date
-and null means never implemented** — so list membership alone is not evidence.
+**THE MATCHER FINDING, AND IT NEEDS THOMAS: `namesTarget` can never see
+`(SDDS Plus)`.** The acronym branch requires the parenthetical to be all upper case
+(`/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/`), so `(SDDS)` fires and the lower-case "lus"
+disqualifies `(SDDS Plus)`. Twelve SDDS Plus pages saying "SDDS Plus" in their own
+heading therefore grade `agency-not-artefact` and sit at B: AT, BE, CZ, DK, FI, FR, HU,
+LT, MK, SE, SK, US. Untouched — matcher change, his call.
 
-`imf-sdds`, `imf-sdds-plus`, `imf-dqaf`, `imf-weo` and `imf-fiscal-monitor` were
-all pure sinks before round 4 and now have outgoing edges. `imf-e-gdds` is still
-a sink, and the round established why: e-GDDS has no methodology table to wire
-from.
+**Second finding, applied not ruled: the grader's html extractor does not decode HTML
+entities**, so a quote copied from a rendered page (`Fund’s`) cannot match the stored
+text (`Fund&rsquo;s`) and returns `partial-quote`; three edges (GE, HU, MA) were re-cut
+around it. Six of the block's URLs already backed older edges and were re-graded with
+every live edge selected — psa.gov.ph walls the sandbox, so its record holds a wall
+verdict until refetched.
 
-**Renderer — no work this round.** Every shipped constant and its reason is in
-`PLAYBOOK-RENDER.md` §3–§4 and in dated code comments; harness in
-`scripts/renderer/`; narrative in memory. **One open item**: node instancing
-(target 25.00 → 16.67 ms/frame) and the tick burst are still unmeasured on
-Thomas's hardware.
+**Nine of the 81 are still unwired, and four are one click away: dea.gov.in,
+kostat.go.kr + mods.go.kr, insse.ro, bportugal.pt** render in Chrome and are refused
+by the extension ("permission denied for reading pages on this domain"). The other
+five — Bulgaria, Seychelles, Paraguay, Estonia, the Euro Area — are refused on
+evidence rather than access, each with its reason in the slice's `_dropped`.
 
-**Ranking:** `mutual: true` edges stay live and on screen but out of
-`rankedEdges` — a mutual pair is a 2-cycle that pumps its own rank. **Five
-pairs**, curated not computed. `measure-mutual-rank.ts` printing identical
-shipped and both-halves columns IS the fix, not a broken script.
+**Direction (Thomas, 2026-09-06): gathering data**, target THIN COVERAGE — memory
+`gb_national_core_2026-09-06` has the census and method. GB and AU are done; DE and
+FR/IT/ES/SE/BE/AT/PL/FI remain. **979 nodes still have zero edges**, unchanged: the block
+added 70 and wired all 70.
+
+**Renderer and ranking:** no work this round.
 
 ---
 
@@ -118,59 +116,50 @@ shipped and both-halves columns IS the fix, not a broken script.
 
 ### [Thomas]
 
-**Nothing is waiting on you.** All six rulings of 2026-09-06 are executed: the
-four weak live edges, the caption fix (§7a says A, and the 14 table-cell edges
-moved with it), and the table-number ruling (§7a, three conditions, three edges
-upgraded and two refused on the conditions).
+**1. The `(SDDS Plus)` acronym case above.** Twelve B edges turn on it. The
+upper-case test was measured before adoption and should be measured again if loosened —
+it is the guard that keeps `(2016)` and `(ESA 2010)` out.
+
+**2. Should a country carry two tier edges?** Twenty-six of the block's countries
+already had one from an institutional node (REGISTER, about the country) and now
+also have one from their NSDP (SELF-DECLARED, about the page). Both are true and
+separately evidenced, and rule 13 says the new one does not silently override the
+old. If you want one per country, the older REGISTER edge is the one to drop and it
+is a single pass — list in the block's own `_dropped` note.
+
+**3. Four extension permissions**, named in §2 — one more edge each.
 
 ### [Agent]
 
-**Round 5, in the order Thomas set: the little things, then the IMF pool.**
+**Thin coverage:** DE next, then FR/IT/ES/SE/BE/AT/PL/FI. Method in memory
+`gb_national_core_2026-09-06`. Round 7's five orphaned NSO nodes (Sudan, Yemen,
+Syria, Iraq, Iran) are leads for the same programme from the other direction.
 
-**The little things.** All evidenced already; none needs new research.
+**The e-GDDS third of the tier finding, untouched and structurally harder:** 34
+confirmed participants with a real NSDP and no node, and no `NSDPUrl` for any e-GDDS
+row, so each anchor has to be found on the country's own site. List with dates in
+`int-imf-tier-sweep-2026-09-07.json`. Botswana and Tanzania are the two most
+valuable — both carry a live `-> imf-sdds` edge while the IMF lists them as e-GDDS.
 
-1. *Two Chrome reads, four grades.* `dsbb.imf.org/e-gdds/important-dates-history`
-   renders the heading and the country row on one page, taking this round's three
-   e-GDDS edges from B to A. And **yukon.ca serves a Cloudflare interstitial to
-   the cloud sandbox** — the only thing holding `yt-statistical-review ->
-   statcan-population-estimates` at B, on a Sources line naming six 17-10-* tables.
-2. *Three nodes, each blocking edges already found and quoted*: the **2004 CPI
-   Manual** (*Theory and Practice*; the corpus has only the 2020 *Concepts and
-   Methods*), **MFSM 2000** plus the 2008 Compilation Guide (the corpus has only
-   the 2016 merger), and **IRIP 2009**. Older-edition siblings are established
-   corpus practice — `sna-1968`, `sna-1993`, `sna-2008` and `sna-2025` all exist.
-3. *Three more nodes, one alias, one bad edge* — detail in memory
-   `round4b_rulings_and_dsbb_reopen_2026-09-06`: the **Eurostat COFOG manual
-   2019**, an **IMTS Revision 2**, AFRISTAT's **NCOA-IHPC** (2008, the likely real
-   target for West African CPI edges now defaulting to `afristat-ihpc-guide-2014`);
-   `title_aliases` "Sistema Armonizado" on `hs`, which lifts several Latin American
-   edges; and `cmhc-residential-mortgage-industry-report ->
-   statcan-national-accounts`, which has no `evidence_quote` at all and names a
-   balance-sheet table, not the quarterly accounts — a probable wrong target.
+**A non-ASCII-hyphen sweep, opened round 6 and STILL NOT DONE.** Any pass looking for
+product numbers, section numbers or dates in an extracted document must search the hyphen
+CLASS (`-`, U+2010, U+2011, en dash), never ASCII `-`; cover diacritics and HTML entities
+too — this round's second finding is the same failure.
 
-**The IMF pool.** Biggest first.
+**The UEMOA NCOA retarget pass, opened round 6 and deliberately not done.** Thirteen
+UEMOA/CEMAC CPI edges point at `afristat-ihpc-guide-2014` or `uemoa-ihpc-note-2023`
+because `afristat-ncoa-ihpc` did not exist. **Read the vintage split first** (SN, NE, CI
+on NCOA 2018, correctly wired to `un-coicop-2018`); lead in the slice's `_dropped`.
 
-1. *Sweep the whole corpus against the tier endpoints.* The ~50 existing
-   `-> imf-e-gdds` and ~30 `-> imf-sdds` edges have never been checked against
-   `getcountrybytype` and `getsubscriptiondateInfos`. One pass verifies all of
-   them — **and catches any that are wrong in the direction nobody looks**, i.e.
-   a country wired to a tier it is not in, or wired to e-GDDS on a null NSDP.
-   Nothing else on this page is that cheap per edge.
-2. *The per-country metadata seam.* `getBaseSummaryofMethodologies` and the
-   DQAF-base country pages cover 191 countries across ~20 data categories each.
-   A 2026-09-05 round took 136 edges out of it before the recipe was understood;
-   it is the largest untapped source of A-grade national methodology edges.
-3. *Finish the flagships.* The **GFSR** was never read — April 2025 is ISBN
-   `9798229003261`, whole-issue PDF to a plain curl. `imf-weo -> imf-bpm6` is
-   deferred on a real finding: the only statement is in the WEO's Table G, which
-   `pdftotext` renders as column soup with no quotable span. Chrome read.
+**The rest of the IMF pool:** the per-country metadata seam, and the GFSR
+(`notes/imf-elibrary-2026-09-06.md` has the ISBN recipe).
 
-**Then back to thin coverage**: DE, then FR/IT/ES/SE/BE/AT/PL/FI. The CA/US/GB/AU
-pattern transfers directly and Eurostat's national metadata
-(`PLAYBOOK-CORPUS.md` rule 16) does half the work.
-
-**Settled, do not re-raise:** everything in §2 is executed, and everything older
-is in project memory and in `PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.
+**Settled, do not re-raise:** the null-ComplianceDate class; round 7's tier
+confirmations (Taiwan, Mauritius); round 5's little things 1-3. New this round: the Euro
+Area row (not a country, placeholder dates, refused twice); wiring a tier edge onto a
+single ordinary publication (the NSDP is the exception, reason in the block's note); and
+Estonia's NSDP, read in full and refused because "SDDS" appears only in its URL path.
+Older calls: `PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.
 
 ---
 

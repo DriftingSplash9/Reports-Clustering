@@ -395,18 +395,10 @@
       "source_report_id": "yt-statistical-review",
       "target_report_id": "statcan-population-estimates",
       "relationship_type": "uses_data_from",
-      "basis": "The Yukon Statistical Review population tables and highlights are derived from Statistics Canada population estimates. The document states: \"POPULATION (June 30th) Yukon ... Source: Statistics Canada.\"",
+      "basis": "The Yukon Statistical Review population tables and highlights are derived from Statistics Canada population estimates. The document states: \"POPULATION (June 30th) Yukon ... Source: Statistics Canada.\" || READ LIVE IN THOMAS'S OWN CHROME 2026-09-06 (round 5). yukon.ca serves a Cloudflare interstitial to both the cloud sandbox and the bridge VM (403, challenge HTML, re-tested from the VM this round), so the PDF was fetched same-origin inside Chrome and its text layer extracted in-page (content streams + each font's own ToUnicode CMap, 76 pages, 203,631 chars, sha256-verified across the transport). The Sources line is verbatim on p.17's population table; the document renders the hyphens as U+2011 (non-breaking hyphen), which normalizeForMatch folds. Table 17-10-0009-01 was resolved against Statistics Canada's own product page the same day (www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000901 -> 'Population estimates, quarterly', Frequency: Quarterly), which is the target node's artefact, so under the 2026-09-06 table-number ruling (PLAYBOOK-CORPUS §7a, condition 1 and 2) the number is now a title_aliases entry on the target. The other five tables in the Sources line are component tables of the same programme (17-10-0005-01 is the annual by-age-and-gender table) and were NOT added as aliases — they are not the quarterly estimates the node stands for.",
       "evidence_url": "https://yukon.ca/sites/default/files/2025-11/fin-yukon-statistical-review-2024_r.pdf",
-      "evidence_grade": "B",
+      "evidence_grade": "A",
       "evidence_quote": "Sources: Statistics Canada. Tables 17-10-0009-01, 17-10-0059-01, 17-10-0020-01, 17-10-0040-01 (quarterly); 17-10-0005-01 and 17-10-0008-01 (annual)"
-    },
-    {
-      "source_report_id": "yt-statistical-review",
-      "target_report_id": "statcan-national-accounts",
-      "relationship_type": "uses_data_from",
-      "basis": "The Yukon Statistical Review GDP-by-industry section relies on Statistics Canada provincial/territorial economic accounts data. The document states: \"The preliminary* real Gross Domestic Product (GDP) by industry for Yukon in 2024 was estimated at $3.3 billion ... Source: Statistics Canada.\"",
-      "evidence_url": "https://yukon.ca/sites/default/files/2025-11/fin-yukon-statistical-review-2024_r.pdf",
-      "evidence_grade": "C"
     },
     {
       "source_report_id": "nt-bureau-statistics",
@@ -515,6 +507,13 @@
       "target": "statcan-national-accounts",
       "reason": "wrong-target",
       "why": "RETARGETED 2026-09-06 (round 4), not dropped. This edge pointed at 'National Economic Accounts (Quarterly)', Canada's national quarterly expenditure-based series, while the NWT Bureau of Statistics republishes Statistics Canada's PROVINCIAL AND TERRITORIAL accounts. The Bureau's own spreadsheet names the source tables by number (36-10-0222-01, 36-10-0711-01, 36-10-0434-01) and none of them is the national quarterly series. The edge now runs to `statcan-provincial-economic-accounts` at B; see its basis. Recorded because the wrong target survived a re-point, a quote verification and a live-edge review before anyone checked what the target node actually was — checking the TARGET's title, not just the source document, belongs in any weak-edge review."
+    },
+    {
+      "edge": "yt-statistical-review -> statcan-national-accounts",
+      "source": "yt-statistical-review",
+      "target": "statcan-national-accounts",
+      "reason": "wrong-target",
+      "why": "RETARGETED 2026-09-06 on Thomas's ruling, and the original reasoning is this: the edge claimed the Yukon Statistical Review's GDP figures come from the quarterly National Economic Accounts, and they do not. The Review's GDP-by-industry tables 11.9 and 11.10 carry the figure-source line 'Source: Statistics Canada. Table 36-10-0402-01, [accessed 2025-06-19].', and that number resolves at Statistics Canada's own product page (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610040201, read 2026-09-06) to 'Gross domestic product (GDP) at basic prices, by industry, provinces and territories', Frequency: Annual, source programme 'Gross Domestic Product by Industry - Provincial and Territorial (Annual)'. That programme had no node; it was minted as statcan-provincial-gdp-by-industry in src/data/research/round6-rulings-2026-09-06.json and the edge is now live against it with the figure-source line as its quote. The earlier proposal to retarget to statcan-provincial-economic-accounts was refused: that node is 36-10-0222-01, GDP by income and by expenditure, a different product. Original edge preserved below. {\"source_report_id\": \"yt-statistical-review\", \"target_report_id\": \"statcan-national-accounts\", \"relationship_type\": \"uses_data_from\", \"basis\": \"The Yukon Statistical Review GDP-by-industry section relies on Statistics Canada provincial/territorial economic accounts data. The document states: \\\"The preliminary* real Gross Domestic Product (GDP) by industry for Yukon in 2024 was estimated at $3.3 billion ... Source: Statistics Canada.\\\"\", \"evidence_url\": \"https://yukon.ca/sites/default/files/2025-11/fin-yukon-statistical-review-2024_r.pdf\", \"evidence_grade\": \"B\"}"
     }
   ]
 }

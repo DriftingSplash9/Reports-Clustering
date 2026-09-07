@@ -25,8 +25,8 @@ you know what you are doing, it is this file plus ONE of these:
 
 **Rule numbers are global and permanent.** They are cited from code comments
 and from `notes/`, so each playbook's list has GAPS where a rule lives in one
-of the others: this file has 1, 2, 4, 5, 6, 8, 9; `PLAYBOOK-CORPUS.md` has 3
-and 10-17; `PLAYBOOK-RENDER.md` has 7 and 18. Never renumber, never reuse a
+of the others: this file has 1, 2, 4, 5, 6, 8, 9; `PLAYBOOK-CORPUS.md` has 3,
+10-17 and 19; `PLAYBOOK-RENDER.md` has 7 and 18. Never renumber, never reuse a
 number, and add a new rule as 19, 20, ... in whichever playbook binds it. An
 older reference to "PLAYBOOK §6" (known traps) or "§7" (standing decisions)
 resolves to that section of CORPUS, or of RENDER where its subject is the

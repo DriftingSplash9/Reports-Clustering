@@ -72,3 +72,43 @@ Two A-grade edges minted the same day from GFSM 2014 chapter 6 and its introduct
 harmonized with those of the System of National Accounts 2008"). The first is the
 standard-to-standard tie that explains why COFOG appears in every government-finance
 release in the corpus, and it had been parked as unreadable four hours earlier.
+
+## Addendum 2026-09-06 evening (round 5)
+
+- **Which machine:** `elibrary.imf.org` returned **403 to the bridge VM** on every
+  path tried and **200 to the cloud sandbox** — but only with a full Chrome UA
+  string; a bare `Mozilla/5.0` got 403 from the sandbox too. Re-probe before believing.
+- **Book chapters are lowercase** for the 2008 MFS Compilation Guide
+  (`/downloadpdf/display/book/9781589065840/ch001.pdf`; `CH001.pdf` 404s), unlike
+  the flagships' uppercase `CH00N.pdf`. Read the landing page's chapter links
+  rather than assuming the case.
+- **A whole-book PDF can be front matter only**: 9781589065840's is 17 pages of a
+  373-page book. Check `pdfinfo` page count against the landing page's `Pages:`.
+- English editions verified by title page today: CPI Manual *Theory and Practice*
+  2004 = `9789221136996` (688 pp); MFSM 2000 = `9781557759740` (152 pp); MFS
+  Compilation Guide 2008 = `9781589065840`; CPI Manual *Concepts and Methods*
+  2020 = `9781484354841`; MFSMCG 2016 = `9781513579191`.
+
+## Addendum 2 — round 5 minting pass, same evening
+
+- **The whole-book PDF for 9781589065840 serves the complete 372-page book.** The
+  addendum above recorded it as 17 pages of front matter; re-fetched half an hour
+  later it came down at 2,925,084 bytes / 372 pages with the body text present.
+  The earlier read was a truncated transfer, not a partial document. Check
+  `pdfinfo` page count against the landing page's `Pages:` — that advice stands,
+  and the answer this time is that they agree.
+- **"The evidence verifier extracts both ways and searches the concatenation" is
+  not true of `scripts/grade-evidence.ts`.** It reads a PDF twice — `pdftotext
+  -layout` (primary) and pdf.js (alt) — and **neither** is plain `pdftotext`
+  reading order. That matters for these two-column books because both renderings
+  keep the line-break hyphens: ch001 of the Compilation Guide prints
+  `Compi-lation` and `sta-tistical`, so paragraph 1.1 grades `partial-quote` at
+  coverage 0.76 even though it is the sentence a reader sees. Plain `pdftotext`
+  rejoins them. Workaround used in round 5: cite the Preface, which is
+  single-column and unhyphenated. The matcher gap is written up in `HANDOFF.md`
+  for Thomas.
+- Landing pages re-verified 2026-09-06 (Language / Publication Date / Pages):
+  9789221136996 English, 25 Aug 2004, 572 · 9781557759740 English, 14 Sep 2000,
+  172 · 9781589065840 English, 11 Jul 2008, 373. The CPI Manual 2004 title page
+  lists all six publishing organisations, which is what the node's `publisher`
+  carries.

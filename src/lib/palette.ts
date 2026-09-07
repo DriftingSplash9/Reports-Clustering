@@ -182,6 +182,15 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // to do with. Revisit if the Arctic ever gets its own slice.
   GL: 'XEU',
 
+  // **Three countries staffed by the NSDP block, 2026-09-07 (round 8).** Each is
+  // the first node this corpus has ever carried for that jurisdiction, and
+  // `validate-data` errors on a country with no entry here, so the data round
+  // that added the node adds the colour. `HK` draws from the China family (a
+  // special administrative region of China; inventing a family for one node was
+  // the alternative), `PS` from `ASIA` beside JO, LB and IL, and `SV` from `SA`
+  // beside GT, CR, HN and the rest of Latin America.
+  HK: 'CN', PS: 'ASIA', SV: 'SA',
+
   // Puerto Rico. Filed to the `US` family rather than given its own, because
   // unlike the Compact states it genuinely is a US subsystem: a US territory,
   // US dollar, US GAAP, and a fiscal plan certified by a federally appointed
@@ -1404,6 +1413,13 @@ export const COUNTRY_LABEL: Record<string, string> = {
   DJ: 'Djibouti', ER: 'Eritrea', KM: 'Comoros', LR: 'Liberia',
   SC: 'Seychelles', SD: 'Sudan', SL: 'Sierra Leone', SO: 'Somalia',
   SS: 'South Sudan', ST: 'São Tomé and Príncipe',
+
+  // **Three countries staffed by the NSDP block, 2026-09-07 (round 8)**,
+  // alongside their COUNTRY_FAMILY entries above and CONTINENT_OF in
+  // regions.ts. The labels are the IMF's own list wording, shortened: the
+  // endpoint spells them "China, P.R.: Hong Kong", "West Bank and Gaza" and
+  // "El Salvador".
+  HK: 'Hong Kong SAR', PS: 'West Bank and Gaza', SV: 'El Salvador',
 
   // **62-country "new countries" tier, 2026-08-25**, alongside the
   // COUNTRY_FAMILY and CONTINENT_OF (regions.ts) entries added the same day.

@@ -1,0 +1,38 @@
+{
+  "_slice": "round6-rulings-2026-09-06",
+  "_researched": "2026-09-06",
+  "_note": "Thomas's rulings of 2026-09-06 evening, executed. Item 1: yt-statistical-review's GDP edge pointed at statcan-national-accounts (quarterly, national). Reading the round-5 Chrome capture of the Yukon Statistical Review found a real figure-source line under its GDP tables naming Statistics Canada table 36-10-0402-01 - invisible to every earlier pass because the document sets table numbers with U+2011 non-breaking hyphens rather than ASCII. That table is the annual provincial and territorial by-industry product, which had no node: statcan-provincial-economic-accounts is 36-10-0222-01 (income and expenditure) and statcan-gdp-monthly is the national monthly estimate. Thomas ruled mint-and-retarget rather than retarget-to-the-nearest-wrong-node. The old edge is preserved verbatim on a wrong-target _dropped entry in territories-canada-grok-2026-08.json, where it lived.",
+  "reports": [
+    {
+      "id": "statcan-provincial-gdp-by-industry",
+      "title": "Gross Domestic Product by Industry - Provincial and Territorial (Annual)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "kind": "publication",
+      "description": "Statistics Canada's annual provincial and territorial GDP-by-industry programme (IMDB record 1303; the programme page reads Status: Active, Frequency: Annual), the output side of the provincial and territorial accounts. Its published table is 36-10-0402-01, 'Gross domestic product (GDP) at basic prices, by industry, provinces and territories' (formerly CANSIM 379-0030), whose Statistics Canada product page names this programme as its source; that table was retired after its 2025-05-01 release and the page names table 36-10-0711-01 under the same title as its replacement. Minted 2026-09-06 on Thomas's ruling, after yt-statistical-review was found citing 36-10-0402-01 by number in its own figure-source lines: neither statcan-provincial-economic-accounts (36-10-0222-01, GDP by income and by expenditure) nor statcan-gdp-monthly (the national monthly by-industry estimate) is this artefact. Table number resolved against the agency's own product page in this round per PLAYBOOK-CORPUS §7a condition 1 (www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610040201, read 2026-09-06). NOT aliased: 36-10-0711-01, the successor number, which no document in this corpus cites.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual. The IMDB programme page records its most recent data release as May 1, 2026.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1303",
+      "domains": [
+        "national-accounts"
+      ],
+      "title_aliases": [
+        "36-10-0402-01"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "yt-statistical-review",
+      "target_report_id": "statcan-provincial-gdp-by-industry",
+      "relationship_type": "uses_data_from",
+      "basis": "RETARGETED 2026-09-06 (Thomas's ruling) from statcan-national-accounts, which was the wrong release: the Yukon Statistical Review's GDP figures are the annual provincial and territorial by-industry estimates, not the quarterly national accounts. The Review's own tables 11.9 and 11.10 carry the figure-source line quoted below, which names the table by number; under PLAYBOOK-CORPUS §7a a figure-source line is a citation, and an agency's own product number names the artefact. The number was resolved against Statistics Canada's own product page in this round per condition 1 (www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610040201, read 2026-09-06): 'Gross domestic product (GDP) at basic prices, by industry, provinces and territories', Frequency: Annual, source programme 'Gross Domestic Product by Industry - Provincial and Territorial (Annual)', which is the target node. The Review sets its table numbers with U+2011 non-breaking hyphens, which is why every earlier pass missed them; normalizeForMatch folds U+2011 to an ASCII hyphen, and the quote below was copied out of the extraction rather than retyped. READ LIVE IN THOMAS'S OWN CHROME 2026-09-06 - yukon.ca serves a Cloudflare interstitial to both the cloud sandbox and the bridge VM, so the PDF was fetched same-origin inside Chrome and its text layer extracted in-page (76 pages, 203,631 chars, sha256-verified across the transport). via: chrome 2026-09-06.",
+      "evidence_url": "https://yukon.ca/sites/default/files/2025-11/fin-yukon-statistical-review-2024_r.pdf",
+      "evidence_quote": "Source: Statistics Canada. Table 36‑10‑0402‑01, [accessed 2025‑06‑19].",
+      "evidence_grade": "A"
+    }
+  ]
+}

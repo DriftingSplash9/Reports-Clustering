@@ -30,24 +30,16 @@
       "evidence_url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf",
       "evidence_grade": "A",
       "evidence_quote": "Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual."
-    },
-    {
-      "source_report_id": "af-bop",
-      "target_report_id": "imf-e-gdds",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.",
-      "evidence_url": "https://dab.gov.af/External-Sector-Statistics1",
-      "evidence_grade": "C"
     }
   ],
   "relations": [],
   "_dropped": [
     {
       "edge": "af-nsia -> imf-e-gdds (basis addendum)",
-      "source": "af-nsia",
-      "target": "imf-e-gdds",
-      "reason": "caveat",
-      "why": "Grok's redo cited IMF Country Report No. 06/251 (Islamic Republic of Afghanistan, Seventh Review Under the SMP / PRGF request, July 2006) for two supporting quotes: a MEFP (Attachment II) sentence on 'drafting the metadata necessary to participate in the General Data Dissemination System', and a separate Executive Director statement that 'STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)'. The correct 89-page document was located and read (Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback). Full-document accessibility-tree search for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' returned zero matches. This is the second consecutive round this exact claim has failed verification; the existing af-nsia -> imf-e-gdds edge (minted round 1/2) already carries the same 'quote could not be independently retrieved' caveat and is left unchanged."
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "REASON CHANGED TO `note` 2026-09-07: this was a `caveat`, which is reserved for an annotation on an edge that EXISTS, and `af-nsia -> imf-e-gdds` was dropped in round 7 on Thomas's null-ComplianceDate ruling (record in crossborder-standards-2026-08-22.json). The content below is unchanged and is now doubly worth keeping: it records that the IMF CR 06/251 corroboration failed verification in two separate rounds, which is the same conclusion the ruling reached from the other direction. || ORIGINAL ENTRY FOLLOWS. || Grok's redo cited IMF Country Report No. 06/251 (Islamic Republic of Afghanistan, Seventh Review Under the SMP / PRGF request, July 2006) for two supporting quotes: a MEFP (Attachment II) sentence on 'drafting the metadata necessary to participate in the General Data Dissemination System', and a separate Executive Director statement that 'STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)'. The correct 89-page document was located and read (Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback). Full-document accessibility-tree search for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' returned zero matches. This is the second consecutive round this exact claim has failed verification; the existing af-nsia -> imf-e-gdds edge (minted round 1/2) already carries the same 'quote could not be independently retrieved' caveat and is left unchanged."
     },
     {
       "edge": "mu-national-accounts -> imf-sdds-plus",
@@ -76,6 +68,13 @@
       "target": "imf-e-gdds",
       "reason": "no-document",
       "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://dsbb.imf.org/. Original basis: \"IMF DSBB National Accounts DQAF (Iran, updated 6 August 2012): the Central Bank of Iran compiles accounts 'based on ... SNA 1968 and 1993' — an honest, dated SNA-vintage disclosure (not SNA 2008), distinct from the existing ir-sci -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render). Minor discrepancy noted, non-blocking: Grok's basis cited this DQAF page as also carrying a '15 December 2009' update date matching Iraq's; the live Iraq DQAF page instead showed 'Last Updated: Jan 08, 2018' — does not affect this Iran quote or edge.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "af-bop -> imf-e-gdds",
+      "source": "af-bop",
+      "target": "imf-e-gdds",
+      "reason": "wrong-target",
+      "why": "DROPPED 2026-09-07 (round 7, the IMF tier sweep). This edge was a placeholder and its own basis says so: 'Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node.' Its evidence names BPM6 and nothing else — Da Afghanistan Bank's External Sector Statistics page titling a file 'Balance of Payments Transactions (BPM6)' — so it never named the e-GDDS at all, which is why it sat at C. The node it was standing in for now exists and the real edge is live: af-bop -> imf-bpm6, graded B in af-unlinked-wiring-2026-08-29.json on the same page. Keeping this one would double-count one page as evidence for two different standards, one of which it does not mention. Afghanistan's e-GDDS participation is not lost with it — af-nsia -> imf-e-gdds remains live and is the country-level record, and the sweep confirms its own caveat: Afghanistan's Important Dates row is 'June 22, 2006' with the NSDP column blank. ORIGINAL ENTRY PRESERVED: relationship_type=\"methodology_depends_on\", evidence_url=\"https://dab.gov.af/External-Sector-Statistics1\", evidence_grade=\"C\", basis=\"Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.\""
     }
   ]
 }
