@@ -3,7 +3,7 @@ import type { Country } from './types'
 /**
  * Bilateral force layer for Phase 2 of the usability plan — redesigned
  * 2026-08-12 per Thomas's direction, replacing the "continental repulsion"
- * Grok's plan originally proposed.
+ * the original plan proposed.
  *
  * The rejected version pushed nodes apart purely for sitting on different
  * continents, which is exactly the "position asserts a claim the edges do
@@ -57,7 +57,7 @@ export type GeoBloc =
   // disagree about who is in. Membership as of 2026: the original five (BR,
   // RU, IN, CN, ZA) plus Egypt, Ethiopia, Iran, the UAE (2024) and Indonesia
   // (2025). Iran and Indonesia have no live nodes yet — they arrive with the
-  // staged Grok mint, and their entries should be added then. Saudi Arabia
+  // staged mint, and their entries should be added then. Saudi Arabia
   // was invited and has not formally joined, so it is deliberately absent —
   // and note for the mint: its ISO code 'SA' collides with the `SA` (South
   // America) ColourFamily name in palette.ts, worth untangling before any

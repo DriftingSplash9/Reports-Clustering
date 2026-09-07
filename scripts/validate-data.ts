@@ -21,6 +21,7 @@ let invariantFailures = 0
 import {
   buildGraph,
   contains,
+  hasStoredQuote,
   isBareHost,
   isIndexPage,
   isDocumented,
@@ -452,9 +453,10 @@ console.log()
 const documentedDeps = dependencies.filter(isDocumented)
 const noUrl = documentedDeps.filter((d) => !d.evidence_url)
 const bareUrl = documentedDeps.filter((d) => d.evidence_url && isBareHost(d.evidence_url))
-const hasQuote = (b: string | undefined) => /["“”«»『「]/.test(b ?? '')
-const noUrlWithQuote = noUrl.filter((d) => hasQuote(d.basis))
-const bareUrlNoQuote = bareUrl.filter((d) => !hasQuote(d.basis))
+// `hasStoredQuote` reads `evidence_quote` FIRST and `basis` second — see its
+// comment in graph.ts for what the basis-only version was mislabelling.
+const noUrlWithQuote = noUrl.filter(hasStoredQuote)
+const bareUrlNoQuote = bareUrl.filter((d) => !hasStoredQuote(d))
 const bareHosts = new Map<string, number>()
 for (const d of bareUrl) {
   const h = d.evidence_url ?? ''
@@ -577,7 +579,7 @@ if (loadIssues.duplicateRelations.length) {
  * and which reports carry no tag at all and so cannot be reached by the domain
  * filter at all.
  *
- * Added 2026-08-18, when the Grok import promoted 18 tags in one pass and the
+ * Added 2026-08-18, when the August 2026 import promoted 18 tags in one pass and the
  * question "which of the 62 proposed ones have earned a slot" turned out to have
  * no answer anywhere in the tooling.
  */

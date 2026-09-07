@@ -781,7 +781,19 @@ export function namesTarget(
       // after `Services Producer Price Index (SPPI)`).
       const after = target.title.slice((m.index ?? 0) + m[0].length).trim()
       if (after && !/^[\/|—–]/.test(after)) continue
-      if (!/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/u.test(acr)) continue
+      // **The case test admits ONE trailing capitalised word** (Thomas,
+      // 2026-09-07, ruling on round 8's matcher finding). The test was
+      // all-upper-case throughout, so `(SDDS)` fired and `(SDDS Plus)` could
+      // never fire — the lower-case "lus" disqualified it — and twelve
+      // countries whose NSDP heading says "SDDS Plus" in the IMF's own words
+      // graded `agency-not-artefact`. The guard that keeps `(2016)` and
+      // `(ESA 2010)` out is `acronymFitsHead` below, NOT this line; what this
+      // line is for is refusing a parenthetical that is ordinary prose
+      // ("(Revised edition)", "(all items)"), and one capitalised word after
+      // an otherwise all-caps acronym is not prose. Exactly one word, initial
+      // capital, at most five following letters, so `SDDS Plus` and
+      // `COICOP Rev` pass and `(Consumer Price Index)` does not.
+      if (!/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*(?: \p{Lu}\p{Ll}{1,5})?$/u.test(acr)) continue
       // **The parenthetical must abbreviate THIS title, not name the standard
       // it follows** (2026-09-05, ESMS pass). Thirty-one national releases are
       // titled "National accounts (ESA 2010)" and the rule above read "(ESA
@@ -2431,6 +2443,19 @@ function selftest(): void {
   t('a three-letter parenthetical acronym still does not name the artefact',
     !namesTarget('the EDP notification tables were transmitted in April',
       { title: 'Hellenic fiscal reporting (EDP) tables', publisher: 'x', url: '' }).artefact)
+  t('an acronym with ONE trailing capitalised word names the artefact',
+    namesTarget('Colombia subscribes to the SDDS Plus and publishes this page',
+      { title: 'IMF Special Data Dissemination Standard Plus (SDDS Plus)', publisher: 'IMF', url: '' }).how === 'acronym:SDDS Plus'
+    && namesTarget('reported under SDDSPlus',
+      { title: 'IMF Special Data Dissemination Standard Plus (SDDS Plus)', publisher: 'IMF', url: '' }).artefact
+    && !namesTarget('the SDDS Plusx category', { title: 'IMF Special Data Dissemination Standard Plus (SDDS Plus)', publisher: 'IMF', url: '' }).artefact)
+  t('the trailing word is one short capitalised word, not prose',
+    !namesTarget('see the revised edition of the manual',
+      { title: 'Balance of Payments Manual (Revised Edition)', publisher: 'x', url: '' }).artefact
+    && !namesTarget('the SDDS Extended dataset',
+      { title: 'Data Standard Extended (SDDS Extended)', publisher: 'x', url: '' }).artefact
+    && !namesTarget('under SDDS Plus Extra rules',
+      { title: 'Data Standard Plus Extra (SDDS Plus Extra)', publisher: 'x', url: '' }).artefact)
   t('the second pass does not invent a match that is not there',
     locateQuote('the weights come from the household budget survey',
       'this document is about something else entirely and says nothing of the kind').coverage < 0.55)

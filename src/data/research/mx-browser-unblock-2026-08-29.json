@@ -72,7 +72,7 @@
       "source_report_id": "mx-alcaldia-benito-juarez",
       "target_report_id": "mx-censo-poblacion",
       "relationship_type": "uses_data_from",
-      "basis": "The alcaldía's Programa de Gobierno 2024-2027 takes its unemployment and foreign-resident population figures for Benito Juárez directly from the 2020 census, in body text, in two separate chapters. Verbatim: \"De acuerdo con el Censo de Población y Vivienda 2020, en la Alcaldía Benito Juárez, la población de 12 años y más que se encuentra desocupada asciende a un total de 5,673 personas, de las cuales, 2,618 son mujeres y 3,055, son hombres\"; and separately \"teniendo un total de 17,747 habitantes según el Censo Nacional de Población y Vivienda 2020 del INEGI\". This closes the lead that round 1 left open after a Grok follow-up pass; the earlier verdict that the source was unreadable was wrong — alcaldiabenitojuarez.gob.mx serves fine to plain curl.",
+      "basis": "The alcaldía's Programa de Gobierno 2024-2027 takes its unemployment and foreign-resident population figures for Benito Juárez directly from the 2020 census, in body text, in two separate chapters. Verbatim: \"De acuerdo con el Censo de Población y Vivienda 2020, en la Alcaldía Benito Juárez, la población de 12 años y más que se encuentra desocupada asciende a un total de 5,673 personas, de las cuales, 2,618 son mujeres y 3,055, son hombres\"; and separately \"teniendo un total de 17,747 habitantes según el Censo Nacional de Población y Vivienda 2020 del INEGI\". This closes the lead that round 1 left open after a import follow-up pass; the earlier verdict that the source was unreadable was wrong — alcaldiabenitojuarez.gob.mx serves fine to plain curl.",
       "evidence_url": "https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf",
       "evidence": "documented",
       "evidence_grade": "A",
@@ -136,7 +136,7 @@
       "source": "mx-nuevo-leon-imss-municipal",
       "target": "mx-imss-puestos",
       "reason": "note",
-      "why": "RESOLVED (as part_of, not an edge), and it should come out of the access-blocked pile. The node already carries part_of: 'mx-imss-puestos' in mx-mexico-grok-2026-08.json, so a dependency edge between the pair is a validator error regardless of what datos.imss.gob.mx would say — the access block was never the binding constraint. This is the identical shape already recorded for mx-jalisco-imss-municipal -> mx-imss-puestos. (For the record, the hosts remain unreachable: datos.imss.gob.mx returns 403 from an Imperva/Incapsula WAF and datos.nl.gob.mx fails with OpenSSL SSL_ERROR_SYSCALL.) Stays 'note' rather than 'resolved' because a part_of resolution has no matching live edge by design."
+      "why": "RESOLVED (as part_of, not an edge), and it should come out of the access-blocked pile. The node already carries part_of: 'mx-imss-puestos' in mx-mexico-2026-08.json, so a dependency edge between the pair is a validator error regardless of what datos.imss.gob.mx would say — the access block was never the binding constraint. This is the identical shape already recorded for mx-jalisco-imss-municipal -> mx-imss-puestos. (For the record, the hosts remain unreachable: datos.imss.gob.mx returns 403 from an Imperva/Incapsula WAF and datos.nl.gob.mx fails with OpenSSL SSL_ERROR_SYSCALL.) Stays 'note' rather than 'resolved' because a part_of resolution has no matching live edge by design."
     },
     {
       "edge": "mx-infonavit-estadisticas -> mx-imss-puestos",

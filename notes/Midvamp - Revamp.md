@@ -16,7 +16,7 @@ the design changes.
 A random raw-fetch sample of 56 live, validation-passing edges graded only
 50% as fully supported (quote found in the cited document, document names
 the input artefact, direction stated). 25% were weak, 14% unsupported, 11%
-unverifiable. Hand-researched EU/US branches held (11/13); Grok-derived
+unverifiable. Hand-researched EU/US branches held (11/13); bulk-imported
 slices did not. Root cause: an edge has one bit of quality — live or
 `_dropped` — while the evidence has a gradient. The schema cannot say
 "this is a lead", so leads get minted as facts.
@@ -143,7 +143,7 @@ the top 10.
 Throughput: ~56 edges per ~10-minute agent run → the 2,748 live edges are
 roughly a day of agent time, batched by slice so validate runs between
 batches. Order: slices behind the top-10 authority nodes first (`sna-2008`
-has 40/100 in-edges with no URL), then Grok-derived slices, then the
+has 40/100 in-edges with no URL), then the bulk-imported slices, then the
 hand-researched branches (they mostly pass). The grader must reproduce
 the audit's 56-edge grades before it touches the corpus.
 
@@ -221,7 +221,7 @@ cites. Finding a better document for a B edge is a research round.
 
 ## 5. Data sources going forward
 
-Grok is retired (Thomas, 2026-09-05) — no new leads from it. Machine-readable
+No new leads come from the August 2026 import. Machine-readable
 metadata is for citations: the IMF DSBB JSON endpoint
 (`dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=&categoryCode=`),
 Eurostat ESMS pages, SDMX metadata "source" fields. A scripted pass over
@@ -338,7 +338,7 @@ slider over `supersedes`.
 
 ## 10. Open from the question round
 
-- **Q18 (Grok folder) — blank.** Standing recommendation: delete locally +
+- **Q18 (the import scratch folder) — blank.** Standing recommendation: delete locally +
   commit if git tracks it (GitHub Desktop will show ~295 deletions);
   otherwise move to `archive/`. Windows ownership fix is in the chat of
   2026-09-02. Either way write `notes/mint-2026-08-20.md` first (37

@@ -1,0 +1,96 @@
+{
+ "_slice": "de-national-core-round3-2026-09-07",
+ "_researched": "2026-09-07",
+ "_status": "live",
+ "_note": "DE thin-coverage round 3, same session as round 2 (de-national-core-2026-09-07.json). Continues resolving de-destatis-source-surveys.json's own deferred Chapter 10.1 list (46 EVAS-numbered Destatis source statistics named in the German GNI inventory, esa-2010-methods.pdf). Three more nodes, all with direct body-text usage quotes (not just table-row mentions): de-destatis-building-housing-census (EVAS 31211), de-destatis-microcensus-housing-supplement (EVAS 12212 -- resolves the specific lead de-national-core-2026-09-07.json's own microcensus node flagged as untouched), and de-destatis-tax-revenue-statistics (EVAS 71211, which the GNI inventory itself glosses three different ways in three places -- 'Tax revenue statistics' in the Chapter 10 summary table, 'public finance statistics' at two body citations, 'fiscal statistics' at a third -- all recorded as title_aliases sourced from this same document, since a translation inconsistency inside one document is still evidence for the alias rule as written).",
+ "_headline": "DE: +3 nodes, +3 edges. All run through grade-evidence.ts before finalizing -- see basis fields for grader verdicts.",
+ "_open_questions": "de-destatis-source-surveys.json's own _dropped block (Chapter 10.1, 'remaining 43 of 46') now has 5 of its rows resolved across this session's two DE slices (12211, 73311 in round 2; 31211, 12212, 71211 here) -- that file's own dropped note has not been edited to reflect this (the same stale-cross-file pattern its own history already logged four times); flagged here rather than fixed, since the resolved items are individually traceable by EVAS number and de-destatis-source-surveys.json's dropped entry already carries a caveat that a future session should check for overlap before re-deriving. Bundesbank Monthly Report / Annual Report (Chapter 10.2) were not re-investigated this round -- round 2's finding stands (real, live, monthly/annual, but no document search located a sentence naming a specific German source statistic as their data source).",
+ "reports": [
+  {
+   "id": "de-destatis-building-housing-census",
+   "title": "Building and Housing Census",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 31211 (Gebäude- und Wohnungszählung). A full survey of Germany's housing stock, conducted alongside the population census -- most recently 2022 and 2011. The GNI inventory names it directly and repeatedly as the primary data source for housing services (imputed and actual rent) in the production/expenditure accounts: 'With the results of the 2022 building and housing census (EVAS 31211), data on rental income per square metre and the corresponding floor area are available for the first time from a full survey', and its results are the 'current benchmark' for the housing-services calculation between census years.",
+   "releases_per_year": 0.09,
+   "cadence_note": "GNI inventory: conducted 2011 and 2022, an 11-year interval -- entered as a nominal rate (1/11) rather than guessed, per the corpus's own 'a number can say once a generation' convention for the decennial US census (0.1) and SNA 2008 (0.05). Not independently cross-checked against a stated future schedule on a separate Destatis page this round.",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Society-Environment/Housing/_node.html",
+   "domains": [
+    "housing"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-microcensus-housing-supplement",
+   "title": "Microcensus Additional Survey on the Housing Situation of Households",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 12212 -- the microcensus's housing supplementary programme, distinct from the core annual microcensus (EVAS 12211, minted in de-national-core-2026-09-07.json). The GNI inventory names it by its full official title directly: 'Information on service charges (excluding energy) is available from the Microcensus Additional Survey on the Housing Situation of Households (EVAS 12212). The most recent surveys were conducted in 2018 and 2022.' Also used, per the same document, to extrapolate housing floor-area data between building-census years.",
+   "releases_per_year": 0.25,
+   "cadence_note": "GNI inventory: 'The most recent surveys were conducted in 2018 and 2022' -- a 4-year interval, matching the microcensus's own broader supplementary-survey rotation. Not independently cross-checked against a stated future schedule this round.",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Society-Environment/Population/Households-Families/Methods/microcensus-2020.html",
+   "domains": [
+    "housing",
+    "population"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-tax-revenue-statistics",
+   "title": "Tax Revenue Statistics",
+   "title_aliases": [
+    "public finance statistics",
+    "fiscal statistics"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 71211 (Steuerhaushalt / Kassenmäßige Steuereinnahmen). Destatis's own EN page titles this 'Tax revenue' and reports cash tax revenue by type of tax. The GNI inventory's Chapter 10 summary table glosses the same EVAS number 'Tax revenue statistics'; its body text cites the identical EVAS number twice as 'public finance statistics' (land transfer tax revenue for the housing-services and real-estate-services calculations) and once as 'fiscal statistics' (the second-home tax added to housing services) -- three English glosses for one release inside the same document, recorded here as title_aliases sourced from that document rather than picked for the node.",
+   "releases_per_year": 4,
+   "cadence_note": "Destatis publishes both annual (Fachserie 14 Reihe 4) and quarterly ('Statistischer Bericht Steuerhaushalt') releases; not independently cross-checked against a stated periodicity document this round -- entered as quarterly (4) since that is the more frequent, live-confirmed release cadence (destatis.de lists quarterly 'Statistischer Bericht Steuerhaushalt' reports through 2024).",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Government/Taxes/Tax-Revenue/_node.html",
+   "domains": [
+    "taxation"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-building-housing-census",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 3). The GNI inventory names the 2022 building and housing census directly as the current benchmark data source for housing-services calculations (rental income per square metre, floor area) in the production/expenditure accounts. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim (PDF line-wrapped in the original, joined here). GRADED BY grade-evidence.ts --slice (2026-09-07): A, reason quote-found-artefact-named -- the artefact is named within the grader's matched window around the quote itself. Grader confirms the initial hand grade of A; no downgrade.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "With the results of the 2022 building and housing census (EVAS 31211), data on rental income per square metre and the corresponding floor area are available for the first time from a full survey.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-microcensus-housing-supplement",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 3). The GNI inventory names this survey by its full official title as the source for service-charge (non-energy) housing-services data. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim (PDF line-wrapped in the original, joined here). GRADED BY grade-evidence.ts --slice (2026-09-07): A, reason quote-found-artefact-named -- the artefact is named within the grader's matched window around the quote itself. Grader confirms the initial hand grade of A; no downgrade.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Information on service charges (excluding energy) is available from the Microcensus Additional Survey on the Housing Situation of Households (EVAS 12212).",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-tax-revenue-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 3). The GNI inventory names this EVAS number directly as the source for land-transfer-tax revenue used in the real-estate and housing-services calculations (under one of its three in-document glosses, 'public finance statistics' -- recorded as a title_alias sourced from this same document per the multilingual/multi-gloss alias rule). Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim (PDF line-wrapped in the original, joined here). GRADED BY grade-evidence.ts --slice (2026-09-07): A, reason quote-found-artefact-named -- the artefact is named within the grader's matched window around the quote itself. Grader confirms the initial hand grade of A; no downgrade.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The amount of revenues from the land transfer tax is obtained from the public finance statistics (EVAS 71211).",
+   "evidence_grade": "A"
+  }
+ ],
+ "_dropped": []
+}

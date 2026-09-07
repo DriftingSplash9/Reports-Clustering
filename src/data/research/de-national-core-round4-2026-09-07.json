@@ -1,0 +1,644 @@
+{
+ "_slice": "de-national-core-round4-2026-09-07",
+ "_researched": "2026-09-07",
+ "_status": "live",
+ "_note": "DE thin-coverage round 4. Works the 37 genuinely-open Chapter 10.1 rows that de-destatis-source-surveys.json's own _dropped note lists (round 10 made that note accurate: four rows resolved, two REFUSED, so 37 open and not 43). Method is round 3's: the German GNI inventory (esa-2010-methods.pdf, 372pp, 4.4MB) fetched live in the cloud sandbox and read for BODY-TEXT sentences that name a source statistic by title AND by EVAS number AND say what the accounts do with it. Chapter 10's table row alone was never treated as sufficient -- see the first open question for why that is a ruling and not a research gap. 21 rows had such a sentence; 16 did not and stay open, each with its reason. Node titles are the publisher's own words for the artefact taken from this same document (PLAYBOOK-CORPUS §7c), with the Chapter 10 register gloss recorded as a title_alias where the two differ -- the same multi-gloss handling round 3 used for EVAS 71211. One title_alias was deliberately NOT recorded (EVAS 71712's register gloss, see that node). Node urls are the publisher's canonical per-statistic GENESIS-Online pages, all verified 200 this round; they are Angular shells, so they are a node url and never evidence.",
+ "_headline": "DE: +21 nodes, +21 edges, all off one document already cited in this corpus. Chapter 10.1's open rows go from 37 to 16.",
+ "_open_questions": [
+  "THE RULING THIS ROUND KEPT HITTING, and it is Thomas's, not a research pass: 8 of the 16 rows left open appear in Chapter 10's table and NOWHERE in the 372-page body -- 12111 Population census, 21372 (higher-education finance, quarterly), 31141 Statistics of demolition of buildings and dwellings, 44241 (annual survey, finishing trade and property developers), 71512 and 71517 (quarterly cash results), 71811 Annual accounts of extra budgets, 79931 Energy tax statistics. PLAYBOOK-CORPUS §7a admits a methodology table cell that names a source as caption-equivalent and grades it A, and Chapter 10 is exactly such a table -- its title is 'Main data sources used'. What it discloses per row is an X against the Production/Expenditure/Income column, i.e. WHICH APPROACH the source feeds, not what the accounts compute from it. Every mint in rounds 2, 3 and 4 rested on a body sentence instead. Reading the table row as sufficient would move all eight at once, on one decision; refusing it leaves them permanently unwirable from this document. Neither is a research question.",
+  "The other 8 open rows are refused on evidence, not left unread. Five are cited ONLY inside an EVAS BUNDLE the document never separates: 43211 appears only as 'EVAS 43211 and 43221', 23121 only as 'the annual hospital statistics (EVAS 23111, 23112, 23121)', 51141 and 51231 only as 'the monthly ITGS (EVAS 51141, 51231)' / 'the external trade statistics (EVAS 51141, 51231)', 44221 only as 'the annual business and investment survey (EVAS 44211, 44221)'. Wiring one member of a bundle asserts a division of labour the sentence does not make. Three more are named only in a phrasing too generic to carry a node title: 42252 is cited twice as 'the annual structural survey (SE)', 71711 as 'the budgets of the Federal Government, the federal states and the municipalities' with no artefact title at all, and 31121 only as 'the construction activity statistics', which is the family name covering EVAS 31111 as well. The ITGS pair is the most valuable of the eight -- 'monthly ITGS' would be a real node if minted as ONE international-trade-in-goods node rather than split across two EVAS rows, and this corpus already carries ITGS nodes elsewhere; that is a scoping question, not an evidence one.",
+  "Chapter 10.2 (16 other official sources) is untouched by this round and its own note in de-destatis-source-surveys.json is the accurate worklist: KBA motor vehicle statistics, BaFin insurance and pension statistics, banking statistics, EMU interest rate statistics, Economic Accounts for Agriculture and the Bundesnetzagentur telecommunications annual report are still open; the Bundesbank Monthly Report and Annual Report are refused, twice, and must not be opened a third time. Chapter 10.3 (7 non-government sources) is still lowest priority and untouched.",
+  "The 47415 -> 47410 and 45341/45342 -> 47410 successions are real and are NOT minted here. Both are `supersedes`, which is a Relation and not a dependency edge, and no round has opened that shape for this branch. All five nodes carry the succession in their descriptions so the lead survives."
+ ],
+ "reports": [
+  {
+   "id": "de-destatis-structural-survey-trade-services",
+   "title": "Structural survey of service activities, wholesale and retail trade (SHD)",
+   "title_aliases": [
+    "Structural survey in the trade and service sector"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 47410 (Strukturerhebung im Dienstleistungsbereich und Handel, SHD). Successor from reporting year 2021 to the structural survey in the services sector (EVAS 47415) and the annual trade statistics (EVAS 45341). The GNI inventory names it as the source for both output and intermediate consumption across several NACE sections, and elsewhere as one of the two main sources for output and intermediate consumption in the whole production approach.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/47410",
+   "domains": [
+    "services",
+    "trade"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-structural-survey-services",
+   "title": "Structural survey of service activities (SiD)",
+   "title_aliases": [
+    "Structural survey in the service sector",
+    "Structural survey in the services sector"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 47415 (Strukturerhebung im Dienstleistungsbereich, SiD). Discontinued after reporting year 2020, when EVAS 47410 took over. The GNI inventory calls it the primary source for output in the service sections until 2020 and uses it for household final consumption expenditure in transport, tour operators, internet services, training courses and the arts.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/47415",
+   "domains": [
+    "services"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-annual-trade-statistics",
+   "title": "Annual trade statistics",
+   "title_aliases": [
+    "Annual survey of the wholesale and retail trade",
+    "Annual trade survey"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 45341 (Jahreserhebung im Handel). Discontinued after reporting year 2020, when EVAS 47410 took over. The GNI inventory uses it for turnover in the trade sections up to 2020 and for the back-casting of the 2021 series.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/45341",
+   "domains": [
+    "trade"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-hotel-restaurant-statistics",
+   "title": "Annual statistics of the hotel and restaurant industry",
+   "title_aliases": [
+    "Annual survey of the hotels and restaurants sector"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 45342 (Jahreserhebung im Gastgewerbe). Discontinued after reporting year 2020. The GNI inventory uses it for turnover and intermediate consumption in accommodation and food service activities, and for the back-casting of the 2021 series.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/45342",
+   "domains": [
+    "tourism",
+    "services"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-cost-structure-survey-manufacturing",
+   "title": "Cost structure survey for the manufacturing sector",
+   "title_aliases": [
+    "Cost structure survey in manufacturing, mining and quarrying",
+    "Cost-structure survey of manufacturing, mining and quarrying"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 42251 (Kostenstrukturerhebung im Verarbeitenden Gewerbe, KSE). Surveys enterprises with 20 or more employees. The GNI inventory names it, alongside EVAS 47410, as one of the two main sources for output and intermediate consumption in the entire production approach, and uses it for turnover in NACE sections B and C.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/42251",
+   "domains": [
+    "industry",
+    "mining"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-cost-structure-survey-energy-water",
+   "title": "Cost structure survey of enterprises engaged in energy supply, water supply, sewage and waste disposal, and environmental pollution abatement (KSE)",
+   "title_aliases": [
+    "Cost structure survey in the fields of energy supply, water supply, waste water and waste disposal, remediation activities",
+    "Cost structure survey in the fields of energy and water supply"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 43221 (Kostenstrukturerhebung bei Unternehmen der Energie- und Wasserversorgung, KSE). The GNI inventory says the survey covers around 3,000 supply enterprises and uses it as the data basis for output in every division of NACE sections D and E.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/43221",
+   "domains": [
+    "energy",
+    "environment"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-cost-structure-survey-main-construction",
+   "title": "Cost structure survey in the main construction industry",
+   "title_aliases": [
+    "Cost structure survey in main construction industry"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 44253 (Kostenstrukturerhebung im Bauhauptgewerbe). Covers enterprises with 20 or more employees. The GNI inventory uses it for intermediate consumption in NACE section F and for the cost of external labour and the gross output of property developers.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/44253",
+   "domains": [
+    "construction"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-cost-structure-survey-building-completion",
+   "title": "Cost structure survey in the building completion work",
+   "title_aliases": [
+    "Cost structure survey of the building completion work",
+    "Cost structure survey in the finishing trade"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 44254 (Kostenstrukturerhebung im Ausbaugewerbe). The GNI inventory uses it for specialised construction activities (NACE 43) and, with EVAS 44253, as the source data for intermediate consumption in the construction section.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/44254",
+   "domains": [
+    "construction"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-annual-survey-main-construction",
+   "title": "Annual survey of businesses in the main construction industry",
+   "title_aliases": [
+    "Annual survey incl. investments in the main construction industry"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 44211 (Jahreserhebung bei Betrieben im Bauhauptgewerbe). The GNI inventory names it as an important source for gross fixed capital formation in buildings and structures, and uses its annual construction output data to determine output in NACE 41 and NACE 42 for enterprises with 20 or more employees.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/44211",
+   "domains": [
+    "construction",
+    "investment"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-investment-survey-manufacturing",
+   "title": "Investment survey of the manufacturing and mining industries",
+   "title_aliases": [
+    "Survey of investments in manufacturing, mining and quarrying"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 42231 (Investitionserhebung im Verarbeitenden Gewerbe sowie Bergbau und Gewinnung von Steinen und Erden). The GNI inventory names it as one of the surveys behind the mixed model used to determine purchased software in the expenditure approach.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/42231",
+   "domains": [
+    "industry",
+    "investment"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-vat-assessment-statistics",
+   "title": "Statistics on VAT assessments",
+   "title_aliases": [
+    "VAT statistics, assessment",
+    "VAT statistics (assessments)"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 73321 (Umsatzsteuerstatistik, Veranlagungen). The assessment-based half of the German VAT statistics, distinct from the advance-return statistics at EVAS 73311 (de-destatis-turnover-tax-statistics). The GNI inventory uses it for the turnover of small businesses when calculating the exhaustiveness allowance.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/73321",
+   "domains": [
+    "taxation",
+    "industry"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-crafts-census",
+   "title": "Census of crafts and trades",
+   "title_aliases": [
+    "Crafts census"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 53111 (Handwerkszählung). An annual evaluation of administrative data on craft enterprises. The GNI inventory names it as one of the principal sources of turnover data in the production approach and as the basis for a specific turnover calculation.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/53111",
+   "domains": [
+    "industry",
+    "services"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-health-expenditure-accounts",
+   "title": "Health expenditure accounts",
+   "title_aliases": [
+    "Health expenditure account"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 23611 (Gesundheitsausgabenrechnung). The GNI inventory names it as the main data source for the output of medical and dental practices, and uses it for preventive and rehabilitation clinics.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/23611",
+   "domains": [
+    "health"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-electricity-sales-survey",
+   "title": "Survey of electricity sales and sales proceeds",
+   "title_aliases": [
+    "Survey of electricity sales and sales proceeds of electricity suppliers and electricity sellers"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 43331 (Erhebung über Stromabsatz und Erlöse). The GNI inventory takes household electricity price information from it for the household final consumption expenditure calculation.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/43331",
+   "domains": [
+    "energy"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-gas-generation-sales-survey",
+   "title": "Survey of the generation and sale of gas",
+   "title_aliases": [
+    "Survey of the generation and sale of gas and the sales proceeds of gas suppliers and gas sellers"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 43341 (Erhebung über Gasgewinnung, Gasabsatz und Erlöse). The GNI inventory takes the average annual gas price for household customers from it.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/43341",
+   "domains": [
+    "energy"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-tobacco-tax-statistics",
+   "title": "Tobacco tax statistics",
+   "title_aliases": [
+    "Statistics of tobacco tax"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 79911 (Tabaksteuerstatistik). The GNI inventory takes the full household final consumption expenditure figure for legally purchased tobacco from the turnover it reports, and names it as the source for purchases of cigarettes and tobacco.",
+   "releases_per_year": 12,
+   "cadence_note": "The GNI inventory calls it the monthly tobacco tax statistics ('for purchases of cigarettes and tobacco: the monthly tobacco tax statistics (EVAS 79911)'), entered as 12. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/79911",
+   "domains": [
+    "taxation",
+    "food"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-environmental-economic-accounts",
+   "title": "Environmental-Economic Accounts",
+   "title_aliases": [
+    "Environmental Accounts"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 85111 (Umweltökonomische Gesamtrechnungen, UGR). The GNI inventory derives the household final consumption expenditure on automotive fuel from it.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/85111",
+   "domains": [
+    "environment",
+    "energy"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-accounting-results-federal-states-social",
+   "title": "Accounting results of the Federal Government, the federal states and the social security funds",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 71712 (Rechnungsergebnisse der Kern- und Extrahaushalte des Bundes, der Länder und der Sozialversicherung). The GNI inventory uses it as the data source for the federal, state and social security sub-sectors of general government, and for social benefits in kind. Chapter 10's register gloss for this row is deliberately NOT recorded as a title_alias: it opens with the same words as EVAS 71717's gloss ('Accounting results of the core budgets, of the extra budgets using cameralistic...'), and two nodes sharing a title lead is exactly what the grader's title-lead fallback cannot tell apart.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/71712",
+   "domains": [
+    "public-finance",
+    "benefits"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-accounting-results-municipalities",
+   "title": "Accounting results of the core budgets, of the extra budgets using cameralistic/double-entry accounting and of the other public funds, institutions and enterprises using cameralistic/double–entry accounting of the municipalities/associations of municipalities",
+   "title_aliases": [
+    "Local-authority budgets"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 71717 (Rechnungsergebnisse der kommunalen Kern- und Extrahaushalte). The GNI inventory uses it for the whole local government sub-sector and for the charges levied by local building authorities. The title is the publisher's own prose rendering in this document, en dash and all: the second 'double–entry' carries U+2013 where the first carries an ASCII hyphen, which is why this title and its quote were copied out of the extracted text rather than retyped.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/71717",
+   "domains": [
+    "public-finance",
+    "municipal-finance"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-higher-education-finance-statistics",
+   "title": "Annual higher education finance statistics",
+   "title_aliases": [
+    "Finance statistics of institutions of higher education"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 21371 (Jahresrechnungsstatistik der Hochschulen). An exhaustive annual survey of university income and expenditure, including university hospitals, based on administrative data. The GNI inventory lists it among the data sources included in general government accounting where the extra-budgetary unit is a university.",
+   "releases_per_year": 1,
+   "cadence_note": "The GNI inventory calls this an annual source statistic in the same passage that cites it. Not cross-checked against a stated Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/21371",
+   "domains": [
+    "post-secondary",
+    "public-finance"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-science-research-institutions-survey",
+   "title": "Survey of expenditure, receipts and staff of public and state-subsidized institutions for science and research",
+   "title_aliases": [
+    "Survey of expenditure, income and personnel of public institutions and institutions receiving public funding for science, R&D"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 21811 (Erhebung über Ausgaben, Einnahmen und Personal der öffentlichen und öffentlich geförderten Einrichtungen für Wissenschaft, Forschung und Entwicklung). The GNI inventory lists it among the data sources included in general government accounting where the extra-budgetary unit is a research institution.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) because the GNI inventory uses it as an annual input to the annual accounts; the document states no periodicity for this EVAS number and it was not cross-checked against a Destatis release calendar this round.",
+   "last_updated": null,
+   "url": "https://genesis.destatis.de/datenbank/online/statistic/21811",
+   "domains": [
+    "research-innovation",
+    "public-finance"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-structural-survey-trade-services",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the survey the inventory reaches for first from reporting year 2021 onwards in the trade and service sections. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "structural survey of service activities, wholesale and retail trade (SHD) (EVAS 47410) is used to derive output",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-structural-survey-services",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is called the primary source for output in the service sections up to reporting year 2020. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Until 2020, the structural survey of service activities (SiD) (EVAS 47415) have been used as the primary source for output",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-annual-trade-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It supplies turnover for the trade supply sources up to reporting year 2020. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "turnovers coming for 2020 from annual trade statistics including motor vehicle maintenance and repair (EVAS 45341)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-hotel-restaurant-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It supplies the turnover figure for accommodation and food service activities for reporting year 2020. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "is provided by the annual statistics of the hotel and restaurant industry (EVAS 45342)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-cost-structure-survey-manufacturing",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. The inventory singles it out by name as a main source for output and intermediate consumption. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Here, especially the cost structure survey for the manufacturing sector NACE C (EVAS 42251 and the structural survey of service activities, wholesale and retail trade (SHD, EVAS 47410) have to be mentioned as main sources for output and intermediate consumption.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-cost-structure-survey-energy-water",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is chosen as the data basis for output in all divisions of NACE sections D and E. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "the cost structure survey of enterprises engaged in energy supply, water supply, sewage and waste disposal, and environmental pollution abatement (KSE) (EVAS 43221) is used",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-cost-structure-survey-main-construction",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the source for the cost of external labour in the construction section. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The data on the cost of external labour is derived from the cost-structure survey in the main construction industry (EVAS 44253)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-cost-structure-survey-building-completion",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the basis for a deduction in the specialised construction activities calculation. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "This deduction is based on data from the cost-structure survey in the building completion work (EVAS 44254)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-annual-survey-main-construction",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is named as an important source for gross fixed capital formation in buildings and structures. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The annual survey of businesses in the main construction industry (EVAS 44211) and the annual supplementary survey of production units in the main construction industry (EVAS 44231) are important sources for calculating GFCF in buildings and structures",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-investment-survey-manufacturing",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is one of the named survey inputs to the mixed model for purchased software in the expenditure approach. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "It is based on survey data from various surveys: structural survey in the trade and service sector (SHD, EVAS 47410), investment survey of the manufacturing and mining industries (EVAS 42231), and investment and cost structure surveys of companies involved in energy supply, sewage and waste disposal as well as in the removal of environmental pollution (EVAS 43211 and 43221).",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-vat-assessment-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the source for the small-business turnover behind an exhaustiveness allowance. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The source for the allowance is the statistics on VAT assessments (EVAS 73321), which contain data on the turnover of small businesses",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-crafts-census",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the basis for the turnover calculation the passage describes, and elsewhere is listed among the principal sources of turnover data. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The annual census of crafts and trades (EVAS 53111) is also the basis for this calculation",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-health-expenditure-accounts",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is named as the main data source for the output of medical and dental practices. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The main data source for the calculation of medical and dental practices is the health expenditure account (EVAS 23611)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-electricity-sales-survey",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the source of the household electricity price information used in household final consumption expenditure. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Price information on electricity for household customers is taken from the survey of electricity sales and sales proceeds by electricity suppliers and traders (EVAS 43331)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-gas-generation-sales-survey",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It supplies the average annual gas price used to value household gas sales. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Gas sales to household customers are valued using the average annual price taken from annual survey of the generation and sale of gas (EVAS 43341)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-tobacco-tax-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. Its reported turnover IS the household final consumption expenditure figure for legally purchased tobacco, not merely an input to it. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The turnover reported in the tobacco tax statistics (EVAS79911), including VAT and tobacco tax, represents the full amount of HFCE for legally purchased tobacco",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-environmental-economic-accounts",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the source of the underlying data for household final consumption expenditure on automotive fuel. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The underlying data used to determine HFCE on automotive fuel is derived from the environmental-economic accounts (EVAS 85111)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-accounting-results-federal-states-social",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the source from which social benefits in kind and social benefits are derived. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "These benefits in kind and social benefits are derived from the accounting results of the Federal Government, the federal states and the social security fund (EVAS 71712)",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-accounting-results-municipalities",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is the data source used for the local government sub-sector. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The accounting results of the core budgets, of the extra budgets using cameralistic/double-entry accounting and of the other public funds, institutions and enterprises using cameralistic/double–entry accounting of the municipalities/associations of municipalities (EVAS 71717) are used for the local government sub-sector",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-higher-education-finance-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is listed as a data source included in accounting where the extra-budgetary unit is a university. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Annual higher education finance statistics (EVAS 21371), in case the extra budgetary unit is a university",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-science-research-institutions-survey",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 4). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source statistic by title and by EVAS register number in its body text. It is listed as a data source included in accounting where the extra-budgetary unit is a research institution. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The survey of expenditure, receipts and staff of public and state-subsidized institutions for science and research (EVAS 21811), in case the extra budgetary unit is a research institution",
+   "evidence_grade": "A"
+  }
+ ],
+ "_dropped": []
+}

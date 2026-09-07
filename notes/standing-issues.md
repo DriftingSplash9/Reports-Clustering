@@ -58,6 +58,17 @@ neither question has one. They are here rather than in `HANDOFF.md` because the
 honest status is "nobody has wanted this yet", and that is worth knowing before
 someone spends a round on it.
 
+### Node instancing and the tick burst — unmeasured on Thomas's hardware
+*Demoted 2026-09-07 after riding five handoffs. First carried 2026-09-05.*
+The three mirror instancers took headless draw calls from 7,371 to ~85 and the
+physics levers took a tick from 123.9 to 65.9 ms, both measured in a sandbox. The
+target on real hardware was 25.00 → 16.67 ms and **nobody has run the 15-second rAF
+trace to confirm it**. Recipe in memory `renderer_perf_measured_2026-09-04`; the
+revert is one line in `useFrame` if it turns out wrong. This is here rather than in
+`HANDOFF.md` because it fell off that file three handoffs ago and survived only as a
+pointer inside `PLAYBOOK-RENDER.md` §3 to a `HANDOFF.md` item that no longer existed
+— which is the failure `HANDOFF.md` §4 step 5b now exists to catch.
+
 ### DSBB — 750 `no-source-node` leads, parked
 *Demoted 2026-09-06 after 5 handoffs. First carried 2026-09-05.*
 684 leaf nodes' worth of IMF Dissemination Standards Bulletin Board leads whose
@@ -66,6 +77,12 @@ work is minting 684 nodes, not wiring 750 edges, and that is a programme rather
 than a round. Note that the 2026-09-06 IMF unblock (`notes/imf-elibrary-2026-09-06.md`)
 does **not** touch this — DSBB is `dsbb.imf.org`, a different host from
 `elibrary.imf.org`, and was never probed.
+
+*Updated 2026-09-07: `dsbb.imf.org` is no longer the blocker.* Rounds 7 and 8 read it
+freely — two country endpoints plus three rendered tier pages, recipes in
+`notes/imf-dsbb-2026-09-06.md` — and round 8 minted 70 NSDP nodes from its own
+`NSDPUrl` field. What remains is the 684 leaf nodes, which is still a programme
+rather than a round.
 
 ---
 
@@ -85,8 +102,13 @@ mg-constitution-ctd` C→A (full text of the organic law on dgfag.mg). Two dead
 hosts had live first-party alternatives nobody had looked for: `ine.gov.mz`
 (HTTP 000) → the SADC Secretariat's own bulletin on `sadc.int`, and
 `ins.gov.gn` (HTTP 000) → `stat-guinee.org`, which hosts the Guinea SNDS in
-full. The validator now prints **"✓ no dependency cites a bare homepage as its
-evidence"**. Three of the six came back with the evidence being weaker than the
+full. The validator printed **"✓ no dependency cites a bare homepage as its evidence"**
+from that evening until 2026-09-07. *Superseded in part: round 8 minted two edges
+whose evidence URL is a host root (`is-nsdp`, `mn-nsdp`), because Iceland's and
+Mongolia's own NSDPs genuinely live at `data.sedlabanki.is/` and `nsdp.nso.mn/` and
+there is no deeper path to cite. Both are graded C, which is what keeps the warning
+from being an error. The check still fires; it is no longer clean, and that is
+correct.* Three of the six came back with the evidence being weaker than the
 citation looked, and those are a live-edge decision in `HANDOFF.md` §3.
 
 *(When an item is fixed or ruled out, its line moves here with the date and the

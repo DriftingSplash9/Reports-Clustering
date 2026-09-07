@@ -196,11 +196,12 @@ and "these two series are consistent" offered as if it were a dependency — and
 another seventy-odd edges went the same way. The count of unlinked reports rose
 accordingly. That is the rule working, same as the Alberta grant programme.
 
-Second, the "cluster repulsion" control barely changes what you see. The force
-really does push country clusters apart, but the camera then refits to the
-larger cloud and cancels most of it on screen — the whole slider range moves the
-picture by around 15%, and by almost nothing at high spread settings. What that
-control should be *for* is an open design question.
+Second, the "cluster repulsion" control used to barely change what you see: the
+force really did push country clusters apart, but the camera then refitted to the
+larger cloud and cancelled most of it on screen. That was fixed on 6 September 2026
+— the camera no longer frames the cloud the same way at every setting, so spreading
+the clusters now actually spreads them. What the control should be *for* is still an
+open design question.
 
 The drawing-size problems that used to sit in this paragraph (nodes at 7 pixels,
 edges a tenth of a pixel wide) were fixed on 2026-08-19.
@@ -216,10 +217,12 @@ truer.
 What it exposed is how unevenly the map is drawn. Some countries are here in
 depth; others are a single thread — a price index feeding the national accounts
 feeding a household survey — with nothing else attached, and that is a fact
-about who has looked, not about the country. The United Kingdom, a G7 economy,
+about who has looked, not about the country. Until September 2026 the United
+Kingdom, a G7 economy,
 sat in the graph for months with no inflation release, no labour release and no
-central bank publication in it at all. Several hundred reports still sit with no
-line into or out of them. So the work now is going back into those places, with
+central bank publication in it at all. That one was filled in on 6 September 2026,
+and there are still plenty like it: several hundred reports sit with no line into or
+out of them. So the work now is going back into those places, with
 the well-covered countries as the template for what ought to be there. Alberta's
 330 municipalities, 60 school authorities and 26 post-secondary institutions are
 still on the list for whenever depth beats breadth again.

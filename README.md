@@ -36,20 +36,15 @@ this folder between Windows, macOS, Linux or WSL, delete `node_modules` and run
 
 ### Running the checks from a Linux sandbox
 
-The committed `node_modules` is a Windows build, so an agent working in a Linux
-sandbox cannot run `npm run check` or `npm run validate` in place — both fail
-instantly with the esbuild platform error above, and deleting `node_modules`
-is not an option because it belongs to the Windows install. Copy the tree out,
-excluding `node_modules`, and install there:
+**The procedure lives in `PLAYBOOK.md` rule 4 and only there.** It carries the
+current staging set and two traps this file did not know about — how to zip across
+the device bridge without losing the archive, and why `tsx`/`vite` scripts fail in a
+sandbox. A second copy used to sit here and the two had already drifted apart by
+2026-09-07, which is why there is now one.
 
-```
-rm -rf /tmp/rc && mkdir -p /tmp/rc
-tar --exclude=node_modules --exclude=.git -cf - . | (cd /tmp/rc && tar xf -)
-cd /tmp/rc && npm install && npm run check && npm run validate
-```
-
-Edit the data files **in place** in the real folder and re-copy; do not edit in
-the scratch copy, or the work is lost. This cost four consecutive sessions the
+The one thing worth repeating, because it is about your own machine rather than the
+sandbox: **edit the data files in place in the real folder and re-copy; do not edit
+in the scratch copy, or the work is lost.** This cost four consecutive sessions the
 same five minutes before it was written down.
 
 ## Other commands
@@ -77,6 +72,12 @@ calculation.
 | Commercial (unranked) | Click to hide published-but-private sources. Nothing moves or resizes when you do — they sit outside the ranking |
 | Drag / scroll | Orbit and zoom |
 
+The app has grown a menu bar (Panels / Views / Help), saved views and deep links, a
+Groups panel, isolate-and-neighbourhood, a tier ladder with folding orbs, PNG export
+and a release calendar since this table was written. **Help ▸ What this is, in the
+app, is the current tour** — it renders `START-HERE.md`. The table above is only the
+keyboard-and-mouse basics.
+
 ## Where things live
 
 **The code** — everything the app actually loads:
@@ -86,20 +87,16 @@ src/data/index.ts          the loader — merges the seed set with every researc
 src/data/reports.ts        hand-written seed reports (nodes)
 src/data/dependencies.ts   hand-written seed edges
 src/data/research/*.json   research slices, one file per topic area
-src/lib/types.ts           the data model
+src/lib/types.ts           the data model — start here, it is heavily commented
 src/lib/graph.ts           validation, authority scoring, sizing
-src/lib/filter.ts          which nodes are drawn — a view, never a recalculation
-src/lib/search.ts          find-by-name ranking
-src/lib/selection.ts       click-to-focus cones
-src/lib/palette.ts         colour by jurisdiction level
-src/lib/view.ts            renderer settings behind the view panel
-src/components/            the 3D graph, room, search box, and controls
+src/lib/                   23 more modules; the maintained map is PLAYBOOK-RENDER.md §4
+src/components/            the 3D graph, panels, cards and the three instancers
 scripts/validate-data.ts   what `npm run validate` runs
 ```
 
 **The documents** — cleaned up 2026-08-13 (old handoffs, closed decisions and
 the retired session-log thread moved into `archive/`, subfoldered by what they
-were); the five files at root are the ones worth opening first, everything
+were); the seven files at root are the ones worth opening first, everything
 else is filed by what it *is*:
 
 ```

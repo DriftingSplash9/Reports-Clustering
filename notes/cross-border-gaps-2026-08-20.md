@@ -36,7 +36,7 @@ anything outside itself:
 | Mauritius (MU) | 7 |
 | Sierra Leone (SL) | 5 |
 
-Most of these are from the recent Grok-archive mint (139-country expansion) —
+Most of these are from the recent August 2026 archive mint (139-country expansion) —
 that pass recorded each country's own domestic dependency structure but not
 its international ties, even where those obviously exist (Israel's MERCOSUR
 trade agreement, IMF/World Bank programme ties for the others, ASEAN links

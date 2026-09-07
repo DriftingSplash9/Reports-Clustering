@@ -6,16 +6,23 @@ deletes, measure before believing — are there, with the test for where a new
 paragraph goes. This file is for finding, minting, wiring, quoting and
 grading edges; the renderer's rules are in `PLAYBOOK-RENDER.md`.
 
-**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3, 10-17 and 19,
-and the gaps are rules that live in one of the other two.
+**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3, 10-16 and 19,
+and the gaps are rules that live in one of the other two. Rule 17 was retired to
+`notes/techniques-2026-09-04.md` on 2026-09-07 for being a recipe rather than a
+rule; its number stays retired.
+
+**When a line in this file turns out to be wrong, correct it in place and show
+the old wording**, the way `PLAYBOOK-RENDER.md`'s 2026-09-06 review did. A doc
+that quietly changes its mind is harder to trust than one that says what it got
+wrong, and this file has no sweep of its own except `HANDOFF.md` §4 step 5b.
 
 ---
 
 ## 2. Standing rules — corpus lane
 
 **3. A pointer is not a source.** WebFetch can fabricate content for a
-dead URL — raw-verify before trusting any quote. Applies to the Grok-derived
-slices too, including node descriptions: a description naming a standard is a
+dead URL — raw-verify before trusting any quote. This applies to a node's own
+`description` as much as to a fetched page: a description naming a standard is a
 lead to verify, not a citable basis.
 
 **10. A `_dropped` entry describing an edge that DOES exist live must use
@@ -28,6 +35,13 @@ live edges, not just this round's proposals.
 corpus, not just `src/data/research/*.json`** — some ids/edges live
 only in the hand-written seed files (`src/data/reports.ts`,
 `src/data/dependencies.ts`).
+
+**And scan for the EVIDENCE URL, not only the (source, target) pair** (round 8).
+A URL you are about to mint on may already back live edges from other slices —
+six did — and every grader run rewrites that URL's `evidence-cache/` record to
+hold only the edges THAT RUN selected. Find them all first and pass them
+together to `--edges`, or you silently destroy another edge's windows. One
+record was clobbered in round 8 before the collision was noticed.
 
 **12. A dependency edge between a node and its `part_of` container is a
 validator ERROR.** Before minting, cross-check every new edge's
@@ -45,30 +59,20 @@ makes that note a lie, and validate fails on it. Read the older note
 before assuming your new edge wins — it may have the better evidence.
 
 **15. A page title is not evidence, and neither is a node description.** Read
-the body, not just the title/heading. Grok's imported descriptions naming a
-standard are leads to verify, not citable bases.
+the body, not just the title/heading. Round 8's Argentina case is the clean
+example: `sdds.indec.gob.ar/nsdp.htm` is 966 bytes of JavaScript shell whose only
+mention of the standard is its `<title>`, and that is a `_dropped` lead, not an
+A.
 
 **16. Eurostat's national reference metadata is the highest-yield source
-for "which standard / which source" questions on an EU/EEA country.**
-Filename is versioned per country: `prc_hicp_esmshi4_<cc>.htm` for
-PL/EL/ES/HU/HR/BG/LT, `prc_hicp_esmshi3_<cc>.htm` for
-SK/SI/EE/LV/MT/CY/IS/CZ/DK/IT/NO/RO/CH/TR/AL, and FI is `hi3` since
-2026-09-05 (it 404'd on 08-28 — try hi4, fall back to hi3; Greece is
-`_el` not `_gr`). Section 18.1.1 "Weights" is where the weight-source
-sentence lives; memory `esms_hicp_pass_2026-09-05` has the pass. `employ_simslfs_<cc>.htm` answers "is LFS the
-national-accounts employment source" as an explicit Y/N field (no such
-page for Iceland). No government-finance equivalent exists
-(`gov_10dd_*_esms_<cc>.htm` 404s everywhere tried) — for deficit/debt
-go to the NSI's own EDP release page instead.
-
-**17. ASEANstats (`cdn.aseanstats.org/public/...`) is the reliable
-workaround for an unreachable ASEAN NSO** — supplied Myanmar's BPM6
-basis and Thailand's SNA 2008 basis when their own domains were dead.
-**ilo.org itself** hosts labour-force-survey reports stating ICLS
-compliance when an NSO's own pages are blocked (supplied Iraq's and
-Vietnam's ICLS edges). The old ILO microdata catalogue
-(`webapps.ilo.org/surveyLib`) is retired.
-
+for "which standard / which source" questions on an EU/EEA country.** The
+filename patterns, the `hi3`/`hi4` split, the §18.1.1 "Weights" section and the
+LFS Y/N page all live in `notes/techniques-2026-09-04.md` — they are a recipe and
+they rot (FI moved from `hi4` to `hi3` on 2026-09-05), and a stale filename in a
+playbook gets trusted where a stale filename in techniques gets re-probed. What
+belongs here is only the ranking: **go to Eurostat's national metadata before the
+NSI's own site.** There is no government-finance equivalent; for deficit/debt go
+to the NSI's own EDP release page.
 
 **19. Stamp every `basis` with WHO IS SPEAKING** (Thomas, 2026-09-07). The first
 token of a basis is one of three, followed by a colon:
@@ -102,11 +106,14 @@ six e-GDDS edges turned on exactly that distinction (a membership is not a
 dependency), and the tag is what would have made the class visible four rounds
 earlier.
 
-**Coverage, so an absent tag is not misread: only the 101 edges into `imf-e-gdds` /
-`imf-sdds` / `imf-sdds-plus` are stamped** (round 7 — 61 REGISTER, 40 SELF-DECLARED,
-0 THIRD-PARTY). Everywhere else an unstamped basis means NOT YET CLASSIFIED, never
-"unknown tier". Stamp what you touch; nobody should run a corpus-wide stamping pass
-as a job of its own.
+**Coverage, so an absent tag is not misread: 172 edges are stamped.** Round 7's 101
+tier edges into `imf-e-gdds` / `imf-sdds` / `imf-sdds-plus` (61 REGISTER, 40
+SELF-DECLARED, 0 THIRD-PARTY) and round 8's 71 NSDP edges (all SELF-DECLARED).
+Everywhere else an unstamped basis means NOT YET CLASSIFIED, never "unknown tier".
+Stamp what you touch; nobody should run a corpus-wide stamping pass as a job of its
+own. **This number goes stale faster than anything else in the file** — it is the
+paragraph §4 step 5b should check first, because "unstamped means not yet
+classified" only holds if the reader knows what is stamped.
 
 **What this replaced: nothing, and that is a considered answer** to §1's
 say-what-you-would-remove rule. No existing rule covers who authored the evidence,
@@ -115,25 +122,6 @@ and the §6 bullets this sits beside are all live.
 
 ---
 
-## 5. Grok — retired as a source, not ruled out as a tool
-
-**Grok is not a source for this project** (Thomas, 2026-09-05: no prompts, no
-queue, no Grok todo items; restated 2026-09-06: "it made more work than
-anything"). The `*-grok-2026-08.json` slices stay as data and are verified and
-graded like any other — and §6 says how far to trust them.
-
-**The door Thomas left open** (2026-09-06): *"when this is all done we can have
-Grok look where you tell it to."* That is a different job from the one that
-produced these slices. The failure was unscoped generation — Grok inventing ids,
-enum values and whole batches that then cost rounds to verify and retire. A
-narrow, named lookup against a target the corpus has already scoped is not that.
-**Do not restart the old workflow on the strength of this paragraph**; it exists
-so the next agent knows the retirement is about scope, not about the model, and
-that reopening it is Thomas's call and not yet made.
-
----
-
----
 
 ## 6. Known traps
 
@@ -265,6 +253,17 @@ the lane that needs them never reads. Moved, not copied.)*
   Candidates to sweep: any quote containing `(x 1,000)`, a straight apostrophe next
   to a letter, or straight double quotes.
 
+  **The same failure arrives from the reader's side, and it is commoner** (round 8):
+  **the grader's html extractor does not decode HTML entities.** A span copied out of
+  a correctly rendered page reads `Fund’s` where the stored text holds
+  `Fund&rsquo;s`, so the quote returns `partial-quote` at coverage 0.78-0.86 rather
+  than absent — near enough to look like a bad quote, far enough to lose the A. Three
+  round-8 edges (GE, HU, MA) were re-cut around the entity and all three then matched
+  at 1.00. **So when writing a quote, prefer a span with no apostrophe, dash or quote
+  mark in it at all** — ending the span before the punctuation is cheaper than
+  diffing it afterwards. Watch for U+200B too: one sat invisibly inside Mauritius's
+  sentence and would have done the same.
+
 - **A `title_aliases` entry that is a bare product number only reaches the grader
   through the `product-number` path in `namesTarget`** (added 2026-09-06 evening,
   guarded by a selftest). Before it, a one-token alias could never fire — the run
@@ -283,6 +282,16 @@ the lane that needs them never reads. Moved, not copied.)*
   `alt2-text-chars`, and **a CACHED `.evidence-fulltext/` record has no third
   rendering at all** — an offline re-grade of the old store sees none of this, so
   `--refetch` is what gets it. Additive by construction: it can only add matches.
+
+- **`namesTarget`'s acronym branch cannot see a mixed-case parenthetical** (found
+  round 8, not fixed — it is a matcher change and Thomas's call). The test is
+  `/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/`, so `(SDDS)` fires and `(SDDS Plus)` never
+  can: the lower-case "lus" disqualifies it. For any node whose acronym carries a
+  lower-case word the only door left is a run of ≥60% of the title's words. Twelve
+  round-8 edges sit at B on `agency-not-artefact` because the country's page prints
+  "SDDS Plus" in its own heading and never writes the words out. **Do not read that
+  grade as thin evidence** — check whether this is the cause before spending a round
+  re-reading the document.
 
 - **Never edit a `basis` or a quote to move a grade.** If an evidence record is
   graded down by a matcher defect, fix or report the matcher. Trimming the
@@ -319,12 +328,13 @@ the lane that needs them never reads. Moved, not copied.)*
   characters and refuses full reproduction. It can establish a negative or
   locate text; a mintable quote needs a real browser or another host carrying
   the same document.
-- **The Grok-derived slices carry Grok's habits** (Grok itself is retired,
-  §5): ids and enum values that were inventions, one jurisdiction's exact
+- **The bulk-imported slices of August 2026 carry import habits worth knowing**:
+  ids and enum values that were invented rather than read, one jurisdiction's exact
   quote and URL reused as evidence for another — the tell is a quote naming a
-  specific *other* place — and the same region minted under different batch
-  names. Grep against the FULL corpus (research files AND seed files) before
-  trusting any of it.
+  specific *other* place — and the same region minted under different batch names.
+  Grep against the FULL corpus (research files AND seed files) before trusting any of
+  it. They are data like any other and are verified and graded on the same rules as
+  everything else.
 
 
 ---
@@ -376,7 +386,7 @@ are consistent, aligned or comparable — and quotes no passage — describes
 agreement between figures, not a document naming one as the other's input.
 38 such edges (28 of them in the Russian regional slices) were moved to
 `_dropped` `deferred` as leads, originals preserved in `why`. The shape to
-watch for in Grok output: "X data in national compilations are consistent
+watch for in any bulk import: "X data in national compilations are consistent
 with the Y yearbook" — that is the tell.
 
 **An index page is a bare homepage with a path** (Thomas, 2026-08-31,
@@ -578,6 +588,16 @@ quote one step apart. Naming the route is what makes the pair honest, and the
 B cap is the same treatment `wayback` gets for the same reason. General rule
 for every agency that publishes this way, not just BPS.
 
+**On a NEW edge the grader outranks the hand grade, and the basis says so**
+(round 8). Writing a block by hand and then grading it is the normal shape for a
+large mint, and the two will disagree: round 8's hand grades were 60 A / 5 B and
+`grade-evidence.ts --slice` returned 45 A / 23 B / 3 C over the same 65 edges.
+**Take the grader's verdict**, name its reason string in the basis so the downgrade
+is auditable, and record a reader's ruling ONLY where its own fetcher failed —
+never where it read the document and disagreed with you. The rule below protects an
+EARNED grade from a bad network day; this one stops a hand grade being an opinion
+that outranks a measurement.
+
 **A re-grade never writes a grade DOWN on a bad network day.** Selecting an
 already-graded edge and writing whatever comes back lets one DNS failure or one
 Akamai mood destroy a grade earned from a good read. A re-grade pass writes only
@@ -627,7 +647,7 @@ statistics depend on," not "instrument."
 **Analytical meta-nodes: 5 retired, sweep deliberately stopped there**
 (Thomas, 2026-08-29) — comparison-device/policy-frame nodes with no
 publication behind them. **Do not extend this by keyword search: both
-obvious signals are contaminated.** "framing" is a Grok verbal tic that
+obvious signals are contaminated.** "framing" is a verbal tic of the August 2026 import that
 also appears in real statistics-node titles ("Statistics and framing of
 remittance inflows"). The corpus's own "meta-node" `_notes` phrasing
 describes a node's ROLE IN THE GRAPH, not its nature — it lands on the
@@ -637,23 +657,34 @@ both genuine. A title-regex sweep caught 36 candidates, only 5 were real.
 **Above all, never sweep the "— high/low-poverty contrast" nodes.** They
 read like analytical framings and aren't — they're real subnational
 jurisdictions (Ecuadorian/Peruvian/Uruguayan/Paraguayan/Bolivian/Chilean)
-that Grok titled as a poverty-contrast set. They're the bulk of the
+that the August 2026 import titled as a poverty-contrast set. They're the bulk of the
 unresearched South America seam; deleting them destroys the next round
 before it starts.
 
+**A country may carry TWO tier edges, one REGISTER and one SELF-DECLARED** (Thomas,
+2026-09-07, ruling on round 8's second question). Twenty-six countries in the NSDP
+block have both: an older edge off an institutional node, where the IMF's own
+register says the country adheres, and a new one off the country's National Summary
+Data Page, where the country's statistical system says so itself. **Both stay.** They
+are two different assertions with two different speakers (rule 19), separately
+evidenced, and rule 13's don't-silently-override is the reason the second one did not
+replace the first when it was minted. Do not open a pass to deduplicate them, and do
+not treat a country that has one as already wired for the other.
+
 ### 7d. Parked and closed
 
-**Parked, and one of these needs a decision.** `diary.csv` moved to
-`PLAYBOOK.md` (it binds any task, not just corpus ones). Cadence: 101 of 2,951
-edges state when the reading happens; the validator's CADENCE block is the live
-number, not this file. **`proposed:` domain tags are no longer a parked
-footnote**: this line said "7 single-use tags" and, measured 2026-09-06, there
-are **624 distinct proposed tags across 738 nodes — 407 of them used exactly
-once — producing 1,195 validator warnings, 53% of every warning `npm run
-validate` prints.** Only 9 are used ten times or more. The parked note was
-written when the number was small and nothing swept it since, which is the
-failure `PLAYBOOK.md` §1's second test exists to catch. The decision is in
-`HANDOFF.md` §3; do not promote or delete tags without it.
+**Parked.** `diary.csv` moved to `PLAYBOOK.md` (it binds any task, not just corpus
+ones). Cadence: 101 of 3,071 edges state when the reading happens; the validator's
+CADENCE block is the live number, not this file.
+
+**`proposed:` domain tags: settled 2026-09-06, do not reopen.** 1,080 stripped, 6
+promoted to approved `Domain` values, 43 mapped; the complete before/after record —
+and the only way back, since there is no git safety net — is
+`notes/proposed-tags-retired-2026-09-06.json`. `validate`'s DOMAINS block prints the
+live count and has read **46 approved, 0 proposed** since. *(This paragraph described
+the question as open, with 624 live tags and a pointer to a `HANDOFF.md` §3 decision,
+until 2026-09-07 — three handoffs after it was answered. It is the find that produced
+`HANDOFF.md` §4 step 5b.)*
 
 **One-off scope calls, already decided — don't re-raise.** Iran's SNA vintage,
 generic COICOP citations (Iran, Iraq), the generic MFSM citation (Vietnam,

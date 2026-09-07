@@ -23,14 +23,19 @@ you know what you are doing, it is this file plus ONE of these:
 | a recipe for one kind of fetch, capture or extraction job | `notes/techniques-2026-09-04.md` |
 | "can I reach host X?" | `notes/routing-snapshot-2026-09-04.md` — stale on arrival, re-probe |
 
+**A bare "PLAYBOOK" reference is older than the split, and it is the most
+common cross-reference in the repo.** The last 25 handoffs contain 36 bare
+`PLAYBOOK` mentions against 12 for `PLAYBOOK.md`, so you will hit one before you
+reach the rest of this section. "PLAYBOOK §6" (known traps) and "§7" (standing
+decisions) resolve to that section of `PLAYBOOK-CORPUS.md`, or of
+`PLAYBOOK-RENDER.md` where the subject is the renderer; both files keep those
+section numbers. A bare "PLAYBOOK rule N" resolves by the rule map below.
+
 **Rule numbers are global and permanent.** They are cited from code comments
 and from `notes/`, so each playbook's list has GAPS where a rule lives in one
 of the others: this file has 1, 2, 4, 5, 6, 8, 9; `PLAYBOOK-CORPUS.md` has 3,
-10-17 and 19; `PLAYBOOK-RENDER.md` has 7 and 18. Never renumber, never reuse a
-number, and add a new rule as 19, 20, ... in whichever playbook binds it. An
-older reference to "PLAYBOOK §6" (known traps) or "§7" (standing decisions)
-resolves to that section of CORPUS, or of RENDER where its subject is the
-renderer; both files keep those section numbers.
+10-16 and 19; `PLAYBOOK-RENDER.md` has 7 and 18. Never renumber, never reuse a
+number, and add a new rule as 20, 21, ... in whichever playbook binds it.
 
 **Two questions decide where a new paragraph goes, and the second one is the one
 that gets skipped.** First: would an agent who never reads it make a WRONG
@@ -96,12 +101,18 @@ logic tests, then the data checks; the live count of each is in
 `HANDOFF.md` §2 and nowhere else. It can't run through the device
 bridge. Recipe: stage `src/ scripts/ package.json tsconfig.json
 index.html vite.config.ts START-HERE.md` (full `src/data/research/`
-corpus included) into a Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to
-move 270+ research JSONs across the bridge: zip `src/data/research/`
-on-device into `_to_delete/`, stage that one file, unzip in the
-sandbox — but **`zip` on the device mount cannot rename its temp file onto
-the target**: you get a 0-byte zip plus a random-named complete one, so `cp`
-the temp file. (That trap sat in `PLAYBOOK-RENDER.md` §6 until 2026-09-06,
+corpus included) into a Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build.
+**A new `country` value needs THREE entries and validate finds them one at a
+time**, so a round adding a country runs it three times before it goes green:
+`COUNTRY_FAMILY` (palette.ts) → `CONTINENT_OF` (regions.ts, which fails as a
+LOGIC CHECK, not a data error, so it looks like a different class of problem) →
+`COUNTRY_LABEL` (palette.ts). Add all three in one edit. Fastest way to
+move 270+ research JSONs across the bridge: **zip into `$HOME` (outside
+`mnt/`), then `cp` the archive into `_to_delete/` and stage that one file.**
+Zipping directly onto the device mount cannot rename its temp file onto the
+target — you get a 0-byte zip plus a random-named complete one. Zipping outside
+the mount and copying in avoids the failure entirely rather than working around
+it (measured round 8). (That trap sat in `PLAYBOOK-RENDER.md` §6 until 2026-09-06,
 where a corpus round staging 270 JSONs would never have seen it.) Reuse a
 live sandbox with `node_modules` already installed across rounds in the same
 session. Any `tsx`/`vite`-driven script fails
@@ -131,20 +142,19 @@ throwaway script that was deleted, and one of them (the 2026-08-28
 cluster-repulsion sweep) turned out not to reproduce — read `onscreen`,
 run more than one seed, never let simulation state leak between runs.
 
-**9.** *(Retired 2026-09-05 — it governed prompts relayed to Grok, and Grok is
-no longer used in this project. Number kept so cross-references hold.)*
+**9.** *(Retired 2026-09-05. Number kept so cross-references hold — the rule
+itself is gone and nothing replaces it.)*
+
+**Hand off rather than push on** when you re-derive something already settled,
+contradict an earlier answer, retry a tool past its documented once-only policy,
+or the session has been through a compaction. Each of those is the same signal:
+the session has stopped accumulating and started circling.
 
 **Process rule.** `HANDOFF.md` stays short — edit its Current State/Todo
-directly (overwrite, don't append) each turn. **The handoff procedure itself
-is `HANDOFF.md` §4 and is not repeated here.** It is archive-first because
-there is no git safety net (rule 1), and it was missed on 2026-08-29/30:
-HANDOFF.md was overwritten three times in one session and archived only
-retrospectively, from a copy that happened to still be in the session's
-context. A new standing rule or trap goes here, not `HANDOFF.md`. Hand off rather than
-push on when you re-derive something already settled, contradict an
-earlier answer, retry a tool past its documented once-only policy, or the
-session has been through a compaction. Project memory: write entries as
-you go; if it refuses, park a note in `notes/` and flag it in
+directly (overwrite, don't append) each turn. **The handoff procedure itself is
+`HANDOFF.md` §4 and is not repeated here**, including why it is archive-first.
+A new standing rule or trap goes here, not `HANDOFF.md`. Project memory: write
+entries as you go; if it refuses, park a note in `notes/` and flag it in
 `HANDOFF.md`.
 
 ---

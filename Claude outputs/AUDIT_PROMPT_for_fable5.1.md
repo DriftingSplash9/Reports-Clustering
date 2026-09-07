@@ -136,8 +136,8 @@ Use these as a starting map, not as conclusions. Confirm or correct every one.
   audit-fix zips, dating back to 2026-08-30/31 — i.e. "delete this" has been true
   for days and hasn't happened, which is a process gap (rule 2 above exists
   precisely because this keeps recurring).
-- A large, separate top-level directory, `Grok - Brics+israel and singapore/`,
-  contains hundreds of raw and "consolidated" per-country Grok research JSON
+- A large, separate top-level directory, `the import - Brics+israel and singapore/`,
+  contains hundreds of raw and "consolidated" per-country the import research JSON
   files, its own `_to_delete/` with more zips, batch logs, and status files — all
   outside `src/`, not obviously wired into the `npm run gen` pipeline, and not
   documented anywhere you've been told to read first. Establish what this
@@ -268,11 +268,11 @@ to keep shipping features into it, not as a one-time bug hunt.
    Thomas — never `git`. Give him a concrete list of what looks uncommitted and how
    risky each looks to lose or to merge.
 2. **`_to_delete/` audit.** List everything in both `_to_delete/` directories (top
-   level and the one nested inside `Grok - Brics+israel and singapore/`), total
+   level and the one nested inside `the import - Brics+israel and singapore/`), total
    size, and how long each item has been sitting there. Recommend what actually
    needs Thomas to click delete versus what turns out to still be needed (in which
    case it shouldn't be in `_to_delete/` at all).
-3. **`Grok - Brics+israel and singapore/` disposition.** Determine, and state
+3. **`the import - Brics+israel and singapore/` disposition.** Determine, and state
    plainly, whether this multi-hundred-file directory is: (a) fully superseded by
    `src/data/research/` and safe to archive, (b) partially unmerged source
    material that BRICS rounds still depend on, or (c) genuinely unclear even after

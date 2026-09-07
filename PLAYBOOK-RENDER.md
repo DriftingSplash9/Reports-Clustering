@@ -125,16 +125,21 @@ Assume all of this exists and works; each has a dated comment at the site.
   frame is folded; orbs scale with member count (`orbSizeFactor`); every lens
   is live at every tier (the `tier` prop was deleted, not left unused).
 - **Physics levers shipped 2026-09-05/06**: collide `iterations` 1, charge
-  `theta` 1.5 (together 123.9 → 65.9 ms/tick), a geoAffinity position cache,
-  and `TICK_BURST_MAX` 4 / 8 ms. `THETA=0.9` restores the old layout.
-  **Node instancing and the tick burst are still unmeasured on Thomas's
-  hardware** — that is a `HANDOFF.md` item, not a fact about the app.
+  `theta` 1.5, a geoAffinity position cache,
+  and `TICK_BURST_MAX` 4 / 8 ms. `THETA=0.9` restores the old layout. The
+  before/after timings live in memory `layout_levers_and_hbs_2026-09-05` and in the
+  dated comments at each constant, not here.
+  **Node instancing and the tick burst are still unmeasured on Thomas's hardware**
+  — `notes/standing-issues.md`. *(This line said "that is a `HANDOFF.md` item" until
+  2026-09-07, by which point `HANDOFF.md` had not carried it for three handoffs and
+  the only record of a real open item was a pointer to nowhere.)*
 - **`mutual: true` edges are excluded from `rankedEdges`** — still drawn, but
   not feeding PageRank, so they do not inflate node size.
-- **Sliders**: cluster spread 50%–1200%, geo-affinity 0–500%, zoom 0.25–2.6
-  of fit. The bounds live in `ViewControls.tsx` and `view.ts` and have moved
-  three times — read them there, never from here. *(This line said
-  200%–10000% until 2026-09-06; both bounds were wrong.)*
+- **Sliders**: cluster spread, geo-affinity and zoom all have bounds, and they live
+  in `ViewControls.tsx` and `view.ts`. **They have moved three times — read them
+  there, never from here.** *(The numbers that used to sit on this line were wrong
+  twice; a line that tells you not to trust it should not print values, so as of
+  2026-09-07 it prints none.)*
 
 
 ---
@@ -156,7 +161,10 @@ Assume all of this exists and works; each has a dated comment at the site.
   `regions.ts` (continents/blocs/publishers/directory), `selection.ts`
   (`computeFocus`/`computeGroupFocus`/`computeNeighbourhoodFocus`,
   `shortestPath`), `graph.ts` (build + validate), `galaxyForce.ts`,
-  `geoAffinity.ts`, `schedule.ts` (calendar), `search.ts`, `types.ts`.
+  `geoAffinity.ts`, `clusterRepulsion.ts`, `intAnchor.ts`, `autoUnfold.ts`,
+  `useCompactLayout.ts`, `schedule.ts` (calendar), `search.ts`, `types.ts`.
+  *(Four of those were missing from this list until 2026-09-07; it is the map
+  `README.md` now points at, so it has to be complete.)*
 - **`src/components/`** — `linkVisuals.ts` (edge shader/beam),
   `nodeVisuals.ts` (materials/rims), `MenuBar`, `HelpCard`, `LoadingCurtain`,
   `PanelShell`, `GroupsPanel`, `Legend`, `Compare`, `PngExport`,

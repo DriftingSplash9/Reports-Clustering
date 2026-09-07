@@ -1,214 +1,214 @@
 {
-  "_slice": "de-destatis-source-surveys",
-  "_researched": "2026-08-05",
-  "_status": "IMPORTED 2026-08-05. First cut at sc-75 (PartB_soft_connections_2026-08-04.md), flagged since G.26.md as 'a whole sub-graph, not one edge' and never started. Registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): all 3 _dropped entries (three priority tiers of the German EVAS source-survey list) read in full. None independently verified live this session, same limitation the entries themselves state. Cross-referenced this session from de-destatis-national-accounts.json's own deferred entry, which transcribes an overlapping but shorter list -- a future session should treat this file as the fuller worklist. No reports or dependencies changed.",
-  "_note": "Downloaded and read the German GNI inventory in full ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025, 372 pages, destatis.de) -- the same document de-destatis-national-accounts.json's _dropped array already quoted but never opened directly. Its own Chapter 10 ('Main data sources used') is a three-tier numbered table naming every source statistic by EVAS register number and title -- Research.1.md 7's strongest evidence class, applied at scale: 46 Destatis surveys (10.1), 16 other official sources mostly from the Bundesbank/BaFin/KBA (10.2), and 7 non-government sources (10.3). This slice mints the three strongest, most clearly cadenced candidates from the 46; the full table is preserved verbatim below so a future session does not have to re-download and re-parse a 4.4MB PDF to continue.",
-  "_headline": "German CPI -- one of the best-known consumer price indices in the world -- was not a node in this corpus until this session, despite statcan-cpi, bls-cpi, lu-statec-ipch and eurostat-hicp all already being present.",
-  "_open_questions": [
-    "Only 3 of 46 Destatis-survey rows in Chapter 10.1 are minted this session. The remaining 43, plus 16 other-official-source rows and 7 non-government rows, are transcribed verbatim below (source: Chapter 10 of the GNI inventory PDF) for a future session to work through without re-fetching the document. Candidates that stood out on a first read but were not chased: EVAS 73311/73321 (VAT/turnover-tax statistics, the single most-cited source in the whole document at 35 mentions, administrative rather than survey-based -- cadence not established this session); EVAS 47410 (the current structural survey in trade and services, successor to the now-superseded 47415); EVAS 31211 (Census of buildings and housing) and EVAS 12111 (Population census), both plausible generational-cadence nodes on the sna-2008/esa-2010 pattern but not verified live this session.",
-    "The edge direction for all three minted surveys (survey -> feeds de-destatis-national-accounts, i.e. de-destatis-national-accounts uses_data_from each survey) follows directly from Chapter 10's own table, which marks each row against the Production/Expenditure/Income approach it feeds -- this is the strongest-evidenced edge direction in the whole EU branch, a document naming its inputs in a structured table exactly as Research.1.md 7 describes it."
-  ],
-  "reports": [
-    {
-      "id": "de-destatis-cpi",
-      "title": "Consumer Price Index for Germany",
-      "publisher": "Statistisches Bundesamt (Destatis)",
-      "country": "DE",
-      "jurisdiction_level": "federal",
-      "region": "Germany",
-      "description": "Germany's national consumer price index, EVAS register no. 61111, listed as one of the German GNI calculation's main data sources (production, expenditure and income approaches) in the GNI inventory's own Chapter 10 table. Confirmed live on Destatis's own site: a flash/expected estimate near month-end followed by the confirmed rate roughly ten days into the following month (e.g. 'Inflation rate of +2.8% expected in July 2026' on 30 July 2026, followed by 'Inflation rate at +2.3% in June 2026' on 10 July 2026 for the prior month).",
-      "releases_per_year": 12,
-      "cadence_note": "Live-verified on destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index -- a monthly press-release series, two releases per reference month (flash estimate, then confirmed figure), same two-stage pattern already seen for eurostat-hicp.",
-      "release_schedule": {
-        "kind": "published-calendar",
-        "entries": [
-          {
-            "from": "2026-08-12",
-            "to": "2026-08-12",
-            "precision": "day",
-            "covers": "Final CPI for July 2026",
-            "evidence": "documented"
-          },
-          {
-            "from": "2026-08-31",
-            "to": "2026-08-31",
-            "precision": "day",
-            "covers": "Preliminary CPI for August 2026"
-          },
-          {
-            "from": "2026-09-10",
-            "to": "2026-09-10",
-            "precision": "day",
-            "covers": "Final CPI for August 2026"
-          },
-          {
-            "from": "2026-09-30",
-            "to": "2026-09-30",
-            "precision": "day",
-            "covers": "Preliminary CPI for September 2026"
-          },
-          {
-            "from": "2026-10-13",
-            "to": "2026-10-13",
-            "precision": "day",
-            "covers": "Final CPI for September 2026"
-          },
-          {
-            "from": "2026-10-30",
-            "to": "2026-10-30",
-            "precision": "day",
-            "covers": "Preliminary CPI for October 2026"
-          },
-          {
-            "from": "2026-11-11",
-            "to": "2026-11-11",
-            "precision": "day",
-            "covers": "Final CPI for October 2026"
-          },
-          {
-            "from": "2026-11-30",
-            "to": "2026-11-30",
-            "precision": "day",
-            "covers": "Preliminary CPI for November 2026"
-          },
-          {
-            "from": "2026-12-10",
-            "to": "2026-12-10",
-            "precision": "day",
-            "covers": "Final CPI for November 2026"
-          },
-          {
-            "from": "2027-01-05",
-            "to": "2027-01-05",
-            "precision": "day",
-            "covers": "Preliminary CPI for December 2026"
-          }
-        ],
-        "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_270_611.html",
-        "note": "Destatis publishes both a preliminary estimate (around the last working day of the reference month) and final results (mid-following month) for the German CPI/HICP each month. The August 12, 2026 date is directly confirmed in the July 30, 2026 press release (PD26_270_611): 'Die endgültigen Ergebnisse für Juli 2026 werden am 12. August 2026 veröffentlicht.' Subsequent dates through end of 2026 are taken from Destatis's own release calendar search tool (Terminsuche) filtered for 'verbraucherpreisindex', consistent with the standard preliminary/final monthly pattern."
-      },
-      "last_updated": null,
-      "url": "https://www.destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index/_node.html",
-      "domains": [
-        "inflation"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "de-destatis-labour-cost-survey",
-      "title": "Labour Cost Survey",
-      "publisher": "Statistisches Bundesamt (Destatis)",
-      "country": "DE",
-      "jurisdiction_level": "federal",
-      "region": "Germany",
-      "description": "EVAS register no. 62411, listed in the GNI inventory's Chapter 10 table as a production- and income-approach source. The GNI inventory's own text: 'The labour cost survey (EVAS 62411) takes place every 4 years (also 2020) and asks for the private use of car companies (benefit in kind)...' -- used among other things to allocate gross wages and salaries per employee and private use of company cars.",
-      "releases_per_year": 0.25,
-      "cadence_note": "Stated directly in the source document itself (the GNI inventory, p. 152 of the extracted text): 'takes place every 4 years (also 2020)'. Not independently re-verified on a separate Destatis page this session -- the GNI inventory is itself a Destatis publication and the primary source for this fact.",
-      "release_schedule": {
-        "kind": "stated-rule",
-        "entries": [
-          {
-            "from": "2026-07-01",
-            "to": "2026-07-31",
-            "precision": "month",
-            "covers": "Labour Cost Survey 2024 (Arbeitskostenerhebung 2024) detailed results",
-            "evidence": "documented"
-          }
-        ],
-        "rule": "The Labour Cost Survey (Arbeitskostenerhebung) is conducted every four years under EU law (Council Regulation (EC) No 530/1999 and Commission Regulation (EC) No 1737/2005) and Germany's Verdienststatistikgesetz, covering reference years 2000, 2004, 2008, ..., 2020, 2024, 2028. Eurostat's LCS metadata states 'Data for LCS2024 will be published in 2nd half of 2026,' and Destatis's April 2026 press release (PD26_148_624) states the 2024 survey results 'werden voraussichtlich im Juli 2026 veröffentlicht' (are expected to be published in July 2026).",
-        "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_148_624.html",
-        "note": "As of the research date (2026-08-11), no press release or dataset confirming the actual July 2026 publication of AKE2024 detailed results could be located via search — the target month has just passed and the release may have slipped slightly (Destatis used 'voraussichtlich' = 'expected'). The prior cycle (LCS2020) was published July 2022 (PD22_280_624), i.e. about 2 years after the reference year, consistent with the 2024→2026 pattern. If AKE2024 has already been published by the time this is read, the next occurrence would instead be AKE2028, expected to be published in the second half of 2030."
-      },
-      "last_updated": null,
-      "url": "https://www.destatis.de/EN/Themes/Labour/Labour-Costs-Non-Wage-Costs/_node.html",
-      "domains": [
-        "labour"
-      ],
-      "kind": "publication"
-    },
-    {
-      "id": "de-destatis-quarterly-production-survey",
-      "title": "Quarterly Production Survey in Manufacturing, Mining and Quarrying",
-      "publisher": "Statistisches Bundesamt (Destatis)",
-      "country": "DE",
-      "jurisdiction_level": "federal",
-      "region": "Germany",
-      "description": "EVAS register no. 42131, listed in the GNI inventory's Chapter 10 table as a production- and expenditure-approach source, one of a family of items surveys covering manufacturing/mining/quarrying (alongside the cost structure survey, EVAS 42251, and the investment survey, EVAS 42231). Named directly in Chapter 6's discussion of output calculation: 'Production statistics by products and industries (EVAS 42131)'. CORRECTION 2026-08-09 (EU/G.74.md): domains was ['manufacturing'], which is not a member of the Domain union and never has been — the sole such value corpus-wide, undetected because nothing outside types.ts reads the field. Retagged 'national-accounts', which is the corpus's own convention for a production or manufacturing survey feeding the accounts (statcan-msm, statcan-asml, nl-cbs-sbs, au-abs-australian-industry all carry it) and is what this record's own description says it is — a GNI-inventory production- and expenditure-approach source. No new Domain member was minted: one node is not evidence that the union is missing a category, and 'manufacturing' as used here is the survey's subject matter rather than an economic domain in this field's sense. Nothing about the survey itself is corrected; the original description above is unchanged.",
-      "releases_per_year": 4,
-      "cadence_note": "Cadence stated in the survey's own title as given in the GNI inventory's Chapter 10 table ('Quarterly production survey'); not independently re-verified on a separate Destatis genesis-online page this session.",
-      "release_schedule": {
-        "kind": "stated-rule",
-        "entries": [
-          {
-            "from": "2026-10-15",
-            "to": "2026-10-15",
-            "precision": "month",
-            "covers": "Q2 2026 (April-June) quarterly production results",
-            "evidence": "implied"
-          }
-        ],
-        "rule": "Quartalsergebnisse werden innerhalb von dreieinhalb Monaten nach Abschluss des Berichtsquartals veröffentlicht. (Quarterly results [of the Vierteljährliche Produktionserhebung, EVAS 42131] are published within three and a half months after the end of the reporting quarter.) Reporting deadline for respondents is no later than 12 days after the end of the reference quarter.",
-        "source_url": "https://download.statistik-berlin-brandenburg.de/4ab1766c7144d39b/d21708553166/MD_42121_2024.pdf",
-        "note": "This is the official coordinated federal/Länder metadata report (EVAS 42121/42131) for the 'Monatliche und Vierteljährliche Produktionserhebung im Bereich Verarbeitendes Gewerbe, Bergbau und Gewinnung von Steinen und Erden' survey, which is the German-language name for the report in question (EVAS 42131 = the quarterly survey). Q1 2026 results (ending 2026-03-31) would have been due by roughly 2026-07-15, which has already passed relative to today (2026-08-11); the next unreleased quarter is Q2 2026, due by roughly 2026-10-15. Note the standalone print publication 'Fachserie 4 Reihe 3.1' (dated PDF editions) was discontinued after the Q4/full-year 2018 edition ('Diese Publikation wird letztmalig mit der Jahresausgabe 2018 veröffentlicht'), but the underlying survey/data series (EVAS 42131, GENESIS-Online table 42131) continues on the stated quarterly schedule; results now appear only via GENESIS-Online tables rather than a dated PDF report, so no dated 'published-calendar' entries could be found, only the stated timeliness rule."
-      },
-      "last_updated": null,
-      "url": "https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Industrie-Verarbeitendes-Gewerbe/produktionserhebungen.html",
-      "domains": [
-        "national-accounts"
-      ],
-      "kind": "publication"
-    }
-  ],
-  "dependencies": [
-    {
-      "source_report_id": "de-destatis-national-accounts",
-      "target_report_id": "de-destatis-cpi",
-      "relationship_type": "uses_data_from",
-      "basis": "GNI inventory, Chapter 10.1, Serial No. 31: 'Consumer price index for Germany' marked as a source for the Production and Expenditure approaches.",
-      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
-      "evidence_grade": "A",
-      "evidence_quote": "Consumer price index for Germany"
-    },
-    {
-      "source_report_id": "de-destatis-national-accounts",
-      "target_report_id": "de-destatis-labour-cost-survey",
-      "relationship_type": "uses_data_from",
-      "basis": "GNI inventory, Chapter 10.1, Serial No. 32: 'Labour cost survey' marked as a source for the Production and Income approaches; also directly discussed in Chapter 5's wage/salary recalculation ('several source statistics are considered when recalculating gross wages and salaries per employee: 2020 labour cost survey (specially processed for national accounts purposes) (EVAS 62411)').",
-      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
-      "evidence_grade": "A",
-      "evidence_quote": "wages and salaries were determined by industry in the course of the 2024 revision of the national accounts, based on a special processing of the labour cost survey in 2020."
-    },
-    {
-      "source_report_id": "de-destatis-national-accounts",
-      "target_report_id": "de-destatis-quarterly-production-survey",
-      "relationship_type": "uses_data_from",
-      "basis": "GNI inventory, Chapter 10.1, Serial No. 11: 'Quarterly production survey in manufacturing, mining and quarrying' marked as a source for the Production and Expenditure approaches.",
-      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
-      "evidence_grade": "A",
-      "evidence_quote": "Quarterly production survey in manufacturing, mining and quarrying"
-    }
-  ],
-  "_dropped": [
-    {
-      "edge": "GNI inventory Chapter 10.1, remaining 43 of 46 Destatis-survey rows -> nodes",
-      "source": null,
-      "target": null,
-      "reason": "deferred",
-      "why": "Transcribed verbatim from the GNI inventory's own Chapter 10.1 table (all entries carry EVAS register numbers): 12111 Population census; 12212 Microcensus supplementary programme; 21371 Finance statistics of institutions of higher education, yearly; 21372 same, quarterly; 21811 Survey of expenditure, income and personnel of public institutions and institutions receiving public funding for science, R&D; 23611 Health expenditure accounts; 23121 Hospital cost report; 31121 Statistics of construction work completed; 31141 Statistics of demolition of buildings and dwellings; 31211 Census of buildings and housing; 42231 Survey of investments in manufacturing, mining and quarrying; 42251 Cost structure survey in manufacturing, mining and quarrying; 42252 Structural survey of small enterprises in manufacturing, mining and quarrying; 43211 Investment survey of enterprises in energy/water supply, sewage/waste disposal, environmental pollution elimination; 43221 Cost structure survey in energy supply, water supply, wastewater/waste disposal, remediation; 43331 Survey of electricity sales and sales proceeds; 43341 Survey of gas generation/sale and sales proceeds; 44211 Annual survey incl. investments in the main construction industry; 44221 Annual survey incl. investments, finishing trade and property developers; 44241 Annual survey, finishing trade and property developers; 44253 Cost structure survey in the main construction industry; 44254 Cost structure survey of building completion work; 45341 Annual trade statistics (until 2020); 45342 Annual statistics of the hotel and restaurant industry (until 2020); 47415 Structural survey in the service sector (until 2020); 47410 Structural survey in the trade and service sector (starting 2021, successor to 47415); 51141 International trade in goods statistics: Intra-Community trade; 51231 same: Extra-Community trade; 53111 Crafts census; 63221 Income and Consumption Sample Survey: household records; 63231 same: detailed log book (food/beverages/tobacco); 71211 Tax revenue statistics; 71512 Quarterly cash results, core/extra budgets, Federal Government/states/social insurance; 71517 same, municipalities; 71711 Accounting results, core/extra budgets, overall public budget; 71712 same, Federal Government/states/social insurance; 71717 same, municipalities; 71811 Annual accounts of extra budgets (commercial accounting); 73311 VAT (turnover tax) statistics, advance returns -- the single most-cited source statistic in the whole document (35 mentions); 73321 VAT statistics, assessment; 79911 Statistics of tobacco tax; 79931 Energy tax statistics; 85111 Environmental Accounts. None independently verified live this session."
-    },
-    {
-      "edge": "GNI inventory Chapter 10.2, 16 other official sources -> nodes",
-      "source": null,
-      "target": null,
-      "reason": "deferred",
-      "why": "Mostly named by institution rather than by a titled recurring publication (AGENCY ONLY territory), but several carry real titles worth checking: 'Balance of payments statistics, Deutsche Bundesbank'; 'Monthly report, Deutsche Bundesbank'; 'Annual report, Deutsche Bundesbank'; 'Banking statistics, Deutsche Bundesbank'; 'EMU interest rate statistics, Deutsche Bundesbank and the European Central Bank'; motor vehicle statistics (Kraftfahrt-Bundesamt); Economic Accounts for Agriculture (Bundesanstalt fur Landwirtschaft und Ernahrung); insurance/pension statistics (BaFin); telecommunications annual report (Bundesnetzagentur). None independently verified live this session -- the Bundesbank's Monthly Report and Annual Report in particular look like plausible near-term candidates given de-bundesbank-financial-accounts already exists in this corpus."
-    },
-    {
-      "edge": "GNI inventory Chapter 10.3, 7 non-government sources -> nodes",
-      "source": null,
-      "target": null,
-      "reason": "no-document",
-      "why": "Energy balances (Working Group on Energy Balances); R&D survey (Stifterverband fur Deutsche Wissenschaft); Epidemiological Survey on Addiction (ESAIFT, Munich); Report of German Monitoring Centre for Drugs and Drug Addiction; new/used car prices (Deutsche Automobil Treuhand); Annual report, Deutsche Borse Group; profit-and-loss accounts of payment-statistics-reporting institutions (Deutsche Bundesbank). None independently verified; lowest priority of the three tiers."
-    }
-  ]
+ "_slice": "de-destatis-source-surveys",
+ "_researched": "2026-08-05",
+ "_status": "IMPORTED 2026-08-05. First cut at sc-75 (PartB_soft_connections_2026-08-04.md), flagged since G.26.md as 'a whole sub-graph, not one edge' and never started. Registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): all 3 _dropped entries (three priority tiers of the German EVAS source-survey list) read in full. None independently verified live this session, same limitation the entries themselves state. Cross-referenced this session from de-destatis-national-accounts.json's own deferred entry, which transcribes an overlapping but shorter list -- a future session should treat this file as the fuller worklist. No reports or dependencies changed. UPDATED 2026-09-07 (round 9): the 10.1 and 10.2 _dropped notes had gone stale — five EVAS rows and the Bundesbank BoP statistics were resolved by DE rounds 2 and 3, the EVS was refused, and the Bundesbank Monthly/Annual Report were investigated twice and not wired, none of which the notes said. Both notes now record it. Reports and dependencies in THIS file are still unchanged; the mints live in de-national-core-2026-09-07.json and de-national-core-round3-2026-09-07.json. UPDATED 2026-09-07 (round 4): 21 of the 37 open Chapter 10.1 rows wired at A in de-national-core-round4-2026-09-07.json; the 10.1 note now records which, and records the 16 refusals with their reasons rather than only what is left open. Reports and dependencies in THIS file are still unchanged. UPDATED 2026-09-07 (round 5): Chapter 10.2 is CLOSED -- 5 rows wired, 3 already settled, 8 refused with reasons in de-national-core-round5-2026-09-07.json's _dropped. Only Chapter 10.3 remains untouched.",
+ "_note": "Downloaded and read the German GNI inventory in full ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025, 372 pages, destatis.de) -- the same document de-destatis-national-accounts.json's _dropped array already quoted but never opened directly. Its own Chapter 10 ('Main data sources used') is a three-tier numbered table naming every source statistic by EVAS register number and title -- Research.1.md 7's strongest evidence class, applied at scale: 46 Destatis surveys (10.1), 16 other official sources mostly from the Bundesbank/BaFin/KBA (10.2), and 7 non-government sources (10.3). This slice mints the three strongest, most clearly cadenced candidates from the 46; the full table is preserved verbatim below so a future session does not have to re-download and re-parse a 4.4MB PDF to continue.",
+ "_headline": "German CPI -- one of the best-known consumer price indices in the world -- was not a node in this corpus until this session, despite statcan-cpi, bls-cpi, lu-statec-ipch and eurostat-hicp all already being present.",
+ "_open_questions": [
+  "Only 3 of 46 Destatis-survey rows in Chapter 10.1 are minted this session. The remaining 43, plus 16 other-official-source rows and 7 non-government rows, are transcribed verbatim below (source: Chapter 10 of the GNI inventory PDF) for a future session to work through without re-fetching the document. Candidates that stood out on a first read but were not chased: EVAS 73311/73321 (VAT/turnover-tax statistics, the single most-cited source in the whole document at 35 mentions, administrative rather than survey-based -- cadence not established this session); EVAS 47410 (the current structural survey in trade and services, successor to the now-superseded 47415); EVAS 31211 (Census of buildings and housing) and EVAS 12111 (Population census), both plausible generational-cadence nodes on the sna-2008/esa-2010 pattern but not verified live this session.",
+  "The edge direction for all three minted surveys (survey -> feeds de-destatis-national-accounts, i.e. de-destatis-national-accounts uses_data_from each survey) follows directly from Chapter 10's own table, which marks each row against the Production/Expenditure/Income approach it feeds -- this is the strongest-evidenced edge direction in the whole EU branch, a document naming its inputs in a structured table exactly as Research.1.md 7 describes it."
+ ],
+ "reports": [
+  {
+   "id": "de-destatis-cpi",
+   "title": "Consumer Price Index for Germany",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Germany's national consumer price index, EVAS register no. 61111, listed as one of the German GNI calculation's main data sources (production, expenditure and income approaches) in the GNI inventory's own Chapter 10 table. Confirmed live on Destatis's own site: a flash/expected estimate near month-end followed by the confirmed rate roughly ten days into the following month (e.g. 'Inflation rate of +2.8% expected in July 2026' on 30 July 2026, followed by 'Inflation rate at +2.3% in June 2026' on 10 July 2026 for the prior month).",
+   "releases_per_year": 12,
+   "cadence_note": "Live-verified on destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index -- a monthly press-release series, two releases per reference month (flash estimate, then confirmed figure), same two-stage pattern already seen for eurostat-hicp.",
+   "release_schedule": {
+    "kind": "published-calendar",
+    "entries": [
+     {
+      "from": "2026-08-12",
+      "to": "2026-08-12",
+      "precision": "day",
+      "covers": "Final CPI for July 2026",
+      "evidence": "documented"
+     },
+     {
+      "from": "2026-08-31",
+      "to": "2026-08-31",
+      "precision": "day",
+      "covers": "Preliminary CPI for August 2026"
+     },
+     {
+      "from": "2026-09-10",
+      "to": "2026-09-10",
+      "precision": "day",
+      "covers": "Final CPI for August 2026"
+     },
+     {
+      "from": "2026-09-30",
+      "to": "2026-09-30",
+      "precision": "day",
+      "covers": "Preliminary CPI for September 2026"
+     },
+     {
+      "from": "2026-10-13",
+      "to": "2026-10-13",
+      "precision": "day",
+      "covers": "Final CPI for September 2026"
+     },
+     {
+      "from": "2026-10-30",
+      "to": "2026-10-30",
+      "precision": "day",
+      "covers": "Preliminary CPI for October 2026"
+     },
+     {
+      "from": "2026-11-11",
+      "to": "2026-11-11",
+      "precision": "day",
+      "covers": "Final CPI for October 2026"
+     },
+     {
+      "from": "2026-11-30",
+      "to": "2026-11-30",
+      "precision": "day",
+      "covers": "Preliminary CPI for November 2026"
+     },
+     {
+      "from": "2026-12-10",
+      "to": "2026-12-10",
+      "precision": "day",
+      "covers": "Final CPI for November 2026"
+     },
+     {
+      "from": "2027-01-05",
+      "to": "2027-01-05",
+      "precision": "day",
+      "covers": "Preliminary CPI for December 2026"
+     }
+    ],
+    "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_270_611.html",
+    "note": "Destatis publishes both a preliminary estimate (around the last working day of the reference month) and final results (mid-following month) for the German CPI/HICP each month. The August 12, 2026 date is directly confirmed in the July 30, 2026 press release (PD26_270_611): 'Die endgültigen Ergebnisse für Juli 2026 werden am 12. August 2026 veröffentlicht.' Subsequent dates through end of 2026 are taken from Destatis's own release calendar search tool (Terminsuche) filtered for 'verbraucherpreisindex', consistent with the standard preliminary/final monthly pattern."
+   },
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Economy/Prices/Consumer-Price-Index/_node.html",
+   "domains": [
+    "inflation"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-labour-cost-survey",
+   "title": "Labour Cost Survey",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 62411, listed in the GNI inventory's Chapter 10 table as a production- and income-approach source. The GNI inventory's own text: 'The labour cost survey (EVAS 62411) takes place every 4 years (also 2020) and asks for the private use of car companies (benefit in kind)...' -- used among other things to allocate gross wages and salaries per employee and private use of company cars.",
+   "releases_per_year": 0.25,
+   "cadence_note": "Stated directly in the source document itself (the GNI inventory, p. 152 of the extracted text): 'takes place every 4 years (also 2020)'. Not independently re-verified on a separate Destatis page this session -- the GNI inventory is itself a Destatis publication and the primary source for this fact.",
+   "release_schedule": {
+    "kind": "stated-rule",
+    "entries": [
+     {
+      "from": "2026-07-01",
+      "to": "2026-07-31",
+      "precision": "month",
+      "covers": "Labour Cost Survey 2024 (Arbeitskostenerhebung 2024) detailed results",
+      "evidence": "documented"
+     }
+    ],
+    "rule": "The Labour Cost Survey (Arbeitskostenerhebung) is conducted every four years under EU law (Council Regulation (EC) No 530/1999 and Commission Regulation (EC) No 1737/2005) and Germany's Verdienststatistikgesetz, covering reference years 2000, 2004, 2008, ..., 2020, 2024, 2028. Eurostat's LCS metadata states 'Data for LCS2024 will be published in 2nd half of 2026,' and Destatis's April 2026 press release (PD26_148_624) states the 2024 survey results 'werden voraussichtlich im Juli 2026 veröffentlicht' (are expected to be published in July 2026).",
+    "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_148_624.html",
+    "note": "As of the research date (2026-08-11), no press release or dataset confirming the actual July 2026 publication of AKE2024 detailed results could be located via search — the target month has just passed and the release may have slipped slightly (Destatis used 'voraussichtlich' = 'expected'). The prior cycle (LCS2020) was published July 2022 (PD22_280_624), i.e. about 2 years after the reference year, consistent with the 2024→2026 pattern. If AKE2024 has already been published by the time this is read, the next occurrence would instead be AKE2028, expected to be published in the second half of 2030."
+   },
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Labour/Labour-Costs-Non-Wage-Costs/_node.html",
+   "domains": [
+    "labour"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-quarterly-production-survey",
+   "title": "Quarterly Production Survey in Manufacturing, Mining and Quarrying",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 42131, listed in the GNI inventory's Chapter 10 table as a production- and expenditure-approach source, one of a family of items surveys covering manufacturing/mining/quarrying (alongside the cost structure survey, EVAS 42251, and the investment survey, EVAS 42231). Named directly in Chapter 6's discussion of output calculation: 'Production statistics by products and industries (EVAS 42131)'. CORRECTION 2026-08-09 (EU/G.74.md): domains was ['manufacturing'], which is not a member of the Domain union and never has been — the sole such value corpus-wide, undetected because nothing outside types.ts reads the field. Retagged 'national-accounts', which is the corpus's own convention for a production or manufacturing survey feeding the accounts (statcan-msm, statcan-asml, nl-cbs-sbs, au-abs-australian-industry all carry it) and is what this record's own description says it is — a GNI-inventory production- and expenditure-approach source. No new Domain member was minted: one node is not evidence that the union is missing a category, and 'manufacturing' as used here is the survey's subject matter rather than an economic domain in this field's sense. Nothing about the survey itself is corrected; the original description above is unchanged.",
+   "releases_per_year": 4,
+   "cadence_note": "Cadence stated in the survey's own title as given in the GNI inventory's Chapter 10 table ('Quarterly production survey'); not independently re-verified on a separate Destatis genesis-online page this session.",
+   "release_schedule": {
+    "kind": "stated-rule",
+    "entries": [
+     {
+      "from": "2026-10-15",
+      "to": "2026-10-15",
+      "precision": "month",
+      "covers": "Q2 2026 (April-June) quarterly production results",
+      "evidence": "implied"
+     }
+    ],
+    "rule": "Quartalsergebnisse werden innerhalb von dreieinhalb Monaten nach Abschluss des Berichtsquartals veröffentlicht. (Quarterly results [of the Vierteljährliche Produktionserhebung, EVAS 42131] are published within three and a half months after the end of the reporting quarter.) Reporting deadline for respondents is no later than 12 days after the end of the reference quarter.",
+    "source_url": "https://download.statistik-berlin-brandenburg.de/4ab1766c7144d39b/d21708553166/MD_42121_2024.pdf",
+    "note": "This is the official coordinated federal/Länder metadata report (EVAS 42121/42131) for the 'Monatliche und Vierteljährliche Produktionserhebung im Bereich Verarbeitendes Gewerbe, Bergbau und Gewinnung von Steinen und Erden' survey, which is the German-language name for the report in question (EVAS 42131 = the quarterly survey). Q1 2026 results (ending 2026-03-31) would have been due by roughly 2026-07-15, which has already passed relative to today (2026-08-11); the next unreleased quarter is Q2 2026, due by roughly 2026-10-15. Note the standalone print publication 'Fachserie 4 Reihe 3.1' (dated PDF editions) was discontinued after the Q4/full-year 2018 edition ('Diese Publikation wird letztmalig mit der Jahresausgabe 2018 veröffentlicht'), but the underlying survey/data series (EVAS 42131, GENESIS-Online table 42131) continues on the stated quarterly schedule; results now appear only via GENESIS-Online tables rather than a dated PDF report, so no dated 'published-calendar' entries could be found, only the stated timeliness rule."
+   },
+   "last_updated": null,
+   "url": "https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Industrie-Verarbeitendes-Gewerbe/produktionserhebungen.html",
+   "domains": [
+    "national-accounts"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-cpi",
+   "relationship_type": "uses_data_from",
+   "basis": "GNI inventory, Chapter 10.1, Serial No. 31: 'Consumer price index for Germany' marked as a source for the Production and Expenditure approaches.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_grade": "A",
+   "evidence_quote": "Consumer price index for Germany"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-labour-cost-survey",
+   "relationship_type": "uses_data_from",
+   "basis": "GNI inventory, Chapter 10.1, Serial No. 32: 'Labour cost survey' marked as a source for the Production and Income approaches; also directly discussed in Chapter 5's wage/salary recalculation ('several source statistics are considered when recalculating gross wages and salaries per employee: 2020 labour cost survey (specially processed for national accounts purposes) (EVAS 62411)').",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_grade": "A",
+   "evidence_quote": "wages and salaries were determined by industry in the course of the 2024 revision of the national accounts, based on a special processing of the labour cost survey in 2020."
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-quarterly-production-survey",
+   "relationship_type": "uses_data_from",
+   "basis": "GNI inventory, Chapter 10.1, Serial No. 11: 'Quarterly production survey in manufacturing, mining and quarrying' marked as a source for the Production and Expenditure approaches.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_grade": "A",
+   "evidence_quote": "Quarterly production survey in manufacturing, mining and quarrying"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "GNI inventory Chapter 10.1, remaining 43 of 46 Destatis-survey rows -> nodes",
+   "source": null,
+   "target": null,
+   "reason": "deferred",
+   "why": "Transcribed verbatim from the GNI inventory's own Chapter 10.1 table (all entries carry EVAS register numbers): 12111 Population census; 12212 Microcensus supplementary programme; 21371 Finance statistics of institutions of higher education, yearly; 21372 same, quarterly; 21811 Survey of expenditure, income and personnel of public institutions and institutions receiving public funding for science, R&D; 23611 Health expenditure accounts; 23121 Hospital cost report; 31121 Statistics of construction work completed; 31141 Statistics of demolition of buildings and dwellings; 31211 Census of buildings and housing; 42231 Survey of investments in manufacturing, mining and quarrying; 42251 Cost structure survey in manufacturing, mining and quarrying; 42252 Structural survey of small enterprises in manufacturing, mining and quarrying; 43211 Investment survey of enterprises in energy/water supply, sewage/waste disposal, environmental pollution elimination; 43221 Cost structure survey in energy supply, water supply, wastewater/waste disposal, remediation; 43331 Survey of electricity sales and sales proceeds; 43341 Survey of gas generation/sale and sales proceeds; 44211 Annual survey incl. investments in the main construction industry; 44221 Annual survey incl. investments, finishing trade and property developers; 44241 Annual survey, finishing trade and property developers; 44253 Cost structure survey in the main construction industry; 44254 Cost structure survey of building completion work; 45341 Annual trade statistics (until 2020); 45342 Annual statistics of the hotel and restaurant industry (until 2020); 47415 Structural survey in the service sector (until 2020); 47410 Structural survey in the trade and service sector (starting 2021, successor to 47415); 51141 International trade in goods statistics: Intra-Community trade; 51231 same: Extra-Community trade; 53111 Crafts census; 63221 Income and Consumption Sample Survey: household records; 63231 same: detailed log book (food/beverages/tobacco); 71211 Tax revenue statistics; 71512 Quarterly cash results, core/extra budgets, Federal Government/states/social insurance; 71517 same, municipalities; 71711 Accounting results, core/extra budgets, overall public budget; 71712 same, Federal Government/states/social insurance; 71717 same, municipalities; 71811 Annual accounts of extra budgets (commercial accounting); 73311 VAT (turnover tax) statistics, advance returns -- the single most-cited source statistic in the whole document (35 mentions); 73321 VAT statistics, assessment; 79911 Statistics of tobacco tax; 79931 Energy tax statistics; 85111 Environmental Accounts. None independently verified live this session.\n\nUPDATED 2026-09-07 (rounds 2 and 3 of the DE national-core programme, after two consecutive rounds flagged this note as stale without fixing it). FOUR of the 43 rows below are NO LONGER OPEN and must not be re-researched: 31211 Census of buildings and housing -> `de-destatis-building-housing-census` (round 3, A); 12212 Microcensus supplementary programme -> `de-destatis-microcensus-housing-supplement` (round 3, A); 71211 Tax revenue statistics -> `de-destatis-tax-revenue-statistics` (round 3, A, with three in-document glosses recorded as `title_aliases`); 73311 VAT (turnover tax) statistics, advance returns -> `de-destatis-turnover-tax-statistics` (round 2). All four are wired to `de-destatis-national-accounts` in `de-national-core-round3-2026-09-07.json` and `de-national-core-2026-09-07.json`. TWO more are REFUSED, not open: 63221 and 63231, the Income and Consumption Sample Survey (EVS), were investigated in round 2 and explicitly refused — this same GNI inventory says the EVS is used \"for the purposes of comparison, and not as a basis for calculation\", which is PLAYBOOK-CORPUS §7a's consistent-with-is-not-a-citation shape. Do not re-open the EVS per row. THIRTY-SEVEN rows are therefore genuinely open, not 43. (12211 Microcensus, in the original three, is not in this list.)\n\nUPDATED 2026-09-07 (round 4 of the DE national-core programme, de-national-core-round4-2026-09-07.json). TWENTY-ONE of the 37 rows this note called open are now WIRED, all at A, all on body-text sentences from this same GNI inventory: 21371, 21811, 23611, 42231, 42251, 43221, 43331, 43341, 44211, 44253, 44254, 45341, 45342, 47410, 47415, 53111, 71712, 71717, 73321, 79911, 85111. SIXTEEN rows remain, and each was read and refused this round -- do not re-derive the reasons, they are in that slice's _open_questions in full. In short: 43211, 23121, 51141, 51231 and 44221 are cited ONLY inside an EVAS bundle the document never separates ('EVAS 43211 and 43221', 'EVAS 23111, 23112, 23121', 'EVAS 51141, 51231', 'EVAS 44211, 44221'), so wiring one member asserts a split the sentence does not make; 42252, 71711 and 31121 are named only in a phrasing too generic to be a node title ('the annual structural survey (SE)', 'the budgets of the Federal Government, the federal states and the municipalities', 'the construction activity statistics', which is the family name covering EVAS 31111 too); and 12111, 21372, 31141, 44241, 71512, 71517, 71811 and 79931 appear in the Chapter 10 TABLE and nowhere in the 372-page body at all. That last group of eight is not a research task -- it is one ruling for Thomas on whether Chapter 10's table row is caption-equivalent under PLAYBOOK-CORPUS 7a, and it moves all eight or none."
+  },
+  {
+   "edge": "GNI inventory Chapter 10.2, 16 other official sources -> nodes",
+   "source": null,
+   "target": null,
+   "reason": "deferred",
+   "why": "Mostly named by institution rather than by a titled recurring publication (AGENCY ONLY territory), but several carry real titles worth checking: 'Balance of payments statistics, Deutsche Bundesbank'; 'Monthly report, Deutsche Bundesbank'; 'Annual report, Deutsche Bundesbank'; 'Banking statistics, Deutsche Bundesbank'; 'EMU interest rate statistics, Deutsche Bundesbank and the European Central Bank'; motor vehicle statistics (Kraftfahrt-Bundesamt); Economic Accounts for Agriculture (Bundesanstalt fur Landwirtschaft und Ernahrung); insurance/pension statistics (BaFin); telecommunications annual report (Bundesnetzagentur). None independently verified live this session -- the Bundesbank's Monthly Report and Annual Report in particular look like plausible near-term candidates given de-bundesbank-financial-accounts already exists in this corpus.\n\nUPDATED 2026-09-07 (DE rounds 2 and 3). 'Balance of payments statistics, Deutsche Bundesbank' is RESOLVED -> `de-bundesbank-balance-of-payments` (round 2), wired to `de-destatis-national-accounts`. And the two this note called plausible near-term candidates are NOT: the Bundesbank **Monthly Report** and **Annual Report** were investigated in round 2 and re-checked in round 3, and neither round found a citing sentence — the GNI inventory names the Bundesbank as an institution without naming either report as a source of a compiled figure, which is PLAYBOOK-CORPUS §7a's agency-not-artefact bar. Two rounds have now paid for that answer; do not spend a third. Still untouched and still worth a look: motor vehicle statistics (Kraftfahrt-Bundesamt), insurance and pension statistics (BaFin), banking statistics, EMU interest rate statistics, Economic Accounts for Agriculture, and the Bundesnetzagentur telecommunications annual report.\n\nUNCHANGED 2026-09-07 (round 4): this chapter was deliberately not opened -- round 4 spent itself on 10.1. The worklist above is still exactly right.\n\nCLOSED 2026-09-07 (round 5 of the DE national-core programme, de-national-core-round5-2026-09-07.json). Chapter 10.2 is finished. THE FULL 16-ROW TABLE WAS READ FROM THE PDF this round rather than from this note, and the note was missing two of the chapter's best rows -- row 15, the annual report of the gambling supervisory authorities of the federal states, and row 16, the Federal Ministry of Finance's AfA depreciation tables, both of which the inventory names repeatedly in its body and both now wired at A. FIVE ROWS WIRED this round: 4 Economic accounts for agriculture (BLE), 9 EMU/MFI interest rate statistics (Bundesbank), 13 Banking statistics (Bundesbank), 15 the gambling authorities' annual report, 16 the AfA tables. THREE were already settled: 1 balance of payments (round 2), 2 and 12 the Bundesbank Monthly and Annual Report (refused twice). The remaining EIGHT are refused with full reasons in that slice's _dropped -- rows 5 and 6 (BaFin) because what the accounts use is regulatory returns passed between agencies as internal accounting documents and not a publication at all; row 3 (Kraftfahrt-Bundesamt) and row 14 (Bundesnetzagentur) and row 7 (Pfandkreditgewerbe) on the agency-not-artefact bar; and rows 8, 10 and 11 because they appear in the table and nowhere in the body, which Thomas closed on 2026-09-07. Do not re-derive any of these. THE LESSON: this note has been the worklist since 2026-08-05 and its summary of the unlisted rows was fair but hid the two best ones -- read the source table, not the note about it."
+  },
+  {
+   "edge": "GNI inventory Chapter 10.3, 7 non-government sources -> nodes",
+   "source": null,
+   "target": null,
+   "reason": "no-document",
+   "why": "Energy balances (Working Group on Energy Balances); R&D survey (Stifterverband fur Deutsche Wissenschaft); Epidemiological Survey on Addiction (ESAIFT, Munich); Report of German Monitoring Centre for Drugs and Drug Addiction; new/used car prices (Deutsche Automobil Treuhand); Annual report, Deutsche Borse Group; profit-and-loss accounts of payment-statistics-reporting institutions (Deutsche Bundesbank). None independently verified; lowest priority of the three tiers."
+  }
+ ]
 }

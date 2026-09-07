@@ -1,4 +1,4 @@
-# C1 — Grok consolidated/*.json vs public/corpus-data.json (2026-09-02)
+# C1 — the import consolidated/*.json vs public/corpus-data.json (2026-09-02)
 
 Method: for each consolidated country file, every `reports[].id` looked up in corpus ids; else title (whitespace-normalised, lowercased) looked up; else id looked up in notes/retired-nodes-2026-08-29.json, retired-nodes-2026-08-31.json, publisher-cleanup-2026-08-31.json; remainder = stripped at mint (institution/geography scaffolding, per each slice's `meta.note`). Edges keyed on (source_report_id,target_report_id): present in corpus / quarantined in some research slice's `_dropped` / carried as `part_of` on a node / unexplained.
 

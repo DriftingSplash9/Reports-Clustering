@@ -1,0 +1,338 @@
+{
+  "_slice": "r4-italy-czechia",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Consolidated from the August 2026 research rounds, structurally checked, registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): the file's single _dropped entry read in full and confirmed correctly reasoned -- ISTAT's national accounts are named only at institution/generic-survey-title level in the ESMS source-data section, agency-only. No reports or dependencies changed.",
+  "_note": "import round 4 (Italy, Czechia — national depth with named registers and central-bank BoP links).",
+  "reports": [
+    {
+      "id": "it-istat-national-accounts",
+      "title": "Annual national accounts",
+      "publisher": "Istat",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "Italian national accounts estimates compiled under ESA 2010, published as ESMS metadata and annual press releases.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-22",
+            "to": "2026-09-22",
+            "precision": "day",
+            "covers": "Annual National Accounts - Year 2025"
+          }
+        ],
+        "source_url": "https://www.istat.it/wp-content/uploads/2026/01/Calendario-2026_-EN.pdf",
+        "note": "Istat publishes an official annual press-release calendar listing exact dates for each year's releases. The 2026 calendar (Calendario-2026_-EN.pdf) lists 'Annual National Accounts (Year 2025)' for Tuesday, 22 September 2026 at 10 a.m. Past editions confirm annual September cadence: Years 2023-2024 edition was published 22 September 2025 (https://www.istat.it/en/press-release/annual-national-accounts-years-2023-2024/), and the prior edition (Years 1995-2023) was published 23 September 2024."
+      },
+      "last_updated": null,
+      "url": "https://www.istat.it/en/press-release/annual-national-accounts-years-2023-2024/",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "it-istat-asia-enterprises",
+      "title": "Statistical register of active enterprises (ASIA-Enterprises)",
+      "publisher": "Istat",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "Census-type statistical register of active enterprises, named as a core supply-side source for Italian national accounts.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2022-07-28",
+            "to": "2022-07-28",
+            "precision": "day",
+            "covers": "Reference year 2020 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2023-08-09",
+            "to": "2023-08-09",
+            "precision": "day",
+            "covers": "Reference year 2021 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-07-11",
+            "to": "2024-07-11",
+            "precision": "day",
+            "covers": "Reference year 2022 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-07-09",
+            "to": "2025-07-09",
+            "precision": "day",
+            "covers": "Reference year 2023 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-07-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "Reference year 2024 edition (next expected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.istat.it/tavole-di-dati/registro-statistico-delle-imprese-attive-anno-2023/",
+        "note": "Istat publishes the ASIA-Imprese (Registro statistico delle imprese attive) annual data tables with a roughly 2-year lag (data for year N released in year N+2), each year in the July-August window: 28 Jul 2022 (ref. 2020), 9 Aug 2023 (ref. 2021), 11 Jul 2024 (ref. 2022), 9 Jul 2025 (ref. 2023) - dates taken from the 'Data pubblicazione' field on each year's Istat tavole-di-dati page. No formal release-calendar page or stated publication rule was found on istat.it; as of 2026-08-11 no 'Anno 2024' edition page exists yet (istat.it/tavole-di-dati/registro-statistico-delle-imprese-attive-anno-2024/ returns 404), so it is overdue relative to the observed Jul 9 - Aug 9 window and likely imminent."
+      },
+      "last_updated": null,
+      "url": "https://www.istat.it/scheda-qualita/registro-statistico-delle-imprese-attive-asia-imprese-2/",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "it-istat-frame-sbs",
+      "title": "Frame-SBS (information system on economic results of enterprises)",
+      "publisher": "Istat",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "Micro-database of annual financial statements for active market enterprises within the ASIA-Enterprises register, built from administrative archives plus PMI and SCI surveys; primary source for enterprise economic results in national accounts.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "Reference year 2024 national economic results of enterprises (Frame-SBS / 'Conti economici delle imprese e dei gruppi di impresa')",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "Reference year 2024 territorial/regional breakdown ('Risultati economici delle imprese e delle multinazionali a livello territoriale')",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Per Eurostat's SBS metadata for Italy (Istat, ESSBS21 reference metadata): national-level structural business statistics data is 'published in general in October/November t+22 (months)' after the reference year; a separate regional/territorial breakdown is published 'in January t+25 (months)' after the reference year (data transmitted to Eurostat 18 months after reference year per Regulation; dissemination is annual).",
+        "source_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/sbs_essbs21_it.htm",
+        "note": "Computed by applying the stated t+22/t+25-month rule to the most recent reference year (2024), since the 2024-reference-year edition had not yet appeared as of 2026-08-11. Corroborated by Istat's own observed release pattern: 'Conti economici delle imprese e dei gruppi di impresa' editions were released mid-October for reference years 2022 (15 Oct 2024) and 2023 (15 Oct 2025), and the territorial table 'Risultati economici delle imprese e delle multinazionali a livello territoriale -- Anno 2023' was released 13 Jan 2026 (matching t+25 months from Dec 2023)."
+      },
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/sbs_essbs21_it.htm",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "it-bdi-bop",
+      "title": "Balance of Payments",
+      "publisher": "Banca d'Italia",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "Italian balance of payments, compiled by the Bank of Italy and named as the source for trade-in-services data feeding national accounts.",
+      "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-19",
+            "to": "2026-08-19",
+            "precision": "day",
+            "covers": "June 2026 balance of payments data"
+          },
+          {
+            "from": "2026-09-18",
+            "to": "2026-09-18",
+            "precision": "day",
+            "covers": "July 2026 balance of payments data"
+          },
+          {
+            "from": "2026-10-20",
+            "to": "2026-10-20",
+            "precision": "day",
+            "covers": "August 2026 balance of payments data"
+          },
+          {
+            "from": "2026-11-19",
+            "to": "2026-11-19",
+            "precision": "day",
+            "covers": "September 2026 balance of payments data"
+          },
+          {
+            "from": "2026-12-18",
+            "to": "2026-12-18",
+            "precision": "day",
+            "covers": "October 2026 balance of payments data"
+          },
+          {
+            "from": "2027-01-19",
+            "to": "2027-01-19",
+            "precision": "day",
+            "covers": "November 2026 balance of payments data"
+          }
+        ],
+        "source_url": "https://www.bancaditalia.it/statistiche/calendario-pubblicazioni/Cal_mese_ita_2026.pdf",
+        "note": "Banca d'Italia publishes a monthly statistical release calendar (Cal_mese_ita_2026.pdf) listing exact dates for Balance of Payments and international investment position releases. Confirmed also via the Agenda delle Statistiche page (bancaditalia.it/media/agenda). Full 2026 calendar runs Jan 20 through Dec 18 (12 releases), consistent with the corpus's releases_per_year=12; entries listed here are limited to the next occurrences from today (2026-08-11) onward."
+      },
+      "last_updated": null,
+      "url": "https://www.bancaditalia.it/statistiche/tematiche/rapporti-estero/bilancia-pagamenti/index.html",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cz-csu-national-accounts",
+      "title": "National accounts (ESA 2010)",
+      "publisher": "Czech Statistical Office (ČSÚ)",
+      "country": "CZ",
+      "jurisdiction_level": "federal",
+      "region": "Czechia",
+      "description": "Czech national accounts, with a published ESA 2010 GNI Inventory at a level of detail comparable to Germany, France and the Netherlands.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-11-27",
+            "to": "2023-11-27",
+            "precision": "day",
+            "covers": "Statistical Yearbook of the Czech Republic 2023 (incl. national accounts chapter B1)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-12-18",
+            "to": "2024-12-18",
+            "precision": "day",
+            "covers": "Statistical Yearbook of the Czech Republic 2024 (incl. national accounts chapter B1)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-11",
+            "to": "2025-12-11",
+            "precision": "day",
+            "covers": "Statistical Yearbook of the Czech Republic 2025 (incl. national accounts chapter B1)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Statistical Yearbook of the Czech Republic 2026 (national accounts chapter, projected next edition)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://csu.gov.cz/produkty/statistical-yearbook-of-the-czech-republic-2025",
+        "note": "This report (apl.czso.cz/pll/rocenka/b1.metodika) is the 'National accounts' methodology/data chapter (B1) of the CZSO's annual Statistical Yearbook of the Czech Republic. No published forward release calendar with an exact date was found for the yearbook itself; however the last three editions were published 27 Nov 2023, 18 Dec 2024, and 11 Dec 2025, an annual pattern in late Nov/December each year. The next edition (2026 data compilation) is therefore projected for ~December 2026, but no exact day is documented yet. Separately, CZSO also publishes annual national-accounts headline aggregates (GDP/GNI/GDI real growth) each year around 30 June for the prior reference year (e.g. 2025 data published 30 June 2026) via https://csu.gov.cz/annual-national-accounts, and a GDP deflator update around 2 January — these are related but distinct annual national-accounts releases from the yearbook chapter that this report's URL points to."
+      },
+      "last_updated": null,
+      "url": "https://apl.czso.cz/pll/rocenka/b1.metodika?mylang=EN",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cz-cnb-bop",
+      "title": "Balance of Payments",
+      "publisher": "Czech National Bank (ČNB)",
+      "country": "CZ",
+      "jurisdiction_level": "federal",
+      "region": "Czechia",
+      "description": "Czech balance of payments, compiled by the central bank and named as a source for national accounts.",
+      "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-11",
+            "to": "2026-09-11",
+            "precision": "day",
+            "covers": "Balance of Payments, Q2 2026"
+          }
+        ],
+        "source_url": "https://www.cnb.cz/en/cnb-news/calendar/",
+        "note": "CNB's calendar entry for this specific release is periodically republished under a new URL suffix (e.g. .../Platebni-bilance-00009/ for Q1 2026, .../Platebni-bilance-00010/ for Q2 2026) rather than kept at one stable URL per edition. Confirmed via both the Czech (cnb.cz/cs/cnb-news/kalendar/Platebni-bilance-00010/) and English (cnb.cz/en/cnb-news/calendar/Balance-of-payments-00010/) calendar pages. Prior quarterly release: Q1 2026 data published 2026-06-12, consistent with a ~10-11 week lag after quarter-end, matching the corpus's releases_per_year=4. Note CNB also separately publishes a higher-frequency 'Basic items of the balance of payments' monthly release and an annual Balance of Payments Report (early June) — these are distinct series from the quarterly release captured here."
+      },
+      "last_updated": null,
+      "url": "https://www.cnb.cz/en/statistics/bop_stat/index.html",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "it-istat-national-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"National accounts estimates are produced in accordance with the provisions of the European System of National and Regional Accounts Manual (ESA 2010), which represents the application at European level of the System of National Accounts (SNA 2008) of the United Nations. The methodological provisions act as binding rules for EU member states, ensuring comparability of the estimates. ESA 2010 was introduced by Regulation (EU) of the European Parliament and of the Council No 549/2013.\"",
+      "evidence_url": "https://www.istat.it/wp-content/uploads/2021/09/PR_Annual-national-accounts_2020.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "National accounts estimates are produced in accordance with the provisions of the European System of National and Regional Accounts Manual (ESA 2010), which represents the application at European level of the System of National Accounts (SNA 2008) of the United Nations. The methodological provisions"
+    },
+    {
+      "source_report_id": "it-istat-national-accounts",
+      "target_report_id": "it-istat-asia-enterprises",
+      "relationship_type": "uses_data_from",
+      "basis": "\"As regards estimates of the supply side, the most relevant sources are those providing census-type information on enterprises: the statistical register of active enterprises (ASIA-Enterprises) and the information system on economic results of enterprises (Frame-SBS in the following).\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_it.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "As regards estimates of the supply side, the most relevant sources are those providing census-type information on enterprises: the statistical register of active enterprises (ASIA-Enterprises) and the information system on economic results of enterprises (Frame-SBS in the following)."
+    },
+    {
+      "source_report_id": "it-istat-national-accounts",
+      "target_report_id": "it-istat-frame-sbs",
+      "relationship_type": "uses_data_from",
+      "basis": "\"This micro database includes information on economic results for the whole population of active market enterprises (excluding agriculture and financial intermediation). It is built through a complex integration procedure of data from administrative archives, treated statistically and combined with data drawn from the survey on small and medium enterprises (PMI) and from the survey on the financial statements of large enterprises (SCI).\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_it.htm",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "it-istat-national-accounts",
+      "target_report_id": "it-bdi-bop",
+      "relationship_type": "uses_data_from",
+      "basis": "\"As regards foreign trade (imports and exports of goods and services), the data derive from the survey on traded goods (Intrastat and Extrastat components) conducted by Istat and from information on the trade of services extracted from the Balance of Payments compiled by the Bank of Italy.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_it.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "As regards foreign trade (imports and exports of goods and services), the data derive from the survey on traded goods (Intrastat and Extrastat components) conducted by Istat and from information on the trade of services extracted from the Balance of Payments compiled by the Bank of Italy."
+    },
+    {
+      "source_report_id": "cz-csu-national-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"Within the NA compilations the CZSO strictly follows the ESA 2010 methodology.\" Reinforced by the existence of a published ESA 2010 GNI Inventory (2018 and 2022 editions listed on the ČSÚ methodology page).",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_cz.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "Within the NA compilations the CZSO strictly follows the ESA 2010 methodology."
+    },
+    {
+      "source_report_id": "cz-csu-national-accounts",
+      "target_report_id": "cz-cnb-bop",
+      "relationship_type": "uses_data_from",
+      "basis": "\"It relies on a variety of data sources, including administrative data: car and business registers, accounting statements, tax data, budgetary reports, population censuses, statistical surveys of businesses and households, statements of supervising institutions and branch organisations, annual and quarterly reports, trade statistics on goods and services, balance of payments information.\" ČNB is the publicly documented compiler of Czech BoP.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_cz.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "It relies on a variety of data sources, including administrative data: car and business registers, accounting statements, tax data, budgetary reports, population censuses, statistical surveys of businesses and households, statements of supervising institutions and branch organisations, annual and qu"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "it-istat-national-accounts -> Household Budget Survey / Labour Force Survey / Census of Agriculture / SIOPE-BDAP",
+      "source": "it-istat-national-accounts",
+      "target": null,
+      "reason": "no-document",
+      "why": "AGENCY_ONLY. Named only at institution or generic survey-title level in the ESMS source-data section; no clean publication-title-plus-cadence edge extractable beyond the ASIA/Frame-SBS and BoP cases already minted above."
+    }
+  ]
+}

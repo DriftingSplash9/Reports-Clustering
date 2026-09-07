@@ -16,7 +16,7 @@ import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate,
 import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, countryFromOrbId, countryOrbId, isCountryOrbId, isFamilyOrbId, isOrbId, orbId, resolveId, tierOf, toggleCountryOpen, toggleDrilldown } from '../src/lib/hierarchy'
 import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
 import { buildFocusIndex, computeFocus, computeGroupFocus, computeNeighbourhoodFocus, shortestPath } from '../src/lib/selection'
-import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
+import { buildGraph, describeRate, hasStoredQuote, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
 import { affinityScore } from '../src/lib/geoAffinity'
 import { galaxyForce, type GalaxyNode } from '../src/lib/galaxyForce'
@@ -205,6 +205,16 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   ok(bare.some((i) => i.severity === 'warning' && i.message.includes('bare homepage')), 'validate: a bare-homepage evidence_url warns')
   const pathed = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't', evidence_url: 'https://www.example.gov/method/cpi.pdf' }])
   ok(!pathed.some((i) => i.message.includes('bare homepage') || i.message.includes('cites no evidence_url')), 'validate: a document URL raises neither evidence warning')
+  // `hasStoredQuote`, 2026-09-07. The EVIDENCE block's "assertion only" count
+  // read `basis` for quotation marks and never looked at `evidence_quote`, so
+  // 1,058 edges carrying the schema's own quote field could be called
+  // assertion-only the moment their URL went bare. That phrase is Thomas's
+  // 2026-08-31 ruling by name, so a false positive on it is expensive.
+  ok(hasStoredQuote({ evidence_quote: 'the index is compiled monthly', basis: 'no marks here' }), 'hasStoredQuote: evidence_quote counts on its own')
+  ok(hasStoredQuote({ basis: 'it states "the index is compiled monthly"' }), 'hasStoredQuote: a quoted span in basis still counts')
+  ok(hasStoredQuote({ basis: 'the report says \u201cthe index is compiled\u201d' }), 'hasStoredQuote: typographic quotes count')
+  ok(!hasStoredQuote({ basis: 'the ministry publishes it', evidence_quote: '   ' }), 'hasStoredQuote: whitespace is not a quote')
+  ok(!hasStoredQuote({}), 'hasStoredQuote: nothing stored is nothing stored')
 }
 
 // Three new validator rules, 2026-08-21 (review §2, §6 item 7): the reserved

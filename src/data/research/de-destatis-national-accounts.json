@@ -1,81 +1,81 @@
 {
-  "_slice": "de-destatis-national-accounts",
-  "_researched": "2026-08-05",
-  "_status": "IMPORTED 2026-08-05. Staged in EU/slices/member-states/, checked, moved here and registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): all 4 _dropped entries read in full against Research.1.md §4's third-category test. Two (Bundesbank sector accounts, GNI inventory) turned out to be the stale-cross-file pattern -- already resolved in sibling files, never reflected back here -- and are annotated `note` rather than deleted, per the equalization-file precedent. A third (EVAS sub-graph) is cross-referenced to de-destatis-source-surveys.json, which duplicates its worklist. The fourth (wrong-direction, ESA 2010 Annex B) was already correctly reasoned and is unchanged. No reports or dependencies added; the Bundesbank edge this entry asked for already exists in de-bundesbank-financial-accounts.json, which src/data/index.ts loads independently of this file.",
-  "_note": "THE BRANCH'S FIRST CROSS-LAYER EDGE, and its first member-state node. One report, one dependency, four _dropped. Unlike the two preceding EU slices this one was extracted from sources opened and read directly this session — the Destatis Quality Report for National Accounts (19 pp), the German GNI inventory (372 pp) and the QNA inventory (54 pp), all fetched from destatis.de, which is reachable from this environment even though eur-lex.europa.eu is not.",
-  "_why_it_is_here_and_not_in_cross_layer": "EU/slices/README.md directs edges 'where an EU instrument obliges or feeds a member state, or a member state feeds an EU aggregate' to cross-layer/, named for the instrument that creates the obligation. This edge is neither: it is a member-state publication naming an EU instrument as its own legal basis — disclosure running UPWARD. It is a property of the German statistic, so it belongs in that country's file. The README has been updated to say so. If a future obligation-shaped edge appears (an EU instrument naming a national release), cross-layer/ is still the right home for it — and two attempts to find one have now failed.",
-  "reports": [
-    {
-      "id": "de-destatis-national-accounts",
-      "title": "National Accounts — Domestic Product (Fachserie 18)",
-      "publisher": "Statistisches Bundesamt (Destatis)",
-      "country": "DE",
-      "jurisdiction_level": "federal",
-      "region": "Germany",
-      "description": "The German national accounts, scoped by Destatis's own quality report as 'national accounts of the Federation (EVAS No 81)' and covering 'domestic product calculation (production, use, and distribution approaches), input-output accounts, national wealth accounts, employment accounts'. Published as Fachserie 18, whose quarterly strand is Reihe 1.2 ('National Accounts – Domestic Product – Quarterly results') and whose seasonally adjusted strand is Reihe 1.3. First results for a quarter appear as a press release at t+30 days, with detail at about t+55. Compiled under ESA 2010, which Destatis states was 'implemented in Germany as part of the 2014 general revision'.",
-      "releases_per_year": 4,
-      "cadence_note": "Destatis Quality Report, General information on the statistics: 'Periodicity: quarterly, annual'. The quarterly strand is taken as the release rate. Publication timing is documented separately in the QNA inventory: 'First quarterly results of GDP without particular breakdown are published as press release 30 days after the end of a reporting quarter. The more detailed figures are published … around 55 days after the end of the reporting quarter.'",
-      "release_schedule": {
-        "kind": "published-calendar",
-        "entries": [
-          {
-            "from": "2026-08-25",
-            "to": "2026-08-25",
-            "precision": "day",
-            "covers": "Detailed results on gross domestic product, 2nd quarter 2026 (Fachserie 18, Reihe 1.2)",
-            "evidence": "documented"
-          }
-        ],
-        "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_269_811.html",
-        "note": "Destatis's Fachserie 18 Reihe 1.2 (quarterly national accounts detailed results) is published quarterly (~4x/year), consistent with the corpus's releases_per_year=4. The publisher's own 30 July 2026 press release (PD26_269) explicitly states: 'Detaillierte Informationen zu den Revisionen stellt das Statistische Bundesamt mit der Veröffentlichung der ausführlichen Ergebnisse zum Bruttoinlandsprodukt im 2. Quartal 2026 am 25. August 2026 zur Verfügung' (detailed Q2 2026 GDP results will be published 25 August 2026). Past pattern of detailed-results releases in 2026: 22 May 2026 (Q1 2026, PE26_173). No published full-year release calendar with all future dates was found; only the next single date is documented directly by the publisher."
-      },
-      "last_updated": null,
-      "url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/_node.html",
-      "domains": [
-        "national-accounts"
-      ],
-      "kind": "publication"
-    }
-  ],
-  "dependencies": [
-    {
-      "source_report_id": "de-destatis-national-accounts",
-      "target_report_id": "esa-2010",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Destatis states ESA 2010 as the legal basis of the German national accounts in the structured metadata of its own quality report: 'Scope of the statistics: national accounts of the Federation (EVAS No 81) … Legal bases: Regulation (EC) No 549/2013, European System of National and Regional Accounts (ESA) 2010, and supplementary and amending regulations … Periodicity: quarterly, annual'. The same report sets out the mechanism: 'The ESA 2010 is a European Regulation, which is binding for all EU member states as of 1 September 2014 (Council Regulation (EU) No. 549/2013 of the European Parliament and of the Council of 21 May 2013, published in the Official Journal on 26 June 2013). It was implemented in Germany as part of the 2014 general revision. This regulation was amended by Regulation (EU) 2023/734 …'. Two further documents say the same in their own words: the GNI inventory ('in compliance with the European System of National Accounts (ESA) 2010' and 'based on the European System of Accounts (ESA) 2010') and the QNA inventory ('in compliance with the European System of Accounts 2010 (ESA 2010)'). relationship_type is methodology_depends_on rather than uses_data_from: ESA 2010 supplies no figures, it supplies the 'common standards, definitions, classifications and accounting rules that shall be used for compiling accounts and tables' (Regulation 549/2013, Article 1(2)(a)).",
-      "evidence_url": "https://www.destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf?__blob=publicationFile",
-      "evidence_grade": "A",
-      "evidence_quote": "The national accounting system is based on harmonised European rules that are laid down in a legally binding form in the European System of National and Regional Accounts (ESA 2010)."
-    }
-  ],
-  "_dropped": [
-    {
-      "edge": "de-destatis-national-accounts -> financial accounts by sector (Deutsche Bundesbank)",
-      "source": "de-destatis-national-accounts",
-      "target": null,
-      "reason": "note",
-      "why": "STALE — RESOLVED ELSEWHERE, caught 2026-08-09 (dropped-sweep, long tail). The target this entry asked for already exists: de-bundesbank-financial-accounts.json's own dependencies array carries 'de-destatis-national-accounts -> de-bundesbank-financial-accounts' (uses_data_from), wired the same day this file was built (2026-08-05), quoting the identical GNI-inventory sentence this entry preserves. This file's own _dropped block was simply never updated to match -- the fourth instance of the stale-cross-file pattern first caught in equalization-named-products.json (2026-08-08) and already found twice more in esa-2010.json the same day. No new edit needed beyond this note; the edge already lives in the sibling file and is loaded. Original text follows for history: Documented and named, but the target has not been researched as a node. The GNI inventory: 'Within the system of national accounts, sector accounts shed a light on the transactions between the institutional sectors of the economy. They also serve as an important instrument ensuring coherence in the system of national accounts as well as bridge to the financial accounts by sector, which the Deutsche Bundesbank (German Central Bank) is responsible for compiling.' A second, independent naming appears in the QNA source lists ('Balance of Payments Statistics (Deutsche Bundesbank)', 'Monetary statistics of the Deutsche Bundesbank'). A national central bank feeding the national accounts is the same shape as the Bank of Canada material already in the corpus, and it is the obvious second German node."
-    },
-    {
-      "edge": "ESA 2010 methods and sources for the German GNI (Destatis) -> esa-2010",
-      "source": null,
-      "target": "esa-2010",
-      "reason": "note",
-      "why": "STALE — RESOLVED ELSEWHERE, caught 2026-08-09 (dropped-sweep, long tail). This entry's own blocker ('Periodicity: non-recurring') was the exact conflict Thomas ruled on 2026-08-08 (Open-Questions-2026-08-08-sweep.docx, Q2): treat the colophon label as metadata, not a hard disqualifier, and estimate a cadence from the demonstrated edition interval. esa-2010.json now carries the resulting node, de-destatis-gni-inventory (releases_per_year 0.25, methodology_depends_on -> esa-2010), minted the same day as that ruling -- this file's own _dropped block was never updated to point at it. Fifth instance of the stale-cross-file pattern in this corpus (see the note on entry above and esa-2010.json's own _dropped[4]). Original text follows for history: Superseded as a route but kept, because the cadence finding is worth not rediscovering. This inventory states the dependency more explicitly than anything else in the corpus ('in compliance with … ESA 2010'), and it cannot be minted: its own colophon says 'Periodicity: non-recurring', which is Research.1.md 4.2's exact disqualifier, while the same document names its predecessor ('major revisions since the 2021 inventory') and the Destatis landing page carries an 'Older editions' heading. Documented conflict, reported per 3 and not adjudicated. The edge in this slice reaches the same target through the RELEASE rather than the methodology document, which sidesteps the conflict entirely — the release's periodicity is stated plainly as 'quarterly, annual'. Full reasoning in src/data/research/esa-2010.json."
-    },
-    {
-      "edge": "esa-2010 -> de-destatis-national-accounts",
-      "source": "esa-2010",
-      "target": "de-destatis-national-accounts",
-      "reason": "wrong-direction",
-      "why": "Recorded explicitly because this is the edge the branch expected to find and did not, and someone will propose it. ESA 2010's Annex B obliges Germany to transmit accounts and tables, but it names no German publication — the programme's table overview has four columns (number, subject, deadline, period) and no column for a publication, and Destatis describing its own transmission names ten ESA table numbers and no German release. So the documented relationship runs member state -> EU instrument, as in the dependency above, and NOT the other way. The obligation is real; the naming is one-directional. See EU/AnnexB_assessment_2026-08-05.md."
-    },
-    {
-      "edge": "de-destatis-national-accounts -> the German source statistics it names (EVAS-numbered surveys)",
-      "source": "de-destatis-national-accounts",
-      "target": null,
-      "reason": "deferred",
-      "why": "Deliberately out of this slice's scope and described as real — a large lead, not a gap. The GNI and QNA inventories name their own inputs by title AND by German statistical register number, which is the strongest evidence class Research.1.md 7 describes: 'Cost structure survey of manufacturing, mining and quarrying', 'Structural statistics in trade and services (EVAS 47410)', 'International trade in goods statistics (ITGS)', 'Microcensus', 'Building and housing census (EVAS 31211)', 'Employment statistics (EVAS 13111)' of the Federal Employment Agency, 'monthly statistics of retail trade (EVAS 45212)', and administrative sources including VAT statistics. That is a whole German sub-graph, documented to the register number, and it is the natural next slice after the Bundesbank node. CROSS-REFERENCE ADDED 2026-08-09 (dropped-sweep, long tail): this lead is not untouched -- de-destatis-source-surveys.json (built the same day, 2026-08-05) is exactly this German sub-graph, transcribing the same GNI-inventory Chapter 10.1 EVAS-register table verbatim into its own _dropped array in three priority tiers. None of its entries are independently verified live either, so the underlying work is still open -- but a future session should read that file first rather than re-transcribing this one's list."
-    }
-  ]
+ "_slice": "de-destatis-national-accounts",
+ "_researched": "2026-08-05",
+ "_status": "IMPORTED 2026-08-05. Staged in EU/slices/member-states/, checked, moved here and registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): all 4 _dropped entries read in full against Research.1.md §4's third-category test. Two (Bundesbank sector accounts, GNI inventory) turned out to be the stale-cross-file pattern -- already resolved in sibling files, never reflected back here -- and are annotated `note` rather than deleted, per the equalization-file precedent. A third (EVAS sub-graph) is cross-referenced to de-destatis-source-surveys.json, which duplicates its worklist. The fourth (wrong-direction, ESA 2010 Annex B) was already correctly reasoned and is unchanged. No reports or dependencies added; the Bundesbank edge this entry asked for already exists in de-bundesbank-financial-accounts.json, which src/data/index.ts loads independently of this file.",
+ "_note": "THE BRANCH'S FIRST CROSS-LAYER EDGE, and its first member-state node. One report, one dependency, four _dropped. Unlike the two preceding EU slices this one was extracted from sources opened and read directly this session — the Destatis Quality Report for National Accounts (19 pp), the German GNI inventory (372 pp) and the QNA inventory (54 pp), all fetched from destatis.de, which is reachable from this environment even though eur-lex.europa.eu is not.",
+ "_why_it_is_here_and_not_in_cross_layer": "EU/slices/README.md directs edges 'where an EU instrument obliges or feeds a member state, or a member state feeds an EU aggregate' to cross-layer/, named for the instrument that creates the obligation. This edge is neither: it is a member-state publication naming an EU instrument as its own legal basis — disclosure running UPWARD. It is a property of the German statistic, so it belongs in that country's file. The README has been updated to say so. If a future obligation-shaped edge appears (an EU instrument naming a national release), cross-layer/ is still the right home for it — and two attempts to find one have now failed.",
+ "reports": [
+  {
+   "id": "de-destatis-national-accounts",
+   "title": "National Accounts — Domestic Product (Fachserie 18)",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "The German national accounts, scoped by Destatis's own quality report as 'national accounts of the Federation (EVAS No 81)' and covering 'domestic product calculation (production, use, and distribution approaches), input-output accounts, national wealth accounts, employment accounts'. Published as Fachserie 18, whose quarterly strand is Reihe 1.2 ('National Accounts – Domestic Product – Quarterly results') and whose seasonally adjusted strand is Reihe 1.3. First results for a quarter appear as a press release at t+30 days, with detail at about t+55. Compiled under ESA 2010, which Destatis states was 'implemented in Germany as part of the 2014 general revision'.",
+   "releases_per_year": 4,
+   "cadence_note": "Destatis Quality Report, General information on the statistics: 'Periodicity: quarterly, annual'. The quarterly strand is taken as the release rate. Publication timing is documented separately in the QNA inventory: 'First quarterly results of GDP without particular breakdown are published as press release 30 days after the end of a reporting quarter. The more detailed figures are published … around 55 days after the end of the reporting quarter.'",
+   "release_schedule": {
+    "kind": "published-calendar",
+    "entries": [
+     {
+      "from": "2026-08-25",
+      "to": "2026-08-25",
+      "precision": "day",
+      "covers": "Detailed results on gross domestic product, 2nd quarter 2026 (Fachserie 18, Reihe 1.2)",
+      "evidence": "documented"
+     }
+    ],
+    "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_269_811.html",
+    "note": "Destatis's Fachserie 18 Reihe 1.2 (quarterly national accounts detailed results) is published quarterly (~4x/year), consistent with the corpus's releases_per_year=4. The publisher's own 30 July 2026 press release (PD26_269) explicitly states: 'Detaillierte Informationen zu den Revisionen stellt das Statistische Bundesamt mit der Veröffentlichung der ausführlichen Ergebnisse zum Bruttoinlandsprodukt im 2. Quartal 2026 am 25. August 2026 zur Verfügung' (detailed Q2 2026 GDP results will be published 25 August 2026). Past pattern of detailed-results releases in 2026: 22 May 2026 (Q1 2026, PE26_173). No published full-year release calendar with all future dates was found; only the next single date is documented directly by the publisher."
+   },
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/_node.html",
+   "domains": [
+    "national-accounts"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "esa-2010",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Destatis states ESA 2010 as the legal basis of the German national accounts in the structured metadata of its own quality report: 'Scope of the statistics: national accounts of the Federation (EVAS No 81) … Legal bases: Regulation (EC) No 549/2013, European System of National and Regional Accounts (ESA) 2010, and supplementary and amending regulations … Periodicity: quarterly, annual'. The same report sets out the mechanism: 'The ESA 2010 is a European Regulation, which is binding for all EU member states as of 1 September 2014 (Council Regulation (EU) No. 549/2013 of the European Parliament and of the Council of 21 May 2013, published in the Official Journal on 26 June 2013). It was implemented in Germany as part of the 2014 general revision. This regulation was amended by Regulation (EU) 2023/734 …'. Two further documents say the same in their own words: the GNI inventory ('in compliance with the European System of National Accounts (ESA) 2010' and 'based on the European System of Accounts (ESA) 2010') and the QNA inventory ('in compliance with the European System of Accounts 2010 (ESA 2010)'). relationship_type is methodology_depends_on rather than uses_data_from: ESA 2010 supplies no figures, it supplies the 'common standards, definitions, classifications and accounting rules that shall be used for compiling accounts and tables' (Regulation 549/2013, Article 1(2)(a)).",
+   "evidence_url": "https://www.destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf?__blob=publicationFile",
+   "evidence_grade": "A",
+   "evidence_quote": "The national accounting system is based on harmonised European rules that are laid down in a legally binding form in the European System of National and Regional Accounts (ESA 2010)."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "de-destatis-national-accounts -> financial accounts by sector (Deutsche Bundesbank)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "note",
+   "why": "STALE — RESOLVED ELSEWHERE, caught 2026-08-09 (dropped-sweep, long tail). The target this entry asked for already exists: de-bundesbank-financial-accounts.json's own dependencies array carries 'de-destatis-national-accounts -> de-bundesbank-financial-accounts' (uses_data_from), wired the same day this file was built (2026-08-05), quoting the identical GNI-inventory sentence this entry preserves. This file's own _dropped block was simply never updated to match -- the fourth instance of the stale-cross-file pattern first caught in equalization-named-products.json (2026-08-08) and already found twice more in esa-2010.json the same day. No new edit needed beyond this note; the edge already lives in the sibling file and is loaded. Original text follows for history: Documented and named, but the target has not been researched as a node. The GNI inventory: 'Within the system of national accounts, sector accounts shed a light on the transactions between the institutional sectors of the economy. They also serve as an important instrument ensuring coherence in the system of national accounts as well as bridge to the financial accounts by sector, which the Deutsche Bundesbank (German Central Bank) is responsible for compiling.' A second, independent naming appears in the QNA source lists ('Balance of Payments Statistics (Deutsche Bundesbank)', 'Monetary statistics of the Deutsche Bundesbank'). A national central bank feeding the national accounts is the same shape as the Bank of Canada material already in the corpus, and it is the obvious second German node."
+  },
+  {
+   "edge": "ESA 2010 methods and sources for the German GNI (Destatis) -> esa-2010",
+   "source": null,
+   "target": "esa-2010",
+   "reason": "note",
+   "why": "STALE — RESOLVED ELSEWHERE, caught 2026-08-09 (dropped-sweep, long tail). This entry's own blocker ('Periodicity: non-recurring') was the exact conflict Thomas ruled on 2026-08-08 (Open-Questions-2026-08-08-sweep.docx, Q2): treat the colophon label as metadata, not a hard disqualifier, and estimate a cadence from the demonstrated edition interval. esa-2010.json now carries the resulting node, de-destatis-gni-inventory (releases_per_year 0.25, methodology_depends_on -> esa-2010), minted the same day as that ruling -- this file's own _dropped block was never updated to point at it. Fifth instance of the stale-cross-file pattern in this corpus (see the note on entry above and esa-2010.json's own _dropped[4]). Original text follows for history: Superseded as a route but kept, because the cadence finding is worth not rediscovering. This inventory states the dependency more explicitly than anything else in the corpus ('in compliance with … ESA 2010'), and it cannot be minted: its own colophon says 'Periodicity: non-recurring', which is Research.1.md 4.2's exact disqualifier, while the same document names its predecessor ('major revisions since the 2021 inventory') and the Destatis landing page carries an 'Older editions' heading. Documented conflict, reported per 3 and not adjudicated. The edge in this slice reaches the same target through the RELEASE rather than the methodology document, which sidesteps the conflict entirely — the release's periodicity is stated plainly as 'quarterly, annual'. Full reasoning in src/data/research/esa-2010.json."
+  },
+  {
+   "edge": "esa-2010 -> de-destatis-national-accounts",
+   "source": "esa-2010",
+   "target": "de-destatis-national-accounts",
+   "reason": "wrong-direction",
+   "why": "Recorded explicitly because this is the edge the branch expected to find and did not, and someone will propose it. ESA 2010's Annex B obliges Germany to transmit accounts and tables, but it names no German publication — the programme's table overview has four columns (number, subject, deadline, period) and no column for a publication, and Destatis describing its own transmission names ten ESA table numbers and no German release. So the documented relationship runs member state -> EU instrument, as in the dependency above, and NOT the other way. The obligation is real; the naming is one-directional. See EU/AnnexB_assessment_2026-08-05.md."
+  },
+  {
+   "edge": "de-destatis-national-accounts -> the German source statistics it names (EVAS-numbered surveys)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "deferred",
+   "why": "Deliberately out of this slice's scope and described as real — a large lead, not a gap. The GNI and QNA inventories name their own inputs by title AND by German statistical register number, which is the strongest evidence class Research.1.md 7 describes: 'Cost structure survey of manufacturing, mining and quarrying', 'Structural statistics in trade and services (EVAS 47410)', 'International trade in goods statistics (ITGS)', 'Microcensus', 'Building and housing census (EVAS 31211)', 'Employment statistics (EVAS 13111)' of the Federal Employment Agency, 'monthly statistics of retail trade (EVAS 45212)', and administrative sources including VAT statistics. That is a whole German sub-graph, documented to the register number, and it is the natural next slice after the Bundesbank node. CROSS-REFERENCE ADDED 2026-08-09 (dropped-sweep, long tail): this lead is not untouched -- de-destatis-source-surveys.json (built the same day, 2026-08-05) is exactly this German sub-graph, transcribing the same GNI-inventory Chapter 10.1 EVAS-register table verbatim into its own _dropped array in three priority tiers. None of its entries are independently verified live either, so the underlying work is still open -- but a future session should read that file first rather than re-transcribing this one's list. PARTLY RESOLVED 2026-09-07: rounds 2, 3 and 4 of the DE national-core programme wired 27 of these EVAS-numbered source statistics to de-destatis-national-accounts -- 73311 and 12211 (round 2, with the Bundesbank balance of payments), 31211/12212/71211 (round 3), and 21 more in round 4 (de-national-core-round4-2026-09-07.json). The lead is no longer untouched; the live worklist for what is still open is de-destatis-source-surveys.json's own Chapter 10.1 and 10.2 notes, which round 10 and round 4 made accurate. Named here so a future round does not read this entry as a whole sub-graph nobody has started."
+  }
+ ]
 }

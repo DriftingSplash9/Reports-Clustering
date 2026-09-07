@@ -1,0 +1,203 @@
+{
+ "_slice": "de-national-core-round5-2026-09-07",
+ "_researched": "2026-09-07",
+ "_status": "live",
+ "_note": "DE thin-coverage round 5, and the FIRST round to work Chapter 10.2 of the German GNI inventory (16 'main other official data sources', as against Chapter 10.1's 46 Destatis surveys). Same method as rounds 2-4: the inventory fetched live and read for BODY-TEXT sentences that name a source by title and say what the accounts do with it, with node titles verified against the publisher's own pages. THE FULL CHAPTER 10.2 TABLE WAS READ THIS ROUND rather than trusting de-destatis-source-surveys.json's partial transcription of it -- and that transcription was missing two of the best rows in the chapter, row 15 (the gambling supervisory authorities' annual report) and row 16 (the Federal Ministry of Finance's AfA depreciation tables), both of which are minted here. Five of the sixteen rows are now wired, three were already settled (row 1 balance of payments wired in round 2; rows 2 and 12, the Bundesbank Monthly and Annual Report, refused twice), and the remaining eight are refused with their reasons in _dropped. Chapter 10.2 is finished.",
+ "_headline": "DE: +5 nodes, +5 edges, and Chapter 10.2 is closed -- 5 wired, 3 already settled, 8 refused with reasons. Two of the five were rows the old partial transcription never mentioned.",
+ "_open_questions": [
+  "THE TRANSCRIPTION LESSON, which is the transferable part of this round: de-destatis-source-surveys.json's 10.2 note has been the worklist since 2026-08-05 and it named nine of the sixteen rows, describing the rest as 'mostly named by institution rather than by a titled recurring publication'. That summary was fair but it hid rows 15 and 16, which are the two cleanest artefact citations in the whole chapter -- the AfA tables are named four separate times in the body and the gambling report names itself in the sentence that uses it. Two rounds (10 and 11) treated that note as the worklist without opening the table. READ THE SOURCE TABLE, NOT THE NOTE ABOUT IT, exactly as round 10 concluded for a different reason.",
+  "Chapter 10.3 (7 non-government sources: the Working Group on Energy Balances, the Stifterverband R&D survey, the Epidemiological Survey on Addiction, the German Monitoring Centre for Drugs and Drug Addiction, Deutsche Automobil Treuhand car prices, the Deutsche Börse annual report, and Bundesbank profit-and-loss accounts of payment-statistics-reporting institutions) is the last untouched part of the inventory and was deliberately not opened this round. It is the lowest-value tier by the original note's own ranking and several members are private bodies, which is a scope question before it is an evidence one -- Deutsche Automobil Treuhand and Deutsche Börse in particular. The energy balances (Arbeitsgemeinschaft Energiebilanzen) and the Stifterverband R&D survey are the two that look like genuine recurring official-adjacent releases.",
+  "With Chapters 10.1 and 10.2 both closed, the German GNI inventory is spent as a source of new edges except for Chapter 10.3. DE now has 46 nodes. The next thin-coverage country is FR, which has had no round at all."
+ ],
+ "reports": [
+  {
+   "id": "de-bundesbank-mfi-interest-rates",
+   "title": "MFI interest rate statistics",
+   "title_aliases": [
+    "EMU interest rate statistics"
+   ],
+   "publisher": "Deutsche Bundesbank",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Chapter 10.2 row 9 of the German GNI inventory, where the register gloss is 'EMU interest rate statistics, Deutsche Bundesbank and the European Central Bank'; the inventory's body calls it the MFI interest rate statistics and says the Bundesbank conducts it. Covers interest rates on new business for short-term loans, time deposits and similar instruments, and average portfolio rates by sector. The national accounts use it for the interest rates applied to deposit-taking corporations' loan and deposit balances when calculating FISIM.",
+   "releases_per_year": 12,
+   "cadence_note": "Entered as monthly (12). The Bundesbank's own page for this statistic does not state a periodicity in so many words; it references the January 2004 Monthly Report article introducing the collection. Not confirmed against a stated release calendar this round.",
+   "last_updated": null,
+   "url": "https://www.bundesbank.de/en/statistics/money-and-capital-markets/interest-rates-and-yields/interest-rates-on-deposits-and-loans",
+   "domains": [
+    "interest-rates",
+    "banking"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-bundesbank-banking-statistics",
+   "title": "Banking statistics",
+   "publisher": "Deutsche Bundesbank",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Chapter 10.2 row 13 of the German GNI inventory ('Banking statistics, Deutsche Bundesbank'). The Bundesbank's monthly banking statistics, whose balance-sheet component it calls 'a centrally important source of data'. The national accounts use it for output and intermediate consumption of financial corporations, and for the loan and deposit balances behind FISIM.",
+   "releases_per_year": 12,
+   "cadence_note": "Entered as monthly (12) on the Bundesbank's own wording for the collection ('The monthly balance sheet statistics provide a comprehensive overview of the business of German banks (MFIs)') read live from its balance-sheet-items page this round. The GNI inventory itself states no periodicity.",
+   "last_updated": null,
+   "url": "https://www.bundesbank.de/en/statistics/banks-and-other-financial-corporations/banks",
+   "domains": [
+    "banking",
+    "national-accounts"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-ble-economic-accounts-agriculture",
+   "title": "Economic accounts for agriculture",
+   "title_aliases": [
+    "Economic Accounts for Agriculture (EAA)",
+    "Landwirtschaftliche Gesamtrechnung"
+   ],
+   "publisher": "Bundesanstalt für Landwirtschaft und Ernährung (BLE)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Chapter 10.2 row 4 of the German GNI inventory. The German EAA/LGR, published on the BMEL statistics portal, which its own imprint names the Bundesanstalt für Landwirtschaft und Ernährung (BLE) as operator. The national accounts do not recompute agriculture: they take the EAA results and add their own calculations on top. NOTE ON THE PUBLISHER: the inventory attributes the EAA to the BLE at 3.44 and in the Chapter 10.2 register row, and to the Federal Ministry of Food and Agriculture (BMEL) at 3.114. Both are recorded here rather than one being chosen silently; BLE is used as the publisher because two of the three attributions say so and because bmel-statistik.de's imprint names the BLE.",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1). The GNI inventory treats the EAA as the annual framework for agriculture; neither it nor the BLE page states a periodicity in words read this round.",
+   "last_updated": null,
+   "url": "https://www.bmel-statistik.de/landwirtschaft/landwirtschaftliche-gesamtrechnung",
+   "domains": [
+    "agriculture",
+    "national-accounts"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-gambling-authorities-annual-report",
+   "title": "Annual report of the gambling supervisory authorities of the federal states",
+   "title_aliases": [
+    "Jahresreport der Glücksspielaufsichtsbehörden der Länder"
+   ],
+   "publisher": "Glücksspielaufsichtsbehörden der Länder",
+   "country": "DE",
+   "jurisdiction_level": "provincial",
+   "region": "Germany",
+   "description": "Chapter 10.2 row 15 of the German GNI inventory. The joint annual economic analysis of the German gambling market published by the federal states' gambling supervisory authorities through their common office (now the Gemeinsame Glücksspielbehörde der Länder, GGL). The national accounts use it, with the cash receipts of public budgets, to derive output for betting, pools and lottery activities (NACE 92.00.3).",
+   "releases_per_year": 1,
+   "cadence_note": "Entered as annual (1) on the report's own name and on the publisher's page, which lists it as a yearly series ('Jahresreports der Glücksspielaufsichtsbehörden der Länder', read live this round). The GNI inventory calls it an annual report but states no schedule.",
+   "last_updated": null,
+   "url": "https://www.gluecksspiel-behoerde.de/de/gemeinsame-geschaeftsstelle/jahresreports",
+   "domains": [
+    "services",
+    "governance"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-bmf-afa-tables",
+   "title": "AfA tables (Absetzung für Abnutzung)",
+   "title_aliases": [
+    "Depreciation table for generally usable fixed assets",
+    "amortisation tables",
+    "Abschreibungstabelle für allgemein verwendbare Anlagegüter"
+   ],
+   "publisher": "Bundesministerium der Finanzen (BMF)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Chapter 10.2 row 16 of the German GNI inventory ('Depreciation table for generally usable fixed assets, Federal Ministry of Finance'). BMF's depreciation tables giving the ordinary useful life of fixed assets for tax purposes: one table for generally usable assets ('AfA-Tabelle AV', applying to assets acquired after 31 December 2000) plus around a hundred branch-specific tables. The inventory calls them the main reference points for the average service lives used in the national accounts' capital stock estimates, while saying plainly that the figures have to be augmented by 20% to 100% because fiscal service lives are set on a precautionary basis. BMF's own page says the tables are not a binding legal norm, which is why this is a publication and not an instrument.",
+   "releases_per_year": 0.05,
+   "cadence_note": "Nominal, not measured. The inventory calls them 'regularly updated' and states no interval; BMF's own page shows the generally-usable-assets table applying unchanged to everything acquired after 31 December 2000, with the branch tables revised occasionally. 0.05 is the corpus's once-a-generation convention (as used for SNA 2008), entered rather than guessing a real rate.",
+   "last_updated": null,
+   "url": "https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerverwaltungu-Steuerrecht/Betriebspruefung/AfA_Tabellen/afa_tabellen.html",
+   "domains": [
+    "taxation",
+    "national-accounts"
+   ],
+   "kind": "publication"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-bundesbank-mfi-interest-rates",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 5). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source in its body text, not only in the Chapter 10.2 register table. It supplies the interest rates used in the FISIM calculation. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Interest rates are based on MFI interest rate statistics, which is conducted by the Deutsche Bundesbank.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-bundesbank-banking-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 5). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source in its body text, not only in the Chapter 10.2 register table. It is the source used for financial corporations in both the output and the intermediate-consumption calculations. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "For financial corporations data from banking statistics (Deutsche Bundesbank) and the BAFIN (Federal Financial Supervisory Authority) is used.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-ble-economic-accounts-agriculture",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 5). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source in its body text, not only in the Chapter 10.2 register table. The accounts use the BLE's results directly rather than compiling agriculture themselves. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "For Agriculture the calculations are carried out within the framework of the economic accounts for agriculture compiled by the Federal Office for Agriculture and Food (BLE). National accounts use the BLE results and add own calculations.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-gambling-authorities-annual-report",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 5). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source in its body text, not only in the Chapter 10.2 register table. It is one of the two inputs to the special evaluation behind output for betting, pools and lottery activities. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "To determine the data for the betting, pools and lottery activities (code 92.00.3), a special evaluation is carried out on the basis of the annual report of the gambling supervisory authorities of the federal states and the cash receipts of public budgets.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-bmf-afa-tables",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (DE national core round 5). Destatis's own GNI inventory ('ESA 2010 methods and sources for the German GNI and its components', Edition 2025) names this source in its body text, not only in the Chapter 10.2 register table. They are the main reference points for the average service lives the income approach needs, and the inventory's own caveat about augmenting them is part of why it names them so precisely. Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200, 4,426,379 bytes); quote verbatim, PDF line-wrapped in the original and joined here.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Despite the aforementioned limitations of the AfA tables (amortisation tables) published by the Federal Ministry of Finance, they represent the main reference points for determining the average service life",
+   "evidence_grade": "A"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "de-destatis-national-accounts -> BaFin insurance and pension statistics (GNI inventory Chapter 10.2 rows 5 and 6)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-07 (DE round 5), and refused on the strongest ground available: what the accounts use is not a publication. Chapter 10.2 row 5 is titled 'Statistics for primary insurance, reinsurance undertakings and pensions funds, Bundesanstalt für Finanzdienstleistungsaufsicht' and row 6 is BaFin's own budget, so the register makes them look like titled releases. The body says otherwise. Paragraph 3.369: 'Data sources here are the forms and records made available to the Federal Financial Supervisory Authority ... in line with the Regulation on Reporting by Insurance Undertakings to the Federal Financial Supervisory Authority (Versicherungsberichterstattungs-Verordnung - BerVersV) and/or the Regulation on Reporting by Pension Funds (Pensionsfondsberichterstattungs-Verordnung - BerPensV). They are made available to the Federal Statistical Office by the Federal Financial Supervisory Authority (BaFin) as so-called internal accounting documents.' Regulatory returns passed between two agencies as internal documents are not a published recurring release, so PLAYBOOK.md rule 2 refuses the node however well evidenced the usage is. The later body sentences that DO name something ('based on data of the insurance statistics from the Financial Supervisory Authority', 3.374 and 3.379) describe the same pipeline and do not turn the internal documents into a publication. THE LEAD THAT SURVIVES, and it is a real one: BerVersV and BerPensV are both named by full title in 3.369 and are genuine legal instruments of the kind PLAYBOOK-CORPUS §7c keeps. They are the legal basis of the INSURERS' reporting to BaFin, not of Destatis's compilation, so wiring them to de-destatis-national-accounts would assert one step more than the document says. Whoever opens this should mint them against BaFin's data collection if that ever becomes a node, not against the national accounts."
+  },
+  {
+   "edge": "de-destatis-national-accounts -> Kraftfahrt-Bundesamt motor vehicle statistics (GNI inventory Chapter 10.2 row 3)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-07 (DE round 5) on PLAYBOOK-CORPUS §7a's agency-not-artefact bar, after a real attempt to clear it. The inventory uses KBA data heavily and says so in at least six body sentences, but every one attributes it to the AGENCY with a descriptive phrase rather than naming a release: 'the registration statistics of the Federal Motor Transport Authority', 'the re-registration statistics of the Federal Motor Transport Authority', 'notifications of new registrations and re-registrations from the Federal Motor Transport Authority'. Chapter 10.2's own row is 'Motor vehicle statistics, Kraftfahrt-Bundesamt', which is the agency plus a category. A node could be forced through the matcher by titling it 'Registration statistics', which the body would run-match — but that is not a title the publisher uses, and §7c says a node carries the publisher's own title. KBA's German pages name the products Neuzulassungen (new registrations, https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/neuzulassungen_node.html, 200 this round) and Besitzumschreibungen (change of ownership, 200 this round), and its English site has no statistics section naming either. So the honest position is: two distinct KBA products, the inventory citing them as one undifferentiated agency source, and no publisher's-own English title to carry. Reopen it by minting the two KBA products from KBA's own pages FIRST and wiring the inventory to them second — not by inventing an English title to satisfy the run rule."
+  },
+  {
+   "edge": "de-destatis-national-accounts -> Bundesnetzagentur telecommunications annual report (GNI inventory Chapter 10.2 row 14)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-07 (DE round 5), agency-not-artefact. Chapter 10.2 row 14 is 'Telecommunications annual report / Post activity report, federal network Agency', so a titled report does exist in the register. The body never names it: all four usages attribute to the agency alone -- 'For postal activities the turnover published by the Federal Network Agency is used', 'Turnovers for telecommunications and cable TV (excluding VAT) are provided by the Federal Network Agency', 'The main data sources are data from the Federal Network Agency, the service structure survey and the trade statistics', 'derived from data of the Federal Network Agency as well as studies of the Bundesverband Paket & Express Logistik'. That leaves the register row as the only naming, and Thomas ruled on 2026-09-07 that a Chapter 10 table row on its own is not worth pursuing. Closed, not open."
+  },
+  {
+   "edge": "de-destatis-national-accounts -> Zentralverband des deutschen Pfandkreditgewerbes lending data (GNI inventory Chapter 10.2 row 7)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "no-document",
+   "why": "REFUSED 2026-09-07 (DE round 5), agency-not-artefact and arguably out of scope besides. The single body citation is 'The calculation on pawnshops (NACE 64.92.2) is based on data of the Central Association of the German Pawn Credit Business (Zentralverband des deutschen Pfandkreditgewerbes)' -- data of an ORGANISATION, with no release named, which is §7a's bar arriving in its plainest form. The organisation is also a trade association rather than an official statistical producer, so even a titled publication would want a scope check before minting."
+  },
+  {
+   "edge": "de-destatis-national-accounts -> GNI inventory Chapter 10.2 rows 8, 10 and 11 (Deutsche Bundesbank)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "no-document",
+   "why": "CLOSED 2026-09-07 (DE round 5). 'Statistics for other financial institutions' (row 8), 'Aggregate income statement of the guarantee banks' (row 10) and 'Aggregate income statement of the investment companies' (row 11), all attributed to the Deutsche Bundesbank, appear in the Chapter 10.2 table and nowhere in the 372-page body -- the same shape as the eight Chapter 10.1 rows Thomas closed on 2026-09-07. Guarantee banks and investment companies are discussed in the body (3.354, 3.362) but as NACE subclasses being calculated, never with these Bundesbank statements named as the source. Closed under that ruling, not open."
+  }
+ ]
+}

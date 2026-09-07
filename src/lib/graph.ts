@@ -178,6 +178,33 @@ export function isBareHost(url: string): boolean {
 }
 
 /**
+ * True when an edge stores a readable quote anywhere the schema allows one.
+ *
+ * **This exists because the test it replaces was written before
+ * `evidence_quote` did** (the field landed 2026-09-03 in the schema+validator
+ * round). `scripts/validate-data.ts` kept a local `hasQuote` that searched the
+ * `basis` prose for quotation marks and nothing else, so an edge whose quote
+ * sits in `evidence_quote` — the field `types.ts` says an A grade's assertion
+ * must be falsifiable against — read as having no quote at all. The EVIDENCE
+ * block then called it "assertion only", which is not a neutral phrase: it is
+ * the class Thomas ruled out of the corpus on 2026-08-31, 463 edges at a time.
+ *
+ * Measured when this was fixed (2026-09-07): it was mislabelling exactly two
+ * live edges (`is-nsdp` and `mn-nsdp`, both bare-homepage NSDPs from round 8,
+ * both carrying a stored quote), and **1,058 live edges corpus-wide carry an
+ * `evidence_quote` with no quotation mark in their `basis`** — so the false
+ * accusation was one bare URL away from firing on any of them. The two counters
+ * that read it are the bare-homepage one and the no-evidence_url one.
+ *
+ * `basis` is still checked, and second: quoted spans in the prose are the older
+ * convention and several hundred edges have never been migrated.
+ */
+export function hasStoredQuote(d: { basis?: string; evidence_quote?: string }): boolean {
+  if ((d.evidence_quote ?? '').trim()) return true
+  return /["\u201c\u201d\u00ab\u00bb\u300e\u300c]/.test(d.basis ?? '')
+}
+
+/**
  * True when an evidence URL is a listing rather than a document — a
  * publications index, a statistics catalogue, a topic shell, a Rosstat
  * `folder/<n>` listing, or a language-root homepage (`/en/`). Added

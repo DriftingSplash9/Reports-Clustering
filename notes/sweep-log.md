@@ -134,7 +134,7 @@ Archived (moved into `archive/`, not deleted — nothing here is gone, just file
   Retired: nothing was added to this thread since `V0.12`, but `REPORTS.md` kept pointing
   agents at it as "current state" long after that stopped being true. See REPORTS.md's
   rewritten protocol section for the full reasoning.
-- `archive/research-input/` — the whole `research-input/` folder (Grok/GPT scout briefs I
+- `archive/research-input/` — the whole `research-input/` folder (scout briefs I
   through XI plus the 2026-07-31 handoff bundle), all pre-dating the AF/EU/NZ/AU/CA branch
   structure and already fully merged per `rolling-todo.md`'s own record. Kept rather than
   swept because `GPT-Scout-Brief-I.md` ("Scout Brief I — South America") may be a reusable
@@ -168,7 +168,7 @@ log (2026-08-08) — that entry grouped it with `diary.csv` and `notes/country.d
 filename/vibe, apparently without opening it, and every cleanup pass since (including this
 session's own root sweep, earlier today) carried that classification forward unverified.
 
-Opened it this time: it's a 712-paragraph Grok/GPT-style research dump — a structured,
+Opened it this time: it's a 712-paragraph machine-generated research dump — a structured,
 sourced-and-quoted section covering 7 countries (South Africa, Nigeria, Egypt, Kenya,
 Ethiopia, Tanzania, Ghana; 48 entries total) plus an unsourced qualitative synthesis for
 the rest of the continent's CPI/social-protection indexation landscape. Checked specific
@@ -184,7 +184,7 @@ formal indexation'" — a direct citation of this file, refined per the branch's
 practice of not trusting an unverified lead at face value.
 
 Moved to `archive/research-input/country-afrikans-cpi-social-protection-leads.docx` —
-processed source material, same category as the other old Grok/GPT briefs already there, not
+processed source material, same category as the other old scout briefs already there, not
 personal. Renamed on the way in (original name was the actual cause of the two-cleanup-pass
 error) — flagged here in case anything elsewhere still cites the old filename verbatim.
 

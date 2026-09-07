@@ -245,8 +245,8 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // false fit into `AFR`, `EU`/`XEU`, or a reserved-for-someone-else code.
   AE: 'ASIA',
 
-  // Israel and Singapore — added 2026-08-18 with the Grok archive
-  // consolidation (`Grok - Brics+israel and singapore/consolidated/`). Both
+  // Israel and Singapore — added 2026-08-18 with the August 2026 archive
+  // consolidation. Both
   // filed to `ASIA` for the same reason RU and AE are: it is the reserved
   // catch-all family, and there is still no dedicated Middle East family for
   // Israel nor an East/Southeast Asia one for Singapore. Thomas is revamping
@@ -413,7 +413,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   TD: 'AFR',
 
   // 2026-08-12 (AF/G.15 -- continental/regional hub-building session, plus
-  // AF/G.16's Grok-verified follow-up): eleven countries that arrived not
+  // AF/G.16's verified follow-up): eleven countries that arrived not
   // through a country-by-country docx list but through *following the
   // regional blocs themselves* -- WAEMU, CEMAC, EAC and UMA hub documents
   // each named member states this branch hadn't researched yet, and each
@@ -426,21 +426,21 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // Republic and Congo-Brazzaville (CEMAC) were minted from scratch in
   // G.15; Equatorial Guinea (also CEMAC) needed two sessions to resolve
   // cleanly -- G.15 could only find its annual yearbook, G.16 located the
-  // separate monthly IPC bulletin Grok was asked to find. Guinea-Bissau
+  // separate monthly IPC bulletin the round was asked to find. Guinea-Bissau
   // (WAEMU) and Burundi, South Sudan and Somalia (all three EAC members
   // with a binding Harmonised CPI obligation but zero prior AF-branch
-  // presence) were all resolved in G.16 via Grok's own follow-up research,
+  // presence) were all resolved in G.16 via that branch's own follow-up research,
   // independently re-verified rather than taken on trust per Thomas's
   // explicit instruction that round ("things change fast so double check
   // you have the recent data") -- Somalia's framing was specifically
-  // softened from Grok's "historic first" language after re-fetching would
+  // softened from the import's "historic first" language after re-fetching would
   // not support the stronger claim. DR Congo (CD) is this batch's one
   // genuinely new country rather than a resolved gap: G.15 had flagged
   // "DR Congo CPI -- no document" and G.16 closed it, plus independently
   // quoted Article 175 of DRC's own constitution (a flat 40%-of-revenue
   // provincial retention rule) and Kinshasa province's own ~US$1.1 billion
   // 2026 budget. See `src/data/research/af-waemu-remainder.json`,
-  // `af-mauritania.json`, `af-cemac.json`, `af-grok-synthesis.json`,
+  // `af-mauritania.json`, `af-cemac.json`, `af-synthesis.json`,
   // `cd-provinces-fiscal.json`, and `AF/G.15.md` / `AF/G.16.md`.
   BJ: 'AFR',
   NE: 'AFR',
@@ -493,7 +493,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // arriving through the Fundo de Participação dos Municípios — a
   // constitutional transfer to roughly five and a half thousand municipalities
   // decided on one IBGE population figure. The rest of the continent is
-  // scouted and unbuilt; see `research-input/Grok-Research-Brief-XI.md`.
+  // scouted and unbuilt.
   BR: 'SA',
 
   // Argentina — processed 2026-08-15, `src/data/research/ar-national-core.json`.
@@ -503,7 +503,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   AR: 'SA',
 
   // Bolivia — processed 2026-08-16, `src/data/research/bo-national-core.json`,
-  // via the raw-Grok-batch conversion pipeline. Filed to `SA` alongside
+  // via the raw-batch conversion pipeline. Filed to `SA` alongside
   // Brazil and Argentina.
   BO: 'SA',
 
@@ -524,7 +524,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   IN: 'IN',
 
   // **South America filled out, 2026-08-20**, via the BRICS+/Israel/Singapore
-  // Grok archive mint (`Grok - Brics+israel and singapore/consolidated/`).
+  // August 2026 archive mint.
   // Filed to `SA` alongside Brazil, Argentina and Bolivia — the family
   // reserved for this continent since the continent redesign.
   CL: 'SA', CO: 'SA', EC: 'SA', PE: 'SA', PY: 'SA', UY: 'SA', VE: 'SA',
@@ -548,7 +548,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   TH: 'ASIA', MM: 'ASIA',
 
   // **62-country "new countries" tier, 2026-08-25** — the zero-prior-presence
-  // batch verified this session from the Grok research queue's prompts 30-37.
+  // batch verified this session from the research queue's prompts 30-37.
   // Same placeholder standing as the 2026-08-20 mint above: these ride the
   // existing catch-all families rather than wait for dedicated ones.
 
@@ -576,7 +576,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // Belarus — `XEU`, the non-EU-European family already carrying Moldova,
   // Ukraine, Serbia etc. (Filed here rather than `ASIA` for the same
   // geography-first reasoning `XEU` was built on.) North Korea returned zero
-  // mintable nodes this round (see `belarus-northkorea-new-grok-2026-08.json`)
+  // mintable nodes this round (see `belarus-northkorea-new-2026-08.json`)
   // so it carries no entry yet — nothing to render.
   BY: 'XEU',
 
@@ -666,7 +666,7 @@ export function scopeOf(report: {
  * a hex in OKLCH at fixed L (below) does not move this: L is untouched, only C
  * changes, so the flat-luminance property survives every re-damp.
  *
- * **v4 re-damp, 2026-08-20 — the BRICS+/Israel/Singapore Grok archive minted.**
+ * **v4 re-damp, 2026-08-20 — the BRICS+/Israel/Singapore archive minted.**
  * Corpus grew from 1 250 to 3 091 reports and the shares inverted exactly as
  * flagged below they would: **ASIA 4.0% → 28.5%** (now the largest family),
  * **SA 9.3% → 21.9%**, **AFR 32.2% → 15.3%** (was largest, now third), EU
@@ -1393,7 +1393,7 @@ export const COUNTRY_LABEL: Record<string, string> = {
   IL: 'Israel', SG: 'Singapore',
 
   // Backfilled 2026-08-20, found while building the Countries directory
-  // panel (`regions.ts`): the 139-country Grok mint added COUNTRY_FAMILY
+  // panel (`regions.ts`): the 139-country August 2026 mint added COUNTRY_FAMILY
   // entries for all of these but never a label, so 52 countries — including
   // China, India, Japan, Mexico, Indonesia — were falling back to a bare ISO
   // code everywhere a label renders (the Flag component's fallback path, and

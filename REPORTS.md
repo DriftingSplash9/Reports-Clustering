@@ -81,8 +81,10 @@ answer.
 
 **What the EU branch found, stated plainly:** two binding EU instruments were
 followed to the member-state boundary and both named their national inputs only
-by institution, never by publication (`AGENCY ONLY` — see `EU/extraction/AnnexXI_PartA_*.md`
-and `EU/extraction/AnnexB_assessment_*.md`). But run the query the other way and the answer
+by institution, never by publication (`AGENCY ONLY` — see
+`archive/EU/extraction/AnnexXI_PartA_*.md` and
+`archive/EU/extraction/AnnexB_assessment_*.md`; both moved under `archive/` on
+2026-08-30 and this reference dangled until 2026-09-07). But run the query the other way and the answer
 is sharp and citable: **Germany and Luxembourg both name EU regulations as the
 legal basis of their own national statistics**, in structured metadata, with a
 title, a URL, and a stated periodicity. That is a documented instance of a
@@ -90,8 +92,11 @@ supranational body setting a binding input to a national government's own
 published numbers — not asserted, not inferred, quoted.
 
 **Bodies already confirmed in the corpus with at least one documented
-national-dependency edge**, as of 2026-08-05 (15 international/supranational
-nodes total; see `Research.1.md` §9 for the full id list):
+national-dependency edge.** The list below is the 2026-08-05 snapshot and has only
+grown since — the live count of international nodes and their edges comes from
+`npm run validate`, never from this file. *(This paragraph carried a fixed count of
+15 and a pointer to `Research.1.md` §9 until 2026-09-07; the file had moved to
+`archive/Research.1-superseded_2026-08-30.md` and the count was months out.)*
 
 - **IMF** — Balance of Payments and IIP Manual (BPM6); Government Finance
   Statistics Manual (GFSM 2014)
@@ -128,8 +133,8 @@ titled recurring publication and no secretariat issuing one (colloquial
 substantive question applies — there is no URL to put in the `URL:` field. A
 private body that publishes but obliges no government (e.g. the World Economic
 Forum) can still produce a node, but the honest `relationship_type` is `cites`,
-not `uses_data_from` or `methodology_depends_on` — see `Research.1.md` §3's
-relationship types. The distinction is not political; it is the same evidence
+not `uses_data_from` or `methodology_depends_on` — the relationship types are
+defined in `src/lib/types.ts`. The distinction is not political; it is the same evidence
 standard applied consistently.
 
 **This is EU-branch-led work but not EU-scoped as an objective.** The Canada/US
@@ -200,12 +205,16 @@ rather than a value:
 - **`basis` and `evidence_url`** are what make the graph auditable rather than
   plausible. Neither is optional in practice. See the evidence standard. Note that
   `evidence_url` is optional in the *type* and required by *convention*, which is
-  how 27 seed edges came to lack one — see the disclosure decision. **8 still do,
-  as of V0.10**, and all eight are seed edges nobody has researched.
-- **`determination`** (`formulaic` | `discretionary`) says whether the publisher
-  applies a stated rule or exercises judgement. It exists so that a short input
-  list can be read as a fact about the institution rather than as missing research.
-  Decided, **not yet implemented.**
+  how 27 seed edges came to lack one — see the disclosure decision. **Every edge in
+  the corpus now carries one**, and `validate` checks it: "✓ every documented
+  dependency cites an evidence_url". *(This line said 8 still lacked one, as of
+  V0.10, until 2026-09-07.)*
+- **`determination`** (`formulaic` | `discretionary`) would say whether the publisher
+  applies a stated rule or exercises judgement, so that a short input list could be
+  read as a fact about the institution rather than as missing research. **Decided and
+  never built** — the string does not appear in `src/lib/types.ts` at all. Recorded
+  here as a design decision that was not taken up, not as pending work; if a round
+  ever wants it, it is a schema change starting from nothing.
 - **`strength`** is a per-edge weight override. It is deliberately unused on every
   edge in the corpus and should stay that way — see the disclosure decision. The
   count is deliberately not written here; it moves every session and a stale
@@ -227,7 +236,7 @@ rather than a value:
 | 3 | Update simulation on real cadence | cadence model built; the pulse still runs on the wrong quantity |
 | 4 | Readable detail panel | done, on hover |
 | 5 | Curated real-world seed set | done — live count in `HANDOFF.md` §2 |
-| 6 | Search, filters & domains | done for name, scope, source kind and evidence grade; domain filter removed 2026-08-05; cadence filter not built |
+| 6 | Search, filters & domains | done for name, scope, source kind and evidence grade; domain filter removed 2026-08-05; the `domains` vocabulary itself was cleaned and closed at 46 approved / 0 proposed on 2026-09-06; cadence filter not built |
 | 7 | Polish & export | in progress — the Midvamp Revamp (`notes/Midvamp - Revamp.md`) is the plan of record; live state in `HANDOFF.md` |
 
 ---
@@ -240,7 +249,7 @@ The prose of every decision below (43.8 KB of design archaeology from the
 ledger for corpus work is `PLAYBOOK-CORPUS.md` §7; nothing here needs reading before
 a research round. One line each, oldest first as written:
 
-- Palette is continent-based, not bloc-based; `ColourFamily` is `CA | US | INT | EU | XEU | AFR | ASIA | SAO | SA` (2026-08-05).
+- Palette is continent-based, not bloc-based (2026-08-05). The live union is `ColourFamily` in `palette.ts` and has been extended three times since — read it there. *(This line printed a nine-value union until 2026-09-07: `SAO` had been split into `AU` and `NZ` in palette v2 and `CN` and `IN` added later, which is the schema-duplication failure the Data model section warns about two sections earlier.)*
 - The domain filter is removed; `domains` stays as data (2026-08-05).
 - Influence pull is visual (edge pulses), not positional.
 - The program watches documented derivation, not subject matter.
@@ -369,25 +378,12 @@ of the two to rule out.
 
 ### Running research in batches
 
-Findings go to `src/data/research/*.json`, one file per slice. The rules below
-were bought with roughly 900,000 tokens of lost work and are not optional:
+Moved to `notes/research-batches.md` on 2026-09-07. The rules are good and were
+bought expensively, and the last multi-agent batch (the publisher-cluster round of
+2026-09-05) shows they still work — but four rounds in five are single-agent now, so
+they do not belong on the scope file's path. **Read that file before scheduling a
+batch round, and regenerate the node-id list as step one.**
 
-1. **State the incremental-write rule first, with its reason.** Anything
-   long-running writes as it confirms, never at the end. Five agents were once
-   told to research everything and write one file at the finish; a session limit
-   killed all five before any had written anything, and two were within a step
-   of done.
-2. **One file per agent, named in the prompt.** No coordination, no conflicts,
-   no agent waiting on another.
-3. **Put the full list of existing node ids in every prompt.** This is what
-   stops a batch producing disconnected islands — agents attach to
-   `statcan-cpi` instead of inventing their own version of it.
-4. **State what an agent does *not* own, not just what it does.** Two agents
-   once independently defined the same node. The loader caught it, but
-   converging definitions are the signature of overlapping slice boundaries.
-5. **Give agents explicit permission to report negatives.** Some of the most
-   valuable results have been confirmations that a relationship does not exist
-   in any public document.
 
 ### Connectivity is worth more than volume
 

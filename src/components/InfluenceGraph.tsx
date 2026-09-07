@@ -2629,7 +2629,7 @@ export default function InfluenceGraph({
     // | 92nd percentile | 2 650 |
     // | median | 1 053 |
     //
-    // **Re-measured 2026-08-20** after the BRICS+/Israel/Singapore Grok archive
+    // **Re-measured 2026-08-20** after the BRICS+/Israel/Singapore archive
     // mint (1 250 → 3 091 reports): 1 806 framed nodes at Everything tier
     // (up from 958), furthest node 4 318, p95 3 134, ratio of the two 1.38× —
     // comfortably inside the 5.675× that would put the camera inside the

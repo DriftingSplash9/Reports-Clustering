@@ -1,0 +1,128 @@
+{
+ "_slice": "de-national-core-2026-09-07",
+ "_researched": "2026-09-07",
+ "_status": "live",
+ "_note": "DE thin-coverage round 2 (round 1 was GB, 2026-09-06; memory gb_national_core_2026-09-06). Continues the sc-75 lead flagged in de-destatis-source-surveys.json's own _note ('this slice mints the three strongest, most clearly cadenced candidates from the 46; the full table is preserved verbatim below so a future session does not have to re-download and re-parse a 4.4MB PDF to continue') -- that PDF (esa-2010-methods.pdf, the German GNI inventory, Chapter 10.1's 46-row source-statistics table) was re-read in full this round, in the cloud sandbox, HTTP 200 on 2026-09-07. Four new nodes: two more of the 46 EVAS-numbered Destatis source statistics named in Chapter 10.1 (microcensus EVAS 12211, turnover tax/VAT statistics EVAS 73311 -- the single most-cited source statistic in the whole document per that file's own dropped-lead count), the Deutsche Bundesbank's balance-of-payments statistics (named in Chapter 10.2's 'other official sources' list and read live on bundesbank.de), and Germany's Federal Statistics Act (Bundesstatistikgesetz, BStatG) -- read live on gesetze-im-internet.de, whose own Section 3(1) No. 13 names 'Volkswirtschaftliche Gesamtrechnungen' (national accounts) as a statutory task of the Statistisches Bundesamt, giving de-destatis-national-accounts a legal_basis edge alongside its existing methodology_depends_on edge to esa-2010. All four edges were run through grade-evidence.ts --slice (2026-09-07) before finalizing, per PLAYBOOK-CORPUS.md section 7b (\"on a NEW edge the grader outranks the hand grade\") -- the grader returned 1 A / 3 B against an initial hand-grade of 4 A; each edge basis records the grader reason for its downgrade.",
+ "_headline": "DE: +4 nodes, +4 edges (1 A, 3 B -- grader-graded, not hand-graded). de-destatis-national-accounts now has 6 outgoing uses_data_from/legal_basis edges plus its esa-2010 methodology edge.",
+ "_open_questions": "EVS (Income and Consumption Sample Survey, EVAS 63221) was investigated and NOT minted -- see _dropped below, the GNI inventory's own words are that it is used 'for the purposes of comparison, and not as a basis for calculation', which is exactly the class PLAYBOOK-CORPUS.md §7a's 'consistent with is a claim about numbers, not a citation' ruling refuses. Microcensus EVAS 12212 (the housing supplementary programme, distinct from the EVAS 12211 core microcensus minted here) remains an open lead in de-destatis-source-surveys.json's own _dropped block, untouched. The Bundesbank's Monthly Report (Monatsbericht) was read live (bundesbank.de/en/publications/reports/monthly-reports) and confirmed as a real monthly publication but no edge was minted from it this round -- no document search located a sentence naming a specific German source statistic (as opposed to 'the current economic situation') as its data source; a lead, not a refusal.",
+ "reports": [
+  {
+   "id": "de-bundesbank-balance-of-payments",
+   "title": "Balance of Payments Statistics",
+   "publisher": "Deutsche Bundesbank",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "Deutsche Bundesbank's balance of payments statistical series -- the German GNI inventory names it as the source for taxes on production and imports paid to the rest of the world and for cross-border property income. Read live on bundesbank.de/en (Statistics > External sector > Balance of payments > Balance of payments statistics): a table series (Major items of the balance of payments; Current account; International investment position and external debt; Trade in services; Direct investments) updated through 2026, most recently 31 August 2026 at the time of research.",
+   "releases_per_year": 12,
+   "cadence_note": "The table series updates monthly (component tables carry different dates within the same month, e.g. 12.08.2026 and 31.08.2026 for different table sets); not independently cross-checked against a stated periodicity on a separate methodology page this round.",
+   "last_updated": null,
+   "url": "https://www.bundesbank.de/en/statistics/external-sector/balance-of-payments/balance-of-payments-statistics-810990",
+   "domains": [
+    "national-accounts"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-microcensus",
+   "title": "Microcensus",
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 12211, Germany's core household survey -- the GNI inventory names it directly as a source for allowances in the labour-market/national-accounts calculation and for average household size used in staff-sales estimation. Destatis's own EN methods page (read live 2026-09-07): 'The microcensus is the largest annual household survey of official statistics in Germany... roughly 810,000 people in about 370,000 households and collective living quarters, that is approximately one percent of Germany's population, are asked about their working and living conditions.' The same page states the EU Labour Force Survey has been folded into it since 1968 ('Since 1968... EU-wide questions about labour market participation (Labour Force Survey, LFS) have been an integral part of the microcensus') -- a lead for a future EU-LFS edge, not pursued this round (no EU LFS Regulation node exists in the corpus yet).",
+   "releases_per_year": 1,
+   "cadence_note": "Destatis's own page: 'the largest annual household survey'. Distinct from EVAS 12212 (the microcensus's housing supplementary programme), which remains an unminted lead in de-destatis-source-surveys.json's own _dropped block.",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Society-Environment/Population/Households-Families/Methods/microcensus-2020.html",
+   "domains": [
+    "labour",
+    "population"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-destatis-turnover-tax-statistics",
+   "title": "Turnover Tax Statistics (Advance Returns)",
+   "title_aliases": [
+    "VAT statistics",
+    "Umsatzsteuerstatistik"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "EVAS register no. 73311 -- per de-destatis-source-surveys.json's own prior count, the single most-cited source statistic in the whole GNI inventory (35 mentions). Used to supplement household final consumption expenditure (HFCE) with VAT, to cross-check production-approach results for almost all industries, and as one of the main data sources (with quarterly production statistics and monthly ITGS) for machinery/equipment capital formation. Destatis's own EN page ('Turnover tax', read live 2026-09-07) confirms it as a live, regularly updated release: e.g. an 18 March 2026 update reporting 2024 advance-return results, and a 25 September 2025 update reporting 2021 assessment results. The GNI inventory's own abbreviations table gives the German original: 'UStSt Umsatzsteuerstatistik (VAT statistics)'.",
+   "releases_per_year": 1,
+   "cadence_note": "Destatis's page presents results by reference year (annual updates, e.g. the 2024 advance-return results reported 18 March 2026); not independently cross-checked against a stated periodicity document this round.",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Government/Taxes/Turn-Over-Tax/_node.html",
+   "domains": [
+    "taxation"
+   ],
+   "kind": "publication"
+  },
+  {
+   "id": "de-bstatg",
+   "title": "Federal Statistics Act (Bundesstatistikgesetz)",
+   "publisher": "Deutscher Bundestag",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "region": "Germany",
+   "description": "The framework law establishing the Statistisches Bundesamt (Destatis) and governing federal statistics in Germany (Gesetz über die Statistik für Bundeszwecke). Originally enacted 1987; current consolidated text as of the 2016 recast, last amended 2024, read live on gesetze-im-internet.de (the Federal Ministry of Justice's official consolidated-law portal) 2026-09-07. Section 3(1) sets out the Statistisches Bundesamt's statutory tasks, including compiling and publishing national accounts (No. 13) -- the German counterpart of the UK's Statistics and Registration Service Act 2007 (gb-srsa-2007) already in the corpus.",
+   "last_updated": null,
+   "url": "https://www.gesetze-im-internet.de/bstatg_1987/BJNR004620987.html",
+   "domains": [
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-bundesbank-balance-of-payments",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 2). The GNI inventory names the Bundesbank's balance-of-payments statistics directly and twice as a calculation source (taxes on production/imports paid to the rest of the world; cross-border property income). Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim (PDF line-wrapped in the original, joined here). GRADED BY grade-evidence.ts --slice (2026-09-07): B, reason artefact-named-elsewhere-in-document -- the node title (\"Balance of Payments Statistics\", unhyphenated) matches verbatim elsewhere in the 372-page document, but not within the grader's 400-character window around this specific quote, which uses the hyphenated form \"balance-of-payments statistics\". Per PLAYBOOK-CORPUS.md section 7b (\"on a NEW edge the grader outranks the hand grade\"), taking the grader's verdict rather than the initial hand grade of A. RE-GRADED 2026-09-07 (DE national core round 4), B -> A, an improvement written under PLAYBOOK-CORPUS §7b's improvements-only rule; nothing in the matcher changed between the two runs. Round 4 re-graded all 30 live edges on this URL together (rule 11's evidence-URL clause) from a FRESH fetch in a clean sandbox, and this edge came back A quote-found-artefact-named at coverage 1.00. The reason the earlier run could not see it is visible in the committed evidence record: the A bar tests the window around ANY fully-matched span, this quote occurs more than once in the document, and the occurrence the fresh run anchored on sits beside a bulleted source list that prints 'Balance of payments statistics' UNHYPHENATED — the exact form the node title needs. The round-2 run's store carried no `pdftotext-flow` third rendering (PLAYBOOK-CORPUS §6: a cached .evidence-fulltext/ record has none, and only --refetch gets it), so it never had that span to anchor on. The B was an artefact of the store, not of the document.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "The source used for calculating is the balance-of-payments statistics compiled by the Deutsche Bundesbank.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-microcensus",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 2). The GNI inventory names the microcensus by EVAS number as an input to a specific national-accounts calculation (staff-sales estimation, which uses average household size from the microcensus). Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim. GRADED BY grade-evidence.ts --slice (2026-09-07): B, reason agency-not-artefact (naming: agency-only). Per PLAYBOOK-CORPUS.md section 7b, taking the grader's verdict rather than the initial hand grade of A.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "the average size of household given in the microcensus (EVAS 12211)",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-destatis-turnover-tax-statistics",
+   "relationship_type": "uses_data_from",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 2). The GNI inventory names VAT/turnover-tax statistics directly as one of the main data sources for gross fixed capital formation in machinery and equipment (alongside quarterly production statistics and monthly ITGS). Read live from the cited esa-2010-methods.pdf URL in the cloud sandbox (HTTP 200), quote verbatim (PDF line-wrapped in the original, joined here). GRADED BY grade-evidence.ts --slice (2026-09-07): A, reason quote-found-artefact-named (title-run 3/3, coverage 1.0) -- confirms the hand grade.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.pdf?__blob=publicationFile",
+   "evidence_quote": "Quarterly production statistics, monthly International trade in Goods Statistics (ITGS) and VAT statistics are the main sources of data.",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "de-destatis-national-accounts",
+   "target_report_id": "de-bstatg",
+   "relationship_type": "legal_basis",
+   "basis": "RESEARCHED 2026-09-07 (DE national core round 2). Section 3(1) No. 13 of the Federal Statistics Act names national accounts (Volkswirtschaftliche Gesamtrechnungen) directly as a statutory task of the Statistisches Bundesamt -- the same pattern as gb-uksa-code-of-practice -> gb-srsa-2007, a national accounts release's legal basis naming the release by its own subject matter rather than by publication title, which is what a framework act does. Read live from gesetze-im-internet.de (HTTP 200) in the cloud sandbox, quote verbatim, German original (the corpus's multilingual-title rule, PLAYBOOK-CORPUS.md §7a, applies the same way it did for Luxembourg's Règlement grand-ducal and Paraguay's Sistema de Cuentas Nacionales). GRADED BY grade-evidence.ts --slice (2026-09-07): B, reason quote-found-target-not-named (naming: neither) -- the Act does not name itself inline near Section 3(1) No. 13; the quote is confirmed verbatim in the live document but the self-reference the A bar requires is absent from this passage. Per PLAYBOOK-CORPUS.md section 7b, taking the grader's verdict rather than the initial hand grade of A.",
+   "evidence_url": "https://www.gesetze-im-internet.de/bstatg_1987/BJNR004620987.html",
+   "evidence_quote": "Volkswirtschaftliche Gesamtrechnungen und sonstige Gesamtsysteme statistischer Daten für Bundeszwecke aufzustellen sowie sie für allgemeine Zwecke zu veröffentlichen und darzustellen",
+   "evidence_grade": "B"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "de-destatis-national-accounts -> Income and Consumption Sample Survey (EVS, EVAS 63221)",
+   "source": "de-destatis-national-accounts",
+   "target": null,
+   "reason": "denied",
+   "why": "Investigated and refused, not merely unresearched -- the node was not minted at all. The GNI inventory's own words: 'The Income and Consumption Sample Survey can only be used for the national accounts for the purposes of comparison, and not as a basis for calculation.' That is exactly the shape PLAYBOOK-CORPUS.md §7a's ruling refuses ('Consistent with is a claim about numbers, not a citation') -- the document itself says this is a comparison check, not an input. If EVS is minted in a future round for some other edge (e.g. as a household-budget-survey node in its own right, the way gb-ons-lcf was minted for GB), this caveat should travel with it: do not wire it to de-destatis-national-accounts on this document's evidence."
+  }
+ ]
+}

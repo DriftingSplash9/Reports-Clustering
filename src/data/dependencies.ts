@@ -68,7 +68,7 @@ export const dependencies: Dependency[] = [
     target_report_id: 'boc-policy-rate',
     relationship_type: 'cites',
     basis:
-      'The Governor\'s press-conference opening statement for the July 2026 MPR ties the two directly, in both directions: "Based on the MPR projection published today, Governing Council judges the current policy rate remains appropriate to sustain the economic recovery and bring inflation back to the 2% target." And, on the occasion itself: "I\'m pleased to be here with Senior Deputy Governor Carolyn Rogers to discuss our quarterly Monetary Policy Report and today\'s decision." Sourced 2026-08-12 (Grok source-hunt, URL and quotes verified against the page), closing a seed edge that had carried no evidence_url since V0.1.',
+      'The Governor\'s press-conference opening statement for the July 2026 MPR ties the two directly, in both directions: "Based on the MPR projection published today, Governing Council judges the current policy rate remains appropriate to sustain the economic recovery and bring inflation back to the 2% target." And, on the occasion itself: "I\'m pleased to be here with Senior Deputy Governor Carolyn Rogers to discuss our quarterly Monetary Policy Report and today\'s decision." Sourced 2026-08-12 (source-hunt, URL and quotes verified against the page), closing a seed edge that had carried no evidence_url since V0.1.',
     evidence_url:
       'https://www.bankofcanada.ca/2026/07/opening-statement-2026-07-15/',
   },
@@ -117,7 +117,7 @@ export const dependencies: Dependency[] = [
     target_report_id: 'bls-employment-situation',
     relationship_type: 'uses_data_from',
     basis:
-      'The Fed\'s own Guide to the Summary of Economic Projections defines the variable on the release: "Unemployment Rate—the average civilian unemployment rate in the fourth quarter of each year." The civilian unemployment rate is the headline series of the BLS Employment Situation, so the projection is denominated in that release\'s number. Sourced 2026-08-12 (Grok source-hunt, URL and quote verified), closing a seed edge with no prior evidence_url.',
+      'The Fed\'s own Guide to the Summary of Economic Projections defines the variable on the release: "Unemployment Rate—the average civilian unemployment rate in the fourth quarter of each year." The civilian unemployment rate is the headline series of the BLS Employment Situation, so the projection is denominated in that release\'s number. Sourced 2026-08-12 (source-hunt, URL and quote verified), closing a seed edge with no prior evidence_url.',
     evidence_url:
       'https://www.federalreserve.gov/monetarypolicy/guide-to-the-summary-of-economic-projections.htm',
   },

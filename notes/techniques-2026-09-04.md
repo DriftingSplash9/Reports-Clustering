@@ -255,3 +255,37 @@ caught it.
   `find … -printf "%s\n" | awk '{s+=$1}END{print s}'`.
 - **Subagents spend the session's own WebSearch budget** (200). Eight parallel
   URL-hunting agents exhausted it half way through a round.
+
+
+---
+
+## Eurostat national reference metadata (moved from `PLAYBOOK-CORPUS.md` rule 16, 2026-09-07)
+
+The highest-yield source for "which standard / which source" on an EU/EEA country.
+The rule that survives in the playbook is only the ranking — go here before the NSI's
+own site. **These filenames are the part that rots and that is why they live here:**
+FI moved from `hi4` to `hi3` between 2026-08-28 and 2026-09-05.
+
+- `prc_hicp_esmshi4_<cc>.htm` — PL, EL, ES, HU, HR, BG, LT
+- `prc_hicp_esmshi3_<cc>.htm` — SK, SI, EE, LV, MT, CY, IS, CZ, DK, IT, NO, RO, CH, TR, AL
+- FI is `hi3` since 2026-09-05; try `hi4` first and fall back. **Greece is `_el`, not `_gr`.**
+- **Section 18.1.1 "Weights"** is where the weight-source sentence lives. Memory
+  `esms_hicp_pass_2026-09-05` has the whole pass, including the trap that
+  Switzerland's sentence is in 18.1.1.1 rather than 18.1.1.
+- `employ_simslfs_<cc>.htm` answers "is the LFS the national-accounts employment
+  source" as an explicit Y/N field. There is no such page for Iceland.
+- **No government-finance equivalent exists** — `gov_10dd_*_esms_<cc>.htm` 404s
+  everywhere tried. For deficit and debt, go to the NSI's own EDP release page.
+
+## Host workarounds for an unreachable NSO (moved from `PLAYBOOK-CORPUS.md` rule 17, 2026-09-07)
+
+Rule 17 was retired on 2026-09-07 with zero citations anywhere in the repo — it was
+three host workarounds wearing a rule's clothes. Its number stays retired.
+
+- **ASEANstats** (`cdn.aseanstats.org/public/...`) is the reliable stand-in for an
+  unreachable ASEAN NSO. It supplied Myanmar's BPM6 basis and Thailand's SNA 2008
+  basis when both national domains were dead.
+- **ilo.org itself** hosts labour-force-survey reports stating ICLS compliance when
+  an NSO's own pages are blocked — it supplied Iraq's and Vietnam's ICLS edges.
+- The old ILO microdata catalogue (`webapps.ilo.org/surveyLib`) is retired; do not
+  send a round at it.
