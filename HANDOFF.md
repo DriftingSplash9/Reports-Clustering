@@ -14,8 +14,8 @@ until 2026-09-07. That cap was retired by Thomas in §1 on the same day this lin
 written, and the two sat contradicting each other for three rounds. The gauge is the
 read-cost percentage in §1, not a character count.)*
 
-Last updated: 2026-09-07 ~17:05 UTC (still handoff 075 — §2/§3 edited in place for
-rounds 9 through 12; not a new handoff under §4, no archive)
+Last updated: 2026-09-07 ~18:15 UTC (still handoff 075 — §2/§3 edited in place for
+rounds 9 through 14; not a new handoff under §4, no archive)
 
 ---
 
@@ -49,27 +49,26 @@ repo: where either disagrees with a file, the file wins.
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 24.6k | everyone, first |
+| `HANDOFF.md` | 27.3k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
 | `PLAYBOOK.md` | 8.9k | everyone |
 | `PLAYBOOK-CORPUS.md` | 44.4k | corpus lane — §7 splits 7a/7b/7c by question |
 | `PLAYBOOK-RENDER.md` | 13.6k | renderer lane |
 | `REPORTS.md` | 24.3k | scope/direction questions |
 | `START-HERE.md` | 13.2k | humans, not agents |
-| **a corpus round reads** | **79.4k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **48.5k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **82.1k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **51.3k** | HANDOFF + CLAUDE + core + RENDER |
 
-**THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-07, round 12): before he types a
-prompt, a corpus round is required to read 9.9% of its context, a renderer round 6.1%.**
-That is the mandatory read above as tokens (chars ÷ 4) over a 200k-token window — 19.9k
-and 12.1k tokens respectively. **Both moved up this session** — 9.2% → 9.9% and 5.4% → 6.1%
-— and `HANDOFF.md` is where all of it went: 19.4k → 24.6k. Rounds 11 and 12 added a general
-finding about stale cached stores, a must-do-this-way constraint on one URL and the state of a
-finished programme, and removed two settled items and one ruling Thomas answered.
-`PLAYBOOK-CORPUS.md` also measures 44.4k against the 43.7k this table carried before round 11;
-nothing has edited it, so the earlier figure was simply read wrong. **Refresh both percentages
-every handoff along with the table**, and state the denominator, because the point of the number
-is the trend and not the value.
+**THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-07, round 14): before he types a
+prompt, a corpus round is required to read 10.3% of its context, a renderer round 6.4%.**
+That is the mandatory read above as tokens (chars ÷ 4) over a 200k-token window — 20.5k
+and 12.8k tokens respectively. **Both moved DOWN this round** — 10.4% → 10.3% and
+6.6% → 6.4% — the first drop since the table started: round 14's §2/§3 edit condensed
+round 13's now-closed FR narrative (three left-open leads, all resolved or refined) rather
+than appending to it, `HANDOFF.md` 28.5k → 27.3k. Neither playbook nor `REPORTS.md`
+changed this round. **Refresh both percentages every handoff along with the
+table**, and state the denominator, because the point of the number is the trend and not
+the value.
 
 **This measures attention, not budget.** A single `get_page_text` on one large page
 cost more than this whole table in round 8. What the read buys or wastes is the
@@ -86,12 +85,39 @@ thing that gets defended.
 
 ## 2. Current state
 
-Corpus **3,540 reports / 3,106 dependencies**. **1,095 A · 1,399 B · 612 C**, A-share
-35.3%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
+Corpus **3,551 reports / 3,116 dependencies**. **1,105 A · 1,399 B · 612 C**, A-share
+35.5%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
 `tsc --noEmit` clean, grader **selftest 76/76**, `vite build` ok,
 `public/corpus-data.json` regenerated and copied back, current as of 2026-09-07
-16:57 UTC. **979 nodes still have zero edges**, unchanged — rounds 11 and 12 wired every
-node they minted.
+18:15 UTC. **980 nodes still have zero edges** (+1) — the one relation-only node round 14
+minted, expected by construction (relations never reach `buildGraph`), not a defect.
+
+**FR: two rounds in, round 13's own three left-open leads all closed or refined by round
+14.** Round 13 (first FR round) wired 9 nodes/9 edges off France's own GNI inventory
+(INSEE, "Gross National Income Inventory 2010, France - ESA 2010", March 2020, 438pp),
+Chapter 10 "MAIN DATA SOURCES USED" plus General Government data-sources (3.5.1.1), all
+`fr-insee-national-accounts -> X uses_data_from`, all A. FR now has **20 nodes**, from 9 at
+the start of round 13. Full narrative: memory `round13_fr_national_core_2026-09-07` and
+`round14_fr_national_core_round2_2026-09-07`.
+
+**Round 14 (this round) closed two of the three leads and refined the third.** BTS
+minted and wired to DADS by a `supersedes` **relation** (not a dependency edge — the
+2010-benchmark inventory cannot name a 2017-vintage source, and inventing one anyway would
+be exactly the no-document-no-edge violation the corpus polices), direction confirmed
+against every other live `supersedes` pair in the corpus (newer → older). The second SIES
+R&D survey (associations/GIP) wired at A, off a Chapter 10.1.4 table row round 13 had only
+paraphrased — round 14 downloaded the actual inventory PDF fresh (`curl` + `pdftotext
+-layout` on the device; **WebFetch truncates this 438pp PDF well before page 404 and
+cannot reach Chapter 10 at all**, three tries, none got there) and read the row verbatim.
+**DGDDI's foreign-trade bulletin is still refused, agency-not-artefact** — two new
+self-declared candidate documents found (DSECE's own "missions" page, INSEE's Courrier des
+statistiques article) both state usage but neither names the bulletin by title; both
+candidate classes are now spent, recorded in the round-14 slice's `_dropped` so a third
+round doesn't retread them. Chapters 3.4.1/5.8.2/5.11.2, flagged "worth a skim" by round
+13, read in full this round and confirmed empty (Regafi register + agency-level mentions;
+Nielsen/GfK private panels, out of scope; Esane/DGFiP repeats) — closed for good barring a
+newer inventory edition. **The GNI inventory PDF now backs 10 edges** (rule 11: any live
+grader run on it must select all ten at once).
 
 **THE GERMAN GNI INVENTORY IS SPENT, and that is the state to carry forward.** Chapters
 10.1 and 10.2 are both closed. Round 11 wired 21 of Chapter 10.1's 37 open rows; Thomas
@@ -155,7 +181,7 @@ all refused on evidence or host, with reasons in the block's own `_dropped`.
 `notes/doc-audit-2026-09-07.md` landed (7 edits, 4 moves, 3 drops, 4 additions).
 Handoffs are numbered from that same round (74 archived files stamped `-001` to `-074`);
 this file archives as **075** when it is next replaced wholesale, and §2/§3 have now been
-edited in place for rounds 9 through 12 without an archive, which §4 permits.
+edited in place for rounds 9 through 14 without an archive, which §4 permits.
 
 ---
 
@@ -170,16 +196,25 @@ with a second reading.
 
 ### [Agent]
 
-**Move to FR.** DE is finished as a programme: 5 rounds this session, 13 → 46 nodes, both
-worked chapters of the GNI inventory closed, and the only German thing left is Chapter
-10.3's seven non-government sources — private bodies for the most part (Deutsche Automobil
-Treuhand, Deutsche Börse), so a scope question first. **FR has had no round at all.**
-Method in memory `gb_national_core_2026-09-06` and, for the shape that worked five times
-running, `round11_de_chapter10_2026-09-07`: find the country's own GNI or national-accounts
+**Continue FR.** Rounds 13-14 wired FR's Chapter 10 "MAIN DATA SOURCES USED", the General
+Government data-sources section (3.5.1.1), the second SIES R&D survey and a BTS/DADS
+succession relation — 11 nodes, 10 edges + 1 relation, all A. Method in memory
+`round13_fr_national_core_2026-09-07` and `round14_fr_national_core_round2_2026-09-07`,
+and for the shape that worked seven times running now (DE x5, FR x2),
+`round11_de_chapter10_2026-09-07`: find the country's own GNI or national-accounts
 inventory, read its source chapter's BODY for sentences that name a source by title and say
-what the accounts do with it, simulate `namesTarget` before choosing node titles, then
-grade the whole evidence URL at once. Round 7's five orphaned NSO nodes (Sudan, Yemen,
-Syria, Iraq, Iran) are leads for the same programme from the other direction.
+what the accounts do with it, simulate `namesTarget` before choosing node titles, verify
+each title against the publisher's own page, then grade the whole evidence URL at once.
+**Left in FR for the next round:** (a) DGDDI's own foreign-trade bulletin — still refused
+after two rounds of research; the two self-declared-usage candidate documents found so far
+(round 13's GNI-inventory passage, round 14's DSECE-missions and Courrier-des-statistiques
+pages) are all spent, `_dropped` has the detail — reopen only with a document that puts a
+TITLE and a usage statement in the same place, not by re-reading either spent class again;
+(b) chapters 3.4/5.8/5.11 confirmed empty round 14, do not re-read them barring a newer
+inventory edition. Round 7's five orphaned NSO nodes (Sudan, Yemen, Syria, Iraq, Iran)
+remain leads for the same programme from the other direction. DE remains finished as a
+programme (5 rounds, 13 → 46 nodes); the only German thing left is Chapter 10.3's seven
+non-government sources — private bodies for the most part, so a scope question first.
 
 **Sweep for B grades that a stale cached store caused.** Round 11 found one by accident
 (§2, the Bundesbank balance-of-payments edge) and the cause is general: the third PDF

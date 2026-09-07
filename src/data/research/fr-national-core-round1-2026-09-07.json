@@ -1,0 +1,284 @@
+{
+  "_slice": "fr-national-core-round1-2026-09-07",
+  "_researched": "2026-09-07",
+  "_status": "draft",
+  "_note": "FR thin-coverage round 1, following DE round 11/12's method exactly: found France's own GNI Inventory (INSEE, 'Gross National Income Inventory 2010, France - ESA 2010', March 2020, 438pp), read Chapter 10 'MAIN DATA SOURCES USED' (the direct FR analogue of DE's Chapter 10 register) in full plus the General Government data-sources subsection (3.5.1.1) for named sources outside Chapter 10. Every candidate title was simulated against namesTarget/normalizeForMatch (copied verbatim from scripts/grade-evidence.ts into a throwaway sandbox copy, never against the live script) before being finalised, and verified against each publisher's own page. Grades below are DRAFT hand grades pending a live grader run against the same evidence_url per rule 11 (all edges on this URL must be graded together).",
+  "reports": [
+    {
+      "id": "fr-drees-ehpa-survey",
+      "title": "Enquête sur les établissements d’hébergement de personnes âgées (EHPA)",
+      "title_aliases": [
+        "Survey of nursing homes for the elderly"
+      ],
+      "publisher": "DREES (Direction de la recherche, des études, de l'évaluation et des statistiques)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Quadrennial DREES survey of nursing homes for the elderly, sampled from the FINESS establishment register. The GNI inventory names it as a major input for estimating output of social-services establishments (Chapter 10.1.3). DREES's own current site names the same survey 'l'enquête aupres des etablissements d'hebergement pour personnes agees (EHPA)' -- a slightly different word order/preposition than the inventory's 'sur les etablissements d'hebergement de personnes agees', evidently the same recurring survey under minor renaming across editions.",
+      "releases_per_year": 1,
+      "cadence_note": "The inventory's own survey table states periodicity 'Every 4 years'; entered as releases_per_year 1 as a conservative annual approximation pending a DREES release calendar cross-check.",
+      "last_updated": null,
+      "url": "https://drees.solidarites-sante.gouv.fr/sources-outils-et-enquetes/07-lenquete-aupres-des-etablissements-dhebergement-pour-personnes-agees",
+      "domains": [
+        "health"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-sies-rd-survey-enterprises",
+      "title": "Enquête annuelle sur les moyens consacrés à la recherche et au développement dans les entreprises",
+      "title_aliases": [
+        "Annual survey of resources committed to research and development in enterprises"
+      ],
+      "publisher": "SIES -- Sous-direction des systèmes d'information et des études statistiques, French Ministry for Higher Education and Research",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Annual survey of enterprise R&D spending, researchers and support staff, run under EU statistics-on-science-and-technology regulation (Commission Implementing Decision 1608/2003/EC family). The GNI inventory names it as the source for R&D output/expenditure estimation (Chapter 10.1.4). Still published; current open-data series at data.enseignementsup-recherche.gouv.fr under 'Les moyens consacres a la R&D par les entreprises'.",
+      "releases_per_year": 1,
+      "cadence_note": "The inventory's own survey table states periodicity 'Annual'.",
+      "last_updated": null,
+      "url": "https://data.enseignementsup-recherche.gouv.fr/explore/assets/fr-esr-rd-moyens-entreprises/",
+      "domains": [
+        "research-innovation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-dads",
+      "title": "Déclaration annuelle de données sociales (DADS)",
+      "title_aliases": [
+        "Annual declaration of social data"
+      ],
+      "publisher": "INSEE / DGFiP (joint tax-social administrative declaration)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Mandatory annual employer declaration covering pay, hours and employment conditions for every employee, historically the base source for compensation-of-employees estimation in the income approach (GNI inventory Chapter 10.2.1). Note for a future round: INSEE's own DADS metadata page (insee.fr/fr/information/2407785) states DADS was succeeded by 'Base Tous salaries (BTS)' from the 2017 data vintage onward; the 2020-published GNI inventory describes the 2010-benchmark-year methodology, when DADS was still the live source, so the edge is accurate to the cited document but the successor is worth wiring in a later round.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual declaration; the inventory states detailed data for year N is released in the first half of year N+3.",
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/information/2407785",
+      "domains": [
+        "labour"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-urssaf-brc",
+      "title": "Bordereau récapitulatif des cotisations (BRC)",
+      "title_aliases": [
+        "Summary of Contributions"
+      ],
+      "publisher": "Acoss / Urssaf",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Employer contribution-summary declaration filed monthly (workforce >=10) or quarterly (below), the source of Acoss/Urssaf's employment and payroll statistical series. The GNI inventory names it directly (Chapter 10.2.2) as, jointly with the summary table (TR), the source of these series. Still a live Urssaf mechanism per urssaf.fr, now filed via the DSN.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly for establishments with 10+ employees; quarterly below that threshold, per the inventory's own description.",
+      "last_updated": null,
+      "url": "https://www.urssaf.fr/portail/home/administration-et-collectivite-t/declarer-et-payer/la-dsn-obligatoire-pour-les-empl/les-cas-particuliers/le-bordereau-recapitulatif-des-c.html",
+      "domains": [
+        "labour"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-insee-enquete-logement",
+      "title": "Enquête Logement (Housing Survey)",
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's periodic survey of tens of thousands of dwellings, covering housing characteristics, occupants and rental fees. The GNI inventory names it as the source for actual and imputed rents underlying the housing satellite account (Chapter 10.3.2). Confirmed live at INSEE's own metadata page (series s1004).",
+      "releases_per_year": 1,
+      "cadence_note": "The inventory's own survey table states periodicity 'Every 7 years' (elsewhere in the same document 'every 4 or 5 years' for the housing-satellite-account use); entered as an annual approximation pending a periodicity cross-check against INSEE's own calendar.",
+      "last_updated": null,
+      "url": "https://www.insee.fr/en/metadonnees/source/serie/s1004",
+      "domains": [
+        "housing"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-insee-csl",
+      "title": "Housing Satellite Account (CSL)",
+      "title_aliases": [
+        "Compte satellite du logement"
+      ],
+      "publisher": "INSEE / SDES (Service des données et études statistiques)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Satellite account synthesising housing-expenditure data across all economic actors, built on an econometric model of actual and imputed rents. The GNI inventory names it as the compiled source feeding household dwelling-services consumption (Chapter 10.3.3). Still published; current dataset at data.gouv.fr ('Compte satellite du logement') and SDES.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual account; not cross-checked against a stated release calendar this round.",
+      "last_updated": null,
+      "url": "https://www.data.gouv.fr/datasets/compte-satellite-du-logement",
+      "domains": [
+        "housing"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-banque-de-france-bop-iip",
+      "title": "The Balance of Payments and International Investment Position",
+      "title_aliases": [
+        "La balance des paiements et la position extérieure de la France"
+      ],
+      "publisher": "Banque de France",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Banque de France's balance-of-payments and international-investment-position statistics and annual report. The GNI inventory names it repeatedly (Chapter 10.3.4 and throughout the expenditure/income chapters) as the source for trade in services, international merchanting, territorial correction of household consumption, cross-border property income and the transition from GDP to GNI. Confirmed live at Banque de France's own statistics page under this exact title.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly balance-of-payments releases plus an annual report ('La balance des paiements et la position exterieure de la France'); entered as 12 for the underlying monthly series that the inventory's chapter 5 adjustments cite.",
+      "last_updated": null,
+      "url": "https://www.banque-france.fr/en/statistics/balance-payments-and-international-investment-position",
+      "domains": [
+        "external-sector"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-dgfip-compte-general-etat",
+      "title": "Compte Général de l’État",
+      "title_aliases": [
+        "General State Account"
+      ],
+      "publisher": "DGFiP (Direction générale des Finances publiques)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "The State's accrual-based general account, built from the Chorus IT system and implemented in the 2000s. The GNI inventory names it directly and states it 'can be mobilised on an ancillary basis to compile the non-financial accounts' of General Government (section 3.5.1.1). Confirmed current at budget.gouv.fr's own 'Le compte general de l'Etat' page.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual account, published alongside the Loi de reglement in Spring N+1; not independently cross-checked against a stated DGFiP calendar this round.",
+      "last_updated": null,
+      "url": "https://www.budget.gouv.fr/reperes/comptes_etat/articles/compte-general-letat",
+      "domains": [
+        "public-finance"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-budget-voies-et-moyens-t1",
+      "title": "Évaluation des voies et moyens, Tome I",
+      "title_aliases": [
+        "Voies et Moyens, Tome I"
+      ],
+      "publisher": "Direction du budget, French Ministry of Finance",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Annex to the annual Finance Bill (PLF) detailing State revenue estimates. The GNI inventory names it directly as where 'revenues are presented in details' for State expenditure/revenue analysis (section 3.5.1.1). Confirmed current and still published annually (2026 edition on assemblee-nationale.fr).",
+      "releases_per_year": 1,
+      "cadence_note": "The inventory states this document is published during Autumn N+1 (alongside the annual Finance Bill cycle).",
+      "last_updated": null,
+      "url": "https://www.budget.gouv.fr/documentation/file-download/30586",
+      "domains": [
+        "public-finance"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-drees-ehpa-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). INSEE's own GNI inventory ('Gross National Income Inventory 2010, France - ESA 2010', March 2020) names this DREES survey in Chapter 10.1.3 as a major input to output estimation for social-services establishments.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "Name of survey Enquête sur les établissements d’hébergement de personnes âgées (EHPA) (Survey of nursing homes for the elderly)",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-sies-rd-survey-enterprises",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.1.4 names this survey by title and describes it as the source used to identify R&D expenditure, researcher numbers and financing for the R&D output estimate.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "The statistical office of the French Ministry for Higher Education and Research produces annual surveys of the resources committed to R&D. These surveys cover both private enterprises and public bodies.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-dads",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.2.1 is titled 'DADS' and describes it as the declarative formality from which employee-level pay and employment data are drawn for the income approach.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "The annual declaration of social data (DADS) is a declarative formality that must be accomplished by any company employing employees.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-urssaf-brc",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.2.2 names the Summary of Contributions (BRC) directly as the source of Acoss/Urssaf's employment and payroll statistical series used in the income approach.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "In particular, the Summary of Contributions (BRC) and the summary table (TR) are the source of the statistical series of employment and payroll produced by Acoss and Urssaf.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-insee-enquete-logement",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.3.2 names this INSEE housing survey as the source used to evaluate actual and imputed rents.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "Every six or seven years, INSEE conducts a survey of several tens of thousands of dwellings. This survey reveals the characteristics of housing and its occupants, and the rental fees when the housing is rented.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-insee-csl",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.3.3 names the Housing Satellite Account (CSL) as the compiled account used for dwelling-services household consumption.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "The Housing Satellite Account (CSL) synthesises a large number of data sources in order to draw up a complete and structured accounting balance sheet for housing expenditure for all economic actors.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-banque-de-france-bop-iip",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's Chapter 10.3.4 is titled 'Balance of Payments (BoP)' and describes its components as contributing directly to GDP, GNI and the financial account; the expenditure chapter separately names it as the source for trade in services, international merchanting and the household-consumption territorial correction.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "Several components of the balance of payments and the international investment position contribute to the compilation of national macroeconomic aggregates.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-dgfip-compte-general-etat",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's section 3.5.1.1 names the Compte General de l'Etat directly and states it can be used to compile the non-financial accounts of General Government.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "which also enables to build the \"Compte General de l'Etat\" (General State account; accrual based)",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-budget-voies-et-moyens-t1",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR national core round 1). The GNI inventory's section 3.5.1.1 names 'Voies et Moyens, Tome I' directly as the document in which State revenues are presented in detail for General Government revenue analysis.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "Revenues are presented in details in the \"Voies et Moyens, Tome I\", a document published during Autumn N+1.",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "fr-insee-national-accounts -> French Foreign Trade Statistics (DGCE/DGDDI monthly balance of trade in goods)",
+      "source": "fr-insee-national-accounts",
+      "target": null,
+      "reason": "no-document",
+      "why": "REFUSED 2026-09-07 (FR round 1), agency-not-artefact. The GNI inventory's section 5.14.1.1 describes trade in goods as measured by 'the Department of Statistics and economics studies of the French Directorate general of customs and excise (DGCE)' (elsewhere DGDDI), and states this department 'also publishes each month its own balance of trade in goods' -- a description of the agency's activity, not a titled recurring publication. The document never uses DGDDI's actual bulletin name (currently 'Resultats du commerce exterieur', formerly 'Chiffres du commerce exterieur : principaux resultats', confirmed live on douane.gouv.fr) anywhere in its 438 pages. Reopen this by minting DGDDI's own bulletin from douane.gouv.fr directly and wiring the inventory's 'special trade statistics' passages to it as usage evidence, rather than inventing a title the document itself never uses."
+    },
+    {
+      "edge": "fr-insee-national-accounts -> SIES R&D survey in associations and public interest groups",
+      "source": "fr-insee-national-accounts",
+      "target": null,
+      "reason": "deferred",
+      "why": "NOTED 2026-09-07 (FR round 1), not minted this round for scope, not evidence. Chapter 10.1.4 also names a companion annual survey, 'Enquete annuelle sur les moyens consacres a la recherche et au developpement dans les associations et les groupements d'interet public', run by the same SIES office and named with the same specificity as the enterprise survey wired this round. A real second node -- deliberately left for a future round to keep this round's scope to one survey per named artefact class; not a refusal."
+    }
+  ]
+}

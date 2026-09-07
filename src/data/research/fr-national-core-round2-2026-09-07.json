@@ -1,0 +1,84 @@
+{
+  "_slice": "fr-national-core-round2-2026-09-07",
+  "_researched": "2026-09-07",
+  "_status": "draft",
+  "_note": "FR round 2, continuing round 1's method (find France's own GNI Inventory, read Chapter 10/relevant chapters for named sources, verify each title against the publisher's own live page before minting). This round worked the three leads round 1 left open: (b) mint BTS as DADS's documented successor and wire the supersedes relation (the DE EVAS-chain pattern); (c) mint and wire the second SIES R&D survey (associations/GIP) named alongside the enterprise one in Ch 10.1.4; (a) DGDDI's own foreign-trade bulletin, further researched but still refused — see _dropped. Also closed round 1's open question on chapters 3.4.1/5.8.2/5.11.2: read in full this round, confirmed empty of new titled artefacts. The GNI inventory PDF was fetched fresh and read directly (pdftotext -layout on a live download, not WebFetch's truncated summary, which could not reach page 404 of 438) to pull the Ch 10.1.4 survey-table quote verbatim; the BTS/DADS succession quote and the DGDDI web sources were fetched live the same way. Grades below are DRAFT hand grades pending a live grader run against the GNI inventory evidence_url per rule 11 (it now stands behind 10 edges counting round 1's nine, so any grader run must select all ten at once).",
+  "reports": [
+    {
+      "id": "fr-sies-rd-survey-associations-gip",
+      "title": "Enquête annuelle sur les moyens consacrés à la recherche et au développement dans les associations et les groupements d’intérêt public",
+      "title_aliases": [
+        "Annual survey of resources committed to research and development in associations and public interest groups"
+      ],
+      "publisher": "SIES -- Sous-direction des systèmes d'information et des études statistiques, French Ministry for Higher Education and Research",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Annual, compulsory SIES survey of R&D spending, researcher numbers and funding in associations and public-interest groupings (GIP) -- the companion to the enterprise R&D survey (fr-sies-rd-survey-enterprises), run by the same office. The GNI inventory's Ch 10.1.4 survey table gives it its own row, distinct from the enterprise survey's row, with a 320-unit sample against administrative files. Still active: CNIS's own survey register lists it as running through the 2022-2026 cycle (registration 2025A703RE), and the Ministry's own current page for the 2025 edition gives a dedicated contact address for associations/GIP respondents (enqretd-assoc@recherche.gouv.fr), confirming the survey stream is distinct from the enterprise one and still live.",
+      "releases_per_year": 1,
+      "cadence_note": "The inventory's own survey table states periodicity 'Annual', matching the enterprise survey.",
+      "last_updated": null,
+      "url": "https://www.enseignementsup-recherche.gouv.fr/fr/enquete-rd-aupres-des-administrations-81709",
+      "domains": [
+        "research-innovation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-bts",
+      "title": "Base Tous Salariés (BTS)",
+      "title_aliases": [
+        "All-employee database"
+      ],
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's current annual statistical base of individual-level data on all employees (positions, employees, enterprises and establishments files), built from employers' administrative declarations. INSEE's own metadata page states this source succeeded DADS from the 2017 data vintage onward. Minted to record that succession alongside fr-dads (round 1), the same way DE's EVAS successor chains were tracked -- not because the 2010-benchmark GNI inventory names BTS itself, which it cannot: that document describes the methodology of the era when DADS was still the live source.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual statistical base, one edition per data year (2018-2023 editions confirmed live at INSEE's own metadata pages).",
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/information/2407785",
+      "domains": [
+        "labour"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-sies-rd-survey-associations-gip",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR round 2). INSEE's own GNI inventory ('Gross National Income Inventory 2010, France - ESA 2010', March 2020), Chapter 10.1.4, gives this survey its own 'Name of survey' table row -- distinct from and immediately following the enterprise R&D survey's row in the same table -- naming it as one of the two annual R&D surveys the intramural R&D expenditure output estimate is supposed to sum (Table 3-99 process table, p.188/404: 'provided by the survey of resources devoted to R&D (see 10.1.4 Surveys on R&D)').",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/fichier/Inventory_France.pdf",
+      "evidence_quote": "Name of survey Enquête annuelle sur les moyens consacrés à la recherche et au développement dans les associations et les groupements d’intérêt public (Annual survey of resources committed to research and development in associations and public interest groups)",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [
+    {
+      "source_report_id": "fr-bts",
+      "target_report_id": "fr-dads",
+      "relation_type": "supersedes",
+      "basis": "RESEARCHED 2026-09-07 (FR round 2). INSEE's own current metadata page for BTS states plainly that BTS took over from DADS starting with the 2017 data vintage.",
+      "evidence_url": "https://www.insee.fr/fr/information/2407785"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "fr-insee-national-accounts -> DGDDI's monthly foreign-trade bulletin (currently 'Résultats du commerce extérieur')",
+      "source": "fr-insee-national-accounts",
+      "target": null,
+      "reason": "no-document",
+      "why": "STILL REFUSED 2026-09-07 (FR round 2, continuing round 1's lead), agency-not-artefact -- two new candidate self-declared documents found this round, neither closes the gap, both worth having on file for whoever opens this next. (1) DSECE/DGDDI's own 'missions et organisation' page (lekiosque.finances.gouv.fr/site_fr/etudes/menubas/missions.asp), fetched live 2026-09-07, states plainly: 'INSEE (élaboration des comptes nationaux trimestriels et annuels), Direction Générale du Trésor, Observatoire de l’Energie, Banque de France (élaboration de la balance des paiements) et les ministères techniques ... reprennent directement les données douanières' -- a clean SELF-DECLARED usage statement, but it names 'les données douanières' (customs data) generically, never a titled recurring release, same bar the round 1 GNI-inventory passage failed. (2) INSEE's own Courrier des statistiques article on foreign-trade statistics (insee.fr/fr/information/8264548) states 'ces statistiques constituent un intrant pour des productions majeures : les comptes nationaux établis par l’Insee et la balance de paiements établie par la Banque de France' -- same shape, same gap. The titled artefact side is confirmed and stable: DGDDI's monthly release is currently named 'Résultats du commerce extérieur' (multiple live 2026 editions on douane.gouv.fr) and the underlying dataset is titled 'Statistiques nationales du commerce extérieur' (confirmed live on data.gouv.fr, publisher DGDDI) -- but no document found so far puts a title and a usage statement in the same place. Reopen by searching specifically for a document that names 'Résultats du commerce extérieur' or 'Statistiques nationales du commerce extérieur' BY TITLE while also stating INSEE's or Banque de France's use of it, rather than re-testing the GNI inventory's agency-level passage again (round 1) or the DSECE mission/Courrier pages again (this round) -- both classes are now spent."
+    },
+    {
+      "edge": "GNI inventory chapters 3.4.1 (financial sector data sources), 5.8.2 (HFCE main data sources) and 5.11.2 (GFCF main data sources) -> any new titled artefact",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "CONFIRMED EMPTY 2026-09-07 (FR round 2), closing the open question round 1 left in HANDOFF.md. Read in full against a fresh direct download of the inventory PDF (not a summarized fetch). 3.4.1 (S.121-S.128, p.90-95) names only agency-level registers and bodies already known to be out of scope or already wired by class: the Regafi register of financial agents (an administrative register, not a recurring statistical release -- same class as the retired index-page rulings), the AMF's approval/monitoring activity, the Caisse des dépôts et consignations' role, and the Esane/DGFiP repeats already wired via fr-dgfip-compte-general-etat. No survey or report is named by title that isn't already a wired node or an out-of-scope register. 5.8.2 (HFCE, p.262-265) describes the compilation PROCESS (expert assessment, VAT/FISIM adjustments, balancing) and names only 'panels of distributors Nielsen or GfK' as a source class -- private commercial panels, out of this project's official-statistics scope, and Esane again. 5.11.2 (GFCF, p.287-289) is Esane and DGFiP (already wired) for every institutional sector, with no additional named source. Nothing to mint in any of the three; do not re-read them on a future FR round unless the inventory itself is superseded by a newer edition."
+    }
+  ]
+}
