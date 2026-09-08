@@ -96,6 +96,8 @@ const UA =
 
 /** Per-URL ceiling. Government statistics sites are often slow, not dead. */
 const TIMEOUT_S = 45
+/** Wall clock for an ARCHIVE body only — see the `--max-time` comment in `fetchRaw`. */
+const ARCHIVE_TIMEOUT_S = 300
 
 /**
  * The second PDF text extractor, run out of process. Written for the transport
@@ -1074,7 +1076,7 @@ export interface Fetched {
   finalUrl: string
   contentType: string
   bodyBytes: number
-  extractor: 'pdftotext' | 'html' | 'docx' | 'xlsx' | 'text' | 'none'
+  extractor: 'pdftotext' | 'html' | 'docx' | 'xlsx' | 'zip-docs' | 'text' | 'none'
   block: Block
   blockLabel: string
   text: string
@@ -1353,6 +1355,93 @@ function xlsxText(sharedStringsXml: string | null, sheetXmls: string[]): string 
 }
 
 /** `xlsxText` over a real workbook on disk, via `unzip` like the docx branch. */
+/**
+ * Decode an HTML/text body honouring the charset it DECLARES, not the one we
+ * wish it used (2026-09-08, China round). See the call site in `fetchRaw` for
+ * the measurement that produced this; the short version is that decoding a
+ * `charset=gb2312` page as UTF-8 does not corrupt a few characters, it destroys
+ * every one of them, and the edge then grades `quote-not-in-document` — a
+ * broken reader wearing the costume of a bad quote.
+ *
+ * **Additive by construction**: the re-decoded reading is returned only when it
+ * yields strictly FEWER replacement characters than the UTF-8 one, and an
+ * unknown or unsupported charset label falls back to UTF-8. It can only ever
+ * improve a reading, never degrade one.
+ */
+function decodeDeclared(body: Buffer): string {
+  const asUtf8 = body.toString('utf8')
+  const declared = /charset=["']?([\w-]+)/i.exec(body.subarray(0, 2048).toString('latin1'))?.[1]
+  if (!declared || /^utf-?8$/i.test(declared)) return asUtf8
+  // gb2312 is declared far more often than it is meant; gb18030 is its superset
+  // and decodes every page that really is gb2312.
+  const label = /^gb2312$/i.test(declared) ? 'gb18030' : declared.toLowerCase()
+  try {
+    const decoded = new TextDecoder(label).decode(body)
+    return decoded.split('\uFFFD').length < asUtf8.split('\uFFFD').length ? decoded : asUtf8
+  } catch {
+    return asUtf8
+  }
+}
+
+/**
+ * **A publisher that ships a document only inside a zip is still publishing it
+ * at that URL** (Thomas, 2026-09-08, ruling on the Guangdong yearbook: *"why
+ * can't we point to a zip that is likely pointing to the url too? I'd say that
+ * is proof"*). He is right, and the two existing B-caps do not reach this case:
+ * `wayback` caps because the bytes are a COPY on a PAST DATE, `token-pdf` caps
+ * because the cited URL is DEAD TOMORROW. A permanent first-party attachment
+ * served 200 from the publisher's own host is neither — the bytes came from the
+ * cited URL on the live host, which is the whole of §7b's actual test, so it
+ * grades on its merits like any other direct read.
+ *
+ * The only real objection was that this extractor could not read one, and that
+ * objection was thin: the fetcher ALREADY unzips two archive types (`.docx` and
+ * `.xlsx`, both branches above). This is the third case of a branch that exists.
+ *
+ * What it does NOT change: a zip is a COLLECTION, so citing one says "this quote
+ * is somewhere in these N files" rather than "this quote is on this page". That
+ * is a precision cost, not an authenticity one, so the guard is a convention
+ * rather than a cap — **name the inner path in the `basis`** so a reader can go
+ * straight to it. Each entry is prefixed with a `[zip: <path>]` marker in the
+ * extracted text so the committed evidence record shows which file matched.
+ */
+async function extractZipDocs(bodyPath: string): Promise<string> {
+  const dir = mkdtempSync(join(tmpdir(), 'gradezip-'))
+  try {
+    // `-qq` quiet, `-o` overwrite; unzip writes odd entry names as raw bytes,
+    // which is why this extracts to disk and walks it rather than round-tripping
+    // names through `unzip -p` (the CD editions carry GBK-encoded filenames).
+    await execFileAsync('unzip', ['-qq', '-o', bodyPath, '-d', dir], { maxBuffer: 64 << 20 })
+    const files: string[] = []
+    const walk = (d: string, depth: number) => {
+      if (depth > 8 || files.length > 4000) return
+      for (const e of readdirSync(d, { withFileTypes: true })) {
+        const full = join(d, e.name)
+        if (e.isDirectory()) walk(full, depth + 1)
+        else if (/\.(html?|txt|csv|md)$/i.test(e.name)) files.push(full)
+      }
+    }
+    walk(dir, 0)
+    files.sort()
+    const parts: string[] = []
+    let bytes = 0
+    for (const f of files) {
+      if (bytes > TEXT_CAP_BYTES) break
+      let raw: Buffer
+      try { raw = readFileSync(f) } catch { continue }
+      const decoded = decodeDeclared(raw)
+      const body = /\.(html?)$/i.test(f) ? stripHtml(decoded) : decoded
+      if (!body.trim()) continue
+      const chunk = `\n[zip: ${f.slice(dir.length + 1)}]\n${body}\n`
+      parts.push(chunk)
+      bytes += Buffer.byteLength(chunk, 'utf8')
+    }
+    return parts.join('')
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
+
 async function extractXlsx(bodyPath: string): Promise<string> {
   const listed = await execFileAsync('unzip', ['-Z1', bodyPath], { maxBuffer: 8 << 20 })
   const names = listed.stdout.split('\n').map((n) => n.trim()).filter(Boolean)
@@ -1412,7 +1501,18 @@ async function fetchRaw(url: string): Promise<Fetched> {
     '-A', UA,
     '-H', 'Accept: text/html,application/xhtml+xml,application/pdf,*/*',
     '-H', 'Accept-Language: en,fr;q=0.8,es;q=0.6,pt;q=0.6',
-    '--max-time', String(TIMEOUT_S),
+    // **An archive gets a longer wall clock, and nothing else does** (2026-09-08,
+    // Guangdong). `TIMEOUT_S` is tuned so a dead host dies fast, and it is right
+    // for a page; it is not right for a yearbook shipped as a 21.5MB zip, which
+    // this fetcher timed out on at 11MB downloaded — the extractor was fine, the
+    // transfer simply did not fit. Narrow BY CONSTRUCTION rather than raising the
+    // global budget: keyed on the URL's own extension, and no edge in this corpus
+    // cited an archive before this round, so it cannot change an existing grade.
+    // `--speed-limit/--speed-time` is what keeps this honest — a transfer that
+    // STALLS for 20s still dies on the old schedule, only one making progress is
+    // allowed the extra minutes.
+    '--max-time', String(/\.(zip|7z|tar\.gz|tgz)(\?|#|$)/i.test(url) ? ARCHIVE_TIMEOUT_S : TIMEOUT_S),
+    '--speed-limit', '1024', '--speed-time', '20',
     '--connect-timeout', String(CONNECT_TIMEOUT_S),
     '-o', bodyPath,
     '-w', '%{http_code}\t%{content_type}\t%{size_download}\t%{url_effective}',
@@ -1515,34 +1615,30 @@ async function fetchRaw(url: string): Promise<Fetched> {
       })
       text = stripHtml(stdout)
       extractor = 'docx'
+    } else if (isZip) {
+      // LAST of the three zip branches on purpose: xlsx and docx are single
+      // documents with a known inner path, this is the general case — an archive
+      // of documents, which is how several statistical agencies ship a yearbook.
+      // See `extractZipDocs` for Thomas's 2026-09-08 ruling on why citing one is
+      // a direct read and not a capped route.
+      text = await extractZipDocs(bodyPath)
+      extractor = text ? 'zip-docs' : 'none'
     } else if (body.length) {
-      // **The fetcher honours a document's DECLARED CHARSET** (2026-09-08, China
-      // round; flagged to Thomas in `HANDOFF.md` §3 because it can move grades
-      // outside the round that made it). This read
-      // `const asText = body.toString('utf8')` and decoded every HTML body as
-      // UTF-8 whatever the document said it was, so a legacy-encoded page was
-      // not read as a bad quote — it was not read AT ALL, and the edge graded
-      // `quote-not-in-document`, which is indistinguishable on screen from an
-      // edge whose quote was wrong. Measured on
-      // https://www.stats.gov.cn/sj/ndsj/2025/html/sm14.htm, which declares
-      // `charset=gb2312`: 537 of its characters became U+FFFD, and the round's
-      // 12 edges graded 1 A / 1 B / 10 C. With the declared charset honoured and
-      // nothing else changed, the same 12 graded 12 A `quote-found-artefact-named`.
-      // **Additive by construction**, like the third PDF rendering: the decoded
-      // reading is kept ONLY when it yields strictly fewer replacement characters
-      // than the UTF-8 one, and an unknown charset label falls back to UTF-8, so
-      // it can only ever improve a reading. NBS, DGBAS, e-Stat and KOSTAT all
-      // still serve gb2312/Big5/Shift_JIS/EUC-KR pages; a corpus-wide `--refetch`
-      // re-grade of the CN/TW/JP/KR edges is the follow-up, NOT run in this round.
-      let asText = body.toString('utf8')
-      const declared = /charset=["']?([\w-]+)/i.exec(body.subarray(0, 2048).toString('latin1'))?.[1]
-      if (declared && !/^utf-?8$/i.test(declared)) {
-        const label = /^gb2312$/i.test(declared) ? 'gb18030' : declared.toLowerCase()
-        try {
-          const decoded = new TextDecoder(label).decode(body)
-          if (decoded.split('\uFFFD').length < asText.split('\uFFFD').length) asText = decoded
-        } catch { /* unknown label: keep the UTF-8 reading */ }
-      }
+      // **Honour the document's DECLARED CHARSET** (2026-09-08, China round;
+      // flagged in `HANDOFF.md` §3 because it can move grades outside the round
+      // that made it). This read `const asText = body.toString('utf8')` and
+      // decoded every HTML body as UTF-8 whatever the document said it was, so a
+      // legacy-encoded page was not read as a bad quote — it was not read AT ALL.
+      // Measured on https://www.stats.gov.cn/sj/ndsj/2025/html/sm14.htm, which
+      // declares `charset=gb2312`: 537 of its characters became U+FFFD, and the
+      // round's 12 edges graded 1 A / 1 B / 10 C `quote-not-in-document`. With
+      // the declared charset honoured and nothing else changed, the same 12
+      // graded 12 A `quote-found-artefact-named`. The rule and the why now live
+      // in `decodeDeclared`, which the zip branch above shares. NBS, DGBAS,
+      // e-Stat and KOSTAT all still serve gb2312/Big5/Shift_JIS/EUC-KR pages; a
+      // corpus-wide `--refetch` re-grade of the CN/TW/JP/KR edges is the
+      // follow-up, NOT run in the round that found this.
+      const asText = decodeDeclared(body)
       if (/<[a-z!]/i.test(asText.slice(0, 2000))) {
         text = stripHtml(asText)
         extractor = 'html'

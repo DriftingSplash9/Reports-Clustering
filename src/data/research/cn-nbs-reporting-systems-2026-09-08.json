@@ -2,7 +2,7 @@
   "meta": {
     "source": "research round 2026-09-08 — China statistical-reporting-system hubs",
     "minted": "2026-09-08",
-    "note": "Opens the China seam. The China Statistical Yearbook and every provincial yearbook put a 简要说明 (Brief Introduction) at the head of each chapter whose stated purpose is to disclose that chapter's data sources, scope and method, and it names the NBS instruments BY TITLE. This slice mints those instruments as nodes and wires the national yearbook to them, plus the GB/T 4754 -> ISIC chain and one provincial pilot (Jiangsu). Every quote read live from the cited URL on the live host."
+    "note": "Opens the China seam. The China Statistical Yearbook and every provincial yearbook put a 简要说明 (Brief Introduction) at the head of each chapter whose stated purpose is to disclose that chapter's data sources, scope and method, and it names the NBS instruments BY TITLE. This slice mints those instruments as nodes and wires the national yearbook to them, plus the GB/T 4754 -> ISIC chain and one provincial pilot (Jiangsu). Every quote read live from the cited URL on the live host. Guangdong added 2026-09-08 after Thomas ruled that a first-party zip is a direct read: 4 more edges off the CD-edition archive."
   },
   "reports": [
     {
@@ -230,6 +230,42 @@
       "basis": "SELF-DECLARED: item 五 of the Jiangsu Statistical Yearbook 2025's own 编者说明 (Editor's Notes) states the yearbook's industry classification is carried out under the 2017 national standard GB/T 4754-2017, naming it by title and number. This is the provincial pilot for the round's template: the editor's notes of a Chinese provincial yearbook carry a numbered item naming the industry-classification standard, which is the same disclosure the national yearbook makes in its industry chapter. Read live from the cited URL (HTTP 200) on 2026-09-08 — the page is server-rendered, not a JavaScript shell.",
       "evidence_url": "https://tj.jiangsu.gov.cn/col/col93166/index.html",
       "evidence_quote": "2017 年国家标准《国民经济行业分类》(GB/T4754 -2017)执行。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-gd-statistical-yearbook",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: chapter 6 (对外经济) of the Guangdong Statistical Yearbook 2025's own 简要说明 states that its import/export commodity classification is carried out against the Harmonized Commodity Description and Coding System catalogue drawn up by the Customs Co-operation Council. Guangdong spells the standard 《商品名称及编码协调制度》 with 及 where NBS writes 和 — both spellings are now title_aliases on the target, each sourced from the document that uses it. ROUTE: the publisher ships the yearbook only as the official CD-edition zip, linked from its own landing page http://stats.gd.gov.cn/gdtjnj/content/post_4810393.html (HTTP 200); the zip is a permanent first-party attachment on the bureau's own host, fetched live 200 on 2026-09-08, so the bytes came from the cited URL on the live host and this is a direct read, not a capped route (Thomas, 2026-09-08). Inner path: directory/06/brief-description.html",
+      "evidence_url": "https://stats.gd.gov.cn/attachment/0/615/615394/4810393.zip",
+      "evidence_quote": "进出口商品分类按海关合作理事会制定的《商品名称及编码协调制度》（HS）目录进行分类统计。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-gd-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: chapter 12 (工业) of the yearbook's own 简要说明 states that from the 2017 annual report onward its industrial branch classification is divided according to the 2017 国民经济行业分类 standard. The province writes 《国民经济行业分类标准》 where the standard's own cover reads 国民经济行业分类; the target's title is a contiguous substring, which is what the matcher's CJK single-token door reads. ROUTE: the publisher ships the yearbook only as the official CD-edition zip, linked from its own landing page http://stats.gd.gov.cn/gdtjnj/content/post_4810393.html (HTTP 200); the zip is a permanent first-party attachment on the bureau's own host, fetched live 200 on 2026-09-08, so the bytes came from the cited URL on the live host and this is a direct read, not a capped route (Thomas, 2026-09-08). Inner path: directory/12/brief-description.html",
+      "evidence_url": "https://stats.gd.gov.cn/attachment/0/615/615394/4810393.zip",
+      "evidence_quote": "工业行业分类按2017年《国民经济行业分类标准》划分",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-gd-statistical-yearbook",
+      "target_report_id": "cn-nbs-construction-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 13 (建筑业) of the yearbook's own 简要说明 states the chapter was compiled from the Construction Industry Statistical Reporting System drawn up by NBS, naming that instrument by title. Same instrument the national yearbook names for the same chapter — which is the point of the round: the provincial and national yearbooks declare the same NBS instruments. ROUTE: the publisher ships the yearbook only as the official CD-edition zip, linked from its own landing page http://stats.gd.gov.cn/gdtjnj/content/post_4810393.html (HTTP 200); the zip is a permanent first-party attachment on the bureau's own host, fetched live 200 on 2026-09-08, so the bytes came from the cited URL on the live host and this is a direct read, not a capped route (Thomas, 2026-09-08). Inner path: directory/13/brief-description.html",
+      "evidence_url": "https://stats.gd.gov.cn/attachment/0/615/615394/4810393.zip",
+      "evidence_quote": "本篇资料是根据国家统计局制定的《建筑业统计报表制度》整理汇总的。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-gd-statistical-yearbook",
+      "target_report_id": "cn-nbs-realestate-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 18 (房地产业) of the yearbook's own 简要说明 states the chapter's statistics were collected and compiled under the Real Estate Development Statistical Reporting System by complete enumeration, naming that instrument by title. ROUTE: the publisher ships the yearbook only as the official CD-edition zip, linked from its own landing page http://stats.gd.gov.cn/gdtjnj/content/post_4810393.html (HTTP 200); the zip is a permanent first-party attachment on the bureau's own host, fetched live 200 on 2026-09-08, so the bytes came from the cited URL on the live host and this is a direct read, not a capped route (Thomas, 2026-09-08). Inner path: directory/18/brief-description.html",
+      "evidence_url": "https://stats.gd.gov.cn/attachment/0/615/615394/4810393.zip",
+      "evidence_quote": "本篇统计资料是根据《房地产开发统计报表制度》搜集和加工整理而得，全部数据采用全面调查的统计方法。",
       "evidence_grade": "A"
     }
   ],

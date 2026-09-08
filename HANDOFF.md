@@ -34,6 +34,7 @@ routes you to one lane playbook. Then, **routed by what you are doing**:
 | fetching / capturing / extracting | `notes/techniques-2026-09-04.md` — recipes, the Eurostat metadata filenames, host workarounds, and the dated routing snapshot it now carries. **Every host reading in it is a claim about one machine on one day: re-probe, never believe it.** |
 | **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md`, then memory `esms_hicp_pass_2026-09-05` (acronym rule), `cjk_span_floor_2026-09-05`, `quote_guard_round_2026-09-05`, `round5_little_things_paused_2026-09-06` (product-number path) and `third_pdf_rendering_2026-09-06` (three renderings) · `round6_rulings_2026-09-06` |
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
+| **anything China** | `notes/china-progress.md` — the live worklist, every division kept whether done or not — then `notes/techniques-cn-yearbooks-2026-09-08.md` for how to read a yearbook |
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
 | a research slice's `meta.note` from the August 2026 import | `notes/mint-2026-08-20.md` |
 | Eurostat metadata / EU price-index / HBS chains | memory `layout_levers_and_hbs_2026-09-05`, `esms_hicp_pass_2026-09-05`, `eu_national_chains_2026-08-28` |
@@ -96,11 +97,12 @@ enforced against §2 itself** — see the "Last updated" note above.
 
 ## 2. Current state
 
-Corpus **3,596 reports / 3,173 dependencies**. **1,160 A · 1,402 B · 611 C**, A-share
+Corpus **3,596 reports / 3,177 dependencies**. **1,164 A · 1,402 B · 611 C**, A-share
 36.6%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
 `grade-evidence --selftest` 76/76, `tsc --noEmit` clean, `vite build` ok,
 `public/corpus-data.json` regenerated and copied back, current as of 2026-09-08 ~19:00 UTC
-(round 29 -- CN statistical-reporting-system hubs, this session -- last data-changing round).
+(round 29 -- CN statistical-reporting-system hubs + Guangdong on the zip ruling, this
+session -- last data-changing round).
 **978 nodes still have zero edges.**
 
 **Open threads (full per-round narrative for all of these lives in project memory —
@@ -207,36 +209,22 @@ Morocco/Tunisia/Iraq get revisited together instead, which also surfaced that
 `PLAYBOOK-CORPUS.md` §7d had already called this exact question closed on 2026-09-06
 and round 24 quietly reopened it.)*
 
-**3. The grader could not read a legacy-encoded page at all, and I shipped the fix --
-please rule on it.** `grade-evidence.ts`'s fetcher decoded every HTML body as UTF-8
-whatever the document declared. NBS's yearbook pages declare `charset=gb2312`, so on
-`.../ndsj/2025/html/sm14.htm` **537 characters became U+FFFD** and the quote could never
-match. Measured, both ways, same 12 edges, nothing else changed: **1 A / 1 B / 10 C
-`quote-not-in-document` before, 12 A `quote-found-artefact-named` after.** This is the
-dangerous shape -- a broken reader is indistinguishable on screen from a bad quote, and
-every one of those C's looked like thin evidence. I judged this a decoding bug rather
-than an evidence-policy question and shipped it, **additive by construction** like the
-third PDF rendering: the re-decoded reading is kept only when it yields strictly fewer
-replacement characters, an unknown charset label falls back to UTF-8, so it can only
-improve a reading. Selftest 76/76 unchanged. **Two things for you.** (a) Do you want it
-kept? It is one block in `gradeEvidence`'s fetch path with the old wording in its comment;
-reverting is a delete. (b) **The follow-up sweep is NOT run and should not be run without
-your say-so**: 220 live edges cite CN/TW/JP/KR hosts and **166 of them are B or C**. Not
-all are encoding victims -- many are PDFs, index pages or genuinely thin -- but a
-`--refetch` re-grade of that set is now the obvious next measurement, and it is exactly
-the kind of pass that needs the old-vs-new `--offline` diff first (PLAYBOOK-CORPUS §6:
-`--write` has no improvements-only guard).
+**3. The charset fix -- RULED 2026-09-08, and the sweep is DEAD.** The grader decoded every
+HTML body as UTF-8 whatever the document declared, so a `charset=gb2312` page was not read as a
+bad quote, it was not read at all (537 chars of `sm14.htm` became U+FFFD). Same 12 edges,
+nothing else changed: **1 A / 1 B / 10 C before, 12 A after.** Fix is kept
+(`decodeDeclared()`, additive by construction -- the re-decode is used only when it yields
+strictly fewer replacement characters). **Thomas on the 166 B/C edges across CN/TW/JP/KR hosts:
+*"that's a lot of time for B/C's. forget that."* The corpus-wide `--refetch` re-grade is NOT
+happening -- do not re-propose it.** Any future re-grade of those edges rides along with work
+that touches them for another reason.
 
-**4. The China seam is open and it is the biggest one left -- how far do you want it
-taken?** See the [Agent] note below for what the template is and what it cost. The
-arithmetic: ~30 provincial-level yearbooks, each declaring the same national instruments,
-at roughly 1-6 edges apiece. Two things bound it and both are your call, not mine. First,
-**scale**: this is the same "how thin a node is acceptable" question as the 750 DSBB rows
-and the NSDP nodes, except here the answer is better -- the nodes already exist and every
-edge is a real quote from a real document, so it is wiring, not thin minting. Second,
-**route**: several provinces serve their yearbook only as a zip of the CD edition
-(Guangdong) or on a port nothing can reach (Guangdong again, `:8080`). I did NOT invent a
-rule for those -- see the [Agent] note.
+**4. China -- RULED 2026-09-08: scale it.** *"i'd rather scale the china work."* Both blockers
+are now settled (route: a first-party zip is a direct read; scale: go). **The worklist is
+`notes/china-progress.md`** -- 31 provincial-level divisions plus XPCC, every row kept whether
+done or not, with each bureau's real host, a dated reachability probe, the city→province
+jurisdiction model, and the tricks. **Read that file, not this paragraph, to know where the
+work is.** Current score: 2 wired, 8 node-but-unwired, 22 with no node yet.
 
 **2. 750 DSBB SoM rows are mint leads with no source node — corpus-expansion call,
 not taken.** The 2026-09-05 DSBB import review file (`Claude outputs/dsbb-som-import-
@@ -268,9 +256,15 @@ first-party `stats.gov.cn` pages, and wired 12 edges, **all A**: 10 from
 drafted with reference to ISIC Rev.4 and carries an ISIC concordance as 附录 G -- caveat
 recorded in the basis: its declared correspondence grade is 非等效/NEQ) and the provincial
 pilot `cn-js-statistical-yearbook -> cn-gbt-4754-2017`, off item 五 of Jiangsu's own 编者说明.
-**Next: fan out to the other provinces.** ~30 provincial-level yearbooks; Jiangsu proves the
-编者说明 carries a numbered item naming GB/T 4754, and the per-chapter 简要说明 carry the
-统计报表制度 edges on top. Scale is Thomas's call (§3 [Thomas] #4).
+**Next: fan out to the other provinces -- Thomas has said go (§3 [Thomas] #4).** The worklist,
+including every bureau's real hostname and a dated probe, is **`notes/china-progress.md`**; keep
+it crossed off as you go, rows retained. Jiangsu proves the 编者说明 carries a numbered item
+naming GB/T 4754 (one edge per province, cheapest possible fan-out), and the per-chapter
+简要说明 carry the 统计报表制度 edges on top. 22 of the 31 divisions have no yearbook node yet, so
+those rounds mint as well as wire. **The portal that makes this cheap is
+`https://www.stats.gov.cn/xglj/tjj/`** -- NBS's own directory of all 32 bureaus; never guess a
+bureau hostname, the prefix varies (`tjj.` / `tj.` / `stats.` / `stjj.`) and four of eight
+guesses were wrong before it was found.
 
 **Three traps found doing it, all of which will bite the next CN round:**
 1. **`namesTarget` strips ASCII parentheses BEFORE matching**, so a node titled
@@ -287,19 +281,23 @@ pilot `cn-js-statistical-yearbook -> cn-gbt-4754-2017`, off item 五 of Jiangsu'
    reason. Old wording is in the comment.
 3. **The charset defect -- see §3 [Thomas] #3.** It is the important one.
 
-**Guangdong is researched but NOT wired, deliberately.** Its 2025 yearbook was read in full
-(the official 21.5MB CD zip from `stats.gd.gov.cn`, HTTP 200) and its chapter 简要说明 name
-the same instruments plus `《商品名称及编码协调制度》(HS)`, `《国民经济行业分类标准》` and
-`《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）`. **The blocker is route, not
-evidence**: the province serves the browsable yearbook only on `tjnj.gdstats.gov.cn:8080`,
-which times out from the container, is refused from the device VM, and does not load in
-Thomas's Chrome -- so the only readable copy is inside a zip, and a zip is not a URL the
-grader can re-fetch. The nearest precedent is §7b's token-PDF ruling (quote the document,
-cite the landing page, name the route, cap at B). **I did not apply it -- a new route class
-needs a ruling** (§3 [Thomas] #4). `批发和零售业统计报表制度` and `住宿和餐饮业统计报表制度`
-are named by both the national and the Guangdong yearbook but were NOT minted: NBS's current
-统计制度 listing does not carry a page for either, and a node whose publisher page cannot be
-found is not a node.
+**Guangdong is wired -- 4 edges, all A, off the zip.** Thomas ruled 2026-09-08 that a
+document a publisher ships only inside a first-party zip is cited to the zip and grades on
+its merits: the bytes came from the cited URL on the live host, which is §7b's whole test,
+and neither existing cap (a past-dated COPY; a URL dead tomorrow) reaches it. Rule and its
+two conventions are now `PLAYBOOK-CORPUS.md` §7b. Executed the same day: `extractZipDocs()`
+is the third zip branch in `grade-evidence.ts` (`.docx` and `.xlsx` were already unzipped by
+the same fetcher, which is why "the grader cannot read a zip" was never the objection it
+looked like), archives get their own wall clock keyed on the URL extension because 21.5MB
+does not fit the 45s page budget, and the grader returned A on all four Guangdong edges
+reading inside the archive. **`批发和零售业统计报表制度` and `住宿和餐饮业统计报表制度`**
+are named by both the national and the Guangdong yearbook but are still NOT minted: NBS's
+current 统计制度 listing carries no page for either, and a node whose publisher page cannot
+be found is not a node. **`cn-js-statistical-yearbook -> cn-gbt-4754-2017` graded A live
+twice and then B via snapshot on a third run when `tj.jiangsu.gov.cn` refused this machine
+-- it stays A** (§7b: a re-grade never writes a grade down on a bad network day). Chinese
+provincial hosts are flaky in both directions from both networks; expect this and re-run
+rather than believing one bad reading.
 
 **Continue FR.** 21 nodes from 9, four rounds in. **The GNI-inventory-chapter method
 (DE ×5, FR ×2) is exhausted for the current inventory edition** — Ch.10 fully mined,
@@ -409,15 +407,22 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
 
 1. Read this file first — it carries these instructions, and the state
    it describes is what you are superseding.
-2. Copy it, unchanged, to `archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-
-   HHMM-<topic>-NNN.md` — UTC date and time, topic = what the superseded
-   state was about, and **`NNN` is the handoff's number, zero-padded to
-   three, one higher than the highest already in the folder**. Verify the
-   copy (`sha256sum` both). The numbering was added 2026-09-07 (Thomas) so
-   the review triggers in steps 5 and 5b are arithmetic anyone can check:
-   `ls -1 "archive/Previous Handoffs"/HANDOFF-*-[0-9][0-9][0-9].md | wc -l`
-   is the number you just stamped. The number goes at the END of the name so
-   that every older reference by date-and-topic still resolves.
+2. Copy it, unchanged, to `archive/Previous Handoffs/handoffNNN.md` —
+   **`NNN` is the handoff's number, zero-padded to three, one higher than the
+   highest already in the folder**. Verify the copy (`sha256sum` both).
+   *(Naming changed 2026-09-08 on Thomas's instruction — "save them as
+   handoff80.md, then the next handoff would be 81". This step read
+   `HANDOFF-YYYY-MM-DD-HHMM-<topic>-NNN.md` until then, with the number at the
+   END so older references by date-and-topic still resolved. **He ruled NEW ONES
+   ONLY**: the 76 files already carrying the long name KEEP it and are not
+   retro-renamed, so both shapes live in the folder and every existing
+   cross-reference in `notes/` still resolves. The first file under the new name
+   is `handoff077.md`. Zero-padding is not decoration — it is what makes the
+   folder sort in handoff order.)* The numbering was added 2026-09-07 (Thomas) so
+   the review triggers in steps 5 and 5b are arithmetic anyone can check, and the
+   count must now span both shapes:
+   `ls -1 "archive/Previous Handoffs" | grep -cE '^(HANDOFF-.*-[0-9]{3}|handoff[0-9]{3})\.md$'`
+   is the number you just stamped.
    **Archive first, then rewrite** — there is no git safety net (rule 1);
    an un-archived overwrite destroys the previous state. That was missed on
    2026-08-29/30: `HANDOFF.md` was overwritten three times in one session and
@@ -438,7 +443,8 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    by default; if you would not act on it next session, it goes.
 5. **Every fifth handoff, review the last five.** The trigger is
    arithmetic, not memory: if the number you stamped in step 2 is
-   divisible by 5, run the review. Read this file's §2/§3 and the four archived
+   divisible by 5, run the review. (The count spans both filename shapes —
+   step 2 has the command.) Read this file's §2/§3 and the four archived
    handoffs before it, and find the paragraphs that appear in all five
    unchanged. Each one is then exactly one of three things. **Finished**
    — delete it, memory is its record (step 4 already says so, and this

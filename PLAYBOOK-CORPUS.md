@@ -328,6 +328,35 @@ the lane that needs them never reads. Moved, not copied.)*
   characters and refuses full reproduction. It can establish a negative or
   locate text; a mintable quote needs a real browser or another host carrying
   the same document.
+- **A page's DECLARED CHARSET is now honoured, and before 2026-09-08 it was not** —
+  the fetcher decoded every HTML body as UTF-8 whatever the document said. This did not
+  corrupt a legacy-encoded page, it destroyed it: 537 of `sm14.htm`'s characters became
+  U+FFFD, and the edge graded `quote-not-in-document`, **which looks exactly like a bad
+  quote and is not one**. Guard is `decodeDeclared()` in `grade-evidence.ts`. The trap that
+  survives the fix is the reading habit: **a `quote-not-in-document` on a non-English host
+  is a claim about the reader until you have checked the decode**. NBS, DGBAS, e-Stat and
+  KOSTAT all still serve gb2312/Big5/Shift_JIS/EUC-KR.
+
+- **`namesTarget` strips ASCII parentheses BEFORE matching, so a non-Latin name that lives
+  only inside them is invisible to EVERY door, including the CJK one** (found 2026-09-08).
+  A node titled `Balance of Payments (国际收支平衡表)` has no reachable Chinese token at all —
+  the CJK single-token path iterates the same parens-stripped string the run rule does. The
+  corpus is full of nodes titled this way (`cn-statistical-yearbook`, `cn-labour-force-survey`,
+  most of the CN/JP/KR import). The fix per node is a `title_aliases` entry carrying the
+  native-language name; `cn-population-census` has carried one since long before anyone named
+  the class. **So when a document plainly names a target in its own language and the edge
+  still grades `agency-not-artefact`, check the target's title for parentheses before
+  concluding anything about the document.** The class has NOT been swept.
+
+- **A `HOST_INDEX_PREFIXES` entry is a PREFIX unless it says `exact: true`, and it will
+  swallow real documents living beneath it** (found 2026-09-08). `stats.gov.cn` `/sj/ndsj/`
+  was written for the yearbook's year-list page and also claimed every chapter page inside
+  the yearbook, so ten edges citing a chapter's own 简要说明 failed validation as
+  "index/listing page" the first time any round cited one. Narrowed to `exact: true` — the
+  same fix `/english/pressrelease/` already carried, with the same reasoning in its comment.
+  **Most of the other entries in that list are still prefixes**; if validate calls a URL an
+  index page and the URL is plainly a document, look there before rewriting the edge.
+
 - **The bulk-imported slices of August 2026 carry import habits worth knowing**:
   ids and enum values that were invented rather than read, one jurisdiction's exact
   quote and URL reused as evidence for another — the tell is a quote naming a
@@ -591,6 +620,30 @@ after the A bar in `gradeEdge` with its own reason string
 host ever becomes readable again. Consequence worth knowing: `writeGrades` only
 writes `evidence_quote` on an A, so **a machine-written `evidence_quote` in this
 corpus always means "found in the live document"**.
+
+**A document a publisher ships only inside a ZIP is cited to the zip, and grades on
+its merits — it is a direct read, not a capped route** (Thomas, 2026-09-08, ruling on
+the Guangdong yearbook: *"why can't we point to a zip that is likely pointing to the url
+too? I'd say that is proof"*). The two existing caps do not reach this case and the reason
+each exists is the reason: `wayback` caps because the bytes are a COPY on a PAST DATE, and
+the token-PDF below caps because the CITED URL IS DEAD TOMORROW. A permanent first-party
+attachment served 200 from the publisher's own host is neither, and §7b's actual test —
+bytes from the cited URL on the live host — is satisfied outright. Guangdong's yearbook is
+published only as its CD-edition zip (`stats.gd.gov.cn/attachment/...zip`, linked from the
+bureau's own landing page); four edges were minted on it and the grader returned A
+`quote-found-artefact-named` on all four, reading inside the archive.
+
+**Two conventions, because a zip is a COLLECTION and a page is not.** Citing an archive
+says "this quote is somewhere in these N files", which is a loss of PRECISION, not of
+authenticity — so **name the inner path in the `basis`** (`Inner path:
+directory/13/brief-description.html`), and the extractor prefixes every entry with a
+`[zip: <path>]` marker so the committed `evidence-cache/` record shows which file matched.
+The mechanism is `extractZipDocs()`, the third of three zip branches in `grade-evidence.ts`
+— `.docx` and `.xlsx` were already unzipped by the same fetcher, which is why "the grader
+cannot read a zip" was never the objection it looked like. Archives also get their own wall
+clock (`ARCHIVE_TIMEOUT_S`), keyed on the URL's extension, because a 21.5MB transfer does
+not fit the 45s budget tuned for pages — a transfer that STALLS still dies on the old
+schedule (`--speed-time`).
 
 **A quote lifted from a PDF that a landing page serves only through a signed,
 expiring token is cited to the LANDING PAGE and recorded as
