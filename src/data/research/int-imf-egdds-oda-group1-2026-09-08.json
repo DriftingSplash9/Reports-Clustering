@@ -1,0 +1,120 @@
+{
+  "_slice": "int-imf-egdds-oda-group1-2026-09-08",
+  "_researched": "2026-09-08",
+  "_status": "draft",
+  "_note": "Round 22. Closes all four of round 21's e-GDDS 'group 1' leads (Burundi, Djibouti, Guinea, Central African Republic -- int-imf-egdds-oda-round21-2026-09-08.json's _dropped, which found no NSDP tab in each country's opendataforafrica.org portal nav and, for CAR, no portal at all under the slug tried). The fix in every case was the same: the IMF's own press release announcing that country's e-GDDS implementation (found via WebSearch, read in Chrome since www.imf.org 403s to curl per notes/imf-dsbb-2026-09-06.md) links DIRECTLY to the country's real NSDP page -- which exists at a URL the portal's own nav does not surface (Burundi: a random slug; Djibouti/Guinea: a short /nsdp path; CAR: the slug is 'car', not 'centrafrique' as round 21 guessed). All four NSDP pages carry the identical self-declared boilerplate rounds 19-21 established, all four graded A on the first attempt. Generalisable finding for the seven group-2 (non-African) countries or any future e-GDDS gap: when a country's opendataforafrica.org portal has no visible NSDP tab, check the IMF's own press release for that country's e-GDDS launch before concluding no page exists -- it typically links straight to it. No id or evidence-URL collision against the whole corpus for any of the four new nodes or URLs (checked before writing). All four countries' ISO codes (BI, DJ, GN, CF) already have live nodes elsewhere in the corpus, so no new COUNTRY_FAMILY/CONTINENT_OF/COUNTRY_LABEL entries are needed.",
+  "reports": [
+    {
+      "id": "bi-nsdp",
+      "title": "National Summary Data Page — Burundi",
+      "publisher": "Institut National de la Statistique du Burundi (INSBU; rebranded from ISTEEBU, the name the IMF's 2023 press release announcing this NSDP uses -- same rebrand the corpus's own bi-insbu-cpi node already records)",
+      "country": "BI",
+      "jurisdiction_level": "federal",
+      "region": "Burundi",
+      "description": "Burundi's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Burundi participates in the enhanced General Data Dissemination System. Round 21 (2026-09-08) checked burundi.opendataforafrica.org's main navigation and found no NSDP tab; this round found the actual page at a slug not linked from that nav, via the IMF's own 2023 press release announcing Burundi's e-GDDS implementation, which links directly to it. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp, in-nsdp and the round-21 e-GDDS/opendataforafrica.org block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://burundi.opendataforafrica.org/dmkqfve/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "dj-nsdp",
+      "title": "National Summary Data Page — Djibouti",
+      "publisher": "Institut National de la Statistique de Djibouti (INSTAD)",
+      "country": "DJ",
+      "jurisdiction_level": "federal",
+      "region": "Djibouti",
+      "description": "Djibouti's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Djibouti participates in the enhanced General Data Dissemination System; its footer names INSTAD directly ('Copyright INSTAD') and links to instad.dj, matching the publisher of the corpus's existing dj-instad-cpi node. Round 21 (2026-09-08) checked djibouti.opendataforafrica.org's main navigation and found no NSDP tab; this round found the page (a short /nsdp path, not a random slug) via the IMF's own June 2025 press release announcing Djibouti's e-GDDS implementation, which links directly to it. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp, in-nsdp and the round-21 e-GDDS/opendataforafrica.org block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://djibouti.opendataforafrica.org/nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gn-nsdp",
+      "title": "National Summary Data Page — Guinea",
+      "publisher": "Institut National de la Statistique (INS), Guinée",
+      "country": "GN",
+      "jurisdiction_level": "federal",
+      "region": "Guinea",
+      "description": "Guinea's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Guinea participates in the enhanced General Data Dissemination System; its footer links directly to stat-guinee.org (INS), mef.gov.gn (Ministry of Economy and Finance) and bcrg-guinee.org (Central Bank of Guinea) -- matching all three bodies the IMF's own December 2019 press release names as the NSDP's data producers, and the same INS the corpus's existing gn-ins-ihpc node already carries. Round 21 (2026-09-08) checked guinea.opendataforafrica.org's main navigation and found no NSDP tab (only an internal 'nsdp-editor' tool page); this round found the public page (a short /nsdp path) via the IMF's own press release, which links directly to it. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp, in-nsdp and the round-21 e-GDDS/opendataforafrica.org block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://guinea.opendataforafrica.org/nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cf-nsdp",
+      "title": "National Summary Data Page — Central African Republic",
+      "publisher": "Institut Centrafricain des Statistiques et des Etudes Economiques et Sociales (ICASEES)",
+      "country": "CF",
+      "jurisdiction_level": "federal",
+      "region": "Central African Republic",
+      "description": "The Central African Republic's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that the Central African Republic participates in the enhanced General Data Dissemination System. Publisher taken from the IMF's own May 2025 press release, which names ICASEES as the body hosting the NSDP launch (alongside BEAC and the Ministry of Finance and Budget) -- matching the corpus's existing cf-icasees-ihpc node's publisher spelling; the NSDP page's own footer carries only generic AfDB/Knoema links, not independently confirmed on the page itself (round 21's Guinea-Bissau/Mauritania/Somalia precedent -- does not affect the grade). Round 21 (2026-09-08) recorded 'no opendataforafrica.org country portal exists at all' for this country, having tried the slug centrafrique.opendataforafrica.org; the correct slug is car.opendataforafrica.org, found via the IMF's own press release, which links directly to it. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp, in-nsdp and the round-21 e-GDDS/opendataforafrica.org block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://car.opendataforafrica.org/nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bi-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 22), closing round 21's e-GDDS group-1 lead (int-imf-egdds-oda-round21-2026-09-08.json's _dropped: Burundi checked and found to have no live NSDP page reachable from its opendataforafrica.org country portal's own navigation). The actual NSDP page exists at a URL not linked from that nav -- found this round via the IMF's own press release announcing Burundi's e-GDDS implementation, which links directly to the NSDP. Burundi's own National Summary Data Page (https://burundi.opendataforafrica.org/dmkqfve/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as every other country in this block per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Burundi participates, please visit the DSBB home page.’ Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool), not transcribed from a screenshot -- the same ASCII-vs-typographic-apostrophe trap round 21 guarded against. This is the same page the node is minted from -- a self-contained declaration, same shape as every other country in this NSDP block. Publisher corroborated by the IMF's own 2023 press release, which names ISTEEBU (now INSBU) as one of three data providers -- not itself present on the NSDP page's footer, same treatment as round 21's Guinea-Bissau/Mauritania/Somalia. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://burundi.opendataforafrica.org/dmkqfve/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Burundi participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "dj-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 22), closing round 21's e-GDDS group-1 lead (int-imf-egdds-oda-round21-2026-09-08.json's _dropped: Djibouti checked and found to have no live NSDP page reachable from its opendataforafrica.org country portal's own navigation). The actual NSDP page exists at a URL not linked from that nav -- found this round via the IMF's own press release announcing Djibouti's e-GDDS implementation, which links directly to the NSDP. Djibouti's own National Summary Data Page (https://djibouti.opendataforafrica.org/nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as every other country in this block per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Djibouti participates, please visit the DSBB home page.’ Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool), not transcribed from a screenshot -- the same ASCII-vs-typographic-apostrophe trap round 21 guarded against. This is the same page the node is minted from -- a self-contained declaration, same shape as every other country in this NSDP block. Publisher (INSTAD) confirmed directly on the NSDP page's own footer ('Copyright INSTAD', linking to instad.dj) -- the strongest attribution class in this block. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://djibouti.opendataforafrica.org/nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Djibouti participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gn-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 22), closing round 21's e-GDDS group-1 lead (int-imf-egdds-oda-round21-2026-09-08.json's _dropped: Guinea checked and found to have no live NSDP page reachable from its opendataforafrica.org country portal's own navigation). The actual NSDP page exists at a URL not linked from that nav -- found this round via the IMF's own press release announcing Guinea's e-GDDS implementation, which links directly to the NSDP. Guinea's own National Summary Data Page (https://guinea.opendataforafrica.org/nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as every other country in this block per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guinea participates, please visit the DSBB home page.’ Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool), not transcribed from a screenshot -- the same ASCII-vs-typographic-apostrophe trap round 21 guarded against. This is the same page the node is minted from -- a self-contained declaration, same shape as every other country in this NSDP block. Publisher confirmed via the NSDP page's own footer links to stat-guinee.org, mef.gov.gn and bcrg-guinee.org, matching all three bodies the IMF's press release names as data producers. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://guinea.opendataforafrica.org/nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guinea participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cf-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 22), closing round 21's e-GDDS group-1 lead (int-imf-egdds-oda-round21-2026-09-08.json's _dropped: Central African Republic checked and found to have no live NSDP page reachable from its opendataforafrica.org country portal's own navigation). The actual NSDP page exists at a URL not linked from that nav -- found this round via the IMF's own press release announcing Central African Republic's e-GDDS implementation, which links directly to the NSDP. Central African Republic's own National Summary Data Page (https://car.opendataforafrica.org/nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as every other country in this block per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Central African Republic participates, please visit the DSBB home page.’ Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool), not transcribed from a screenshot -- the same ASCII-vs-typographic-apostrophe trap round 21 guarded against. This is the same page the node is minted from -- a self-contained declaration, same shape as every other country in this NSDP block. Publisher (ICASEES) taken from the IMF's own press release, not independently confirmed on the NSDP page's own footer (generic AfDB/Knoema links only) -- round 21's Guinea-Bissau/Mauritania/Somalia precedent, does not affect the grade. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://car.opendataforafrica.org/nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Central African Republic participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": []
+}
