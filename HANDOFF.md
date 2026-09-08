@@ -14,11 +14,14 @@ until 2026-09-07. That cap was retired by Thomas in §1 on the same day this lin
 written, and the two sat contradicting each other for three rounds. The gauge is the
 read-cost percentage in §1, not a character count.)*
 
-Last updated: 2026-09-08 ~15:14 UTC (handoff 076 — archived rounds 9–24 as
-`archive/Previous Handoffs/HANDOFF-2026-09-08-1514-egdds-closed-fr-blocked-iraq-coicop-076.md`.
-§2/§3 rewritten to state-and-pointers per Thomas's call that the file had drifted into
-round narrative it explicitly forbids itself — see that archived copy for the full
-per-round prose; every fact in it also has its own project-memory entry, cited below.)
+Last updated: 2026-09-08 ~20:45 UTC (handoff 077 — the superseded state is
+`archive/Previous Handoffs/handoff077.md`, **the first archive under the new name**: Thomas ruled
+2026-09-08 that handoffs are numbered `handoffNNN.md` from here, NEW ONES ONLY, so the 76 files
+carrying the old `HANDOFF-YYYY-MM-DD-HHMM-<topic>-NNN.md` name keep it and every existing
+cross-reference in `notes/` still resolves. §4 step 2 has the rule and the count command, which
+spans both shapes. This handoff covers rounds 29–30, which opened China; §2/§3 were swept hard —
+14.1k left this file for project memory, `notes/china-progress.md` and
+`notes/techniques-cn-yearbooks-2026-09-08.md`.)
 
 ---
 
@@ -53,33 +56,38 @@ repo: where either disagrees with a file, the file wins.
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 26.9k | everyone, first |
+| `HANDOFF.md` | 25.2k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
 | `PLAYBOOK.md` | 8.9k | everyone |
-| `PLAYBOOK-CORPUS.md` | 46.0k | corpus lane — §7 splits 7a/7b/7c by question |
+| `PLAYBOOK-CORPUS.md` | 50.9k | corpus lane — §7 splits 7a/7b/7c by question |
 | `PLAYBOOK-RENDER.md` | 13.6k | renderer lane |
 | `REPORTS.md` | 24.3k | scope/direction questions |
 | `START-HERE.md` | 13.2k | humans, not agents |
-| **a corpus round reads** | **83.2k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **50.8k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **86.6k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **49.2k** | HANDOFF + CLAUDE + core + RENDER |
 
-**THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-08, handoff 076): before he types a
-prompt, a corpus round is required to read 10.4% of its context, a
-renderer round 6.4%.** That is the mandatory read above as tokens
-(chars ÷ 4) over a 200k-token window — 20.8k and 12.7k tokens respectively — this handoff (076) has been edited live
-throughout the same session (the §3 [Thomas] #1 correction, then the research-pass
-write-up) and each pass added real content; net still roughly flat against the
-pre-076 20.5k/12.8k baseline, not the clean drop the midpoint numbers implied. A live
-doc that keeps growing across one session is itself worth watching at the next sweep. (`PLAYBOOK-CORPUS.md` grew slightly this same window from the
-DGDDI ruling and the §7d correction — §1's corpus percentage moved from 9.6% to 9.9%
-between the two edits earlier in this handoff; a live rule going into a playbook costs
-real space even the same day it saves a redundant round.) **Both dropped this handoff** — the trigger was
-Thomas calling out that §2/§3 had quietly become a 24-round changelog in violation of
-this file's own no-round-narrative rule; rounds 13–24's per-round prose (methods, host
-quirks, exact quotes) moved to project memory, where every one of those rounds already
-had its own entry — HANDOFF now cites the pointer instead of repeating the narrative.
-**Refresh both percentages every handoff along with the table**, and state the
-denominator, because the point of the number is the trend and not the value.
+**THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-08, handoff 077): before he types a prompt, a
+corpus round is required to read 10.8% of its context, a renderer round 6.2%.** That is the
+mandatory read above as tokens (chars ÷ 4) over a 200k-token window — 21.6k and 12.3k tokens.
+Against handoff 076's 10.4% / 6.4%.
+
+**The corpus number went UP while `HANDOFF.md` went DOWN by 14.1k, and that is the finding.**
+§1–§3 was swept from 30.4k to 16.4k — three rounds of narrative left for project memory, the
+China worklist and the techniques note. But `PLAYBOOK-CORPUS.md` grew 46.0k → 50.9k in the same
+session absorbing what those rounds learned (three §6 traps, the §7b zip ruling), and it is four
+times HANDOFF's weight, so it swamped the saving. **This is the file's own second test working
+as designed** — a rule that will still be true in a month belongs in the slow layer even though
+the slow layer is what nothing sweeps — but it means the corpus percentage is now governed
+almost entirely by `PLAYBOOK-CORPUS.md`, not by this file. **The next 5b pass should look there
+first**, and the honest question for it is whether §6 and §7 have earned 51k.
+
+**A China round reads more than the mandatory path**: plus `notes/china-progress.md` (14.0k) and
+`notes/techniques-cn-yearbooks-2026-09-08.md` (5.0k) = **105.6k, or 13.2%**. That is the real
+cost of the live programme and it is deliberate — both files exist to keep narrative OUT of
+§1–§3, and the tracker is written to be scanned to one row, not read whole.
+
+**Refresh both percentages every handoff along with the table**, and state the denominator,
+because the point of the number is the trend and not the value.
 
 **This measures attention, not budget.** A single `get_page_text` on one large page
 cost more than this whole table in round 8. What the read buys or wastes is the
@@ -97,54 +105,31 @@ enforced against §2 itself** — see the "Last updated" note above.
 
 ## 2. Current state
 
-Corpus **3,596 reports / 3,177 dependencies**. **1,164 A · 1,402 B · 611 C**, A-share
-36.6%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
-`grade-evidence --selftest` 76/76, `tsc --noEmit` clean, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back, current as of 2026-09-08 ~19:00 UTC
-(round 29 -- CN statistical-reporting-system hubs + Guangdong on the zip ruling, this
-session -- last data-changing round).
-**978 nodes still have zero edges.**
+Corpus **3,597 reports / 3,182 dependencies**. **1,169 A · 1,402 B · 611 C**, A-share 36.7%.
+**Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
+`grade-evidence --selftest` **76/76**, `tsc --noEmit` clean, `vite build` ok,
+`public/corpus-data.json` regenerated and copied back. Current as of 2026-09-08 ~20:45 UTC;
+last data-changing round is **30** (Jiangsu in depth + the first city edge).
+**976 nodes still have zero edges** — CN is 31 of them, down from 34.
 
-**Open threads (full per-round narrative for all of these lives in project memory —
-one pointer per item below, not restated here; the superseded §2/§3 prose is also
-preserved verbatim in `archive/Previous Handoffs/HANDOFF-2026-09-08-1514-...-076.md`
-if the reasoning behind a call needs re-reading):**
+**The live programme is CHINA.** Thomas ruled 2026-09-08 *"i'd rather scale the china work"*,
+and both blockers that were holding it are settled (see §3). **Its state lives in
+`notes/china-progress.md`, not here** — 31 provincial-level divisions plus XPCC and 10 cities,
+every row kept whether done or not, each with its real bureau host and a dated probe. Score
+there: **2 provinces wired and fully mined (Jiangsu, Guangdong), 8 with a node but no edges, 22
+with no node yet, 1 of 10 cities wired.** Two rounds in, 21 edges, every one A.
 
-- **`iq-cso` looks like an unrecognised duplicate node**, not a research gap: it and
-  `iq-cpi`/`iq-national-accounts`/`iq-population` are all publisher-attributed to the
-  same real agency (Iraq's COSIT) with no `part_of` link between them, so no document
-  will ever land on `iq-cso` specifically. Flagged for Thomas (§3), not merged
-  unilaterally — may also explain the three other still-orphaned NSO nodes (`sd-cbs`,
-  `ye-cso`, `sy-cbs`, `ir-sci`), all untouched. Memory: `round_orphaned_nso_iq_coicop_2026-09-08`.
-- **Bare-COICOP-no-stated-revision wiring — CLOSED 2026-09-08.** Thomas ruled: drop
-  all three (`iq-cpi`, `tn-ins-cpi`, `ma-hcp-ipc` -> `un-coicop-2018`) as `no-document`,
-  matching the IMTS-Revision-2 precedent — none names an edition, and Iraq/Tunisia's own
-  cited text points to the pre-2018 vintage instead. All three now in their source
-  files' own `_dropped`; `PLAYBOOK-CORPUS.md` §7d updated to match. Memory:
-  `round_coicop_ruling_2026-09-08`.
-- **FR: 21 nodes from a 9-node start**, four rounds in. Round 4 (2026-09-08) reused
-  round 3's "cited by title in a third document" method against the Note de conjoncture's
-  other sections (labour, prices, public finance), minting one clean self-sourced edge
-  (`fr-insee-camme`, the household confidence survey) and refusing two agency-level
-  near-misses (DSECE's quarterly trade bilan, SDES energy/emissions) that repeat the same
-  agency-not-artefact shape as the dead DGDDI monthly-bulletin lead. The GNI-inventory-
-  chapter method is exhausted for the current inventory edition (Ch.10 fully mined,
-  3.4.1/5.8.2/5.11.2 confirmed empty). DGDDI's monthly bulletin ("Résultats du commerce
-  extérieur") **stays ruled dead** (`PLAYBOOK-CORPUS.md` §7a) — do not attempt a fifth
-  round. Memory: `round13_fr_national_core_2026-09-07`,
-  `round14_fr_national_core_round2_2026-09-07`, `round15_fr_note_de_conjoncture_2026-09-07`,
-  `round16_fr_dgddi_monthly_still_refused_2026-09-07`, `round17_fr_ndc_camme_2026-09-08`.
-- **DE is finished as a programme** — 13 → 46 nodes over 5 rounds. Only Chapter 10.3
-  (7 non-government sources, mostly private bodies) is untouched, and it's a scope
-  question before an evidence one.
+**Other threads, one line each; the narrative is in project memory:**
 
-**Closed this window** (folded into the "Settled, do not re-raise" list in §3 —
-see there for the one-liners): the e-GDDS wiring todo (all 34 target countries, closed
-round 23), the stale-cache B sweep (round 17), India's NSDP (round 18), and DGDDI's
-monthly bulletin lead — ruled dead 2026-09-08, now a permanent `agency-not-artefact`
-refusal in `PLAYBOOK-CORPUS.md` §7a. **The every-20 sweep cadence is confirmed as-is**
-(Thomas, 2026-09-08) — too soon to properly judge with fewer than 20 rounds run under
-it; next real check stays at handoff 100 per §4 step 5b, unchanged.
+- **FR — live, four rounds in, 21 nodes from 9.** The GNI-inventory-chapter method is exhausted
+  for the current edition; the live method is a third document naming a target by title.
+  Unchecked: the Note de conjoncture's public-finance and international articles. Memory
+  `round13`–`round17_fr_ndc_camme_2026-09-08`.
+- **DE — finished as a programme**, 13 → 46 nodes. Only Chapter 10.3 remains (7 non-government
+  sources), and that is a scope question before an evidence one.
+- **`iq-cso`/`ye-cso`/`sy-cbs`/`sd-cbs` — parked, awaiting Thomas (§3).** Not duplicates; a
+  research pass found no document, and the `af-nsia` precedent was a lucky find rather than a
+  common shape. Memory `round_orphaned_nso_iq_coicop_2026-09-08`.
 
 ---
 
@@ -152,246 +137,101 @@ it; next real check stays at handoff 100 per §4 step 5b, unchanged.
 
 ### [Thomas]
 
-**1. `iq-cso`, `ye-cso`, `sy-cbs`, `sd-cbs` are NOT duplicates — the working
-recommendation is to wire them, not merge or retire them** (checked against the raw
-data 2026-09-08, superseding the "duplicate?" framing this item carried in handoff
-076). All four were minted 2026-08-22 in `crossborder-standards-2026-08-22.json` as
-generic institutional-core stubs, came up `no-document` in that same batch's own
-`_dropped`, and have sat at zero edges since. **`af-nsia`, minted in the identical
-batch, is the working counter-example**: it carries two live `uses_data_from` edges
-(`af-cpi -> af-nsia` A, `af-dab -> af-nsia` B), both off documents where a
-DIFFERENT Afghan report (Da Afghanistan Bank's own bulletin) states its data comes
-from NSIA — not off NSIA's own pages. The institutional node and a country's
-specific-publication nodes are DESIGNED to coexist this way (Afghanistan already has
-both `af-nsia` and `af-cpi`/`af-population`/`af-national-accounts`, same shape as
-Iraq's `iq-cso` vs `iq-cpi`/`iq-national-accounts`/`iq-population`) — the institutional
-node is the target when some OTHER report cites drawing on the NSO's data. **So this
-is a research gap, not a ruling call**: check each country's own non-NSO reports
-already in the corpus for a sentence naming the stats office as their data source, the
-way DAB's bulletin named NSIA — candidates already in the corpus: Iraq (`iq-bop`,
-`iq-federal-budget`, `iq-wage-bill`, `iq-banking-system`), Yemen (`ye-bop`), Syria
-(`sy-bop`), Sudan (`sd-cbos-statistical-review-q4-2024`, `sd-mofep-budget-2026`).
-**`ir-sci` does NOT belong in this group** — it was minted in Iran's own original
-import (`ir-iran-2026-08.json`) alongside `ir-cpi`/`ir-population`, not in the
-crossborder-standards batch, and its orphan status traces to a separate, already-ruled
-matter: the null-ComplianceDate e-GDDS class (`ir-sci -> imf-e-gdds` dropped
-2026-09-07 on Thomas's ruling — already in this file's "Settled, do not re-raise"
-list). It was bundled into "five orphaned NSO nodes" by round 7 on the wrong axis.
-Detail: memory `round_orphaned_nso_iq_coicop_2026-09-08`.
+**1. Park the four orphaned NSO nodes, or keep hunting?** `iq-cso`, `ye-cso`, `sy-cbs`,
+`sd-cbs` are **not** duplicates and should not be retired — the institutional node and a
+country's publication nodes are designed to coexist, and `af-nsia` proves the shape works when
+some OTHER report names the stats office as its source. But the 2026-09-08 research pass
+checked Iraq, Yemen and Sudan's own non-NSO reports (CBI PDFs, CBY's 2024 Annual Report, CBOS's
+quarterly review, two IMF country reports) and **found no general sourcing statement anywhere** —
+only narrow CPI-methodology boilerplate that `iq-cpi` already carries. My recommendation is
+**park them as legitimate-but-currently-unwireable** and stop spending round time without a new
+candidate document class. Say park and I'll stop re-reading it. (`ir-sci` is unrelated and stays
+out — it falls under the already-ruled null-ComplianceDate class.) Detail: memory
+`round_orphaned_nso_iq_coicop_2026-09-08`.
 
-**The wiring research pass ran 2026-09-08 — negative result, but not a dead end.**
-Checked: Iraq (`iq-bop`'s and `iq-wage-bill`'s own cited CBI PDFs, `iq-federal-budget`'s
-and `iq-banking-system`'s landing pages, IMF's 2025 Article IV Staff Report), Yemen
-(CBY's BOP page and full 2024 Annual Report PDF), Sudan (full re-read of the
-`sd-cbos-statistical-review-q4-2024` PDF already cited for the `sd-cbs-cpi` edge, plus
-IMF's 2020 country report). **No genuine "this document uses data supplied by the
-institution generally" statement turned up anywhere.** The two CSO mentions found in
-Iraq's CBI PDFs are boilerplate CPI/Core-Inflation methodology text ("prepared by the
-CSO") repeated verbatim across unrelated bulletins — narrowly about CPI, which already
-has its own wired node (`iq-cpi`), not a general sourcing statement. Sudan's CBOS
-review names CBS only in the CPI table caption, same shape. Yemen's 2024 Annual Report
-cites IMF and a different domestic body ("the technical secretariat for food security -
-Aden") for its price data, not CSO at all — plausibly because Yemen's fractured
-governance means CSO may not function as CBY's effective data source. Syria wasn't
-fully checked (its BOP page is a bare nav menu with no linked PDF found quickly, and
-its last full IMF Article IV is from 2009 — too old to be a useful candidate). **The
-`af-nsia` precedent is real but was evidently a lucky find, not a common document
-shape** — it doesn't mean one exists for every country. Recommend: park
-`iq-cso`/`ye-cso`/`sy-cbs`/`sd-cbs` as legitimate-but-currently-unwireable, don't
-retire them (the design is still sound, af-nsia proves that) and don't keep spending
-round time hunting without a new candidate class. `ir-sci` stays out of this group
-entirely — see above.
+**2. 750 DSBB SoM rows are mint leads with no source node — corpus-expansion call, not taken.**
+`Claude outputs/dsbb-som-import-2026-09-05-review.json` has 750 rows where the IMF's own
+methodology summary names a standard (`imf-bpm6` 253, `isic` 128, `hs` 111, `imf-gfsm` 91,
+`imf-mfsmcg-2016` 41, `esa-2010` 34) for a country+category with no node at all. Minting from a
+DSBB category label alone — no independently verified title, publisher or cadence — is a thinner
+kind of research than the rest of this corpus does, at a scale that changes what the corpus is.
+**Not started.** If you want it, say how thin a node may be and roughly what scale.
 
-*(The other three items from handoff 076 are ruled, 2026-09-08 — see §2's "Closed this
-window" and the [Agent] section below for where each landed: sweep cadence stays as-is,
-DGDDI's monthly bulletin is dead, and the COICOP precedent is NOT generalised —
-Morocco/Tunisia/Iraq get revisited together instead, which also surfaced that
-`PLAYBOOK-CORPUS.md` §7d had already called this exact question closed on 2026-09-06
-and round 24 quietly reopened it.)*
-
-**3. The charset fix -- RULED 2026-09-08, and the sweep is DEAD.** The grader decoded every
-HTML body as UTF-8 whatever the document declared, so a `charset=gb2312` page was not read as a
-bad quote, it was not read at all (537 chars of `sm14.htm` became U+FFFD). Same 12 edges,
-nothing else changed: **1 A / 1 B / 10 C before, 12 A after.** Fix is kept
-(`decodeDeclared()`, additive by construction -- the re-decode is used only when it yields
-strictly fewer replacement characters). **Thomas on the 166 B/C edges across CN/TW/JP/KR hosts:
-*"that's a lot of time for B/C's. forget that."* The corpus-wide `--refetch` re-grade is NOT
-happening -- do not re-propose it.** Any future re-grade of those edges rides along with work
-that touches them for another reason.
-
-**4. China -- RULED 2026-09-08: scale it.** *"i'd rather scale the china work."* Both blockers
-are now settled (route: a first-party zip is a direct read; scale: go). **The worklist is
-`notes/china-progress.md`** -- 31 provincial-level divisions plus XPCC, every row kept whether
-done or not, with each bureau's real host, a dated reachability probe, the city→province
-jurisdiction model, and the tricks. **Read that file, not this paragraph, to know where the
-work is.** Current score: 2 wired, 8 node-but-unwired, 22 with no node yet.
-
-**2. 750 DSBB SoM rows are mint leads with no source node — corpus-expansion call,
-not taken.** The 2026-09-05 DSBB import review file (`Claude outputs/dsbb-som-import-
-2026-09-05-review.json`) has 750 rows where the IMF's own methodology summary names a
-standard (mostly `imf-bpm6` 253, `isic` 128, `hs` 111, `imf-gfsm` 91, `imf-mfsmcg-2016`
-41, `esa-2010` 34) for a country+category the corpus has no node for at all. Same shape
-as the 29-of-32-SDDS-Plus-adherents-with-no-node question round 7 flagged and did not
-act on (memory `round7_imf_tier_sweep_2026-09-07`) — minting a node from a DSBB category
-label alone (rather than researching the country's actual named release, its publisher
-and its cadence) is a different, thinner kind of research than the rest of this corpus
-does, at a scale (hundreds of nodes) that changes what the corpus is. Not started. If
-you want this pursued, say how thin a node is acceptable (DSBB category label + no
-independently-verified title/cadence, vs. requiring the same research depth as every
-other node) and roughly what scale — 750 potential nodes is a different-sized project
-than the 81-NSDP-node question was.
+**3. A new international hub node: generic `sitc`?** Both the China Statistical Yearbook and
+Jiangsu name 《国际贸易标准分类》(SITC) and **neither names an edition**. UNSD's page for it is
+Rev.3, marked *Superseded*. Minting an edition-bound node and wiring to it would be the exact
+edition-inference shape you overturned in the COICOP ruling, so I deferred it. A **generic**
+`sitc` hub in the style of `hs` and `isic` — both of which are edition-free and describe their
+revisions in the description — would avoid that cleanly and unlock 2 waiting edges, more as
+provinces are mined. It is a new international node, so it is your call, not mine.
 
 ### [Agent]
 
-**CN is now the live seam, and the template is proven.** Round 29 (2026-09-08) opened it.
-**The method, which is what matters and repeats:** the China Statistical Yearbook and every
-provincial yearbook put a **简要说明 (Brief Introduction)** at the head of each chapter whose
-stated purpose is to disclose that chapter's sources, scope and method -- and it names the
-NBS instrument **by title**, e.g. `本篇建筑业企业统计数据根据《建筑业统计报表制度》中年度报表有关资料整理汇总。`
-That is a source disclosure naming an artefact, so it clears §7a outright; it is the
-single richest repeating document shape found in this corpus so far. Minted the 7 hub
-documents those notes name (6 NBS 统计报表制度 + `cn-gbt-4754-2017`), all sourced to
-first-party `stats.gov.cn` pages, and wired 12 edges, **all A**: 10 from
-`cn-statistical-yearbook`, plus `cn-gbt-4754-2017 -> isic` (GB/T 4754's own 前言 says it was
-drafted with reference to ISIC Rev.4 and carries an ISIC concordance as 附录 G -- caveat
-recorded in the basis: its declared correspondence grade is 非等效/NEQ) and the provincial
-pilot `cn-js-statistical-yearbook -> cn-gbt-4754-2017`, off item 五 of Jiangsu's own 编者说明.
-**Next: fan out to the other provinces -- Thomas has said go (§3 [Thomas] #4).** The worklist,
-including every bureau's real hostname and a dated probe, is **`notes/china-progress.md`**; keep
-it crossed off as you go, rows retained. Jiangsu proves the 编者说明 carries a numbered item
-naming GB/T 4754 (one edge per province, cheapest possible fan-out), and the per-chapter
-简要说明 carry the 统计报表制度 edges on top. 22 of the 31 divisions have no yearbook node yet, so
-those rounds mint as well as wire. **The portal that makes this cheap is
-`https://www.stats.gov.cn/xglj/tjj/`** -- NBS's own directory of all 32 bureaus; never guess a
-bureau hostname, the prefix varies (`tjj.` / `tj.` / `stats.` / `stjj.`) and four of eight
-guesses were wrong before it was found.
+**CHINA is the work. Read `notes/china-progress.md` first — it is the worklist and it is kept
+crossed off.** Then `notes/techniques-cn-yearbooks-2026-09-08.md` for how to read a yearbook.
+Neither is restated here.
 
-**Three traps found doing it, all of which will bite the next CN round:**
-1. **`namesTarget` strips ASCII parentheses BEFORE matching**, so a node titled
-   `Balance of Payments (国际收支平衡表)` has NO reachable Chinese token -- the CJK
-   single-token door never sees it, because the door iterates the same parens-stripped
-   string. Many CN/JP/KR nodes are titled exactly this way. The fix per node is a
-   `title_aliases` entry; done this round for `cn-bop` (国际收支平衡表) and `hs`
-   (商品名称和编码协调制度 + the 及 variant, which NBS and Guangdong spell differently).
-   **This is a whole class and it has not been swept.**
-2. **`isIndexPage`'s `stats.gov.cn` `/sj/ndsj/` entry was a PREFIX**, so it swallowed every
-   page *inside* the yearbook, and all 10 sm-page edges failed validation as "index/listing
-   page" the first time any round cited one. Narrowed to `exact: true` -- the identical fix
-   the `/english/pressrelease/` entry two lines above it already carries, for the identical
-   reason. Old wording is in the comment.
-3. **The charset defect -- see §3 [Thomas] #3.** It is the important one.
+**The method in one line:** a Chinese yearbook's per-chapter **简要说明** exists to disclose that
+chapter's sources and names the NBS instrument **by title**, which clears §7a outright; a
+provincial or municipal **编者说明** additionally carries a numbered item naming 《国民经济行业分类》.
+Both are self-declared, both grade A.
 
-**Guangdong is wired -- 4 edges, all A, off the zip.** Thomas ruled 2026-09-08 that a
-document a publisher ships only inside a first-party zip is cited to the zip and grades on
-its merits: the bytes came from the cited URL on the live host, which is §7b's whole test,
-and neither existing cap (a past-dated COPY; a URL dead tomorrow) reaches it. Rule and its
-two conventions are now `PLAYBOOK-CORPUS.md` §7b. Executed the same day: `extractZipDocs()`
-is the third zip branch in `grade-evidence.ts` (`.docx` and `.xlsx` were already unzipped by
-the same fetcher, which is why "the grader cannot read a zip" was never the objection it
-looked like), archives get their own wall clock keyed on the URL extension because 21.5MB
-does not fit the 45s page budget, and the grader returned A on all four Guangdong edges
-reading inside the archive. **`批发和零售业统计报表制度` and `住宿和餐饮业统计报表制度`**
-are named by both the national and the Guangdong yearbook but are still NOT minted: NBS's
-current 统计制度 listing carries no page for either, and a node whose publisher page cannot
-be found is not a node. **`cn-js-statistical-yearbook -> cn-gbt-4754-2017` graded A live
-twice and then B via snapshot on a third run when `tj.jiangsu.gov.cn` refused this machine
--- it stays A** (§7b: a re-grade never writes a grade down on a bad network day). Chinese
-provincial hosts are flaky in both directions from both networks; expect this and re-run
-rather than believing one bad reading.
+**Next three moves, in order:**
 
-**Continue FR.** 21 nodes from 9, four rounds in. **The GNI-inventory-chapter method
-(DE ×5, FR ×2) is exhausted for the current inventory edition** — Ch.10 fully mined,
-3.4/5.8/5.11 confirmed empty, do not re-read barring a newer inventory edition. **Round
-4 (2026-09-08) used the other method instead**: a third document (here, INSEE's own
-Note de conjoncture) naming a target by title while citing it — the same method round 15
-opened. Applied against the NDC's other sections (labour, prices, public finance) this
-time, not just trade: minted `fr-insee-camme` (the household confidence survey, an
-11-times-repeated self-sourced chart caption) and refused two agency-level near-misses
-(DSECE's quarterly trade bilan, SDES energy/emissions — both name the agency in-body but
-never co-locate the bibliography's own title with a usage statement, the same
-agency-not-artefact shape as the dead DGDDI monthly bulletin). Method detail: memory
-`round11_de_chapter10_2026-09-07`, `round13_fr_national_core_2026-09-07`,
+1. **Sweep the reachable cities.** Nanjing proved a city reaches `cn-gbt-4754-2017` directly off
+   its own 编者说明, with **no city→province hop** — which matters, because Nanjing's and
+   Suzhou's edges to the Jiangsu yearbook were minted once and quarantined as assertion-only
+   (`cn-china-2026-08.json` `_dropped`; rule 14 — read that note before re-minting either).
+   Wuhan and Xi'an answered the probe and **their parent provinces have no node at all**, so a
+   city edge is the only thing available there. One fetch, one A, each.
+2. **Shandong, then Henan.** Both already have nodes, so it is pure wiring. Shandong answers over
+   http and is the third economy; Henan's 403 has WAF written on it — try Chrome.
+3. **Then the minting run** — Hunan, Hubei, Fujian, Yunnan, Xinjiang, Jilin, Hainan, Tibet all
+   answered and have no node yet, so those rounds mint the yearbook node and wire it in one pass.
+
+**Two live traps for the next CN round:**
+
+- **`namesTarget` strips ASCII parentheses BEFORE matching, so a node titled
+  `X (中文名)` has NO reachable Chinese token** — the CJK single-token door iterates the same
+  stripped string. Fixed per node for `cn-bop` and `hs`; **the class is unswept** and most of the
+  CN/JP/KR import is titled this way. Now `PLAYBOOK-CORPUS.md` §6.
+- **The same standard gets spelled differently by different publishers** — 和/及 in HS's Chinese
+  title, U+2014 vs an ASCII hyphen in the GB/T number. Three instances in two rounds. **Cut the
+  quote before the parenthetical**; the title alone names the artefact. If a province ever writes
+  the *title* differently, that needs a new alias.
+
+**Named by title, still unminted, all waiting on a publisher page:**
+《批发和零售业统计报表制度》 and 《住宿和餐饮业统计报表制度》 (named by the national AND Guangdong AND
+Jiangsu yearbooks; **not** in the probed NBS id range — see the tracker's listing-truncation
+note, which is why this conclusion is now stronger than it was in round 29), 《中国统计摘要》,
+第五次全国经济普查, 《全国农业普查条例》, 《统计上大中小微型企业划分办法（2017）》,
+《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）, and MOHURD's and MOT's city instruments.
+
+**Continue FR when China pauses.** 21 nodes from 9. The GNI-inventory-chapter method (DE ×5,
+FR ×2) is **exhausted for the current inventory edition** — do not re-read barring a newer one.
+The live method is a third document naming a target by title (INSEE's Note de conjoncture);
+its public-finance and international articles are unchecked. The EU harmonised
+business/consumer survey node shares `fr-insee-camme`'s domain-fit problem ("monetary-policy"
+as least-wrong) and the two want **one** scope decision, not two. Memory
 `round15_fr_note_de_conjoncture_2026-09-07`, `round17_fr_ndc_camme_2026-09-08`.
-**DGDDI's monthly bulletin is closed — do not re-run** (Thomas, 2026-09-08; permanent
-refusal in `PLAYBOOK-CORPUS.md` §7a). Next: the NDC's other articles (public finance,
-international) haven't been checked yet against this method; the EU harmonised
-business/consumer survey node (`ecfin-business-consumer-surveys.json`) shares
-`fr-insee-camme`'s domain-fit problem ("monetary-policy" as least-wrong) and both are
-worth a single scope decision together rather than two. The `iq-cso`/`ye-cso`/`sy-cbs`/`sd-cbs` wiring research pass ran 2026-09-08
-and came up empty — see §3 [Thomas] #1 for what was checked and why. **Parked, not
-retired; don't re-run without a genuinely new candidate document class** (the
-non-NSO-report angle is spent for these four). `ir-sci` is unrelated (see §3
-[Thomas] #1) and stays parked under the null-ComplianceDate ruling. DE is finished as
-a programme; the only German thing left is Chapter 10.3 (scope question, §2).
 
-**Revisit Morocco/Tunisia/Iraq's COICOP edges together — CLOSED 2026-09-08.**
-Re-read all three against the actual documents and the corpus's own IMTS-Revision-2
-precedent: none names a COICOP edition, and for Iraq and Tunisia the cited document's
-own divisional structure points to the pre-2018 vintage rather than the `un-coicop-2018`
-target it was wired to. The "wire with a vintage caveat" practice three separate rounds
-converged on independently did not actually satisfy the corpus's own edition-inference
-standard. Thomas ruled: drop all three as `no-document`. Executed — `iq-cpi`,
-`tn-ins-cpi` and `ma-hcp-ipc`'s edges to `un-coicop-2018` are now in their own source
-files' `_dropped`, `candidates-tier-wiring-2026-08-28.json`'s stale `resolved` note
-updated to match (reason changed to `no-document` since the edge it named no longer
-exists), and `PLAYBOOK-CORPUS.md` §7d rewritten to record the final ruling in place of
-the "reopened, pending a ruling" language. Sandbox validate/tsc/build all green;
-`public/corpus-data.json` regenerated and copied back. Memory:
-`round_coicop_ruling_2026-09-08`.
-
-**The non-ASCII-hyphen sweep, opened round 6, is CLOSED 2026-09-08 — negative, do not
-re-run the same way.** `normalizeForMatch` already folds the whole hyphen class
-(U+2010-U+2015 plus U+2212) to ASCII `-`, so the grader was never the risk, matching
-round 6's own framing. A sweep of both evidence caches (2115 files) for a digit-adjacent
-non-ASCII hyphen found no new lead beyond the already-known, already-blocked Yukon
-table-number case. A bulk diff of stored quotes against cached windows, tried as a
-second check for the ASCII-substitution defect class, produced ~60% false positives
-from `evidence-cache/`'s own one-record-per-URL-last-run-wins structure — **do not
-re-attempt that approach**; the three known defects were found by targeted reading, not
-bulk diffing. What would actually extend this is a corpus-wide `--refetch` re-grade, not
-attempted (out of scope for "one sweep"). Detail: memory
-`round_hyphen_sweep_and_dsbb_followup_2026-09-08`.
-
-**The UEMOA NCOA retarget pass, opened round 6, is CLOSED 2026-09-08 — resolved
-differently than framed.** The four remaining countries (Burkina Faso, Benin, Mali,
-Guinea-Bissau) all still label their table "NCOA-IHPC" but none states an edition year,
-so retargeting to `afristat-ncoa-ihpc` (explicitly the PRE-2018 vintage) would be an
-edition inference — deferred, not minted, same shape as the IMTS-Revision-2 refusal.
-What their current bulletins DO self-declare is the base-2023 transition itself: four
-new B-grade edges to `uemoa-reg-2024-base2023` (previously wired only from Togo).
-Detail: memory `round_uemoa_base2023_retarget_2026-09-08`.
-
-**The IMF pool's DSBB-review half is done 2026-09-08**: the 9 bounded
-`ambiguous-source`/`already-live-one-of-several` rows from the 2026-09-05 review file
-are resolved (6 new A edges minted — 2 Latin American ISIC edges, 2 Indonesian GFSM
-edges, 2 bonus Indonesian COFOG edges; 3 rows were already stale, resolved by later
-rounds). **GFSR read in full and closed as a negative finding** — no Statistical/
-Methodological Appendix exists in the April 2025 issue at all, unlike WEO/Fiscal
-Monitor; don't re-read without a new candidate. Detail: memory
-`round_hyphen_sweep_and_dsbb_followup_2026-09-08`. **Left, and NOT started**: the
-750 `no-source-node` rows in the same review file are mint leads needing new report
-nodes per country+category — a corpus-expansion call, same shape as the NSDP-node
-question — flagged to Thomas below, not taken unilaterally.
-
-**Settled, do not re-raise:** DGDDI's monthly bulletin — ruled dead 2026-09-08 after
-four rounds and six document classes, now a permanent `agency-not-artefact` refusal in
-`PLAYBOOK-CORPUS.md` §7a. The e-GDDS wiring todo — all 34 target countries wired
-(32 self-declared, 2 register), closed round 23, memory `round19_bw_nsdp_2026-09-07`
-through `round23_egdds_remaining9_2026-09-08`. The stale-cache B sweep — only three
-live candidates found corpus-wide, all reproduced their grade under `--refetch`, none
-were actually stale; memory `round17_stale_cache_b_sweep_2026-09-07`. India's NSDP —
-`dea.gov.in` dead from six networks/two failure modes, wired instead off RBI's own
-pages; memory `round18_india_nsdp_2026-09-07`. A Chapter 10 table row alone is NOT
-enough to wire an edge (Thomas, 2026-09-07). The three project-memory files whose
-filenames carry the retired source's name (`grok_archive_state`,
-`grok_canada_round_2026-08-25`, `grok_wiring_round_2026-08-25`) — leave them. A
-country carrying both a REGISTER and a SELF-DECLARED tier edge — both stay, now in
-`PLAYBOOK-CORPUS.md` §7, no dedupe pass. The `(SDDS Plus)` acronym case, fixed and
-measured. Korea's NSDP, Estonia's NSDP, the null-ComplianceDate class, round 7's tier
-confirmations (Taiwan, Mauritius), round 5's little things 1-3, the Euro Area row, the
-DE round-2 EVS refusal, the Bundesbank Monthly/Annual Report refusal, the BaFin
-insurance/pension row refusal — all read in full and refused, reasons in
-`PLAYBOOK-CORPUS.md` §7 / `PLAYBOOK-RENDER.md` §7.
+**Settled, do not re-raise:** **The CN/TW/JP/KR re-grade sweep** — 166 B/C edges, Thomas
+2026-09-08: *"that's a lot of time for B/C's. forget that."* The charset fix itself is kept; any
+re-grade rides along with work touching those edges for another reason. **A first-party zip is a
+direct read**, not a capped route (§7b) — Guangdong is wired on it. **Bulk-diffing stored quotes
+against cached windows** — ~60% false positives from `evidence-cache/`'s last-run-wins structure;
+the real defects were found by targeted reading. The non-ASCII-hyphen sweep (negative), the
+UEMOA NCOA retarget (resolved as base-2023 edges instead), the COICOP edges for
+Morocco/Tunisia/Iraq (dropped `no-document`), DGDDI's monthly bulletin (dead after four rounds,
+permanent §7a refusal), the e-GDDS wiring todo (all 34 countries, round 23), the stale-cache B
+sweep, India's NSDP, the GFSR (no methodological appendix exists), the ICLS class (§7a: do not
+re-open per country). A Chapter 10 table row alone is NOT enough to wire an edge. The three
+project-memory files carrying the retired source's name — leave them. A country carrying both a
+REGISTER and a SELF-DECLARED tier edge — both stay, no dedupe pass. Korea's and Estonia's NSDP,
+the null-ComplianceDate class, round 7's tier confirmations, round 5's little things 1-3, the
+Euro Area row, the DE round-2 EVS refusal, the Bundesbank Monthly/Annual refusal, the BaFin
+insurance/pension refusal — all read in full and refused, reasons in `PLAYBOOK-CORPUS.md` §7 /
+`PLAYBOOK-RENDER.md` §7.
 
 ---
 

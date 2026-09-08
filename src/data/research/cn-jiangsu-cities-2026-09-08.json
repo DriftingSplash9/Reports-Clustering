@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "source": "research round 2026-09-08 — Jiangsu chapter notes + the first city edge",
+    "minted": "2026-09-08",
+    "note": "Round 30. Mines the per-chapter 简要说明 of the Jiangsu Statistical Yearbook 2025 (the round-29 template applied to a province in depth, not just its 编者说明), adds the first CITY edge of the programme off Nanjing's own 编者说明, and mints the NBS city-monitoring instrument the national yearbook names for its city tables. Every quote read live from the cited URL on the live host, 2026-09-08."
+  },
+  "reports": [
+    {
+      "id": "cn-nbs-city-development-monitoring-system",
+      "title": "城市高质量发展统计监测报表制度 (Urban High-Quality Development Statistical Monitoring Reporting System)",
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS reporting system under which the Department of Urban Socio-Economic Survey collects the city-level indicators that feed the China Statistical Yearbook's urban tables — the national distribution of cities and the main economic indicators of provincial capitals and separately-listed cities (计划单列市). Reissued annually; the edition read for this round covers the 2025 annual report. Structurally the counterpart, for cities, of the sectoral 统计报表制度 that provinces declare: an instrument every Chinese municipal statistical publication is collected under, and therefore a hub the city yearbook nodes can reach without depending on a city-to-province edge.",
+      "cadence_note": "Reissued annually, covering one statistical year's annual report.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962948.html",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-js-statistical-yearbook",
+      "target_report_id": "cn-nbs-wage-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 3 (人口、就业和工资) of the Jiangsu Statistical Yearbook 2025's own 简要说明 states that its urban-unit employment figures were worked up under the Labour and Wage Statistical Reporting System, naming that NBS instrument by title. Round 29 wired Jiangsu off its 编者说明 only; this round mines the per-chapter notes, which is where the instrument names live. Read live from the cited URL (HTTP 200) on 2026-09-08.",
+      "evidence_url": "http://tj.jiangsu.gov.cn/2025/nj03/nj0300.htm",
+      "evidence_quote": "城镇单位就业数据，根据《劳动工资统计报表制度》推算整理。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-js-statistical-yearbook",
+      "target_report_id": "cn-nbs-agriculture-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 10 (农业) of the yearbook's own 简要说明 states its basic agricultural-production material was compiled from the Agriculture, Forestry, Animal Husbandry and Fishery Statistical Reporting System, naming it by title, and goes on to describe how that instrument's returns are collected. CAVEAT recorded because the same sentence names a SECOND instrument, 《农业产值与增加值核算统计报表制度》 — that is NOT the corpus's cn-nbs-agri-output-price-reporting-system (NBS's is 《农业产值和价格综合统计报表制度》, a different title), so no second edge was minted from this sentence and the difference was checked character by character rather than assumed. Read live from the cited URL (HTTP 200) on 2026-09-08.",
+      "evidence_url": "http://tj.jiangsu.gov.cn/2025/nj10/nj1000.htm",
+      "evidence_quote": "根据《农林牧渔业统计报表制度》《农业产值与增加值核算统计报表制度》的有关资料整理提供。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-js-statistical-yearbook",
+      "target_report_id": "cn-nbs-construction-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 12 (建筑业) of the yearbook's own 简要说明 states its construction-enterprise statistics were compiled from the Construction Industry Statistical Reporting System drawn up by NBS, naming that instrument by title. The national yearbook and Guangdong declare the same instrument for the same chapter, which is the programme's point: provinces and the centre point at one shared set of NBS instruments. Read live from the cited URL (HTTP 200) on 2026-09-08.",
+      "evidence_url": "http://tj.jiangsu.gov.cn/2025/nj12/nj1200.htm",
+      "evidence_quote": "本篇建筑业企业统计数据是根据国家统计局制定的《建筑业统计报表制度》整理汇总的。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-nj-city-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: item 三 of the Nanjing Statistical Yearbook 2025's own 编者说明 states the yearbook's industry classification is carried out under the 2017 national standard GB/T 4754-2017, naming it by title. **This is the first CITY edge in the China programme and it confirms the route**: a municipal yearbook makes the same one-line disclosure a provincial one does, so a city reaches a national standard directly without needing a city-to-province edge — which matters, because Nanjing's own edge to the Jiangsu yearbook was minted once and quarantined as assertion-only in 2026-08-31's audit and remains in cn-china-2026-08.json's _dropped. The quote stops before the standard number: Nanjing writes it （GB/T4754—2017） with U+2014 where Jiangsu writes (GB/T4754 -2017) with an ASCII hyphen and a space, and the title alone names the artefact. Read live from the cited URL (HTTP 200) on 2026-09-08.",
+      "evidence_url": "https://tjj.nanjing.gov.cn/material/njnj_2025/shouye/bzsm.html",
+      "evidence_quote": "本年鉴国民经济行业分类按2017年国家标准《国民经济行业分类》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-statistical-yearbook",
+      "target_report_id": "cn-nbs-city-development-monitoring-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: chapter 25 of the China Statistical Yearbook 2025's own 简要说明 states that the national distribution of cities and the main economic indicators of provincial capitals and separately-listed cities were collected and supplied by NBS's Department of Urban Socio-Economic Survey under the Urban High-Quality Development Statistical Monitoring Reporting System, naming that instrument by title. Read live from the cited URL (HTTP 200) on 2026-09-08.",
+      "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/sm25.htm",
+      "evidence_quote": "全国城市分布情况及省会城市和计划单列市主要经济指标由城市社会经济调查司依据《城市高质量发展统计监测报表制度》收集整理提供。",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": []
+}

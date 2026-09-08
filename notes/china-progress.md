@@ -19,7 +19,7 @@ often walks straight through. **Re-probe, never believe this column.**
 
 | ✔ | Division | Type | Node | Bureau host | Probe | Notes / result |
 |---|---|---|---|---|---|---|
-| `[x]` | 江苏 Jiangsu | province | `cn-js-statistical-yearbook` | tj.jiangsu.gov.cn | 200 | **1 edge, A.** 编者说明 item 五 names GB/T 4754. Year pages at `/col/colNNNNN/`, server-rendered. Chapter 简要说明 not yet mined — more edges here. |
+| `[x]` | 江苏 Jiangsu | province | `cn-js-statistical-yearbook` | tj.jiangsu.gov.cn | 200 | **4 edges, A. Chapter notes MINED (round 30) — done.** 编者说明 item 五 → GB/T 4754; ch3 → wage system, ch10 → agriculture system, ch12 → construction system. Also names, with no node to take them: SITC (ch8), 《中国统计摘要2025》 (ch21), 《批发和零售业统计报表制度》+《住宿和餐饮业统计报表制度》 (ch14), 《统计上大中小微型企业划分办法（2017）》 and 《农业产值与增加值核算统计报表制度》 (ch11/ch10 — the latter is NOT NBS's 农业产值和价格综合…, different title, do not conflate). Browse at `/2025/njNN.htm`, chapter notes at `/2025/njNN/njNN00.htm`. |
 | `[x]` | 广东 Guangdong | province | `cn-gd-statistical-yearbook` | stats.gd.gov.cn | 200 | **4 edges, A**, off the CD-edition zip (§7b ruling). Browse host `tjnj.gdstats.gov.cn:8080` unreachable from every network tried — use the zip. |
 | `[~]` | 北京 Beijing | municipality | `cn-bj-statistical-yearbook` | tjj.beijing.gov.cn | 000 | Node is `provincial` level, correctly. |
 | `[~]` | 上海 Shanghai | municipality | `cn-sh-statistical-yearbook` | tjj.sh.gov.cn | 200 | Node is `provincial` level, correctly. |
@@ -57,7 +57,8 @@ carries them as appendix chapters and says outright that each runs its own stati
 (`香港特别行政区保留其单独运作的统计系统`). Taiwan already has its own large node family
 (`tw-*`). Do not fold any of the three into the CN provincial programme.
 
-**Score: 2 wired · 8 node-but-unwired · 22 no node yet.**
+**Score: 2 wired · 8 node-but-unwired · 22 no node yet.** (Provinces. Jiangsu is now *fully*
+mined rather than just opened; Guangdong's chapter notes are mined too.)
 
 ---
 
@@ -70,7 +71,7 @@ municipalities.
 |---|---|---|---|
 | `[ ]` | 广州 Guangzhou | 广东 Guangdong | `cn-gz-city-statistical-yearbook` |
 | `[ ]` | 深圳 Shenzhen | 广东 Guangdong | `cn-sz-city-statistical-yearbook` |
-| `[ ]` | 南京 Nanjing | 江苏 Jiangsu | `cn-nj-city-statistical-yearbook` |
+| `[x]` | 南京 Nanjing | 江苏 Jiangsu | `cn-nj-city-statistical-yearbook` — **1 edge, A** (round 30). 编者说明 item 三 → GB/T 4754. **First city edge; proves the route.** Yearbook at `tjj.nanjing.gov.cn/material/njnj_<year>/`, 编者说明 at `shouye/bzsm.html`. |
 | `[ ]` | 苏州 Suzhou | 江苏 Jiangsu | `cn-suz-city-statistical-yearbook` |
 | `[ ]` | 杭州 Hangzhou | 浙江 Zhejiang | `cn-hz-city-statistical-yearbook` |
 | `[ ]` | 武汉 Wuhan | 湖北 Hubei | `cn-wh-city-statistical-yearbook` — parent has NO node yet |
@@ -78,6 +79,9 @@ municipalities.
 | `[ ]` | 西安 Xi'an | 陕西 Shaanxi | `cn-xa-city-statistical-yearbook` — parent has NO node yet |
 | `[ ]` | 重庆 Chongqing | — (municipality) | `cn-cq-city-statistical-yearbook` — see mis-levelling note above |
 | `[ ]` | 北京 Beijing | — (municipality) | `cn-bj-statistical-yearbook` |
+
+**City host probes, 2026-09-08:** 南京 200 · 武汉 200 · 西安 200 · 苏州 503 · 成都 412 · 广州/深圳/杭州 000.
+Same caveat as the province column — 503/412/000 is usually a WAF or a bad moment, not a dead site.
 
 ### How cities connect — Thomas's assumption, checked
 
@@ -93,20 +97,33 @@ its bureau is a 市统计局 answering to the 省统计局. Two qualifications t
    and **quarantined 2026-08-31 as assertion-only** (`cn-china-2026-08.json` `_dropped`,
    `no-document`). Re-minting either needs a real document, and rule 14 says read that note first.
 
-**The route that should work for every city, and is untested:** a city yearbook's own 编者说明 /
-chapter 简要说明 will name the same NBS instruments the provinces name — above all
-《国民经济行业分类》. That is a **city → `cn-gbt-4754-2017`** edge, no province involved, and it is
-the same one-line disclosure Jiangsu gave. Try that before hunting city→province.
+**The route works — CONFIRMED round 30, do not re-derive it.** A city yearbook's own 编者说明
+carries the same numbered item a provincial one does, naming 《国民经济行业分类》. Nanjing item 三
+gave **city → `cn-gbt-4754-2017`** at A with no province involved. Run this first for every
+remaining city; it is one fetch and one edge each, and it does not depend on the contested
+city→province hop. Watch the punctuation: Nanjing writes （GB/T4754—2017） with U+2014, Jiangsu
+writes (GB/T4754 -2017) with an ASCII hyphen and a stray space — **cut the quote before the
+number**, the title alone names the artefact.
 
-Two national hubs specific to cities, both named by the CSY and **neither minted yet**:
-《城市高质量发展统计监测报表制度》 (NBS 城市社会经济调查司, supplies the CSY's city tables) and
-《城市（县城）和村镇建设统计调查制度》 (MOHURD). Either would be a hub every city node could reach.
+**`cn-nbs-city-development-monitoring-system`** (城市高质量发展统计监测报表制度) was minted round 30
+and is wired from the CSY — it is the instrument NBS's 城市社会经济调查司 collects the city tables
+under, so it is the second hub a city node can reach. **Untested and worth trying**: does a city
+yearbook name it? Still unminted, both needing a non-NBS publisher page:
+《城市（县城）和村镇建设统计调查制度》 (MOHURD) and 《城市（县城）客运统计报表制度》 (MOT).
 `cn-city-statistical-yearbook` (中国城市统计年鉴) already exists and is already wired to the CSY.
 
 ---
 
 ## Portals and tricks — read before starting a province
 
+- **THE NBS 统计制度 LISTING IS TRUNCATED — probe the article-id range instead** (found round 30).
+  `https://www.stats.gov.cn/sj/tjzd/` shows 15 instruments; the ids are consecutive and probing
+  `t20260402_<id>.html` past the end of the listing found at least 8 more, including
+  城市高质量发展统计监测报表制度 (1962948, the city hub, now minted), 流通和消费价格统计报表制度 (1962945),
+  工业生产者价格统计调查制度 (1962946), 房地产价格统计调查制度 (1962947), 住户收支与生活状况调查方案 (1962944),
+  乡村振兴统计监测一套表制度 (1962949), 农民工监测调查方案 (1962950), 脱贫县农村住户监测调查方案 (1962952).
+  **Never conclude an NBS instrument has no page from the listing alone.** Known range so far:
+  1962929-1962952, gaps at 1962951/1962953+. 批发和零售业 and 住宿和餐饮业 are still NOT among them.
 - **THE portal: `https://www.stats.gov.cn/xglj/tjj/`** — NBS's own 地方统计网站 directory. One
   fetch returns every provincial bureau URL, first-party and authoritative. The table above came
   from it. `https://www.stats.gov.cn/xglj/` is the parent index (ministries, provincial
