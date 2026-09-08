@@ -142,7 +142,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // continent-redesign note on `ColourFamily` and `SCOPE_COLOUR` for the hue.
   NO: 'XEU', IS: 'XEU', LI: 'XEU', CH: 'XEU', GB: 'XEU',
   RS: 'XEU', ME: 'XEU', MK: 'XEU', AL: 'XEU', BA: 'XEU',
-  TR: 'XEU', UA: 'XEU', MD: 'XEU', XK: 'XEU',
+  TR: 'XEU', UA: 'XEU', MD: 'XEU', XK: 'XEU', AD: 'XEU', SM: 'XEU',
 
   // Australia — its own family since palette v2 (2026-08-12): SAO split in
   // two on Thomas's colour assignments (AU orange, NZ brown), which is the
@@ -1350,7 +1350,7 @@ export const COUNTRY_LABEL: Record<string, string> = {
   NO: 'Norway', IS: 'Iceland', LI: 'Liechtenstein', CH: 'Switzerland',
   GB: 'United Kingdom', RS: 'Serbia', ME: 'Montenegro', MK: 'North Macedonia',
   AL: 'Albania', BA: 'Bosnia and Herzegovina', TR: 'Türkiye', UA: 'Ukraine',
-  MD: 'Moldova', XK: 'Kosovo',
+  MD: 'Moldova', XK: 'Kosovo', AD: 'Andorra', SM: 'San Marino',
 
   // Backfilled 2026-08-12 (Thomas: "fill in please"). The rule above — "add a
   // name when that country gets its first node" — had quietly stopped being

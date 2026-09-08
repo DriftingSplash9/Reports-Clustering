@@ -1,0 +1,255 @@
+{
+  "_slice": "int-imf-egdds-oda-group2-2026-09-08",
+  "_researched": "2026-09-08",
+  "_status": "draft",
+  "_note": "Round 23. Closes the remaining 9 of round 21's original 34-country e-GDDS list: the 7 countries round 21 bundled into a single 'not checked this round' dropped entry (Andorra, Albania, Micronesia, Montenegro, Palau, San Marino, Kosovo) plus 2 more (Guyana, Serbia) that round 21 miscounted and never listed at all -- found only because round 22's count-correction pass (25/34 wired, 9 remained, not 7) caught the discrepancy. Method: the IMF's own DSBB e-GDDS country-category page (dsbb.imf.org/e-gdds/country/<ISO3>/category), rendered in Chrome, carries a hidden global country-to-NSDP-URL link list (found via javascript_tool querying all outbound <a> tags -- a plain page-text read only shows the active country's own category rows, not this list) that gave a registered NSDP URL for every one of these 9 countries in one page load, replacing the country-by-country press-release search round 22 used. 7 of the 9 registered destinations were live, self-declared pages (each on the country's own domain) and graded A. The other 2 (Andorra, Micronesia) have registered destinations that are unreadable for different reasons (a JS-shell SPA with no content region; an expired TLS certificate) -- both wired instead as REGISTER-tier edges off the IMF's own press release for that country, per PLAYBOOK-CORPUS.md rule 19 (a document published by the TARGET's own publisher recording the relationship is REGISTER, not THIRD-PARTY, and grades on the same A/B/C rules as any other tier -- both grade A here because both press releases were read in full and quoted verbatim). Two recurring findings, both character-level: the shared NSDP page template has an unsubstituted-placeholder bug ('...in which Country participates', literally, on San Marino/Montenegro/Albania/Serbia's own copies -- confirmed present on 4 of the 7 self-declared pages in this batch, so this is a platform-wide template defect, not a per-country typo); Serbia's page additionally bakes a Unicode replacement character (U+FFFD) into the apostrophe position in its raw HTML, and San Marino's page uses a plain ASCII apostrophe where every other page in this batch uses the U+2019 typographic one. Every quote below was cut to avoid the specific defect(s) present on its own page rather than silently 'fixed', and every apostrophe was verified by code point before transcription. Two of the nine country codes (AD, SM) had no existing corpus node and were missing COUNTRY_FAMILY/COUNTRY_LABEL (palette.ts) and CONTINENT_OF (regions.ts) entries -- both added this round (XEU family, Europe continent, alongside LI/CH's non-EU-European-microstate precedent). The other 7 (AL, FM, ME, PW, RS, XK, GY) already had live nodes elsewhere in the corpus and needed no classification changes. No id or evidence-URL collision against the whole corpus for any of the 9 new nodes or URLs (checked before writing). This closes the e-GDDS wiring todo: all 34 of round 21's original list are now wired (25 self-declared/register from round 21 itself, 4 from round 22's group-1, 9 from this round -- 7 self-declared, 2 register).",
+  "reports": [
+    {
+      "id": "al-nsdp",
+      "title": "National Summary Data Page — Albania",
+      "publisher": "Institute of Statistics of Albania (INSTAT)",
+      "country": "AL",
+      "jurisdiction_level": "federal",
+      "region": "Albania",
+      "description": "Albania's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://www.instat.gov.al/en/national-statistical-system/egdds/",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "me-nsdp",
+      "title": "National Summary Data Page — Montenegro",
+      "publisher": "MONSTAT — Statistical Office of Montenegro",
+      "country": "ME",
+      "jurisdiction_level": "federal",
+      "region": "Montenegro",
+      "description": "Montenegro's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "http://www.monstat.org/NSDP/National%20Summary%20Data%20Page%20(NSDP).htm",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "pw-nsdp",
+      "title": "National Summary Data Page — Palau",
+      "publisher": "Bureau of Budget and Planning, Ministry of Finance, Republic of Palau",
+      "country": "PW",
+      "jurisdiction_level": "federal",
+      "region": "Palau",
+      "description": "Palau's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://www.palaugov.pw/executive-branch/ministries/finance/budgetandplanning/palau-national-summary-data-page/",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "rs-nsdp",
+      "title": "National Summary Data Page — Serbia",
+      "publisher": "Statistical Office of the Republic of Serbia (SORS)",
+      "country": "RS",
+      "jurisdiction_level": "federal",
+      "region": "Serbia",
+      "description": "Serbia's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "http://www.stat.gov.rs/en-US/nsdp-serbia",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "sm-nsdp",
+      "title": "National Summary Data Page — San Marino",
+      "publisher": "Ufficio Nazionale di Statistica (Republic of San Marino)",
+      "country": "SM",
+      "jurisdiction_level": "federal",
+      "region": "San Marino",
+      "description": "San Marino's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "http://www.statistica.sm/on-line/home/national-summary-data-page.html",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "xk-nsdp",
+      "title": "National Summary Data Page — Kosovo",
+      "publisher": "Banka Qendrore e Kosovës (Central Bank of the Republic of Kosovo, BQK)",
+      "country": "XK",
+      "jurisdiction_level": "federal",
+      "region": "Kosovo",
+      "description": "Kosovo's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://bqk-kos.org/statistikat/gdds/faqja-permbledhese-e-te-dhenave-kombetare/?lang=en",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gy-nsdp",
+      "title": "National Summary Data Page — Guyana",
+      "publisher": "Bureau of Statistics, Guyana",
+      "country": "GY",
+      "jurisdiction_level": "federal",
+      "region": "Guyana",
+      "description": "Guyana's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://statisticsguyana.gov.gy/IMF_NSDP/Guyana_NSDP.htm",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "ad-nsdp",
+      "title": "National Summary Data Page — Andorra",
+      "publisher": "Statistics Department of the Government of Andorra",
+      "country": "AD",
+      "jurisdiction_level": "federal",
+      "region": "Andorra",
+      "description": "Andorra's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://www.estadistica.ad/portal/apps/sites/#/estadistica-en/pages/national-summary-data-page",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fm-nsdp",
+      "title": "National Summary Data Page — Federated States of Micronesia",
+      "publisher": "Federated States of Micronesia (FSM) Division of Statistics",
+      "country": "FM",
+      "jurisdiction_level": "federal",
+      "region": "Micronesia",
+      "description": "Micronesia's National Summary Data Page, the country's e-GDDS self-declaration artefact.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as the rest of this NSDP block (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://www.fsmstatistics.fm/fsm-national-summary-data-page-nsdp/",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "al-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Albania's dedicated NSDP subdomain (http://instat.gov.al:8080/NSDPAlbania/, the URL registered on the IMF's own DSBB country-link list) returns ERR_CONNECTION_RESET on repeated attempts in Thomas's own Chrome, 2026-09-08 -- confirmed dead, not a transient load hiccup. INSTAT's own main-domain eGDDS page (https://www.instat.gov.al/en/national-statistical-system/egdds/, read in Thomas's own Chrome 2026-09-08) is live and states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB.’ (full sentence continues ‘For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Country participates, please visit the DSBB home page’ -- same unsubstituted-placeholder template bug as San Marino/Montenegro/Serbia in this batch, so the quote is cut at the clean sentence boundary before it) and itself links onward to the dead NSDP subdomain as ‘Data linked from this page’ (https://instat.gov.al:8080/NSDPAlbania/). Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). INSTAT is Albania's own national statistics institute -- this is the country's own self-declaration, on its own domain, even though the final data-hosting subdomain it points to is currently unreachable. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://www.instat.gov.al/en/national-statistical-system/egdds/",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "me-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Montenegro's National Summary Data Page (http://www.monstat.org/NSDP/National%20Summary%20Data%20Page%20(NSDP).htm, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list), whose own page title reads ‘National Summary Data Page (NSDP)-Montenegro’, states in its body text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB.’ (the sentence continues ‘For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Country participates...’ -- same unsubstituted-placeholder template bug as San Marino/Albania/Serbia in this batch; the quote below is cut at the clean sentence boundary before it, with the country's own identity established by the page's own title instead). Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). MONSTAT is Montenegro's own statistical office. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "http://www.monstat.org/NSDP/National%20Summary%20Data%20Page%20(NSDP).htm",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "pw-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Palau's National Summary Data Page (https://www.palaugov.pw/executive-branch/ministries/finance/budgetandplanning/palau-national-summary-data-page/, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list, on palaugov.pw, the Government of Palau's own domain), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Palau participates, please visit the DSBB home page.’ -- this copy of the shared template has the country-name placeholder correctly substituted (unlike San Marino/Montenegro/Albania/Serbia in this same batch), so the full sentence is quotable. Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). Publisher inferred from the URL path (Ministry of Finance > Budget and Planning); not itself named in the page's visible text, same treatment as round 21's similar cases. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://www.palaugov.pw/executive-branch/ministries/finance/budgetandplanning/palau-national-summary-data-page/",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Palau participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "rs-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Serbia's National Summary Data Page (http://www.stat.gov.rs/en-US/nsdp-serbia, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list, on stat.gov.rs, the Statistical Office of the Republic of Serbia's own domain), whose own page title reads ‘NSDP-Serbia | Statistical Office of the Republic of Serbia’, states in its body text: ‘For a fuller explanation of the DSBB and the enhanced General Data Dissemination System’ -- a clean fragment of a longer sentence that has TWO defects baked into the live page bytes on either side of this fragment, both confirmed by direct code-point inspection: before it, ‘International Monetary Fund�s DSBB’ -- U+FFFD (the Unicode replacement character) standing in for the apostrophe, present in the raw page HTML itself, not a Chrome-rendering or extraction artifact; after it, ‘in which Country participates’ -- the same unsubstituted country-name-placeholder template bug as San Marino/Montenegro/Albania in this batch. The quote below is cut cleanly between both defects; the page's own title establishes Serbia's identity instead. SORS is Serbia's own national statistical office. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "http://www.stat.gov.rs/en-US/nsdp-serbia",
+      "evidence_quote": "For a fuller explanation of the DSBB and the enhanced General Data Dissemination System",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "sm-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). San Marino's National Summary Data Page (http://www.statistica.sm/on-line/home/national-summary-data-page.html, redirects to https://www.statistica.sm/pub1/StatisticaSM/e-gdds/nsdp.html, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list, on statistica.sm, the Ufficio Nazionale di Statistica's own domain), whose own page heading reads ‘San Marino - National Summary Data Page (NSDP)’, states in its body text: ‘Data linked from this page correspond to data described in the International Monetary Fund's DSBB.’ (the sentence continues ‘...enhanced General Data Dissemination System in which Country participates...’ -- same unsubstituted-placeholder template bug as Montenegro/Albania/Serbia in this batch; cut before it, country identity established by the page's own heading instead). Apostrophe in ‘Fund's’ verified by direct code-point read as U+0027 (plain ASCII apostrophe) -- NOT the U+2019 typographic apostrophe every other page in this batch uses; transcribed here with the correct ASCII character rather than the typographic one, exactly the trap PLAYBOOK-CORPUS.md §6 warns against. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://www.statistica.sm/pub1/StatisticaSM/e-gdds/nsdp.html",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund's DSBB.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "xk-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Kosovo's National Summary Data Page (https://bqk-kos.org/statistikat/gdds/faqja-permbledhese-e-te-dhenave-kombetare/?lang=en, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list, on bqk-kos.org, the Central Bank of the Republic of Kosovo's own domain), whose own page title reads ‘National Summary Data Page - BQK’, states in its body text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Kosovo participates, please visit the DSBB home page.’ -- this copy of the shared template has the country-name placeholder correctly substituted (unlike San Marino/Montenegro/Albania/Serbia in this same batch), so the full sentence is quotable. Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://bqk-kos.org/statistikat/gdds/faqja-permbledhese-e-te-dhenave-kombetare/?lang=en",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Kosovo participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gy-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 23). Guyana was miscounted out of round 21's e-GDDS group-2 lead entirely (never named in its _dropped bundle -- round 22's count-correction finding). Guyana's National Summary Data Page (https://statisticsguyana.gov.gy/IMF_NSDP/Guyana_NSDP.htm, read in Thomas's own Chrome 2026-09-08 -- the URL registered on the IMF's own DSBB country-link list, on statisticsguyana.gov.gy, the Bureau of Statistics' own domain), states in its own text: ‘Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guyana participates, please visit the DSBB home page.’ -- this copy of the shared template has the country-name placeholder correctly substituted (unlike San Marino/Montenegro/Albania/Serbia in this same batch), so the full sentence is quotable. Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://statisticsguyana.gov.gy/IMF_NSDP/Guyana_NSDP.htm",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guyana participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ad-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "REGISTER: MINTED 2026-09-08 (round 23). Andorra's registered NSDP destination on the IMF's own DSBB country-link list (https://www.estadistica.ad/portal/apps/sites/#/estadistica-en/pages/national-summary-data-page, an ArcGIS Hub single-page app) renders, in Thomas's own Chrome 2026-09-08, to navigation chrome and a Contact block only -- confirmed by searching the full rendered DOM's outerHTML (442,934 characters) for the string ‘gdds’ case-insensitively (zero matches) and by checking for shadow-DOM content regions (2 shadow roots present, neither a content area). No declarative NSDP text exists on this page to quote as SELF-DECLARED. The IMF's own press release announcing Andorra's e-GDDS implementation (https://www.imf.org/en/news/articles/2022/05/06/pr22140-andorra-implements-international-monetary-fund-enhanced-general-data-dissemination-system, read in Thomas's own Chrome 2026-09-08) is fully readable and states: ‘Andorra has joined the IMF Data Standards Initiatives, implementing the recommendations of the Enhanced General Data Dissemination System (e-GDDS) by publishing essential macro-economic and financial data through a National Summary Data Page (NSDP).’ -- pure ASCII, no apostrophe to verify. This is IMF's own document (imf.org, the TARGET's own publisher) recording the relationship, per PLAYBOOK-CORPUS.md rule 19's REGISTER definition -- not a third-party account. The press release also names the publisher: ‘The NSDP is hosted by the Statistics Department of the Government of Andorra... utilizing the Statistical Data and Metadata Exchange.’ via: claude-in-chrome, 2026-09-08, direct read of both cited URLs on the live hosts.",
+      "evidence_url": "https://www.imf.org/en/news/articles/2022/05/06/pr22140-andorra-implements-international-monetary-fund-enhanced-general-data-dissemination-system",
+      "evidence_quote": "Andorra has joined the IMF Data Standards Initiatives, implementing the recommendations of the Enhanced General Data Dissemination System (e-GDDS) by publishing essential macro-economic and financial data through a National Summary Data Page (NSDP).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "fm-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "REGISTER: MINTED 2026-09-08 (round 23). Micronesia's registered NSDP destination on the IMF's own DSBB country-link list (https://www.fsmstatistics.fm/fsm-national-summary-data-page-nsdp/) fails to load in Thomas's own Chrome 2026-09-08 with a privacy/certificate error; WebFetch's own robots.txt probe against the same host confirms the cause: 'certificate has expired' (CERTIFICATE_VERIFY_FAILED). The alternate URL the IMF's original 2017 press release gives (http://www.fsmstats.fm/?page_id=605) also fails to load (error page, both http and the domain's https variant). The Wayback Machine's saved snapshot of the fsmstatistics.fm page (2023-04-18) captured only the site's footer text, not the JS-rendered body. No declarative NSDP text is reachable anywhere to quote as SELF-DECLARED. The IMF's own press release announcing FSM's e-GDDS implementation (https://www.imf.org/en/news/articles/2017/08/02/pr17317-the-federated-states-of-micronesia-implement-imf-enhanced-general-data-dissemination-system, read in Thomas's own Chrome 2026-09-08) is fully readable and states: ‘A mission of the International Monetary Fund (IMF)’s Statistics Department visited Pohnpei in May 2017, to assist the authorities with the implementation of the Enhanced General Data Dissemination System (e-GDDS) and the development of a National Summary Data Page (NSDP).’ Apostrophe verified as U+2019 by reading the DOM text directly (element.innerText via javascript_tool). This is IMF's own document (imf.org, the TARGET's own publisher) recording the relationship, per PLAYBOOK-CORPUS.md rule 19's REGISTER definition -- not a third-party account. The press release also names the publisher: ‘...posted on the website of the Federated States of Micronesia (FSM)’s Division of Statistics.’ via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host; WebFetch, 2026-09-08, TLS-probe confirmation that fsmstatistics.fm's certificate has expired.",
+      "evidence_url": "https://www.imf.org/en/news/articles/2017/08/02/pr17317-the-federated-states-of-micronesia-implement-imf-enhanced-general-data-dissemination-system",
+      "evidence_quote": "A mission of the International Monetary Fund (IMF)’s Statistics Department visited Pohnpei in May 2017, to assist the authorities with the implementation of the Enhanced General Data Dissemination System (e-GDDS) and the development of a National Summary Data Page (NSDP).",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": []
+}

@@ -87,7 +87,7 @@ const CONTINENT_OF: Partial<Record<string, Continent>> = {
   ME: 'Europe', MK: 'Europe', MT: 'Europe', NL: 'Europe', NO: 'Europe', PL: 'Europe',
   PT: 'Europe', RO: 'Europe', RS: 'Europe', SE: 'Europe', SI: 'Europe', SK: 'Europe',
   TR: 'Europe', UA: 'Europe', XK: 'Europe', AL: 'Europe', BA: 'Europe', EU: 'Europe',
-  GL: 'Europe',
+  GL: 'Europe', AD: 'Europe', SM: 'Europe',
 
   // Middle East — split out of Asia/Africa on request. Egypt, Algeria,
   // Morocco, Tunisia, Libya stay under Africa (matching their AFR family and
