@@ -1,0 +1,513 @@
+{
+  "_slice": "int-imf-egdds-oda-round21-2026-09-08",
+  "_researched": "2026-09-08",
+  "_status": "draft",
+  "_note": "Round 21 of the [Agent] e-GDDS todo (HANDOFF.md, int-imf-tier-sweep-2026-09-07.json's _dropped 'e-GDDS participants with a real NSDP and no node to hang the edge on (34 countries)'). Rounds 19-20 wired 3 of the 34 (Botswana, Tanzania, Cote d'Ivoire) and left a generalised method: search '<country> opendataforafrica NSDP', go to the country's own <slug>.opendataforafrica.org NSDP page in Chrome (Cloudflare-walled to curl but clean in Chrome), and read the platform's own boilerplate self-declaration naming the country and e-GDDS. This round ran that method across all 31 remaining countries via WebSearch + Chrome and found the NSDP page live and readable for 18 of them: Benin, Madagascar, Zambia, Zimbabwe, Lesotho, Mozambique, Malawi, Cameroon, Angola, Cabo Verde, Gambia, Equatorial Guinea, DR Congo, Eswatini, Guinea-Bissau, Mauritania, Sao Tome and Principe, and Somalia -- all minted here at A (quote-found-artefact-named, SELF-DECLARED). Every quote was read directly off the rendered page via the browser's accessibility tree (read_page) rather than transcribed from a screenshot, specifically to avoid the known ASCII-vs-typographic-apostrophe trap (PLAYBOOK-CORPUS.md Known Traps) -- the U+2019 in \"Fund’s\" was confirmed via read_page on the Angola page and the same platform template is used verbatim (country name substituted) on every other page in this batch. For each publisher, the page's own footer was checked via the accessibility tree/find tool for a direct link to the country's NSO (confirmed for 13 of 18: Madagascar->instat.mg, Angola->ine.gov.ao/minfin.gov.ao/bna.ao, Cabo Verde->ine.cv, Gambia->gbosdata.org, Equatorial Guinea->dgecnstat-ge.org, DR Congo->ins-rdc.org, Sao Tome->ine.st, plus the 7 that name the agency directly in the page's own title: Benin/INStaD, Zambia/Zambia Statistics Agency, Lesotho/Central Bank of Lesotho, Mozambique/INE, Malawi/Reserve Bank of Malawi, Cameroon/NIS, Eswatini/Ministry of Finance). Three (Guinea-Bissau, Mauritania, Somalia) carry only generic AfDB/Knoema sponsor links in the footer with no NSO-specific link found this round -- their publisher field follows the NSO name already established elsewhere in-corpus for that country (gw-ine-inhpc, mr-ons-inpc, so-nsds-ii-2024-2029/so-snbs-cpi) but that specific attribution was NOT independently re-verified on the NSDP page itself this round; each report's own description flags this. The self-declaration text and evidence_grade do not depend on the publisher field either way -- rule 19's Togo precedent ('a country's own data portal on opendataforafrica.org... is self-declared', judged by the page's own national branding, not by which specific sub-agency's footer link is present) is what carries the SELF-DECLARED tag for all 18, publisher-attribution strength aside. 13 of the original 34 remain open after this round: Andorra, Albania, Burundi, Central African Republic, Djibouti, Guinea, Micronesia, Montenegro, Palau, San Marino, Kosovo -- checked this round and found NOT to have a live NSDP page on the opendataforafrica.org platform (Burundi, Djibouti, Guinea and Central African Republic's country portals exist but carry no NSDP nav item or resolvable URL; Andorra, Albania, Micronesia, Montenegro, Palau, San Marino and Kosovo were not checked -- opendataforafrica.org appears to be an Africa-focused platform and these are unlikely candidates for it, a different route (IMF press release / DSBB) would be needed. No id or evidence-URL collision found against the whole corpus (research + seed files) for any of the 18 new ids or URLs -- checked before writing.",
+  "reports": [
+    {
+      "id": "bj-nsdp",
+      "title": "National Summary Data Page — Benin",
+      "publisher": "Institut National de la Statistique et de la Démographie (INStaD) du Benin",
+      "country": "BJ",
+      "jurisdiction_level": "federal",
+      "region": "Benin",
+      "description": "Benin's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Benin participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData pour l'Institut National de la Statistique et de la Démographie (INStaD) du Benin' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-benin.opendataforafrica.org/awuvjv/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "mg-nsdp",
+      "title": "National Summary Data Page — Madagascar",
+      "publisher": "Institut National de la Statistique (INSTAT), Madagascar",
+      "country": "MG",
+      "jurisdiction_level": "federal",
+      "region": "Madagascar",
+      "description": "Madagascar's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Madagascar participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Madagascar Data Portal' (country coat of arms), footer links directly to instat.mg -- confirmed via the page's own footer, matches the INSTAT name already used in-corpus (mg-instat-nipc, mg-instat-snds-ii).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://madagascar.opendataforafrica.org/pmidxic/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "zm-nsdp",
+      "title": "National Summary Data Page — Zambia",
+      "publisher": "Zambia Statistics Agency",
+      "country": "ZM",
+      "jurisdiction_level": "federal",
+      "region": "Zambia",
+      "description": "Zambia's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Zambia participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData for Zambia Statistics Agency, Zambia' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-zambia.opendataforafrica.org/ddaiaof/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "zw-nsdp",
+      "title": "National Summary Data Page — Zimbabwe",
+      "publisher": "Zimbabwe National Statistics Agency (ZIMSTAT)",
+      "country": "ZW",
+      "jurisdiction_level": "federal",
+      "region": "Zimbabwe",
+      "description": "Zimbabwe's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Zimbabwe participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page header carries ZimStat, Reserve Bank of Zimbabwe and Ministry of Finance and Economic Development logos jointly; ZIMSTAT is the name already used in-corpus (zw-zimstat-cpi) for Zimbabwe's national statistics office.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://zimbabwe.opendataforafrica.org/xqjvwob/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "ls-nsdp",
+      "title": "National Summary Data Page — Lesotho",
+      "publisher": "Central Bank of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Lesotho's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Lesotho participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData for the Central Bank of Lesotho' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://cb-lesotho.opendataforafrica.org/dmbrohg/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "mz-nsdp",
+      "title": "National Summary Data Page — Mozambique",
+      "publisher": "Instituto Nacional de Estatística, Moçambique",
+      "country": "MZ",
+      "jurisdiction_level": "federal",
+      "region": "Mozambique",
+      "description": "Mozambique's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Mozambique participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData - Instituto Nacional de Estatística, Moçambique' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-mozambique.opendataforafrica.org/fxuuqre/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "mw-nsdp",
+      "title": "National Summary Data Page — Malawi",
+      "publisher": "Reserve Bank of Malawi",
+      "country": "MW",
+      "jurisdiction_level": "federal",
+      "region": "Malawi",
+      "description": "Malawi's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Malawi participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData for the Reserve Bank of Malawi' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://cb-malawi.opendataforafrica.org/uwkhibc/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cm-nsdp",
+      "title": "National Summary Data Page — Cameroon",
+      "publisher": "National Institute of Statistics of Cameroon",
+      "country": "CM",
+      "jurisdiction_level": "federal",
+      "region": "Cameroon",
+      "description": "Cameroon's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Cameroon participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData for the National Institute of Statistics of Cameroon' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-cameroon.opendataforafrica.org/xkrcbs/national-summary-data-page",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "ao-nsdp",
+      "title": "National Summary Data Page — Angola",
+      "publisher": "Instituto Nacional de Estatística (INE), Angola",
+      "country": "AO",
+      "jurisdiction_level": "federal",
+      "region": "Angola",
+      "description": "Angola's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Angola participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Angola Data Portal' (country coat of arms); footer read via accessibility tree links jointly to minfin.gov.ao (Ministry of Finance), bna.ao (central bank) and ine.gov.ao (INE) -- INE matches the name already used in-corpus (ao-ine-ipcn, ao-ine-pasen-2026, ao-ine-sen2018-report).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://angola.opendataforafrica.org/mdvllif",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cv-nsdp",
+      "title": "National Summary Data Page — Cabo Verde",
+      "publisher": "Instituto Nacional de Estatística de Cabo Verde (INE-CV)",
+      "country": "CV",
+      "jurisdiction_level": "federal",
+      "region": "Cabo Verde",
+      "description": "Cabo Verde's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Cabo Verde participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Cabo Verde Data Portal'; footer links directly to ine.cv -- confirmed via the page's own footer, matches the INE-CV name already used in-corpus (cv-ine-ipc).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://caboverde.opendataforafrica.org/scqoed/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gm-nsdp",
+      "title": "National Summary Data Page — Gambia",
+      "publisher": "Gambia Bureau of Statistics (GBoS)",
+      "country": "GM",
+      "jurisdiction_level": "federal",
+      "region": "Gambia",
+      "description": "Gambia's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Gambia participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Gambia Data Portal'; footer links directly to gbosdata.org -- confirmed via the page's own footer, matches the GBoS name already used in-corpus (gm-gbos-cpi).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://gambia.opendataforafrica.org/bmgyepe/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gq-nsdp",
+      "title": "National Summary Data Page — Equatorial Guinea",
+      "publisher": "Instituto Nacional de Estadística de Guinea Ecuatorial (INEGE)",
+      "country": "GQ",
+      "jurisdiction_level": "federal",
+      "region": "Equatorial Guinea",
+      "description": "Equatorial Guinea's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Equatorial Guinea participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Equatorial Guinea Data Portal'; footer links to dgecnstat-ge.org, the country's statistics directorate -- treated as the same body as INEGE, already used in-corpus (gq-inege-anuario-2024, gq-inege-ipc-mensual); this specific naming was not independently re-verified this round.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://eguinea.opendataforafrica.org/jvakil/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cd-nsdp",
+      "title": "National Summary Data Page — Democratic Republic of the Congo",
+      "publisher": "Institut National de la Statistique (INS), République Démocratique du Congo",
+      "country": "CD",
+      "jurisdiction_level": "federal",
+      "region": "Democratic Republic of the Congo",
+      "description": "Democratic Republic of the Congo's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Democratic Republic of the Congo participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Democratic Republic of the Congo Data Portal'; footer links directly to ins-rdc.org -- confirmed via the page's own footer, matches the INS name already used in-corpus (cd-ins-note-conjoncture).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://drcongo.opendataforafrica.org/nqxjsh/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "sz-nsdp",
+      "title": "National Summary Data Page — Eswatini",
+      "publisher": "Ministry of Finance, Eswatini",
+      "country": "SZ",
+      "jurisdiction_level": "federal",
+      "region": "Eswatini",
+      "description": "Eswatini's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Eswatini participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page itself titled 'OpenData for the Ministry of Finance, Eswatini' -- publisher named on the page.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://mof-swaziland.opendataforafrica.org/uhzofbc/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "gw-nsdp",
+      "title": "National Summary Data Page — Guinea-Bissau",
+      "publisher": "Instituto Nacional de Estatística (INE), Guiné-Bissau",
+      "country": "GW",
+      "jurisdiction_level": "federal",
+      "region": "Guinea-Bissau",
+      "description": "Guinea-Bissau's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Guinea Bissau participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Guinea-Bissau Data Portal' (country flag); footer carries only generic AfDB/Knoema sponsor links, no NSO-specific link found this round. Publisher name follows the INE convention already used in-corpus (gw-ine-inhpc) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://guinebissau.opendataforafrica.org/nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "mr-nsdp",
+      "title": "National Summary Data Page — Mauritania",
+      "publisher": "Office National de la Statistique (ONS), Mauritanie",
+      "country": "MR",
+      "jurisdiction_level": "federal",
+      "region": "Mauritania",
+      "description": "Mauritania's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Mauritania participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Mauritania Data Portal' (country flag/seal); footer carries only a generic AfDB sponsor link, no NSO-specific link found this round. Publisher name follows the ONS convention already used in-corpus (mr-ons-inpc) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://mauritania.opendataforafrica.org/nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "st-nsdp",
+      "title": "National Summary Data Page — São Tomé and Príncipe",
+      "publisher": "Instituto Nacional de Estatística (INE), São Tomé e Príncipe",
+      "country": "ST",
+      "jurisdiction_level": "federal",
+      "region": "São Tomé and Príncipe",
+      "description": "São Tomé and Príncipe's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that São Tomé and Príncipe participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'São Tomé and Príncipe Data Portal'; footer links directly to ine.st -- confirmed via the page's own footer, matches the INE name already used in-corpus (st-ende-2025-2029, st-ine-ipc).",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://saotome.opendataforafrica.org/yrdvpcf/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "so-nsdp",
+      "title": "National Summary Data Page — Somalia",
+      "publisher": "Somalia National Bureau of Statistics (SNBS)",
+      "country": "SO",
+      "jurisdiction_level": "federal",
+      "region": "Somalia",
+      "description": "Somalia's National Summary Data Page, published on the OpenData for Africa platform. The page's own text states data on it correspond to the IMF's DSBB and that Somalia participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from the country's own site rather than the IMF's -- continuing the method that wired bw-nsdp, tz-nsdp and ci-nsdp (rounds 19-20). Page branded 'Somalia Data Portal' (country flag/seal); footer carries only generic AfDB/Knoema sponsor links, no NSO-specific link found this round. Publisher name follows the SNBS convention already used in-corpus (so-nsds-ii-2024-2029, so-snbs-cpi) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, tz-nsdp, ci-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://somalia.opendataforafrica.org/fhubste/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bj-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Benin's own National Summary Data Page, published on the OpenData for Africa platform (https://nso-benin.opendataforafrica.org/awuvjv/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Benin participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData pour l'Institut National de la Statistique et de la Démographie (INStaD) du Benin' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-benin.opendataforafrica.org/awuvjv/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Benin participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "mg-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Madagascar's own National Summary Data Page, published on the OpenData for Africa platform (https://madagascar.opendataforafrica.org/pmidxic/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Madagascar participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Madagascar Data Portal' (country coat of arms), footer links directly to instat.mg -- confirmed via the page's own footer, matches the INSTAT name already used in-corpus (mg-instat-nipc, mg-instat-snds-ii). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://madagascar.opendataforafrica.org/pmidxic/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Madagascar participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "zm-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Zambia's own National Summary Data Page, published on the OpenData for Africa platform (https://nso-zambia.opendataforafrica.org/ddaiaof/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Zambia participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData for Zambia Statistics Agency, Zambia' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-zambia.opendataforafrica.org/ddaiaof/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Zambia participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "zw-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Zimbabwe's own National Summary Data Page, published on the OpenData for Africa platform (https://zimbabwe.opendataforafrica.org/xqjvwob/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Zimbabwe participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page header carries ZimStat, Reserve Bank of Zimbabwe and Ministry of Finance and Economic Development logos jointly; ZIMSTAT is the name already used in-corpus (zw-zimstat-cpi) for Zimbabwe's national statistics office. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://zimbabwe.opendataforafrica.org/xqjvwob/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Zimbabwe participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ls-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Lesotho's own National Summary Data Page, published on the OpenData for Africa platform (https://cb-lesotho.opendataforafrica.org/dmbrohg/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Lesotho participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData for the Central Bank of Lesotho' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://cb-lesotho.opendataforafrica.org/dmbrohg/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Lesotho participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "mz-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Mozambique's own National Summary Data Page, published on the OpenData for Africa platform (https://nso-mozambique.opendataforafrica.org/fxuuqre/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Mozambique participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData - Instituto Nacional de Estatística, Moçambique' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-mozambique.opendataforafrica.org/fxuuqre/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Mozambique participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "mw-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Malawi's own National Summary Data Page, published on the OpenData for Africa platform (https://cb-malawi.opendataforafrica.org/uwkhibc/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Malawi participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData for the Reserve Bank of Malawi' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://cb-malawi.opendataforafrica.org/uwkhibc/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Malawi participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cm-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Cameroon's own National Summary Data Page, published on the OpenData for Africa platform (https://nso-cameroon.opendataforafrica.org/xkrcbs/national-summary-data-page, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cameroon participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData for the National Institute of Statistics of Cameroon' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-cameroon.opendataforafrica.org/xkrcbs/national-summary-data-page",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cameroon participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ao-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Angola's own National Summary Data Page, published on the OpenData for Africa platform (https://angola.opendataforafrica.org/mdvllif, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Angola participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Angola Data Portal' (country coat of arms); footer read via accessibility tree links jointly to minfin.gov.ao (Ministry of Finance), bna.ao (central bank) and ine.gov.ao (INE) -- INE matches the name already used in-corpus (ao-ine-ipcn, ao-ine-pasen-2026, ao-ine-sen2018-report). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://angola.opendataforafrica.org/mdvllif",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Angola participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cv-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Cabo Verde's own National Summary Data Page, published on the OpenData for Africa platform (https://caboverde.opendataforafrica.org/scqoed/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cabo Verde participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Cabo Verde Data Portal'; footer links directly to ine.cv -- confirmed via the page's own footer, matches the INE-CV name already used in-corpus (cv-ine-ipc). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://caboverde.opendataforafrica.org/scqoed/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cabo Verde participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gm-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Gambia's own National Summary Data Page, published on the OpenData for Africa platform (https://gambia.opendataforafrica.org/bmgyepe/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Gambia participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Gambia Data Portal'; footer links directly to gbosdata.org -- confirmed via the page's own footer, matches the GBoS name already used in-corpus (gm-gbos-cpi). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://gambia.opendataforafrica.org/bmgyepe/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Gambia participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gq-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Equatorial Guinea's own National Summary Data Page, published on the OpenData for Africa platform (https://eguinea.opendataforafrica.org/jvakil/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Equatorial Guinea participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Equatorial Guinea Data Portal'; footer links to dgecnstat-ge.org, the country's statistics directorate -- treated as the same body as INEGE, already used in-corpus (gq-inege-anuario-2024, gq-inege-ipc-mensual); this specific naming was not independently re-verified this round. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://eguinea.opendataforafrica.org/jvakil/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Equatorial Guinea participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cd-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Democratic Republic of the Congo's own National Summary Data Page, published on the OpenData for Africa platform (https://drcongo.opendataforafrica.org/nqxjsh/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Democratic Republic of the Congo participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Democratic Republic of the Congo Data Portal'; footer links directly to ins-rdc.org -- confirmed via the page's own footer, matches the INS name already used in-corpus (cd-ins-note-conjoncture). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://drcongo.opendataforafrica.org/nqxjsh/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Democratic Republic of the Congo participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "sz-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Eswatini's own National Summary Data Page, published on the OpenData for Africa platform (https://mof-swaziland.opendataforafrica.org/uhzofbc/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Eswatini participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page itself titled 'OpenData for the Ministry of Finance, Eswatini' -- publisher named on the page. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://mof-swaziland.opendataforafrica.org/uhzofbc/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Eswatini participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gw-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Guinea-Bissau's own National Summary Data Page, published on the OpenData for Africa platform (https://guinebissau.opendataforafrica.org/nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guinea Bissau participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Guinea-Bissau Data Portal' (country flag); footer carries only generic AfDB/Knoema sponsor links, no NSO-specific link found this round. Publisher name follows the INE convention already used in-corpus (gw-ine-inhpc) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://guinebissau.opendataforafrica.org/nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Guinea Bissau participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "mr-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Mauritania's own National Summary Data Page, published on the OpenData for Africa platform (https://mauritania.opendataforafrica.org/nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Mauritania participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Mauritania Data Portal' (country flag/seal); footer carries only a generic AfDB sponsor link, no NSO-specific link found this round. Publisher name follows the ONS convention already used in-corpus (mr-ons-inpc) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://mauritania.opendataforafrica.org/nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Mauritania participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "st-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). São Tomé and Príncipe's own National Summary Data Page, published on the OpenData for Africa platform (https://saotome.opendataforafrica.org/yrdvpcf/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which São Tomé and Príncipe participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'São Tomé and Príncipe Data Portal'; footer links directly to ine.st -- confirmed via the page's own footer, matches the INE name already used in-corpus (st-ende-2025-2029, st-ine-ipc). via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://saotome.opendataforafrica.org/yrdvpcf/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which São Tomé and Príncipe participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "so-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08 (round 21), continuing the [Agent] todo 'the e-GDDS third of the tier finding' (int-imf-tier-sweep-2026-09-07.json's _dropped named 34 e-GDDS participants with a real NSDP and no node; rounds 19-20 wired Botswana, Tanzania and Cote d'Ivoire off the same opendataforafrica.org NSDP-template method -- this round applied the generalised method HANDOFF.md flagged: search '<country> opendataforafrica NSDP' and go straight to the country's own opendataforafrica.org NSDP page in Chrome, before IMF press releases or DSBB routes). Somalia's own National Summary Data Page, published on the OpenData for Africa platform (https://somalia.opendataforafrica.org/fhubste/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- these opendataforafrica.org pages are Cloudflare-walled to cloud-sandbox curl, same wall class as bw-nsdp/tz-nsdp/ci-nsdp per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Somalia participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp/tz-nsdp/ci-nsdp). Page branded 'Somalia Data Portal' (country flag/seal); footer carries only generic AfDB/Knoema sponsor links, no NSO-specific link found this round. Publisher name follows the SNBS convention already used in-corpus (so-nsds-ii-2024-2029, so-snbs-cpi) but was NOT independently re-confirmed on this specific page -- weaker than the footer-linked group above, flagged as such. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://somalia.opendataforafrica.org/fhubste/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Somalia participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": [
+    {
+      "edge": "Burundi, Djibouti, Guinea, Central African Republic -- checked this round, no live NSDP on opendataforafrica.org",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Continuing round 21's sweep of int-imf-tier-sweep-2026-09-07.json's 34-country e-GDDS list. Burundi's own burundi.opendataforafrica.org portal exists (checked in Chrome) but its nav carries no NSDP tab (Home, Data Catalog, Gallery, SDG, COVID-19, PNRD, DBSEB, SANTE, RGAE -- no NSDP). Djibouti's own djibouti.opendataforafrica.org exists but its nav is Home/Data Catalog/Visualisations/SDG/Census/PNRD -- no NSDP. Guinea's own guinea.opendataforafrica.org exists but its nav is Homepage/Data Catalog/Gallery/SDG/PNRD/ANASA/ODIN -- no NSDP tab (a WebSearch hit found only an 'nsdp-editor' page at guinea.opendataforafrica.org/rtltrwe/nsdp-editor, which is an internal editing tool, not a public NSDP page). Central African Republic has no opendataforafrica.org country portal at all -- centrafrique.opendataforafrica.org returns an error page, and no other slug was found via WebSearch. All four remain open leads for a future round via a different route (IMF press release naming the NSDP directly, or dsbb.imf.org)."
+    },
+    {
+      "edge": "Andorra, Albania, Micronesia, Montenegro, Palau, San Marino, Kosovo -- not checked this round",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The remaining 7 of the original 34-country e-GDDS list. opendataforafrica.org is, on this round's evidence (34 of 34 checked countries so far have been African, and every non-African NSDP-editor/portal search returned nothing), an Africa-focused platform -- these seven are Europe/Micronesia/Caribbean-region countries and were not tried against it this round on that basis. Left open for a future round via a direct IMF press release or dsbb.imf.org search, not via opendataforafrica.org."
+    }
+  ]
+}

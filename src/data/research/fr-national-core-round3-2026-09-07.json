@@ -1,0 +1,59 @@
+{
+  "_slice": "fr-national-core-round3-2026-09-07",
+  "_researched": "2026-09-07",
+  "_status": "draft",
+  "_note": "FR round 3, a different shape than rounds 1-2's GNI-inventory-chapter method. Opened HANDOFF's standing DGDDI lead (fr-insee-national-accounts -> DGDDI's monthly foreign-trade bulletin, refused twice as agency-not-artefact: round 1 against the GNI inventory's own agency-level passage, round 2 against DSECE's mission page and INSEE's Courrier des statistiques article, both self-declared but both naming only \"customs data\" generically, never a titled artefact). Reopened not by re-reading either spent class but by searching for a document naming a DGDDI product BY TITLE while citing it -- found in INSEE's own December 2025 Note de conjoncture (an INSEE first-party publication, not previously represented in this corpus at all), whose December 2025 agri-food-trade éclairage cites DGDDI's quarterly analysis bulletin 'Le chiffre du commerce extérieur' BY FULL TITLE in its own bibliography, with the in-text footnote (footnote 1) stating a specific trade-deficit figure is computed directly from that bulletin's Q3 2025 data. This is a DIFFERENT DGDDI artefact than the one named in rounds 1-2's dropped note (that note's target was DGDDI's MONTHLY press release, 'Résultats du commerce extérieur'; this round's target is DGDDI/DSECE's QUARTERLY thematic analysis series under the same portal, lekiosque.finances.gouv.fr, whose own page title is literally 'Le chiffre du commerce extérieur' -- raw-verified live 2026-09-07, and its cited Q3 2025 edition at lekiosque.finances.gouv.fr/fichiers/Etudes/thematiques/3T2025.pdf raw-verified live, PDF metadata CreationDate 6 Nov 2025 UTC matching the bibliography's 'novembre 2025'). The monthly-bulletin lead stays refused exactly as rounds 1-2 left it -- not re-tested here. Two new nodes minted (neither existed in the corpus before this round, confirmed by id and title grep): fr-insee-note-de-conjoncture (INSEE's own quarterly economic-outlook report, not previously represented in the corpus at all) and fr-dgddi-chiffre-commerce-exterieur (DGDDI/DSECE's quarterly trade-analysis series). One edge wired between them, graded against the caption/table-cell disclosure ruling (PLAYBOOK-CORPUS.md §7a: a citation whose whole purpose is source disclosure names the artefact, same standing as a chart caption or a sourced table cell) since the bibliography entry's function is exactly that disclosure and it names the specific titled artefact, not the agency. Evidence grade to be confirmed by scripts/grade-evidence.ts before this file leaves draft.",
+  "reports": [
+    {
+      "id": "fr-insee-note-de-conjoncture",
+      "title": "Note de conjoncture",
+      "title_aliases": [
+        "Conjoncture française"
+      ],
+      "publisher": "INSEE (Institut national de la statistique et des études économiques)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's quarterly economic-outlook report on the French and international economy -- GDP, trade, prices, employment and short-term public-finance developments -- built around a 'Conjoncture française' chapter plus thematic 'Éclairages' (in-depth features) each edition. The December 2025 edition's éclairage on the French agri-food trade balance computes a quantities/prices decomposition directly from customs (DGDDI) trade data, footnoting a specific trade-deficit figure to DGDDI's own quarterly analysis bulletin (fr-dgddi-chiffre-commerce-exterieur).",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly: editions cited or referenced in this round's evidence are dated December 2025 (this round's primary source) and June 2025 (a paper in its own bibliography), consistent with INSEE's published March/June/September/December cycle.",
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/statistiques/fichier/8684437/ndc-dec-2025.pdf",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "fr-dgddi-chiffre-commerce-exterieur",
+      "title": "Le chiffre du commerce extérieur",
+      "title_aliases": [],
+      "publisher": "Direction Générale des Douanes et Droits Indirects (DGDDI) -- Département des statistiques et des études du commerce extérieur (DSECE)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "DGDDI/DSECE's foreign-trade statistics portal and publication series (lekiosque.finances.gouv.fr, whose own page title is 'Le chiffre du commerce extérieur - Page d'accueil'), which runs both a monthly results commentary and a quarterly thematic analysis series under the 'bilans périodiques' heading -- this node represents the quarterly thematic series. The Q3 2025 edition ('Le chiffre du commerce extérieur – Analyse du troisième trimestre 2025', published November 2025) is live at the cited URL and is the edition INSEE's December 2025 Note de conjoncture cites by full title in its own bibliography.",
+      "releases_per_year": 4,
+      "cadence_note": "The 'bilans périodiques' quarterly thematic analysis this node models is distinct from the portal's separate monthly 'commentaires mensuels' results release and from DGDDI's monthly press release 'Résultats du commerce extérieur' (a different, not-yet-wired DGDDI artefact -- see HANDOFF.md's standing lead).",
+      "last_updated": null,
+      "url": "https://lekiosque.finances.gouv.fr/fichiers/Etudes/thematiques/3T2025.pdf",
+      "domains": [
+        "trade"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fr-insee-note-de-conjoncture",
+      "target_report_id": "fr-dgddi-chiffre-commerce-exterieur",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-09-07 (FR round 3). INSEE's own December 2025 Note de conjoncture, in the éclairage on the French agri-food trade balance, states in its footnote 1: 'Ce déficit est évalué « CAF-FAB » à partir des données du bulletin du troisième trimestre 2025 de la DGDDI, 2025.' -- i.e. a specific trade-deficit figure the report publishes is computed directly from DGDDI's Q3 2025 bulletin. The document's own Bibliographie section resolves that 'DGDDI, 2025' citation to the titled artefact by name, author and date: 'DGDDI (2025), « Le chiffre du commerce extérieur – Analyse du troisième trimestre 2025 », novembre 2025'. Graded per the standing table-cell/caption disclosure ruling (PLAYBOOK-CORPUS.md §7a): a citation whose whole purpose is source disclosure names the artefact the same as a sourced table cell or chart caption, and this entry names the specific titled bulletin, not merely the agency -- the exact gap that refused this lead twice before (round 1 against the GNI inventory's agency-level passage, round 2 against DSECE's mission page and INSEE's Courrier des statistiques article, both generic 'customs data'). The cited Q3 2025 edition was raw-verified live 2026-09-07 at lekiosque.finances.gouv.fr/fichiers/Etudes/thematiques/3T2025.pdf (PDF metadata CreationDate 6 Nov 2025 UTC, matching the bibliography's 'novembre 2025').",
+      "evidence_url": "https://www.insee.fr/fr/statistiques/fichier/8684437/ndc-dec-2025.pdf",
+      "evidence_quote": "DGDDI (2025), « Le chiffre du commerce extérieur – Analyse du troisième trimestre 2025 », novembre 2025",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": []
+}

@@ -1,0 +1,48 @@
+{
+  "_slice": "in-nsdp-2026-09-07",
+  "_researched": "2026-09-07",
+  "_status": "draft",
+  "_note": "Continues the [Agent] todo 'India's NSDP, from a new direction' (HANDOFF.md). The IMF's own dsbb list endpoint gives dea.gov.in/sites/default/files/nsdp.htm as India's NSDPUrl -- confirmed dead again this round from three networks (cloud sandbox curl: connection reset; the linked device's own network: connection refused; WebFetch alone reached it but the page it returned never mentions SDDS or the IMF at all, so even a working route to it would not have helped). Followed the todo's own lead instead: searched mospi.gov.in and rbi.org.in directly rather than retrying dea.gov.in. mospi.gov.in's own NSDP announcement page (https://www.mospi.gov.in/announcements/summary-data-real-sector-nsdp-sdds-0) is a Drupal JS shell that returns 2.7KB of chrome and no body text to a plain fetch -- consistent with the standing note that mospi.gov.in needs a live browser to render, not pursued further this round since RBI's route worked cleanly. RBI hosts its own NSDP under classic server-rendered ASP.NET (no JS-shell problem): its 'Sources of Information' page (https://www.rbi.org.in/scripts/SDDSview.aspx, raw-verified via cloud-sandbox curl, HTTP 200, 67,519 bytes) states RBI's SDDS role directly and links onward, labelled 'National Summary Data Page', to https://rbi.org.in/Scripts/BS_NSDPDisplay.aspx -- also raw-verified, HTTP 200, 172,361 bytes, live data dated September 2026 (Date of Publish: Sep 04, 2026; table rows dated as late as August 28, 2026), structured exactly per SDDS categories (Reserves Template, International Investment Position, External Debt, Advance Release Calendar) and headed in its own markup 'SDDS-NATIONAL SUMMARY DATA PAGE-INDIA'. This is a live, current, first-party NSDP that the IMF's own dsbb record for India (a dead dea.gov.in link) does not surface -- the standing lead's 'somewhere other than dea.gov.in' is this page. Node minted from BS_NSDPDisplay.aspx (what the NSDP IS); evidence_url and evidence_quote instead point to SDDSview.aspx, the companion RBI page that names SDDS and NSDP together in the same two sentences and links directly to the NSDP page by that label -- chosen over the NSDP page's own table-header labels because the two mentions of 'SDDS' sit inside the same sentence as the declarative claim, guaranteeing they land in the same grading window, rather than relying on a data-table heading several thousand characters from any full sentence. No id or evidence-URL collision found against the whole corpus (research + seed files) for in-nsdp, rbi.org.in/scripts/SDDSview.aspx or rbi.org.in/Scripts/BS_NSDPDisplay.aspx."
+  ,
+  "reports": [
+    {
+      "id": "in-nsdp",
+      "title": "National Summary Data Page — India",
+      "publisher": "Reserve Bank of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "India's National Summary Data Page as hosted by the Reserve Bank of India, the single page of macroeconomic and financial data the IMF's SDDS prescribes and monitors on the Dissemination Standards Bulletin Board. The IMF's own dsbb list endpoint points to a dead dea.gov.in URL for India (confirmed unreachable across three networks this round and in round 8/9); this is the live, current alternative RBI itself hosts and updates (data dated September 2026 at the time of research), reached via RBI's 'Sources of Information → SDDS' page rather than the IMF's stale pointer. Coverage, periodicity and timeliness of every category on it are set by the standard, which is what the edge to imf-sdds records.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page with no discrete editions: the standard prescribes a periodicity and a timeliness per data category, and the page is refreshed as each category releases. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) — a nominal releases_per_year so the pulse reads as continuous rather than one-off; 250 encodes business-day updating. It is a statement of continuous flow, not a claim of counted editions.",
+      "last_updated": null,
+      "url": "https://rbi.org.in/Scripts/BS_NSDPDisplay.aspx",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "in-nsdp",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-07, continuing the [Agent] todo 'India's NSDP, from a new direction'. RBI's own 'Sources of Information' page for SDDS (https://www.rbi.org.in/scripts/SDDSview.aspx, raw-verified via cloud-sandbox curl, HTTP 200) states: 'The Reserve Bank of India is one of the earliest central bank signatories of SDDS. This section provides the data released by the Reserve Bank of India under SDDS requirements.' and immediately below that sentence links, labelled 'National Summary Data Page', to https://rbi.org.in/Scripts/BS_NSDPDisplay.aspx -- the node this edge is drawn from. The NSDP page itself (also raw-verified, HTTP 200, live data dated September 2026) independently corroborates the same claim in its own markup, headed 'SDDS-NATIONAL SUMMARY DATA PAGE-INDIA' and carrying a 'SDDS Data Category and Component' column across every data table (Reserves Template, International Investment Position, External Debt) plus a 'Special Data Dissemination Standards (SDDS) Advance Release Calendar' section -- but the evidence_quote below is taken from SDDSview.aspx rather than from one of those table headings, because the two 'SDDS' mentions there sit inside the same two sentences as the declarative claim, which keeps naming and declaration in one grading window; a table-heading quote would put the nearest full sentence too far away, the same trap that graded the NSDP block's El Salvador/Kyrgyz Republic/Mexico edges B on 2026-09-07 (round 17 sweep, memory round17_stale_cache_b_sweep_2026-09-07). via: cloud-sandbox curl, 2026-09-07, direct read of the cited URL on the live host, browser UA, no snapshot needed.",
+      "evidence_url": "https://www.rbi.org.in/scripts/SDDSview.aspx",
+      "evidence_quote": "The Reserve Bank of India is one of the earliest central bank signatories of SDDS. This section provides the data released by the Reserve Bank of India under SDDS requirements.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": [
+    {
+      "edge": "in-nsdp -> imf-sdds (dea.gov.in route)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "STILL DEAD 2026-09-07 (round 18). The IMF's own dsbb list endpoint gives https://dea.gov.in/sites/default/files/nsdp.htm as India's NSDPUrl. Re-tested from a fifth and sixth network this round: cloud-sandbox curl (`curl: (35) Recv failure: Connection reset by peer`, agent-proxy log confirms a mid-exchange tunnel close to dea.gov.in:443) and the linked device's own separate network (`curl: (7) Failed to connect ... Connection refused` after ~22s). A seventh route, WebFetch, DID return content for this URL, but per PLAYBOOK-CORPUS.md rule 3 a WebFetch read is a lead to raw-verify, not a source, and raw verification failed on both available networks; WebFetch's own returned text was checked anyway and it names neither the IMF nor SDDS anywhere, so even a working direct route to this exact URL would not have supported the edge. Do not retry this URL again barring a report that the host's routing changed; India's NSDP is wired instead off RBI's own current page (this file's live edge)."
+    }
+  ]
+}

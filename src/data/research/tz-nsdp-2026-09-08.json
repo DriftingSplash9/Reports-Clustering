@@ -1,0 +1,39 @@
+{
+  "_slice": "tz-nsdp-2026-09-08",
+  "_researched": "2026-09-08",
+  "_status": "draft",
+  "_note": "Continues the [Agent] todo 'the e-GDDS third of the tier finding' (HANDOFF.md; int-imf-tier-sweep-2026-09-07.json's _dropped, and bw-nsdp-2026-09-07.json's own _dropped entry, both name Tanzania as the other of the two most valuable of 34 unwired e-GDDS participants, after round 19 wired Botswana). Round 19 tried and closed two routes for Tanzania: NBS Tanzania's nav label ('e-GDDS', bare, no declarative sentence) and four dsbb.imf.org routes (Angular shell / 400). This round tried the two routes round 19 left open and both worked. (1) The IMF's own 2016 press release announcing Tanzania's e-GDDS implementation (imf.org/en/news/articles/2016/11/23/pr16524-tanzania-to-implement-imf-enhanced-general-data-dissemination-system), which 403'd Akamai to curl in round 19 (and again this round from the cloud sandbox), reads cleanly in Thomas's Chrome: 'This sets Tanzania firmly among the first wave of countries to implement the e-GDDS', and it names Tanzania's NSDP directly, linking to http://nso.tanzania.opendataforafrica.org/yolzjif/nsdp -- a REGISTER-tier document (rule 19), since it is IMF's own page about the target standard. (2) That linked NSDP page 404s (path retired), but the CURRENT NSDP page -- nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp -- is live: 403 Cloudflare to cloud-sandbox curl (same wall bw-nsdp's linked cb-botswana.opendataforafrica.org hit, per PLAYBOOK-CORPUS.md rule 3 and the 2026-09-04 Chrome-read ruling), but reads cleanly in Chrome, titled 'National Summary Data Page (NSDP) - OpenData for the National Bureau of Statistics, Tanzania' and stating in its own text, self-declared on NBS's behalf, that Tanzania participates in the enhanced GDDS. Preferred this SELF-DECLARED page over the IMF press release per rule 19's 'prefer a self-declared document even when a register would grade the same' -- node and evidence are the same URL, no split needed (same shape as bw-nsdp, unlike the India round-18 split). The 2013 'Prototype of National Summary Data Page' PDF round 19 flagged as an unopened lead (nbs.go.tz/nbs/takwimu/gdds/NSDP_FEB_2013.pdf) was opened this round and confirmed a dead end as suspected: 734,054 bytes, pdftotext'd in full, and it names neither 'e-GDDS', 'Enhanced', nor 'dissemination' anywhere -- a plain GDDS-era data table from before the 2016 enhanced relaunch, correctly left unused. No id or evidence-URL collision found against the whole corpus (research + seed files) for tz-nsdp or nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp.",
+  "reports": [
+    {
+      "id": "tz-nsdp",
+      "title": "National Summary Data Page — Tanzania",
+      "publisher": "National Bureau of Statistics (Tanzania)",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania Mainland",
+      "description": "Tanzania's National Summary Data Page, published on the OpenData for Africa platform on behalf of the National Bureau of Statistics, following a 2016 IMF Statistics Department mission (per the IMF's own November 2016 press release) that helped develop it using the Open Data Platform installed with African Development Bank support. The page's own text states data on it correspond to the IMF's DSBB and that Tanzania participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from Tanzania's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp and in-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "tz-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08, continuing the [Agent] todo 'the e-GDDS third of the tier finding' (Botswana wired round 19, Tanzania left open). Tanzania's own National Summary Data Page, published on behalf of the National Bureau of Statistics on the OpenData for Africa platform (https://nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp, read in Thomas's own Chrome 2026-09-08 -- the cited URL returns HTTP 403 Cloudflare to cloud-sandbox curl, same wall class as anstat.ci and ibge.gov.br per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Tanzania participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp). Corroborated by a REGISTER-tier document not used as the citation: the IMF's own November 2016 press release (imf.org/en/news/articles/2016/11/23/pr16524-tanzania-to-implement-imf-enhanced-general-data-dissemination-system, also read in Chrome after a 403 Akamai to curl) states 'This sets Tanzania firmly among the first wave of countries to implement the e-GDDS' and names this same NSDP directly -- not cited here per rule 19's preference for the self-declared document where both would grade the same. Note this is a DIFFERENT, additive edge to the existing tz-nbs-cpi-dqa -> imf-sdds edge (tz-cpi-social-protection.json, grade A) -- that edge evidences a national CPI programme's own SDDS-dissemination claim (per tz-cpi-social-protection.json's 2026-09-07 correction, an inference about Tanzania's TIER was wrong, but the SDDS-methodology quote itself is real and stands); this edge is the institutional e-GDDS edge that int-imf-tier-sweep-2026-09-07.json's _dropped entry said was unminted for want of a node, now wired via Tanzania's own NSDP page instead. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Tanzania participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": []
+}

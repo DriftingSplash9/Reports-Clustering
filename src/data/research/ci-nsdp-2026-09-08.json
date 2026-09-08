@@ -1,0 +1,39 @@
+{
+  "_slice": "ci-nsdp-2026-09-08",
+  "_researched": "2026-09-08",
+  "_status": "draft",
+  "_note": "Continues the [Agent] todo 'the e-GDDS third of the tier finding' (HANDOFF.md). int-imf-tier-sweep-2026-09-07.json's _dropped named Cote d'Ivoire as carrying 'a standing lead': its NSDP was first posted 2017-12-27 and dsbb.imf.org's api/country/ route (unlike the Angular-shell pages hit for Tanzania) reads fine. ci-cpi-social-protection.json's own 2026-09-07 addendum had already confirmed CI is an e-GDDS participant, not SDDS/SDDS Plus, but left the edge unminted for want of an ANStat NSDP node. A web search for 'opendataforafrica' + ANStat found Cote d'Ivoire's own NSDP page directly, the same platform Tanzania and Botswana use: nso-cotedivoire.opendataforafrica.org/awirqrf/national-summary-data-page-nsdp -- titled 'National Summary Data Page (NSDP) - OpenData de l'Agence Nationale de la Statistique (ANStat)', the SAME publisher already in the corpus for ci-anstat-ihpc. 403 Cloudflare to cloud-sandbox curl (same wall as Tanzania's and Botswana's equivalent pages), reads cleanly in Thomas's Chrome, and carries the identical OpenDataForAfrica NSDP-template declaration used on Tanzania's page, this time naming Cote d'Ivoire directly and stating it participates in the enhanced GDDS -- SELF-DECLARED, on ANStat's own behalf, no split needed between node and evidence. This is a different, additive anchor to the existing ci-anstat-ihpc node (the CPI release itself, not the statistical system's NSDP) -- ci-anstat-ihpc has no edge to imf-e-gdds and none is added to it here; ci-nsdp is the institutional anchor the tier-sweep dropped-entry said CI was missing. No id or evidence-URL collision found against the whole corpus (research + seed files) for ci-nsdp or nso-cotedivoire.opendataforafrica.org.",
+  "reports": [
+    {
+      "id": "ci-nsdp",
+      "title": "National Summary Data Page — Côte d'Ivoire",
+      "publisher": "Agence Nationale de la Statistique (ANStat)",
+      "country": "CI",
+      "jurisdiction_level": "federal",
+      "region": "Côte d'Ivoire",
+      "description": "Cote d'Ivoire's National Summary Data Page, published on the OpenData for Africa platform on behalf of ANStat (Agence Nationale de la Statistique), the same institute that publishes the country's IHPC (ci-anstat-ihpc). The page's own text states data on it correspond to the IMF's DSBB and that Cote d'Ivoire participates in the enhanced General Data Dissemination System. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from Cote d'Ivoire's own site rather than the IMF's; the tier sweep (int-imf-tier-sweep-2026-09-07.json) separately confirmed via the IMF's own country endpoint that CI's NSDP was first posted 2017-12-27 and that CI appears in neither the SDDS nor SDDS Plus lists.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page, not a discrete-edition publication -- same renderer convention as bw-nsdp, in-nsdp and tz-nsdp (HANDOFF section 7, 2026-08-18): a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://nso-cotedivoire.opendataforafrica.org/awirqrf/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ci-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-08, continuing the [Agent] todo 'the e-GDDS third of the tier finding' and closing the standing lead named in int-imf-tier-sweep-2026-09-07.json's _dropped and ci-cpi-social-protection.json's own 2026-09-07 addendum. Cote d'Ivoire's own National Summary Data Page, published on behalf of ANStat on the OpenData for Africa platform (https://nso-cotedivoire.opendataforafrica.org/awirqrf/national-summary-data-page-nsdp, read in Thomas’s own Chrome 2026-09-08 -- the cited URL returns HTTP 403 Cloudflare to cloud-sandbox curl, same wall class as anstat.ci per the routing snapshot, and a Chrome read of the cited URL is the direct read per the 2026-09-04 ruling), states in its own text: 'Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cote d’Ivoire participates, please visit the DSBB home page.' This is the same page the node is minted from -- a self-contained declaration, no split needed (same shape as bw-nsdp and tz-nsdp). Additive to, and does not touch, the existing ci-anstat-ihpc node and its two B-grade edges (ci-cpi-social-protection.json) -- those evidence the CPI release's own weights and classification, not the statistical system's dissemination-standard membership. via: claude-in-chrome, 2026-09-08, direct read of the cited URL on the live host.",
+      "evidence_url": "https://nso-cotedivoire.opendataforafrica.org/awirqrf/national-summary-data-page-nsdp",
+      "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Cote d’Ivoire participates, please visit the DSBB home page.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": []
+}

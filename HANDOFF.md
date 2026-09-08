@@ -14,8 +14,8 @@ until 2026-09-07. That cap was retired by Thomas in §1 on the same day this lin
 written, and the two sat contradicting each other for three rounds. The gauge is the
 read-cost percentage in §1, not a character count.)*
 
-Last updated: 2026-09-07 ~18:15 UTC (still handoff 075 — §2/§3 edited in place for
-rounds 9 through 14; not a new handoff under §4, no archive)
+Last updated: 2026-09-08 ~01:40 UTC (still handoff 075 — §2/§3 edited in place for
+rounds 9 through 21; not a new handoff under §4, no archive)
 
 ---
 
@@ -85,15 +85,88 @@ thing that gets defended.
 
 ## 2. Current state
 
-Corpus **3,551 reports / 3,116 dependencies**. **1,105 A · 1,399 B · 612 C**, A-share
-35.5%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
-`tsc --noEmit` clean, grader **selftest 76/76**, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back, current as of 2026-09-07
-18:15 UTC. **980 nodes still have zero edges** (+1) — the one relation-only node round 14
+Corpus **3,575 reports / 3,139 dependencies**. **1,128 A · 1,399 B · 612 C**, A-share
+35.9%. **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
+`tsc --noEmit` clean, `vite build` ok,
+`public/corpus-data.json` regenerated and copied back, current as of 2026-09-08
+~01:40 UTC. **980 nodes still have zero edges** — unchanged (rounds 18-21's new nodes
+each have one edge, so none of them join this count); the one relation-only node round 14
 minted, expected by construction (relations never reach `buildGraph`), not a defect.
 
-**FR: two rounds in, round 13's own three left-open leads all closed or refined by round
-14.** Round 13 (first FR round) wired 9 nodes/9 edges off France's own GNI inventory
+**FR: three rounds in (global rounds 13-15). Round 15 (FR round 3, this round) opened a
+different shape of lead than rounds 13-14's GNI-inventory-chapter method:** it minted
+**fr-insee-note-de-conjoncture** (INSEE's own quarterly economic-outlook report, not
+previously in the corpus at all) and **fr-dgddi-chiffre-commerce-exterieur** (DGDDI/DSECE's
+quarterly trade-analysis series, "Le chiffre du commerce extérieur"), wiring one
+**A**-graded edge between them: INSEE's own December 2025 Note de conjoncture footnotes a
+specific trade-deficit figure to DGDDI's Q3 2025 bulletin, and its own Bibliographie
+resolves that citation to the artefact BY FULL TITLE — the exact bar rounds 13-14 could not
+clear (both found only generic "customs data" statements). Graded via the caption/table-cell
+disclosure ruling (PLAYBOOK-CORPUS.md §7a): a citation whose whole purpose is source
+disclosure names the artefact, same as a chart caption. **This is a DIFFERENT DGDDI
+artefact than the standing lead's target** — the quarterly analysis series, not the monthly
+press release ("Résultats du commerce extérieur"). Graded and validated in a cloud sandbox:
+128/128 logic, tsc clean, `validate` exit 0, counts moved by exactly +2 reports/+1
+dependency/+1 A as expected. Full narrative: memory `round15_fr_note_de_conjoncture_2026-09-07`.
+
+**Round 16 (this round) tried the monthly bulletin again and it is STILL refused — no data
+changed, counts unchanged from round 15.** Four more candidate document classes checked
+(Trésor's own same-titled annual commentary, Banque de France's annual BoP report, two more
+INSEE Note/Point de conjoncture editions, INSEE's Comptes de la Nation chapter and TEF page)
+and every one attributes trade-in-goods figures to the AGENCY ("Douanes / DSECE") in a chart
+caption, never to the specific monthly release by title — same wall as rounds 1-2, now hit
+from six candidate-document angles across four rounds. **This looks structural rather than
+under-searched**: nobody found this specific title cited anywhere except DGDDI's own pages.
+Flagged in [Thomas] below rather than re-run a fifth time. Full narrative: memory
+`round16_fr_dgddi_monthly_still_refused_2026-09-07`.
+
+**Round 17 (this round, no data changed) executed and CLOSED the standing "stale-cache B
+sweep" todo** (opened round 11): only three live edges corpus-wide carried the flagged grade
+reasons, all in the NSDP block (`sv-nsdp`, `kg-nsdp`, `mx-nsdp -> imf-sdds`), and a fresh
+`--refetch` in a clean sandbox reproduced B on all three exactly — the pages genuinely name
+the DSBB, not SDDS, within reach of the self-declaration quote. Nothing written. See §3 for
+the todo item removed and memory `round17_stale_cache_b_sweep_2026-09-07`.
+
+**Round 18 (this round) closed the standing "India's NSDP, from a new direction" todo**
+(open since round 9): `dea.gov.in`'s NSDP URL is confirmed dead again, from a fifth and
+sixth network, in a genuinely different failure mode than earlier rounds (connection
+reset / connection refused, not a cert or bot-wall problem) — WebFetch alone returned
+content for it, raw-verification failed on both available networks, and the returned text
+named neither the IMF nor SDDS anyway, so the URL was correctly abandoned rather than
+retried again. India's NSDP is wired instead off RBI's own current pages: `in-nsdp`
+(RBI's `BS_NSDPDisplay.aspx`, live data dated September 2026) `-> imf-sdds`, evidenced off
+the companion `SDDSview.aspx` page, deliberately choosing its two-sentence self-declaration
+over the NSDP page's own table headings to avoid repeating round 17's B-grade trap (target
+name too far from the declaration). Graded **A `quote-found-artefact-named` at coverage
+1.00** on the first attempt. Validated in a cloud sandbox: 128/128 logic, tsc clean,
+`validate` exit 0, counts moved by exactly +1 report/+1 dependency/+1 A as expected. Full
+narrative: memory `round18_india_nsdp_2026-09-07`.
+
+**Round 19 (this round) advanced the e-GDDS tier finding: Botswana wired, Tanzania still
+open.** `int-imf-tier-sweep-2026-09-07.json`'s _dropped named Botswana and Tanzania as the
+two most valuable of 34 e-GDDS participants with a real NSDP and no institutional node
+(no `NSDPUrl` exists for e-GDDS rows on the IMF endpoint, unlike SDDS/SDDS Plus). Minted
+**bw-nsdp** off the Bank of Botswana's own NSDP page — a single self-contained page that
+both explains the NSDP and states directly it is implemented under the IMF's e-GDDS,
+naming Botswana as the first country to adopt the enhanced format — wired
+`bw-nsdp -> imf-e-gdds`, graded **A `quote-found-artefact-named` at coverage 1.00** on
+the first attempt. This is additive to the existing `bw-statsbots-cpi-technical-report-2018
+-> imf-sdds` edge (round 7, grade B, correctly left alone — a 2018 CPI-methodology claim,
+not a subscription claim). **Tanzania NOT wired**: NBS Tanzania's own site labels its NSDP
+link "e-GDDS" in its main nav, but that's a bare label with no declarative sentence: too
+thin to grade. Four IMF DSBB routes for a fallback REGISTER-tier citation all returned
+the known Angular-shell chrome (PLAYBOOK-CORPUS.md §6) or a bare 400; the IMF's 2016 press
+release announcing Tanzania's e-GDDS status is Akamai-blocked (403) on two user agents.
+Left open with a documented lead (an unopened 2013 NSDP prototype PDF, probably too dated
+to use) in this round's own `_dropped`. Validated in a cloud sandbox: 128/128 logic, tsc
+clean, `validate` exit 0, counts moved by exactly +1 report/+1 dependency/+1 A as expected.
+Full narrative: memory `round19_bw_nsdp_2026-09-07`.
+
+**Round 20 (this round) closed BOTH of the two remaining leads flagged by round 19 — Tanzania wired, and Côte d'Ivoire wired too (a lead round 19 didn't even try).** For Tanzania: the IMF's own 2016 press release (imf.org/en/news/articles/2016/11/23/pr16524-...), which 403'd Akamai to curl in round 19, reads cleanly in Thomas's Chrome and names Tanzania's NSDP directly — but the page it links to has moved; the CURRENT NSDP page (nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp) is also Cloudflare-walled to curl (same class as bw-nsdp's linked opendataforafrica.org page) but reads cleanly in Chrome, and its own text — self-declared on NBS Tanzania's behalf — states Tanzania participates in the enhanced GDDS. Preferred over the IMF press release per rule 19 (self-declared beats register when both would grade the same). The 2013 prototype PDF round 19 flagged as an unopened lead was opened and confirmed a dead end exactly as suspected: no mention of e-GDDS, Enhanced, or dissemination anywhere in it. **Wired `tz-nsdp -> imf-e-gdds`, graded A on the first attempt.** For Côte d'Ivoire: a web search for the same opendataforafrica.org platform found nso-cotedivoire.opendataforafrica.org directly — same publisher (ANStat) already in the corpus for `ci-anstat-ihpc`, same wall class (403 to curl, clean in Chrome), same self-declaration template naming Côte d'Ivoire and e-GDDS by name. **Wired `ci-nsdp -> imf-e-gdds`, graded A on the first attempt.** **Generalizable finding for future rounds: the opendataforafrica.org NSDP template ("Data linked from this page correspond to data described in the International Monetary Fund's DSBB...") is shared across countries on the platform** — Botswana's own site used a different page instead because its opendataforafrica.org page was actually 403'd everywhere including Chrome, but Tanzania's and Côte d'Ivoire's were not. **Try each remaining unwired e-GDDS country's own `<nso-slug>.opendataforafrica.org` NSDP page in Chrome BEFORE spending a round on IMF press releases or DSBB routes** — a plain web search for "<country> opendataforafrica NSDP" finds the slug fast. Validated in a cloud sandbox: 128/128 logic, tsc clean, `validate` exit 0, grader selftest 76/76, `vite build` ok, counts moved by exactly +2 reports/+2 dependencies/+2 A as expected. Full narrative: memory `round20_tz_ci_nsdp_2026-09-08`.
+
+**Round 21 (this round) generalised the e-GDDS/opendataforafrica.org method across the whole remaining list at once, instead of one country per round: 18 of the 31 still-open countries wired in a single pass.** Ran `<country> opendataforafrica NSDP` via WebSearch for all 31, then read each hit in Chrome. Wired at A (SELF-DECLARED, `quote-found-artefact-named`, coverage 1.00): Benin, Madagascar, Zambia, Zimbabwe, Lesotho, Mozambique, Malawi, Cameroon, Angola, Cabo Verde, Gambia, Equatorial Guinea, DR Congo, Eswatini, Guinea-Bissau, Mauritania, São Tomé and Príncipe, Somalia — all `<cc>-nsdp -> imf-e-gdds`, all off the identical platform boilerplate ("Data linked from this page correspond to data described in the International Monetary Fund's DSBB... the enhanced General Data Dissemination System in which <Country> participates") that rounds 19-20 established. Every quote was read via the browser's accessibility tree (`read_page`), not transcribed from a screenshot, specifically against the ASCII-vs-typographic-apostrophe trap (PLAYBOOK-CORPUS.md Known Traps) — confirmed U+2019 in "Fund's" on one page and trusted the identical template elsewhere. Publisher attribution: 13 of the 18 confirmed directly (7 name the agency in the page's own title — same shape as bw-nsdp/tz-nsdp/ci-nsdp; 6 more confirmed via the portal's own footer link to the NSO's site, e.g. Madagascar→instat.mg, Angola→ine.gov.ao). The remaining 3 (Guinea-Bissau, Mauritania, Somalia) carry only generic AfDB/Knoema footer links — publisher field follows the NSO name already established elsewhere in-corpus for that country but was **not** independently re-confirmed on the NSDP page itself; flagged in each report's own description, does not affect the grade (rule 19's Togo precedent — a country's own branded data portal on opendataforafrica.org is self-declared regardless of which footer logo appears). Four countries checked and found to have **no live NSDP page on this platform**: Burundi, Djibouti, Guinea (nav has no NSDP tab on any of the three), Central African Republic (no opendataforafrica.org portal exists at all) — recorded in `_dropped`, open leads via a different route. Seven not checked this round (Andorra, Albania, Micronesia, Montenegro, Palau, San Marino, Kosovo) — opendataforafrica.org looks Africa-only on this round's evidence (34/34 countries tried so far have been African), so these are deprioritized for the same platform and would need IMF press release / DSBB instead. All 18 new ids and evidence URLs checked for collision against the whole corpus before writing — none found. Data: `src/data/research/int-imf-egdds-oda-round21-2026-09-08.json`. Also ran the automated grader against all 18 (`--refetch`, live and `--offline`): the cloud sandbox cannot reach any of the 18 URLs either (`wall:cloudflare-challenge` on all 18, same class as bw-nsdp/tz-nsdp/ci-nsdp) — confirms these needed the Chrome route rather than disagreeing with it, per PLAYBOOK-CORPUS.md §7b's exception (grader ruling only overrides where its fetcher succeeds and disagrees, not where it can't fetch at all). The 18 evidence-cache/ wall records from that run are committed. Validated in a cloud sandbox: 128/128 logic, tsc clean, `validate` exit 0, counts moved by exactly +18 reports/+18 dependencies/+18 A as expected, no evidence-quality warning on any of the 18 new URLs. Full narrative: memory `round21_egdds_oda_sweep_2026-09-08`.
+
+Round 13 (first FR round) wired 9 nodes/9 edges off France's own GNI inventory
 (INSEE, "Gross National Income Inventory 2010, France - ESA 2010", March 2020, 438pp),
 Chapter 10 "MAIN DATA SOURCES USED" plus General Government data-sources (3.5.1.1), all
 `fr-insee-national-accounts -> X uses_data_from`, all A. FR now has **20 nodes**, from 9 at
@@ -194,53 +267,98 @@ the oldest had been wrong for about three weeks. That is the only data point the
 is; step 5b asks the question again at handoff 100 and the answer should get better
 with a second reading.
 
+**2. Is the DGDDI monthly bulletin lead worth a fifth round?** Four rounds (1, 2, 16, plus
+round 15's adjacent search) have now checked six different candidate document classes for
+something naming DGDDI's monthly "Résultats du commerce extérieur" bulletin BY TITLE
+alongside a usage statement, and every one — including Trésor's own confusingly-same-titled
+annual commentary and Banque de France's annual balance-of-payments report — cites the
+AGENCY ("Douanes / DSECE") rather than the specific release. This may just be how French
+official documents cite customs data (title only appears on DGDDI's own pages). One class
+is untried (a press article quoting the release by name) if it's worth a fifth round;
+otherwise this is a candidate for a permanent refusal alongside PLAYBOOK-CORPUS.md §7's
+other agency-not-artefact rulings. Detail: memory `round16_fr_dgddi_monthly_still_refused_2026-09-07`.
+
 ### [Agent]
 
 **Continue FR.** Rounds 13-14 wired FR's Chapter 10 "MAIN DATA SOURCES USED", the General
 Government data-sources section (3.5.1.1), the second SIES R&D survey and a BTS/DADS
-succession relation — 11 nodes, 10 edges + 1 relation, all A. Method in memory
-`round13_fr_national_core_2026-09-07` and `round14_fr_national_core_round2_2026-09-07`,
-and for the shape that worked seven times running now (DE x5, FR x2),
-`round11_de_chapter10_2026-09-07`: find the country's own GNI or national-accounts
-inventory, read its source chapter's BODY for sentences that name a source by title and say
-what the accounts do with it, simulate `namesTarget` before choosing node titles, verify
-each title against the publisher's own page, then grade the whole evidence URL at once.
-**Left in FR for the next round:** (a) DGDDI's own foreign-trade bulletin — still refused
-after two rounds of research; the two self-declared-usage candidate documents found so far
-(round 13's GNI-inventory passage, round 14's DSECE-missions and Courrier-des-statistiques
-pages) are all spent, `_dropped` has the detail — reopen only with a document that puts a
-TITLE and a usage statement in the same place, not by re-reading either spent class again;
-(b) chapters 3.4/5.8/5.11 confirmed empty round 14, do not re-read them barring a newer
-inventory edition. Round 7's five orphaned NSO nodes (Sudan, Yemen, Syria, Iraq, Iran)
-remain leads for the same programme from the other direction. DE remains finished as a
-programme (5 rounds, 13 → 46 nodes); the only German thing left is Chapter 10.3's seven
-non-government sources — private bodies for the most part, so a scope question first.
+succession relation — 11 nodes, 10 edges + 1 relation, all A. Round 15 (FR round 3) tried a
+different shape entirely — not the GNI-inventory chapter method, but searching for an
+INSEE/Banque de France document whose OWN bibliography names a DGDDI product by title —
+and it worked: `fr-insee-note-de-conjoncture -> fr-dgddi-chiffre-commerce-exterieur`, A,
+off INSEE's December 2025 Note de conjoncture. Method in memory
+`round13_fr_national_core_2026-09-07`, `round14_fr_national_core_round2_2026-09-07` and
+`round15_fr_note_de_conjoncture_2026-09-07`, and for the GNI-chapter shape that worked seven
+times running (DE x5, FR x2), `round11_de_chapter10_2026-09-07`: find the country's own GNI
+or national-accounts inventory, read its source chapter's BODY for sentences that name a
+source by title and say what the accounts do with it, simulate `namesTarget` before
+choosing node titles, verify each title against the publisher's own page, then grade the
+whole evidence URL at once.
+**Left in FR for the next round:** (a) DGDDI's own MONTHLY foreign-trade bulletin
+("Résultats du commerce extérieur") — still refused after FOUR rounds now (round 16 spent
+four more candidate classes: Trésor's own same-titled annual commentary, Banque de France's
+annual BoP report, two more INSEE conjoncture editions, INSEE's Comptes de la Nation chapter
+and TEF page — every one names the AGENCY, "Douanes / DSECE", never the titled release).
+**Six candidate document classes are now spent across rounds 1, 2 and 16** — see memory
+`round16_fr_dgddi_monthly_still_refused_2026-09-07` for the full list, and do not re-read
+any of them. One class genuinely untried: a press article (Les Echos/La Tribune/Le Monde)
+quoting the monthly release by name when reporting a month's trade figures — worth one more
+round only if Thomas wants this pursued past what §3 [Thomas] flags below. (b) chapters
+3.4/5.8/5.11 confirmed empty round 14, do not re-read them barring a newer inventory
+edition. Round 7's five orphaned NSO nodes (Sudan, Yemen, Syria, Iraq, Iran) remain leads
+for the same programme from the other direction. DE remains finished as a programme (5
+rounds, 13 → 46 nodes); the only German thing left is Chapter 10.3's seven non-government
+sources — private bodies for the most part, so a scope question first.
 
-**Sweep for B grades that a stale cached store caused.** Round 11 found one by accident
-(§2, the Bundesbank balance-of-payments edge) and the cause is general: the third PDF
-rendering landed 2026-09-06, a cached `.evidence-fulltext/` record has none, and an
-offline re-grade of an old store cannot see it. Every B graded off a cache before that
-date is suspect and `--refetch` is what settles it. **Do not run this as a blanket
-`--write`** — §6's no-improvements-only-guard trap and rule 11's evidence-URL clause both
-apply, so it is: pick the B edges whose grade reason is `artefact-named-elsewhere-in-
-document` or `partial-quote`, group them BY URL, select every live edge on each URL, run
-`--refetch` offline-diffed against the stored grades, and write only what went up.
+**DONE — the stale-cache B sweep (round 17), do not re-run.** Round 11 found one by
+accident (§2, the Bundesbank edge, already A). Round 17 grepped the WHOLE corpus for the two
+reason strings this todo named and found only three other live candidates, all in
+`int-imf-nsdp-2026-09-07.json` (`sv-nsdp`, `kg-nsdp`, `mx-nsdp`, none sharing a URL with any
+other live edge). Re-graded all three with `--refetch` in a fresh sandbox — all three
+reproduced B `artefact-named-elsewhere-in-document` exactly, at coverage 1.00. **Not a
+stale-PDF issue** (all three documents are HTML, the third-rendering fix doesn't apply) —
+each page's self-declaration sentence names the DSBB, never "SDDS" itself, and "SDDS" sits
+outside the grader's window everywhere it appears on the page. Nothing written; nothing to
+write. A fourth candidate (`ma-nsdp`) is an intentional B whose own basis says so and was not
+touched. Detail: memory `round17_stale_cache_b_sweep_2026-09-07`. **A future B carrying one
+of these two reasons is a NEW candidate for a future sweep, not a reason to redo this one.**
 
-**India's NSDP, from a new direction.** `dea.gov.in` is unreachable from four networks in
-four different ways and is not a bot wall — stop retrying it. India met the SDDS
-specifications on 2001-12-14, so a first-party NSDP exists somewhere; mospi.gov.in and
-rbi.org.in are the candidates. Lead is in the block's own `_dropped`.
+**DONE — India's NSDP (round 18), do not re-run.** `dea.gov.in`'s NSDP URL is dead from six
+networks across two failure modes now — stop retrying it, barring a report the host's
+routing changed. Wired instead off RBI's own current pages (`in-nsdp -> imf-sdds`, A,
+coverage 1.00) in `src/data/research/in-nsdp-2026-09-07.json`. Detail: memory
+`round18_india_nsdp_2026-09-07`.
 
-**The e-GDDS third of the tier finding, untouched and structurally harder:** 34
-confirmed participants with a real NSDP and no node, and no `NSDPUrl` for any e-GDDS
-row, so each anchor has to be found on the country's own site. List with dates in
-`int-imf-tier-sweep-2026-09-07.json`. Botswana and Tanzania are the two most valuable —
-each has a real NSDP and an institutional node is all that is missing. **Their live
-`-> imf-sdds` edges are NOT a defect and are not what makes them valuable**: round 7 read
-both and kept them deliberately, because each NSO's own document says its CPI follows the
-SDDS, and a methodology claim about a CPI is a dependency whether or not the country
-subscribes; the reasoning is written into both bases. Re-confirmed against the live IMF
-endpoint 2026-09-07 — 49 SDDS countries, neither is one.
+**The e-GDDS third of the tier finding: 21 of the original 34 now wired, 13 open.**
+Botswana (round 19), Tanzania and Côte d'Ivoire (round 20), then **18 more in round 21 in
+one pass**: Benin, Madagascar, Zambia, Zimbabwe, Lesotho, Mozambique, Malawi, Cameroon,
+Angola, Cabo Verde, Gambia, Equatorial Guinea, DR Congo, Eswatini, Guinea-Bissau,
+Mauritania, São Tomé and Príncipe, Somalia — all `<cc>-nsdp -> imf-e-gdds`, all A. **The
+method (search "<country> opendataforafrica NSDP", read the country's own
+`<slug>.opendataforafrica.org` NSDP page in Chrome) is now proven at scale — 21 of 22
+countries tried across three rounds had a working page**, only Botswana needed the
+fallback (its own opendataforafrica.org page was 403'd even in Chrome; wired off the
+Bank of Botswana's own page instead). Cloudflare-walled to curl on every country tried so
+far (confirmed again in round 21 via the automated grader: `wall:cloudflare-challenge` on
+all 18) but reads cleanly in Chrome every time.
+**13 of the 34 remain, in two groups — try the group-1 method first on every one of them
+before falling back to IMF press releases or DSBB routes:**
+- **Group 1 (checked in round 21, no live NSDP page found on this platform — a different
+  route is needed): Burundi, Djibouti, Guinea, Central African Republic.** Burundi/
+  Djibouti/Guinea each have a country portal on the platform but its nav carries no NSDP
+  tab; Central African Republic has no opendataforafrica.org portal at all. Try an IMF
+  press release or dsbb.imf.org route instead — do not re-try this platform for these four
+  without a new lead (e.g. a different slug).
+- **Group 2 (not tried this round): Andorra, Albania, Micronesia, Montenegro, Palau, San
+  Marino, Kosovo.** opendataforafrica.org looks Africa-only on the evidence so far (22 of
+  22 countries tried across rounds 19-21 were African) — these seven are not African, so
+  try IMF press release / DSBB routes directly rather than this platform first.
+Detail: memory `round19_bw_nsdp_2026-09-07`, `round20_tz_ci_nsdp_2026-09-08`,
+`round21_egdds_oda_sweep_2026-09-08`. Publisher note for a future round: three of round
+21's 18 (Guinea-Bissau, Mauritania, Somalia) have their publisher field set from the
+NSO name already used elsewhere in-corpus for that country, NOT independently confirmed
+on the NSDP page itself (its footer carries only generic AfDB/Knoema links) — worth a
+quick re-check if anyone doubts the attribution, though it does not affect the grade.
 
 **A non-ASCII-hyphen sweep, opened round 6 and STILL NOT DONE.** Any pass looking for
 product numbers, section numbers or dates in an extracted document must search the hyphen

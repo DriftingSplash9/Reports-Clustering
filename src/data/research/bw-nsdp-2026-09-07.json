@@ -1,0 +1,47 @@
+{
+  "_slice": "bw-nsdp-2026-09-07",
+  "_researched": "2026-09-07",
+  "_status": "draft",
+  "_note": "Continues the [Agent] todo 'the e-GDDS third of the tier finding' (HANDOFF.md, int-imf-tier-sweep-2026-09-07.json's _dropped entry naming Botswana and Tanzania as the two most valuable of 34 unwired e-GDDS participants). No NSDPUrl exists for any e-GDDS row on the IMF's endpoint, so the anchor had to be found on Botswana's own site rather than the IMF's. The Bank of Botswana's own 'National Summary Data Page (NSDP)' page (https://www.bankofbotswana.bw/content/national-summary-data-page-nsdp, raw-verified via cloud-sandbox curl, HTTP 200, 93,947 bytes) both explains what an NSDP is AND states directly, in the same paragraph, that Botswana's NSDP is implemented as part of the IMF's e-GDDS, naming Botswana as the first country to introduce the enhanced version -- a self-contained declarative page, so node and evidence are the same URL (no split needed, unlike the India round-18 edge). The actual LIVE data render this page links to ('Access the NSDP') is hosted on a third-party platform (cb-botswana.opendataforafrica.org) that returned HTTP 403 with a Cloudflare interstitial ('Just a moment...') on this round's raw-verify attempt -- not pursued as the node's own URL for that reason; the Bank of Botswana's own descriptive page is used instead, since it is first-party, reachable, and substantive. Same finding checked for Tanzania this round and NOT wired: NBS Tanzania's own site (nbs.go.tz) labels its main-nav link to the NSDP 'e-GDDS' (https://www.nbs.go.tz/portals, raw-verified HTTP 200) but that is a bare navigation label with no declarative sentence attached, too thin to grade; the IMF's DSBB pages for Tanzania (several routes tried: /e-gdds/country/TZA/contacts-list, /e-gdds/dqaf-base/country/TZA/category/CPI00, /e-gdds/country/TZA/summary-of-dissemination, api/country/getsubscriptiondateInfos) are all an Angular shell that returns identical nav-only chrome with no country data server-side (the known PLAYBOOK-CORPUS trap) or a 400 on the bare API call; the IMF's own 2016 press release announcing Tanzania's e-GDDS implementation (imf.org/en/news/articles/2016/11/23/pr16524-...) returned HTTP 403 (Akamai 'Access Denied') on two user-agent attempts. Tanzania is left as a documented open lead in this file's own _dropped, not retried further this round. No id or evidence-URL collision found against the whole corpus for bw-nsdp or bankofbotswana.bw/content/national-summary-data-page-nsdp.",
+  "reports": [
+    {
+      "id": "bw-nsdp",
+      "title": "National Summary Data Page — Botswana",
+      "publisher": "Bank of Botswana",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "Botswana's National Summary Data Page as described and linked by the Bank of Botswana, which hosts the page on behalf of all three national producers of official statistics (the Bank of Botswana, the Ministry of Finance and Economic Development, and Statistics Botswana). Implemented under the IMF's Enhanced General Data Dissemination System (e-GDDS) as of end-January 2016, with Botswana cited by the Bank itself as the first country to introduce the enhanced-format NSDP. The IMF's own dsbb.imf.org endpoint carries no NSDPUrl for e-GDDS participants (unlike SDDS/SDDS Plus), so this anchor is drawn from Botswana's own site rather than the IMF's.",
+      "releases_per_year": 250,
+      "continuous": true,
+      "cadence_note": "Continuously updated data page (its own live render is on a linked third-party platform, updated as each producer releases new data), not a discrete-edition publication. 250 follows the same renderer convention used for the NSDP block and for India's NSDP (round 18, HANDOFF section 7 / 2026-08-18) — a nominal releases_per_year so the pulse reads as continuous rather than one-off.",
+      "last_updated": null,
+      "url": "https://www.bankofbotswana.bw/content/national-summary-data-page-nsdp",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bw-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: MINTED 2026-09-07, continuing the [Agent] todo 'the e-GDDS third of the tier finding'. The Bank of Botswana's own NSDP page (https://www.bankofbotswana.bw/content/national-summary-data-page-nsdp, raw-verified via cloud-sandbox curl, HTTP 200) states, in the same paragraph that introduces the page's 2016 upgrade: 'This is been implemented as part of the IMF's Enhanced General Data Dissemination System (e-GDDS), with Botswana being the first country to introduce the enhanced NSDP.' This is the same page the node is minted from -- a self-contained declaration, unlike the India NSDP edge (round 18) which had to split node and evidence across two RBI pages. Note this is a DIFFERENT, additive edge to the existing bw-statsbots-cpi-technical-report-2018 -> imf-sdds edge (bw-g23-municipal.json, grade B, correctly left as-is per that basis's own caveat) -- that edge evidences a 2018 CPI-methodology claim about SDDS compliance from a document that predates Botswana's actual e-GDDS-only status being clear; this edge is the institutional e-GDDS edge that caveat said was 'unminted for want of an institutional Statistics Botswana node', now wired via the Bank of Botswana's NSDP page instead. via: cloud-sandbox curl, 2026-09-07, direct read of the cited URL on the live host, browser UA, no snapshot needed.",
+      "evidence_url": "https://www.bankofbotswana.bw/content/national-summary-data-page-nsdp",
+      "evidence_quote": "This is been implemented as part of the IMF’s Enhanced General Data Dissemination System (e-GDDS), with Botswana being the first country to introduce the enhanced NSDP.",
+      "evidence_grade": "A"
+    }
+  ],
+  "relations": [],
+  "_dropped": [
+    {
+      "edge": "tz-nsdp -> imf-e-gdds",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "RESOLVED 2026-09-08 (round 20). Wired: the current NSDP page (nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp) is Cloudflare-walled to curl but reads cleanly in Thomas's Chrome, and its own text states Tanzania participates in the enhanced GDDS -- self-declared, no institutional node needed beyond the NSDP page itself. See tz-nsdp-2026-09-08.json. The 2013 prototype PDF flagged below as unopened was opened this round and confirmed a dead end as suspected (no mention of e-GDDS, Enhanced, or dissemination). || ORIGINAL ENTRY FOLLOWS. || OPEN LEAD, not closed. Tanzania is the other of the two most valuable e-GDDS unwired participants (int-imf-tier-sweep-2026-09-07.json). NBS Tanzania's own site (https://www.nbs.go.tz/portals, raw-verified HTTP 200) labels its main-navigation link to the country's NSDP 'e-GDDS' (href to nso-tanzania.opendataforafrica.org/yolzjif/national-summary-data-page-nsdp) -- confirming NBS itself treats that link as its e-GDDS artefact, but a bare nav-menu label is not a declarative sentence and is too thin to grade on its own (no surrounding text saying what e-GDDS is or that Tanzania participates). Four IMF DSBB routes tried for a REGISTER-tier fallback (country/TZA/contacts-list, e-gdds/dqaf-base/country/TZA/category/CPI00, e-gdds/country/TZA/summary-of-dissemination, api/country/getsubscriptiondateInfos) all returned either the same 44,059-byte Angular shell with no server-rendered country data (matches the standing PLAYBOOK-CORPUS.md §6 trap for dsbb.imf.org) or a bare 400 from the API route. The IMF's own November 2016 press release announcing Tanzania's e-GDDS implementation (imf.org/en/news/articles/2016/11/23/pr16524-tanzania-to-implement-imf-enhanced-general-data-dissemination-system) returned HTTP 403 Access Denied on two user-agent attempts (Akamai block, not a Cloudflare interstitial). The third-party opendataforafrica.org NSDP page itself is Cloudflare-walled ('Just a moment...', HTTP 403) same as Botswana's. Next round: try the 2013 'Prototype of National Summary Data Page' PDF at nbs.go.tz/nbs/takwimu/gdds/NSDP_FEB_2013.pdf (found, not yet opened -- likely too dated, describes the OLD 'GDDS' scheme predating the 2016 'enhanced' e-GDDS relaunch per the press release's own date, so may not support a current methodology claim even if opened) or a different network/route for the IMF press release."
+    }
+  ]
+}
