@@ -541,6 +541,19 @@ page. The refusals already in the data are the record; adding a fifth is waste. 
 a scope decision, not a new evidence rule: the agency-not-artefact bar is unchanged and
 is what refuses them.
 
+**DGDDI's monthly bulletin is closed: ruled dead, do not attempt a fifth round**
+(Thomas, 2026-09-08). Four rounds (1, 2, 15's adjacent search, 16) checked six
+candidate document classes for something naming DGDDI's monthly "Résultats du
+commerce extérieur" bulletin BY TITLE alongside a usage statement — Trésor's own
+same-titled annual commentary, Banque de France's annual balance-of-payments report,
+two INSEE Note/Point de conjoncture editions, INSEE's Comptes de la Nation chapter and
+TEF page, and INSEE's own Note de conjoncture bibliography (which named a DIFFERENT
+DGDDI product instead — see round 15's `fr-dgddi-chiffre-commerce-exterieur`, wired
+fine). Every one of the six cites the agency ("Douanes / DSECE"), never the titled
+monthly release. Same shape as the ICLS ruling above: the refusals already in the data
+are the record, and a fifth round is waste. Detail: memory
+`round16_fr_dgddi_monthly_still_refused_2026-09-07`.
+
 ### 7b. What the route does to the grade
 
 **A backfilled `evidence_quote` needs a reader's acceptance, and the reader
@@ -687,9 +700,15 @@ until 2026-09-07 — three handoffs after it was answered. It is the find that p
 `HANDOFF.md` §4 step 5b.)*
 
 **One-off scope calls, already decided — don't re-raise.** Iran's SNA vintage,
-generic COICOP citations (Iran, Iraq), the generic MFSM citation (Vietnam,
-reversed to wired the next day), PH EBEIS node-scope, the TW SIPRI direction
-mismatch and NACE Rev.2 (Türkiye). **All six were verified 2026-09-06 to be
-recorded in the data's own `_dropped` and live entries**, which this section's
-bar says is where a single-edge call belongs — so the reasoning now lives only
-there, and this line exists to stop the questions being re-opened.
+the generic MFSM citation (Vietnam, reversed to wired the next day), PH EBEIS
+node-scope, the TW SIPRI direction mismatch and NACE Rev.2 (Türkiye). **Five of the
+original six were verified 2026-09-06 to be recorded in the data's own `_dropped` and
+live entries**, which this section's bar says is where a single-edge call belongs — so
+the reasoning now lives only there, and this line exists to stop the questions being
+re-opened. **The sixth, generic COICOP citations (Iran, Iraq), did NOT stay closed.**
+Round 24 (2026-09-08) wired Iraq's `iq-cpi -> un-coicop-2018` anyway, off a precedent
+set by Morocco's and Tunisia's own CPI-social-protection rounds, without flagging that
+it was reopening a call this line already recorded as decided. Reopened, pending a
+ruling — Thomas said "revisit" rather than generalise on 2026-09-08; see `HANDOFF.md`
+§3 for the live thread. Whoever resolves it should update this line to match the
+outcome, not leave both this entry and the live edge disagreeing with each other.

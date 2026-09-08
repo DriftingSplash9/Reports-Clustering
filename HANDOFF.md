@@ -52,21 +52,24 @@ repo: where either disagrees with a file, the file wins.
 
 | file | k | who reads it |
 |---|---|---|
-| `HANDOFF.md` | 22.3k | everyone, first |
+| `HANDOFF.md` | 22.9k | everyone, first |
 | `CLAUDE.md` | 1.5k | a local Claude Code session, automatically |
 | `PLAYBOOK.md` | 8.9k | everyone |
-| `PLAYBOOK-CORPUS.md` | 44.4k | corpus lane — §7 splits 7a/7b/7c by question |
+| `PLAYBOOK-CORPUS.md` | 46.0k | corpus lane — §7 splits 7a/7b/7c by question |
 | `PLAYBOOK-RENDER.md` | 13.6k | renderer lane |
 | `REPORTS.md` | 24.3k | scope/direction questions |
 | `START-HERE.md` | 13.2k | humans, not agents |
-| **a corpus round reads** | **77.2k** | HANDOFF + CLAUDE + core + CORPUS |
-| **a renderer round reads** | **46.3k** | HANDOFF + CLAUDE + core + RENDER |
+| **a corpus round reads** | **79.2k** | HANDOFF + CLAUDE + core + CORPUS |
+| **a renderer round reads** | **46.9k** | HANDOFF + CLAUDE + core + RENDER |
 
 **THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-08, handoff 076): before he types a
-prompt, a corpus round is required to read 9.6% of its context, a
-renderer round 5.8%.** That is the mandatory read above as tokens
-(chars ÷ 4) over a 200k-token window — 19.3k and 11.6k tokens respectively, down
-from 20.5k and 12.8k. **Both dropped this handoff** — the trigger was
+prompt, a corpus round is required to read 9.9% of its context, a
+renderer round 5.9%.** That is the mandatory read above as tokens
+(chars ÷ 4) over a 200k-token window — 19.8k and 11.7k tokens respectively, down
+from 20.5k and 12.8k. (`PLAYBOOK-CORPUS.md` grew slightly this same window from the
+DGDDI ruling and the §7d correction — §1's corpus percentage moved from 9.6% to 9.9%
+between the two edits earlier in this handoff; a live rule going into a playbook costs
+real space even the same day it saves a redundant round.) **Both dropped this handoff** — the trigger was
 Thomas calling out that §2/§3 had quietly become a 24-round changelog in violation of
 this file's own no-round-narrative rule; rounds 13–24's per-round prose (methods, host
 quirks, exact quotes) moved to project memory, where every one of those rounds already
@@ -123,7 +126,11 @@ if the reasoning behind a call needs re-reading):**
 
 **Closed this window** (folded into the "Settled, do not re-raise" list in §3 —
 see there for the one-liners): the e-GDDS wiring todo (all 34 target countries, closed
-round 23), the stale-cache B sweep (round 17), India's NSDP (round 18).
+round 23), the stale-cache B sweep (round 17), India's NSDP (round 18), and DGDDI's
+monthly bulletin lead — ruled dead 2026-09-08, now a permanent `agency-not-artefact`
+refusal in `PLAYBOOK-CORPUS.md` §7a. **The every-20 sweep cadence is confirmed as-is**
+(Thomas, 2026-09-08) — too soon to properly judge with fewer than 20 rounds run under
+it; next real check stays at handoff 100 per §4 step 5b, unchanged.
 
 ---
 
@@ -131,33 +138,20 @@ round 23), the stale-cache B sweep (round 17), India's NSDP (round 18).
 
 ### [Thomas]
 
-**1. Was every-20 right for the slow sweep?** The first pass found seven defects and
-the oldest had been wrong for about three weeks. That is the only data point there
-is; step 5b asks the question again at handoff 100 and the answer should get better
-with a second reading.
-
-**2. Is the DGDDI monthly bulletin lead worth a fifth round?** Four rounds have now
-checked six candidate document classes for something naming DGDDI's monthly
-"Résultats du commerce extérieur" bulletin BY TITLE alongside a usage statement, and
-every one cites the agency rather than the release. May just be how French official
-documents cite customs data. One class untried (a press article quoting the release
-by name); otherwise a candidate for a permanent refusal alongside
-`PLAYBOOK-CORPUS.md` §7's other agency-not-artefact rulings. Detail: memory
-`round16_fr_dgddi_monthly_still_refused_2026-09-07`.
-
-**3. Is `iq-cso` a duplicate of `iq-cpi`/`iq-national-accounts`/`iq-population`, and
+**1. Is `iq-cso` a duplicate of `iq-cpi`/`iq-national-accounts`/`iq-population`, and
 if so, which id survives?** Same real agency (COSIT), no `part_of` link. Retiring or
 merging a node is a ruling, not a research call. **If this shape is real it may also
 explain the other three orphaned NSO nodes** (`sd-cbs`, `ye-cso`, `sy-cbs`, `ir-sci`) —
 worth checking each against its country's other existing nodes before spending a round
 researching it as a clean slate. Detail: memory `round_orphaned_nso_iq_coicop_2026-09-08`.
+Explained in full 2026-09-08 (chat); ruling still open.
 
-**4. Generalise the COICOP-with-no-stated-revision precedent into a rule, or
-reconsider it?** Morocco, Tunisia and now Iraq all cite bare "COICOP" with no revision
-year and get wired to `un-coicop-2018` anyway, with a vintage caveat and capped grade —
-a practice that formed without a ruling. If right, it should go in
-`PLAYBOOK-CORPUS.md` §7a as a named rule. If wrong, Morocco/Tunisia/Iraq's edges
-should be revisited together.
+*(The other three items from handoff 076 are ruled, 2026-09-08 — see §2's "Closed this
+window" and the [Agent] section below for where each landed: sweep cadence stays as-is,
+DGDDI's monthly bulletin is dead, and the COICOP precedent is NOT generalised —
+Morocco/Tunisia/Iraq get revisited together instead, which also surfaced that
+`PLAYBOOK-CORPUS.md` §7d had already called this exact question closed on 2026-09-06
+and round 24 quietly reopened it.)*
 
 ### [Agent]
 
@@ -167,13 +161,25 @@ source chapter's body for sentences naming a source by title with a usage statem
 verify each title against the publisher's own page, grade the whole evidence URL at
 once. Method detail: memory `round11_de_chapter10_2026-09-07`,
 `round13_fr_national_core_2026-09-07`, `round15_fr_note_de_conjoncture_2026-09-07`.
-**Left for the next round:** (a) DGDDI's monthly bulletin — six candidate classes
-across rounds 1, 2, 16 all spent, one untried (press coverage); see §3 [Thomas] #2
-before re-running. (b) chapters 3.4/5.8/5.11 — confirmed empty, do not re-read barring
-a newer inventory edition. (c) The `iq-cso` duplicate question (§3 [Thomas] #3) blocks
-further work on the remaining orphaned NSO nodes (Sudan, Yemen, Syria, Iran —
-untouched) until Thomas rules on it. DE is finished as a programme; the only German
-thing left is Chapter 10.3 (scope question, §2).
+**DGDDI's monthly bulletin is closed — do not re-run** (Thomas, 2026-09-08; now a
+permanent refusal in `PLAYBOOK-CORPUS.md` §7a). Chapters 3.4/5.8/5.11 confirmed empty,
+do not re-read barring a newer inventory edition. The `iq-cso` duplicate question (§3
+[Thomas] #1) still blocks further work on the remaining orphaned NSO nodes (Sudan,
+Yemen, Syria, Iran — untouched) until Thomas rules on it. DE is finished as a
+programme; the only German thing left is Chapter 10.3 (scope question, §2).
+
+**Revisit Morocco/Tunisia/Iraq's COICOP edges together** (Thomas, 2026-09-08 — do not
+generalise the bare-COICOP-no-stated-revision precedent into a rule without this check
+first). Re-read `ma-hcp-ipc`, `tn-ins-cpi` and `iq-cpi`'s evidence for whether the
+vintage caveat and capped grade actually hold up per edge, not just as a pattern three
+separate rounds converged on independently. **Before starting, note
+`PLAYBOOK-CORPUS.md` §7d already called this exact question ("generic COICOP
+citations, Iran, Iraq") a closed one-off scope call on 2026-09-06** — round 24
+(2026-09-08) wired Iraq's edge anyway without flagging that it was reopening a closed
+call; §7d now says so in place, not resolved. Part of this revisit is deciding which
+was right — the 2026-09-06 closure or round 24's reopening — and updating §7d to match
+whatever the outcome is, so the line and the live edge stop disagreeing with each
+other.
 
 **A non-ASCII-hyphen sweep, opened round 6 and still not done.** Any pass looking for
 product numbers, section numbers or dates in an extracted document must search the
@@ -189,7 +195,9 @@ on NCOA 2018, correctly wired to `un-coicop-2018`); lead in the slice's `_droppe
 **The rest of the IMF pool:** the per-country metadata seam, and the GFSR
 (`notes/imf-elibrary-2026-09-06.md` has the ISBN recipe).
 
-**Settled, do not re-raise:** the e-GDDS wiring todo — all 34 target countries wired
+**Settled, do not re-raise:** DGDDI's monthly bulletin — ruled dead 2026-09-08 after
+four rounds and six document classes, now a permanent `agency-not-artefact` refusal in
+`PLAYBOOK-CORPUS.md` §7a. The e-GDDS wiring todo — all 34 target countries wired
 (32 self-declared, 2 register), closed round 23, memory `round19_bw_nsdp_2026-09-07`
 through `round23_egdds_remaining9_2026-09-08`. The stale-cache B sweep — only three
 live candidates found corpus-wide, all reproduced their grade under `--refetch`, none
