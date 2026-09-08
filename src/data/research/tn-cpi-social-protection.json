@@ -133,15 +133,6 @@
   "dependencies": [
     {
       "source_report_id": "tn-ins-cpi",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "INS methodology brief: 'L'INS publie l'IPC en utilisant La classification des fonctions de consommation des ménages (Classification of Individual Consumption by Purpose - COICOP) qui comporte 12 fonctions.' CAVEAT: no version is named, and the 12-division structure matches the pre-2018 vintage rather than the restructured 2018 revision -- see tn-coicop-version-unconfirmed.",
-      "evidence_url": "https://www.ins.tn/sites/default/files-ftp3/files/2021-03/IPC2015_fr_en%20bref_0.pdf",
-      "evidence_grade": "B",
-      "evidence_quote": "L'INS publie l'IPC en utilisant La classification des fonctions de consommation des ménages (Classification of Individual Consumption by Purpose - COICOP) qui comporte 12 fonctions."
-    },
-    {
-      "source_report_id": "tn-ins-cpi",
       "target_report_id": "tn-ins-enbcnvm-2015",
       "relationship_type": "uses_data_from",
       "basis": "INS methodology brief: 'La structure de pondération a été calculée sur la base des données issues de l'enquête sur le budget et la consommation des ménages effectuée par l'INS en 2015-2016.'",
@@ -208,6 +199,13 @@
       "target": "tn-ins-cpi",
       "reason": "no-document",
       "why": "Secondary sources describe SMIG increases as set via periodic government décret on a negotiated multi-year schedule, with one commentary piece noting increases run 'toujours en retard sur l'inflation réelle' -- implying no automatic CPI-indexation, but the underlying Journal Officiel décret text was not reached directly this session. See tn-smig-cpi-link-unverified."
+    },
+    {
+      "edge": "tn-ins-cpi -> un-coicop-2018",
+      "source": "tn-ins-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "Reopened per PLAYBOOK-CORPUS.md §7d and ruled 2026-09-08: no document in this family names a COICOP edition/revision at all -- the source text says bare 'COICOP' or 'nomenclature COICOP' with no year, no 'Rev.', no '2018'. Reading '2018' onto that silence is the researcher's inference, not the document's statement -- exactly the inference the corpus's own IMTS-Revision-2 refusal (round5-little-things-2026-09-06.json _dropped) exists to block, and the same standard that required un-coicop-hbs-1999 and un-coicop-2018 themselves to only be minted where a country's own document spelled out the edition by name (CAPMAS's 'COICOP-HBS 2000/1999', South Africa's 'the 2018 version of ... COICOP'). Here too the case against 2018 is stronger than silence alone: the cited brief's 12-division structure matches the pre-2018 vintage, not the restructured 2018 revision -- the evidence points away from the very target it was wired to. Dropping rather than keeping the caveated wire: three rounds converging on the same 'wire with a vintage caveat' shape doesn't make it consistent with the rule those rounds were themselves trying to honour."
     }
   ]
 }

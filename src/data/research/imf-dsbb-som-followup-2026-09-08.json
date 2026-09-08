@@ -1,0 +1,99 @@
+{
+  "_slice": "imf-dsbb-som-followup-2026-09-08",
+  "_researched": "2026-09-08",
+  "_note": "Follow-up on the DSBB Summary-of-Methodology import (memory `followup_round_2026-09-05`): six rows from `Claude outputs/dsbb-som-import-2026-09-05-review.json` marked `ambiguous-source` or `already-live-one-of-several` on 2026-09-05, re-checked against the corpus as it stands 2026-09-08. Three of the nine review rows in that bucket turned out to already be resolved by LATER rounds the review file predates (`au-abs-gfs -> imf-gfsm` minted 2026-09-06 in `au-national-core-2026-09-06.json`; both `id-foreign-trade-exports -> hs` and `id-foreign-trade-imports -> hs` already live in `indonesia-wiring-2026-08.json`; both `ph-bop -> imf-bpm6` and `ph-iip -> imf-bpm6` already live, independently evidenced, in two 2026-08 slices) — no action needed there, and no corpus-wide check currently exists to catch a review file going stale this way. Every quote below was re-fetched live from `dsbb.imf.org` today, not trusted from the week-old review file (rule 3). Two bonus edges (Indonesia's COFOG citations) were found while re-reading the CGO00/GGO00 SoM text for the review's own imf-gfsm question — they sit in the same paragraph as the GFSM sentence and were not in the review file at all.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "br-ibge-sistema-contas-nacionais",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: IBGE's own Summary of Methodology submitted to the IMF DSBB states the national accounts' industry classification is ISIC Rev. 4 by name, for category NAG00 (National Accounts, Annual) — the category this node's own edge to sna-2008 (also NAG00) is already wired from, not the quarterly br-cnt. Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=BRA&categoryCode=NAG00",
+      "evidence_grade": "A",
+      "evidence_quote": "Classification of production by economic activity is based on the International Standard Industrial Classification of All Economic Activities, Rev 4 (ISIC, Rev 4)."
+    },
+    {
+      "source_report_id": "pe-cuentas-nacionales",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: INEI's own Summary of Methodology submitted to the IMF DSBB states economic-activity classification for the (annual) national accounts is ISIC Rev. 4 by name. Same category (NAG00) this node is already wired to sna-2008 from. Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=PER&categoryCode=NAG00",
+      "evidence_grade": "A",
+      "evidence_quote": "INEI data and the 2008 edition of the International Standard Industrial Classification of All Economic Activities ISIC Rev. 4 are taken into account for the classification of economic activities."
+    },
+    {
+      "source_report_id": "id-apbn",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: BPS/Ministry of Finance's Summary of Methodology for category CGO00 (Central Government Operations) states the compilation framework follows Indonesia's own Government Statistics Manual, and states in the same sentence that THAT manual is adapted from GFSM 2014 — the document states the derivation itself, which is what the 2026-09-06 nomenclature-based-on-standard ruling (`PLAYBOOK-CORPUS.md` §7a) turns on for a national classification based on HS; extending that same reasoning here since the shape is identical (an intermediate national document the source explicitly says is adapted from the target). id-apbn (State Budget/APBN, Ministry of Finance) is the CGO00-scoped candidate: it is central-government-only, unlike id-local-government-finance (district/city) or id-government-accounts (general government, both levels, which is GGO00 below). Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=IDN&categoryCode=CGO00",
+      "evidence_grade": "A",
+      "evidence_quote": "The compilation framework of the data on the general government operations follows the Indonesian Government Statistics Manual that is adapted from IMF’s Government Finance Statistics Manual 2014."
+    },
+    {
+      "source_report_id": "id-apbn",
+      "target_report_id": "un-cofog-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the same CGO00 Summary of Methodology paragraph, one sentence later, names COFOG directly for the functional breakdown of expenditure. Not in the 2026-09-05 review file at all — found re-reading the same page for the GFSM question above. Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=IDN&categoryCode=CGO00",
+      "evidence_grade": "A",
+      "evidence_quote": "Expenditure by Functions is classified according to the SNA classification of the functions of government (COFOG)."
+    },
+    {
+      "source_report_id": "id-government-accounts",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: BPS's Summary of Methodology for category GGO00 (General Government Operations — central and regional, matching this node's own scope, unlike id-apbn's central-government-only APBN or id-local-government-finance's district/city-only scope) states its compilation framework follows Indonesia's own Government Statistics Manual, adapted from GFSM 2014, stated in the same sentence — same derivation-stated-in-document shape as the id-apbn/imf-gfsm edge above. This node already carries a live A-grade edge to sna-2008 off the same publisher's own page (`id-unlinked-wiring-2026-08-28.json`). Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=IDN&categoryCode=GGO00",
+      "evidence_grade": "A",
+      "evidence_quote": "The compilation framework of the data on the general government operations follows the Indonesian Government Statistics Manual that is adapted from IMF’s Government Finance Statistics Manual 2014."
+    },
+    {
+      "source_report_id": "id-government-accounts",
+      "target_report_id": "un-cofog-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the same GGO00 Summary of Methodology paragraph names COFOG directly, one sentence after the GFSM sentence above. Not in the 2026-09-05 review file — found re-reading the same page. Re-fetched live 2026-09-08.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=IDN&categoryCode=GGO00",
+      "evidence_grade": "A",
+      "evidence_quote": "Expenditure by Functions is classified according to the SNA classification of the functions of government (COFOG)."
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "au-abs-gfs",
+      "target": "imf-gfsm",
+      "edge": "au-abs-gfs -> imf-gfsm",
+      "reason": "resolved",
+      "why": "2026-09-05 review row 'ambiguous-source' (candidates au-abs-gfs / au-aasb1049) is stale: the edge was independently minted A-grade in au-national-core-2026-09-06.json the next day. au-aasb1049 (an accounting STANDARD, not a compiled statistical release) was never the right candidate for a GGO00 methodology citation; it already has its own correctly-scoped edge to au-abs-gfs instead."
+    },
+    {
+      "source": "id-foreign-trade-exports",
+      "target": "hs",
+      "edge": "id-foreign-trade-exports -> hs",
+      "reason": "resolved",
+      "why": "2026-09-05 review row 'already-live-one-of-several' (IDN/MET00) is stale: this edge already exists (grade C) in indonesia-wiring-2026-08.json, predating the DSBB review. The fresh DSBB quote ('classify exports and imports data') is not a clear upgrade over the existing basis, so left untouched. See the paired id-foreign-trade-imports -> hs entry below for the other half of the same review row."
+    },
+    {
+      "source": "id-foreign-trade-imports",
+      "target": "hs",
+      "edge": "id-foreign-trade-imports -> hs",
+      "reason": "resolved",
+      "why": "Same review row as id-foreign-trade-exports -> hs above. This half already exists (grade B) in indonesia-wiring-2026-08.json. Both edges predate the 2026-09-05 DSBB review, which only surfaced the exports node as its single candidate."
+    },
+    {
+      "source": "ph-bop",
+      "target": "imf-bpm6",
+      "edge": "ph-bop -> imf-bpm6",
+      "reason": "resolved",
+      "why": "2026-09-05 review row 'already-live-one-of-several' (PHL/IIP00) is stale: this edge already exists (grade B) in ph-vn-th-mm-wiring-2026-08.json. See the paired ph-iip -> imf-bpm6 entry below. Whether ph-bop and ph-iip are in fact two nodes for one BSP publication (its title is 'Balance of Payments and International Investment Position') is a separate, unresolved node-duplication question, flagged in HANDOFF.md rather than settled here."
+    },
+    {
+      "source": "ph-iip",
+      "target": "imf-bpm6",
+      "edge": "ph-iip -> imf-bpm6",
+      "reason": "resolved",
+      "why": "Same review row as ph-bop -> imf-bpm6 above. This half already exists (grade B) in ph-unlinked-wiring-2026-08-28.json, independently evidenced from ph-bop's edge to the same target."
+    }
+  ]
+}

@@ -705,10 +705,20 @@ node-scope, the TW SIPRI direction mismatch and NACE Rev.2 (Türkiye). **Five of
 original six were verified 2026-09-06 to be recorded in the data's own `_dropped` and
 live entries**, which this section's bar says is where a single-edge call belongs — so
 the reasoning now lives only there, and this line exists to stop the questions being
-re-opened. **The sixth, generic COICOP citations (Iran, Iraq), did NOT stay closed.**
-Round 24 (2026-09-08) wired Iraq's `iq-cpi -> un-coicop-2018` anyway, off a precedent
-set by Morocco's and Tunisia's own CPI-social-protection rounds, without flagging that
-it was reopening a call this line already recorded as decided. Reopened, pending a
-ruling — Thomas said "revisit" rather than generalise on 2026-09-08; see `HANDOFF.md`
-§3 for the live thread. Whoever resolves it should update this line to match the
-outcome, not leave both this entry and the live edge disagreeing with each other.
+re-opened. **The sixth, generic COICOP citations (Iran, Iraq, plus Morocco and Tunisia's
+own CPI-social-protection rounds), is now closed too — ruled 2026-09-08.** Round 24
+(2026-09-08) had wired Iraq's `iq-cpi -> un-coicop-2018` anyway, off a precedent set by
+Morocco's and Tunisia's own edges, without flagging that it was reopening a call this
+line already recorded as decided. Thomas ruled 2026-09-08: drop all three
+(`iq-cpi`, `tn-ins-cpi`, `ma-hcp-ipc` -> `un-coicop-2018`) as `no-document`, matching the
+IMTS-Revision-2 precedent — none of the three source documents names a COICOP edition,
+and for Iraq and Tunisia the cited document's own divisional structure points to the
+pre-2018 vintage rather than the one it was wired to. The "wire with a vintage caveat"
+practice three separate rounds converged on independently did not actually satisfy the
+corpus's own edition-inference standard; converging on a shape doesn't make it correct.
+All three edges are now in their source files' own `_dropped` (reason `no-document`),
+and `candidates-tier-wiring-2026-08-28.json`'s original Iraq entry (which had a stale
+`resolved` note pointing at the since-dropped edge) was updated to match. See
+`HANDOFF.md` §3 and memory `round_coicop_ruling_2026-09-08` for the full record. Do not
+re-mint any of the three off the 2026-08-28/2026-09-06 precedent again — that precedent
+is what this ruling overturned.

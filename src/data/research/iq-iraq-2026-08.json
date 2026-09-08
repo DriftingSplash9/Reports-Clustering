@@ -384,15 +384,14 @@
       "kind": "publication"
     }
   ],
-  "dependencies": [
+  "dependencies": [],
+  "_dropped": [
     {
-      "source_report_id": "iq-cpi",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "SELF-DECLARED: Iraq's Central Statistical Organization (COSIT), Index Numbers Department, in its own May 2018 Consumer Price Index bulletin: 'distributed on 12 divisions according to Classification Of Individual Consumption by Purpose briefly COICOP'. CAVEAT: no COICOP revision/year is named, the bulletin's base year is 2012 (predating COICOP 2018's own 2018 publication), and the 12-division structure matches the pre-2018 vintage rather than the restructured 2018 revision -- same caveat as Morocco's and Tunisia's un-coicop-2018 edges (ma-cpi-social-protection.json's ma-coicop-version-unconfirmed, tn-cpi-social-protection.json's tn-coicop-version-unconfirmed). This resolves candidates-tier-wiring-2026-08-28.json's deferred 'MODELLING QUESTION FOR THOMAS' (generic-COICOP citations, held pending a decision) by following the precedent those two later files already established live in the corpus -- wire with an explicit vintage caveat and a capped grade rather than leave a third identical finding parked indefinitely. Quote raw-verified 2026-09-08 (pdftotext -layout against a fresh download of the cited PDF, not carried over from the 2026-08-28 round's own reading).",
-      "evidence_url": "https://www.cosit.gov.iq/documents/EN/indices/CPI/2018/CPI%20%20for%20May%202018.pdf",
-      "evidence_grade": "B",
-      "evidence_quote": "distributed on 12 divisions according to Classification Of Individual Consumption by Purpose briefly COICOP"
+      "edge": "iq-cpi -> un-coicop-2018",
+      "source": "iq-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "Reopened per PLAYBOOK-CORPUS.md §7d and ruled 2026-09-08: no document in this family names a COICOP edition/revision at all -- the source text says bare 'COICOP' or 'nomenclature COICOP' with no year, no 'Rev.', no '2018'. Reading '2018' onto that silence is the researcher's inference, not the document's statement -- exactly the inference the corpus's own IMTS-Revision-2 refusal (round5-little-things-2026-09-06.json _dropped) exists to block, and the same standard that required un-coicop-hbs-1999 and un-coicop-2018 themselves to only be minted where a country's own document spelled out the edition by name (CAPMAS's 'COICOP-HBS 2000/1999', South Africa's 'the 2018 version of ... COICOP'). Here the case against 2018 is stronger than silence alone: the bulletin's own base year is 2012 (predating COICOP 2018's 2018 publication) and its 12-division structure matches the pre-2018 vintage, not the restructured 2018 revision -- the evidence points away from the very target it was wired to. Dropping rather than keeping the caveated wire: three rounds converging on the same 'wire with a vintage caveat' shape doesn't make it consistent with the rule those rounds were themselves trying to honour."
     }
   ]
 }

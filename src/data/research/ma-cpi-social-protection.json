@@ -146,15 +146,6 @@
     },
     {
       "source_report_id": "ma-hcp-ipc",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "HCP methodological note: 'classifiés selon la nomenclature COICOP.' CAVEAT: no version number is stated anywhere in the document -- see ma-coicop-version-unconfirmed.",
-      "evidence_url": "https://www.hcp.ma/attachment/2737121/",
-      "evidence_grade": "C",
-      "evidence_quote": "classifiés selon la nomenclature COICOP."
-    },
-    {
-      "source_report_id": "ma-hcp-ipc",
       "target_report_id": "imf-sdds",
       "relationship_type": "methodology_depends_on",
       "basis": "REGISTER: HCP methodological note: 'conformément au calendrier établi selon les normes spéciales de diffusion des données (NSDD)' -- Morocco's own document states its CPI release calendar follows SDDS. Corroborated by the IMF's own 'Morocco: Annual Observance Report of the Special Data Dissemination Standard for 2022': 'Morocco subscribed to the SDDS on December 15, 2005 and met all SDDS requirements at the time of subscription,' listing 'Price index: Consumer prices' as an SDDS-monitored, monthly category.",
@@ -205,6 +196,13 @@
       "target": "ma-hcp-ipc",
       "reason": "no-document",
       "why": "Could not access readable primary text of Loi n° 58-23 (Arabic-only scanned PDF, no OCR available this session). Secondary/official sources describe recent increases as driven by the 'Chantier Royal' rollout and budget sustainability, with no mention of inflation or CPI -- but this is not a verified reading of the statute itself, so treated as unresolved rather than a confirmed denial."
+    },
+    {
+      "edge": "ma-hcp-ipc -> un-coicop-2018",
+      "source": "ma-hcp-ipc",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "Reopened per PLAYBOOK-CORPUS.md §7d and ruled 2026-09-08: no document in this family names a COICOP edition/revision at all -- the source text says bare 'COICOP' or 'nomenclature COICOP' with no year, no 'Rev.', no '2018'. Reading '2018' onto that silence is the researcher's inference, not the document's statement -- exactly the inference the corpus's own IMTS-Revision-2 refusal (round5-little-things-2026-09-06.json _dropped) exists to block, and the same standard that required un-coicop-hbs-1999 and un-coicop-2018 themselves to only be minted where a country's own document spelled out the edition by name (CAPMAS's 'COICOP-HBS 2000/1999', South Africa's 'the 2018 version of ... COICOP'). Morocco's document carries no divisional structure evidence either way -- it is silence alone, which is enough on its own under the edition-inference rule. Dropping rather than keeping the caveated wire: three rounds converging on the same 'wire with a vintage caveat' shape doesn't make it consistent with the rule those rounds were themselves trying to honour."
     }
   ]
 }

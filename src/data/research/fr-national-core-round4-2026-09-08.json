@@ -1,0 +1,56 @@
+{
+  "_slice": "fr-national-core-round4-2026-09-08",
+  "_researched": "2026-09-08",
+  "_note": "FR round 4 (HANDOFF's [Agent] 'Continue FR'). Rounds 1-2 exhausted the GNI-inventory-chapter method for the current inventory edition (Ch.10 fully mined, 3.4.1/5.8.2/5.11.2 confirmed empty per round2's own note). Round 3 opened a second method -- a document that names a target artefact BY TITLE while citing it -- against INSEE's own Note de conjoncture (fr-insee-note-de-conjoncture, minted round 3), and flagged it as worth reusing on the NDC's other sections (labour, prices, public finance) in a future round. This round fetched the current (17 June 2026) NDC edition (insee.fr/fr/statistiques/fichier/9007948/ndc-juin-2026.pdf, live 2026-09-08) and read its seven articles' bibliographies against their bodies for a title+usage co-location. Two agency-level near-misses (DSECE's 'Bilan trimestriel du commerce extérieur' bibliography entry has no body co-location with a usage statement; SDES's GES/energy bibliography entries are cited in body only as '►SDES (2026)', agency-not-artefact, same trap as the DGDDI monthly bulletin) -- not minted, recorded below. One clean hit: the 'Epargne des menages' article's entire empirical section is built on INSEE's own monthly household survey, named in full and self-sourced repeatedly (11 occurrences of the identical source line across the article's charts) as 'Insee, enquete mensuelle de conjoncture aupres des menages (Camme)' -- which matches, word for word, the title of INSEE's own metadata page for the series (insee.fr/fr/metadonnees/source/serie/s1208, fetched live 2026-09-08: 'Enquete mensuelle de conjoncture aupres des menages'). This is the chart-caption/table-cell disclosure pattern (PLAYBOOK-CORPUS.md Sec7a) applied to a source line rather than a bibliography entry -- a source line's whole purpose is source disclosure, and this one names the specific survey, not just the publisher.",
+  "reports": [
+    {
+      "id": "fr-insee-camme",
+      "title": "Enquête mensuelle de conjoncture auprès des ménages (Camme)",
+      "title_aliases": [
+        "Camme survey",
+        "Household confidence survey (France)"
+      ],
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's monthly household economic-sentiment survey (Consommation des Ménages / Camme), part of the European Commission's harmonised joint business and consumer survey programme. Surveys roughly 2,000 metropolitan-France households each month on their perceptions of prices, unemployment, savings capacity and living standards; the underlying opinion balances feed both the monthly 'Informations rapides sur la confiance des ménages' bulletin and the synthetic consumer-confidence index built by factor analysis. Opinion balances have run quadrimestrially since 1972 and monthly since January 1987; a household-category breakdown has been published via the European Commission's site since 2013.",
+      "releases_per_year": 12,
+      "cadence_note": "INSEE's own methodology note (in the Note de conjoncture's Épargne des ménages article) states the survey is conducted every month, with monthly opinion balances since January 1987 (quadrimestrial 1972-1986).",
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/metadonnees/source/serie/s1208",
+      "domains": [
+        "monetary-policy"
+      ],
+      "_domain_note": "No clean fit in this corpus's domain union for a consumer-sentiment survey -- same gap noted in ecfin-business-consumer-surveys.json (the EU-level harmonised programme this survey feeds into). 'monetary-policy' used as least-wrong, flagged for reconsideration alongside that entry rather than re-litigated here.",
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fr-insee-note-de-conjoncture",
+      "target_report_id": "fr-insee-camme",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: INSEE's own Note de conjoncture (17 June 2026 edition), 'Épargne des ménages' article. Every chart in the article's empirical section carries the identical source line naming the survey by its own title, e.g. 'Source : Insee, enquête mensuelle de conjoncture auprès des ménages (Camme).' (11 occurrences across the article, one per chart), and the article's own methodology box explains the synthetic confidence indicator is built from this survey's opinion balances. The title matches INSEE's own metadata page for the series verbatim ('Enquête mensuelle de conjoncture auprès des ménages'), fetched live 2026-09-08. Raw-verified 2026-09-08 (pdftotext -layout against a fresh download of the cited PDF).",
+      "evidence_url": "https://www.insee.fr/fr/statistiques/fichier/9007948/ndc-juin-2026.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Source : Insee, enquête mensuelle de conjoncture auprès des ménages (Camme)."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "fr-insee-note-de-conjoncture -> DSECE's 'Bilan trimestriel du commerce extérieur de la France'",
+      "source": "fr-insee-note-de-conjoncture",
+      "target": null,
+      "reason": "no-document",
+      "why": "The June 2026 NDC's bibliography (trade article) cites 'DSECE (2026), Bilan trimestriel du commerce extérieur de la France au premier trimestre 2026, mai 2026' by title, but no body sentence in that article co-locates the title with a usage statement -- unlike round 15's find (a bibliography line that WAS the usage statement, in that case). Searched the full document for a '►DSECE' in-body citation marker: the only other DSECE occurrence is a chart source caption ('Source : DGDDI/DSECE.') on the military-equipment-exports chart, which names the agency, not this titled report, and isn't about this article's subject. Not the same shape as round 15's fr-dgddi-chiffre-commerce-exterieur mint -- that one had the bibliography line itself state usage; this one doesn't. Reopen only if a future NDC edition's body text names this specific title alongside a usage clause."
+    },
+    {
+      "edge": "fr-insee-note-de-conjoncture -> SDES energy/emissions statistics",
+      "source": "fr-insee-note-de-conjoncture",
+      "target": null,
+      "reason": "no-document",
+      "why": "The June 2026 NDC's 'Émissions de gaz à effet de serre' article bibliography lists two SDES (2026) titles ('Les facteurs d'évolution des émissions de CO2...' and 'Conjoncture énergétique - Résultats au premier trimestre 2026', Stat info énergie n°817), and the body does cite SDES with a clear usage statement -- but only at agency level ('►SDES (2026) : les émissions de GES liées à l'énergie diminuent depuis 2005...', and elsewhere 'tel que mesuré par le ►SDES'). Neither in-body citation names either bibliography title. Same agency-not-artefact shape as the DGDDI monthly-bulletin refusal (PLAYBOOK-CORPUS.md §7a) -- refusing here for the same reason, not re-litigating that ruling. Reopen only if a future edition's body names one of these titles directly alongside its usage."
+    }
+  ]
+}

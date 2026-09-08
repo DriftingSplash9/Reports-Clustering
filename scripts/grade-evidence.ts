@@ -1516,7 +1516,33 @@ async function fetchRaw(url: string): Promise<Fetched> {
       text = stripHtml(stdout)
       extractor = 'docx'
     } else if (body.length) {
-      const asText = body.toString('utf8')
+      // **The fetcher honours a document's DECLARED CHARSET** (2026-09-08, China
+      // round; flagged to Thomas in `HANDOFF.md` §3 because it can move grades
+      // outside the round that made it). This read
+      // `const asText = body.toString('utf8')` and decoded every HTML body as
+      // UTF-8 whatever the document said it was, so a legacy-encoded page was
+      // not read as a bad quote — it was not read AT ALL, and the edge graded
+      // `quote-not-in-document`, which is indistinguishable on screen from an
+      // edge whose quote was wrong. Measured on
+      // https://www.stats.gov.cn/sj/ndsj/2025/html/sm14.htm, which declares
+      // `charset=gb2312`: 537 of its characters became U+FFFD, and the round's
+      // 12 edges graded 1 A / 1 B / 10 C. With the declared charset honoured and
+      // nothing else changed, the same 12 graded 12 A `quote-found-artefact-named`.
+      // **Additive by construction**, like the third PDF rendering: the decoded
+      // reading is kept ONLY when it yields strictly fewer replacement characters
+      // than the UTF-8 one, and an unknown charset label falls back to UTF-8, so
+      // it can only ever improve a reading. NBS, DGBAS, e-Stat and KOSTAT all
+      // still serve gb2312/Big5/Shift_JIS/EUC-KR pages; a corpus-wide `--refetch`
+      // re-grade of the CN/TW/JP/KR edges is the follow-up, NOT run in this round.
+      let asText = body.toString('utf8')
+      const declared = /charset=["']?([\w-]+)/i.exec(body.subarray(0, 2048).toString('latin1'))?.[1]
+      if (declared && !/^utf-?8$/i.test(declared)) {
+        const label = /^gb2312$/i.test(declared) ? 'gb18030' : declared.toLowerCase()
+        try {
+          const decoded = new TextDecoder(label).decode(body)
+          if (decoded.split('\uFFFD').length < asText.split('\uFFFD').length) asText = decoded
+        } catch { /* unknown label: keep the UTF-8 reading */ }
+      }
       if (/<[a-z!]/i.test(asText.slice(0, 2000))) {
         text = stripHtml(asText)
         extractor = 'html'

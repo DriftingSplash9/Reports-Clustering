@@ -266,7 +266,15 @@ const LISTING_WORDS = new Set([
 const HOST_INDEX_PREFIXES: ReadonlyArray<{ host: string; prefix: string; exact?: boolean }> = [
   // stats.gov.cn: the Statistical Yearbook year-list, English press-release
   // and communique listings -- all a list of links, no document body.
-  { host: 'stats.gov.cn', prefix: '/sj/ndsj/' },
+  // `exact: true` since 2026-09-08 (China round). This entry read
+  // `{ host: 'stats.gov.cn', prefix: '/sj/ndsj/' }` — a PREFIX — until then, and
+  // so swallowed every page inside the yearbook as well as the year-list page it
+  // was written for. `/sj/ndsj/2025/html/smNN.htm` is a chapter's 简要说明: a real
+  // document body that discloses that chapter's sources by title, and ten such
+  // edges failed validation as "index/listing page" the first time any round
+  // cited one. Identical defect, and identical fix, to the `/english/pressrelease/`
+  // entry below, which was narrowed to `exact` for the same reason.
+  { host: 'stats.gov.cn', prefix: '/sj/ndsj/', exact: true },
   { host: 'stats.gov.cn', prefix: '/english/pressrelease/', exact: true }, // NOT a prefix -- a dated article under this path (.../202502/t...html) is a real document
   { host: 'stats.gov.cn', prefix: '/english/statisticalcommunique' },
   // ndb.int: the whole governance/transparency-reporting section is a
