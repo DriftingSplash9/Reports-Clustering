@@ -148,6 +148,12 @@ const CONTINENT_OF: Partial<Record<string, Continent>> = {
   CU: 'North America', DO: 'North America', HT: 'North America',
   JM: 'North America', TT: 'North America', BS: 'North America',
   BB: 'North America', AG: 'North America', LC: 'North America',
+  // DM and VC added 2026-09-09 (round 33) with the first nodes this corpus
+  // carries for either country — the DSBB option-E Eastern Caribbean slice.
+  // Same bucket as their neighbours; without these two the new nodes fall
+  // back to 'International' and lose their colour family, which is the
+  // failure the HK/PS/SV note below records.
+  DM: 'North America', VC: 'North America',
 
   // Belarus — Europe, alongside Moldova/Ukraine/Serbia (non-EU Europe).
   BY: 'Europe',

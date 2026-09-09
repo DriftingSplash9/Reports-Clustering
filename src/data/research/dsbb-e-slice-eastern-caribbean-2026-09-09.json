@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 33) — DSBB option-E slice, Eastern Caribbean cluster",
+    "minted": "2026-09-09",
+    "note": "First mints from the DSBB option-E worklist (Claude outputs/dsbb-pilot-2026-09-09/e-slice-tier1.json), on Thomas's 2026-09-09 ruling: take only the pairs whose IMF Summary of Methodology names the country's OWN publication by title, so the node is minted on a named publication rather than on a DSBB category label. Each node's title comes from the SoM's dissemination sentence and was then CONFIRMED against the publisher's own site, which is also what supplies `url` and the cadence — no node here rests on the SoM alone. Two of the four Eastern Caribbean candidates are minted; the other two are in _dropped with the reason, and both are host problems rather than evidence problems. NOT wired, deliberately: the MET00 rows for Dominica, Grenada, St Kitts and St Vincent each name SITC Rev.3 alongside HS and would suit the `sitc` node minted earlier today, but their SoMs name no publication for the trade series, so under option E they have no source node to hang on. Saint Vincent's own Annual Trade Report exists on the Office's publications page — but the SoM does not name it, and pairing them would be this researcher's inference, which is the exact source-match error the 2026-09-05 DSBB review flagged. Left as a lead. EDITION NOTE: both quotes name ISIC Rev 3.1 while `isic` is a family-level node; that is the corpus's established shape for ISIC (see `ar-scn -> isic`, minted on 'ISIC Revision 3.1' in the 2026-09-05 import) and is not a new call. JURISDICTION_LEVEL: 'federal', which is this corpus's value for a national-level publisher — there is no 'national' in the JurisdictionLevel union and 2,429 existing nodes use 'federal' for exactly this, including Jamaica's and Trinidad's national releases. Recorded because the word reads wrong for a unitary Caribbean state and the next person will wonder. REGISTRY: DM and VC were absent from both COUNTRY_TO_REGION in src/lib/regions.ts and COUNTRY_FAMILY in src/lib/palette.ts, so they would have fallen back to 'International' and lost their colour family; both maps gain the two codes in this round, alongside their Caribbean neighbours, exactly as round 8 did for HK/PS/SV."
+  },
+  "reports": [
+    {
+      "id": "dm-national-accounts",
+      "title": "National Accounts Report",
+      "publisher": "Central Statistics Office of Dominica",
+      "country": "DM",
+      "jurisdiction_level": "federal",
+      "region": "Dominica",
+      "description": "The Central Statistics Office's annual national accounts publication for the Commonwealth of Dominica, and the release the IMF's Summary of Methodology names as where Dominica's annual national accounts are disseminated, alongside the Eastern Caribbean Central Bank's own Annual National Account Digest. The CSO's Economic Indicators page carries the series as a run of per-reference-year PDFs going back to the 1970s. First node this corpus has carried for Dominica.",
+      "releases_per_year": 1,
+      "cadence_note": "One report per reference year. The series is NOT visibly current: the most recent edition on the CSO's Economic Indicators page is the 2018 report (uploaded under /wp-content/uploads/2020/01/), read 2026-09-09. releases_per_year describes the intended annual cadence, not observed recent output.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "No published release calendar. Editions observed on the CSO page as of 2026-09-09: 2018, 2017, 2014, 2013, 2012, 2011, 2010, 2009 and multi-year volumes back to 1977. The gap after 2018 is what the page shows and is recorded rather than smoothed over; no next date is computable.",
+        "source_url": "https://stats.gov.dm/subjects/economic-indicators/"
+      },
+      "last_updated": null,
+      "url": "https://stats.gov.dm/subjects/economic-indicators/",
+      "domains": ["national-accounts"],
+      "kind": "publication"
+    },
+    {
+      "id": "vc-digest-of-statistics",
+      "title": "Digest of Statistics",
+      "publisher": "Statistical Office, Government of Saint Vincent and the Grenadines",
+      "country": "VC",
+      "jurisdiction_level": "federal",
+      "region": "Saint Vincent and the Grenadines",
+      "description": "The Statistical Office's general annual compendium for Saint Vincent and the Grenadines, and the release the IMF's Summary of Methodology names as where the production data behind the country's industrial-production indicators are published. Tagged `general-statistics` rather than by subject, under the corpus rule that naming the individual domains a compendium covers asserts content nobody checked. First node this corpus has carried for Saint Vincent and the Grenadines.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual. Editions 2015 through 2019 are listed on the Office's Publications page, read 2026-09-09; nothing more recent is posted there, so the observed run stops at 2019.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "No published release calendar. Observed editions on the Publications page as of 2026-09-09: Digest of Statistics 2019, 2018, 2017, 2016 and 2015. No next date is computable, and the absence of post-2019 editions is what the page shows rather than a claim that the series ended.",
+        "source_url": "https://stats.gov.vc/publications/"
+      },
+      "last_updated": null,
+      "url": "https://stats.gov.vc/publications/",
+      "domains": ["general-statistics"],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "dm-national-accounts",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Summary of Methodology, Dominica, data category NAG00: the compiling agency's own metadata states that the economic activities in the national accounts are classified using ISIC, naming the standard in full (see evidence_quote). The source node is the publication the SAME SoM names as where those national accounts are disseminated — 'the annual national accounts of Dominica are disseminated in the \"National Accounts Report\" of the Central Statistical Office (CSO)' — and that publication was then confirmed to exist as a real series on the CSO's own site, so the source match is documented rather than pattern-guessed. SoM re-fetched and the quote re-verified verbatim on 2026-09-09. The document names ISIC Rev 3.1 and the target is the family-level `isic` node, following the corpus's existing treatment of ISIC citations.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=DMA&categoryCode=NAG00",
+      "evidence_quote": "Classification System Economic activities are classified using the International Standard Industrial Classification, Revision 3.1 (ISIC Rev 3.1).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "vc-digest-of-statistics",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Summary of Methodology, Saint Vincent and the Grenadines, data category ILV00/IND00: the compiling agency's own metadata states that manufacturing activities in the production data are broadly classified according to ISIC Rev 3.1. The source node is the publication the SAME SoM names as where those production data are published — 'published in the \"Digest of Statistics\" by the Statistics Office' — confirmed as a real series on the Office's own Publications page. SoM re-fetched and the quote re-verified verbatim on 2026-09-09. GRADE HISTORY, kept deliberately: this was hand-graded B on the reading that the sentence names the standard by ACRONYM only and calls the classification 'broad', where the Dominica edge above gets the standard's full title. `grade-evidence.ts --slice` returned A on `quote-found-artefact-named` and the A stands — 'broad' qualifies the GRANULARITY at which activities are classified, not the degree of adherence, so it is not the hedge family the quote guard exists to catch, and the acronym clears the grader's length floor. The grader overruled the researcher and is the record, following the round-31 precedent.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=VCT&categoryCode=IND00",
+      "evidence_quote": "For manufacturing activities - broad classification according to ISIC Rev3.1.",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "source_report_id": "gd-national-accounts",
+      "target_report_id": "isic",
+      "reason": "unreadable-source",
+      "why": "NOT MINTED 2026-09-09. Grenada's SoM (NAG00) names the 'Grenada Economic Review' as where national accounts are disseminated, which is what option E requires. But that publication is NOT on the Central Statistical Office's own site: stats.gov.gd/publications/ was read in Chrome on 2026-09-09 (the host does not resolve from either this session's cloud container or the device VM) and lists only a single 'National Accounts Statistics, 2009' PDF plus education digests. Minting a node off that 2009 PDF and hanging the SoM's ISIC citation on it would assert that the two are the same series, which nothing read here shows — the exact source-match error the 2026-09-05 DSBB review was written to catch. Re-openable the moment the Economic Review turns up on the CSO site or in the ECCB's library."
+    },
+    {
+      "source_report_id": "kn-digest-of-statistics",
+      "target_report_id": "isic",
+      "reason": "unreadable-source",
+      "why": "NOT MINTED 2026-09-09. St Kitts and Nevis's SoM (NAG00) names the Statistical Office's annual 'Digest of Statistics' and the ECCB's 'National Accounts Digest', so the evidence side is fine. The publisher's site could not be read to confirm the publication or supply a URL and cadence: www.statistics.gov.kn does not resolve from the cloud container or the device VM, https:// is refused by Chrome with ERR_SSL_VERSION_OR_CIPHER_MISMATCH (the host offers a TLS configuration current Chrome will not negotiate), and http:// returns a Chrome network error. Three routes, one day, one machine each — a host verdict, not an evidence verdict, and re-probe before believing it."
+    }
+  ]
+}

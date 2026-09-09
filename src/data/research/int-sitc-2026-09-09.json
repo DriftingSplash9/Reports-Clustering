@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 — generic SITC classification hub",
+    "minted": "2026-09-09",
+    "note": "Mints the SITC classification hub and wires the two Chinese yearbook chapter notes that name it. RULING (Thomas, 2026-09-09): a GENERIC, edition-less node, in the shape of `hs` and `isic`, not an edition-bound one. Both citing documents name 《国际贸易标准分类》 with no revision, and the 2026-09-08 COICOP ruling forbids inferring an edition a document does not state — an edition-less node infers nothing, which is why this shape is available where `un-coicop-2018` was not. Note for the record that an edition-bound node WAS available and was declined on the documents, not for want of a current edition: SITC Rev.4 (2006) is live and reads 'Status: Operational' in UNSD's classification registry (Family/Detail/28, read 2026-09-09); Rev.3 (Detail/14) is the superseded one. URL CHOICE: `hs` cites a family-level WCO overview page, and there is no SITC equivalent — https://unstats.un.org/unsd/classifications/Econ/isic serves ISIC but /Econ/sitc is a 404 (both probed 2026-09-09). The node therefore cites the UNSD economic-classifications index, which is the publisher's own page carrying the whole SITC family (Rev.1 through Rev.4) rather than any one revision. Its weakness is that it covers other classifications too; the alternative was a revision-specific page, which would have undercut the family-level ruling. TITLE_ALIAS: 国际贸易标准分类 is sourced, not translated — it is the exact string both cited documents print, and it is also UNSD's own Chinese title for the standard in its registry. DOMAIN: `trade`, which is the accurate approved tag. Noting a divergence rather than hiding it — `hs` and `isic` both carry `national-accounts`, which predates the `trade` tag's use for classification hubs; this slice does not change them."
+  },
+  "reports": [
+    {
+      "id": "sitc",
+      "title": "Standard International Trade Classification (SITC)",
+      "publisher": "United Nations Statistics Division",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The United Nations' commodity classification for international merchandise trade, grouping traded goods by material, processing stage, market practice and end use so that trade can be analysed rather than merely tariffed. It is the analytical counterpart to the HS, which is the collection nomenclature: countries collect customs data on HS codes and convert to SITC for comparison and long-run series, which is exactly what the Chinese yearbooks wired here do. Held at family level deliberately — the documents in this corpus that cite it name no revision. Revisions: original 1950, Rev.1 (1961), Rev.2 (1975), Rev.3 (1986) and Rev.4, accepted by the UN Statistical Commission at its thirty-seventh session in March 2006 and recommended by the Interagency Task Force on International Merchandise Trade Statistics for analytical use.",
+      "releases_per_year": 0.05,
+      "cadence_note": "Five editions in fifty-six years and none since Rev.4 in 2006. Not an annual release; releases_per_year is nominal so the pulse rate reads as near-static, matching the treatment of `isic` and `sna-2008`.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "SITC has no publication calendar and no fixed revision cycle. Rev.4 (2006) is the current edition and UNSD's classification registry records its status as Operational as of a 2026-09-09 read; no successor has been announced. Unlike ISIC, SITC is not covered by the Committee of Experts' proposed five-year ISIC/CPC revision cycle, so no computable next revision date exists.",
+        "source_url": "https://unstats.un.org/unsd/classifications/Family/Detail/28"
+      },
+      "last_updated": null,
+      "url": "https://unstats.un.org/unsd/classifications/Econ",
+      "domains": ["trade"],
+      "kind": "standard",
+      "title_aliases": ["国际贸易标准分类"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-statistical-yearbook",
+      "target_report_id": "sitc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the China Statistical Yearbook 2025's foreign-economy-and-trade chapter note (简要说明, chapter 11) states that its historical export and import commodity-classification values are compiled according to the United Nations' Standard International Trade Classification. The document names the artefact by title and names its publisher (联合国), and states no revision — which is why the target is the family-level node rather than an edition. Same chapter note as the existing `cn-statistical-yearbook -> hs` edge, one sentence earlier. Read live in Chrome on 2026-09-09; www.stats.gov.cn does not resolve from either this session's cloud container or the device VM, and Chrome is the working route for it. Quote transcribed against the page's own code points: the parentheses around SITC are ASCII U+0028/U+0029 here, where the Jiangsu yearbook's identical sentence uses fullwidth U+FF08/U+FF09.",
+      "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/sm11.htm",
+      "evidence_quote": "历年出口商品分类金额和历年进口商品分类金额按照联合国《国际贸易标准分类》(SITC)进行统计。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-js-statistical-yearbook",
+      "target_report_id": "sitc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: chapter 8 (对外经济贸易) of the Jiangsu Statistical Yearbook 2025's own 简要说明 carries the same statement as the national yearbook — historical export and import commodity-classification values are compiled according to the United Nations' Standard International Trade Classification, named by title with no revision. This is the SITC lead that round 30 recorded against Jiangsu chapter 8 and left unwired for want of a target node. Read live in Chrome on 2026-09-09; the cited http:// path served over https and the https form is cited. Quote transcribed against the page's own code points: fullwidth parentheses U+FF08/U+FF09 around SITC, where the national yearbook's otherwise character-identical sentence uses ASCII.",
+      "evidence_url": "https://tj.jiangsu.gov.cn/2025/nj08/nj0800.htm",
+      "evidence_quote": "历年出口商品分类金额和历年进口商品分类金额按照联合国《国际贸易标准分类》（SITC）进行统计。",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": []
+}

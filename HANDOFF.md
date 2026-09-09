@@ -130,14 +130,23 @@ names grew 60% in one round and the headline number still barely moved.)*
 
 ## 2. Current state
 
-Corpus **3,600 reports / 3,188 dependencies**. **1,175 A · 1,402 B · 611 C**, A-share 36.9%.
+Corpus **3,603 reports / 3,192 dependencies**. **1,179 A · 1,402 B · 611 C**, A-share 36.9%.
 **Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
 `grade-evidence --selftest` **76/76**, `tsc --noEmit` clean, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back. Last data-changing round is **31**
-(Wuhan and Xi'an city yearbooks + 3 NBS instrument nodes), 2026-09-09.
+`public/corpus-data.json` regenerated and copied back. Last data-changing round is **33**
+(the first DSBB option-E mints, Eastern Caribbean), 2026-09-09; round 32 was the generic `sitc`
+hub, round 31 Wuhan and Xi'an plus 3 NBS instrument nodes.
 **974 nodes still have zero edges** — CN is 29 of them, down from 31.
 
-**No data changed after round 31.** Handoff 079 is that round plus this write-up.
+**Round 32, 2026-09-09: `sitc` minted and wired.** Generic, edition-less, in the shape of `hs` and
+`isic`, on Thomas's ruling. Two A edges off chapter notes that name 《国际贸易标准分类》 with no
+revision — `cn-statistical-yearbook` (CSY ch.11) and `cn-js-statistical-yearbook` (Jiangsu ch.8),
+both read in Chrome and transcribed against the pages' own code points (the CSY prints ASCII
+parens around SITC, Jiangsu fullwidth). Slice `src/data/research/int-sitc-2026-09-09.json`.
+Validated in a cloud sandbox: `validate` exit 0, 128/128 logic, grader selftest 76/76, and
+`--scan-quotes` clean on both new quotes. **www.stats.gov.cn resolves from neither the cloud
+container nor the device VM — Chrome is the working route for it**, which is a machine claim, not
+a host verdict.
 
 **The live programme is CHINA.** Thomas ruled 2026-09-08 *"i'd rather scale the china work"*, and
 both blockers are settled. **Its state lives in `notes/china-progress.md`, not here.** Score
@@ -151,6 +160,22 @@ that the per-chapter 简要说明 is the route — all six of its edges came fro
 tracker now carries the corrected method, the four physical SHAPES a city yearbook comes in, and
 the re-probe evidence that a host verdict is a claim about one machine on one day. Narrative:
 memory `round31_cn_cities_2026-09-09`.
+
+**Round 33, 2026-09-09: DSBB option-E opened, Eastern Caribbean first.** Two nodes minted on a
+publication the SoM NAMES and the publisher's own site CONFIRMS — `dm-national-accounts`
+(Dominica CSO, *National Accounts Report*) and `vc-digest-of-statistics` (SVG Statistical Office,
+*Digest of Statistics*) — each wired to `isic`, both A. **First nodes this corpus has carried for
+either country**, so `src/lib/regions.ts` and `src/lib/palette.ts` gained DM and VC in the same
+round; without them the two nodes fall back to 'International' and lose their colour family, the
+failure the HK/PS/SV note records. Grenada and St Kitts were candidates and are in the slice's
+`_dropped`, both for HOST reasons rather than evidence ones — Grenada's *Economic Review* is not on
+its CSO site, and statistics.gov.kn refuses TLS to Chrome and errors over http. Validated in the
+cloud sandbox: `validate` exit 0, 128/128 logic, selftest 76/76, `tsc` clean, `vite build` ok,
+`public/corpus-data.json` regenerated and copied back; all four changed files sha256-verified
+against the validated copies. Slice `src/data/research/dsbb-e-slice-eastern-caribbean-2026-09-09.json`.
+**The grader overruled the researcher on one edge** — SVG's quote was hand-graded B for naming ISIC
+by acronym inside a 'broad classification' phrase, and `--slice` returned A; the A stands and the
+reasoning is in the edge's own basis.
 
 **Other threads, one line each; the narrative is in project memory:**
 
@@ -222,20 +247,11 @@ The corpus has no provincial-bureau instrument node yet and Shaanxi has no node 
 yes opens a class — every province writes these — so it is a scope call, not a research one.
 Detail: `notes/china-progress.md`, leads section.
 
-**5. A new international hub node: generic `sitc`?** The China Statistical Yearbook and Jiangsu
-both name 《国际贸易标准分类》(SITC) and **neither names an edition**; UNSD's page is Rev.3, marked
-*Superseded*. An edition-bound node would be the exact inference the COICOP ruling overturned, so
-it was deferred. A **generic** `sitc` hub in the style of `hs` and `isic` avoids that and unlocks
-2 waiting edges, more as provinces are mined. New international node, so it is your call.
-**Checked 2026-09-09, so no research is owed before the call.** The shape is not new: `hs` (25
-inbound) and `isic` (72) are both edition-less family hubs already, and `hs` already carries
-商品名称和编码协调制度 as a `title_aliases` entry for this exact kind of CJK citation. **Correction to
-the framing above:** SITC **Rev.4** (2006) is live and reads *Status: Operational* in UNSD's registry
-(`unstats.un.org/unsd/classifications/Family/Detail/28`) — Rev.3 (`Detail/14`) is the superseded one.
-So an edition-bound node IS available; what rules it out is the documents naming no edition, not the
-absence of a current edition. UNSD's own Chinese title there is 国际贸易标准分类, character-identical
-to what the CSY and Jiangsu print, so that alias would be sourced, not translated. Only loose end if
-you say yes: which URL the node takes (`hs` uses a family-level page; the registry is per-revision).
+**5. DONE — generic `sitc` minted and wired, round 32, 2026-09-09.** Thomas ruled yes; the node is
+edition-less in the shape of `hs`/`isic`, the two waiting edges are wired A, and the reasoning
+(including why an edition-bound node was declined on the documents rather than for want of a
+current edition, and why the node cites UNSD's economic-classifications index) is in the slice's
+own `meta.note`. Nothing left here — this item leaves at the next handoff.
 
 **6. RULED 2026-09-09: option D — a BOUNDED SLICE, not the whole 750.** Thomas picked the family;
 the member was not named, so **the pilot bound taken is the 6 countries with no corpus node at all
@@ -243,7 +259,26 @@ the member was not named, so **the pilot bound taken is the 6 countries with no 
 offered, fills genuine holes rather than densifying, and preserves the stop option that is the whole
 point of D. **Widening is one word from Thomas**: MET00+NAG00 is 225 pairs, countries with 20+
 nodes already is 131. Any pass must mark the thin nodes as thin (a `provenance` marker or
-equivalent) so they stay separable later. **Not started as of this line.** *(Original item:)*
+equivalent) so they stay separable later. **Thomas switched the bound to option E, 2026-09-09** — take only the pairs whose SoM names the
+actual publication by title, so the node is not thin at all. **The full sweep is done and E is far
+smaller than the sample predicted: all 684 SoMs fetched and filtered, and the honest yield is
+~20 strong pairs plus ~10 marginal, not the 70–135 estimated off a 60-pair sample.** The sample
+estimate was 3x too optimistic and is corrected in the scoping note; the raw matcher says 56, which
+falls to 39 once the standards' own manual names are excluded and to ~20 once hand-read (the
+discards include a font name, SITC section headings, and an ISIC activity). Worklist:
+`Claude outputs/dsbb-pilot-2026-09-09/e-slice-tier1.json`, with all 684 SoM texts cached beside it.
+**Two side-findings worth more than the count.** Several hits are statistical LAWS rather than
+releases (Uzbekistan's "On Official Statistics", Kyrgyzstan's "On the National Bank of the Kyrgyz
+Republic") — a legitimate and better-evidenced class this corpus already mints. And Colombia's
+ILV00 names a publication with an unsubstituted template placeholder in its title ("Periodo
+-----"), the same defect class round 23 found on the e-GDDS pages.
+
+**Pilot state, 2026-09-09: prepared, NOT minted.** All 23 pairs fetched, and **all 24 stored
+quotes re-verified verbatim against a fresh read** — cache and worklist in
+`Claude outputs/dsbb-pilot-2026-09-09/`. The quote guard would cap only 2 of the 24 (both Aruba's
+"transition … foreseen in 2017"). What is left before any mint: a `url` and a cadence per node,
+which for the four Eastern Caribbean countries means the CSO and ECCB product pages. **No data
+has changed and `validate` has not been re-run, because nothing needed it.** *(Original item:)*
 **750 DSBB SoM rows are mint leads with no source node — corpus-expansion call, not taken.**
 `Claude outputs/dsbb-som-import-2026-09-05-review.json`, 750 rows where the IMF's own methodology
 summary names a standard for a country+category with no node at all. Minting from a DSBB category

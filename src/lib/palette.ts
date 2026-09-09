@@ -572,6 +572,8 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // Caribbean — `SA`, same bucket as Central America and Mexico.
   CU: 'SA', DO: 'SA', HT: 'SA', JM: 'SA', TT: 'SA', BS: 'SA', BB: 'SA',
   AG: 'SA', LC: 'SA',
+  // Round 33, 2026-09-09 — first nodes for Dominica and Saint Vincent.
+  DM: 'SA', VC: 'SA',
 
   // Belarus — `XEU`, the non-EU-European family already carrying Moldova,
   // Ukraine, Serbia etc. (Filed here rather than `ASIA` for the same
@@ -1437,6 +1439,7 @@ export const COUNTRY_LABEL: Record<string, string> = {
   CU: 'Cuba', DO: 'Dominican Republic', HT: 'Haiti', JM: 'Jamaica',
   TT: 'Trinidad and Tobago', BS: 'The Bahamas', BB: 'Barbados',
   AG: 'Antigua and Barbuda', LC: 'Saint Lucia',
+  DM: 'Dominica', VC: 'Saint Vincent and the Grenadines',
   BY: 'Belarus',
   FJ: 'Fiji', PG: 'Papua New Guinea', SB: 'Solomon Islands',
   VU: 'Vanuatu', WS: 'Samoa', TO: 'Tonga', KI: 'Kiribati', NR: 'Nauru',

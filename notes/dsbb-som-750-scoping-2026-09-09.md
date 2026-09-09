@@ -118,6 +118,74 @@ this class is closed, not open — but a wiring pass should still run `--scan-qu
 the guard caps at B rather than refusing, and a B built on "foreseen in 2017" is still a lead
 rather than a dependency.
 
+## 5b. The SoM sometimes names the actual PUBLICATION — measured 2026-09-09
+
+§2 says the endpoint never gives a publication title. **That is wrong as stated, and the
+correction matters more than the error.** The DQAF prose has a dissemination passage, and in some
+countries it names the product by title: Dominica's *"the annual national accounts of Dominica are
+disseminated in the "National Accounts Report" of the Central Statistical Office (CSO) and in the
+Eastern Caribbean Central Bank's (ECCB) "Annual National Account Digest""*; Grenada's *Grenada
+Economic Review*; St Kitts' *Digest of Statistics*; St Vincent's *Digest of Statistics*. **Where
+that sentence exists, the node is not thin at all** — it is minted on a named publication and a
+named publisher, and only the URL and cadence still have to be researched.
+
+**How often, measured on a random 60 of the 684** (seed 20260909, all 60 fetched
+2026-09-09, cached in `Claude outputs/dsbb-pilot-2026-09-09/sample/`):
+
+| | pairs | share |
+|---|---|---|
+| names a titled publication in a dissemination sentence | 12 | 20% |
+| names only a compiling agency | 39 | 65% |
+| neither | 9 | 15% |
+
+**SUPERSEDED BY THE FULL SWEEP — read the correction at the end of this section before using any
+number above.** All 684 SoMs were fetched and filtered later the same day; the sample was 3x too
+optimistic. Numbers kept because the method is reusable, not because the estimate held.
+
+**Discount that 20%.** The matcher takes any Title-Case product-ish phrase, and hand-checking the
+12 hits, roughly half are generic — "Official Statistics" (MDA), "National Statistics" (AGO),
+"External Statistics" (DEU) are descriptions, not product names, while *Statistical Abstract*
+(SYC), *External Merchandise Trade Statistics* (MUS), *Structural Business Survey* (EST) and
+Dominica's two are real. **Call the usable rate ~10%, and 20% the ceiling.** The four Eastern
+Caribbean countries in the pilot are unusually rich because the ECCB names its own products; do
+not generalise from them.
+
+So this does not rescue a wholesale mint — 65% of pairs still give an agency and nothing else —
+but it does mean the set is **separable**, and that separation is a better bound than any of §6's
+three (see option E).
+
+### 5c. The full 684-SoM sweep — what option E is actually worth (2026-09-09)
+
+All 684 fetched and cached in `Claude outputs/dsbb-pilot-2026-09-09/all-som/`; filter output in
+`e-slice.json`, hand-checked shortlist in `e-slice-tier1.json`.
+
+| stage | pairs |
+|---|---|
+| a quoted title inside a dissemination sentence (raw matcher) | 56 |
+| after excluding the standards' own manual names (BPM6, GFSM, IMTS…) | 39 |
+| **after reading all 39 — a real product of the country's own agency** | **~20 strong, ~10 marginal** |
+| Title-Case candidate only, no quotes (tier 2, mostly noise) | 39 |
+| neither | 589 |
+
+**So E is worth roughly 20–30 pairs of 684, about 4%, not the 70–135 the sample predicted.** The
+error was in the sample: a 60-pair draw put four unusually rich Eastern Caribbean entries in a small
+denominator, and the Title-Case matcher counted descriptions as products. Discards found by reading:
+`Times New Roman` (a font, out of a leaked CSS rule in Poland's CPI page), Jamaica's SITC section
+headings, Rwanda's ISIC activity name, Nigeria's citation of the UN IMTS standard.
+
+The strong list is genuinely good, though — Bahamas' three trade products, Dominica's and St Kitts'
+CSO/ECCB digests, Grenada's *National Accounts Statistics Digest*, Guatemala's *Boletín Estadístico*,
+Kyrgyzstan's and Tajikistan's and Azerbaijan's and Moldova's national-accounts annuals, Malaysia's
+*Index of Industrial Production*, Sri Lanka's *CBSL Annual Report*, Zimbabwe's three RBZ/ZIMSTAT
+products. Each still needs its own URL and cadence researched before it mints.
+
+**Two side-findings.** Several hits are statistical LAWS, not releases — Uzbekistan's *On Official
+Statistics*, Kyrgyzstan's *On the National Bank of the Kyrgyz Republic*. This corpus already mints
+legal instruments and grades them well, so that is a real and better-evidenced side yield rather than
+noise. And Colombia's ILV00 names a publication whose title carries an unsubstituted template
+placeholder — *"Comportamiento de la Balanza de Pagos de Colombia Periodo -----"* — the same defect
+class round 23 found in the e-GDDS pages, and a reminder to quote what the page prints.
+
 ## 6. The options, stated so one can be picked
 
 - **A — leave it.** The file stays a lead list; when a country is researched for another
@@ -133,4 +201,11 @@ rather than a dependency.
 - **D — a bounded slice of B.** e.g. only the 6 uncovered countries (23 pairs, fills real
   holes), or only MET00+NAG00 (225 pairs), or only countries with 20+ nodes already
   (131 pairs, where the neighbourhood is best sourced). Keeps the option to stop.
+- **E — the slice that is not thin at all, found by §5b.** Fetch all 684 SoMs (~6 minutes,
+  polite rate, no token cost) and keep only the pairs whose dissemination passage names a
+  publication by title. On the sampled rate that is roughly **70 pairs, ceiling ~135**. Those
+  mint like the rest of the corpus — named publication, named publisher, only the URL and cadence
+  left to research — and the remainder stays a lead list. **This is the bound to prefer over D's
+  three if the thinness is what you actually object to**, because it removes the thinness rather
+  than rationing it.
 
