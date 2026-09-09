@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 36) — Hunan minted and wired; Fujian unreadable; the minting run's real yield",
+    "minted": "2026-09-09",
+    "note": "First round of the provincial minting run (8 probed-and-nodeless provinces). ONE province landed. THE FINDING: 'the host answers a probe' is a much weaker signal than the tracker's 200s imply — every one of the eight answers on some scheme, and that says nothing about whether the yearbook is locatable or readable. Two distinct new failure modes were found in one round and both are recorded in _dropped. HUNAN'S ROUTE IS THE REUSABLE PART: nothing under tjj.hunan.gov.cn serves the yearbook. Its own landing page for 湖南统计年鉴2025 carries no link in the HTML curl sees, and CLIENT-SIDE navigates a browser to http://222.240.193.190/2025tjnj/zk/indexch.htm — the yearbook is served from a BARE IP, in the same FrontPage frameset shape as Shandong and Xi'an. Reproduced twice in Chrome. That is why three curl-based path guesses found nothing: no hostname path exists to find. **When a provincial yearbook cannot be located by path, open the edition's landing page in a browser and watch where it goes.** A TRAP WORTH THE ROUND: this edge first graded **B on reason `inferred`** — not because of the document, but because the BASIS PROSE below originally contained the sentence \"the edition is stated, not inferred\". `WEAK_BASIS_PATTERNS` matches the word on the basis text and has no notion of negation, exactly as the quote guard has none, so saying an edge is NOT inferred capped it at B. Reworded and it graded A `quote-found-artefact-named` with nothing else changed. **Do not use the guard's own trigger words in a basis, even to deny them** — consistent with, comparable to, aligned with, presumably, likely, appears to, seems to, suggests that, implies, inferred, inference, by implication, paraphrase. Hunan also names its chapter notes zbNN.pdf (主要统计指标解释), not smNN.pdf — the filename convention is per-province, so glob for *.pdf under the frameset's html/ rather than assuming sm."
+  },
+  "reports": [
+    {
+      "id": "cn-hn-statistical-yearbook",
+      "title": "Hunan Statistical Yearbook (湖南统计年鉴)",
+      "publisher": "Hunan Provincial Bureau of Statistics",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Hunan",
+      "description": "Annual statistical yearbook of Hunan Province, a 66-million-person inland economy. Carries provincial and prefecture-level series on national accounts, population, employment and wages, prices, living standards, investment, industry, agriculture, transport, trade, education, health and environment, together with an 主要统计指标解释 (explanatory notes on main indicators) section per chapter which is where its methodology disclosures sit. The publisher's own series listing carries editions back to 2008.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year, but the release month is not fixed — observed publication dates from the publisher's own series listing run from October to March: 2025 edition 2026-01-19, 2024 edition 2025-03-31, 2023 edition 2023-12-21, 2022 edition 2022-12-15, 2021 edition 2021-10-25. Read 2026-09-09.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "Hunan Statistical Yearbook 2026 (2025 reference year)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "No published release calendar. The window is the observed October-to-March spread of the five most recent editions on the publisher's series listing, not a stated rule; the 2024 edition slipped to the end of March, so the range is wide on purpose.",
+        "source_url": "http://tjj.hunan.gov.cn/hntj/tjfx/hntjnj/hntjnjwlb/index.html"
+      },
+      "last_updated": null,
+      "url": "http://tjj.hunan.gov.cn/hntj/tjfx/hntjnj/hntjnjwlb/index.html",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-hn-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 综合 chapter's 主要统计指标解释 (zb01) states that from the 2017 annual report and the 2018 periodic returns onward the yearbook uses the new 《国民经济行业分类》, and names the edition by its standard number in the same sentence — 自2017年年报和2018年定期报表开始使用新的《国民经济行业分类》（GB/T4754-2017）— then repeats title-plus-number when giving the revision's structure (20 门类, 97 大类, 473 中类, 1382 小类). So the document itself states the edition, rather than the researcher supplying it, which is what the edition-bound target requires. QUOTE CUT: the two-column layout breaks the number across a line ((GB/T4754- / 2017)), so the stored span is the contiguous run that carries the title and the usage verb; the number sits in the grader's window either way, and round 31 settled that a title split across a two-column break still grades A. ROUTE: the yearbook is NOT served from tjj.hunan.gov.cn — the bureau's own landing page for the 2025 edition navigates a browser to a bare-IP host, http://222.240.193.190/2025tjnj/zk/, which serves the FrontPage frameset; reproduced twice in Chrome on 2026-09-09 and the chapter PDFs then fetch cleanly to plain curl. The cited URL is that first-party viewer, reached from the publisher's own page. NOT WIRED from the same chapter, deliberately: the sentence also names 《全部经济活动的国际标准产业分类》（ISIC/Rev.4）, but it does so to explain what GB/T 4754 was revised against — that is the existing `cn-gbt-4754-2017 -> isic` edge restated by a third document, not a dependency of the Hunan yearbook on ISIC.",
+      "evidence_url": "http://222.240.193.190/2025tjnj/zk/html/zb01.pdf",
+      "evidence_quote": "报表开始使用新的《国民经济行业分类》",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "source_report_id": "cn-fj-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "unreadable-source",
+      "why": "NOT MINTED 2026-09-09, and the reason is precise enough to be worth reusing. Fujian's yearbook was found cleanly — 福建统计年鉴2025 at https://tjj.fujian.gov.cn/tongjinianjian/dz2025/zk/indexch.htm, the same frameset shape as Shandong, with 21 chapter notes at html/smNN.pdf. All 21 were fetched and ALL YIELD ZERO CHARACTERS to `pdftotext` (both modes) and to pypdf. **This is NOT a scan**: `pdfimages` lists no images, the pages render to real content, and the raw PDF contains /Font. The cause is the font structure — the only /Subtype values are Type1 and XML, there is **no /ToUnicode map anywhere in the file**, and poppler additionally errors on a malformed /OCProperties. Chinese text drawn from a custom-encoded Type1 font with no Unicode mapping cannot be extracted by any parser; it would need OCR, which caps at B. Contrast Hunan and Shandong, whose notes use CID TrueType Identity-H with uni=yes and extract cleanly — and note the SAME /OCProperties error appears on Hunan's files, which extract fine, so **that error is a red herring and not the diagnosis**. Re-openable only via OCR or a newer edition."
+    },
+    {
+      "source_report_id": "cn-hb-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-09 (round 37) — the edge is now LIVE, minted in cn-provinces-2026-09-09b.json, and this entry is kept rather than deleted so the blocker survives. WHAT THE ORIGINAL GOT WRONG: it recorded the byte count of the response and not its content. Those 71 bytes are `<script language=\"javascript\">window.location = \"./qstjnj/\";</script>` — a JS redirect, not an empty shell — and ./qstjnj/ is the yearbook listing with fifteen editions on it. The 2025 edition is a 6.4MB first-party zip whose 21 per-chapter `指标解释` .docx documents carry the GB/T 4754 sentence. **A small body is a redirect: cat it.** Original entry follows.\n\nNOT REACHED 2026-09-09. Hubei's homepage carries a 统计年鉴 link to /tjsj/sjkscx/tjnj/, which returns HTTP 200 with a 71-BYTE body — an empty shell, not a listing. No yearbook located this round. The Hunan finding above is the obvious next thing to try here: open a yearbook landing page in a browser and watch where it navigates, rather than probing paths with curl. Note Wuhan (a Hubei city) IS wired and its yearbook is a single first-party PDF on tjj.wuhan.gov.cn, so the province and its capital publish quite differently."
+    },
+    {
+      "source_report_id": "cn-yn-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "unreadable-source",
+      "why": "SUPERSEDED 2026-09-09 (round 37), and kept in place rather than rewritten so the wording that was wrong is visible. FOUR OF THE FIVE PROVINCES GROUPED HERE WERE LOCATED THE NEXT ROUND, and none of them needed a browser: Yunnan and Jilin publish their yearbooks under the 政府信息公开 tree (stats.yn.gov.cn/zwgk/zfxxgk/fdzdgknr/tjsj/tjnj/ and tjj.jl.gov.cn/tjsj/tjnj/) rather than on the homepage this entry checked; Xinjiang's is behind a 954-byte JS redirect shell at /tjj/tjsj/jump.shtml. All three now have nodes, Yunnan and Jilin with edges. Only Xizang held: its 统计年鉴 label is a commented-out placeholder in the template and the bureau publishes no yearbook section at all. Hainan is still open and its next step is the PROVINCIAL GOVERNMENT portal listing at www.hainan.gov.cn/hainan/tjnj/list3.shtml, not the bureau site. Per-province answers are in cn-provinces-2026-09-09b.json's _dropped; the Yunnan pair named here is refused there as `no-document`, because the yearbook was read in full and names no classification edition. **The lesson for the next grouped entry: 'expose NO 年鉴 link on the homepage' is a fact about a homepage, not about a site.** Original entry follows.\n\nNOT REACHED 2026-09-09. Yunnan (stats.yn.gov.cn), Xinjiang (tjj.xinjiang.gov.cn), Jilin (tjj.jl.gov.cn, https only — http 503) and Xizang/Tibet (tjj.xizang.gov.cn) all answer at the root but expose NO 年鉴 link on the homepage at all; Xizang's is a `javascript:;` stub. Hainan (stats.hainan.gov.cn) exposes only its 经济普查年鉴2023 (economic census yearbook, a different publication) at /tjj/2023hnnj/indexce.htm — which does at least show the frameset shape is in use there, so a statistical-yearbook path in the same style is worth probing. Grouped in one entry because they share a status, not a diagnosis: none has been shown to be unreadable, only unlocated in this round's time."
+    }
+  ]
+}

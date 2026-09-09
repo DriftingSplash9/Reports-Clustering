@@ -60,7 +60,10 @@ lead to verify, not a citable basis.
 `reason: "caveat"` (or `"resolved"`), never any other reason** —
 applies to every `DroppedReason`. Before finalizing any `_dropped`
 entry, check its exact (source, target) against the WHOLE corpus's
-live edges, not just this round's proposals.
+live edges, not just this round's proposals. *(As of 2026-09-09 the check
+sees `source_report_id`-shaped entries too, so a contradiction written in
+that shape now FAILS where it used to be skipped — the rule got stricter,
+not looser.)*
 
 **11. Build the id-collision and edge-collision checks from the whole
 corpus, not just `src/data/research/*.json`** — some ids/edges live
@@ -137,8 +140,12 @@ six e-GDDS edges turned on exactly that distinction (a membership is not a
 dependency), and the tag is what would have made the class visible four rounds
 earlier.
 
-**Coverage, so an absent tag is not misread: 286 edges are stamped** — 225 SELF-DECLARED,
-61 REGISTER, 0 THIRD-PARTY, counted from the data 2026-09-09. *(This read "172 edges are
+**Coverage, so an absent tag is not misread: 302 edges are stamped** — 239 SELF-DECLARED,
+63 REGISTER, 0 THIRD-PARTY, recounted from `src/data/research/*.json` 2026-09-09 (round 39).
+*(This read 286 / 225 / 61 for part of one day, then 297 / 234 / 63 after round 38. Round 38 added 4
+and the count moved by 11, so that earlier figure was already behind its own round when written — which is the paragraph's own
+point, made twice now. Recount, do not trust either number: match `^(SELF-DECLARED|REGISTER|THIRD-PARTY):`
+against the head of every `basis`.)* *(This read "172 edges are
 stamped" from round 8 until the handoff-080 slow-layer sweep. The 172 was round 7's 101 tier
 edges into `imf-e-gdds` / `imf-sdds` / `imf-sdds-plus` plus round 8's 71 NSDP edges, and it went
 stale as later rounds stamped what they touched — which is the practice this paragraph asks for,
@@ -148,6 +155,23 @@ Stamp what you touch; nobody should run a corpus-wide stamping pass as a job of 
 own. **This number goes stale faster than anything else in the file** — it is the
 paragraph §4 step 5b should check first, because "unstamped means not yet
 classified" only holds if the reader knows what is stamped.
+
+**What round 39's two lines would remove: nothing here** — both are rulings that did not exist, and
+one of them (the endpoint-field line) is a guard that now fails rather than a convention to
+remember. The file is 22.3k and the pressure is unchanged: **§2 is still the only part of the
+2026-09-09 restructure that stayed prose instead of becoming an index**, and it is where the next
+cut goes.
+
+**What round 38's two §6 lines would remove: nothing here, and the file under pressure is no longer
+`notes/china-progress.md`** — it was split into a worklist and `notes/china-method-2026-09-09.md`
+on 2026-09-09, 37.6k becoming 23.0k + 19.0k, and the redirect rule that had been buried in it is
+now a §6 line above. The next candidate is this file's own §2, which is the only part of the
+2026-09-09 restructure that stayed prose rather than becoming an index.
+
+**What the two §6 lines added earlier on 2026-09-09 would remove: nothing here.** Both are rulings that did
+not exist before, and §6 is one line per ruling by design. The file actually under pressure is
+`notes/china-progress.md` — 37.6k, still both a worklist and a body of method, and round 37 made it
+10k worse; `HANDOFF.md` §3 carries that as a job.
 
 **What this replaced: nothing, and that is a considered answer** to §1's
 say-what-you-would-remove rule. No existing rule covers who authored the evidence,
@@ -175,7 +199,10 @@ one line each; open the file named at the end of the line for the evidence behin
 - `--write` has NO "improvements only" guard — diff old vs new `--offline` before any write.
 - Every grader run rewrites each URL's `evidence-cache/` record, dry run or not, keeping only
   the edges THAT run selected.
-- `_dropped` entries come in two shapes; a scan reading only one misses the other.
+- **`_dropped` entries come in THREE shapes, not two** — a scan reading one misses the others. The
+  endpoints are normalised at the LOADER since 2026-09-09, so anything reading `droppedNotes` sees
+  one shape; **a script of your own reading the JSON directly does not get that** and must handle
+  all three.
 - A title's parenthetical only counts as its acronym if it abbreviates the title head.
 - The grader's A bar reads presence, not meaning — it once graded A on a NEGATED sentence.
 - Your own basis prose can cap your edge (`WEAK_BASIS_PATTERNS`: consistent / aligned / …).
@@ -187,6 +214,13 @@ one line each; open the file named at the end of the line for the evidence behin
   worth reading. *(Sharpened 2026-09-09: the line said the rule existed but not what it decides,
   and round 31 hit exactly this case and resolved it by running the grader anyway.)*
 - `namesTarget`'s acronym branch cannot see a mixed-case parenthetical — `(SDDS Plus)` never fires.
+- **`MIN_SPAN` is 10 characters for a mostly-CJK span and 24 otherwise** — a 9-character Chinese
+  title grades **B `no-quoted-span`** off a document that reads perfectly and names the target in
+  full. Widen the stored span past the floor rather than re-reading the document (round 38).
+- **A DEPENDENCY USES `source_report_id`/`target_report_id`; `source`/`target` is the `_dropped`
+  note shape.** Writing an edge with the note's key names produced five lines of
+  `undefined->undefined` under "edges pointing at reports not yet researched" and **validate exited
+  0 having discarded all five** (round 39). Now a MALFORMED EDGES error naming the missing field.
 - **Never edit a `basis` or a quote to move a grade.**
 
 ### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`
@@ -203,6 +237,17 @@ one line each; open the file named at the end of the line for the evidence behin
 - A `HOST_INDEX_PREFIXES` entry is a PREFIX unless it says `exact: true`, and it will swallow real
   documents living beneath it.
 - The August 2026 bulk imports carry import habits worth knowing — grep before trusting.
+- **A SMALL BODY IS A REDIRECT — read it, never record the byte count as a verdict.** A 71-byte,
+  625-byte or 954-byte 200 is a `window.location`, a `<p id="url">` in a hidden div, or a meta
+  refresh, and the thing you were looking for is one `cat` away. Cost so far: one province recorded
+  as an empty shell for a round, and NBS's whole 国家统计标准 listing missing from a tracker.
+  *(Restated here 2026-09-09 when `notes/china-progress.md` was split — it binds every fetch, not
+  just a Chinese one. Full account: `notes/china-method-2026-09-09.md`.)*
+- **An archive that extracts to nothing is not an empty archive.** `unzip` exits non-zero on a mere
+  warning and that used to abort the grader's whole zip branch; a zip of `.docx` was invisible to it
+  besides. Both fixed 2026-09-09 — recipe and diagnostics in `notes/techniques-cn-yearbooks-2026-09-08.md`.
+- A `.docx` read through `stripHtml` gets a SPACE at every Word run boundary, so the one-text-node
+  quote rule applies to Office documents exactly as it does to HTML.
 
 ---
 
@@ -225,6 +270,10 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - A statistical agency's own product NUMBER names the artefact (three conditions).
 - A nomenclature the document says is BASED ON the target names the target — **the document must
   state the derivation**, your own knowledge of it is not evidence.
+- **The ISSUER named in the sentence decides the target, not the title.** A provincial yearbook
+  saying 上海市统计局制定的《固定资产投资统计报表制度》 names the PROVINCE's instrument, which is a
+  mint lead, not the identically-titled NBS node. Two of Shanghai's four exact title matches were
+  its own (round 39). Read the words before the 《.
 - A document naming the target IN ANOTHER LANGUAGE names it (mechanism: `title_aliases`).
 - A parenthetical acronym names it at ≥4 characters AND only if it glosses the WHOLE title.
 - A node carries the PUBLISHER's own title for the artefact, not ours.
@@ -237,6 +286,9 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - An archived copy caps at B. General rule for every future fetch strategy.
 - **A first-party ZIP is a direct read, not a capped route** (2026-09-08) — name the inner path
   in the basis.
+  *(The reader could not actually honour this until 2026-09-09: it walked html/txt/csv/md only, so a
+  yearbook shipped as a zip of `.docx` graded C on `empty:no-extractor`. Two provinces publish that
+  way. Fixed; the rule did not change.)*
 - A token-served PDF is cited to the LANDING page, `via: token-pdf`, caps at B.
 - On a NEW edge the grader outranks the hand grade — name its reason string in the basis.
 - A re-grade never writes a grade DOWN on a bad network day.
@@ -279,10 +331,22 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - **`reference_period` is a structured `{readings_per_year, window_months,
   ends}` object**, not free text. 11 edges failed validation for this in one
   round.
-- **A `report_id`/`candidate_target`-shaped `_dropped` entry has no
-  `source`/`target` fields at all** — rule 10 applies to `edge`-shaped entries
-  only. Tagging one `"resolved"` makes the validator read `undefined ->
-  undefined` and fail. They stay `reason: "note"` permanently; prepend
-  "RESOLVED …" to the `note` instead.
+- **`_dropped` entries come in THREE shapes and the loader now normalises two of them.**
+  `normalizeDroppedNote()` in `src/data/assembleCorpus.ts` is the only place this happens, and it
+  reads `n.source ?? n.source_report_id ?? null` (the `?? null` is load-bearing — `null ?? undefined`
+  is `undefined`, and a caveat with a deliberately null endpoint must keep failing the check that
+  exists to catch it). The shapes:
+  - `edge` / `source` / `target` — **the intended shape; write new notes this way.** 2,966 of them.
+  - `source_report_id` / `target_report_id` — 17 of them, first written 2026-09-07 and copied by
+    every CN round for two days. **Read correctly since 2026-09-09** (Thomas: *"teach the
+    validator"*), and `validate` prints a `DROPPED-NOTE SHAPE` block naming them so the repair is
+    visible. **The 17 files are not to be rewritten.** *(What it cost while unread: `validate`
+    exited 1 on the one `resolved` entry in this shape, reporting `undefined -> undefined` about a
+    note that was correct — and `disclosureByReport` skipped all 15 of them, understating five
+    reports' disclosure counts in the app. The fix went at the loader for that second reason.)*
+  - `report_id` / `candidate_target` — 27 of them, **endpoint-free by design**, and normalisation
+    correctly gives them null endpoints. They stay `reason: "note"` permanently; prepend
+    "RESOLVED …" to the `note` instead of tagging one `"resolved"`, which would then fail the
+    null-endpoint check exactly as it should.
 
 

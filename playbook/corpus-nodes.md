@@ -42,6 +42,23 @@ field to fix, not a node to drop — 166 rewritten to the first-named body
 block prints any new one. Don't mint a node whose publisher you can't
 name.
 
+**The four orphaned NSO nodes are PARKED — ruled by Thomas 2026-09-09. Do not re-hunt them.**
+`iq-cso`, `ye-cso`, `sy-cbs`, `sd-cbs` (the statistics offices of Iraq, Yemen, Syria and Sudan)
+went isolated in round 7 when the null-ComplianceDate ruling took their e-GDDS edges out — a
+membership is not a dependency. **They are NOT duplicates and are NOT to be retired**: an
+institutional node and a country's publication nodes are designed to coexist, and `af-nsia` proves
+the shape works the moment some OTHER report names the stats office as its source. The hunt has
+already been run once — the 2026-09-08 pass read Iraq's, Yemen's and Sudan's own non-NSO reports
+looking for a general sourcing statement and found none anywhere, only the narrow CPI-methodology
+boilerplate `iq-cpi` already carries. So they are **legitimate-but-currently-unwireable**, and the
+ruling is that they stop being picked up as a lead every time someone scans the orphan list. They
+unpark themselves if a document ever turns up naming one as a source; nothing else reopens them.
+*(`ir-sci` is unrelated — already covered by the null-ComplianceDate ruling itself. And `iq-cso`
+carries a SEPARATE, still-open structural question: it may be an unrecognised duplicate of the
+imported `iq-cpi` / `iq-national-accounts` / `iq-population` — same real agency, no `part_of` link,
+minted in a different batch. That is a question about the August 2026 import, not about wiring, and
+parking does not settle it.)* Narrative: memory `round_orphaned_nso_iq_coicop_2026-09-08`.
+
 **A legal instrument stays a legitimate node when a statistical release
 names it as its own legal/methodological basis** — Japan's Statistics
 Act, Brazil's Lei 8.213, the EAEU statistical protocol, national social-

@@ -35,6 +35,23 @@ import {
   validate,
 } from '../src/lib/graph'
 
+// A dependency with no endpoint FIELD, as distinct from one naming a report we
+// do not have. This fails; `dangling` below does not. Round 39 wrote five real
+// edges with the `_dropped` note's key names (`source`/`target`) rather than
+// `Dependency`'s, and the loader dropped all five into `dangling`, where they
+// printed as `undefined->undefined` under a heading that says "not yet
+// researched" — and validate exited 0. **A malformed edge never resolves by
+// waiting**, so it is an error and it names which field is missing.
+if (loadIssues.malformedEdges.length) {
+  console.log(
+    `\nMALFORMED EDGES — ${loadIssues.malformedEdges.length} dependency/dependencies missing an endpoint field`,
+  )
+  for (const d of loadIssues.malformedEdges) console.log(`  ✗ ${d}`)
+  console.log(
+    '  ✗ a Dependency uses source_report_id/target_report_id — source/target are the _dropped note shape',
+  )
+  invariantFailures++
+}
 if (loadIssues.dangling.length) {
   console.log('\nDROPPED — edges pointing at reports not yet researched')
   for (const d of loadIssues.dangling) console.log(`  · ${d}`)
@@ -83,6 +100,26 @@ if (loadIssues.duplicateEdges.length) {
     '  ✗ merge these into one object, preserving every distinct basis and evidence_url',
   )
   invariantFailures++
+}
+
+// Reported, never failed. A `_dropped` note written with `source_report_id`
+// instead of `source` is normalised by `normalizeDroppedNote` in
+// `assembleCorpus.ts` and is then indistinguishable from any other note — the
+// shape is a style difference, not a defect, and Thomas ruled on 2026-09-09
+// that the validator should learn it rather than the 17 files be rewritten.
+//
+// It is printed because a repair nobody can see is how the habit spread in the
+// first place: the shape appeared once on 2026-09-07 and every China round
+// copied it for two days while both the validator and the app's disclosure
+// panel silently skipped the notes. **If this number is going UP, a round is
+// still writing the old shape** — say so in the handoff rather than letting the
+// loader absorb it forever.
+if (loadIssues.renamedDroppedEndpoints.length) {
+  console.log(
+    `\nDROPPED-NOTE SHAPE — ${loadIssues.renamedDroppedEndpoints.length} note(s) wrote endpoints as source_report_id/target_report_id; normalised on load`,
+  )
+  for (const d of loadIssues.renamedDroppedEndpoints) console.log(`  · ${d}`)
+  console.log('  ✓ not an error — the intended shape is source/target, and both now read alike')
 }
 
 const issues = validate(reports, dependencies)

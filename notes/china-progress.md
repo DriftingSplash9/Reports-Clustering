@@ -19,37 +19,37 @@ often walks straight through. **Re-probe, never believe this column.**
 
 | ✔ | Division | Type | Node | Bureau host | Probe | Notes / result |
 |---|---|---|---|---|---|---|
-| `[x]` | 江苏 Jiangsu | province | `cn-js-statistical-yearbook` | tj.jiangsu.gov.cn | 200 | **4 edges, A. Chapter notes MINED (round 30) — done.** 编者说明 item 五 → GB/T 4754; ch3 → wage system, ch10 → agriculture system, ch12 → construction system. Also names, with no node to take them: SITC (ch8), 《中国统计摘要2025》 (ch21), 《批发和零售业统计报表制度》+《住宿和餐饮业统计报表制度》 (ch14), 《统计上大中小微型企业划分办法（2017）》 and 《农业产值与增加值核算统计报表制度》 (ch11/ch10 — the latter is NOT NBS's 农业产值和价格综合…, different title, do not conflate). Browse at `/2025/njNN.htm`, chapter notes at `/2025/njNN/njNN00.htm`. |
+| `[x]` | 江苏 Jiangsu | province | `cn-js-statistical-yearbook` | tj.jiangsu.gov.cn | 200 | **5 edges, A. Chapter notes MINED (round 30); ch11 re-swept round 38 — done.** 编者说明 item 五 → GB/T 4754; ch3 → wage system, ch10 → agriculture system, ch12 → construction system. Also names, with no node to take them: SITC (ch8), 《中国统计摘要2025》 (ch21), 《批发和零售业统计报表制度》+《住宿和餐饮业统计报表制度》 (ch14), 《统计上大中小微型企业划分办法（2017）》 (ch11 — **node minted round 37, wired round 38**) and 《农业产值与增加值核算统计报表制度》 (ch11/ch10 — the latter is NOT NBS's 农业产值和价格综合…, different title, do not conflate). Browse at `/2025/njNN.htm`, chapter notes at `/2025/njNN/njNN00.htm`. |
 | `[x]` | 广东 Guangdong | province | `cn-gd-statistical-yearbook` | stats.gd.gov.cn | 200 | **4 edges, A**, off the CD-edition zip (§7b ruling). Browse host `tjnj.gdstats.gov.cn:8080` unreachable from every network tried — use the zip. |
-| `[~]` | 北京 Beijing | municipality | `cn-bj-statistical-yearbook` | tjj.beijing.gov.cn | 000 | Node is `provincial` level, correctly. |
-| `[~]` | 上海 Shanghai | municipality | `cn-sh-statistical-yearbook` | tjj.sh.gov.cn | 200 | Node is `provincial` level, correctly. |
-| `[~]` | 重庆 Chongqing | municipality | `cn-cq-city-statistical-yearbook` | tjj.cq.gov.cn | 200 | **Mis-levelled**: node is `municipal` and id says `-city-`, but Chongqing is a province-level municipality like Beijing/Shanghai, which are `provincial`. Fix the level; leave the id (ids are cited). |
-| `[~]` | 浙江 Zhejiang | province | `cn-zj-statistical-yearbook` | tjj.zj.gov.cn | 000 | Also failed in Chrome. Try again later / another route. |
-| `[~]` | 山东 Shandong | province | `cn-sd-statistical-yearbook` | tjj.shandong.gov.cn | 200 | http only. 101M people, 3rd economy — high value. |
-| `[~]` | 河南 Henan | province | `cn-ha-statistical-yearbook` | tjj.henan.gov.cn | 403 | 99M people. 403 is likely WAF — try Chrome. |
-| `[~]` | 四川 Sichuan | province | `cn-sc-statistical-yearbook` | tjj.sc.gov.cn | 503 | 84M people. |
-| `[~]` | 贵州 Guizhou | province | `cn-gz-statistical-yearbook` | stjj.guizhou.gov.cn | 503 | Note host is `stjj.`, not `tjj.`. |
+| `[~]` | 北京 Beijing | municipality | `cn-bj-statistical-yearbook` | tjj.beijing.gov.cn | 000 (bureau **200 in Chrome**, round 39) | Node is `provincial` level, correctly. **THE YEARBOOK IS ON A SEPARATE HOSTNAME — that is the round-39 finding.** `/tjsj_31433/tjnj_31441/bjtjnj_31442/` redirects to **`https://nj.tjj.beijing.gov.cn/nj/main/2025-tjnj/zk/indexch.htm`**, the standard frameset shape. Chrome loaded the bureau site and resolved the redirect, then `nj.tjj.beijing.gov.cn` itself timed out twice (ERR_CONNECTION_TIMED_OUT); the container gets 503 over http and 000 over https. **The path is now known and is not the problem** — retry the `nj.` host on another day and the frameset should read like Shandong's. |
+| `[x]` | 上海 Shanghai | municipality | `cn-sh-statistical-yearbook` | tjj.sh.gov.cn | 200 | **5 edges, all A. All 216 chapter notes swept (round 39) — done, and it is the richest provincial yearbook found so far.** Node is `provincial` level, correctly. Section `/tjnj/index.html`, editions to 2004; the 2025 landing page is a shell whose **iframe** points at `/tjnj/tjnj2025.htm`, the real TOC. 编者说明 at `2025tjnj/BZSM.html`; chapter notes at **`2025tjnj/ZBHTML/CNNNN.htm` — UPPERCASE, and the publisher's own TOC writes it lowercase**, which 404s (with HTTP 200). Wired: GB/T 4754 (C0003), 劳动工资 (C0002), 大中小微型企业划分办法 (C0012), 建筑业 (C0013), 市场主体统计分类 (编者说明). **Refused because the sentence names 上海市统计局制定的, not 国家统计局制定的**: 固定资产投资 (C0010) and 房地产开发 (C0018) — same titles as live NBS nodes, different issuer, and both are mint leads for Shanghai's own instruments. |
+| `[~]` | 重庆 Chongqing | municipality | `cn-cq-city-statistical-yearbook` | tjj.cq.gov.cn | 200 | **Chrome fails too (round 39).** **Mis-levelled**: node is `municipal` and id says `-city-`, but Chongqing is a province-level municipality like Beijing/Shanghai, which are `provincial`. Fix the level; leave the id (ids are cited). |
+| `[~]` | 浙江 Zhejiang | province | `cn-zj-statistical-yearbook` | tjj.zj.gov.cn | 000 | Also failed in Chrome, **re-confirmed round 39** — three rounds, both routes, no answer. |
+| `[x]` | 山东 Shandong | province | `cn-sd-statistical-yearbook` | tjj.shandong.gov.cn | 200 (**http ONLY** — https is connection-refused) | **1 edge, A. All 25 chapter notes swept (round 35) — done.** Yearbook 2025 at `/tjnj/nj2025/zk/indexch.htm`, frameset, TOC `left.htm`; **chapter notes are single-page TEXT PDFs at `html/smNN.pdf`** while all 387 tables are `.jpg` scans and 编辑说明 is `html/note.jpg` (image → refused, Suzhou precedent). Only 4 of 25 chapters name a 《…》 at all: sm04 → 《劳动工资统计报表制度》 (**wired**), sm18 → 《批发和零售业统计报表制度》+《住宿和餐饮业统计报表制度》 (no nodes — third yearbook to name them), sm23 → 《中国统计摘要 2025》 (no node, but now with an edition year AND publisher 中国统计出版社), sm24 → 《国际统计年鉴 2024》 (no node). **建筑业 (sm15) and 农业 (sm13) are BOTH agency-level here** — see the method note below. |
+| `[!]` | 河南 Henan | province | `cn-ha-statistical-yearbook` | tjj.henan.gov.cn | **403 — IP-BLOCKED** | 99M people. **Round 35: blocked on all three routes** — 403 to the cloud container, 403 over BOTH http and https from the device VM, and a 'Sorry, you have been blocked' interstitial **naming the requesting IP** in Thomas's own Chrome. Block is on the ADDRESS, not the user-agent (the Shenzhen shape). Sub-paths blocked identically (`/tjnj/`, `/tjfw/tjnj/`), so it is not a root-only rule. NBS's 地方统计网站 portal lists no alternate bureau host — only `hazd.stats.gov.cn`, the separate NBS survey office in Henan, which returned 503. Re-probe before believing this. |
+| `[~]` | 四川 Sichuan | province | `cn-sc-statistical-yearbook` | tjj.sc.gov.cn | 503 (000 + **Chrome fails**, round 39) | 84M people. |
+| `[~]` | 贵州 Guizhou | province | `cn-gz-statistical-yearbook` | stjj.guizhou.gov.cn | 503 (000 + **Chrome fails**, round 39) | Note host is `stjj.`, not `tjj.`. |
 | `[ ]` | 河北 Hebei | province | — | tjj.hebei.gov.cn | 503 | 74M. Node needed. |
-| `[ ]` | 湖南 Hunan | province | — | tjj.hunan.gov.cn | 200 | 66M. Node needed. Host answers. |
+| `[x]` | 湖南 Hunan | province | `cn-hn-statistical-yearbook` | **222.240.193.190** (NOT tjj.hunan.gov.cn) | 200 | **Minted + 1 edge, A (round 36).** `-> cn-gbt-4754-2017` off zb01, which names 《国民经济行业分类》（GB/T4754-2017） with the number. **THE YEARBOOK IS ON A BARE IP**: nothing under the bureau host serves it; its landing page `/hntj/tjfx/hntjnj/hntjnjwlb/202601/t20260119_33896874.html` CLIENT-SIDE navigates a browser to `http://222.240.193.190/2025tjnj/zk/indexch.htm` (reproduced twice in Chrome; no meta/JS refresh in the HTML curl sees). Frameset shape; **chapter notes are `html/zbNN.pdf` (主要统计指标解释), not `smNN.pdf`** — glob, don't assume. Series listing with 17 editions: `/hntj/tjfx/hntjnj/hntjnjwlb/index.html`. |
 | `[ ]` | 安徽 Anhui | province | — | tjj.ah.gov.cn | 403 | 61M. Node needed. |
-| `[ ]` | 湖北 Hubei | province | — | tjj.hubei.gov.cn | 200 | 58M. Node needed. Host answers. |
+| `[x]` | 湖北 Hubei | province | `cn-hb-statistical-yearbook` | tjj.hubei.gov.cn | 200 (http only) | **Minted + 1 edge, A (round 37).** `-> cn-gbt-4754-2017` off the 综合 chapter's 指标解释. **Round 36's 71-byte shell was a JS REDIRECT, not an empty page** — its body is `window.location = "./qstjnj/"` and that directory lists 15 editions. Yearbook is a first-party **zip** (2025: `/tjsj/sjkscx/tjnj/qstjnj/202601/P020260114553839802144.zip`, 6.4MB) of per-chapter `.xls` tables plus one `第N章指标解释.docx` per chapter (21). **No 编者说明 at all.** Ch1 carries the standard GB/T 4754 sentence; ch5/16/19/20/21 name only licences and other ministries' standards. Ch9 is a legacy binary `.doc` — convert with `soffice --convert-to docx`, not to txt (txt loses the CJK). |
 | `[ ]` | 广西 Guangxi | autonomous region | — | tjj.gxzf.gov.cn | 000 | 50M. Node needed. |
-| `[ ]` | 云南 Yunnan | province | — | stats.yn.gov.cn | 200 | 47M. Node needed. Host is `stats.`, not `tjj.`. Answers. |
+| `[x]` | 云南 Yunnan | province | `cn-yn-statistical-yearbook` | stats.yn.gov.cn | 200 | **Minted + 2 edges, A (round 37).** `-> cn-nbs-sme-classification-2017` (ch8 指标解释) and `-> cn-nbs-market-entity-classification` (note under table 1-12). **The yearbook is under the 政府信息公开 tree, not the homepage**: `/zwgk/zfxxgk/fdzdgknr/tjsj/tjnj/`, editions back to 2010; 2025 landing `202605/t20260507_3052633.html` → zip `P020260723540390408353.zip` (10.7MB). Inside: the whole 512-page book as one PDF, a 目录 PDF, per-chapter `.xlsx`, and per-chapter 主要指标解释 `.docx` in **Chinese AND English** (18 chapters). **Names no GB/T 4754 edition** — its agriculture note says only 执行新的国民经济行业分类标准, refused §7a. Table notes are bilingual and productive; sweep them as well as the chapter notes. |
 | `[ ]` | 江西 Jiangxi | province | — | tjj.jiangxi.gov.cn | 503 | 45M. Node needed. |
 | `[ ]` | 辽宁 Liaoning | province | — | tjj.ln.gov.cn | 000 | 42M. Node needed. |
-| `[ ]` | 福建 Fujian | province | — | tjj.fujian.gov.cn | 200 | 42M. Node needed. Host answers. |
+| `[~]` | 福建 Fujian | province | `cn-fj-statistical-yearbook` | tjj.fujian.gov.cn | 200 | **NODE MINTED round 37, still no edges — the text is unextractable and that is settled.** 福建统计年鉴2025 at `/tongjinianjian/dz2025/zk/indexch.htm`, Shandong's frameset shape, 21 notes at `html/smNN.pdf`. All 21 yield zero characters: Type1 fonts, no `/ToUnicode` anywhere. OCR only (caps B). Do not re-probe with another parser; the node exists so the publication is on the graph. |
 | `[ ]` | 陕西 Shaanxi | province | — | tjj.shaanxi.gov.cn | 503 | 39M. Node needed. |
 | `[ ]` | 黑龙江 Heilongjiang | province | — | tjj.hlj.gov.cn | 000 | 31M. Node needed. |
 | `[ ]` | 山西 Shanxi | province | — | tjj.shanxi.gov.cn | 503 | 34M. Node needed. Don't confuse with 陕西 Shaanxi. |
 | `[ ]` | 贵…／甘肃 Gansu | province | — | tjj.gansu.gov.cn | 000 | 25M. Node needed. |
 | `[ ]` | 内蒙古 Inner Mongolia | autonomous region | — | tj.nmg.gov.cn | 403 | 24M. Node needed. Host is `tj.`, not `tjj.`. |
-| `[ ]` | 新疆 Xinjiang | autonomous region | — | tjj.xinjiang.gov.cn | 200 | 26M. Node needed. Host answers. |
-| `[ ]` | 吉林 Jilin | province | — | tjj.jl.gov.cn | 200 | 24M. Node needed. Host answers. |
+| `[~]` | 新疆 Xinjiang | autonomous region | `cn-xj-statistical-yearbook` | tjj.xinjiang.gov.cn | 200 | **NODE MINTED round 37, no edges available.** Found behind a **JS redirect shell**: `/tjj/tjsj/jump.shtml` is 954 bytes carrying `<p id="url">/tjj/zhhvgh/list_nj1.shtml</p>` in a `display:none` div. That is the 综合 chapter of the yearbook; 22 chapter sections in all, each an HTML listing of individual tables. **No 简要说明 or 指标解释 page under any chapter — tables only**, so nothing names an instrument. Newest edition online is **2021** (pages dated 2022-03); 统计书刊 section `/tjj/tjsk/ist.shtml` lists nothing. |
+| `[x]` | 吉林 Jilin | province | `cn-jl-statistical-yearbook` | tjj.jl.gov.cn | 200 (https; http 302s) | **Minted + 1 edge, A (round 37).** `-> cn-gbt-4754-2017` off `ml/zbjs1.html`. Yearbook section `/tjsj/tjnj/`, one directory per edition 2011-2025, **not linked from the homepage**. Shape: `2025/enter.htm` → `2025/ml/indexc.htm`, a frameset (left `njmlc.htm` TOC, right `sm.htm` = 编者说明). **Chapter notes are `ml/zbjsN.html` — a THIRD filename convention** after Shandong's `smNN.pdf` and Hunan's `zbNN.pdf`; 19 of them, ch20 (市州和县市概况) has none. Word-exported HTML: every Latin run is its own `<span>`, so cut quotes before any number. 编者说明 names nothing. Also names 《三次产业划分规定》 (zbjs2, no year — two NBS pages, do not pick one) and 《关于工资总额组成的规定》 (zbjs4, no node). |
 | `[ ]` | 天津 Tianjin | municipality | — | stats.tj.gov.cn | 403 | 14M. Node needed. Host is `stats.tj.`, not `tjj.tj.`. |
-| `[ ]` | 海南 Hainan | province | — | stats.hainan.gov.cn | 200 | 10M. Node needed. Host answers. |
+| `[ ]` | 海南 Hainan | province | — | stats.hainan.gov.cn | 200 | 10M. **Round 37: bureau site has no statistical yearbook** — only 经济普查年鉴2023 at `/tjj/2023hnnj/indexce.htm` (a different publication), `/tjj/tjsu/ndsj/` empty, `/tjj/tjnj/` 302s to 404, six sibling-path guesses all 404. **THE LEAD IS THE PROVINCIAL GOVERNMENT PORTAL:** `https://www.hainan.gov.cn/hainan/tjnj/list3.shtml` carries a 统计年鉴 listing. Not read this round — 503 to the cloud container across four retries over both schemes, device VM egress does not reach `.gov.cn`, and Chrome would not hold the navigation. Start there. |
 | `[ ]` | 宁夏 Ningxia | autonomous region | — | tj.nx.gov.cn | 200 | 7M. Node needed. Host is `tj.`. Corpus already has `cn-ningxia-equalization-transfer-measures` — a Ningxia node exists in another domain. |
 | `[ ]` | 青海 Qinghai | province | — | tjj.qinghai.gov.cn | 412 | 6M. Node needed. 412 = precondition failed, a WAF shape. |
-| `[ ]` | 西藏 Tibet | autonomous region | — | tjj.xizang.gov.cn | 200 | 4M. Node needed. Host answers. |
+| `[!]` | 西藏 Tibet | autonomous region | — | tjj.xizang.gov.cn | 200 | 4M. **NO YEARBOOK SECTION EXISTS — answered round 37, not a time-out.** The homepage's 统计年鉴 is an **HTML COMMENT**: `<a href="./xxgk/tjxx/tjsj/">统计数据</a><!--<a href="javascript:;">统计年鉴</a>-->`, a leftover placeholder from the site template, which is why round 36 read it as a `javascript:;` stub. The four real sections are 最新发布 / 统计信息 / 统计数据 / 统计公报; `/xxgk/tjxx/` returns no links. Nothing to mint against on the issuing bureau's site. |
 | `[ ]` | 兵团 XPCC | corps (province-level) | — | tjj.xjbt.gov.cn | 200 | Xinjiang Production & Construction Corps. Reports to NBS separately and appears in NBS tables as its own row. **Scope question before a research one** — ask before minting. |
 
 **Not in scope as "provinces":** Hong Kong, Macau and Taiwan. The China Statistical Yearbook
@@ -57,8 +57,18 @@ carries them as appendix chapters and says outright that each runs its own stati
 (`香港特别行政区保留其单独运作的统计系统`). Taiwan already has its own large node family
 (`tw-*`). Do not fold any of the three into the CN provincial programme.
 
-**Score: 2 wired · 8 node-but-unwired · 22 no node yet.** (Provinces — unchanged by round 31, which
-worked cities only. Jiangsu is *fully* mined rather than just opened; Guangdong's chapter notes are mined too.)
+**Score after round 39 — provinces: 8 wired · 7 node-but-unwired · 15 no node yet · 2 blocked.**
+Wired: Jiangsu, Guangdong, Shandong, Hunan, Hubei, Yunnan, Jilin, **Shanghai**. Node but no edge:
+Beijing, Chongqing, Zhejiang, Sichuan, Guizhou, **Fujian** (unextractable), **Xinjiang** (tables only).
+Blocked: Henan (IP), Xizang (publishes no yearbook at all). Counted from the table above, 2026-09-09.
+**Round 39 re-probed the other five node-but-unwired divisions in Thomas's own Chrome and got nothing
+from any of them** — Zhejiang, Sichuan, Guizhou and Chongqing all fail in Chrome as well as to curl,
+and Beijing's bureau loads but its separate yearbook host times out. So the seam that looked like
+"six provinces whose notes have never been swept" is really **one that was reachable and five that
+are not**, and Shanghai was the one.
+**The three provinces added this round were all in round 36's 'answers a probe but nothing found' list**,
+and none of them needed anything cleverer than reading a redirect body or walking one level into
+政府信息公开.
 
 **City score after round 31: 3 wired (Nanjing, Wuhan, Xi'an) · 1 read-and-empty (Suzhou) · 1 IP-blocked
 (Shenzhen) · 5 still open (Guangzhou, Hangzhou, Chengdu, Chongqing, Beijing).**
@@ -109,36 +119,15 @@ its bureau is a 市统计局 answering to the 省统计局. Two qualifications t
    and **quarantined 2026-08-31 as assertion-only** (`cn-china-2026-08.json` `_dropped`,
    `no-document`). Re-minting either needs a real document, and rule 14 says read that note first.
 
-**CORRECTED 2026-09-09 (round 31): the 编者说明 route is NOT the city route — it is 1 for 4.**
-Round 30 read Nanjing's 编者说明 item 三 (naming 《国民经济行业分类》, giving
-**city → `cn-gbt-4754-2017`** at A with no province involved) and wrote here that the route was
-"proven" and should be run first for every remaining city. Round 31 ran it on the next three:
-**Wuhan's 编辑说明, Xi'an's 编者说明 and Suzhou's 编者说明 all stop one level short** — 国家统计制度,
-国家新的统计制度, 当时国家统计制度, 资料主要来自苏州市统计局…, i.e. the collecting agency or a
-generic reference to "the national statistical system", with no artefact titled. That is the
-ordinary §7a refusal and it is the NORMAL case; Nanjing is the exception. All three refusals are
-recorded in `cn-cities-2026-09-09.json`'s `_dropped`. Nanjing's edge stands and its quote advice
-still holds: watch the punctuation — Nanjing writes （GB/T4754—2017） with U+2014, Jiangsu writes
-(GB/T4754 -2017) with an ASCII hyphen and a stray space, so **cut the quote before the number**,
-the title alone names the artefact.
 
-**What DOES generalise is the per-chapter 简要说明 — the same thing that works for provinces.**
-Round 31's six edges all came from chapter notes, none from an 编者说明. Still check the 编者说明
-first, because it is one fetch and it sometimes pays; just do not stop when it is generic, and do
-not treat it as the route. Two chapters are worth opening before the others: **建筑业 and 农业**
-name an NBS 统计报表制度 by title in every yearbook checked so far (national, Jiangsu, Guangdong,
-Wuhan, Xi'an), and 固定资产投资 and the price/household chapters pay almost as often.
+**The city→province question and the four city-yearbook shapes moved to the method file**
+(`notes/china-method-2026-09-09.md`) on 2026-09-09 — the two numbered points above are
+administrative facts about how China is organised and stay here; the 编者说明-route correction,
+the shape taxonomy and the image-note recipe are method and are read when you open a city.
 
-**A city yearbook comes in at least four shapes, and the shape decides the whole approach:**
-one PDF of the entire book (Wuhan); a frameset with TEXT chapter-note PDFs (Xi'an); a frameset
-whose "chapter notes" are image-only scans of indicator tables, with nothing to read (Suzhou); and
-a JS viewer with no static URLs at all (Guangzhou). **Identify the shape before planning the
-round** — Suzhou cost a full fetch-and-extract pass before it was clear there was no text anywhere
-in it, and that would have been visible from `pdfinfo` (Creator: ABBYY FineReader) in one command.
+---
 
-**An image-only 编者说明 is still readable** — fetch the JPG, put it somewhere the container can
-reach, and read it as an image. Xi'an's and Suzhou's refusals were both established that way
-rather than left as "couldn't check".
+## Leads parked here rather than in HANDOFF
 
 **`cn-nbs-city-development-monitoring-system`** (城市高质量发展统计监测报表制度) was minted round 30
 and is wired from the CSY — it is the instrument NBS's 城市社会经济调查司 collects the city tables
@@ -146,52 +135,22 @@ under, so it is the second hub a city node can reach. **Untested and worth tryin
 yearbook name it? Still unminted, both needing a non-NBS publisher page:
 《城市（县城）和村镇建设统计调查制度》 (MOHURD) and 《城市（县城）客运统计报表制度》 (MOT).
 `cn-city-statistical-yearbook` (中国城市统计年鉴) already exists and is already wired to the CSY.
-
----
-
-## Portals and tricks — read before starting a province
-
-- **THE NBS 统计制度 LISTING IS TRUNCATED — probe the article-id range instead** (found round 30).
-  `https://www.stats.gov.cn/sj/tjzd/` shows 15 instruments; the ids are consecutive and probing
-  `t20260402_<id>.html` past the end of the listing found at least 8 more, including
-  城市高质量发展统计监测报表制度 (1962948, the city hub, now minted), 流通和消费价格统计报表制度 (1962945),
-  工业生产者价格统计调查制度 (1962946), 房地产价格统计调查制度 (1962947), 住户收支与生活状况调查方案 (1962944),
-  乡村振兴统计监测一套表制度 (1962949), 农民工监测调查方案 (1962950), 脱贫县农村住户监测调查方案 (1962952).
-  **Never conclude an NBS instrument has no page from the listing alone.** Known range so far:
-  1962929-1962952, gaps at 1962951/1962953+. 批发和零售业 and 住宿和餐饮业 are still NOT among them.
-- **THE portal: `https://www.stats.gov.cn/xglj/tjj/`** — NBS's own 地方统计网站 directory. One
-  fetch returns every provincial bureau URL, first-party and authoritative. The table above came
-  from it. `https://www.stats.gov.cn/xglj/` is the parent index (ministries, provincial
-  governments, international bodies) if a non-statistical body is ever needed.
-- **NEVER guess a bureau hostname.** The pattern is genuinely inconsistent — `tjj.` (most),
-  `tj.` (Jiangsu, Inner Mongolia, Ningxia), `stats.` (Guangdong, Yunnan, Hainan, Tianjin),
-  `stjj.` (Guizhou). Four of the eight I guessed before finding the portal were wrong.
-- **The NBS instrument hubs are at `https://www.stats.gov.cn/sj/tjzd/`** (统计报表制度, one landing
-  page per instrument, reissued annually) and `https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/`
-  (国民经济行业分类, with the GB/T 4754 PDF). These are the targets provinces point at.
-- **The national yearbook's chapter notes are `https://www.stats.gov.cn/sj/ndsj/<year>/html/smNN.htm`**,
-  and `left.htm` is the frame that lists them. Tables are `.jpg` — only the sm pages carry text.
-- **A 403/503/412 from curl is usually a WAF refusing the UA, not a dead site.** Try Chrome before
-  recording a province as blocked; the two networks are not a superset of each other in either
-  direction, in EITHER direction (Chrome failed on Zhejiang where curl also failed, but Chrome
-  reached stats.gov.cn pages that curl reset on).
-- **Concurrent fetches of one big file collide.** Four grader threads pulling the same 21.5MB zip
-  reset three of them; the cached second run served all four. Re-run before believing a network
-  verdict.
-- **A year LISTING page may be JS-driven while the year's own page is static.** Jiangsu's
-  `/col/col85821/` reads empty to curl; `/col/col93166/` (the 2025 page) is fully server-rendered.
-  Don't conclude "JS shell" from the listing.
-- The techniques note has the rest: where the 简要说明 lives, the per-chapter yield table, the
-  quote-splitting trap, GBK filenames inside CD zips.
-
-## Leads parked here rather than in HANDOFF
-
 - 《批发和零售业统计报表制度》 and 《住宿和餐饮业统计报表制度》 are named by the national AND the
   Guangdong yearbook but have **no NBS landing page** on the current 统计制度 listing, so no node.
   If a page turns up (an older year's listing, or a provincial reprint), two more hubs open.
 - Also named by title, no node yet: 《中国统计摘要》, 第五次全国经济普查, 《全国农业普查条例》,
-  《统计上大中小微型企业划分办法（2017）》, 《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）,
-  SITC, and the 地区生产总值统一核算 reform that governs how provincial GDP is now produced.
+  and the 地区生产总值统一核算 reform that governs how provincial GDP is now produced.
+  *(Struck from this list 2026-09-09: 《统计上大中小微型企业划分办法（2017）》 and
+  《关于市场主体统计分类的划分规定》（国统字〔2023〕14号） — both minted round 37 and wired round 38;
+  SITC — `sitc` is a live node and the national yearbook is wired to it off sm11.)*
+- **Round 38 additions, all named in the national yearbook's zb layer and all still nodeless**, each
+  needing its own publisher's page found: 《关于工资总额组成的规定》 (zb04, and Jilin names it too —
+  two independent yearbooks, the strongest of these), 《国家危险废物名录》 and
+  《危险废物贮存污染控制标准》 (zb08, MEE), 《对外承包工程管理条例》 (zb11, also Hubei),
+  《运输货物分类和代码》 and 《机动车注册登记工作规范》 (zb16, MOT and MPS),
+  《旅游饭店星级的划分与评定》 (zb17, MCT), 《广播电视人口覆盖率统计技术标准和方法》 (zb23, NRTA,
+  also Hubei). 《三次产业划分规定》 is named by zb03 bare with no year and stays unwired on the same
+  two-candidate-pages grounds as Jilin's.
 - **Round 31 additions to that list, all named by a CITY yearbook and all still nodeless:**
   《企业一套表统计调查制度》 and 《一套表统计调查制度》 (Xi'an parts 12 and 15 — no NBS landing page
   under either spelling), and 《工业统计报表制度》 (Xi'an part 12). **Do not wire that last one to

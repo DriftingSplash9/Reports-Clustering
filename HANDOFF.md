@@ -14,14 +14,19 @@ until 2026-09-07. That cap was retired by Thomas in §1 on the same day this lin
 written, and the two sat contradicting each other for three rounds. The gauge is the
 read-cost percentage in §1, not a character count.)*
 
-Last updated: 2026-09-09 (handoff 079 — the superseded state is
-`archive/Previous Handoffs/handoff079.md`, copied and sha256-verified before this rewrite. Covers
-**round 31**: the Wuhan and Xi'an city yearbooks wired, three NBS instrument nodes minted, Suzhou
-read-and-empty and Shenzhen IP-blocked, and round 30's "编者说明 route" corrected to 1-for-4. 079 is
-divisible by neither 5 nor 20, so **no five-handoff review and no slow-layer sweep ran** this time;
-the next 5 is 080 and the next 20 is 080 — **both fall on the very next handoff.** §2/§3 were swept:
-the router-report and doc-split narrative left for memory, and the three-machines paragraph left
-because `notes/china-progress.md` already carries it.)
+**§2 and §3 were rewritten mid-round on 2026-09-09 by round 37, which is an ordinary §2/§3 edit and
+not a handoff** (§4 has the test). The header below still names handoff 082 because that is the last
+rewrite that WAS one; §1's read-cost table was refreshed at the same time and says why.
+
+Last updated: 2026-09-09 (handoff 082 — the superseded state is
+`archive/Previous Handoffs/handoff082.md`, copied and sha256-verified before this rewrite. **82 is
+divisible by neither 5 nor 20, so no review ran**; both fired on 080 (`notes/doc-audit-2026-09-09.md`).
+Next 5 is 085; **next 20 is 100, which is also the first archive crossing of a hundred** and the only
+condition that triggers step 5b's past-sweeps recap question. Covers **rounds 35-36**: Shandong wired,
+Henan found IP-blocked, Hunan minted and wired off a bare-IP host, Fujian found unextractable. §2/§3
+swept — the round-35 narrative left for memory and §2 now carries only the two method lessons that
+change what the next round DOES. §3 [Thomas] is still empty; direction unchanged, finish the CN
+minting run.)
 
 ---
 
@@ -53,7 +58,7 @@ every change in that lane.
 | MINTING a node, or re-opening a settled question | `playbook/corpus-nodes.md` (§7c, §7d) |
 | the bytes came by an unusual route (browser, archive, token, zip) | `playbook/corpus-route.md` (§7b) |
 | a fetch failed, or a host looks blocked | `playbook/corpus-hosts.md` (§6) — and re-probe, never believe a stored verdict |
-| **anything China** (the live programme) | `notes/china-progress.md` — the worklist, rows kept crossed off — then `notes/techniques-cn-yearbooks-2026-09-08.md` |
+| **anything China** (the live programme) | `notes/china-progress.md` (23.0k) — the worklist, rows kept crossed off. **Split 2026-09-09**: the method moved to `notes/china-method-2026-09-09.md` (19.0k) — portals, the redirect lesson, the yearbook shapes, the extraction traps — and you open it when you are about to fetch, not to see where a round got to. Recipes underneath both: `notes/techniques-cn-yearbooks-2026-09-08.md` |
 | fetching / capturing / extracting anything else | `notes/techniques-2026-09-04.md` — recipes and host workarounds. **Every host reading in it is a claim about one machine on one day.** |
 | **anything in the renderer** | `PLAYBOOK-RENDER.md` §3–§4 first; then the round memory for your bit — `node_instancing_2026-09-05` / `link_batching_2026-09-05` (draw path), `layout_levers_and_hbs_2026-09-05` + `settle_time_tick_burst_2026-09-05` (forces), `fit_percentile_and_tier1_2026-09-06` (camera). Instruments: `scripts/measure-forces.ts`, `scripts/renderer/` |
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
@@ -73,30 +78,43 @@ with a file, the file wins.**
 
 ### Read cost — the bloat gauge, refreshed every handoff
 
-**THE NUMBER THOMAS ASKED FOR (refreshed 2026-09-09, handoff 080): a corpus round reads 5.8% of its
-context before he types a prompt, a renderer round 5.3%.** Chars ÷ 4 over a 200k-token window,
-measured with `wc -c` after this rewrite.
+**THE NUMBER THOMAS ASKED FOR: a corpus round reads 7.3% of its context before he types a prompt, a
+renderer round 6.1%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 17.1k + CORPUS index 17.3k + PLAYBOOK 10.3k + CLAUDE 1.5k | 46.2k | 11.5k | **5.8%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 42.4k | 10.6k | **5.3%** |
-| *was, handoff 079* | *48.2k / 45.1k* | *12.0k / 11.3k* | *6.0% / 5.6%* |
-| *was, handoff 078* | *44.3k / 41.3k* | *11.1k / 10.3k* | *5.5% / 5.2%* |
+| always: HANDOFF 22.5k + CORPUS index 22.9k + PLAYBOOK 11.5k + CLAUDE 1.5k | 58.4k | 14.6k | **7.3%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 49.1k | 12.3k | **6.1%** |
+| *was, after round 38* | *57.3k / 49.2k* | *14.3k / 12.3k* | *7.2% / 6.2%* |
+| *was, after round 37* | *50.9k / 46.2k* | *12.7k / 11.6k* | *6.4% / 5.8%* |
+| *was, handoffs 081-082* | *46.3k / 42.6k* | *11.6k / 10.6k* | *5.8% / 5.3%* |
 
-**079 asked whether 080 could come in under its 20.6k. It could not, and the honest number is that
-this file peaked at 28.2k mid-round before being swept back to 17.4k here.** Three research rounds
-(32, 33, 34) and four rulings landed between the two handoffs, and every one of them arrived in §3
-as prose. The sweep took it below 079 rather than merely back to it — but the peak is the real
-reading: **§3 is where this file grows, and it grows fastest when Thomas is answering questions.**
-The defence is step 4, not restraint while writing.
+**Up 0.1pp across round 39, and the composition is the story: `HANDOFF.md` fell 22.7k → 22.5k while
+`PLAYBOOK-CORPUS.md` rose 21.7k → 22.9k.** That is handoff 081's pattern exactly — **the saving
+moved rather than accrued** — and it is the worse direction, because `HANDOFF.md` gets swept every
+handoff and **nothing sweeps a playbook** (`PLAYBOOK.md` §1). `PLAYBOOK-CORPUS.md` is now the
+LARGER of the two and has never been swept; its §2 is the only part of the 2026-09-09 restructure
+that stayed prose instead of becoming an index, and it is where the next cut goes. Up 0.8pp across
+rounds 37-38 before this; this section's own commentary was 1.8k of that and was cut back to the
+table and this paragraph. Keep it this short. **Two things
+worth carrying forward.** `PLAYBOOK-CORPUS.md` is 21.7k and **nothing sweeps a playbook**
+(`PLAYBOOK.md` §1) — it is the file to watch now, and its §2 is the only part of the 2026-09-09
+restructure that stayed prose instead of becoming an index. And **splitting or retiring a file that
+is already routed by task buys this number nothing**: the 37.6k `notes/china-progress.md` split cost
+a round's work and moved the gauge by zero, correctly. Only cutting an always-read file counts.
 
-**Watch instead whether the five `playbook/` files stay closed unless their question arrives.**
-Measured twice now: round 31 opened two of five and missed nothing; rounds 32-34 opened
-`corpus-nodes.md` only. On-demand sizes, 2026-09-09: naming 15.3k, evidence 10.9k, nodes 7.6k,
-route 7.1k, hosts 5.7k, handoff procedure 9.5k, **China worklist 20.6k** — still the
-fastest-growing file in the repo and still bigger than any `playbook/` file. It wants splitting
-into worklist and method the way `PLAYBOOK-CORPUS.md` was.
+**`notes/china-progress.md` IS SPLIT (round 38)** — 37.6k → a **23.0k worklist** (tables, scores,
+probe columns, parked leads) plus **19.0k `notes/china-method-2026-09-09.md`** (portals, the redirect
+lesson, the yearbook shapes, the extraction traps). Nothing reworded. One rule left China entirely,
+per `PLAYBOOK.md` §1's check for rules binding a different task: *a small body is a redirect — read
+it* is now a `PLAYBOOK-CORPUS.md` §6 line.
+
+**Watch whether the five `playbook/` files stay closed unless their question arrives.** Measured
+three times now: round 31 opened two of five and missed nothing; rounds 32-34 opened `corpus-nodes.md`
+only; rounds 35-37 opened one of five — round 37 opened `corpus-nodes.md` only, to mint against §7c, and
+ran on the tracker and the techniques note otherwise. On-demand sizes, 2026-09-09: naming 15.3k,
+evidence 10.9k, nodes 9.2k, route 7.1k, hosts 5.7k, handoff procedure 9.5k, standing-issues 7.9k,
+**China worklist 37.6k**.
 
 **A programme's files are routed by task and were never on the mandatory path**, so retiring one
 frees almost nothing from the headline number — China costs ~2.4k of §2/§3 prose plus ~0.3k of
@@ -105,113 +123,159 @@ not book a saving that is not there.
 
 ## 2. Current state
 
-Corpus **3,606 reports / 3,195 dependencies**. **1,182 A · 1,402 B · 611 C**, A-share 37.0%.
-**Domains: 46 approved, 0 proposed.** `validate` exits 0, **128/128 logic tests**,
+Corpus **3,616 reports / 3,211 dependencies**. **1,198 A · 1,402 B · 611 C**, A-share 37.3%.
+**Domains: 46 approved, 0 proposed.** **`validate` exits 0.** **128/128 logic tests**,
 `grade-evidence --selftest` **76/76**, `tsc --noEmit` clean, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back. Last data-changing round is **34**,
-2026-09-09. **974 nodes still have zero edges** — CN is 29 of them.
+`public/corpus-data.json` regenerated and copied back. Last data-changing round is **39**,
+2026-09-09. **974 nodes have zero edges** — CN is 29 of them, both counted from the data this round.
 
-**Three data rounds landed 2026-09-09, all validated in a cloud sandbox and sha256-verified onto
-disk.** Round 32: the generic edition-less `sitc` hub + 2 A edges off CSY ch.11 and Jiangsu ch.8.
-Rounds 33-34: the first **DSBB option-E** mints — 5 nodes, each on a publication the IMF's Summary
-of Methodology NAMES and the publisher's own site CONFIRMS (`dm-national-accounts`,
-`vc-digest-of-statistics`, `kg-national-accounts`, `az-national-accounts`,
-`md-international-accounts`), 5 A edges, 4 candidates dropped for HOST reasons. Narrative:
-memory `round32_sitc_and_e_slice_2026-09-09`, `round33_dsbb_e_eastern_caribbean_2026-09-09`,
-`round34` section of the same. Scoping: `notes/dsbb-som-750-scoping-2026-09-09.md`.
+**These numbers are THE count.** §2 supersedes any figure in any other file, without argument —
+`PLAYBOOK.md` §2 rule 4.
 
-**THE TOOLCHAIN DOES NOT RUN ON THE DEVICE.** `npx tsx` dies in the device VM — the repo's
-`node_modules` is a Windows install and hits `@esbuild/win32-x64` vs `linux-x64`. Validate in a
-cloud sandbox: tar **only** `src scripts package.json package-lock.json tsconfig.json
-vite.config.ts index.html START-HERE.md` (≈3 MB) into `tmp_work/`, stage that one file, `npm
-install` there, run, then commit results back by `fileUuid` and `sha256sum` both copies. Tarring
-the repo root instead produces 118 MB. Reusable payload: `tmp_work/validate-payload-2026-09-09.tgz`.
+**SHANGHAI IS WIRED — 5 edges, all A, and it is the richest provincial yearbook in eleven rounds.**
+23 chapter 简要说明 plus 主要统计指标解释, 214 readable note pages, eight NBS instruments named by
+title. It had a node since the August 2026 import and nobody had opened it. Wired to GB/T 4754,
+劳动工资统计报表制度, 统计上大中小微型企业划分办法, 建筑业统计报表制度 and 关于市场主体统计分类的划分规定
+— the last off item 八 of the 编者说明, which is the strongest citation that hub has (Yunnan's came
+from one table note; Shanghai's governs the whole book and then lists which categories moved).
+Provinces now **8 wired · 7 node-but-unwired · 15 no node · 2 blocked**.
 
-**The live programme is CHINA, and it has not moved since round 31.** State in
-`notes/china-progress.md`, not here: 2 provinces wired and mined (Jiangsu, Guangdong), 8 with a
-node but no edges, 22 with no node; 3 of 10 cities wired, 1 read-and-empty, 1 IP-blocked, 5 open.
-The per-chapter 简要说明 is the route, not the 编者说明.
+**Round 39's three findings, cheapest first.**
+
+1. **A UNIFORM SMALL BODY ACROSS A BATCH IS ONE RESPONSE YOU HAVE NOT READ.** All 216 of Shanghai's
+   note pages came back at exactly 1085 bytes — the site's 404 page, served with HTTP 200. The
+   publisher's own TOC links `zbhtml/C0001.htm`; the server serves only `ZBHTML/C0001.htm`. **The
+   path is case-sensitive and the publisher gets its own case wrong.** This is round 37's
+   small-body lesson at scale, and it was nearly walked past because 216 files arriving looks like
+   success. Sort by size before extracting.
+2. **AUTHORSHIP INSIDE THE SENTENCE DECIDES THE TARGET, NOT THE TITLE.** Shanghai names four
+   instruments whose titles match live NBS nodes exactly, and says 国家统计局制定的 for two and
+   **上海市统计局制定的** for the other two. Those two are Shanghai's own instruments wearing NBS's
+   titles; they are `_dropped` as `wrong-target` and are mint leads under the provincial-instrument
+   ruling. This is the 农业产值 look-alike trap in its hardest form — there the titles differed, here
+   they are identical and only the issuer separates them, so nothing about the title can catch it.
+3. **A MIS-DECLARED CHARSET THE GUARD SURVIVES BY ACCIDENT.** Every Shanghai page declares gb2312 and
+   is served UTF-8 with an HTTP header saying so; `decodeDeclared()` reads the META and ignores the
+   header. It gets the right answer only because gb18030 decodes almost any bytes into mojibake with
+   ZERO U+FFFD, so it loses the strict `<` tie-break and UTF-8 is returned. Verified against the real
+   bytes; all five edges graded A. **Nothing changed — recorded because it passes for a reason nobody
+   designed**, and a page that decodes into *plausible* legacy text would win that comparison.
+
+**A NEW VALIDATOR GUARD, AND ROUND 39 EARNED IT THE HARD WAY.** The five Shanghai edges were first
+written with the `_dropped` note's key names — `source`/`target` instead of
+`source_report_id`/`target_report_id`. The loader dropped all five into `dangling`, printed them as
+five lines of **`undefined->undefined`** under the heading *"edges pointing at reports not yet
+researched"*, and **`validate` exited 0**. `assembleCorpus.ts` now separates a **malformed edge**
+(missing an endpoint FIELD) from a **dangling edge** (naming a report that does not exist yet): the
+first is an error naming which field is missing, the second stays the informational note it always
+was, because research ahead of its node is normal and a malformed edge never resolves by waiting.
+Proved against three cases — the exact mistake, a half-missing edge, and a well-formed edge naming a
+non-existent node, which correctly stayed a note. *(This is the mirror image of the `_dropped` shape
+Thomas ruled on the same day: the two shapes are one character apart and the corpus has now been
+bitten in both directions.)*
+
+**The other five node-but-unwired divisions were re-probed in Thomas's own Chrome and gave nothing.**
+Zhejiang, Sichuan, Guizhou and Chongqing fail in Chrome as well as to curl. **Beijing is the one with
+a real finding: its yearbook is on a SEPARATE HOSTNAME** —
+`/tjsj_31433/tjnj_31441/bjtjnj_31442/` redirects to
+`https://nj.tjj.beijing.gov.cn/nj/main/2025-tjnj/zk/indexch.htm`, the standard frameset shape. Chrome
+resolved the redirect and then that host timed out twice; the container gets 503 over http. **The
+path is known and is not the problem** — retry the `nj.` host another day.
 
 **Other threads, one line each; narrative is in project memory:**
 
-- **DSBB option E — live worklist, ~15 pairs left.** Demoted to `notes/standing-issues.md`, which
-  carries the corrected size (~20 strong pairs of 684, not the 70–135 a sample predicted).
-  Worklist `Claude outputs/dsbb-pilot-2026-09-09/e-slice-tier1.json`; all 684 SoMs cached beside it.
+- **DSBB option E — a live worklist, ~15 pairs left**, in `notes/standing-issues.md` with the
+  corrected size (~20 strong pairs of 684). Worklist
+  `Claude outputs/dsbb-pilot-2026-09-09/e-slice-tier1.json`, all 684 SoM texts cached beside it.
 - **FR — live, four rounds in, 21 nodes from 9.** GNI-inventory method exhausted for this edition;
   the live method is a third document naming a target by title. The Note de conjoncture's
-  public-finance and international articles are unchecked.
-- **DE — finished as a programme**, 13 → 46 nodes. Only Chapter 10.3 remains (7 non-government
-  sources), a scope question before an evidence one.
-- **`iq-cso`/`ye-cso`/`sy-cbs`/`sd-cbs` — parked, awaiting Thomas (§3).**
+  employment, enterprise, prices and international articles are unread against it.
+- **DE — finished as a programme**, 13 → 46 nodes. Only Chapter 10.3 remains, a scope question.
+- **`iq-cso`/`ye-cso`/`sy-cbs`/`sd-cbs` — PARKED, ruled 2026-09-09.** Not duplicates, not to be
+  retired, not to be re-hunted; rule in `playbook/corpus-nodes.md`. `iq-cso`'s separate
+  possible-duplicate question stays open.
 
 ## 3. Todo (live items only)
 
 ### [Thomas]
 
-**1. `MEMORY.md` is now DUE — you deferred it to "after handoff 080" and this is 080.** Two things
-in one session: the missing index lines (round 31 never got one, and rounds 32-34 have none either,
-so four topic files are findable only by name), and a condense pass. The file is 64KB of dense
-prose including Chinese, the tool requires resending it whole, and recent entries run ~1.5k each
-against a header that asks for one-line hooks under ~150 chars. It wants to be its own session, not
-a tail end. Nothing else in this handoff depends on it.
-
-**2. Stop writing live counts into the slow layer?** All three defects the handoff-080 sweep found
-were the same species — a count typed into prose that the corpus then moved past (`172 edges are
-stamped` → 286; `101 of 3,071 edges` → 3,195; the DSBB entry still described as parked). None was a
-broken pointer or a drifted rule. Proposed rule: **a slow-layer file may name a count only as a
-dated observation with the command that produced it, or not at all.** That would make this class
-mechanically impossible and force the next 5b to look for something else. Detail and the evidence
-behind the cadence answer: `notes/doc-audit-2026-09-09.md`.
-
-**3. Park the four orphaned NSO nodes, or keep hunting?** `iq-cso`, `ye-cso`, `sy-cbs`, `sd-cbs`
-are **not** duplicates and should not be retired — the institutional node and a country's
-publication nodes are designed to coexist, and `af-nsia` proves the shape works when some OTHER
-report names the stats office as its source. The 2026-09-08 pass checked Iraq's, Yemen's and
-Sudan's own non-NSO reports and found no general sourcing statement anywhere. Recommendation:
-**park them as legitimate-but-currently-unwireable**. Say park and it stops being re-read.
-(`ir-sci` is unrelated — already-ruled null-ComplianceDate class.) Carried unanswered since 079.
+**Empty.**
 
 ### [Agent]
 
-**Your round: Shandong and Henan.** Both have nodes and no edges — pure wiring, no minting.
-Shandong answers over http; Henan's 403 smells like a WAF. `notes/china-progress.md` first: it is
-the worklist, it carries the corrected method, and **a single failed fetch is not a verdict there —
-retry, and change machine, before recording a host as blocked.** Then
-`notes/techniques-cn-yearbooks-2026-09-08.md`. Go to the per-chapter 简要说明 and open 建筑业 and
-农业 first: both have named an NBS 统计报表制度 by title in every yearbook checked. After that the
-minting run — Hunan, Hubei, Fujian, Yunnan, Xinjiang, Jilin, Hainan, Tibet all answered and have no
-node, so those rounds mint and wire in one pass.
+**The CN seam that was "six provinces whose notes have never been swept" turned out to be one
+reachable province and five that are not.** Shanghai was the one and it is done. What is left:
 
-**Shaanxi provincial instruments — the ruling is made, the research is not.** Provincial-bureau
-methodology instruments ARE nodes (Thomas, 2026-09-09); the class is open, do not re-raise per
-province. The bar is unchanged: a node needs its own page on the issuing bureau's site, the way
-round 31's three NBS instruments came off their own `stats.gov.cn` pages. Nobody has yet looked for
-Xi'an's two Shaanxi instruments on the Shaanxi bureau's site. If the pages do not exist the two
-edges park for want of a source. Shaanxi still has no node of any kind.
+1. **Beijing, on the `nj.` host** — the only unfinished node-but-unwired division with a live,
+   specific lead. `https://nj.tjj.beijing.gov.cn/nj/main/2025-tjnj/zk/indexch.htm`, frameset shape,
+   timed out twice on 2026-09-09. One retry on another day; the path is not in question.
+2. **Zhejiang, Sichuan, Guizhou, Chongqing — three routes each, nothing.** Do not re-probe these
+   as a batch again without a new route to try; the container, the device VM and Chrome have now all
+   been spent on them.
+3. **Hainan** — bureau site has no yearbook; the PROVINCIAL GOVERNMENT portal carries a 统计年鉴
+   listing at `https://www.hainan.gov.cn/hainan/tjnj/list3.shtml`, unreachable from all three
+   machines on 2026-09-09. One retry, then drop it.
+4. **The 15 nodeless provinces**, yield curve flattened. Hebei (74M), Anhui (61M), Guangxi (50M) and
+   Jiangxi (45M) are the only ones worth a targeted look.
 
-**Continuing option E.** ~15 pairs left on the tier-1 worklist, each needing its publisher's own
-page found — Bahamas' three trade products, Guatemala's *Boletín Estadístico*, Sri Lanka's *CBSL
-Annual Report*, Zimbabwe's three RBZ/ZIMSTAT products, Barbados' *Report of the Accountant
-General*, Tajikistan's national-accounts annual. **Two lessons from rounds 33-34 that will recur:**
-a country the corpus has never carried needs THREE registry entries (`COUNTRY_TO_REGION` in
-`regions.ts`, plus `COUNTRY_FAMILY` and the display-name map in `palette.ts`) and nothing errors if
-you forget — the node silently falls back to 'International'; and `jurisdiction_level` has no
-`national`, it is **`federal`** for a national publisher.
+**Two Shanghai leads that are cheap and were opened by this round.**
 
-**Five CN cities still open**, each with a concrete next step on its tracker row — Guangzhou
-(Chrome-only, zTree JS viewer), Hangzhou, Chengdu, Chongqing, Beijing. **Suzhou is read-and-empty,
-not unread.** **Shenzhen is IP-blocked at the WAF by address**, not user-agent.
+- **Shanghai's OWN 《固定资产投资统计报表制度》 and 《房地产开发统计报表制度》** — named by title in the
+  yearbook, attributed to 上海市统计局, and nobody has looked for their pages on `tjj.sh.gov.cn`.
+  Provincial-bureau instruments ARE nodes, so this is a mint away from two more edges off citations
+  the corpus already holds.
+- **《批发和零售业统计报表制度》 and 《住宿和餐饮业统计报表制度》 now have FOUR independent yearbooks
+  naming them** — national, Guangdong, Shandong and Shanghai — and still no NBS landing page. The
+  case for hunting an older year's 统计制度 listing is much stronger than when it was two.
 
-**Settled, do not re-raise:** the CN/TW/JP/KR re-grade sweep (Thomas 2026-09-08: *"that's a lot of
-time for B/C's. forget that."*); a first-party zip is a direct read, not a capped route; a table
-NOTE naming an instrument by title IS a citation and grades A, but a table ROW alone is not; a
-target title broken across a two-column line break in all three pdftotext readings still grades A;
-bulk-diffing stored quotes against cached windows (~60% false positives). Also refused with reasons
-recorded in the data or the `playbook/` files: the COICOP edges for Morocco/Tunisia/Iraq, the
-e-GDDS wiring todo (all 34 countries), India's NSDP, the GFSR, the ICLS class, the non-ASCII-hyphen
-sweep, DGDDI's monthly bulletin, the stale-cache B sweep, Korea's and Estonia's NSDP, the
-null-ComplianceDate class, the DE round-2 EVS / Bundesbank / BaFin refusals. A country carrying
-both a REGISTER and a SELF-DECLARED tier edge keeps both — no dedupe pass.
+**Round 38's follow-ups, still open.**
+
+- **Sweep the zb layer of every OTHER yearbook that has one.** The national yearbook had 27 unread
+  chapter notes beside the 29 that had been read for nine rounds. Nobody has checked whether
+  Shandong, Xi'an, Suzhou or Fujian publish a second layer. `left.htm`'s href list answers it in one
+  fetch. **Shanghai is a second data point for the general form of this**: its notes were not where
+  the file naming suggested either.
+- **`zb10.pdf` and `zb27.pdf` of the national yearbook are unread** — a corrupt xref and a 404.
+- **《关于工资总额组成的规定》 is named by two independent yearbooks** (national zb04, Jilin zbjs4) and
+  has no node; strongest of the eight non-NBS instruments the zb layer named.
+
+**Table notes are still underswept.** Yunnan and Shanghai's chapter notes have been read; only
+Yunnan's 注： lines have. Shanghai has 558 table pages and its C0101 table note names a municipal
+provider in the first one read, so the seam is real and unsampled.
+
+**Three standing CN leads, unchanged.** 《中国统计摘要》 has an edition year, a publisher and a
+citation saying a yearbook takes DATA from it; four yearbooks name it, still no NBS page.
+《批发和零售业》/《住宿和餐饮业》 are above. **Shaanxi provincial instruments** — the ruling is made,
+the research is not: nobody has looked for Xi'an's two Shaanxi instruments on the Shaanxi bureau's
+site, and Shanghai's two are now the same class of job.
+
+**Five CN cities still open** — Guangzhou (Chrome-only, zTree JS viewer), Hangzhou, Chengdu,
+Chongqing, Beijing. **Suzhou is read-and-empty, not unread. Shenzhen and Henan are IP-blocked** at
+the WAF by address, not user-agent; nothing to retry on either.
+
+**When China pauses: option E, then FR.** E's remaining pairs each need their publisher's own page
+found — Bahamas' three trade products, Guatemala's *Boletín Estadístico*, Sri Lanka's *CBSL Annual
+Report*, Zimbabwe's three RBZ/ZIMSTAT products, Barbados' *Report of the Accountant General*,
+Tajikistan's national-accounts annual.
+
+**Settled, do not re-raise:** the `_dropped` third shape — **the validator reads both spellings as
+of 2026-09-09 and the 17 files are NOT to be rewritten** (Thomas ruled the guard should learn it);
+write new notes in `source`/`target` all the same. The CN/TW/JP/KR re-grade sweep (Thomas
+2026-09-08: *"that's a lot of time for B/C's. forget that."*); a first-party zip is a direct read,
+not a capped route; a table NOTE naming an instrument by title IS a citation and grades A, but a
+table ROW alone is not; a target title broken across a two-column line break in all three pdftotext
+readings still grades A; bulk-diffing stored quotes against cached windows (~60% false positives).
+**Round 37-39 additions:** Yunnan names no industrial-classification EDITION — the ordinary §7a
+refusal, recorded `no-document`, do not re-mint; a bare 《三次产业划分规定》 with no year stays unwired
+because NBS publishes two candidate pages — refused for Jilin and again for the national yearbook's
+zb03, **settled twice, no third look**; Xizang publishes no yearbook at all and its 统计年鉴 link is a
+commented-out template placeholder; **Shanghai's bare 《国际收支手册》 does not reach `imf-bpm6`** —
+named by title and publisher with no edition, the generic-COICOP refusal again. Also refused with
+reasons in the data or the `playbook/` files: the COICOP edges for Morocco/Tunisia/Iraq, the e-GDDS
+wiring todo (all 34 countries), India's NSDP, the GFSR, the ICLS class, the non-ASCII-hyphen sweep,
+DGDDI's monthly bulletin, the stale-cache B sweep, Korea's and Estonia's NSDP, the
+null-ComplianceDate class, the DE round-2 EVS / Bundesbank / BaFin refusals. A country carrying both
+a REGISTER and a SELF-DECLARED tier edge keeps both.
 
 ## 4. How to hand off
 

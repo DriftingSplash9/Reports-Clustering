@@ -204,6 +204,8 @@ const EMPTY_CORPUS: AssembledCorpus = {
     orphans: [],
     danglingRelations: [],
     duplicateRelations: [],
+    renamedDroppedEndpoints: [],
+    malformedEdges: [],
   },
   droppedNotes: [],
 }

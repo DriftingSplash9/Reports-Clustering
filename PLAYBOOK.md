@@ -112,7 +112,20 @@ exists, it doesn't go in the graph.
 
 **4. `npm run validate` before and after any data change** — generator,
 logic tests, then the data checks; the live count of each is in
-`HANDOFF.md` §2 and nowhere else. It can't run through the device
+`HANDOFF.md` §2 and nowhere else.
+
+**HANDOFF §2 IS THE COUNT — Thomas, 2026-09-09.** *"the one true count is going to be the handoff
+as it actually looks and keeps count, it will always supercede other counts."* Any figure in any
+other file is a dated snapshot and is superseded by §2 without argument: do not act on it, do not
+"correct" §2 to match it, and do not book a mismatch as a defect in the corpus. **Counts drift
+because they are written down at all — the fix is precedence, not writing discipline.** Two
+consequences worth stating. (a) `validate` is what §2 is refreshed FROM, so the chain is
+**validate → §2 → everything else**, and a §2 figure older than the last data change is stale too;
+rerun rather than trust it. (b) **For a count §2 does not carry** — tier-stamp coverage, the
+cadence transmission share, per-slice tallies — there is no superseding number to fall back on, so
+the file must say HOW TO RECOUNT rather than state a figure. That is the gap the handoff-080 sweep
+found: `"172 edges are stamped"` had nothing above it to be corrected by, and sat wrong for seven
+handoffs. Both files it corrected now name the command instead of trusting the number. It can't run through the device
 bridge. Recipe: stage `src/ scripts/ package.json tsconfig.json
 index.html vite.config.ts START-HERE.md` (full `src/data/research/`
 corpus included) into a Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build.

@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 37) — the CN provincial minting run finished: five provinces minted, two NBS standard hubs minted, five edges",
+    "minted": "2026-09-09",
+    "note": "SECOND AND LAST ROUND OF THE PROVINCIAL MINTING RUN. Round 36 left seven provinces with no node (Hubei, Yunnan, Fujian, Xinjiang, Jilin, Xizang, Hainan). Five now have one. THE ONE FINDING THAT PAYS FORWARD: **a small body is a JS redirect — READ IT.** Round 36 recorded Hubei's /tjsj/sjkscx/tjnj/ as 'HTTP 200 with a 71-BYTE body, an empty shell' and stopped there. The 71 bytes are `<script language=\"javascript\">window.location = \"./qstjnj/\";</script>`, and that directory is the yearbook listing — fifteen editions of it. The same shape then turned up twice more in one round: Xinjiang's /tjj/tjsj/jump.shtml is a 954-byte shell carrying `<p id=\"url\">/tjj/zhhvgh/list_nj1.shtml</p>` in a display:none div, and NBS's own /sj/tjbz/ is a 625-byte shell redirecting to ./gjtjbz/ — the national statistical-standards listing, which is where both hubs minted here came from. Round 36's Hunan lesson (open the landing page in Chrome and watch the address bar) was right about the SYMPTOM and expensive about the cure: three of these four were solved by reading the body. **Curl the shell and cat it before reaching for a browser.** SECOND FINDING, and it cost a code change: the grader's zip branch walked html/txt/csv/md ONLY, so a yearbook shipped as a zip of .docx chapter notes extracted to NOTHING. Hubei ships 21 `第N章指标解释.docx`; Yunnan ships 18 `主要指标解释.docx` plus the whole 512-page book as one PDF; neither publishes them at any other URL, so Thomas's 2026-09-08 ruling that a first-party zip IS a direct read could not actually be exercised on either. `extractZipDocs` in scripts/grade-evidence.ts now takes a second pass over .docx and .pdf entries AFTER the existing markup pass, so the byte budget is spent in the old order first and every already-committed zip record (Guangdong's CD edition is the one that exists) extracts byte-for-byte what it did before — the new pass can only add text, never displace it, which is what keeps it from writing a grade down. THIRD: the 编者说明 / 简要说明 / 主要统计指标解释 distinction is a red herring, and what matters is only that SOME per-chapter prose exists. Hubei, Yunnan and Jilin all publish 指标解释 (indicator definitions) rather than 简要说明 (chapter scope notes), and the GB/T 4754 sentence sits in the 综合 chapter's 指标解释 in both Hubei and Jilin — word for word the same sentence Hunan carries in its zb01. FOURTH: filename conventions are per-province yet again. Jilin names its chapter notes `ml/zbjsN.html` — 19 of them, chapter 20 having none — which is neither Shandong's `smNN.pdf` nor Hunan's `zbNN.pdf`. Glob, never assume. NOT MINTED: Xizang and Hainan, both in _dropped with what was actually established rather than 'not found'."
+  },
+  "reports": [
+    {
+      "id": "cn-hb-statistical-yearbook",
+      "title": "Hubei Statistical Yearbook (湖北统计年鉴)",
+      "publisher": "Hubei Provincial Bureau of Statistics",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Hubei",
+      "description": "Annual statistical yearbook of Hubei Province, a 58-million-person central-China economy. Published as a first-party zip archive of per-chapter Excel tables with one 指标解释 (explanation of indicators) document per chapter — 21 chapters in the 2025 edition, and that is where its methodology disclosures sit. It carries no 编者说明 at all. The publisher's own listing runs back to the 2011 edition (2013-2023 as .rar, 2012 and 2024-2025 as .zip). Its capital Wuhan has a separate city-yearbook node that is already wired, and the two publish quite differently.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year. The 2025 edition's zip was last modified 2026-01-14 and sits under a 202601 path; the 2024 edition sits under 202501 and the 2023 edition under 202402, so publication is January-ish with at least one edition slipping later. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "http://tjj.hubei.gov.cn/tjsj/sjkscx/tjnj/qstjnj/",
+      "domains": ["national-accounts", "general-statistics"],
+      "kind": "publication"
+    },
+    {
+      "id": "cn-yn-statistical-yearbook",
+      "title": "Yunnan Statistical Yearbook (云南统计年鉴)",
+      "publisher": "Yunnan Provincial Bureau of Statistics",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Yunnan",
+      "description": "Annual statistical yearbook of Yunnan Province, a 47-million-person south-western border economy. Published as a first-party zip holding the whole 512-page book as one InDesign-produced PDF, a table-of-contents PDF, per-chapter Excel tables, and per-chapter 主要指标解释 documents in Chinese and in English — 18 chapters in the 2025 edition. Its methodology disclosures sit in those 指标解释 documents and in the notes under individual tables, both of which are bilingual. The listing runs back to the 2010 edition alongside the 2020 population-census and 2023 economic-census yearbooks.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year, published in the first half of the following year: the 2025 edition's landing page is dated 2026-05-07, the 2024 edition 2025-05-23, the 2023 edition 2024-03-29. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "https://stats.yn.gov.cn/zwgk/zfxxgk/fdzdgknr/tjsj/tjnj/",
+      "domains": ["national-accounts", "general-statistics"],
+      "kind": "publication"
+    },
+    {
+      "id": "cn-jl-statistical-yearbook",
+      "title": "Jilin Statistical Yearbook (吉林统计年鉴)",
+      "publisher": "Jilin Provincial Bureau of Statistics",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Jilin",
+      "description": "Annual statistical yearbook of Jilin Province, a 24-million-person north-eastern economy, published bilingually (中英文对照). Served as a FrontPage-era frameset per edition — an enter page, then a left TOC frame and a right content frame — with 20 chapters of HTML tables and a per-chapter 主要统计指标解释 at ml/zbjsN.html; there are 19 of those, chapter 20 (市州和县市概况) having none. Its 编者说明 at ml/sm.htm names no instrument, which is the ordinary case. The publisher's own section carries every edition from 2011 to 2025.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year; the section lists 2011 through 2025 as one directory each, with no dated landing page to read a publication month from. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "https://tjj.jl.gov.cn/tjsj/tjnj/",
+      "domains": ["national-accounts", "general-statistics"],
+      "kind": "publication"
+    },
+    {
+      "id": "cn-fj-statistical-yearbook",
+      "title": "Fujian Statistical Yearbook (福建统计年鉴)",
+      "publisher": "Fujian Provincial Bureau of Statistics",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Fujian",
+      "description": "Annual statistical yearbook of Fujian Province, a 42-million-person coastal economy. Served as a frameset in the same shape as Shandong's, with 21 chapter notes at html/smNN.pdf. MINTED WITHOUT EDGES ON PURPOSE: the yearbook is located and fetchable but its text cannot be extracted by any parser — the chapter-note PDFs carry only Type1 fonts and no /ToUnicode map anywhere in the file, so the Chinese has no Unicode mapping at all (established round 36; the full diagnosis is in cn-hunan-2026-09-09.json's _dropped). The publication is real and first-party and only its machine-readability fails; OCR would cap any edge off it at B.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year; the 2025 edition is served under a dz2025 path. No dated landing page was read, so no publication month is claimed. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "https://tjj.fujian.gov.cn/tongjinianjian/dz2025/zk/indexch.htm",
+      "domains": ["national-accounts", "general-statistics"],
+      "kind": "publication"
+    },
+    {
+      "id": "cn-xj-statistical-yearbook",
+      "title": "Xinjiang Statistical Yearbook (新疆统计年鉴)",
+      "publisher": "Statistics Bureau of the Xinjiang Uygur Autonomous Region",
+      "country": "CN",
+      "jurisdiction_level": "provincial",
+      "region": "Xinjiang",
+      "description": "Annual statistical yearbook of the Xinjiang Uygur Autonomous Region, a 26-million-person north-western economy. Published on the bureau's own site as per-chapter HTML listings of individual tables — 22 chapter sections, including 各地州市主要经济指标排序 and 各省市区主要经济指标排序 — reached through a JS redirect shell rather than a link. MINTED WITHOUT EDGES: the online presentation is tables only, with no 简要说明 or 指标解释 page under any chapter, so nothing on the bureau's site names an instrument. Note also that the newest edition served online is the 2021 one, its table pages dated March 2022; the print series continues past it.",
+      "releases_per_year": 1,
+      "cadence_note": "One edition per reference year in print. Online publication lags badly: the newest edition on the bureau's own site is 2021, with table pages dated March 2022. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "http://tjj.xinjiang.gov.cn/tjj/tjnj/jump.shtml",
+      "domains": ["national-accounts", "general-statistics"],
+      "kind": "publication"
+    },
+    {
+      "id": "cn-nbs-sme-classification-2017",
+      "title": "统计上大中小微型企业划分办法（2017） (Measures for Classifying Large, Medium, Small and Micro Enterprises for Statistical Purposes (2017))",
+      "title_aliases": ["统计上大中小微型企业划分办法", "统计上大中小微型企业划分办法(2017)"],
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS measure that decides which enterprises count as large, medium, small and micro in Chinese official statistics, by industry, headcount, operating revenue and total assets. Issued 2017-12-28 as a revision of the 2011 measure, re-cut against the 2017 edition of the industrial classification. After the industrial classification itself it is one of the most frequently named instruments in Chinese yearbooks — the national, Jiangsu and Yunnan yearbooks all name it by title.",
+      "cadence_note": "Not a recurring release. Issued once and revised when the industrial classification underneath it is: the 2011 measure was superseded by this 2017 one.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/t20230213_1902763.html",
+      "domains": ["statistical-system", "industry"],
+      "kind": "instrument"
+    },
+    {
+      "id": "cn-nbs-market-entity-classification",
+      "title": "关于市场主体统计分类的划分规定 (Provisions on the Statistical Classification of Market Entities)",
+      "title_aliases": ["国统字〔2023〕14号"],
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The joint NBS / State Administration for Market Regulation rule fixing the registration-type categories market entities are counted under in official statistics — state-owned, collective, private, Hong Kong/Macau/Taiwan-invested, foreign-invested and the rest. Issued 2023-01-31 as 国统字〔2023〕14号, revising the 2011 provisions on enterprise registration types (国统字〔2011〕86号). Provincial yearbooks cite it in the notes under their legal-person unit tables.",
+      "cadence_note": "Not a recurring release. Issued once, revising the 2011 provisions it replaced.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/t20230213_1902786.html",
+      "domains": ["statistical-system", "industry"],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-hb-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 综合 chapter's 指标解释 states that from the 2017 annual report and the 2018 periodic returns onward the yearbook uses the new 《国民经济行业分类》, and gives the edition by its standard number in the same sentence — 自2017年年报和2018年定期报表开始使用新的《国民经济行业分类》(GB/T 4754-2017) — then repeats title-plus-number when giving the revision's structure (20 门类, 97 大类, 473 中类, 1382 小类). The document states the edition itself, which is what an edition-bound target requires. ROUTE: a first-party zip served 200 from the publisher's own host, which §7b settles is a direct read; the inner path is 湖北统计年鉴2025-定/湖北统计年鉴2025-定/第01章  综合/第1章指标解释.docx (two spaces after 第01章, as the publisher wrote it). A NOTE ON THE ROUTE ITSELF: the grader's zip branch walked html/txt/csv/md only and therefore read this archive as empty; it now takes a second pass over .docx and .pdf entries, added this round. HOW THE ARCHIVE WAS FOUND: the bureau's own 统计年鉴 link returns a 71-byte body, and those 71 bytes are a JS redirect to ./qstjnj/ — round 36 recorded the byte count without reading the content. NOT WIRED from the same sentence, deliberately: it also names 《全部经济活动的国际标准产业分类》(ISIC/Rev.4), but only to say what GB/T 4754 was revised against, which is the existing cn-gbt-4754-2017 edge restated by a third document rather than a Hubei dependency.",
+      "evidence_url": "http://tjj.hubei.gov.cn/tjsj/sjkscx/tjnj/qstjnj/202601/P020260114553839802144.zip",
+      "evidence_quote": "自2017年年报和2018年定期报表开始使用新的《国民经济行业分类》(GB/T 4754-2017)",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-jl-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 综合 chapter's 主要统计指标解释 (ml/zbjs1.html) carries the same sentence Hubei and Hunan carry — 自2017年年报和2018年定期报表开始使用新的《国民经济行业分类》（GB/T4754-2017） — and repeats title-plus-number when giving the revision's structure. The 国民经济核算 chapter's note (zbjs2) names it again. QUOTE CUT: the page is Word-exported HTML that wraps every Latin run in its own span, so （GB/T4754-2017） is a separate element and a quote spanning it would not match; the stored span is the contiguous run carrying the title and the usage verb, and the number sits in the grader's window either way. NOT WIRED from zbjs2, deliberately: it also names 《三次产业划分规定》 but bare, with no year, and NBS publishes both a 《三次产业划分规定》 page and a 关于修订《三次产业划分规定（2012）》的通知 — picking one would be supplying an edition the document does not state, which is the refusal the COICOP ruling of 2026-09-08 settled. All 19 chapter notes were swept; three name anything at all, and the other two name 《关于工资总额组成的规定》 (zbjs4) and 《医疗机构执业许可证》 (zbjs19), neither of which has a node.",
+      "evidence_url": "https://tjj.jl.gov.cn/tjsj/tjnj/2025/ml/zbjs1.html",
+      "evidence_quote": "报表开始使用新的《国民经济行业分类》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-yn-statistical-yearbook",
+      "target_report_id": "cn-nbs-sme-classification-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 工业和能源 chapter's 主要指标解释 defines its 大、中、小和微型企业 breakdown by stating that the size-classification standard applied is the named measure — 企业规模的划分标准执行《统计上大中小微型企业划分办法（2017）》，按照企业从业人员、主营业务收入，将企业划分为大型、中型、小型和微型 — naming the instrument by title with its year. The same sentence appears in the whole-book PDF in the same archive. ROUTE: a first-party zip served 200 from the publisher's own host (§7b, direct read); inner path 2025云南统计年鉴/8.工业和能源/八、工业和能源主要指标解释.docx, and again at 2025云南统计年鉴/2025云南统计年鉴.pdf. Yunnan does NOT name 《国民经济行业分类》 anywhere by title — its 农业和农村 note says only 执行新的国民经济行业分类标准, with no 《》 and no number — so no GB/T 4754 edge is minted for it; that refusal is recorded in this file's _dropped.",
+      "evidence_url": "https://stats.yn.gov.cn/zwgk/zfxxgk/fdzdgknr/tjsj/tjnj/202605/P020260723540390408353.zip",
+      "evidence_quote": "企业规模的划分标准执行《统计上大中小微型企业划分办法（2017）》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-yn-statistical-yearbook",
+      "target_report_id": "cn-nbs-market-entity-classification",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the note under table 1-12 各州市按登记注册统计类别分企业法人单位数（2024年） states that the table's registration-type categories follow the named provision, with its document number — 注：本表登记注册统计类别按《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）执行 — and the facing English note glosses it as the Regulations on the Classification of Market Entity Statistics (Guotongzi [2023] No. 14), which matches the target's own 国统字〔2023〕14号. A table NOTE naming an instrument by title is a citation and grades A (§7a); a table ROW alone would not be. QUOTE CUT: pdftotext renders 〔2023〕 as {2023}, so the stored span stops before the document number, which sits in the grader's window and in this basis. ROUTE: first-party zip (§7b, direct read); inner path 2025云南统计年鉴/2025云南统计年鉴.pdf.",
+      "evidence_url": "https://stats.yn.gov.cn/zwgk/zfxxgk/fdzdgknr/tjsj/tjnj/202605/P020260723540390408353.zip",
+      "evidence_quote": "本表登记注册统计类别按《关于市场主体统计分类的划分规定》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-nbs-sme-classification-2017",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: article 一 of the measure states it is formulated on the basis of the named classification and gives the edition by its standard number — 以《国民经济行业分类》（GB/T4754-2017）为基础，结合统计工作的实际情况，制定本办法 — and the covering notice opens by saying the 2011 measure was revised precisely because that classification had come into force, mapping the industries involved from GB/T 4754-2011 across to GB/T 4754-2017. Same publisher at both ends. QUOTE CUT: the page wraps every Latin run in its own element, so the parenthetical renders with spaces inside it once tags are stripped; the stored span is the contiguous run naming the classification, and the number sits in the grader's window. Read live from the cited URL on 2026-09-09.",
+      "evidence_url": "https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/t20230213_1902763.html",
+      "evidence_quote": "以《国民经济行业分类》",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "source_report_id": "cn-xz-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "no-node-yet",
+      "why": "XIZANG / TIBET — NOT MINTED 2026-09-09, and this is an ANSWER rather than a time-out. The bureau's own homepage (tjj.xizang.gov.cn) carries four data sections — 最新发布, 统计信息, 统计数据, 统计公报 — and no yearbook section at all. The 统计年鉴 label round 36 saw is an HTML COMMENT: the markup reads <a href=\"./xxgk/tjxx/tjsj/\">统计数据</a><!--<a href=\"javascript:;\">统计年鉴</a>-->, a commented-out placeholder left over from the template the site was built from, which is why it looked like a javascript:; stub. /xxgk/tjxx/ itself returns no links. There is therefore nothing on the issuing bureau's site to mint a node against and the §7c bar is not met. Re-openable if the bureau publishes a yearbook section, or against the autonomous region's own government portal."
+    },
+    {
+      "source_report_id": "cn-hi-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "no-node-yet",
+      "why": "HAINAN — NOT MINTED 2026-09-09, and the lead is live and specific. The BUREAU site (stats.hainan.gov.cn) publishes only its 经济普查年鉴2023 — the economic census yearbook, a different publication — at /tjj/2023hnnj/indexce.htm; its 年度数据 section at /tjj/tjsu/ndsj/ returns no entries, and /tjj/tjnj/ 302s to 404.html. Six sibling-directory guesses in the census yearbook's own style all 302'd to 404. BUT the PROVINCIAL GOVERNMENT portal carries a 统计年鉴 listing at https://www.hainan.gov.cn/hainan/tjnj/list3.shtml, and that is where the next round should start. It was not readable this round: 503 to the cloud container over both schemes across four retries, unreachable from the device VM (whose egress does not reach .gov.cn at all), and Chrome would not hold the navigation — the tab reverted to newtab twice. That is a claim about three machines on one day, not about the site."
+    },
+    {
+      "source_report_id": "cn-yn-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "reason": "no-document",
+      "why": "YUNNAN NAMES NO INDUSTRIAL-CLASSIFICATION EDITION — searched 2026-09-09, and this is the answer rather than a gap. Round 36 recorded this pair in cn-hunan-2026-09-09.json as unreadable-source on the grounds that the yearbook had not been located. It has now been located, downloaded and read in full — 18 chapter 指标解释 documents plus the whole 512-page book — and it names the classification only as 执行新的国民经济行业分类标准 in the 农业和农村 chapter, with no 《》 and no GB/T number. That is the ordinary §7a refusal: naming a standard generically does not name the artefact, and supplying the 2017 edition ourselves is exactly the inference the corpus does not make. Yunnan IS wired to two other instruments this round, off citations that do carry titles."
+    },
+    {
+      "report_id": "cn-provinces-round-37",
+      "candidate_target": "leads named by title with no node",
+      "reason": "note",
+      "note": "LEADS FOUND AND NOT TAKEN, all named by title in a document read this round, none with a node. (1) 《中国统计摘要》 — Yunnan's table note 注：本表全国数据主要来自《中国统计摘要(2024)》 is the first citation found that says a yearbook takes DATA from it rather than merely pointing readers at it, and it carries an edition year; four yearbooks now name it (national, Jiangsu, Shandong, Yunnan) and NBS still has no landing page for it. (2) 《统计用产品分类目录》 — Yunnan's agriculture chapter; NBS HAS a section for it at /sj/tjbz/tjypflml/, so this one is mintable the moment a round wants it. (3) 《关于统计上划分城乡的规定（试行）》（国统字[1999]114号） — Yunnan's population table note. NBS's listing carries a 统计上划分城乡的规定 page (t20230213_1902742.html), but that is the LATER measure without 试行: do NOT wire the 1999 trial version to it, this is the same trap as the three different 农业产值 titles. (4) 《三次产业划分规定》 — Jilin, bare with no year; NBS has two pages and the Jilin edge's basis says why neither was picked. (5) Cross-ministry instruments each needing their own publisher's page: 《全国文化文物和旅游统计调查制度》 (Yunnan, MCT), 《广播电视人口覆盖率统计技术标准和方法》 (Hubei, NRTA), 《对外承包工程管理条例》 (Hubei, MOFCOM), 《公路工程技术标准》 (Hubei and Yunnan, at two different vintages — JTJ 01-88 and JTG B01-2003 — so read the number before wiring). AND THE PORTAL THAT MAKES SEVERAL OF THESE CHEAP: NBS's 国家统计标准 listing at https://www.stats.gov.cn/sj/tjbz/gjtjbz/ (three pages — index_1.html and index_2.html carry the rest) has a landing page per standard: 三次产业划分规定, 统计上划分城乡的规定, 统计单位划分及具体处理办法, 文化及相关产业分类, 高技术产业（制造业/服务业）分类, 战略性新兴产业分类, 数字经济及其核心产业统计分类, 节能环保清洁产业统计分类, 农业及相关产业统计分类, and more. It is the 统计标准 counterpart of the 统计制度 listing at /sj/tjzd/ that round 30 found, and it was not in the tracker's portal section."
+    }
+  ]
+}

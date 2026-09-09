@@ -9,6 +9,63 @@ import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
  * shape differently — both hand the array straight to `assembleCorpus`
  * below, which is the ONLY place slices turn into a graph.
  */
+/**
+ * A `_dropped` note as it may actually appear on disk, before normalisation.
+ *
+ * `DroppedNote` is the shape the corpus is *supposed* to use and the only shape
+ * anything downstream sees. This is what slices have really written, and it has
+ * three variants (`PLAYBOOK-CORPUS.md` §6 records the first two):
+ *
+ *  - `edge` / `source` / `target` — the intended shape, 2,966 of them;
+ *  - `report_id` / `candidate_target` — endpoint-free by design, 27 of them;
+ *    these have no edge to name and normalise to null endpoints, which is
+ *    correct and is why they must stay `reason: "note"`;
+ *  - **`source_report_id` / `target_report_id` — 17 of them, first written
+ *    2026-09-07 and copied by every CN round since.** This one is why this
+ *    function exists.
+ */
+interface RawDroppedNote extends Omit<DroppedNote, 'edge' | 'source' | 'target'> {
+  edge?: string
+  source?: string | null
+  target?: string | null
+  source_report_id?: string | null
+  target_report_id?: string | null
+}
+
+/**
+ * Read a `_dropped` note's endpoints whichever field they were written in.
+ *
+ * **Why this is at the loader and not in the two checks that noticed it.**
+ * Round 37 wrote a `resolved` note in the `source_report_id` shape. Round 38
+ * found `npm run validate` exiting 1 on it — `danglingCaveats` reads `n.source`,
+ * got `undefined`, matched no live edge and reported `undefined -> undefined`,
+ * while the note itself was perfectly correct. Thomas ruled: teach the
+ * validator. Fixing the two checks would have left the SAME blind spot in
+ * `disclosureByReport` (`src/lib/graph.ts`), which the app calls on every
+ * render and which skips a note whose `source` it cannot read — so 15 notes
+ * were missing from the disclosure counts of the reports they are about, in the
+ * UI, silently. One normalisation at the loader fixes the validator, the panel,
+ * and whatever reads `droppedNotes` next.
+ *
+ * `?? null` rather than bare `??` is load-bearing: `null ?? undefined` is
+ * `undefined`, and a caveat with a deliberately null endpoint must keep failing
+ * the `n.source === null` test in `validate-data.ts` that exists to catch it.
+ * Note the intended field WINS — the two notes carrying both shapes agree, and
+ * if one ever disagreed the documented field is the one to trust.
+ */
+function normalizeDroppedNote(n: RawDroppedNote): DroppedNote {
+  const source = n.source ?? n.source_report_id ?? null
+  const target = n.target ?? n.target_report_id ?? null
+  return {
+    ...n,
+    source,
+    target,
+    // The third shape carries no `edge` either, and `edge` is what the
+    // unknown-reason report prints — it was printing `undefined` for these.
+    edge: n.edge ?? `${source ?? '(none)'} -> ${target ?? '(none)'}`,
+  }
+}
+
 export interface ResearchSlice {
   reports: Report[]
   dependencies: Dependency[]
@@ -17,7 +74,7 @@ export interface ResearchSlice {
    * Optional because the seed set has none and a slice may legitimately drop
    * nothing. Read rather than ignored as of V0.8 — see `DroppedNote`.
    */
-  _dropped?: DroppedNote[]
+  _dropped?: RawDroppedNote[]
   /**
    * Documented relationships that are not dependencies — see `Relation`.
    *
@@ -48,6 +105,32 @@ export interface LoadIssues {
   danglingRelations: string[]
   /** Exact `source-[type]->target` repeats. Reported, not tolerated silently. */
   duplicateRelations: string[]
+  /**
+   * Dependencies missing an endpoint FIELD — not naming a report that does not
+   * exist, but carrying no `source_report_id` / `target_report_id` at all.
+   *
+   * **This is an error and `validate-data.ts` fails on it.** It is separate
+   * from `dangling` because the two look identical once dropped and mean
+   * opposite things: a dangling edge is research ahead of its node and is
+   * normal, while this is a malformed edge that will never resolve. Found
+   * 2026-09-09 (round 39), when five real edges were written with the
+   * `_dropped` note's key names (`source`/`target`) instead of the
+   * `Dependency` ones, were reported as five lines of `undefined->undefined`
+   * under "edges pointing at reports not yet researched", and **`validate`
+   * exited 0 having silently discarded all five.**
+   */
+  malformedEdges: string[]
+  /**
+   * `_dropped` notes whose endpoints arrived as `source_report_id` /
+   * `target_report_id` instead of `source` / `target`, and were normalised on
+   * the way in — one `"slice: a -> b"` string each.
+   *
+   * NOT an error, and not something to fix in the data. It is reported because
+   * a silent repair would hide a habit that has already cost something (see
+   * `normalizeDroppedNote` below), and because the count going UP is the signal
+   * that a round is still writing the old shape.
+   */
+  renamedDroppedEndpoints: string[]
 }
 
 /** The fully assembled corpus — what both loaders below hand their caller. */
@@ -119,6 +202,7 @@ export function assembleCorpus(
   const seen = new Set<string>()
   const dependencies: Dependency[] = []
   const dangling: string[] = []
+  const malformedEdges: string[] = []
   const duplicateEdges: string[] = []
 
   // **Later definition wins for edges — the opposite of the rule for reports.**
@@ -153,6 +237,16 @@ export function assembleCorpus(
     const key = `${d.source_report_id}->${d.target_report_id}`
     if (seen.has(key)) {
       duplicateEdges.push(key)
+      continue
+    }
+    // A missing endpoint FIELD is a different failure from an endpoint that
+    // names a report we do not have, and lumping them together hid five real
+    // edges for a whole round (round 39). Checked first because an edge with no
+    // endpoints cannot be dangling — there is nothing for it to dangle from.
+    if (!d.source_report_id || !d.target_report_id) {
+      malformedEdges.push(
+        `${d.source_report_id ?? '(missing source_report_id)'} -> ${d.target_report_id ?? '(missing target_report_id)'}`,
+      )
       continue
     }
     if (!reportById.has(d.source_report_id) || !reportById.has(d.target_report_id)) {
@@ -243,6 +337,23 @@ export function assembleCorpus(
     }
   }
 
+  // `_dropped` endpoints are normalised here and nowhere else, so every
+  // consumer — the validator, the app's disclosure panel, anything added later
+  // — reads one shape. See `normalizeDroppedNote` for why it is at this layer.
+  const renamedDroppedEndpoints: string[] = []
+  const droppedNotes: DroppedNote[] = []
+  for (const s of slices) {
+    for (const raw of s._dropped ?? []) {
+      const n = normalizeDroppedNote(raw)
+      if (raw.source === undefined && raw.source_report_id !== undefined) {
+        renamedDroppedEndpoints.push(n.edge)
+      } else if (raw.target === undefined && raw.target_report_id !== undefined) {
+        renamedDroppedEndpoints.push(n.edge)
+      }
+      droppedNotes.push(n)
+    }
+  }
+
   return {
     reports,
     dependencies,
@@ -254,7 +365,9 @@ export function assembleCorpus(
       orphans,
       danglingRelations,
       duplicateRelations,
+      renamedDroppedEndpoints,
+      malformedEdges,
     },
-    droppedNotes: slices.flatMap((s) => s._dropped ?? []),
+    droppedNotes,
   }
 }

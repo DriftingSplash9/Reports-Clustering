@@ -68,3 +68,45 @@ no page for either — that is why they are not nodes), 《中国统计摘要》
 （国统字〔2023〕14号）, SITC, and the sector yearbooks the CSY points at
 (《中国教育统计年鉴》《中国劳动统计年鉴》 etc. — but check whether the note says the data CAME
 from them or merely says 详细资料见, which is a cross-reference and not a dependency).
+
+---
+
+## Added 2026-09-09 (round 37) — the zip-of-Office-documents shape
+
+Two provinces publish the whole yearbook as one first-party zip whose readable parts are **Office
+documents, not HTML**: Hubei (21 `第N章指标解释.docx`, no 编者说明 at all) and Yunnan (18
+`主要指标解释.docx` in Chinese and English, plus the entire 512-page book as one PDF). Neither
+publishes those files at any other URL, so the zip is the only citable route — which §7b already
+allows.
+
+**Three mechanical traps, all fixed in `scripts/grade-evidence.ts` this round but worth knowing
+before you plan a fetch:**
+
+- **`unzip` can exit non-zero and still be fine.** Hubei's archive disagrees between its local and
+  central filename records on all 392 entries; Info-ZIP warns, exits 1, and — before this round —
+  that rejection aborted the grader's whole zip branch, which then recorded `empty:no-extractor`.
+  **An archive that extracts to nothing is not an empty archive.** Cross-check with Python's
+  `zipfile` (it trusts the central directory) or `unzip -Z1` before believing it.
+- **`unzip -qq -o -UU` is the rescue** when the ordinary extraction writes zero files: it takes the
+  local names and ignores the Unicode reconciliation. Do not make it the default — it renames
+  archives that already extract fine, and those names end up in committed `[zip: <path>]` markers.
+- **A legacy binary `.doc` needs `soffice --headless --convert-to docx`, never `--convert-to txt`.**
+  The txt path drops every CJK character to `?`. Convert to docx and read `word/document.xml`.
+
+**Reading a .docx the way the grader does**, so a quote you store actually matches: `unzip -p f
+word/document.xml`, then the equivalent of `stripHtml` — which puts a SPACE where each tag was.
+Word splits a sentence across `<w:r>` runs at every formatting change, so the "quote must sit in one
+text node" rule applies to .docx exactly as it does to HTML. Hubei's chapter 1 happens to be one
+clean run and takes a quote carrying both the title and the number; Jilin's Word-exported HTML puts
+every Latin run in its own `<span>`, so its quote has to stop before `（GB/T4754-2017）`.
+
+## Added 2026-09-09 — where the citation actually sits
+
+Not only in the chapter notes. **Yunnan's strongest citation is the note under table 1-12**
+(`注：本表登记注册统计类别按《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）执行`), and its
+《中国统计摘要》 lead is a table note too. Table notes are cheap to sweep once you have the whole book
+as text — grep the extracted PDF for `注：` as well as for 《 — and §7a already settles that a table
+NOTE naming an instrument grades A while a table ROW alone does not.
+
+**And `pdftotext` mangles the CJK bracket pair 〔 〕 into `{ }`.** Cut the stored span before any
+document number written with them.

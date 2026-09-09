@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 38) — the two hub nodes minted in round 37 re-swept against yearbooks already read, plus the national yearbook's SECOND chapter-note layer, which no earlier round had opened",
+    "minted": "2026-09-09",
+    "note": "THE FINDING THAT PAYS FORWARD: **the national yearbook publishes TWO per-chapter note layers and every round so far read only one.** left.htm lists html/smNN.htm (简要说明, 29 of them) AND html/zbNN.pdf (主要统计指标解释, 27 of them). The tracker's portal section names only the smNN.htm layer, and all 21 live edges off the national yearbook cite either that layer or the bare /sj/ndsj/ index. The zb layer was fetched and swept in full this round for the first time and it names eleven 《》-titled instruments the sm layer does not, two of which have an NBS landing page and are minted here. The lesson generalises past China: a yearbook that publishes 简要说明 may ALSO publish 指标解释 under a different filename in the same frameset, and round 37 already found the reverse (Hubei, Yunnan and Jilin publish 指标解释 and no 简要说明 at all). Read left.htm's whole href list, not the pattern you expected. SECOND: the zb PDFs are two-column, and pdftotext without -layout interleaves the columns mid-title — 《文化及相关产业分类管理（经部门审批并领取营业性演出许可证），有观众席、(2018)》 is two columns spliced, not a title. Run both renderings before reading a title as garbled. THIRD, and it is the round-37 re-sweep HANDOFF §3 asked for: cn-nbs-sme-classification-2017 was named by title in the national and Jiangsu yearbooks all along and only Yunnan was wired to it; both are wired here off documents already fetched in earlier rounds. NOT DONE: the same re-sweep against Shandong, Wuhan and Xi'an — their chapter notes were swept in rounds 31/35 and none of the recorded 《》 titles is either hub, so there is nothing to re-read there."
+  },
+  "reports": [
+    {
+      "id": "cn-nbs-culture-industry-classification-2018",
+      "title": "文化及相关产业分类（2018） (Classification of Culture and Related Industries (2018))",
+      "title_aliases": [
+        "文化及相关产业分类",
+        "文化及相关产业分类(2018)"
+      ],
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS standard fixing which industrial activities count as cultural for statistical purposes, cut against the 2017 edition of the industrial classification. Issued 2018-05-09 as a revision of the 2012 classification. It is what decides the scope of the 规模以上文化制造业企业 and 规模以上文化服务业企业 populations the national yearbook's culture chapter reports on, and the yearbook says so in its own indicator definitions. The landing page carries the classification itself as an attached .doc.",
+      "cadence_note": "Not a recurring release. Issued once and revised when the industrial classification underneath it is: the 2012 classification was superseded by this 2018 one. Landing page dated 2018-05-09, read 2026-09-09.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/t20230213_1902765.html",
+      "domains": [
+        "statistical-system",
+        "culture"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "cn-nbs-product-classification-catalogue",
+      "title": "统计用产品分类目录 (Product Classification Catalogue for Statistical Purposes)",
+      "title_aliases": [
+        "统计用产品分类目录（2010）"
+      ],
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS catalogue that names and codes the products Chinese official statistics count output in, chapter by chapter — agricultural products, forestry products, farmed animals, fishery products, mined products, manufactured goods and services. Published on the bureau's own site as one section per chapter under a 2010 path. It is the product-side counterpart of GB/T 4754, which classifies the industries rather than what they make, and it is what the national yearbook says it applied when it revised its 2009 agricultural and forestry output values.",
+      "cadence_note": "Not a recurring release. The edition served on the bureau's site sits under a 2010 path and NBS publishes no later one; the national yearbook dates its own application of it to 2010. Read 2026-09-09.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjbz/tjypflml/",
+      "domains": [
+        "statistical-system",
+        "industry"
+      ],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-statistical-yearbook",
+      "target_report_id": "cn-nbs-sme-classification-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 工业 chapter's 简要说明 (html/sm13.htm) states in one sentence which two standards the chapter's tables are cut by — 本篇资料中工业行业分类按《国民经济行业分类》（GB/T4754-2017）标准划分；企业规模划分按《统计上大中小微型企业划分办法（2017）》标准执行 — the first clause being the already-live cn-gbt-4754-2017 edge and the second this one. The enterprise-size breakdowns this chapter publishes (大中型工业企业, 规模以上) are exactly what the named measure defines, so the dependency is on the artefact rather than on the agency. QUOTE CUT: the page wraps each Latin/number run in its own element, so once tags are stripped the parenthetical renders as （ 2017 ） with spaces inside it and a quote spanning it would not match; the stored span stops before the parenthetical and the title alone names the artefact, which is the same cut the Jilin and Nanjing edges use. EVIDENCE-URL COLLISION, checked per rule 11: this URL already backs cn-statistical-yearbook -> cn-gbt-4754-2017, and both edges were passed to the grader together so neither run clobbers the other's windows. Read live from the cited URL on 2026-09-09.",
+      "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/sm13.htm",
+      "evidence_quote": "企业规模划分按《统计上大中小微型企业划分办法",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-js-statistical-yearbook",
+      "target_report_id": "cn-nbs-sme-classification-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: Jiangsu's 工业 chapter 简要说明 (2025 edition, nj11/nj1100.htm) carries the national yearbook's sentence with its own scope figures — 本篇资料中工业行业分类按《国民经济行业分类》（GB/T 4754-2017）标准划分；企业规模划分按《统计上大中小微型企业划分办法（2017）》标准执行 — naming the measure by title with its year. Jiangsu's chapter notes were mined in round 30, which recorded this title as named-with-no-node-to-take-it; the node was minted in round 37 and this wires it. Unlike the national yearbook's copy of the same sentence, Jiangsu's markup leaves the parenthetical contiguous, so the stored span carries the year. NOT WIRED from the same sentence: the GB/T 4754 clause, which is already a live Jiangsu edge off the 编者说明 from round 30.",
+      "evidence_url": "http://tj.jiangsu.gov.cn/2025/nj11/nj1100.htm",
+      "evidence_quote": "企业规模划分按《统计上大中小微型企业划分办法（2017）》标准执行",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-statistical-yearbook",
+      "target_report_id": "cn-nbs-culture-industry-classification-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 文化 chapter's 主要统计指标解释 (html/zb23.pdf) defines two of the chapter's reporting populations by the scope the named classification prescribes — 规模以上文化制造业企业 指《文化及相关产业分类(2018)》所规定行业范围内，年主营业务收入在2000万元及以上的工业企业法人 — and defines 规模以上文化服务业企业 the same way in the facing column. An indicator definition that says which standard fixes the industry scope is a methodology dependency on that standard, not on the agency that issued it. QUOTE CUT: the page is two-column and the title breaks across a line in the layout rendering （《文化及相关产业分类 / (2018)》） and is spliced with the neighbouring column in the plain one, so the stored span is the contiguous run naming the classification and is verified present in all three renderings (pdftotext, pdftotext-flow, pdfjs); it carries the leading 指《 because the title alone is 9 characters and the grader’s CJK span floor is 10, which is what graded a shorter cut B on no-quoted-span before it was lengthened; the 2018 edition is stated in the document and sits in the grader's window, which is the two-column line-break case settled 2026-09-09. ROUTE: fetched 200 from the publisher's own host, a direct read. HOW THE DOCUMENT WAS FOUND: left.htm lists a zbNN.pdf beside every smNN.htm and no earlier round opened that layer.",
+      "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/zb23.pdf",
+      "evidence_quote": "指《文化及相关产业分类",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-statistical-yearbook",
+      "target_report_id": "cn-nbs-product-classification-catalogue",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 农业 chapter's 主要统计指标解释 (html/zb12.pdf) states that the yearbook applied the named catalogue and revised its own published output values to match — 2010年执行《统计用产品分类目录》，对2009年的农业、林业产值做了相应调整 — which is a stated dependency on the artefact, with the year the yearbook applied it. NBS publishes exactly one 统计用产品分类目录 section on its own site, so there is no edition ambiguity of the kind that left Jilin's bare 《三次产业划分规定》 unwired: nothing has to be supplied that the document does not say. QUOTE CUT: two-column PDF; the sentence continues into the facing column after 对2009年的农, so the stored span is the contiguous run naming the catalogue. ROUTE: fetched 200 from the publisher's own host, a direct read.",
+      "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/zb12.pdf",
+      "evidence_quote": "执行《统计用产品分类目录》",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "cn-statistical-yearbook",
+      "target": "cn-gbt-4754-2017",
+      "reason": "caveat",
+      "why": "NOT A NEW CLAIM — the zb layer restates the live edge. html/zb01.pdf (综合 chapter 主要统计指标解释) names 《国民经济行业分类》 again and also names 《全部经济活动的国际标准产业分类》 (ISIC) only to say what GB/T 4754 was revised against, which is the same construction Hubei's chapter 1 uses and the same refusal round 37 made there. The live edge is cited to html/sm13.htm and stays; this note records that a second document in the same yearbook says it, so no later round reads zb01 as an unwired lead."
+    },
+    {
+      "report_id": "cn-statistical-yearbook",
+      "candidate_target": "instruments named in the zbNN.pdf layer with no node",
+      "reason": "note",
+      "note": "THE NATIONAL YEARBOOK'S SECOND CHAPTER-NOTE LAYER, SWEPT IN FULL 2026-09-09 — 26 of the 27 zbNN.pdf files read (zb10.pdf has a corrupt xref that poppler cannot reconstruct, and zb27.pdf 404s; both are gaps in the source, not in the sweep). Eleven 《》-titled instruments appear that the smNN.htm layer does not name. TWO ARE MINTED AND WIRED THIS ROUND (文化及相关产业分类（2018）, 统计用产品分类目录). ONE IS A SETTLED REFUSAL: zb03 names 《三次产业划分规定》 bare with no year, and NBS publishes both a 三次产业划分规定 page (t20230213_1902749) and a 关于修订《三次产业划分规定（2012）》的通知 (t20230213_1902764) — the same two candidates that left Jilin's identical citation unwired in round 37, and the answer is the same. EIGHT NEED A NON-NBS PUBLISHER'S OWN PAGE FOUND BEFORE THEY CAN BE NODES: 《关于工资总额组成的规定》 (zb04, and Jilin names it too — two independent yearbooks now, so it is the strongest of these), 《国家危险废物名录》 and 《危险废物贮存污染控制标准》 (zb08, MEE), 《对外承包工程管理条例》 (zb11, State Council/MOFCOM, and Hubei names it as well), 《运输货物分类和代码》 and 《机动车注册登记工作规范》 (zb16, MOT and MPS), 《旅游饭店星级的划分与评定》 (zb17, MCT), 《广播电视人口覆盖率统计技术标准和方法》 (zb23, NRTA, and Hubei names it as well). NOT INSTRUMENTS AND NOT LEADS: 《医疗机构执业许可证》 and 《医师执业证》 (zb22) are licences held by the units being counted, not standards the yearbook follows."
+    }
+  ]
+}

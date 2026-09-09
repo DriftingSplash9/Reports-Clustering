@@ -1411,18 +1411,58 @@ async function extractZipDocs(bodyPath: string): Promise<string> {
     // `-qq` quiet, `-o` overwrite; unzip writes odd entry names as raw bytes,
     // which is why this extracts to disk and walks it rather than round-tripping
     // names through `unzip -p` (the CD editions carry GBK-encoded filenames).
-    await execFileAsync('unzip', ['-qq', '-o', bodyPath, '-d', dir], { maxBuffer: 64 << 20 })
+    // Its own try/catch, and that is the whole fix (2026-09-09, round 37). Info-ZIP
+    // exits NON-ZERO on a warning, `execFileAsync` rejects on a non-zero exit, and
+    // the rejection was propagating out of this function to the caller's catch —
+    // so a merely noisy archive was recorded as `empty:no-extractor` before a
+    // single file was looked at. What matters is whether files landed on disk,
+    // never what the exit code was.
+    try {
+      await execFileAsync('unzip', ['-qq', '-o', bodyPath, '-d', dir], { maxBuffer: 64 << 20 })
+    } catch {
+      /* warnings exit non-zero; the check below is whether anything was written */
+    }
+    // **AN ARCHIVE THAT EXTRACTS TO NOTHING IS NOT AN EMPTY ARCHIVE** (2026-09-09,
+    // round 37, Hubei). Info-ZIP refuses any entry whose LOCAL header filename
+    // disagrees with the CENTRAL directory's — `mismatching "local" filename
+    // (湖北统计年鉴2025-定/), continuing with "central" filename version` — and on
+    // Hubei's yearbook that is every one of its 392 entries, so the command
+    // succeeds, exits 0, and writes zero files. The grader then recorded
+    // `empty:no-extractor` and the edge graded C, which reads as "the publisher
+    // shipped an empty zip" and is false: Python's zipfile, which trusts the
+    // central directory, reads the same archive perfectly.
+    //
+    // `-UU` ("ignore all Unicode fields") skips the reconciliation and takes the
+    // local names, and it extracted all 392. It is NOT the default here on
+    // purpose: it also changes the filenames of archives that extract fine
+    // today, and those names go into the `[zip: <path>]` markers of committed
+    // evidence records. So it runs ONLY as a rescue, when the ordinary
+    // extraction produced no file at all — an archive that already works is
+    // untouched.
+    if (!readdirSync(dir).length) {
+      try {
+        await execFileAsync('unzip', ['-qq', '-o', '-UU', bodyPath, '-d', dir], {
+          maxBuffer: 64 << 20,
+        })
+      } catch {
+        /* the rescue is a second opinion, never the one the run depends on */
+      }
+    }
     const files: string[] = []
+    const docFiles: string[] = []
     const walk = (d: string, depth: number) => {
-      if (depth > 8 || files.length > 4000) return
+      if (depth > 8 || files.length + docFiles.length > 4000) return
       for (const e of readdirSync(d, { withFileTypes: true })) {
         const full = join(d, e.name)
         if (e.isDirectory()) walk(full, depth + 1)
         else if (/\.(html?|txt|csv|md)$/i.test(e.name)) files.push(full)
+        // `~$` skips Word's lock files, which are not documents.
+        else if (/\.(docx|pdf)$/i.test(e.name) && !/^~\$/.test(e.name)) docFiles.push(full)
       }
     }
     walk(dir, 0)
     files.sort()
+    docFiles.sort()
     const parts: string[] = []
     let bytes = 0
     for (const f of files) {
@@ -1431,6 +1471,42 @@ async function extractZipDocs(bodyPath: string): Promise<string> {
       try { raw = readFileSync(f) } catch { continue }
       const decoded = decodeDeclared(raw)
       const body = /\.(html?)$/i.test(f) ? stripHtml(decoded) : decoded
+      if (!body.trim()) continue
+      const chunk = `\n[zip: ${f.slice(dir.length + 1)}]\n${body}\n`
+      parts.push(chunk)
+      bytes += Buffer.byteLength(chunk, 'utf8')
+    }
+    // SECOND PASS, and it runs SECOND on purpose (2026-09-09, round 37). The
+    // markup pass above is unchanged and spends the byte budget first, so every
+    // already-committed zip record — Guangdong's CD edition is the one that
+    // exists — extracts byte-for-byte what it extracted before. This pass can
+    // only ADD text, never displace it, which is what keeps it from writing a
+    // grade down (§7b's re-grade rule).
+    //
+    // Why it is needed: the walk above collects html/txt/csv/md only, and
+    // **the chapter notes of a provincial yearbook are frequently .docx or .pdf
+    // INSIDE the zip** — Hubei ships 21 `第N章指标解释.docx`, Yunnan ships 18
+    // `主要指标解释.docx` plus the whole 512-page book as one PDF, and neither
+    // publishes them at any other URL. Without this, a zip that Thomas's own
+    // 2026-09-08 ruling says IS a direct read extracts to nothing and the edge
+    // cannot be graded at all. The two readers here are the same ones the
+    // fetcher's own docx and pdf branches use, so nothing new is trusted.
+    for (const f of docFiles) {
+      if (bytes > TEXT_CAP_BYTES) break
+      let body = ''
+      try {
+        if (/\.docx$/i.test(f)) {
+          const { stdout } = await execFileAsync('unzip', ['-p', f, 'word/document.xml'], {
+            maxBuffer: 64 << 20,
+          })
+          body = stripHtml(stdout)
+        } else {
+          const { stdout } = await execFileAsync('pdftotext', ['-layout', '-q', f, '-'], {
+            maxBuffer: 64 << 20,
+          })
+          body = stdout
+        }
+      } catch { continue }
       if (!body.trim()) continue
       const chunk = `\n[zip: ${f.slice(dir.length + 1)}]\n${body}\n`
       parts.push(chunk)

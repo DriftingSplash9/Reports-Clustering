@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 39) — Shanghai, the first of the eight province-level divisions that had a node and no edges; five edges, all A",
+    "minted": "2026-09-09",
+    "note": "SHANGHAI IS THE RICHEST PROVINCIAL YEARBOOK FOUND IN ELEVEN ROUNDS — 23 chapter 简要说明 plus 主要统计指标解释, 214 readable note pages, and eight NBS instruments named by title. It had a node since the August 2026 import and had never been opened. THREE THINGS THAT PAY FORWARD. (1) **THE PATH IS CASE-SENSITIVE AND THE PUBLISHER'S OWN TOC GETS IT WRONG.** The TOC writes d1=2025tjnj/zbhtml/C0001.htm; the server serves only 2025tjnj/ZBHTML/C0001.htm and returns a 404 PAGE WITH HTTP 200 for the lowercase form. All 216 notes were fetched once, all 216 came back 1085 bytes, and every one of them was that 404 page — a uniform small body across a whole batch is the same signal as round 37's single small body, and it means READ ONE. (2) **AUTHORSHIP INSIDE THE SENTENCE DECIDES THE TARGET, NOT THE TITLE.** Shanghai names 《固定资产投资统计报表制度》 and 《房地产开发统计报表制度》 — both exact title matches for live NBS nodes — but says 上海市统计局制定的 for both, and 国家统计局制定的 for the wage and construction instruments. The first two are SHANGHAI's own instruments wearing NBS's titles and are NOT wired here; the ruling that provincial-bureau instruments are nodes makes them a mint lead, not an NBS edge. This is the 农业产值 look-alike trap in a new form: same title, different issuer, and the sentence says which. (3) **A MIS-DECLARED CHARSET THAT THE GUARD HAPPENS TO SURVIVE.** Every page declares gb2312 in its meta and is served as UTF-8 with an HTTP header that says so; decodeDeclared reads the META and ignores the header, so it decodes as gb18030 — and is saved only by its U+FFFD tie-break, because gb18030 accepts almost any byte sequence and produces mojibake with ZERO replacement characters, losing the < comparison and falling back to UTF-8. Verified by running decodeDeclared over the real bytes rather than reasoning about it. No change made; recorded because the guard is passing for a reason nobody designed."
+  },
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "cn-sh-statistical-yearbook",
+      "target_report_id": "cn-gbt-4754-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 国民经济核算 chapter's 简要说明 states which classification standard the yearbook's own GDP accounting uses, and gives the edition by its standard number — 本篇GDP核算行业分类标准采用国家标准管理部门2017年颁布的《国民经济行业分类（GB/T4754－2017）》. The document states the edition itself, which is what an edition-bound target requires. QUOTE CUT: the page is Word-exported HTML that wraps every Latin and numeric run in its own element, so once tags are stripped the parenthetical renders as （ GB/T 4754 － 2017 ） with spaces inside it and a quote spanning it would not match; the stored span is the contiguous run carrying the promulgation verb and the title, and the number sits in the grader's window. Note also that the fullwidth hyphen in the number is U+FF0D, not an ASCII hyphen — a reason not to retype it. NOT WIRED from the 工业 chapter's 《国民经济行业分类（2017版）》, a third spelling of the same standard: this edge already carries the edition off a sentence that gives the GB/T number.",
+      "evidence_url": "https://tjj.sh.gov.cn/tjnj/2025tjnj/ZBHTML/C0003.htm",
+      "evidence_quote": "年颁布的《国民经济行业分类",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-sh-statistical-yearbook",
+      "target_report_id": "cn-nbs-wage-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the 人口、就业与工资 chapter's 简要说明 names the instrument its employment and wage tables are compiled under AND names its issuer — 本篇从业人员和工资数据是根据国家统计局制定的《劳动工资统计报表制度》整理汇总得到. 国家统计局制定的 is what makes this NBS's instrument rather than Shanghai's own, which is the distinction that kept two other exact-title matches in this yearbook out of the corpus (see _dropped). The same 简要说明 attributes its other series to named municipal bodies, so the chapter distinguishes instrument from provider itself.",
+      "evidence_url": "https://tjj.sh.gov.cn/tjnj/2025tjnj/ZBHTML/C0002.htm",
+      "evidence_quote": "本篇从业人员和工资数据是根据国家统计局制定的《劳动工资统计报表制度》整理汇总得到",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-sh-statistical-yearbook",
+      "target_report_id": "cn-nbs-sme-classification-2017",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the 工业 chapter's 简要说明 states that its large/medium/small/micro enterprise breakdown is executed under the named measure — 企业大中小微型划分按《统计上大中小微型企业划分办法（2017）》标准执行 — in the same sentence that gives the industrial classification, which is the construction the national, Jiangsu and Yunnan yearbooks all use. Fourth province wired to this hub. QUOTE CUT: Word-exported HTML again, and here the run boundaries fall inside the Chinese as well as around the numbers — the rendering reads 企业大中小微型 划分按 《统计上大中小微型企业划分办法（ 2017 ）》 — so the stored span is the title alone, which is contiguous and names the artefact. Fifteen characters, comfortably over the grader's ten-character CJK span floor.",
+      "evidence_url": "https://tjj.sh.gov.cn/tjnj/2025tjnj/ZBHTML/C0012.htm",
+      "evidence_quote": "《统计上大中小微型企业划分办法",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-sh-statistical-yearbook",
+      "target_report_id": "cn-nbs-construction-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the 建筑业 chapter's 简要说明 names the instrument and its issuer in one sentence — 本篇建筑业企业统计数据是根据国家统计局制定的《建筑业统计报表制度》整理汇总的 — and the following sentence says the Shanghai bureau administers that reporting system locally by 联网直报, which is the relationship the edge asserts rather than a second one. Note this chapter is productive here where round 35 found Shandong's 建筑业 chapter agency-level and named nothing: the two-chapter shortcut is still dead, and this is a sweep result rather than a targeted fetch.",
+      "evidence_url": "https://tjj.sh.gov.cn/tjnj/2025tjnj/ZBHTML/C0013.htm",
+      "evidence_quote": "本篇建筑业企业统计数据是根据国家统计局制定的《建筑业统计报表制度》整理汇总的",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-sh-statistical-yearbook",
+      "target_report_id": "cn-nbs-market-entity-classification",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: item 八 of the 编者说明 gives the whole provenance — NBS and the market-regulation administration revised the 2011 registration-type provisions and jointly issued the named 2023 provision, and 本年鉴对相关统计分类按“新标准”作出相应调整, the yearbook adjusted its own classifications to it. It then spends four paragraphs listing which categories were merged, renamed and abolished as a result, so the dependency is demonstrated rather than asserted. Second yearbook wired to this hub after Yunnan, and the strongest citation for it so far — Yunnan's came from a note under one table, this governs the whole book. QUOTE CUT: the document number renders as （国统字〔 2023 〕 14 号） with spaces once tags are stripped, so the stored span stops at the title; the number sits in the grader's window and in this basis.",
+      "evidence_url": "https://tjj.sh.gov.cn/tjnj/2025tjnj/BZSM.html",
+      "evidence_quote": "联合印发《关于市场主体统计分类的划分规定》",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cn-sh-statistical-yearbook -> cn-nbs-fixed-investment-reporting-system",
+      "source": "cn-sh-statistical-yearbook",
+      "target": "cn-nbs-fixed-investment-reporting-system",
+      "reason": "wrong-target",
+      "why": "SAME TITLE, DIFFERENT ISSUER — and the sentence says so. The 城市建设 chapter's 简要说明 (ZBHTML/C0010.htm) reads 城市基础设施建设、公共事业和市政建设投资统计资料依据上海市统计局制定的《固定资产投资统计报表制度》收集整理提供: 上海市统计局制定的, drawn up by the SHANGHAI municipal bureau, not 国家统计局制定的 as the wage and construction chapters of the same yearbook say. The live node cn-nbs-fixed-investment-reporting-system is NBS's instrument, off its own stats.gov.cn landing page (article 1962939, minted round 31), so wiring this sentence to it would assert a dependency on a document Shanghai did not name. THIS IS A MINT LEAD, NOT A DEAD END: provincial-bureau methodology instruments ARE nodes (Thomas, 2026-09-09) and the bar is a page on the issuing bureau's own site — nobody has looked for Shanghai's version on tjj.sh.gov.cn. Same shape as the three 农业产值 spellings, except that here the titles are identical and only the issuer differs, which is harder to catch by eye."
+    },
+    {
+      "edge": "cn-sh-statistical-yearbook -> cn-nbs-realestate-reporting-system",
+      "source": "cn-sh-statistical-yearbook",
+      "target": "cn-nbs-realestate-reporting-system",
+      "reason": "wrong-target",
+      "why": "SAME TITLE, DIFFERENT ISSUER — the identical refusal as the fixed-investment one above, and found in the same sweep. The 房地产业 chapter's 简要说明 (ZBHTML/C0018.htm) reads 根据上海市统计局制定的《房地产开发统计报表制度》调查汇总提供. 上海市统计局制定的, so it is Shanghai's own instrument and not the NBS node minted round 29. Also a mint lead for a Shanghai provincial instrument rather than an answer."
+    },
+    {
+      "edge": "cn-sh-statistical-yearbook -> imf-bpm6",
+      "source": "cn-sh-statistical-yearbook",
+      "target": "imf-bpm6",
+      "reason": "no-document",
+      "why": "NAMES THE MANUAL, NOT AN EDITION. The 对外经济贸易和旅游 chapter's 简要说明 (ZBHTML/C0007.htm) says services trade is compiled 根据国际货币基金组织公布的《国际收支手册》中的相关标准 — the IMF's Balance of Payments Manual, named by title and publisher with no edition and no number. imf-bpm6 is edition-bound. Supplying the sixth edition ourselves is exactly the inference the generic-COICOP ruling of 2026-09-08 settled, and the same refusal Jilin's bare 《三次产业划分规定》 got in round 37. Re-openable only against a Shanghai edition that names the edition."
+    },
+    {
+      "report_id": "cn-sh-statistical-yearbook",
+      "candidate_target": "instruments named in Shanghai's chapter notes with no node",
+      "reason": "note",
+      "note": "SHANGHAI'S 2025 YEARBOOK SWEPT IN FULL 2026-09-09 — 216 note pages listed by the TOC, 214 readable, one 404 at the publisher (C1511) and one not fetched. FIVE EDGES TAKEN, three refusals recorded separately above, and the rest are leads. NAMED BY TITLE, NO NODE: 《服务业统计报表制度》 (C0014) — NBS's 统计制度 listing has no page for it under that spelling; 《批发和零售业统计报表制度》 and 《住宿和餐饮业统计报表制度》 (C0016), which makes Shanghai the FOURTH independent yearbook to name this pair after the national, Guangdong and Shandong ones, still with no NBS landing page — the case for hunting an older listing year is now much stronger than it was; 《运输货物分类和代码》 (C1505) and 《机动车注册登记工作规范》 (C1507), both also named by the national yearbook's zb16 in round 38, so each now has two independent citations and needs only its own publisher's page (MOT, MPS). LOOK-ALIKES, DELIBERATELY NOT WIRED: 《工业生产者价格调查目录》 (C0008) is not NBS's 《工业生产者价格统计调查制度》 (cn-nbs-ppi-survey-system) — 调查目录 against 统计调查制度, a catalogue against a reporting system; and 《农业调查报表制度》, 《农村统计报表制度》 and 《县域社会经济基本情况统计报表制度》 (C0011) are none of them NBS's 《农林牧渔业统计报表制度》 or 《农业产值和价格综合统计报表制度》. That is now four yearbooks producing four different agriculture-instrument titles; compare character by character, never by eye. NOT INSTRUMENTS: 《医疗机构执业许可证》, 《中医诊所备案证》, 《计划生育技术服务许可证》 (C2101) and 《基金会管理条例》 (C2106) are licences and rules governing the units being counted, not standards the yearbook follows. ALSO REFUSED: C0106 names 《全部经济活动的国际标准产业分类》 only to say what 《国民经济行业分类》 was revised against, the same construction Hubei's chapter 1 used and the same refusal round 37 made there."
+    }
+  ]
+}
