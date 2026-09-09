@@ -137,9 +137,12 @@ six e-GDDS edges turned on exactly that distinction (a membership is not a
 dependency), and the tag is what would have made the class visible four rounds
 earlier.
 
-**Coverage, so an absent tag is not misread: 172 edges are stamped.** Round 7's 101
-tier edges into `imf-e-gdds` / `imf-sdds` / `imf-sdds-plus` (61 REGISTER, 40
-SELF-DECLARED, 0 THIRD-PARTY) and round 8's 71 NSDP edges (all SELF-DECLARED).
+**Coverage, so an absent tag is not misread: 286 edges are stamped** — 225 SELF-DECLARED,
+61 REGISTER, 0 THIRD-PARTY, counted from the data 2026-09-09. *(This read "172 edges are
+stamped" from round 8 until the handoff-080 slow-layer sweep. The 172 was round 7's 101 tier
+edges into `imf-e-gdds` / `imf-sdds` / `imf-sdds-plus` plus round 8's 71 NSDP edges, and it went
+stale as later rounds stamped what they touched — which is the practice this paragraph asks for,
+so the number was always going to drift. Recount from the data rather than trusting it.)*
 Everywhere else an unstamped basis means NOT YET CLASSIFIED, never "unknown tier".
 Stamp what you touch; nobody should run a corpus-wide stamping pass as a job of its
 own. **This number goes stale faster than anything else in the file** — it is the

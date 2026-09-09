@@ -79,8 +79,10 @@ not treat a country that has one as already wired for the other.
 ### 7d. Parked and closed
 
 **Parked.** `diary.csv` moved to `PLAYBOOK.md` (it binds any task, not just corpus
-ones). Cadence: 101 of 3,071 edges state when the reading happens; the validator's
-CADENCE block is the live number, not this file.
+ones). Cadence: 101 of 3,195 edges state when the reading happens (3%), read from `validate`
+2026-09-09; the validator's CADENCE block is the live number, not this file. *(The denominator
+read 3,071 from round 8 until the handoff-080 sweep — the transmission count 101 had not moved,
+the corpus underneath it had.)*
 
 **`proposed:` domain tags: settled 2026-09-06, do not reopen.** 1,080 stripped, 6
 promoted to approved `Domain` values, 43 mapped; the complete before/after record —

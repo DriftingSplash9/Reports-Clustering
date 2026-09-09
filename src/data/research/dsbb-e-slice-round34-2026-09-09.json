@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 (round 34) — DSBB option-E slice, second batch",
+    "minted": "2026-09-09",
+    "note": "Continues the option-E worklist begun in round 33. Same bar: the IMF Summary of Methodology must NAME the country's own publication, and the publisher's own site must then CONFIRM it and supply the url and cadence. Three minted here (Kyrgyzstan, Azerbaijan, Moldova); the candidates that failed the second half are in _dropped, and the reasons are worth reading because none of them is an evidence failure. AZERBAIJAN, A CHECK WORTH RECORDING: its quote is the DQAF-shaped sentence 'The methodological soundness dimension is assessed against the guidelines outlined in...', which reads like framework boilerplate and would be worthless if it were. It is not — grepping all 684 cached SoMs for that phrase returns exactly ONE file, Azerbaijan's own. Checked rather than assumed, because if it had turned up in two hundred countries the edge would have been the IMF's template talking, not Azerbaijan. All three quotes were confirmed unique across the 684-file cache the same way. MOLDOVA, ONE EDGE NOT TWO: BOP00 and IIP00 both name BPM6 and both resolve to the same yearbook, which would be a duplicate (source, target) pair; the BOP00 quote is the stronger of the two (it names the manual in full) and is the one wired. No registry work this round — KG, AZ and MD were already in regions.ts and palette.ts, unlike round 33's DM and VC."
+  },
+  "reports": [
+    {
+      "id": "kg-national-accounts",
+      "title": "National Accounts of the Kyrgyz Republic",
+      "publisher": "National Statistical Committee of the Kyrgyz Republic",
+      "country": "KG",
+      "jurisdiction_level": "federal",
+      "region": "Kyrgyzstan",
+      "description": "The National Statistical Committee's annual national accounts collection, and the publication its own DSBB metadata names as where the full set of SNA indicators is published. Distinct from the quarterly GDP estimates the same metadata says appear in 'Socio-Economic Situation of the Kyrgyz Republic' in October-November — that is a separate compendium and is not minted here.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, published in December of the calendar year — a rule stated by the compiling agency's own DSBB metadata rather than inferred. The English publications archive on stat.gov.kg exposes the series as per-edition entries and the newest located in this pass is the 2012-2016 collection; no newer English entry was found, which is a limit of this search and not evidence the series stopped.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "National Accounts of the Kyrgyz Republic, next annual collection",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The full set of indicators of the system of national accounts is published in the annual collection 'National Accounts of the Kyrgyz Republic', in December of the calendar year.",
+        "source_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=KGZ&categoryCode=NAG00",
+        "note": "The December rule is stated in the compiling agency's DSBB metadata. The entry is the next occurrence implied by that rule, not a date on a published calendar."
+      },
+      "last_updated": null,
+      "url": "https://www.stat.gov.kg/en/publications/sbornik-nacionalnye-scheta-kyrgyzskoj-respubliki-2012-2016gg/",
+      "domains": ["national-accounts"],
+      "kind": "publication"
+    },
+    {
+      "id": "az-national-accounts",
+      "title": "National Accounts of Azerbaijan",
+      "publisher": "State Statistical Committee of the Republic of Azerbaijan",
+      "country": "AZ",
+      "jurisdiction_level": "federal",
+      "region": "Azerbaijan",
+      "description": "The State Statistical Committee's annual national accounts publication, carried on its 'System of national accounts and balance of payments' page. TITLE NOTE: the DSBB metadata calls it 'National Accounts of the Republic of Azerbaijan'; the publisher's own page calls it 'National Accounts of Azerbaijan', and the publisher's spelling is the title used here.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual. The publisher's page carried a 'National Accounts of Azerbaijan 2025' edition (a 92 MB PDF) and a 2022 edition (zip) when read on 2026-09-09, so the series is current.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "No published release calendar was found. Editions observed on the publisher's page as of 2026-09-09: 2025 and 2022. The gap between them is what the English page lists and may reflect the page rather than the series; no next date is computable.",
+        "source_url": "https://www.stat.gov.az/source/system_nat_accounts/?lang=en"
+      },
+      "last_updated": null,
+      "url": "https://www.stat.gov.az/source/system_nat_accounts/?lang=en",
+      "domains": ["national-accounts"],
+      "kind": "publication"
+    },
+    {
+      "id": "md-international-accounts",
+      "title": "International Accounts of the Republic of Moldova",
+      "publisher": "National Bank of Moldova",
+      "country": "MD",
+      "jurisdiction_level": "federal",
+      "region": "Moldova",
+      "description": "The National Bank of Moldova's statistical yearbook of Moldova's external accounts, named by the NBM's own DSBB metadata as the publication carrying both the balance of payments and the international investment position and their contact points. Listed on the NBM site under international accounts statistics as 'Statistical yearbook \"International accounts of the Republic of Moldova\"'.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual statistical yearbook. The NBM exposes its per-edition list through a JavaScript-rendered search listing which returned only navigation to a plain fetch on 2026-09-09, so no edition run is recorded here and none is claimed.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "No release calendar located. The publisher's per-edition listing is client-rendered and was not read in this pass; the cadence is the yearbook's own annual frame, not an observed run.",
+        "source_url": "https://www.bnm.md/en/content/international-accounts-republic-moldova"
+      },
+      "last_updated": null,
+      "url": "https://www.bnm.md/en/content/international-accounts-republic-moldova",
+      "domains": ["external-sector"],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "kg-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Summary of Methodology, Kyrgyz Republic, data category NAG00: the compiling agency's own metadata states that the National Accounts of the Kyrgyz Republic are compiled in accordance with the methodological principles of the System of National Accounts 2008, naming both the publication and the standard in full in one sentence. The source node is that same named publication, confirmed on the National Statistical Committee's own publications archive. Quote re-verified verbatim against a fresh 2026-09-09 fetch and confirmed unique across all 684 cached SoMs.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=KGZ&categoryCode=NAG00",
+      "evidence_quote": "The National Accounts of the Kyrgyz Republic are compiled in accordance with the main concepts, categories, concepts of accounts, and other methodological principles of the System of National Accounts 2008.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "az-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Summary of Methodology, Azerbaijan, data category NAG00: the metadata states that the methodological soundness of the national accounts is assessed against the guidelines of the System of National Accounts 2008, naming the standard in full. BOILERPLATE CHECK: this sentence has the shape of the generic DQAF Methodological Soundness opener, which would make it the IMF's template rather than Azerbaijan's statement — so all 684 cached SoMs were grepped for the phrase and it appears in exactly ONE, this file. It is Azerbaijan's own text. Recorded because the check, not the sentence, is what makes the edge safe. The source node is the annual publication the same metadata names, confirmed on the State Statistical Committee's own page.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=AZE&categoryCode=NAG00",
+      "evidence_quote": "The methodological soundness dimension is assessed against the guidelines outlined in the System of National Accounts 2008 (2008 SNA).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "md-international-accounts",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Summary of Methodology, Moldova, data category BOP00: the National Bank of Moldova's own metadata states that the framework of Moldova's balance of payments follows the IMF's Balance of Payments and International Investment Position Manual, naming it in full with its edition. The source node is the yearbook the same metadata names as carrying those statistics. ONE EDGE, NOT TWO: the IIP00 category names the same manual and resolves to the same yearbook, which would duplicate this (source, target) pair; BOP00 carries the stronger sentence and is the one wired, and the IIP00 row is left in the worklist rather than minted as a near-duplicate.",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=MDA&categoryCode=BOP00",
+      "evidence_quote": "The framework of the BOP of Moldova follows the IMF's Balance of Payments and International Investment Position Manual, 2009 (BPM6).",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "source_report_id": "my-index-of-industrial-production",
+      "target_report_id": "isic",
+      "reason": "unreadable-source",
+      "why": "NOT MINTED 2026-09-09. Evidence is good: Malaysia's DSBB metadata names the survey report 'Index of Industrial Production, Malaysia' and states that establishments are classified by MSIC 2008, which adheres to ISIC. The publisher's own release page for it, https://www.dosm.gov.my/portal-main/release-content/index-of-industrial-production-, returns HTTP 200 carrying a DATABASE ERROR rather than content — 'SQLSTATE[HY000]: General error: 1525 Incorrect DATE value' against its release_settings table, read 2026-09-09. That is the publisher's bug on the day, not a block and not a missing publication; a 200 with an error body is exactly the case a status-code-only check would have scored as success. Retry another day."
+    },
+    {
+      "source_report_id": "tz-annual-trade-statistics",
+      "target_report_id": "hs",
+      "reason": "unreadable-source",
+      "why": "NOT MINTED 2026-09-09. Tanzania's DSBB metadata names 'The \"Annual Trade Statistics\" publication' and even states its cadence ('released four months after the reference year'), so the evidence and the cadence rule are both in hand. The National Bureau of Statistics site (www.nbs.go.tz) answers at the root but the two topic paths tried for trade statistics returned 404, and no publication page was located in this pass. A search of the site's own structure is the next step, not a re-probe of the same guessed paths."
+    }
+  ]
+}

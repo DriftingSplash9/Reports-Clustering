@@ -84,6 +84,19 @@ freely — two country endpoints plus three rendered tier pages, recipes in
 `NSDPUrl` field. What remains is the 684 leaf nodes, which is still a programme
 rather than a round.
 
+*Updated 2026-09-09 (handoff-080 slow-layer sweep) — NO LONGER PARKED, and the shape of the
+problem changed.* Thomas ruled **option E**: take only the pairs whose Summary of Methodology
+NAMES the country's own publication, so the node is minted on a named publication and not on a
+DSBB category label. All 684 SoMs were fetched and filtered
+(`Claude outputs/dsbb-pilot-2026-09-09/`, worklist `e-slice-tier1.json`), and **E is worth ~20
+strong pairs plus ~10 marginal, not the 70–135 a 60-pair sample had predicted** — the sample was
+3x optimistic and the correction is in `notes/dsbb-som-750-scoping-2026-09-09.md`. Rounds 33 and
+34 minted 5 of them (Dominica, Saint Vincent, Kyrgyzstan, Azerbaijan, Moldova) and dropped 4 for
+HOST reasons rather than evidence ones (Grenada, St Kitts, Malaysia, Tanzania). **So this entry is
+now a live worklist of ~15 remaining pairs, not a parked programme** — the 684-leaf-node framing
+above describes option B, which was not the option taken. Kept here rather than promoted back into
+`HANDOFF.md` because it is a queue to work through, not a decision awaiting anyone.
+
 ---
 
 ## Closed
