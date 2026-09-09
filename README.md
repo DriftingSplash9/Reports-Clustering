@@ -103,16 +103,27 @@ else is filed by what it *is*:
 HANDOFF.md                 current state and the live todo — read this first
 REPORTS.md                 the design rules and direction; standing rules are PLAYBOOK.md
 PLAYBOOK.md                the core standing rules — short, binds every task
-PLAYBOOK-CORPUS.md         research lane: evidence, quotes, grading, schema, traps, rulings
+PLAYBOOK-CORPUS.md         research lane: the rules that bind every data change, plus
+                            an INDEX of every trap and ruling (split 2026-09-09)
 PLAYBOOK-RENDER.md         renderer lane: what the app is, architecture crib, invariants
+
+playbook/                  the corpus lane's reasoning, read ON DEMAND when the
+                            question arrives, never by default — corpus-naming.md
+                            (§7a, does the document name the target), corpus-evidence.md
+                            (§6, quotes and grading), corpus-nodes.md (§7c/§7d, minting),
+                            corpus-route.md (§7b), corpus-hosts.md (§6, failed fetches).
+                            Moved verbatim out of PLAYBOOK-CORPUS.md; its index names
+                            every one of them.
 START-HERE.md              plain-language explanation, for sending to people
 README.md                  this file
 
 notes/                     working notes read by task — `HANDOFF.md` §1 says
                             which; `Midvamp - Revamp.md` is the plan of record,
                             `techniques-*.md` the recipes, `routing-snapshot-*.md`
-                            dated host readings. Round narratives live in
-                            project memory, not here.
+                            dated host readings, `handoff-procedure.md` the full
+                            handoff steps (moved out of HANDOFF.md §4 2026-09-09),
+                            `china-progress.md` the live China worklist.
+                            Round narratives live in project memory, not here.
 archive/                   every closed-out branch (AF/ EU/ NZ/ AU/ CA/) and
                             planning document, moved here whole once done, not
                             file by file — kept for reference, not deleted;

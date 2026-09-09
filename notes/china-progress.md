@@ -57,8 +57,11 @@ carries them as appendix chapters and says outright that each runs its own stati
 (`香港特别行政区保留其单独运作的统计系统`). Taiwan already has its own large node family
 (`tw-*`). Do not fold any of the three into the CN provincial programme.
 
-**Score: 2 wired · 8 node-but-unwired · 22 no node yet.** (Provinces. Jiangsu is now *fully*
-mined rather than just opened; Guangdong's chapter notes are mined too.)
+**Score: 2 wired · 8 node-but-unwired · 22 no node yet.** (Provinces — unchanged by round 31, which
+worked cities only. Jiangsu is *fully* mined rather than just opened; Guangdong's chapter notes are mined too.)
+
+**City score after round 31: 3 wired (Nanjing, Wuhan, Xi'an) · 1 read-and-empty (Suzhou) · 1 IP-blocked
+(Shenzhen) · 5 still open (Guangzhou, Hangzhou, Chengdu, Chongqing, Beijing).**
 
 ---
 
@@ -69,19 +72,28 @@ municipalities.
 
 | ✔ | City | Parent | Node |
 |---|---|---|---|
-| `[ ]` | 广州 Guangzhou | 广东 Guangdong | `cn-gz-city-statistical-yearbook` |
-| `[ ]` | 深圳 Shenzhen | 广东 Guangdong | `cn-sz-city-statistical-yearbook` |
+| `[~]` | 广州 Guangzhou | 广东 Guangdong | `cn-gz-city-statistical-yearbook` — **reachable in Chrome (round 31), 000 to both curl machines.** Yearbook index `tjj.gz.gov.cn/stats_newtjyw/tjsj/tjnj/index.html` redirects to `tjj.gz.gov.cn/datav/admin/home/www_nj/`, a **zTree JS viewer**: 43 year nodes, all `isParent:false`, `href` empty, navigation entirely in a click handler that a synthetic `.click()` and a direct `onClick` call both failed to fire. The document is there; it needs a real click or the API the tree calls. Concrete next step, not a dead end. |
+| `[!]` | 深圳 Shenzhen | 广东 Guangdong | `cn-sz-city-statistical-yearbook` — **IP-blocked, confirmed round 31.** Knownsec CloudWAF serves *"Your IP is not allowed to visit this website!"* to Chrome on Thomas's own machine, and 403 to curl. Not a UA problem and not a bad moment — the block is on the address. Nothing to retry from here. |
 | `[x]` | 南京 Nanjing | 江苏 Jiangsu | `cn-nj-city-statistical-yearbook` — **1 edge, A** (round 30). 编者说明 item 三 → GB/T 4754. **First city edge; proves the route.** Yearbook at `tjj.nanjing.gov.cn/material/njnj_<year>/`, 编者说明 at `shouye/bzsm.html`. |
-| `[ ]` | 苏州 Suzhou | 江苏 Jiangsu | `cn-suz-city-statistical-yearbook` |
+| `[!]` | 苏州 Suzhou | 江苏 Jiangsu | `cn-suz-city-statistical-yearbook` — **READ AND EMPTY (round 31), not blocked.** 编者说明 (`html/note.jpg`, an image) names only the collecting bodies; and Suzhou publishes NO chapter 简要说明 at all — its 20 `html/smNN.pdf` are 主要统计指标 tables, image-only ABBYY scans with no text layer. Yearbook at `tjj.suzhou.gov.cn/sztjj/tjnj/2025/2025/zk/indexch.htm`. Re-check only against a future edition. |
 | `[ ]` | 杭州 Hangzhou | 浙江 Zhejiang | `cn-hz-city-statistical-yearbook` |
-| `[ ]` | 武汉 Wuhan | 湖北 Hubei | `cn-wh-city-statistical-yearbook` — parent has NO node yet |
+| `[x]` | 武汉 Wuhan | 湖北 Hubei | `cn-wh-city-statistical-yearbook` — **4 edges, all A (round 31).** Whole yearbook is ONE first-party PDF: `tjj.wuhan.gov.cn/tjfw/tjnj/202601/P020260113374292635526.pdf` (landing `.../t20260113_2710333.shtml`). Chapter 简要说明 → 农林牧渔业统计报表制度 (p99), 住户收支与生活状况调查方案 + 工业生产者价格统计调查制度 (p297, both nodes minted this round); table 2-7's note → 劳动工资统计报表制度 (p61). Its 编辑说明 carries NO classification item. Parent Hubei still has no node. |
 | `[ ]` | 成都 Chengdu | 四川 Sichuan | `cn-cd-city-statistical-yearbook` |
-| `[ ]` | 西安 Xi'an | 陕西 Shaanxi | `cn-xa-city-statistical-yearbook` — parent has NO node yet |
+| `[x]` | 西安 Xi'an | 陕西 Shaanxi | `cn-xa-city-statistical-yearbook` — **2 edges, both A (round 31).** Frameset yearbook, `tjj.xa.gov.cn/tjnj/2025/zk/indexch.htm`; TOC `left.htm` (single-quoted hrefs — a double-quote regex finds nothing), chapter notes are TEXT PDFs at `html/smNN.pdf`. sm14 → 建筑业统计报表制度, sm05 → 固定资产投资统计报表制度 (minted this round). 编者说明 is `html/note.jpg` and is generic. |
 | `[ ]` | 重庆 Chongqing | — (municipality) | `cn-cq-city-statistical-yearbook` — see mis-levelling note above |
 | `[ ]` | 北京 Beijing | — (municipality) | `cn-bj-statistical-yearbook` |
 
 **City host probes, 2026-09-08:** 南京 200 · 武汉 200 · 西安 200 · 苏州 503 · 成都 412 · 广州/深圳/杭州 000.
 Same caveat as the province column — 503/412/000 is usually a WAF or a bad moment, not a dead site.
+
+**Re-probed 2026-09-09 (round 31), and the column moved in both directions — proof the caveat is real.**
+Three machines now, not one: the CLOUD CONTAINER, Thomas's LOCAL VM (`device_bash`), and his CHROME.
+Nanjing and Suzhou answered 200 to the container on 2026-09-08 and **000 on 2026-09-09** — the container's
+route to most `.gov.cn` hosts collapsed for the whole round while `stats.gov.cn` and Wuhan kept working.
+Xi'an went the other way: 503/403 to curl on both machines, **200 in the local VM's curl on a retry** and
+fine in Chrome. DNS on the local VM also failed intermittently mid-batch (`Could not resolve host`) and
+succeeded on a 3-second retry, so **a single failed fetch is not a verdict — retry before recording one.**
+Working order that actually paid this round: cloud container → local VM curl → Chrome.
 
 ### How cities connect — Thomas's assumption, checked
 
@@ -97,13 +109,36 @@ its bureau is a 市统计局 answering to the 省统计局. Two qualifications t
    and **quarantined 2026-08-31 as assertion-only** (`cn-china-2026-08.json` `_dropped`,
    `no-document`). Re-minting either needs a real document, and rule 14 says read that note first.
 
-**The route works — CONFIRMED round 30, do not re-derive it.** A city yearbook's own 编者说明
-carries the same numbered item a provincial one does, naming 《国民经济行业分类》. Nanjing item 三
-gave **city → `cn-gbt-4754-2017`** at A with no province involved. Run this first for every
-remaining city; it is one fetch and one edge each, and it does not depend on the contested
-city→province hop. Watch the punctuation: Nanjing writes （GB/T4754—2017） with U+2014, Jiangsu
-writes (GB/T4754 -2017) with an ASCII hyphen and a stray space — **cut the quote before the
-number**, the title alone names the artefact.
+**CORRECTED 2026-09-09 (round 31): the 编者说明 route is NOT the city route — it is 1 for 4.**
+Round 30 read Nanjing's 编者说明 item 三 (naming 《国民经济行业分类》, giving
+**city → `cn-gbt-4754-2017`** at A with no province involved) and wrote here that the route was
+"proven" and should be run first for every remaining city. Round 31 ran it on the next three:
+**Wuhan's 编辑说明, Xi'an's 编者说明 and Suzhou's 编者说明 all stop one level short** — 国家统计制度,
+国家新的统计制度, 当时国家统计制度, 资料主要来自苏州市统计局…, i.e. the collecting agency or a
+generic reference to "the national statistical system", with no artefact titled. That is the
+ordinary §7a refusal and it is the NORMAL case; Nanjing is the exception. All three refusals are
+recorded in `cn-cities-2026-09-09.json`'s `_dropped`. Nanjing's edge stands and its quote advice
+still holds: watch the punctuation — Nanjing writes （GB/T4754—2017） with U+2014, Jiangsu writes
+(GB/T4754 -2017) with an ASCII hyphen and a stray space, so **cut the quote before the number**,
+the title alone names the artefact.
+
+**What DOES generalise is the per-chapter 简要说明 — the same thing that works for provinces.**
+Round 31's six edges all came from chapter notes, none from an 编者说明. Still check the 编者说明
+first, because it is one fetch and it sometimes pays; just do not stop when it is generic, and do
+not treat it as the route. Two chapters are worth opening before the others: **建筑业 and 农业**
+name an NBS 统计报表制度 by title in every yearbook checked so far (national, Jiangsu, Guangdong,
+Wuhan, Xi'an), and 固定资产投资 and the price/household chapters pay almost as often.
+
+**A city yearbook comes in at least four shapes, and the shape decides the whole approach:**
+one PDF of the entire book (Wuhan); a frameset with TEXT chapter-note PDFs (Xi'an); a frameset
+whose "chapter notes" are image-only scans of indicator tables, with nothing to read (Suzhou); and
+a JS viewer with no static URLs at all (Guangzhou). **Identify the shape before planning the
+round** — Suzhou cost a full fetch-and-extract pass before it was clear there was no text anywhere
+in it, and that would have been visible from `pdfinfo` (Creator: ABBYY FineReader) in one command.
+
+**An image-only 编者说明 is still readable** — fetch the JPG, put it somewhere the container can
+reach, and read it as an image. Xi'an's and Suzhou's refusals were both established that way
+rather than left as "couldn't check".
 
 **`cn-nbs-city-development-monitoring-system`** (城市高质量发展统计监测报表制度) was minted round 30
 and is wired from the CSY — it is the instrument NBS's 城市社会经济调查司 collects the city tables
@@ -157,3 +192,19 @@ yearbook name it? Still unminted, both needing a non-NBS publisher page:
 - Also named by title, no node yet: 《中国统计摘要》, 第五次全国经济普查, 《全国农业普查条例》,
   《统计上大中小微型企业划分办法（2017）》, 《关于市场主体统计分类的划分规定》（国统字〔2023〕14号）,
   SITC, and the 地区生产总值统一核算 reform that governs how provincial GDP is now produced.
+- **Round 31 additions to that list, all named by a CITY yearbook and all still nodeless:**
+  《企业一套表统计调查制度》 and 《一套表统计调查制度》 (Xi'an parts 12 and 15 — no NBS landing page
+  under either spelling), and 《工业统计报表制度》 (Xi'an part 12). **Do not wire that last one to
+  NBS's 工业统计调查制度** (`t20260402_1962932.html`) — different title, same trap as the 农业产值
+  titles. Also 《农业产值统计报表制度》 (Wuhan p99), a THIRD title again: not NBS's
+  《农业产值和价格综合统计报表制度》 and not Jiangsu's 《农业产值与增加值核算统计报表制度》. Three
+  yearbooks, three spellings, one apparent instrument — compare character by character, never by eye.
+- **Two SHAANXI provincial instruments, named by title in Xi'an's yearbook (parts 3 and 11):**
+  《陕西省统计局关于非公有制经济增加值测算的暂行办法（修订版）》 and a Shaanxi scheme for revising
+  regular annual data off the third national agricultural census. Shaanxi has no node of any kind,
+  so this is a **scope question for Thomas** — do provincial-bureau methodology instruments become
+  nodes the way NBS's do? — before it is a research one.
+- **Round 31 minted three NBS instrument nodes** off their own `stats.gov.cn` landing pages:
+  `cn-nbs-household-survey-scheme` (1962944), `cn-nbs-ppi-survey-system` (1962946),
+  `cn-nbs-fixed-investment-reporting-system` (1962939). Two of the three ids came from the
+  article-id probe past the truncated listing, so **that probe is now worth 3 nodes and counting.**

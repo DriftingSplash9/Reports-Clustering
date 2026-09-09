@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "source": "research round 2026-09-09 — Chinese city yearbooks: Wuhan and Xi'an mined, Suzhou refused",
+    "minted": "2026-09-09",
+    "note": "Round 31. Sweeps the remaining orphaned Chinese CITY yearbook nodes per HANDOFF 077 §3. CORRECTS round 30's expectation: the 编者说明 route Nanjing proved is NOT universal — Wuhan's 编辑说明, Xi'an's 编者说明 and Suzhou's 编者说明 all stop at 国家统计制度 / the collecting agency and name no artefact, so only 1 of 4 cities checked carries that item. What DOES generalise is the per-chapter 简要说明, exactly as it does for provinces. Every quote read live from the cited URL on the live host, 2026-09-09; Wuhan from the cloud container, Xi'an from Thomas's own machine after the container's route to the host failed."
+  },
+  "reports": [
+    {
+      "id": "cn-nbs-household-survey-scheme",
+      "title": "住户收支与生活状况调查方案 (Scheme for the Survey of Household Income, Expenditure and Living Conditions)",
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS scheme governing China's integrated urban-rural household survey — the instrument under which NBS's provincial and municipal survey teams draw the sample areas and sample dwellings, and collect household income, expenditure and living-conditions data by diary and questionnaire. It is the source instrument behind the household chapters of the national, provincial and municipal statistical yearbooks, which report disposable income and consumption expenditure per capita from it. Reissued annually; the edition read for this round covers the 2025 annual report and the 2026 periodic reporting forms.",
+      "cadence_note": "Reissued annually, covering one statistical year's annual report and the following year's periodic reporting forms.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962944.html",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "cn-nbs-ppi-survey-system",
+      "title": "工业生产者价格统计调查制度 (Industrial Producer Price Statistical Survey System)",
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS survey system governing China's industrial producer price statistics — both the ex-factory price of industrial products at first sale (PPI) and the purchasing price of raw materials, fuel and power bought as intermediate input. It prescribes the combination of key-unit and typical-unit survey methods, the online direct-reporting route by which selected enterprises submit prices for designated representative products, and the weights (industrial sales value, input-output data, enterprise product weights) used to compute the indices. Reissued annually; the edition read for this round covers the 2026 periodic reporting forms.",
+      "cadence_note": "Reissued annually, covering one year's periodic statistical reporting forms.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962946.html",
+      "domains": [
+        "statistical-system",
+        "inflation"
+      ],
+      "kind": "instrument"
+    },
+    {
+      "id": "cn-nbs-fixed-investment-reporting-system",
+      "title": "固定资产投资统计报表制度 (Fixed Asset Investment Statistical Reporting System)",
+      "publisher": "国家统计局 (National Bureau of Statistics of China)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The NBS reporting system governing China's fixed-asset investment statistics — the instrument that sets the reporting thresholds, the project-based unit of collection, the treatment of real-estate development and rural household investment, and the indicator set every level of the statistical system reports against. Revisions to it propagate directly into what the national, provincial and municipal yearbooks are able to publish: the round that minted this node found Xi'an's yearbook explaining that indicators it used to carry were withdrawn because NBS revised this instrument. Reissued annually; the edition read for this round covers the 2025 annual report and the 2026 periodic reporting forms.",
+      "cadence_note": "Reissued annually, covering one statistical year's annual report and the following year's periodic reporting forms.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962939.html",
+      "domains": [
+        "statistical-system"
+      ],
+      "kind": "instrument"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cn-wh-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-agriculture-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the 简要说明 heading chapter 5 (农业) of the Wuhan Statistical Yearbook 2025 states that the chapter's material was compiled from the Agriculture, Forestry, Animal Husbandry and Fishery Statistical Reporting System, naming that NBS instrument by title, and the next sentence describes how that instrument's returns are collected and passed up the statistical system. CAVEAT recorded, as it was for Jiangsu: the same sentence names a SECOND instrument, 《农业产值统计报表制度》, and that is a THIRD distinct title — it is neither the corpus's cn-nbs-agri-output-price-reporting-system (NBS's own is 《农业产值和价格综合统计报表制度》) nor Jiangsu's 《农业产值与增加值核算统计报表制度》. The three were compared character by character rather than assumed equivalent, and no second edge was minted from this sentence. Quote cut before that second title. Read live from the cited first-party PDF (HTTP 200) on 2026-09-09; page 99, landing page https://tjj.wuhan.gov.cn/tjfw/tjnj/202601/t20260113_2710333.shtml.",
+      "evidence_url": "https://tjj.wuhan.gov.cn/tjfw/tjnj/202601/P020260113374292635526.pdf",
+      "evidence_quote": "有关资料根据《农林牧渔业统计报表制度》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-wh-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-wage-reporting-system",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the note under table 2-7 of the Wuhan Statistical Yearbook 2025 states that, following a change in NBS's Labour and Wage Statistical Reporting System, the table's own indicator was redefined from 全部职工 to 单位就业人员 from 2012 — the yearbook's wage series is reported on definitions the instrument sets, and it names that instrument by title. Shape declared plainly so a reviewer can weigh it: this is a TABLE NOTE, not a chapter 简要说明, and it is admitted on §7a's caption-equivalence ruling (a source line under a table or figure is a citation of the same standing as body-text prose, grading A) — which is narrower than it sounds here, because the note names the ARTEFACT rather than the collecting agency, and states a dependency rather than a status (rule 19). It is NOT the settled ‘a Chapter 10 table ROW alone is not enough’ case: no indicator row is being read as evidence. Note the title is written without 《》 here, in running prose after the agency name. Grader's own verdict (§7b): quote-found-artefact-named, A. Read live from the cited first-party PDF (HTTP 200) on 2026-09-09; page 61.",
+      "evidence_url": "https://tjj.wuhan.gov.cn/tjfw/tjnj/202601/P020260113374292635526.pdf",
+      "evidence_quote": "根据国家统计局劳动工资统计报表制度的变化，",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-wh-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-household-survey-scheme",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the 简要说明 heading the prices and people's-livelihood chapter of the Wuhan Statistical Yearbook 2025 states that the chapter's urban and rural household figures come from the NBS Wuhan survey team's household income, expenditure and living-conditions survey, and that the sample areas and sample dwellings are drawn uniformly by NBS under the Scheme for the Survey of Household Income, Expenditure and Living Conditions, naming that instrument by title. Node minted this round off NBS's own landing page for the instrument. CAVEAT on the quote: the title spans a two-column line break in all three pdftotext readings (《住户收 / 支与生活状况调查方案》), so the stored span starts after the break and the full title is reachable only in the whitespace-normalised body — flagged because it is the failure mode a two-column yearbook PDF creates. RESOLVED by the grader (§7b, the grader outranks the hand grade on a new edge): it returned quote-found-artefact-named and graded A, so its whitespace normalisation does reach a title broken across a column line break — a two-column split is not by itself a reason to refuse or cap one of these. Read live from the cited first-party PDF (HTTP 200) on 2026-09-09; page 297.",
+      "evidence_url": "https://tjj.wuhan.gov.cn/tjfw/tjnj/202601/P020260113374292635526.pdf",
+      "evidence_quote": "支与生活状况调查方案》统一抽选。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-wh-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-ppi-survey-system",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the same 简要说明 states that the yearbook's industrial producer price survey is conducted in accordance with the provisions of NBS's Industrial Producer Price Statistical Survey System, naming that instrument by title in running prose (no 《》), and goes on to describe the key-unit/typical-unit method and the weights the instrument prescribes. Node minted this round off NBS's own landing page. CAVEAT on the quote, same as the household edge: the title spans a two-column line break in all three pdftotext readings (工业生产者价格 / 统计调查制度), so the stored span starts after the break; the grader returned quote-found-artefact-named and graded A anyway, same as the household edge. Read live from the cited first-party PDF (HTTP 200) on 2026-09-09; page 297.",
+      "evidence_url": "https://tjj.wuhan.gov.cn/tjfw/tjnj/202601/P020260113374292635526.pdf",
+      "evidence_quote": "统计调查制度规定，采用重点调查和典型调查相结合的调查",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-xa-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-construction-reporting-system",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: item 3 of the 简要说明 to part 14 (建筑业) of the Xi'an Statistical Yearbook 2025 states that the chapter's construction-enterprise statistics were compiled and aggregated under the Construction Industry Statistical Reporting System drawn up by NBS, naming that instrument by title. This is the same instrument the national yearbook, Jiangsu and Guangdong all declare for the same chapter, which is the programme's point: a municipal yearbook reaches the shared NBS instruments directly, with no city-to-province edge involved. Read live from the cited first-party chapter-note PDF (HTTP 200) on 2026-09-09; the quote is contiguous in all three pdftotext readings.",
+      "evidence_url": "https://tjj.xa.gov.cn/tjnj/2025/zk/html/sm14.pdf",
+      "evidence_quote": "本章建筑业企业统计数据是根据国家统计局制定的《建筑业统计报表制度》",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cn-xa-city-statistical-yearbook",
+      "target_report_id": "cn-nbs-fixed-investment-reporting-system",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: item 4 of the 简要说明 to part 5 (固定资产投资) of the Xi'an Statistical Yearbook 2025 states that because NBS revised the Fixed Asset Investment Statistical Reporting System and withdrew the floor-space-under-construction, floor-space-completed and completed-value indicators, the corresponding 2024 figures the yearbook publishes are on the real-estate-development basis instead — naming the instrument by title and stating a dependency of the strongest kind, since what the yearbook can publish is set by it. Node minted this round off NBS's own landing page. Read live from the cited first-party chapter-note PDF (HTTP 200) on 2026-09-09; the quote is contiguous in all three pdftotext readings.",
+      "evidence_url": "https://tjj.xa.gov.cn/tjnj/2025/zk/html/sm05.pdf",
+      "evidence_quote": "由于国家统计局对《固定资产投资统计报表制度》进行了修订",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "report_id": "cn-suz-city-statistical-yearbook",
+      "candidate_target": "cn-gbt-4754-2017",
+      "reason": "note",
+      "note": "NO EDGE FOUND. The Suzhou Statistical Yearbook 2025 was fetched in full and read: its 编者说明 (https://tjj.suzhou.gov.cn/sztjj/tjnj/2025/2025/zk/html/note.jpg, an image, transcribed by reading it) names only the COLLECTING BODIES — item 3, 资料主要来自苏州市统计局、国家统计局苏州调查队… — and item 4 refers generically to 国家统计制度的变化 with no instrument titled. Both are the ordinary §7a agency-not-artefact refusal. Suzhou also publishes NO per-chapter 简要说明 at all: its 20 html/smNN.pdf files are 主要统计指标 (major indicator tables), image-only scans made with ABBYY FineReader and carrying no text layer, so the chapter-notes route that worked for Wuhan and Xi'an does not exist here. Not blocked, not unread — read and empty. Re-check only against a future edition."
+    },
+    {
+      "report_id": "cn-wh-city-statistical-yearbook",
+      "candidate_target": "cn-gbt-4754-2017",
+      "reason": "note",
+      "note": "NO EDGE. Wuhan's yearbook does name the industry classification, but not in a citable form: its chapter 12 (工业) 简要说明 says only 2003年起，工业统计执行新的国民经济行业分类和大中小型企业划分标准 — no 《》, no GB/T number, and 'the NEW classification' as of 2003, which is a DIFFERENT vintage from the corpus's edition-bound cn-gbt-4754-2017. Wiring it would be exactly the edition inference the 2026-09-08 generic-COICOP ruling overturned (playbook/corpus-nodes.md §7d), so it is refused rather than wired with a vintage caveat. Wuhan's 编辑说明 carries no classification item at all; its item 4 refers generically to 国家新的统计制度."
+    },
+    {
+      "report_id": "cn-xa-city-statistical-yearbook",
+      "candidate_target": "cn-gbt-4754-2017",
+      "reason": "note",
+      "note": "NO EDGE. Xi'an's 编者说明 (html/note.jpg, an image, read directly) names no artefact: item 3 says the yearbook's statistical standards follow 当时国家统计制度 and item 6 says its units of measure follow 2024年相关统计报表制度 — both generic references to 'the national statistical system' / 'the relevant reporting systems' with nothing titled, refused under §7a. Recorded because this is the second of three cities this round whose 编者说明 does NOT carry the numbered classification item Nanjing's does."
+    },
+    {
+      "report_id": "cn-xa-city-statistical-yearbook",
+      "candidate_target": "(NBS 工业统计报表制度 / 企业一套表统计调查制度 / 一套表统计调查制度)",
+      "reason": "note",
+      "note": "MINT LEADS, NOT REFUSALS. Xi'an's chapter notes name three further NBS instruments by title that have no node: part 12 (工业) item 5 names 《企业一套表统计调查制度》 and 《工业统计报表制度》, and part 15 names 《一套表统计调查制度》. None was minted because none has a matching NBS landing page: the current 统计制度 listing carries 工业统计调查制度 (t20260402_1962932.html), which is a DIFFERENT title from the 工业统计报表制度 Xi'an names, and nothing for the 一套表 instruments under either spelling. Do not conflate the two industry titles — that is the same trap the Jiangsu/Wuhan 农业产值 titles set. Xi'an also names two SHAANXI PROVINCIAL instruments by title (《陕西省统计局关于非公有制经济增加值测算的暂行办法（修订版）》 in part 3, and a Shaanxi third-agricultural-census revision scheme in part 11); Shaanxi has no node of any kind in the corpus, so those are a scope question for Thomas before a research one."
+    }
+  ]
+}

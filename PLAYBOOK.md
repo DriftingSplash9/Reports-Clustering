@@ -18,10 +18,11 @@ you know what you are doing, it is this file plus ONE of these:
 
 | doing | read after this file |
 |---|---|
-| research, minting, wiring, evidence, quotes, grading, schema | `PLAYBOOK-CORPUS.md` |
+| research, minting, wiring, evidence, quotes, grading, schema | `PLAYBOOK-CORPUS.md` — **an index plus the rules that bind every data change**, since 2026-09-09; it routes you to one of five `playbook/` files, and an ordinary edge off a clean fetch needs none of them |
 | renderer, layout, forces, camera, panels, performance | `PLAYBOOK-RENDER.md` |
 | a recipe for one kind of fetch, capture or extraction job | `notes/techniques-2026-09-04.md` |
 | "can I reach host X?" | `notes/routing-snapshot-2026-09-04.md` — stale on arrival, re-probe |
+| writing a handoff | `notes/handoff-procedure.md` — `HANDOFF.md` §4 moved there 2026-09-09 |
 
 **A bare "PLAYBOOK" reference is older than the split, and it is the most
 common cross-reference in the repo.** The last 25 handoffs contain 36 bare
@@ -29,7 +30,10 @@ common cross-reference in the repo.** The last 25 handoffs contain 36 bare
 reach the rest of this section. "PLAYBOOK §6" (known traps) and "§7" (standing
 decisions) resolve to that section of `PLAYBOOK-CORPUS.md`, or of
 `PLAYBOOK-RENDER.md` where the subject is the renderer; both files keep those
-section numbers. A bare "PLAYBOOK rule N" resolves by the rule map below.
+section numbers. **Since 2026-09-09 the corpus lane's §6 and §7 are an INDEX** — the heading you
+are looking for is still there and still numbered, and it now carries one line per ruling plus
+the name of the `playbook/` file holding the reasoning. So an old `§7a` reference resolves in two
+hops instead of one, and nothing was renumbered. A bare "PLAYBOOK rule N" resolves by the rule map below.
 
 **Rule numbers are global and permanent.** They are cited from code comments
 and from `notes/`, so each playbook's list has GAPS where a rule lives in one
@@ -63,6 +67,16 @@ if only today's round needed it. **The failure this prevents is specific: nothin
 sweeps a playbook.** `HANDOFF.md` §4 sweeps the fast layer and has no counterpart
 here, so live counts, "currently blocked" and "the next round should" rot in place
 if they land in this file.
+
+**Moving a file OFF the always-read path is a third question, and it has already bitten once**
+(2026-09-09). Before you move one, **scan it for rules that bind a DIFFERENT task from the one
+the file is named for** — those have to stay behind, restated where they bind. The
+2026-09-09 split indexed every §6/§7 ruling and still buried one: `HANDOFF.md` §4's opening
+sentence — *editing §2/§3 mid-round is not a handoff and needs no archive* — went into
+`notes/handoff-procedure.md`, a file a research round has no reason to open, and round 31 had to
+dig for it. An index of the rules you KNOW about does not catch the rule you never thought of as
+a rule. The check is mechanical: grep the file you are moving for universal imperatives and ask,
+of each, *whose task is this?*
 
 An unapplied finding awaiting a ruling lives in `HANDOFF.md`, not in a
 playbook, and arrives as a rule only once Thomas has ruled. A trap now

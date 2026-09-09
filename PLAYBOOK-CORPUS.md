@@ -1,20 +1,51 @@
 # PLAYBOOK-CORPUS.md — the research lane
 
-**Read this with `PLAYBOOK.md`, never instead of it.** The rules that bind
-every task whatever it is — git, validate, the generated corpus file, no
-deletes, measure before believing — are there, with the test for where a new
-paragraph goes. This file is for finding, minting, wiring, quoting and
-grading edges; the renderer's rules are in `PLAYBOOK-RENDER.md`.
+**Read this with `PLAYBOOK.md`, never instead of it.** The rules that bind every task whatever it
+is — git, validate, the generated corpus file, no deletes, measure before believing — are there,
+with the test for where a new paragraph goes. This file is for finding, minting, wiring, quoting
+and grading edges; the renderer's rules are in `PLAYBOOK-RENDER.md`.
 
-**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3, 10-16 and 19,
-and the gaps are rules that live in one of the other two. Rule 17 was retired to
-`notes/techniques-2026-09-04.md` on 2026-09-07 for being a recipe rather than a
-rule; its number stays retired.
+**Rule numbers are global** (`PLAYBOOK.md` §1): this file holds 3, 10-16 and 19, and the gaps are
+rules that live in one of the other two. Rule 17 was retired to `notes/techniques-2026-09-04.md`
+on 2026-09-07 for being a recipe rather than a rule; its number stays retired.
 
-**When a line in this file turns out to be wrong, correct it in place and show
-the old wording**, the way `PLAYBOOK-RENDER.md`'s 2026-09-06 review did. A doc
-that quietly changes its mind is harder to trust than one that says what it got
-wrong, and this file has no sweep of its own except `HANDOFF.md` §4 step 5b.
+**When a line in this file turns out to be wrong, correct it in place and show the old wording**,
+the way `PLAYBOOK-RENDER.md`'s 2026-09-06 review did. A doc that quietly changes its mind is
+harder to trust than one that says what it got wrong, and this file has no sweep of its own
+except the handoff procedure's step 5b.
+
+---
+
+## 0. What this file is now, and where the rest went
+
+**Restructured 2026-09-09** (Thomas: *"reassess all the required readings and split them down and
+just have one handoff that says where to go if doing such and such a thing"*). This file was
+50.6k and **every corpus round read all of it**, though most of it decides one specific question
+each. It is now **the always-read part plus an index**; the reasoning moved, byte-for-byte and
+with its headings intact, into `playbook/`.
+
+**The principle: knowing a rule EXISTS is mandatory; reading WHY is on demand.** §6 and §7 are
+lookup tables that were written as prose. To avoid re-raising a settled question you only need to
+know it is settled and where it lives — the justification matters when you are actually facing
+that question. So every ruling still has a line below, and nothing became invisible; the
+2026-09-06 audit's worst find was rules filed where their audience never reads them, and an index
+is what prevents that.
+
+**Nothing was reworded, cut or renumbered.** Section numbers are kept as the headings below so
+every existing `PLAYBOOK §6` / `§7a` cross-reference in the repo, in code comments and in
+`notes/` still resolves — it now resolves to a line that points one file onward.
+
+| file | k | read it when |
+|---|---|---|
+| `playbook/corpus-naming.md` | 15.3k | deciding whether a document NAMES the target (§7a) |
+| `playbook/corpus-evidence.md` | 10.9k | writing a quote, grading, or a grade surprised you (§6) |
+| `playbook/corpus-nodes.md` | 7.4k | MINTING a node, or re-opening something (§7c, §7d) |
+| `playbook/corpus-route.md` | 7.1k | the bytes came by an unusual route (§7b) |
+| `playbook/corpus-hosts.md` | 5.7k | a fetch failed or a host looks blocked (§6) |
+
+**If you are wiring an ordinary edge off a document you fetched cleanly, you need none of them** —
+§2 and §6-schema below are the whole binding set, and you open one of the five only when its
+question actually arrives.
 
 ---
 
@@ -123,21 +154,108 @@ and the §6 bullets this sits beside are all live.
 ---
 
 
-## 6. Known traps
+## 6. Known traps — index
 
-**This section is for traps that change a decision on any corpus task.**
-Recipes for a particular job live in `notes/techniques-2026-09-04.md`; which
-hosts answered which machine on a given day lives in
-`notes/routing-snapshot-2026-09-04.md`, and is expected to be wrong. The
-verbatim pre-split §6 — every war story, every dated host reading — is at
-`archive/playbook/PLAYBOOK-2026-09-04-1938-pre-split.md`.
+**The schema traps stay in this file** (below) because every data change hits them. The rest are
+one line each; open the file named at the end of the line for the evidence behind it.
 
-**Admission bar, and it is now enforced: a bullet belongs here only if an
-agent who never reads it will make a WRONG DECISION, on a task it was not
-expecting.** A recipe goes to techniques. A host reading goes to the routing
-snapshot. A trap now guarded in code gets one line naming the guard. An
-unapplied finding lives in `HANDOFF.md` until Thomas rules on it, and moves
-here only as a rule, once.
+### Evidence, quotes and grading → `playbook/corpus-evidence.md`
+
+- `public/corpus-data.json` STRIPS `evidence_quote` — an edge read from it always looks unquoted.
+- Take grade counts from `npm run validate`, never from `public/corpus-data.json`.
+- `evidence_quote` IS the span — never run it through `extractQuotedSpans`.
+- Single quotes are not a span delimiter, and 476 live edges quote with them.
+- A node's TITLE is a matcher input, not just a label (≥60% contiguous run).
+- `normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold to ASCII.
+- Bytes that did not come from the cited URL on the live host cannot make an A.
+- An archived snapshot may rescue a WALL; it must never rescue a 404.
+- `--write` has NO "improvements only" guard — diff old vs new `--offline` before any write.
+- Every grader run rewrites each URL's `evidence-cache/` record, dry run or not, keeping only
+  the edges THAT run selected.
+- `_dropped` entries come in two shapes; a scan reading only one misses the other.
+- A title's parenthetical only counts as its acronym if it abbreviates the title head.
+- The grader's A bar reads presence, not meaning — it once graded A on a NEGATED sentence.
+- Your own basis prose can cap your edge (`WEAK_BASIS_PATTERNS`: consistent / aligned / …).
+- An ASCII substitution for a typographic character makes a stored quote read as MISSING.
+- A bare product number in `title_aliases` only reaches the grader by the `product-number` path.
+- A PDF is read THREE ways and the best reading wins — so when a quote fails on a PDF, **run the
+  grader before opening anything**: it grades against all three renderings and keeps the best, and
+  a line break inside a word is usually resolved there. Only if it still fails is the reasoning
+  worth reading. *(Sharpened 2026-09-09: the line said the rule existed but not what it decides,
+  and round 31 hit exactly this case and resolved it by running the grader anyway.)*
+- `namesTarget`'s acronym branch cannot see a mixed-case parenthetical — `(SDDS Plus)` never fires.
+- **Never edit a `basis` or a quote to move a grade.**
+
+### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`
+
+- "The sandbox can't read it" and "the site is walled" are different claims — say which machine.
+- A 404 from a single-page-app route is not link rot.
+- A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the site.
+- A blocked verdict decays — re-probe before believing your own notes.
+- WebFetch cannot produce evidence-grade verbatim (~125-char cap).
+- A page's DECLARED CHARSET is honoured since 2026-09-08; before that a gb2312 page was not read
+  as a bad quote, it was not read at all.
+- `namesTarget` strips ASCII parentheses BEFORE matching, so a non-Latin name living only inside
+  them is invisible to EVERY door including the CJK one. **The class is unswept.**
+- A `HOST_INDEX_PREFIXES` entry is a PREFIX unless it says `exact: true`, and it will swallow real
+  documents living beneath it.
+- The August 2026 bulk imports carry import habits worth knowing — grep before trusting.
+
+---
+
+## 7. Standing decisions — index
+
+**Bar for adding: a rule that will change how a FUTURE round decides something**, not a record of
+one specific edge's fate — the data's own `_dropped`/live entry is that record.
+
+### 7a. What counts as naming the artefact → `playbook/corpus-naming.md`
+
+- Naming the AGENCY is not naming the artefact. *(The most-cited refusal in the corpus.)*
+- Naming an ORGANISATION does not name the instrument that created it.
+- "Consistent with" is a claim about numbers, not a citation.
+- An index page is a bare homepage with a path.
+- Assertion-only edges are `_dropped`, never live.
+- Chart/figure-caption sourcing clears the bar and grades **A** — what carries it is the SOURCE
+  LINE, not the chart.
+- A methodology table cell naming a source is caption-equivalent, grades **A**; it does NOT
+  reopen agency-only table entries.
+- A statistical agency's own product NUMBER names the artefact (three conditions).
+- A nomenclature the document says is BASED ON the target names the target — **the document must
+  state the derivation**, your own knowledge of it is not evidence.
+- A document naming the target IN ANOTHER LANGUAGE names it (mechanism: `title_aliases`).
+- A parenthetical acronym names it at ≥4 characters AND only if it glosses the WHOLE title.
+- A node carries the PUBLISHER's own title for the artefact, not ours.
+- **CLOSED, do not re-derive per country:** the ICLS class; DGDDI's monthly bulletin.
+
+### 7b. What the route does to the grade → `playbook/corpus-route.md`
+
+- A backfilled `evidence_quote` needs a reader's acceptance, with a written reason per refusal.
+- A read in Thomas's own Chrome is a DIRECT read; only an archived snapshot caps at B.
+- An archived copy caps at B. General rule for every future fetch strategy.
+- **A first-party ZIP is a direct read, not a capped route** (2026-09-08) — name the inner path
+  in the basis.
+- A token-served PDF is cited to the LANDING page, `via: token-pdf`, caps at B.
+- On a NEW edge the grader outranks the hand grade — name its reason string in the basis.
+- A re-grade never writes a grade DOWN on a bad network day.
+
+### 7c. What is and is not a node → `playbook/corpus-nodes.md`
+
+- Treaty and agreement nodes: retired, do not re-import.
+- A node's `publisher` is a body, not a derivation note.
+- A legal instrument IS a legitimate node when a release names it as its own basis.
+- Analytical meta-nodes: 5 retired, sweep deliberately stopped — **do not extend by keyword**.
+- **Never sweep the "— high/low-poverty contrast" nodes.** They are real jurisdictions.
+- A country may carry TWO tier edges (REGISTER + SELF-DECLARED); both stay, no dedupe pass.
+
+### 7d. Parked and closed → `playbook/corpus-nodes.md`
+
+- `diary.csv` moved to `PLAYBOOK.md`; cadence lives in validate's CADENCE block.
+- `proposed:` domain tags: settled 2026-09-06, do not reopen.
+- One-off scope calls already decided — Iran's SNA vintage, the generic MFSM citation, PH EBEIS
+  node-scope, the TW SIPRI direction mismatch, NACE Rev.2, and generic COICOP (all three edges
+  dropped `no-document` 2026-09-08).
+
+---
 
 ### Schema and closed unions
 
@@ -165,613 +283,3 @@ here only as a rule, once.
   "RESOLVED …" to the `note` instead.
 
 
-### Evidence, quotes and grading
-
-- **`public/corpus-data.json` STRIPS `evidence_quote`**, so an edge read out of
-  the generated corpus always looks unquoted. Twelve edges were worked as
-  unquoted in one round and already had a quote. Read the slice JSON in
-  `src/data/research/` before concluding an edge has none — or before writing
-  over one.
-- **Take grade counts from `npm run validate`, never from
-  `public/corpus-data.json`** — the generated file holds the 347 research
-  slices and misses the ~10 edges in the hand-written seed files (rule 11), so
-  mixing the two produces a grade line that does not sum to the corpus.
-- **`evidence_quote` IS the span — never run it through `extractQuotedSpans`.**
-  That helper pulls out DOUBLE-quoted text, which is right for free-text
-  `basis` and wrong for a field whose whole content is the quote; for six weeks
-  the grader could not read back its own output. Anything checking an edge
-  against its document goes through `spansForEdge`.
-- **Single quotes are not a span delimiter and most of this corpus quotes with
-  them** — deliberately, because apostrophes are ambiguous. An edge whose
-  `basis` quotes in single quotes reads as "no quoted span" and caps at B. 476
-  live edges were in that state. Look at the `basis` yourself before concluding
-  an edge has no checkable evidence.
-- **A node's TITLE is a matcher input, not just a label.** `namesTarget` needs a
-  contiguous run of ≥60% of the title's words, and the title-lead fallback needs
-  ≥3 words before the first dash/comma/colon. A long descriptive title fails
-  silently and looks like missing evidence — BIS's six-word page title would
-  score 2/6, which is why the node is titled `Basel III`. This does not license
-  inventing titles (§7 still holds); it means **check the run arithmetic when a
-  publisher offers both a short name and a long one.**
-- **`normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold to
-  ASCII** — `Ⅲ` (U+2162) becomes `III`. Useful, and a trap: `바젤Ⅲ` normalizes to
-  the single token `바젤iii`, and since Hangul and Latin are both `\p{L}` there
-  is no split for the ≥2-word run rule to use.
-- **Bytes that did not come from the cited URL on the live host cannot make an
-  A**, however cleanly the edge clears every other bar — §7's archived-copy
-  ruling, which every new fetch strategy inherits. A read in Thomas's own
-  Chrome IS the cited URL and is not a second route (§7). Record WHICH route in
-  the committed evidence record (`via:`).
-- **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
-  wall says only that this machine could not read it. A 404 says the citation
-  has rotted, which is exactly what the dead-URL debt list measures — grading it
-  off an archived copy hides link rot behind a good grade.
-- **`--write` has NO "improvements only" guard** (2026-09-05): it writes
-  whatever the run returns, and §7's "a re-grade never writes a grade DOWN" is
-  a process rule, not code. It wrote a B down to C the first time a matcher
-  change was tried that day. Before any `--write` on already-graded edges, run
-  the OLD code and the NEW code `--offline` on the same store and diff; put
-  only the edges that went UP in the write selection.
-- **Every grader run rewrites the `evidence-cache/` record of each URL it
-  touches — dry run or not — and labels the windows with THAT run's grade, and
-  the rewritten record holds ONLY the edges that run selected.** A dry run on a
-  held edge leaves a committed record saying "[A …]" beside a slice that says
-  B; grading one new edge on a URL that already backs three others leaves a
-  record with one window where there were four. Select every live edge on the
-  URL (2026-09-05), restore untouched records from the transport zip before
-  committing, or run the write pass last.
-- **`_dropped` entries come in two shapes**: `source_report_id`/
-  `target_report_id`, and `source`/`target` (+ an `edge` string). A collision
-  scan that reads only the first misses the second; validate then fails on a
-  `no-document` note from an older round (rules 10/14). Read both.
-- **A title's parenthetical only counts as its acronym if it abbreviates the
-  title head** — `acronymFitsHead()` in `grade-evidence.ts` (2026-09-05).
-  "(ESA 2010)" on the 31 "National accounts (ESA 2010)" nodes and "(2016)" on
-  the MFSM manual used to name the release for any document that mentioned
-  the standard. Foreign-language acronyms on English titles (RPJMN, EICV4) no
-  longer count either — that is `title_aliases` territory.
-- **The grader's A bar reads presence, not meaning** (found 2026-09-05): it
-  awarded A on "Classifications … are *not in conformity* with … ISIC".
-  `NEGATED_QUOTE_PATTERNS` (denies / diverges / defers / hedges) now caps such
-  quotes at B and `--scan-quotes` lists them without network; but a new
-  phrasing the guard has not seen still grades A. Read the quote, not the grade.
-- **Your own basis prose can cap your edge.** `WEAK_BASIS_PATTERNS` matches
-  anywhere in the basis — "the EH is the *complementary* annual source" turned
-  an A into a B twice on 2026-09-05. Never write consistent / complementary /
-  comparable / aligned / presumably in a basis, even descriptively.
-*(Both bullets lived in `PLAYBOOK-RENDER.md` §6 until 2026-09-06 — filed where
-the lane that needs them never reads. Moved, not copied.)*
-
-- **An ASCII substitution for a typographic character makes a stored quote read as
-  MISSING, not as a near miss** (found three times in one round, 2026-09-06). The
-  Guinea SNDS quote used `'` where the PDF has U+2019; two SOR/2007-303 quotes wrote
-  `(x 1,000)` where the regulation has `(× 1,000)`, U+00D7. All three had passed an
-  earlier review. Nothing downstream can tell a non-matching quote from an absent
-  one, so these look like unquoted edges forever. **When a quote "isn't in the
-  document", diff it character by character before concluding anything** — and when
-  writing one, copy the span out of the extracted text rather than retyping it.
-  Candidates to sweep: any quote containing `(x 1,000)`, a straight apostrophe next
-  to a letter, or straight double quotes.
-
-  **The same failure arrives from the reader's side, and it is commoner** (round 8):
-  **the grader's html extractor does not decode HTML entities.** A span copied out of
-  a correctly rendered page reads `Fund’s` where the stored text holds
-  `Fund&rsquo;s`, so the quote returns `partial-quote` at coverage 0.78-0.86 rather
-  than absent — near enough to look like a bad quote, far enough to lose the A. Three
-  round-8 edges (GE, HU, MA) were re-cut around the entity and all three then matched
-  at 1.00. **So when writing a quote, prefer a span with no apostrophe, dash or quote
-  mark in it at all** — ending the span before the punctuation is cheaper than
-  diffing it afterwards. Watch for U+200B too: one sat invisibly inside Mauritius's
-  sentence and would have done the same.
-
-- **A `title_aliases` entry that is a bare product number only reaches the grader
-  through the `product-number` path in `namesTarget`** (added 2026-09-06 evening,
-  guarded by a selftest). Before it, a one-token alias could never fire — the run
-  rule needs two words — and the three round-4b table-number A's were written by
-  hand with no grader record. The path is aliases-only, ≥8 characters, ≥2
-  hyphen-separated digit groups, word-bounded, and runs only after every other
-  door has failed; it can only add matches.
-
-- **A PDF is read THREE ways and the best reading wins** (2026-09-06, Thomas's
-  ruling on round 5's matcher finding; guard is `Fetched.alt2Text` and the
-  rendering loop at the foot of `gradeEdge`). `pdftotext -layout`, pdf.js, and
-  plain `pdftotext` — the last is the only one that rejoins a word the typesetter
-  broke across a line with a hyphen, which is why a two-column book's own sentence
-  used to grade `partial-quote`. Two things it changes for a round: a PDF's
-  committed `evidence-cache/` header now carries `alt2-extractor` /
-  `alt2-text-chars`, and **a CACHED `.evidence-fulltext/` record has no third
-  rendering at all** — an offline re-grade of the old store sees none of this, so
-  `--refetch` is what gets it. Additive by construction: it can only add matches.
-
-- **`namesTarget`'s acronym branch cannot see a mixed-case parenthetical** (found
-  round 8, not fixed — it is a matcher change and Thomas's call). The test is
-  `/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/`, so `(SDDS)` fires and `(SDDS Plus)` never
-  can: the lower-case "lus" disqualifies it. For any node whose acronym carries a
-  lower-case word the only door left is a run of ≥60% of the title's words. Twelve
-  round-8 edges sit at B on `agency-not-artefact` because the country's page prints
-  "SDDS Plus" in its own heading and never writes the words out. **Do not read that
-  grade as thin evidence** — check whether this is the cause before spending a round
-  re-reading the document.
-
-- **Never edit a `basis` or a quote to move a grade.** If an evidence record is
-  graded down by a matcher defect, fix or report the matcher. Trimming the
-  record is grade-motivated editing and it hides the defect from everyone after
-  you.
-
-
-### Claims about the world that are really claims about your tools
-
-- **"The sandbox can't read it" and "the site is walled" are different claims,
-  and this repo has been conflating them for months.** There are three networks
-  and none is a superset of the others (see the routing snapshot). Before
-  recording a host as walled, **say which machine you were on** — and re-test
-  from the other one, which is a 20-second check.
-- **A 404 from a single-page-app route is not link rot.** 58 EDP-inventory edges
-  were dropped as DEAD-URL because CIRCABC's `/ui/.../details` pages 404 to curl —
-  while Eurostat's own listing still linked every one of them and
-  `https://s-circabc.europa.eu/rest/download/<id>` served each PDF (Round C,
-  2026-09-05). Before recording a 404 as rot, check whether the host is an SPA
-  (an Angular/React shell with the same byte count for every path) and whether a
-  first-party page still links the URL; a REST/download endpoint usually exists.
-  The Commission documents-register (`api/files/<ref>_0/<id>`) and DCC Tanzania
-  (`/api/pages/slug/<slug>`) are the same shape.
-- **A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the
-  site.** WebFetch obeys robots.txt; curl with a browser UA does not, and
-  neither does a browser. An entire Taiwanese cluster was written off this way
-  while being wide open to curl the whole time. Treat every historical "robots"
-  note in the corpus as untested.
-- **A blocked verdict decays — re-probe before believing your own notes.**
-  Routing changed three separate times inside 24 hours during the 2026-09-04
-  rounds, in both directions. This is why host readings are in a dated file
-  rather than here.
-- **WebFetch cannot produce evidence-grade verbatim** — it caps quotes at ~125
-  characters and refuses full reproduction. It can establish a negative or
-  locate text; a mintable quote needs a real browser or another host carrying
-  the same document.
-- **A page's DECLARED CHARSET is now honoured, and before 2026-09-08 it was not** —
-  the fetcher decoded every HTML body as UTF-8 whatever the document said. This did not
-  corrupt a legacy-encoded page, it destroyed it: 537 of `sm14.htm`'s characters became
-  U+FFFD, and the edge graded `quote-not-in-document`, **which looks exactly like a bad
-  quote and is not one**. Guard is `decodeDeclared()` in `grade-evidence.ts`. The trap that
-  survives the fix is the reading habit: **a `quote-not-in-document` on a non-English host
-  is a claim about the reader until you have checked the decode**. NBS, DGBAS, e-Stat and
-  KOSTAT all still serve gb2312/Big5/Shift_JIS/EUC-KR.
-
-- **`namesTarget` strips ASCII parentheses BEFORE matching, so a non-Latin name that lives
-  only inside them is invisible to EVERY door, including the CJK one** (found 2026-09-08).
-  A node titled `Balance of Payments (国际收支平衡表)` has no reachable Chinese token at all —
-  the CJK single-token path iterates the same parens-stripped string the run rule does. The
-  corpus is full of nodes titled this way (`cn-statistical-yearbook`, `cn-labour-force-survey`,
-  most of the CN/JP/KR import). The fix per node is a `title_aliases` entry carrying the
-  native-language name; `cn-population-census` has carried one since long before anyone named
-  the class. **So when a document plainly names a target in its own language and the edge
-  still grades `agency-not-artefact`, check the target's title for parentheses before
-  concluding anything about the document.** The class has NOT been swept.
-
-- **A `HOST_INDEX_PREFIXES` entry is a PREFIX unless it says `exact: true`, and it will
-  swallow real documents living beneath it** (found 2026-09-08). `stats.gov.cn` `/sj/ndsj/`
-  was written for the yearbook's year-list page and also claimed every chapter page inside
-  the yearbook, so ten edges citing a chapter's own 简要说明 failed validation as
-  "index/listing page" the first time any round cited one. Narrowed to `exact: true` — the
-  same fix `/english/pressrelease/` already carried, with the same reasoning in its comment.
-  **Most of the other entries in that list are still prefixes**; if validate calls a URL an
-  index page and the URL is plainly a document, look there before rewriting the edge.
-
-- **The bulk-imported slices of August 2026 carry import habits worth knowing**:
-  ids and enum values that were invented rather than read, one jurisdiction's exact
-  quote and URL reused as evidence for another — the tell is a quote naming a
-  specific *other* place — and the same region minted under different batch names.
-  Grep against the FULL corpus (research files AND seed files) before trusting any of
-  it. They are data like any other and are verified and graded on the same rules as
-  everything else.
-
-
----
-
-## 7. Standing decisions — do not re-raise
-
-
-**Bar for adding to this section: a rule that will change how a FUTURE
-round decides something, not a record of one specific edge's fate — the
-data's own `_dropped`/live entry is that record.** A one-off single-
-node/single-edge call belongs there, not here as its own paragraph.
-
-**Reorganised 2026-09-06** into the three questions the rulings actually
-answer, so a round reads the third of this section that binds its question
-instead of all of it. Nothing was reworded; four passages were cut where this
-section's own bar puts the record in the data, and they are named where they
-were removed.
-
-### 7a. What counts as naming the artefact
-
-**Naming the agency is not naming the artefact** (Thomas, 2026-08-31,
-ruling on the second audit's F-05). A document that says the figure comes
-from "the Department of Commerce", "ISQ", "FCSC" or "the central bank" —
-without naming the release — does not clear the evidence bar for an edge to
-that agency's *specific* publication. It is a lead: the release still has
-to be found by title. Six such edges went to `_dropped` `no-document` that
-day and are listed there — this section's own bar says the data is that
-record. And REPORTS.md's own
-"disclosure stops one level short of a title" note is the reason this is
-the normal case, not the rare one. Nothing in the validator can catch it —
-the guard is this paragraph and the reviewer.
-
-**Naming an organisation does not name the instrument that created it** (Thomas,
-2026-09-05, ruling on the promotion refused in the grader round). The ≥4-character
-acronym rule cannot tell the two apart: `gq-inege-anuario-2024` graded A against
-`afristat-founding-treaty-1993` on a budget-table row reading "Contribuciones del
-Gobierno a AFRISTAT ─ ─ ─ 380", which names the ORGANISATION that the 1993 founding
-TREATY brought into being — a membership subscription, not a citation of the treaty
-text. The promotion was refused and the edge stays at B. This is the acronym-rule
-sibling of "naming the agency is not naming the artefact" and it decides the same
-way: a body and the document constituting it are two artefacts, and a document that
-names the body has not named the instrument. Nothing in the matcher can catch it —
-the acronym is genuinely in the target's own title — so the guard is this paragraph
-and the reviewer.
-
-**"Consistent with" is a claim about numbers, not a citation** (Thomas,
-2026-08-31, ruling on the second audit's F-03). A basis that says two series
-are consistent, aligned or comparable — and quotes no passage — describes
-agreement between figures, not a document naming one as the other's input.
-38 such edges (28 of them in the Russian regional slices) were moved to
-`_dropped` `deferred` as leads, originals preserved in `why`. The shape to
-watch for in any bulk import: "X data in national compilations are consistent
-with the Y yearbook" — that is the tell.
-
-**An index page is a bare homepage with a path** (Thomas, 2026-08-31,
-ruling on the second audit's F-01/F-02). `brics.ibge.gov.br/publicacao.html`
-stood behind 23 edges and names no data source; `inegi.org.mx/temas/...`,
-Rosstat `folder/<n>` listings are the same class. All 23 went to `_dropped`
-`no-document`; `isIndexPage()` in graph.ts now warns on the class (45 more
-edges on the day it landed, listed in the validator's EVIDENCE block beside
-the bare-homepage count, plus an informational "URLs behind 10+ edges" list —
-one URL rubber-stamping dozens of edges is the tell). Same promotion gate as
-the other two evidence warnings.
-
-**Assertion-only edges are `_dropped`, never live** (Thomas, 2026-08-31,
-ruling 1-A after the audit's D1). An edge whose evidence is a publisher
-homepage or nothing, and whose basis quotes no document, is a belief —
-463 of them went to `_dropped` `no-document` that day with their
-original basis preserved, and the validator's EVIDENCE block counts any
-new one. "Probably true" is the reason they were dangerous, not a
-defence: on screen they were indistinguishable from verified edges. Three nodes look treaty-shaped but deliberately survived:
-`ve-ofac-sanciones` (a `part_of` container — removing it orphans two
-other nodes), `tr-eu-trade` (named like a treaty, actually merchandise
-trade statistics), `sdmx-standard`/`sna-2025` (statistical standards, not
-agreements).
-
-**Chart/figure-caption sourcing clears the evidence bar** (Thomas,
-2026-08-30) — a figure-source line under a chart is a citation, same
-standing as body-text prose. General ruling for every future round, not
-just the edge that prompted it. **Confirmed and made explicit 2026-09-06:
-this means grade A, not B.** A round found this paragraph and the
-table-cell one below saying different things, graded two edges B on the
-later wording, and asked; Thomas: *"i think the caption sourcing is ok and
-both can be A's. we need to fix that line for consistency."* His caveat is
-the operative half — *"a chart doesn't always mean anything official. i can
-make whatever chart I want but it should be sourced to be credible"* — so
-what carries the citation is the **source line**, not the chart, and an
-unsourced or self-made chart carries nothing. Read the attribution before
-grading on it.
-
-**A methodology table cell that names a source is caption-equivalent** (Thomas,
-2026-09-06, extending the chart-caption ruling above). A table whose purpose is to
-disclose sources discloses them: a cell reading "Scottish share is estimated using the
-Living Costs and Food Survey (LCF)" is a citation, and grades **A**, the same as a
-figure caption. *(This clause read "grades **B**" until 2026-09-06 evening, which
-contradicted the chart-caption ruling it says it extends. Thomas resolved it that day
-in favour of A — see that paragraph. "Caption-equivalent" means equivalent, so the two
-now move together; if a caption is ever regraded, this moves with it. The correction
-lifted 14 live edges from B to A: the 13 SDDS/SDDS Plus methodology-table edges in
-`int-imf-dsbb-2026-09-06.json` and `sct-gers -> gb-ons-lcf`.)* This reopened exactly one edge on the day it was ruled
-(`sct-gers -> gb-ons-lcf`, where all six LCF mentions in the GERS revenue methodology
-are in table cells and none in prose), and a corpus-wide sweep of `_dropped` entries
-refused on that shape found only one other candidate, blocked for an unrelated reason.
-**It does not reopen agency-only table entries.** The cell has to name the ARTEFACT:
-`on-ompf`'s Appendix F attributes five measures to "Statistics Canada" with no
-publication named, in a table whose entire purpose is to disclose sources, and that
-stays refused. The two rules compose; the weaker one does not dissolve the stronger.
-
-**A statistical agency's own product NUMBER names the artefact** (Thomas,
-2026-09-06). A Statistics Canada table number — `36-10-0222-01`, or the legacy
-CANSIM form `405-0004` — is not the target's title, so `namesTarget` cannot see
-it and the A bar refuses it; but it is a precise, checkable identifier of one
-specific release, which is strictly MORE specific than the title and is the exact
-thing the agency-not-artefact rule was asking for. Ruled to name the artefact.
-Three conditions, and they are what keep this from becoming "any number counts":
-
-1. **The number must be verified against the agency's own product page**, in the
-   round that uses it, and the page's title must be the target node's artefact.
-   `36-10-0222-01` was checked at `www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3610022201`
-   and returns "Gross domestic product, expenditure-based, provincial and
-   territorial, annual". A number nobody resolved is a guess.
-2. **The mechanism is `title_aliases`**, so the grader can see what the reader
-   can. A table number is neither an acronym nor an agency name, so it clears
-   that field's rule 3; it is the name the citing documents actually use, so it
-   clears rule 2.
-3. **A legacy number that the modern table page does not itself acknowledge does
-   NOT qualify.** SOR/2007-303 cites "CANSIM table 405-0004, Road motor vehicles,
-   registrations"; the current `23-10-0308-01` page shows no former-number
-   mapping, so `fiscal-equalization-program -> statcan-vehicle-registrations`
-   stays at B. Equating the two would be the researcher's own knowledge, not the
-   document's.
-
-Generalises beyond Canada to any agency that numbers its releases and is cited by
-number — but each agency's numbering wants its own check against condition 1.
-
-**A nomenclature the document says is BASED ON the target standard names the target**
-(Thomas, 2026-09-06, ruling on the `Sistema Armonizado` alias). A methodology that says
-its classification rests on a national or bloc nomenclature — Argentina's NCM, Colombia's
-NANDINA, Chile's tariff codes — and says in the same breath that the nomenclature is based
-on the standard, is citing the standard. The intermediate nomenclature does not break the
-chain, and a source line in a glossary or a footnote is a citation like any other source
-line (§7a's caption ruling, which this one leans on). Four Spanish-language edges moved on
-it: `co-comercio-exterior -> hs`, `co-comercio-exterior -> un-imts-2010`,
-`ar-comercio-exterior -> hs` (B to A) and `cl-comercio-exterior -> hs` (C to A, read in
-Thomas's Chrome because bcentral.cl is a JS shell to both machines).
-
-**The guard, and it is the whole rule: the DOCUMENT has to state the derivation.** "The
-statistics use the NCM" plus the researcher's own knowledge that the NCM derives from the
-HS is an inference, and it is refused — that is the agency-not-artefact bar arriving from
-a different direction. What moved these four is that each methodology says *basada en el
-Sistema Armonizado* / *está basado en el Sistema Armonizado* / *del Sistema Armonizado
-vigente* in its own words. Nothing else changes: the standard still has to be NAMED, by
-title or by a sourced `title_aliases` entry, and a bare tariff-code reference still names
-no artefact.
-
-**A document that names the target artefact IN ANOTHER LANGUAGE names it**
-(Thomas, 2026-09-04). `namesTarget()` matches a run of the target's own title
-words and every title in this corpus is English, so a French Règlement that
-prescribes the HICP by its French name, a Bank of Korea appendix on 바젤Ⅲ, an
-NHC yearbook on 国际疾病分类 and Banco Central del Paraguay on the "Sistema de
-Cuentas Nacionales del 2008" were all capped at B for the corpus's own
-monolingualism. The mechanism is `Report.title_aliases` — read that field's
-doc comment before adding one; the three rules there (same artefact not a
-related one, sourced from a document actually read, never an acronym or an
-agency name) are what stop it becoming a synonym bag. The field earns its
-place on the dozen international standards the whole corpus cites in a dozen
-languages, not on national releases only ever cited at home.
-
-**A parenthetical acronym from the target's own title names the artefact when
-it is four characters or more AND glosses the WHOLE title** (Thomas,
-2026-09-04, narrowing the blanket exclusion the dry run wrote). The blanket
-exclusion existed for a real reason — `(EDP)` and `(NSW)` matched documents
-that named neither artefact — and both of those are THREE characters and both
-gloss a component rather than the title, which is what the two conditions are
-for. The rule was measured before adoption and it caught its own false
-positive on the first run: `pspp-cola-methodology` is "Public Service Pension
-Plan (PSPP) Cost-of-Living Adjustment (COLA) Methodology", and an Ontario
-release naming the PSPP names the PLAN, not the COLA methodology — the
-whole-title condition is what puts that edge back at B where it belongs.
-
-**A node carries the publisher's own title for the artefact, not ours**
-(Thomas, 2026-09-04). Six Bolivian department edges sat at B on
-`agency-not-artefact` while citing INE's own anuario table, because the node
-was titled "Pobreza monetaria por departamento" and INE heads the table
-"BOLIVIA: INCIDENCIA DE POBREZA, SEGÚN DEPARTAMENTO". The document WAS the
-artefact and the grader could not see it. Retitled to
-"Incidencia de pobreza, según departamento (INE)"; all six went to A. When an
-edge grades `agency-not-artefact` against a document that is plainly the
-target itself, check the node's title against the publisher's before
-concluding anything about the evidence.
-
-**The ICLS class is closed: stop re-deriving it** (Thomas, 2026-09-06). Four rounds
-have independently found and refused the same edge — a national labour force survey to
-`icls-work-statistics-resolution` — because the survey's own documentation says some
-version of "in accordance with International Labour Organisation concepts and
-definitions" and never names the resolution by title. The UK (2026-09-06), Ireland,
-Australia and Northern Ireland (all 2026-09-06) each cost a research pass to reach the
-same answer; Australia's is the closest and still generic ("aligns closely with the
-standards and guidelines set out in Resolutions of International Conferences of Labour
-Statisticians" — plural, no resolution named). **Do not open this again per country.**
-If the class is ever to be wired, it is by finding ONE document that names the
-resolution and applying the finding as a pattern, not by re-testing the next NSO's LFS
-page. The refusals already in the data are the record; adding a fifth is waste. This is
-a scope decision, not a new evidence rule: the agency-not-artefact bar is unchanged and
-is what refuses them.
-
-**DGDDI's monthly bulletin is closed: ruled dead, do not attempt a fifth round**
-(Thomas, 2026-09-08). Four rounds (1, 2, 15's adjacent search, 16) checked six
-candidate document classes for something naming DGDDI's monthly "Résultats du
-commerce extérieur" bulletin BY TITLE alongside a usage statement — Trésor's own
-same-titled annual commentary, Banque de France's annual balance-of-payments report,
-two INSEE Note/Point de conjoncture editions, INSEE's Comptes de la Nation chapter and
-TEF page, and INSEE's own Note de conjoncture bibliography (which named a DIFFERENT
-DGDDI product instead — see round 15's `fr-dgddi-chiffre-commerce-exterieur`, wired
-fine). Every one of the six cites the agency ("Douanes / DSECE"), never the titled
-monthly release. Same shape as the ICLS ruling above: the refusals already in the data
-are the record, and a fifth round is waste. Detail: memory
-`round16_fr_dgddi_monthly_still_refused_2026-09-07`.
-
-### 7b. What the route does to the grade
-
-**A backfilled `evidence_quote` needs a reader's acceptance, and the reader
-records a reason for every refusal** (Thomas ruled "an agent reviews by slice",
-2026-09-03; executed the same day). The grader proposes; it never accepts its
-own proposal, because an A that rests on "this script found a sentence it liked,
-twice" is not evidence. The accept test is one question — *does this sentence,
-in this document, say the source depends on the target?* — and a rejection is
-written down with its reason, because the rejections are where the research debt
-is measured. Round 4: 213 read, 106 accepted, 107 refused with reasons
-(`Claude outputs/quote-backfill-review-2026-09-03.json`). Round 5: 476 read,
-370 accepted, 106 refused (`quote-backfill-sq-review-2026-09-03.json`).
-
-**A document read in Thomas's own Chrome grades as the direct read it is; only
-an archived snapshot caps at B** (Thomas, 2026-09-04, ruling on the browser
-pass). A snapshot says "this quote was in this document on <timestamp>" — a
-copy, on a past date. A Chrome read is the cited URL, fetched live over
-Thomas's own network, and the only reason the grader could not take it itself
-is a JavaScript challenge curl cannot answer: a fact about the fetcher, not
-about the document. The rule lives in `routeCapsGrade()` in
-`scripts/grade-evidence.ts`, `via` is recorded either way, and the committed
-`evidence-cache/` header carries the route, so a reader can always see where
-the bytes came from.
-
-**A document read from an archived copy caps at B** (Thomas, 2026-09-03,
-ruling on round 3d's fetch strategies). An archived read supports "this quote
-was in this document on `<timestamp>`", which is a weaker claim than "this quote
-is in this document" — and once a grade is written the difference is invisible
-on screen. One `A` must not mean two things. **General rule for every future
-fetch strategy, not just the Wayback one**: bytes that did not come from the
-cited URL on the live host cannot produce an A, however cleanly the edge clears
-every other bar. 15 edges were capped the day it was ruled; the guard sits
-after the A bar in `gradeEdge` with its own reason string
-(`quote-found-artefact-named-via-snapshot`) so the class stays greppable if the
-host ever becomes readable again. Consequence worth knowing: `writeGrades` only
-writes `evidence_quote` on an A, so **a machine-written `evidence_quote` in this
-corpus always means "found in the live document"**.
-
-**A document a publisher ships only inside a ZIP is cited to the zip, and grades on
-its merits — it is a direct read, not a capped route** (Thomas, 2026-09-08, ruling on
-the Guangdong yearbook: *"why can't we point to a zip that is likely pointing to the url
-too? I'd say that is proof"*). The two existing caps do not reach this case and the reason
-each exists is the reason: `wayback` caps because the bytes are a COPY on a PAST DATE, and
-the token-PDF below caps because the CITED URL IS DEAD TOMORROW. A permanent first-party
-attachment served 200 from the publisher's own host is neither, and §7b's actual test —
-bytes from the cited URL on the live host — is satisfied outright. Guangdong's yearbook is
-published only as its CD-edition zip (`stats.gd.gov.cn/attachment/...zip`, linked from the
-bureau's own landing page); four edges were minted on it and the grader returned A
-`quote-found-artefact-named` on all four, reading inside the archive.
-
-**Two conventions, because a zip is a COLLECTION and a page is not.** Citing an archive
-says "this quote is somewhere in these N files", which is a loss of PRECISION, not of
-authenticity — so **name the inner path in the `basis`** (`Inner path:
-directory/13/brief-description.html`), and the extractor prefixes every entry with a
-`[zip: <path>]` marker so the committed `evidence-cache/` record shows which file matched.
-The mechanism is `extractZipDocs()`, the third of three zip branches in `grade-evidence.ts`
-— `.docx` and `.xlsx` were already unzipped by the same fetcher, which is why "the grader
-cannot read a zip" was never the objection it looked like. Archives also get their own wall
-clock (`ARCHIVE_TIMEOUT_S`), keyed on the URL's extension, because a 21.5MB transfer does
-not fit the 45s budget tuned for pages — a transfer that STALLS still dies on the old
-schedule (`--speed-time`).
-
-**A quote lifted from a PDF that a landing page serves only through a signed,
-expiring token is cited to the LANDING PAGE and recorded as
-`via: token-pdf <date>`, which caps the grade at B** (Thomas, 2026-09-04,
-ruling on the 17 deferred BPS edges). Citing the token cites a URL that is
-dead tomorrow; citing the landing page and quoting the PDF puts citation and
-quote one step apart. Naming the route is what makes the pair honest, and the
-B cap is the same treatment `wayback` gets for the same reason. General rule
-for every agency that publishes this way, not just BPS.
-
-**On a NEW edge the grader outranks the hand grade, and the basis says so**
-(round 8). Writing a block by hand and then grading it is the normal shape for a
-large mint, and the two will disagree: round 8's hand grades were 60 A / 5 B and
-`grade-evidence.ts --slice` returned 45 A / 23 B / 3 C over the same 65 edges.
-**Take the grader's verdict**, name its reason string in the basis so the downgrade
-is auditable, and record a reader's ruling ONLY where its own fetcher failed —
-never where it read the document and disagreed with you. The rule below protects an
-EARNED grade from a bad network day; this one stops a hand grade being an opinion
-that outranks a measurement.
-
-**A re-grade never writes a grade DOWN on a bad network day.** Selecting an
-already-graded edge and writing whatever comes back lets one DNS failure or one
-Akamai mood destroy a grade earned from a good read. A re-grade pass writes only
-improvements; regressions go to a dated JSON for a human, with the host and the
-reason (round 4: 33 of them, none written). One refinement from round 5: when
-the regression is `quote-not-in-document` on a document the grader **read in
-full today**, the network is not the excuse — the quote written that round is
-reverted (the field must mean "this span is in the cited document") and the
-grade is left as it was. 29 reverted in round 5, listed with the reason.
-
-### 7c. What is and is not a node
-
-**Treaty and agreement nodes: retired, do not re-import** (Thomas,
-2026-08-29). 72 nodes removed — bilateral/plurilateral trade agreements,
-investment-treaty and bloc-membership framings, multilateral conventions.
-Full record and examples: `notes/retired-nodes-2026-08-29.json`. **The
-reason is structural, not evidential**: a treaty isn't a publication with
-a methodology dependency, no research round could ever wire one — they
-were 7% of the corpus and 11% of its isolated nodes, all orphans, no edge
-broken. **Closed 2026-08-31 (Thomas, ruling 2-A after the audit's D4):
-that sweep removed orphans only, so 31 FTA-family nodes that had edges
-survived it — retired the same day with `ar-mercosur`, records in
-`notes/retired-nodes-2026-08-31.json`.** The class is now retired in
-practice as well as principle. Still nothing in the validator stops a
-new one — a title regex is too contaminated to trust (see the meta-node
-paragraph below); the guard is this paragraph and the reviewer.
-
-**A node's `publisher` is a body, not a derivation note** (Thomas,
-2026-08-31, ruling 3-A after the audit's D7). "Derived from UNICEF and
-education monitoring sources", "WHO / national sources", "Derived from
-international compilations" name a topic with a figure attached, not a
-recurring official release, and no document can ever name a topic as an
-input — 62 such nodes retired (`notes/retired-nodes-2026-08-31.json`).
-A lazy "X / related" or "X / Y related" string on a real release is a
-field to fix, not a node to drop — 166 rewritten to the first-named body
-(`notes/publisher-cleanup-2026-08-31.json`). The validator's PUBLISHERS
-block prints any new one. Don't mint a node whose publisher you can't
-name.
-
-**A legal instrument stays a legitimate node when a statistical release
-names it as its own legal/methodological basis** — Japan's Statistics
-Act, Brazil's Lei 8.213, the EAEU statistical protocol, national social-
-protection acts, the EDP inventories: whole rounds are built on that
-family, untouched by the sweep above. The cut is "instrument nobody's
-statistics depend on," not "instrument."
-
-**Analytical meta-nodes: 5 retired, sweep deliberately stopped there**
-(Thomas, 2026-08-29) — comparison-device/policy-frame nodes with no
-publication behind them. **Do not extend this by keyword search: both
-obvious signals are contaminated.** "framing" is a verbal tic of the August 2026 import that
-also appears in real statistics-node titles ("Statistics and framing of
-remittance inflows"). The corpus's own "meta-node" `_notes` phrasing
-describes a node's ROLE IN THE GRAPH, not its nature — it lands on the
-Okinawa Statistical Yearbook and Taiwan's Energy Statistics Handbook,
-both genuine. A title-regex sweep caught 36 candidates, only 5 were real.
-
-**Above all, never sweep the "— high/low-poverty contrast" nodes.** They
-read like analytical framings and aren't — they're real subnational
-jurisdictions (Ecuadorian/Peruvian/Uruguayan/Paraguayan/Bolivian/Chilean)
-that the August 2026 import titled as a poverty-contrast set. They're the bulk of the
-unresearched South America seam; deleting them destroys the next round
-before it starts.
-
-**A country may carry TWO tier edges, one REGISTER and one SELF-DECLARED** (Thomas,
-2026-09-07, ruling on round 8's second question). Twenty-six countries in the NSDP
-block have both: an older edge off an institutional node, where the IMF's own
-register says the country adheres, and a new one off the country's National Summary
-Data Page, where the country's statistical system says so itself. **Both stay.** They
-are two different assertions with two different speakers (rule 19), separately
-evidenced, and rule 13's don't-silently-override is the reason the second one did not
-replace the first when it was minted. Do not open a pass to deduplicate them, and do
-not treat a country that has one as already wired for the other.
-
-### 7d. Parked and closed
-
-**Parked.** `diary.csv` moved to `PLAYBOOK.md` (it binds any task, not just corpus
-ones). Cadence: 101 of 3,071 edges state when the reading happens; the validator's
-CADENCE block is the live number, not this file.
-
-**`proposed:` domain tags: settled 2026-09-06, do not reopen.** 1,080 stripped, 6
-promoted to approved `Domain` values, 43 mapped; the complete before/after record —
-and the only way back, since there is no git safety net — is
-`notes/proposed-tags-retired-2026-09-06.json`. `validate`'s DOMAINS block prints the
-live count and has read **46 approved, 0 proposed** since. *(This paragraph described
-the question as open, with 624 live tags and a pointer to a `HANDOFF.md` §3 decision,
-until 2026-09-07 — three handoffs after it was answered. It is the find that produced
-`HANDOFF.md` §4 step 5b.)*
-
-**One-off scope calls, already decided — don't re-raise.** Iran's SNA vintage,
-the generic MFSM citation (Vietnam, reversed to wired the next day), PH EBEIS
-node-scope, the TW SIPRI direction mismatch and NACE Rev.2 (Türkiye). **Five of the
-original six were verified 2026-09-06 to be recorded in the data's own `_dropped` and
-live entries**, which this section's bar says is where a single-edge call belongs — so
-the reasoning now lives only there, and this line exists to stop the questions being
-re-opened. **The sixth, generic COICOP citations (Iran, Iraq, plus Morocco and Tunisia's
-own CPI-social-protection rounds), is now closed too — ruled 2026-09-08.** Round 24
-(2026-09-08) had wired Iraq's `iq-cpi -> un-coicop-2018` anyway, off a precedent set by
-Morocco's and Tunisia's own edges, without flagging that it was reopening a call this
-line already recorded as decided. Thomas ruled 2026-09-08: drop all three
-(`iq-cpi`, `tn-ins-cpi`, `ma-hcp-ipc` -> `un-coicop-2018`) as `no-document`, matching the
-IMTS-Revision-2 precedent — none of the three source documents names a COICOP edition,
-and for Iraq and Tunisia the cited document's own divisional structure points to the
-pre-2018 vintage rather than the one it was wired to. The "wire with a vintage caveat"
-practice three separate rounds converged on independently did not actually satisfy the
-corpus's own edition-inference standard; converging on a shape doesn't make it correct.
-All three edges are now in their source files' own `_dropped` (reason `no-document`),
-and `candidates-tier-wiring-2026-08-28.json`'s original Iraq entry (which had a stale
-`resolved` note pointing at the since-dropped edge) was updated to match. See
-`HANDOFF.md` §3 and memory `round_coicop_ruling_2026-09-08` for the full record. Do not
-re-mint any of the three off the 2026-08-28/2026-09-06 precedent again — that precedent
-is what this ruling overturned.
