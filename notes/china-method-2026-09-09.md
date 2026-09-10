@@ -78,6 +78,28 @@ rather than left as "couldn't check".
   `/sj/tjbz/` is a 625-byte JS shell pointing at `./gjtjbz/`. Sibling sections
   `/sj/tjbz/gmjjhyfl/` (国民经济行业分类) and `/sj/tjbz/tjypflml/` (统计用产品分类目录) hang off the same
   parent; the latter is a target Yunnan names and nobody has minted.
+- **A THIRD NBS LISTING, found round 40: `https://www.stats.gov.cn/zs/flfg/tjlydnfghflfg/`** — the 法规
+  listing, and the counterpart of the 统计制度 and 统计标准 listings above. Fifteen instruments, one landing
+  page each, full text inline. On it: **关于工资总额组成的规定** (t20250117_1958348, 国家统计局令第1号 of
+  1990-01-01, **minted round 40** and wired to three yearbooks), 全国人口普查条例 (t20241211_1957724),
+  **全国经济普查条例** (t20241211_1957721) — both standing nodeless leads that now have a page and need only a
+  citing document — 中华人民共和国统计法 and 中华人民共和国统计法实施条例 (both already nodes), 统计执法监督检查办法,
+  统计调查证管理办法, 统计执法证管理办法, 部门统计调查项目管理办法, 涉外调查管理办法, 统计违法违纪行为处分规定,
+  统计严重失信企业信用管理办法, 国家统计局行政处罚信息公示办法, 关于更加有效发挥统计监督职能作用的意见.
+  **The lesson is not the URL, it is why nobody had it:** round 38 filed 关于工资总额组成的规定 among instruments
+  "needing a NON-NBS publisher's own page found", so no round ever searched stats.gov.cn for it. **Check who
+  actually issued an instrument before deciding which site to search** — a 规定 issued as a 国家统计局令 is NBS's,
+  whatever section of the corpus's notes it landed in.
+- **A PROVINCIAL BUREAU PUBLISHES A 年定报制度目录, AND IT IS THE PORTAL FOR PROVINCIAL INSTRUMENTS** (round 40).
+  Shanghai's is `https://tjj.sh.gov.cn/ndbzdml/index.html`: 20 numbered reporting systems for the 2025 年报/2026
+  定报 cycle, each a landing page carrying the instrument itself as a first-party PDF. **Read the COVER of the
+  PDF, because it settles authorship in one line** and the catalogue splits cleanly along the title:
+  entries with a plain national title (固定资产投资, 房地产开发, 建筑业, 劳动工资, 批发和零售业, 住宿和餐饮业)
+  read **国家统计局制定 / 上海市统计局补充、印制**; entries whose title carries 上海市 (上海市核算综合统计报表制度,
+  上海市建设领域基本信息综合统计报表制度) read **上海市统计局制定** or **上海市统计局印制** with no NBS line.
+  This is where round 40 found pages for the two trade hubs after eleven rounds, and where it overturned round
+  39's authorship ruling. **Look for the equivalent section on every other bureau site** — it is a sibling of
+  统计制度/统计服务 in Shanghai's nav and nobody has checked whether other provinces expose one.
 - **THE portal: `https://www.stats.gov.cn/xglj/tjj/`** — NBS's own 地方统计网站 directory. One
   fetch returns every provincial bureau URL, first-party and authoritative. The table above came
   from it. `https://www.stats.gov.cn/xglj/` is the parent index (ministries, provincial
@@ -135,7 +157,26 @@ a louder signal and was nearly walked past anyway because 216 files arriving loo
 Try case variants before concluding a path is wrong: lowercase, uppercase, `.htm`/`.html`. Shanghai
 cost one round-trip to settle once the question was asked.
 
-## AUTHORSHIP INSIDE THE SENTENCE DECIDES THE TARGET — round 39
+## AUTHORSHIP — round 39's rule, CORRECTED BY ROUND 40: READ THE INSTRUMENT, NOT THE CITATION
+
+**Round 40 overturned the conclusion below and Thomas ruled on it 2026-09-09. Both edges are live.**
+Round 39 had only the yearbook's sentence. Round 40 opened the instruments themselves, in Shanghai's own
+年定报制度目录, and **both covers read 国家统计局制定 / 上海市统计局补充、印制** — NBS formulated them; Shanghai
+supplemented and printed them. So do the covers of 建筑业统计报表制度 and 劳动工资统计报表制度, which round 39
+wired to NBS nodes off 国家统计局制定的. The corpus was treating four identically-authored instruments two
+different ways, and the yearbook's 上海市统计局制定的 is simply loose about which bureau produced the local
+edition it used.
+
+**What survives, and it is the useful half.** A provincial instrument with a national title IS a real
+category — Shanghai's catalogue proves it, because its 上海市-titled entries say 上海市统计局制定 with no NBS
+line at all. And the look-alike trap is real: 农业产值 remains three yearbooks, three spellings, one apparent
+instrument. **What does not survive is INFERRING the issuer from the citing sentence when the instrument is
+one fetch away.** The citing document is evidence that a title was used; the instrument is the authority on
+who issued it. Fetch it before recording a look-alike, and before minting a provincial twin that may not exist.
+
+The original section follows unchanged, because its reasoning is what round 40 had to test.
+
+## AUTHORSHIP INSIDE THE SENTENCE DECIDES THE TARGET — round 39 (SUPERSEDED, see above)
 
 Shanghai's yearbook names four instruments whose titles match live NBS nodes exactly. Two of the
 four are not NBS's:

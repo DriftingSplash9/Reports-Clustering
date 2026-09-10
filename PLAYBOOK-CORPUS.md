@@ -202,7 +202,13 @@ one line each; open the file named at the end of the line for the evidence behin
 - **`_dropped` entries come in THREE shapes, not two** — a scan reading one misses the others. The
   endpoints are normalised at the LOADER since 2026-09-09, so anything reading `droppedNotes` sees
   one shape; **a script of your own reading the JSON directly does not get that** and must handle
-  all three.
+  all three. **AND THE THIRD SHAPE IS A BLIND SPOT NO CHECK COVERS** (found 2026-09-09 by a
+  verification pass, not by `validate`): `normalizeDroppedNote` reads `source`/`source_report_id`
+  only, so a `report_id`/`candidate_target` note gets NULL endpoints and the contradiction check
+  skips it — **a note saying "NO EDGE" for a pair you have just minted will pass validate silently.**
+  Rule 14's check has to be run BY HAND against this shape, reading the raw JSON. One such note
+  existed (Xi'an → GB/T 4754, round 31) and was found only because the round's own work was
+  independently re-read.
 - A title's parenthetical only counts as its acronym if it abbreviates the title head.
 - The grader's A bar reads presence, not meaning — it once graded A on a NEGATED sentence.
 - Your own basis prose can cap your edge (`WEAK_BASIS_PATTERNS`: consistent / aligned / …).
@@ -226,6 +232,14 @@ one line each; open the file named at the end of the line for the evidence behin
 ### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`
 
 - "The sandbox can't read it" and "the site is walled" are different claims — say which machine.
+- **An instrument's PUBLISHER decides which site to search, and getting it wrong hides the page for rounds.**
+  Round 38 filed 《关于工资总额组成的规定》 among instruments needing "a NON-NBS publisher's own page found"; it is
+  国家统计局令第1号 of 1990 and NBS publishes its full text. Two rounds passed with nobody searching stats.gov.cn.
+  Check the issuing form — a 令, a 规定, a 通知, and who signed it — before concluding whose site to look on.
+- **A first-party page for a NATIONAL instrument may live on a PROVINCIAL bureau's site**, and rule 19's
+  authorship-not-host principle covers it: read the cover, not the domain. Two hubs named by four yearbooks across
+  eleven rounds were minted 2026-09-09 (Thomas ruled) off Shanghai's printing of them, whose covers name NBS as the
+  formulating body. Record the caveat on the node when the issuer's own page has never been found.
 - A 404 from a single-page-app route is not link rot.
 - A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the site.
 - A blocked verdict decays — re-probe before believing your own notes.
@@ -270,10 +284,20 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - A statistical agency's own product NUMBER names the artefact (three conditions).
 - A nomenclature the document says is BASED ON the target names the target — **the document must
   state the derivation**, your own knowledge of it is not evidence.
-- **The ISSUER named in the sentence decides the target, not the title.** A provincial yearbook
-  saying 上海市统计局制定的《固定资产投资统计报表制度》 names the PROVINCE's instrument, which is a
-  mint lead, not the identically-titled NBS node. Two of Shanghai's four exact title matches were
-  its own (round 39). Read the words before the 《.
+- **CORRECTED 2026-09-09 (round 40): the ISSUER named in the CITING SENTENCE does NOT decide the
+  target — the instrument's own cover does.** *(This line read: "The ISSUER named in the sentence
+  decides the target, not the title. A provincial yearbook saying 上海市统计局制定的《固定资产投资统计
+  报表制度》 names the PROVINCE's instrument, which is a mint lead, not the identically-titled NBS
+  node. Two of Shanghai's four exact title matches were its own (round 39). Read the words before
+  the 《." It stood for one day.)* Round 40 opened both instruments in Shanghai's own 年定报制度目录
+  and both covers read 国家统计局制定 / 上海市统计局补充、印制 — as do 建筑业's and 劳动工资's, which
+  round 39 wired to NBS nodes off 国家统计局制定的. Thomas ruled 2026-09-09: wire all four to NBS.
+  **The rule now: a citing sentence proves a TITLE was used; only the instrument proves who ISSUED
+  it. Fetch the instrument before recording a look-alike or minting a provincial twin.** A provincial
+  bureau's 年定报制度目录 is where to fetch it, and its covers are unambiguous — one that really is the
+  province's says 上海市统计局制定 with no NBS line, and its title carries 上海市 too. Unaffected and
+  still true: the 农业产值 look-alike class, three yearbooks giving three titles for one apparent
+  instrument — compare character by character, never by eye.
 - A document naming the target IN ANOTHER LANGUAGE names it (mechanism: `title_aliases`).
 - A parenthetical acronym names it at ≥4 characters AND only if it glosses the WHOLE title.
 - A node carries the PUBLISHER's own title for the artefact, not ours.
