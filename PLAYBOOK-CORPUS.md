@@ -156,26 +156,11 @@ own. **This number goes stale faster than anything else in the file** — it is 
 paragraph §4 step 5b should check first, because "unstamped means not yet
 classified" only holds if the reader knows what is stamped.
 
-**What round 39's two lines would remove: nothing here** — both are rulings that did not exist, and
-one of them (the endpoint-field line) is a guard that now fails rather than a convention to
-remember. The file is 22.3k and the pressure is unchanged: **§2 is still the only part of the
-2026-09-09 restructure that stayed prose instead of becoming an index**, and it is where the next
-cut goes.
-
-**What round 38's two §6 lines would remove: nothing here, and the file under pressure is no longer
-`notes/china-progress.md`** — it was split into a worklist and `notes/china-method-2026-09-09.md`
-on 2026-09-09, 37.6k becoming 23.0k + 19.0k, and the redirect rule that had been buried in it is
-now a §6 line above. The next candidate is this file's own §2, which is the only part of the
-2026-09-09 restructure that stayed prose rather than becoming an index.
-
-**What the two §6 lines added earlier on 2026-09-09 would remove: nothing here.** Both are rulings that did
-not exist before, and §6 is one line per ruling by design. The file actually under pressure is
-`notes/china-progress.md` — 37.6k, still both a worklist and a body of method, and round 37 made it
-10k worse; `HANDOFF.md` §3 carries that as a job.
-
-**What this replaced: nothing, and that is a considered answer** to §1's
-say-what-you-would-remove rule. No existing rule covers who authored the evidence,
-and the §6 bullets this sits beside are all live.
+**Add-and-remove ledger (PLAYBOOK.md §1 asks for it).** Rule 19 replaced nothing — no rule covered who authored the
+evidence. Rounds 38–40 each added §6/§7 lines and removed nothing, and said so in three paragraphs that sat here;
+**round 41 removed those three paragraphs and this one's predecessor (~1.4k) and added two §7 lines (~1.4k) —
+net flat, 25.5k before and after.** The ledger is now this one paragraph; the next round that adds should shorten
+it, not append to it.
 
 
 ---
@@ -301,6 +286,10 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - A document naming the target IN ANOTHER LANGUAGE names it (mechanism: `title_aliases`).
 - A parenthetical acronym names it at ≥4 characters AND only if it glosses the WHOLE title.
 - A node carries the PUBLISHER's own title for the artefact, not ours.
+- **A document that DEFINES a series' unit or scope under a law names the law as its basis; a bureau REPORTING
+  its legal-publicity work about the same law does not** (Thomas, 2026-09-10). Suzhou's 依照《中华人民共和国统计法》
+  规定，开展住户收支与生活状况调查的住户为调查户 is a `legal_basis` edge; Shandong's 统计事业发展综述 mentioning 《统计法》
+  is not (round 40's refusal stands). The test is the sentence's SUBJECT: the statistic, or the bureau's activities.
 - **CLOSED, do not re-derive per country:** the ICLS class; DGDDI's monthly bulletin.
 
 ### 7b. What the route does to the grade → `playbook/corpus-route.md`
@@ -325,6 +314,10 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - Analytical meta-nodes: 5 retired, sweep deliberately stopped — **do not extend by keyword**.
 - **Never sweep the "— high/low-poverty contrast" nodes.** They are real jurisdictions.
 - A country may carry TWO tier edges (REGISTER + SELF-DECLARED); both stay, no dedupe pass.
+- **A revising NOTICE does not mint an edition** (Thomas, 2026-09-10). 国统设管函〔2018〕74号 revised
+  《三次产业划分规定（2012）》 onto GB/T 4754-2017 and NBS never retitled it: ONE node, the 2012 title, URL the 2012 text,
+  the notice recorded in the description. A citation DATED to the revision reaches the node; a bare title does not,
+  because it cannot say which state it means. Contrast GB/T 4754-2017, a real new edition with its own number.
 
 ### 7d. Parked and closed → `playbook/corpus-nodes.md`
 

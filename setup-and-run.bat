@@ -31,7 +31,7 @@ if exist package-lock.json del /q package-lock.json
 
 echo Installing dependencies. This takes a couple of minutes.
 echo.
-call npm install --no-audit --no-fund
+call npm install --no-audit --no-fund --legacy-peer-deps
 if errorlevel 1 (
   echo.
   echo ================================================
