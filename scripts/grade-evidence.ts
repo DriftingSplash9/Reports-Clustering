@@ -67,7 +67,7 @@
  */
 import { execFile } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -96,8 +96,17 @@ const UA =
 
 /** Per-URL ceiling. Government statistics sites are often slow, not dead. */
 const TIMEOUT_S = 45
-/** Wall clock for an ARCHIVE body only — see the `--max-time` comment in `fetchRaw`. */
-const ARCHIVE_TIMEOUT_S = 300
+/**
+ * Wall clock for an ARCHIVE body only — see the `--max-time` comment in `fetchRaw`.
+ * 600, not 300, since 2026-09-10 (round 42): Guangdong's 21,520,465-byte CD
+ * edition arrives from stats.gd.gov.cn at ~65 KB/s and needs ~330 s; at 300 s
+ * curl cut it at exactly 19,410,770 bytes on two consecutive runs an hour
+ * apart, which graded fourteen live A edges C on `network:curl-28`. A
+ * deterministic truncation is not a bad network day, and the §7b re-grade rule
+ * (never write a grade DOWN on one) only holds if the ceiling is above the
+ * slowest first-party archive the corpus cites.
+ */
+const ARCHIVE_TIMEOUT_S = 600
 
 /**
  * The second PDF text extractor, run out of process. Written for the transport
@@ -1450,19 +1459,22 @@ async function extractZipDocs(bodyPath: string): Promise<string> {
     }
     const files: string[] = []
     const docFiles: string[] = []
+    const sheetFiles: string[] = []
     const walk = (d: string, depth: number) => {
-      if (depth > 8 || files.length + docFiles.length > 4000) return
+      if (depth > 8 || files.length + docFiles.length + sheetFiles.length > 4000) return
       for (const e of readdirSync(d, { withFileTypes: true })) {
         const full = join(d, e.name)
         if (e.isDirectory()) walk(full, depth + 1)
         else if (/\.(html?|txt|csv|md)$/i.test(e.name)) files.push(full)
         // `~$` skips Word's lock files, which are not documents.
         else if (/\.(docx|pdf)$/i.test(e.name) && !/^~\$/.test(e.name)) docFiles.push(full)
+        else if (/\.(xlsx|xls)$/i.test(e.name) && !/^~\$/.test(e.name)) sheetFiles.push(full)
       }
     }
     walk(dir, 0)
     files.sort()
     docFiles.sort()
+    sheetFiles.sort()
     const parts: string[] = []
     let bytes = 0
     for (const f of files) {
@@ -1512,10 +1524,96 @@ async function extractZipDocs(bodyPath: string): Promise<string> {
       parts.push(chunk)
       bytes += Buffer.byteLength(chunk, 'utf8')
     }
+    // THIRD PASS, spreadsheets, and it runs THIRD on purpose (2026-09-10, round
+    // 42) — after markup and after docx/pdf, for the same reason the second
+    // pass runs second: it spends whatever budget is left and can only ADD
+    // text, so every zip record already committed extracts what it extracted
+    // before, in the same order, with this appended.
+    //
+    // Why it is needed: a yearbook's TABLE NOTES name instruments as often as
+    // its chapter notes do (Yunnan's 关于市场主体统计分类的划分规定 edge came from
+    // the note under table 1-12; Hubei's tables 1-6, 3-2 and 13-6 name 中国统计
+    // 年鉴, 关于市场主体统计分类的划分规定 and 统计上大中小微型企业划分办法 by
+    // title), and Yunnan's graded only because its zip ALSO ships the whole
+    // book as one PDF. Hubei's zip is 340 legacy .xls and 29 .xlsx and nothing
+    // else that carries the notes, so without this pass the zip that Thomas's
+    // 2026-09-08 ruling says IS a direct read extracts none of them and the
+    // edges grade C `no-extractor` against a document that names the target
+    // in full. The .xlsx reader is `extractXlsx`, the same one the fetcher's
+    // own xlsx branch uses. A legacy binary .xls has no XML to read, so it is
+    // converted with `soffice --headless --convert-to xlsx` — batched per
+    // source directory in ONE invocation (a process start costs ~4 s, 340 of
+    // them would cost 20 minutes; one call converts a directory in seconds),
+    // written under a per-directory subfolder so two chapters' identically
+    // named 续表 files cannot collide, and read back with the same reader. A
+    // missing soffice, or a file it refuses, is skipped, never an error: the
+    // markup and document passes above are untouched either way.
+    if (sheetFiles.length && bytes <= TEXT_CAP_BYTES) {
+      const legacy = sheetFiles.filter((f) => /\.xls$/i.test(f))
+      const converted = new Map<string, string>()
+      if (legacy.length) {
+        const convRoot = join(dir, '__xls-as-xlsx')
+        const byDir = new Map<string, string[]>()
+        for (const f of legacy) {
+          const d = dirname(f)
+          byDir.set(d, [...(byDir.get(d) ?? []), f])
+        }
+        let n = 0
+        for (const [d, group] of byDir) {
+          const out = join(convRoot, String(n++))
+          mkdirSync(out, { recursive: true })
+          try {
+            await execFileAsync('soffice', ['--headless', '--convert-to', 'xlsx', '--outdir', out, ...group], {
+              maxBuffer: 64 << 20,
+              timeout: 10 * 60 * 1000,
+            })
+          } catch {
+            /* whatever landed in `out` is used below; the rest is skipped */
+          }
+          for (const f of group) {
+            const target = join(out, f.slice(d.length + 1).replace(/\.xls$/i, '.xlsx'))
+            if (existsSync(target)) converted.set(f, target)
+          }
+        }
+      }
+      for (const f of sheetFiles) {
+        if (bytes > TEXT_CAP_BYTES) break
+        const src = /\.xls$/i.test(f) ? converted.get(f) : f
+        if (!src) continue
+        let body = ''
+        try { body = await extractXlsx(src) } catch { continue }
+        if (!body.trim()) continue
+        const chunk = `\n[zip: ${f.slice(dir.length + 1)}]\n${body}\n`
+        parts.push(chunk)
+        bytes += Buffer.byteLength(chunk, 'utf8')
+      }
+    }
     return parts.join('')
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }
+}
+
+/**
+ * Does this archive carry `word/document.xml`? The test that decides a docx when
+ * the server's content-type and the URL both say something else (round 44).
+ * `unzip -Z1` lists names without extracting; a failure is a No, never a throw.
+ */
+async function zipHasWordDocument(bodyPath: string): Promise<boolean> {
+  try {
+    const { stdout } = await execFileAsync('unzip', ['-Z1', bodyPath], { maxBuffer: 8 << 20 })
+    return stdout.split('\n').some((n) => n.trim() === 'word/document.xml')
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Compound File Binary magic — the container legacy `.doc`, `.xls` and `.ppt`
+ * all use. Eight bytes, fixed since 1997: D0 CF 11 E0 A1 B1 1A E1.
+ */
+function isCfb(body: Buffer): boolean {
+  return body.subarray(0, 8).toString('hex') === 'd0cf11e0a1b11ae1'
 }
 
 async function extractXlsx(bodyPath: string): Promise<string> {
@@ -1602,7 +1700,31 @@ async function fetchRaw(url: string): Promise<Fetched> {
   try {
     meta = await run([])
   } catch {
-    try {
+    // **An ARCHIVE that fails in transit is RESUMED, up to three times, before
+    // it is called unreachable** (2026-09-10, round 42). stats.gd.gov.cn resets
+    // or stalls the 21.5 MB CD edition partway through more often than not —
+    // one run cut it at 19,410,770 bytes twice, an hour apart — and the same
+    // host serves the remainder in seconds on the next connection. `-C -`
+    // continues from whatever `bodyPath` already holds, so three resumes cost
+    // a few seconds each and never redownload what arrived. Narrow by
+    // construction, like the archive timeout above: keyed on the extension, so
+    // no page fetch changes; a host that refuses ranges makes curl fail again
+    // and the -k attempt below runs exactly as it always did. Without this the
+    // fourteen Guangdong edges graded C on `network:curl-28` from a document
+    // that is fine, and §7b's "never write a grade down on a bad network day"
+    // only holds if the fetcher can tell a flaky host from a dead one.
+    let resumed: typeof meta | null = null
+    if (/\.(zip|7z|tar\.gz|tgz)(\?|#|$)/i.test(url)) {
+      for (let attempt = 0; attempt < 3 && !resumed; attempt++) {
+        try {
+          resumed = await run(['-C', '-'])
+        } catch {
+          /* try again from wherever the body stopped */
+        }
+      }
+    }
+    if (resumed) meta = resumed
+    else try {
       // Second and last attempt, with certificate checking off. A self-signed
       // or expired cert is a real property of several ministry hosts and is
       // not a reason to call a document unreachable; anything that fails here
@@ -1685,12 +1807,81 @@ async function fetchRaw(url: string): Promise<Fetched> {
       // `empty:no-extractor` — the eight browser-pass edges this branch is for.
       text = await extractXlsx(bodyPath)
       extractor = 'xlsx'
-    } else if (isZip && /officedocument|docx/i.test(meta.ctype + url)) {
+    } else if (isZip && (/officedocument|docx/i.test(meta.ctype + url) || (await zipHasWordDocument(bodyPath)))) {
+      // **A .docx SERVED UNDER A .doc NAME IS STILL A .docx** (2026-09-10, round
+      // 44). NBS attaches its 统计制度 instruments as `P0202604....doc` with
+      // `content-type: application/msword`, and several of those files are real
+      // Word 2007+ zips saved under the old extension. Neither the ctype nor the
+      // URL says `officedocument`, so the condition above missed them and they
+      // fell through to the general archive branch, which walks inner
+      // html/txt/csv/md, docx and xlsx names and finds none — `empty:no-extractor`
+      // on a document that reads perfectly. The added test asks the ARCHIVE what
+      // it is instead of asking the server: `word/document.xml` present means
+      // docx, whatever it is called. Narrow by construction — it can only fire on
+      // a body that is already a zip AND already carries the docx inner path, so
+      // no existing record changes.
       const { stdout } = await execFileAsync('unzip', ['-p', bodyPath, 'word/document.xml'], {
         maxBuffer: 64 << 20,
       })
       text = stripHtml(stdout)
       extractor = 'docx'
+    } else if (isCfb(body)) {
+      // **LEGACY BINARY WORD IS CONVERTED, NOT CALLED UNREADABLE** (2026-09-10,
+      // round 44). The rest of NBS's 统计制度 attachments are genuine
+      // Compound-File `.doc` — WPS Office output, no XML anywhere in them — and
+      // they carry the whole instrument: the 依照《中华人民共和国统计法》 sentence
+      // that makes a reporting system's legal basis, the GB/T 4754 adoption line,
+      // and the sentence naming which yearbook publishes the results. Twenty-four
+      // instruments hang off `https://www.stats.gov.cn/sj/tjzd/` this way and no
+      // round could read one.
+      //
+      // This is the FOURTH branch of the same shape and takes the same defence as
+      // round 42's `.xls` pass: `soffice --headless --convert-to docx` is already
+      // trusted inside `extractZipDocs`, the output is read by the docx reader
+      // above rather than by anything new, and a missing or failing soffice
+      // leaves `text` empty exactly as before. Keyed on the file's own CFB magic,
+      // not on the extension, and NO live edge in this corpus cites a `.doc`
+      // (checked 2026-09-10: two node `url` fields, zero `evidence_url`), so it
+      // cannot move an existing grade. Legacy `.xls` and `.ppt` share that magic;
+      // they convert to a docx of nothing and land on the tiny-body gate, which
+      // is the honest answer for them.
+      const conv = join(dir, '__doc-as-docx')
+      mkdirSync(conv, { recursive: true })
+      const named = join(dir, 'body.doc')
+      try {
+        copyFileSync(bodyPath, named)
+        // **A PRIVATE USER PROFILE PER CONVERSION, or concurrent fetches eat each
+        // other** (measured 2026-09-10, the round that added this branch). LibreOffice
+        // takes an exclusive lock on `~/.config/libreoffice`, so with the runner at its
+        // default concurrency the first conversion wins and every other one exits
+        // without writing an output — the edge then records `empty:no-extractor`
+        // against a document that reads perfectly, and WHICH edges fail changes from
+        // run to run. Two runs over the same 39 edges gave 2 and then 5 such failures
+        // before this line, and 0 after. `-env:UserInstallation` points each conversion
+        // at its own throwaway profile inside the request's temp dir, which is removed
+        // with everything else below. The `.xls` pass in `extractZipDocs` carries the
+        // same latent risk and has not been seen to fire, because it runs once per
+        // archive rather than once per edge; left alone deliberately rather than
+        // changed in a round that cannot measure it.
+        const profile = join(dir, '__lo-profile')
+        await execFileAsync('soffice', [
+          `-env:UserInstallation=file://${profile}`,
+          '--headless', '--convert-to', 'docx', '--outdir', conv, named,
+        ], {
+          maxBuffer: 64 << 20,
+          timeout: 5 * 60 * 1000,
+        })
+        const out = join(conv, 'body.docx')
+        if (existsSync(out)) {
+          const { stdout } = await execFileAsync('unzip', ['-p', out, 'word/document.xml'], {
+            maxBuffer: 64 << 20,
+          })
+          text = stripHtml(stdout)
+          extractor = 'docx'
+        }
+      } catch {
+        /* soffice is the reader of last resort, never what a run depends on */
+      }
     } else if (isZip) {
       // LAST of the three zip branches on purpose: xlsx and docx are single
       // documents with a known inner path, this is the general case — an archive

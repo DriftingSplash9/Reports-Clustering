@@ -11,11 +11,11 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 round narrative. Finished items LEAVE (§4 step 4); the round's memory entry is their
 record. The gauge is the read-cost percentage in §1, not a character count.
 
-Last updated: 2026-09-10 (handoff 084, §2/§3 edited in place after round 44 — not a handoff, see §4 — the superseded state is
-`archive/Previous Handoffs/handoff084.md`, copied and sha256-verified before this rewrite. **84 is
+Last updated: 2026-09-10 (handoff 083, §2/§3 edited mid-round after round 42 — not a handoff, no archive; the superseded state is
+`archive/Previous Handoffs/handoff083.md`, copied and sha256-verified before this rewrite. **83 is
 divisible by neither 5 nor 20, so no review ran.** Next 5 is 085; **next 20 is 100, which is also the first
 archive crossing of a hundred** and the only condition that triggers step 5b's past-sweeps recap question.
-Written after round 42, the device shell down for the whole session — every file went stage →
+Written after round 41, the device shell being down for the whole session — every file went stage →
 container sandbox → `device_commit_files`, so mtimes on disk are the commit's, not the edit's.)
 
 ---
@@ -68,67 +68,91 @@ with a file, the file wins.**
 
 ### Read cost — the bloat gauge, refreshed every handoff
 
-**THE NUMBER THOMAS ASKED FOR: a corpus round reads 7.3% of its context before he types a prompt, a
-renderer round 5.8%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
+**THE NUMBER THOMAS ASKED FOR: a corpus round reads 7.2% of its context before he types a prompt, a
+renderer round 5.7%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 21.5k + CORPUS index 27.2k + PLAYBOOK 11.5k + CLAUDE 1.5k | 61.7k | 15.4k | **7.7%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 48.1k | 12.0k | **6.0%** |
-| *was, after round 43 (handoff 084)* | *58.5k / 46.5k* | *14.6k / 11.6k* | *7.3% / 5.8%* |
-| *was, after round 41 (handoff 083)* | *57.8k / 45.8k* | *14.4k / 11.5k* | *7.2% / 5.7%* |
+| always: HANDOFF 19.3k + CORPUS index 25.5k + PLAYBOOK 11.5k + CLAUDE 1.5k | 57.8k | 14.4k | **7.2%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 45.8k | 11.5k | **5.7%** |
 | *was, after round 40 (handoff 082 + one mid-round edit)* | *62.8k / 50.0k* | *15.7k / 12.5k* | *7.9% / 6.3%* |
+| *was, after round 39* | *58.4k / 49.1k* | *14.6k / 12.3k* | *7.3% / 6.1%* |
 | *was, after round 37* | *50.9k / 46.2k* | *12.7k / 11.6k* | *6.4% / 5.8%* |
 
-**Handoff 084: flat to within a tenth of a point (this file 19.3k → 20.0k).** Round 42's mid-round edit had
-taken it to 22.2k; the handoff swept the round-41 rulings paragraph (now `PLAYBOOK-CORPUS.md` §7 lines), the
-"third shape bitten twice" paragraph (a §6 line) and the rounds 38–40 pointer paragraph (its portals are all in
-`notes/china-method-2026-09-09.md`), and added one paragraph on the grader changes and two [Thomas] questions.
-`PLAYBOOK-CORPUS.md` untouched at 25.5k — round 42 added no §6/§7 line; its two traps went to the China method
-file because both were met on Chinese documents and neither has bitten elsewhere yet. Still the largest
-always-read file and nothing sweeps a playbook; its §2 is where the next cut goes. Keep this section to the
-table and one paragraph.
-
-**Round 44 edited §2/§3 in place and added two universal §6 lines to `PLAYBOOK-CORPUS.md`: +0.4 of a point on the corpus read, +0.2 on the renderer's.** The corpus index is 27.2k and is still the largest always-read file; its §2 is where the next cut goes.
+**Handoff 083: down 0.7pp / 0.6pp, all of it in this file (24.3k → 19.3k) — the round-40 five-point narrative
+and round 41's own mid-round block both left §2 for memory, and §3's [Thomas] emptied.** `PLAYBOOK-CORPUS.md`
+is flat at 25.5k: round 41 added two §7 lines and cut the four "what this would remove" ledger paragraphs
+that had accumulated in its §2, and now carries one ledger paragraph instead. It is still the largest
+always-read file and nothing sweeps a playbook (`PLAYBOOK.md` §1); its §2 remains the only prose section
+of the 2026-09-09 restructure and is where the next cut goes. Keep this section to the table and one paragraph.
 
 **On-demand sizes, 2026-09-10:** `playbook/` naming 15.3k, evidence 10.9k, nodes 9.2k, route 7.1k, hosts
-5.7k; handoff procedure 9.5k; standing-issues 7.9k; **China worklist 35.8k** (grew 4.5k in round 42 — five
-yearbook rows now carry their finished layer inventories) and `china-method-2026-09-09.md` 30.4k (the fourth
-listing and four traps). Rounds 31–42 opened at most one `playbook/` file each and missed nothing; the routing holds.
+5.7k; handoff procedure 9.5k; standing-issues 7.9k; **China worklist 31.1k** (grew 4k in round 41 — its
+Guangdong and Suzhou rows now carry a layer inventory each — and `china-method-2026-09-09.md` 26.4k).
+Rounds 31–41 opened at most one `playbook/` file each and missed nothing; the routing holds.
 
 ## 2. Current state
 
-Corpus **3,644 reports / 3,311 dependencies**. **1,283 A · 1,416 B · 612 C**, A-share 38.8%.
+Corpus **3,628 reports / 3,266 dependencies**. **1,250 A · 1,404 B · 612 C**, A-share 38.3%.
 **Domains: 46 approved, 0 proposed.** **`validate` exits 0.** **128/128 logic tests**,
 `grade-evidence --selftest` **76/76**, `tsc --noEmit` clean, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back. Last data-changing round is **44**,
-2026-09-10 (slice `cn-round44-2026-09-10.json`: 12 nodes, 39 edges, 27 A / 12 B; the round's story is in its `meta.note`).
-**Orphans: recount from `validate`'s ISOLATED block** — CN is 26 of them.
+`public/corpus-data.json` regenerated and copied back. Last data-changing round is **42**,
+2026-09-10. **ORPHANS: recount** — `validate` prints the ISOLATED block; CN is 27 of them, unchanged
+(round 42 added no nodeless report).
 
 **These numbers are THE count.** §2 supersedes any figure in any other file, without argument —
-`PLAYBOOK.md` §2 rule 4. *(Sandbox note: `package-lock.json` IS on disk and `npm ci --legacy-peer-deps`
-installs clean; `setup-and-run.bat` carries the flag since 2026-09-10.)*
+`PLAYBOOK.md` §2 rule 4. *(Sandbox note: there is no `package-lock.json` on disk, so `npm ci` cannot run;
+`npm install --legacy-peer-deps` is what installs — the fiber/react peer range refuses a plain install.)*
 
-**THE LIVE PROGRAMME IS CHINA, AND ROUND 44 ANSWERED ITS LAST OPEN QUESTION AND OPENED A BIGGER ONE.**
-§3 item 4 asked whether another provincial bureau publishes a 年定报制度目录. **All three do** — Jiangsu's
-`/col/col85333/` is fuller than Shanghai's (26 instruments, the whole instrument attached to each, plus the
-previous cycle), Guangdong splits 国家统计调查项目 (`/pc/`) from 地方统计调查项目 (`/zxdc555/`), Shandong's
-`/col/col6112/` carries 14 of NBS's own summaries. Covers read exactly as round 40 said. **But the round's
-yield was not there: it was on stats.gov.cn.** Every one of the 24 pages on NBS's own 统计制度 listing has a
-five-character body — 具体内容见附件 — and the instrument itself hanging off it as an attachment **nobody had
-ever opened, because the fetcher could not read a legacy binary `.doc`.** Those attachments carry, in a fixed
-house form, the three sentences this corpus wires on: the 依照《中华人民共和国统计法》 legal basis, the
-GB/T 4754 adoption line, and the 统计资料的报送和公布 sentence naming which publication the results appear in.
-**Twelve NBS instrument nodes minted across rounds 29-38 had ZERO out-edges until this round**; they were one
-attachment away from their own basis the whole time.
+**THE LIVE PROGRAMME IS CHINA. THE TWO-LAYER SWEEP IS FINISHED (round 42) AND THE SEAM HAS MOVED TO
+PUBLISHER PAGES.** Round 42 closed the sweep on its last five yearbooks (Nanjing, Jilin, Jiangsu, Hubei,
+Yunnan): 8 edges, all to NBS instruments already in the corpus, from Nanjing's and Jiangsu's per-chapter
+主要统计指标解释 pages and Hubei's spreadsheet table notes; Jilin (224 table pages, 20 divider images) and
+Yunnan (table layer) settled empty. Every reachable yearbook now has every index-listed layer read or
+recorded unreadable — `notes/china-progress.md` → "Two-layer sweep status". **What paid better was the
+publisher hunt Thomas asked for instead of one-node grinding: 7 nodes, 21 edges in one round**, because
+**NBS hosts the full text of every departmental survey system it approves** at
+`https://www.stats.gov.cn/fw/bmdcxmsp/bmzd/` (512 entries, 36 pages — a FOURTH NBS listing, in
+`notes/china-method-2026-09-09.md`) and its 统计出版物 listing carries 中国统计摘要. Minted: 小企业会计准则
+(MOF), 运输货物分类和代码 (MOT, JT/T 19-2001), 全国文化文物和旅游统计调查制度 (MCT), 市场监管统计调查制度 (SAMR),
+外商投资统计调查制度 (MOFCOM), 对外承包工程管理条例 (State Council, legal_basis ×3), 中国统计摘要 (NBS, ×6).
+Slice `cn-round42-2026-09-10.json`; its four `_dropped` notes carry the sweep record, the listing, the
+still-nodeless list and the grader change.
 
-**Three fetcher changes, all additive** (`scripts/grade-evidence.ts`, memory
-`round44_nbs_doc_attachments_2026-09-10`): a zip carrying `word/document.xml` is read as docx whatever the
-ctype and URL say; a CFB (legacy `.doc`/`.xls`/`.ppt`) body is converted with `soffice --convert-to docx` and
-handed to the docx reader — the fourth branch of round 42's `.xls` shape; and **each conversion gets its own
-`-env:UserInstallation` profile**, without which concurrent edges silently lose the LibreOffice lock and
-record `empty:no-extractor` against a document that reads perfectly (measured: 2 then 5 failures over the same
-39 edges, 0 after). No live edge cites a `.doc`, so none of it can move an existing grade.
+**Three things for Thomas to glance at, none blocking (round 42):** (1) Jiangsu and Nanjing write
+《全国文物文化和旅游统计调查制度》 for the publisher's 《全国文化文物和旅游统计调查制度》 — the transposed form is a
+title alias on the node on the `hs` 和/及 precedent and two A edges rest on it; strike the alias and they go.
+(2) Two grader changes in `scripts/grade-evidence.ts`: a third zip pass reads xlsx/xls (Hubei's zip is xls-only)
+and an archive is resumed with `curl -C -` up to three times, ceiling 600 s (Guangdong's host cut the zip at
+19,410,770 bytes three runs running — 14 live A edges would have re-graded C). tsc clean, selftest 76/76.
+(3) Three new edges are B/C on mechanics, reasons in their bases: a space inside a CJK title and a
+line-broken title defeat `namesTarget` (2 × B), and a real 174-character page trips the 200-character wall
+gate (1 × C). A normaliser/gate question for the tooling lane, not a corpus one.
+
+**Two rulings made 2026-09-10, both applied:** (1) 《三次产业划分规定》 is ONE node,
+`cn-nbs-three-sector-division-2012` — the 2012 instrument in its 2018-revised state (国统设管函〔2018〕74号
+is a revising notice, not an edition; NBS never retitled it). A DATED citation reaches it (Guangdong's
+2018年修订的); a bare 《三次产业划分规定》 still does not (national zb03, Jilin zbjs2, Xi'an zb03, Hunan zb02
+stay refused). (2) A yearbook DEFINING a series' unit under 《中华人民共和国统计法》 is a `legal_basis`
+edge (Suzhou zb14 → `cn-statistics-law`); a bureau REPORTING legal-publicity work about the law is not
+(round 40's Shandong refusal stands). Both are now `PLAYBOOK-CORPUS.md` §7 lines. The 统计法 sentence was
+swept the same day: national zb06, Shandong zb10, Xi'an zb08 define 调查户 without citing the law — the
+wording is Suzhou's own, one edge so far.
+
+**The third `_dropped` shape has now bitten twice in two rounds** (Xi'an → GB/T 4754 in round 40, Suzhou
+→ GB/T 4754 in round 41): a `report_id`/`candidate_target` "NO EDGE" note for a pair just minted, invisible
+to `validate`, caught only by the rule-14 hand check. Both rewritten RESOLVED in place. Any round that mints
+against a former "read and empty" verdict must grep that shape by hand.
+
+**Pointers still live from rounds 38–40** (narrative in memory): the national/Shandong/Xi'an `left.htm`
+`zb` layers are swept, Fujian's is unextractable in both layers (settled); 《关于工资总额组成的规定》 is
+国家统计局令第1号 — **check the issuing form before deciding whose site to search**; the THIRD NBS listing
+is `https://www.stats.gov.cn/zs/flfg/tjlydnfghflfg/` (法规), and its `zdgqglpctl/` sub-section holds all
+three census 条例 (农业 minted round 41, 经济/人口 still need a citing document); the 国家统计标准 listing
+`/sj/tjbz/gjtjbz/` is paginated `index_1.html`, `index_2.html` — page one is not the listing; Shanghai's
+年定报制度目录 `https://tjj.sh.gov.cn/ndbzdml/index.html` is where provincial printings of NBS
+instruments live, covers settle authorship, and **the two trade hubs' node URLs are Shanghai's and move if
+an NBS page turns up**.
 
 **Other threads, one line each; narrative is in project memory:**
 
@@ -147,44 +171,32 @@ record `empty:no-extractor` against a document that reads perfectly (measured: 2
 
 ### [Thomas]
 
-*(Empty. Both round-42 questions were ruled 2026-09-10: KEEP the 文物文化 alias; 《企业会计准则》 IS a node — minted round 43 as
-`cn-mof-enterprise-accounting-standards`, the basic standard, three edges.)*
+**Empty.**
 
 ### [Agent]
 
-**Start here: SIX NBS PUBLICATIONS ARE ONE PAGE AWAY FROM AN EDGE EACH, and the sentences are already read
-and stored.** Round 44's instruments name them and the corpus has no node to take them:
-**《第三产业统计年鉴》 three citations** (1962929 statistical units, 1962934 transport, 1962936 services),
-**《国家统计局主要统计信息发布日程表》 four** (1962939, 1962945, 1962946, and 1962947 which names the 2026
-edition by year), 《基本单位统计年鉴》 one, 《中国住户调查年鉴》 one, 《全国企业创新调查年鉴》 one,
-《中国农产品价格调查年鉴》 one. Each is an immediate `uses_data_from` off a sentence in this round's own
-`evidence-cache/` records. **Look on NBS's 统计出版物 listing first** —
-`https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/`, the round-42 find that produced 中国统计摘要. Full list and
-counts in `cn-round44-2026-09-10.json`'s fourth `_dropped` note.
+**Start here: the publisher hunt pays 3-6 edges per node found; the sweep is done.**
 
-1. **Round 44 closed §3 item 4 and it leaves.** The answer is YES for all three bureaux and it is written up
-   in §2 and in the round's second `_dropped` note. The catalogues are now known portals: Jiangsu
-   `tj.jiangsu.gov.cn/col/col85333/` (26 instruments, whole document attached to each), Guangdong
-   `stats.gd.gov.cn/pc/` (national projects; the 一套表 instrument as a 1.3MB .docx) and
-   `stats.gd.gov.cn/zxdc555/` (provincial and municipal instruments — 广东省海洋经济统计调查制度,
-   广东省海洋生产总值核算制度 and a long municipal tail), Shandong `tjj.shandong.gov.cn/col/col6112/`
-   (14 NBS summaries only). **Provincial instruments have stopped being a hunt.**
-2. **FOUR OF THE 24 NBS INSTRUMENTS ARE STILL NODELESS AND THE REASON IS THEIR TARGETS, NOT THEIR PAGES** —
-   部分服务行业规模以上企业 (1962936), 农民工监测调查方案 (1962950), 农民工市民化 (1962951),
-   脱贫县农村住户监测 (1962952). Each becomes a one-edge mint the moment the publication it names has a node;
-   the third `_dropped` note names which. 劳动力调查制度's legal basis is 国办发〔2004〕72号, not the
-   Statistics Law, and that notice has no node either.
-3. **Still unscanned against the 512-title listing without 《》:** Jiangsu, Nanjing, Jilin, Shanghai, Hubei,
-   Yunnan, Wuhan (their 《》 titles were all recorded by rounds 30-42 and none was a listing title; the
-   exposure is unbracketed mentions, which Guangdong's sweep found none of). Low yield; do it only alongside
-   another read of those yearbooks.
-4. **《全国经济普查条例》 and 《全国人口普查条例》 have NBS pages** (`/zs/flfg/zdgqglpctl/`) and the
-   precedent is set (农业 minted round 41). They need a citing document. **Round 43 grepped the CSY (all 56
-   layers) and Guangdong's 47 CD pages for 普查条例: only the agricultural one appears.** Look in the
-   yearbooks not in the saved text — Jiangsu, Shanghai, Nanjing — or drop the item.
-5. **`tj.jiangsu.gov.cn` ANSWERS THE CLOUD CONTAINER AGAIN** (round 44, plain curl, both schemes). Round 43's
-   Knownsec block has decayed — the §6 rule that a blocked verdict decays, demonstrated again. Jiangsu's
-   yearbook and its catalogue are both readable from here without the browser pane.
+1. **《旅游饭店星级的划分与评定》 (GB/T 14308-2010) — page found, not wired.** SAMR's 全国标准信息公共服务平台
+   entry `https://std.samr.gov.cn/gb/search/gbDetailed?id=8CC164ED81FAC57EE05397BE0A0A9BED`. Three citing
+   documents already known: national zb17.pdf, Suzhou zb16.pdf, Xi'an (check which zb). One pass.
+2. **Grep NBS's 部门统计调查制度 listing against every 《…统计调查制度》 a yearbook has named** — the 512-row
+   title list is saved as `Claude outputs/cn-round42-2026-09-10/bmzd_all.tsv`. Known unwired hits with a
+   citing yearbook still to find: 教育事业综合统计调查制度, 民政事业统计调查制度, 海关统计调查制度,
+   全国卫生健康监督统计调查制度, 交通运输综合统计调查制度. Also 《生态环境统计调查制度》 (Jiangsu nj0913) is NOT on
+   it — MEE's own site.
+3. **《国家危险废物名录》 (MEE)** — national zb08 and Jiangsu nj0914; MEE publishes the 2021 edition. One node,
+   two edges.
+4. **Guangdong's `indicators.html` layer was swept for 《》 titles only.** 24 chapters of definitions may
+   name instruments without brackets (按…制度, 依据…办法). The zip is known and 21.5 MB — fetch with `curl -C -`.
+5. **《全国经济普查条例》 and 《全国人口普查条例》 have NBS pages** (`/zs/flfg/zdgqglpctl/`) and the
+   precedent is set (农业 minted round 41 off Guangdong ch11's 根据《全国农业普查条例》…做了调整). They need a
+   citing document: the CSY's and Guangdong's population/economic-census chapters are where to look.
+6. **Does any other provincial bureau publish a 年定报制度目录?** Shanghai's sits beside 统计制度 in its
+   nav. If Shandong, Jiangsu or Guangdong expose one, provincial instruments stop being a hunt.
+7. **《企业会计准则》 (MOF) — scope question first.** Suzhou, Guangdong and Xi'an name it beside 小企业会计准则;
+   the MOF instrument is 企业会计准则——基本准则 (令第33号, amended 令第76号) plus 42 specific standards, and a
+   bare 《企业会计准则》 names the system. Thomas to say whether the basic standard is the node.
 
 **Still open from round 39, unchanged — hosts, not documents.**
 
@@ -198,21 +210,18 @@ counts in `cn-round44-2026-09-10.json`'s fourth `_dropped` note.
   Jiangxi (45M) are the only ones worth a targeted look.
 - **Shanghai's table notes.** 558 table pages; C0101's note names a municipal provider in the first
   one read. Chapter notes are swept; table notes are not.
+- **`zb10.pdf` and `zb27.pdf` of the national yearbook are unread** — a corrupt xref and a 404.
 
 **Nodeless instruments, with citation counts — the bar is the publisher's own page.**
 《机动车注册登记工作规范》 (MPS) **seven** — and REFUSED for now: mps.gov.cn carries only the retitled 2020
 successor 《机动车登记工作规范》 (注册 dropped), the 2008 text the yearbooks name is reprinted on provincial and
 municipal government sites only. 《广播电视人口覆盖率统计技术标准和方法》 (NRTA) three — not the departmental
-listing's 广播电视和网络视听统计调查制度. 《危险废物贮存污染控制标准》 (MEE) one.
+listing's 广播电视和网络视听统计调查制度. 《国家危险废物名录》 (MEE) two, 《危险废物贮存污染控制标准》 (MEE) one.
 《关于统计上划分城乡的规定(试行)》 1999 **three** (Guangdong, Yunnan, Nanjing) and 《…暂行规定》 2006 one — NBS's
 page is the differently-titled 2008 规定, so neither matches; compare characters, not eyes. One citation each:
 《经济普查年度GDP核算方案》 and 《非经济普查年度GDP核算方案》 (NBS, Hunan zb14); 《生态环境统计调查制度》 (MEE, Jiangsu);
 《公路工程技术标准》 (MOT, two vintages). *(Minted round 42 and gone from this list: 小企业会计准则, 运输货物分类和代码,
-对外承包工程管理条例, 中国统计摘要, and the three departmental systems; round 43: 旅游饭店星级的划分与评定 (2010 edition),
-国家危险废物名录 (2016 edition), 人力资源和社会保障统计调查制度, 企业会计准则——基本准则; **round 44: 农业产值与增加值核算统计报表制度**
-— on this list since round 30, and Jiangsu's own 统计制度 catalogue was its page all along.)* **Round 44 also minted
-一套表统计调查制度 off Guangdong's and Jiangsu's printings** (NBS publishes no page for it), which resolved round 31's
-Xi'an mint-lead note in part; Xi'an's 《企业一套表统计调查制度》 and 《工业统计报表制度》 stay refused as different titles. **Shaanxi and Shanghai provincial
+对外承包工程管理条例, 中国统计摘要, and the three departmental systems.)* **Shaanxi and Shanghai provincial
 instruments** — the ruling is made, the research is not.
 
 **Five CN cities still open** — Guangzhou (Chrome-only, zTree JS viewer), Hangzhou, Chengdu,

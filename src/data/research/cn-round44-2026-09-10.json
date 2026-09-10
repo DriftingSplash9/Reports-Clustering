@@ -1,0 +1,633 @@
+{
+ "meta": {
+  "source": "research round 2026-09-10 — CN round 44: HANDOFF 084 §3 [Agent] item 4 (does another provincial bureau publish a 年定报制度目录?) — answered YES for all three of Shandong, Jiangsu and Guangdong, and the answer opened NBS's own 统计制度 attachments",
+  "minted": "2026-09-10",
+  "note": "Round 44, Thomas's brief: 'check on Shandong/Jiangsu/Guangdong - lets finish up everything left in china'. RESULT: 12 nodes, 39 edges. THE ITEM-4 ANSWER IS YES FOR ALL THREE (recorded in the Guangdong _dropped note): Jiangsu's 统计制度 at /col/col85333/ is a fuller 年定报制度目录 than Shanghai's — 26 instruments for the 2025年报/2026定报 cycle, the whole instrument attached to each, plus the previous cycle; Guangdong splits national (/pc/) from local (/zxdc555/) survey projects and attaches the entire 一套表统计调查制度 as a 1.3MB .docx; Shandong's /col/col6112/ carries 14 of NBS's own 主要内容 summaries. Every cover read exactly as round 40 said it would.\n\nBUT THE PROVINCIAL CATALOGUES ARE NOT WHERE THE ROUND WENT. Chasing 一套表统计调查制度 to its publisher led back to NBS's own 统计制度 listing, and there the seam was: EVERY ONE of its 24 instrument pages has a body of five characters — 具体内容见附件 — and the instrument itself hanging off it as an attachment that no round had ever opened. Those attachments carry, in a fixed house form, the three sentences this corpus wires on: 依照《中华人民共和国统计法》，制定本制度 (the legal basis), 本制度执行国民经济行业分类（GB/T 4754—2017）等统一的国家统计分类和编码标准 (the classification), and 统计资料的报送和公布, which names the publications the results are released through. Twelve of the corpus's NBS instrument nodes — minted across rounds 29-38 and every one of them with ZERO out-edges until today — were sitting one attachment away from their own basis.\n\nWHY NOBODY HAD OPENED THEM, and it is a tooling answer, not a research one: the attachments are legacy binary Compound-File .doc served as application/msword. The fetcher read PDF, xlsx, docx and general zips, and a CFB file is none of those, so it fell through to the raw-text branch and graded empty. TWO ADDITIVE FETCHER BRANCHES, both narrow by construction and neither able to move an existing grade (checked: the corpus has two .doc URLs, both node `url` fields, zero evidence_url): (1) an archive carrying `word/document.xml` is read as docx whatever the ctype and URL say — NBS saves some of these as Word 2007+ under a .doc name; (2) a CFB body is converted with `soffice --headless --convert-to docx` and handed to the docx reader, the same defence round 42's .xls pass took, and the fourth branch of that shape.\n\nFIVE PUBLICATION NODES GAINED A title_aliases ENTRY and the reason is a known trap, not a convenience: namesTarget strips ASCII parentheses before matching, so a node titled 'China Rural Statistical Yearbook (中国农村统计年鉴)' is invisible to a Chinese-only document naming it in full. cn-statistical-abstract has carried 中国统计摘要 as an alias since round 42 for exactly this. Added: 中国统计年鉴, 中国农村统计年鉴, 中国县域统计年鉴, 中国城市统计年鉴, 中国能源统计年鉴. The bilingual provincial yearbooks matched on their English titles, which is why this never bit before; NBS's instruments are Chinese-only.\n\nTWO NODES CAME FROM PROVINCIAL PRINTINGS BECAUSE NBS PUBLISHES NO PAGE FOR THEM, on the round-40 precedent Thomas ruled: 一套表统计调查制度 (Guangdong's .docx; Jiangsu prints the identical document) and 农业产值与增加值核算统计报表制度 (Jiangsu's catalogue). Both covers read 国家统计局制定, both nodes carry the caveat. The second closes a title that had been on the nodeless list since round 30 and wires Jiangsu's chapter-10 citation.\n\nTWO OLD LEADS RESOLVED: round 31's Xi'an mint-lead note (part 15's 《一套表统计调查制度》 is now wired; its part-12 《企业一套表统计调查制度》 and 《工业统计报表制度》 stay refused as different titles, and the note says so rather than being retagged, per the endpoint-free-note rule). The national yearbook's own sm16 sentence naming the integrated system — the single hit in the 211 documents round 43 saved — is wired too.\n\nREFUSED, with reasons in the _dropped notes: four of the 24 listed instruments (their publication targets have no node), 劳动力调查制度's legal basis (国办发〔2004〕72号, not the Statistics Law directly), and Xi'an's two look-alike industry titles. Six NBS publications are named by sentences already read and stored and have no node — three citations for 《第三产业统计年鉴》, four for 《国家统计局主要统计信息发布日程表》 — each an immediate edge the moment its page is found; that list is the cheapest thing left in CN and it is recorded here rather than in HANDOFF."
+ },
+ "reports": [
+  {
+   "id": "cn-nbs-integrated-survey-system",
+   "title": "一套表统计调查制度 (Integrated (One-Set-of-Forms) Statistical Survey System)",
+   "title_aliases": [
+    "一套表统计调查制度",
+    "一套表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS instrument behind China's 联网直报 'one set of forms' reporting — the single survey system that collects the annual and periodic returns of every above-threshold unit in industry, construction, wholesale and retail trade, accommodation and catering, real-estate development, services and other investing units, through one integrated form set filed directly to NBS's cloud reporting platform. It carries its own 分类目录 section, which is where the classification standards the whole above-threshold system runs on are bound into it. Reissued annually; the edition read here covers the 2025 annual report and the 2026 periodic returns, cover dated 2025年11月. ISSUER: the cover reads 国家统计局制定 with no provincial line, and 本制度由国家统计局负责解释 — this is an NBS instrument, read on a provincial publisher's copy under PLAYBOOK §7a's read-the-instrument-not-the-citation rule and rule 19's authorship-not-host principle. CAVEAT: NBS's own 统计制度 listing (24 instruments, article ids 1962929-1962952) does NOT carry it and no page for it was found on stats.gov.cn, so the URL is Guangdong's 国家统计调查项目 page, which publishes the whole instrument as a .docx; Jiangsu's 统计制度 catalogue publishes the identical document (art_85333_11737396) with the same cover. Minted round 44.",
+   "cadence_note": "Reissued annually for the following year's 年报/定报 cycle.",
+   "last_updated": null,
+   "url": "http://stats.gd.gov.cn/pc/content/post_4874105.html",
+   "domains": [
+    "statistical-system",
+    "industry",
+    "services"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-energy-survey-system",
+   "title": "能源统计调查制度 (Energy Statistical Survey System)",
+   "title_aliases": [
+    "能源统计调查制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS survey system behind China's energy statistics: production, sales, stocks, purchases, consumption, processing and conversion, energy intensity and the energy balance. Its above-threshold content is collected inside the 一套表统计调查制度 and filed through the 统计云 direct-reporting system; provincial energy balance tables are compiled by each province and submitted to NBS for review. It is the instrument behind the energy chapters of the national yearbook and the Abstract, and behind the China Energy Statistical Yearbook. Reissued annually. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Reissued annually; monthly and annual returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962938.html",
+   "domains": [
+    "energy",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-rural-revitalization-monitoring-system",
+   "title": "乡村振兴统计监测一套表制度（试行） (Rural Revitalisation Statistical Monitoring Integrated Reporting System (Trial))",
+   "title_aliases": [
+    "乡村振兴统计监测一套表制度",
+    "乡村振兴统计监测一套表制度（试行）"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS trial reporting system that collects the annual socio-economic basic-situation returns of every county, township and village in China — the county/township/village layer of official statistics, filed through the national 联网直报 system by county statistical bureaus, township governments and village committees. It is the instrument behind the China County Statistical Yearbook. Still marked 试行. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Annual (统计年报) returns; trial status.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962949.html",
+   "domains": [
+    "agriculture",
+    "living-standards",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-statistical-units-basic-info-system",
+   "title": "统计单位基本情况统计报表制度 (Statistical Reporting System for the Basic Situation of Statistical Units)",
+   "title_aliases": [
+    "统计单位基本情况统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS reporting system that maintains China's 基本单位名录库 — the business register behind every unit-based statistical survey. It collects the basic particulars of legal-person units and establishments, combining unit returns, administrative records from other departments and big-data analysis, and it supplies the frame and sample from which the 一套表 surveys draw. Organised by county-level statistical offices and escalated level by level. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Reissued annually; annual and periodic returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962929.html",
+   "domains": [
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-transport-post-it-reporting-system",
+   "title": "交通邮电互联网软件业统计报表制度 (Statistical Reporting System for Transport, Post and Telecommunications, Internet and Software)",
+   "title_aliases": [
+    "交通邮电互联网软件业统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS reporting system for the transport, postal, telecommunications, internet and software industries. Much of its content is collected from other ministries and their agencies — 交通运输部, 中国民用航空局, 国家铁路局, 工业和信息化部, 国家邮政局, 中国互联网络信息中心 and the provincial vehicle-administration offices of 公安部 — and it is the instrument behind the transport, post and telecommunications chapters of the national yearbook. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Reissued annually; monthly and annual returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962934.html",
+   "domains": [
+    "infrastructure",
+    "services",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-industry-survey-system",
+   "title": "工业统计调查制度 (Industrial Statistical Survey System)",
+   "title_aliases": [
+    "工业统计调查制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS survey system for industrial production and enterprise operations — the instrument behind the above-designated-size industry series: output, sales, producer prices, energy consumption and the financial position of industrial legal-person units. It binds respondents to uniform classifications and codes that statistical offices and reporting units may not vary, and requires source records and statistical ledgers under the Statistics Law. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Reissued annually; monthly, quarterly and annual returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962932.html",
+   "domains": [
+    "industry",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-enterprise-innovation-survey-system",
+   "title": "企业创新活动统计报表制度 (Statistical Reporting System for Enterprise Innovation Activities)",
+   "title_aliases": [
+    "企业创新活动统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS annual reporting system for enterprise innovation — product, process, organisational and marketing innovation, its cooperation partners, obstacles and effects, collected with the entrepreneur questionnaire that rides inside the 一套表 form set. It is the instrument behind the innovation chapter of the national yearbook and behind the 全国企业创新调查年鉴. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Annual (统计年报) returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962941.html",
+   "domains": [
+    "research-innovation",
+    "industry"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-rd-activity-reporting-system",
+   "title": "企业（单位）研发活动统计报表制度 (Statistical Reporting System for Research and Development Activities of Enterprises and Units)",
+   "title_aliases": [
+    "企业（单位）研发活动统计报表制度",
+    "企业(单位)研发活动统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS annual reporting system for R&D activity in enterprises and other units — R&D projects, personnel, internal and external expenditure and their sources — collected inside the 一套表 form set. It is the collection instrument behind China's national R&D expenditure aggregates. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Annual (统计年报) returns.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962940.html",
+   "domains": [
+    "research-innovation",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-agri-value-accounting-system",
+   "title": "农业产值与增加值核算统计报表制度 (Statistical Reporting System for the Accounting of Agricultural Output Value and Value Added)",
+   "title_aliases": [
+    "农业产值与增加值核算统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS reporting system for accounting the output value and value added of agriculture, forestry, animal husbandry and fishery — the comprehensive annual and periodic returns behind provincial agricultural value series, with the output-value, intermediate-consumption and growth-rate accounting methods printed as its appendices. NOT the identically-shaped 农业产值和价格综合统计报表制度 (cn-nbs-agri-output-price-reporting-system), which is a different title and a different instrument — compare character by character, never by eye (PLAYBOOK §7a, the 农业产值 look-alike class). ISSUER: the cover reads 国家统计局制定 / 江苏省统计局补充、印制, the Shanghai pattern round 40 settled — an NBS instrument that the province supplements and prints. CAVEAT: NBS's own 统计制度 listing does not carry it, so the URL is Jiangsu's 统计制度 catalogue page, which publishes the whole instrument. Minted round 44.",
+   "cadence_note": "Reissued annually for the 年报/定报 cycle.",
+   "last_updated": null,
+   "url": "http://tj.jiangsu.gov.cn/art/2026/3/5/art_85333_11737411.html",
+   "domains": [
+    "agriculture",
+    "national-accounts"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-price-circulation-consumption-system",
+   "title": "流通和消费价格统计报表制度 (Statistical Reporting System for Circulation and Consumer Prices)",
+   "title_aliases": [
+    "流通和消费价格统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS survey system behind the consumer price index and the other circulation-stage price series: the prices of the goods and services urban and rural households buy for daily consumption, across 8 major divisions and 268 basic classes, collected by hand-held terminals on a fixed-collector, fixed-outlet, fixed-time basis with defined supplementary sources. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Monthly collection; reissued annually.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962945.html",
+   "domains": [
+    "inflation",
+    "statistical-system"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-realestate-price-survey-system",
+   "title": "房地产价格统计调查制度 (Real Estate Price Statistical Survey System)",
+   "title_aliases": [
+    "房地产价格统计调查制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS survey system behind China's 70-city residential sales and rental price indices — the periodic returns each NBS survey corps files for the cities in its area, released on the published NBS release calendar. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Monthly returns; reissued annually.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962947.html",
+   "domains": [
+    "housing",
+    "inflation"
+   ],
+   "kind": "instrument"
+  },
+  {
+   "id": "cn-nbs-pmi-survey-system",
+   "title": "采购经理调查统计报表制度 (Purchasing Managers Survey Statistical Reporting System)",
+   "title_aliases": [
+    "采购经理调查统计报表制度"
+   ],
+   "publisher": "国家统计局 (National Bureau of Statistics of China)",
+   "country": "CN",
+   "jurisdiction_level": "federal",
+   "region": "China",
+   "description": "The NBS survey system behind China's Purchasing Managers Indices — the monthly enterprise questionnaire from which the manufacturing, non-manufacturing and composite PMIs are compiled, drawn up under the Statistics Law and, as the instrument itself says, 结合国际通行规则. The document read for this round is NBS's own attachment on that page — the instrument's 主要内容 (purpose, scope, content, method, organisation and where the results are published), attached as a legacy binary .doc that no grader run could read until this round's fetcher branch converted it. Minted round 44.",
+   "cadence_note": "Monthly returns; reissued annually.",
+   "last_updated": null,
+   "url": "https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962942.html",
+   "domains": [
+    "industry",
+    "services"
+   ],
+   "kind": "instrument"
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-integrated-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the national yearbook's chapter-19 简要说明 (sm16.htm, 本篇的资料来源) states that its enterprise-informatisation and e-commerce material is compiled by NBS's own service-industry survey centre FROM this instrument's returns, naming it in full: 企业信息化及电子商务情况资料是由国家统计局服务业调查中心根据《一套表统计调查制度》调查资料加工整理而得。 A data dependency, not a methodological one. This is the only occurrence of the title in the 211 yearbook layers round 43 saved, and it sat unwired because the instrument had no node. ROUTE: first-party HTML on stats.gov.cn, read live 2026-09-10 from the cloud container.",
+   "evidence_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/sm16.htm",
+   "evidence_quote": "根据《一套表统计调查制度》调查资料加工整理而得",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-integrated-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the instrument's own cover page states its statutory basis in one line — 本报表制度根据《中华人民共和国统计法》的有关规定制定 — and the two pages that follow reproduce 统计法 第八条 and 第十一条 verbatim as the obligations it binds respondents to. ROUTE: first-party .docx of the whole instrument, linked from Guangdong's 国家统计调查项目 page; the cover reads 国家统计局制定 (rule 19: judge by authorship, not by host). Read live 2026-09-10.",
+   "evidence_url": "http://stats.gd.gov.cn/attachment/0/609/609560/4874105.docx",
+   "evidence_quote": "本报表制度根据《中华人民共和国统计法》的有关规定制定",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-integrated-survey-system",
+   "target_report_id": "cn-gbt-4754-2017",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the instrument's 四、分类目录 section binds the classification standards the whole above-threshold reporting system runs on, and its first entry is the industrial classification, named by title AND number: 1.国民经济行业分类目录及代码（GB/T 4754-2017）（略）. The （略） marks the catalogue as printed separately, not as an optional standard. Word run boundaries put spaces inside the parenthesis in the docx rendering; the stored span is cut to what the extractor emits. ROUTE: first-party .docx, read live 2026-09-10.",
+   "evidence_url": "http://stats.gd.gov.cn/attachment/0/609/609560/4874105.docx",
+   "evidence_quote": "国民经济行业分类目录及代码（ GB/T 4754-2017 ）",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-integrated-survey-system",
+   "target_report_id": "cn-nbs-sme-classification-2017",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the instrument's 指标解释 defines the enterprise-size field of its own unit-basic-information form by reference to the 2017 measures, naming them with the year: 企业规模…依据《统计上大中小微型企业划分办法（2017）》…, and the 分类目录 section lists 统计上大中小微型企业划分办法（略） as entry 3. ROUTE: first-party .docx, read live 2026-09-10.",
+   "evidence_url": "http://stats.gd.gov.cn/attachment/0/609/609560/4874105.docx",
+   "evidence_quote": "统计上大中小微型企业划分办法（20 17 ）",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-energy-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the instrument's 调查目的 states its statutory basis in the standard NBS form — 为了解和反映能源生产、销售、库存、消费等情况…依照《中华人民共和国统计法》，制定本制度。 ROUTE: NBS's own attachment on its 统计制度 landing page, a legacy binary .doc converted by the fetcher's round-44 CFB branch. Read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385559376075.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-energy-survey-system",
+   "target_report_id": "cn-nbs-integrated-survey-system",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the energy system states that its above-threshold content is carried INSIDE the integrated survey system and reported through it — 纳入《一套表统计调查制度》的调查内容，由调查对象通过统计云联网直报系统网上报送数据 — and repeats it under 调查组织方式. Both instruments are NBS's own. ROUTE: NBS attachment, .doc converted by the round-44 CFB branch, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385559376075.doc",
+   "evidence_quote": "纳入《一套表统计调查制度》",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-energy-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument's 统计资料的报送和公布 section names the publications its results are released through, the national yearbook among them: 本制度取得的主要统计资料，将按月度、年度定期通过国家统计局官网、新闻发布会、统计公报、《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》等形式对公众发布。 NBS publishes both ends, so this is the publisher of the target naming the publisher of the source's own input. ROUTE: NBS attachment, .doc converted by the round-44 CFB branch, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385559376075.doc",
+   "evidence_quote": "《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-statistical-abstract",
+   "target_report_id": "cn-nbs-energy-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument's 统计资料的报送和公布 section names the publications its results are released through, the Abstract among them: 本制度取得的主要统计资料，将按月度、年度定期通过国家统计局官网、新闻发布会、统计公报、《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》等形式对公众发布。 NBS publishes both ends, so this is the publisher of the target naming the publisher of the source's own input. ROUTE: NBS attachment, .doc converted by the round-44 CFB branch, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385559376075.doc",
+   "evidence_quote": "《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-energy-statistical-yearbook",
+   "target_report_id": "cn-nbs-energy-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument's 统计资料的报送和公布 section names the publications its results are released through, the China Energy Statistical Yearbook among them: 本制度取得的主要统计资料，将按月度、年度定期通过国家统计局官网、新闻发布会、统计公报、《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》等形式对公众发布。 NBS publishes both ends, so this is the publisher of the target naming the publisher of the source's own input. ROUTE: NBS attachment, .doc converted by the round-44 CFB branch, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385559376075.doc",
+   "evidence_quote": "《中国统计摘要》《中国统计年鉴》《中国能源统计年鉴》",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-rural-revitalization-monitoring-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the instrument's 调查目的 names the Statistics Law as what it is made under — 为全面反映农业农村农民基本情况和乡村振兴战略实施情况…根据《中华人民共和国统计法》，制定本报表制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402389030338118.doc",
+   "evidence_quote": "根据《中华人民共和国统计法》，制定本报表制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-rural-revitalization-monitoring-system",
+   "target_report_id": "cn-gbt-4754-2017",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the instrument states outright which classification standards it runs on, naming the industrial classification by title and number: 本制度执行国民经济行业分类（GB/T4754-2017）等统一的国家统计分类和编码标准。 Word run boundaries put a space inside the parenthesis in the docx rendering. ROUTE: NBS attachment, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402389030338118.doc",
+   "evidence_quote": "本制度执行国民经济行业分类（ GB/T4754-2017 ）",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-county-statistical-yearbook",
+   "target_report_id": "cn-nbs-rural-revitalization-monitoring-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument names the publication its returns are released through — 本制度所产生的统计成果主要通过《中国县域统计年鉴》对外发布。 Both are NBS's. ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402389030338118.doc",
+   "evidence_quote": "主要通过《中国县域统计年鉴》对外发布",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-statistical-units-basic-info-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为及时反映全国统计单位的增减变动情况，做好基本单位名录库的维护更新工作…依照《中华人民共和国统计法》，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, a legacy binary .doc read via the fetcher's round-44 CFB branch. Read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402361923134188.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-statistical-units-basic-info-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument names the publications its results are released through, the national yearbook among them: 本制度取得的主要统计资料，将通过《基本单位统计年鉴》、《中国统计年鉴》、《中国第三产业统计年鉴》公布。 ROUTE: NBS attachment, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402361923134188.doc",
+   "evidence_quote": "《基本单位统计年鉴》、《中国统计年鉴》",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-transport-post-it-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为了解全国交通运输邮电互联网软件业生产经营活动的基本情况…依照《中华人民共和国统计法》，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402384285711397.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-transport-post-it-reporting-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 本制度中主要月度统计资料通过国家统计局宏观数据库每月对外公布；主要年度统计资料通过《中国统计年鉴》《第三产业统计年鉴》对外公布。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402384285711397.doc",
+   "evidence_quote": "通过《中国统计年鉴》《第三产业统计年鉴》对外公布",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-industry-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为了解全国工业生产经营活动的基本情况…依照《中华人民共和国统计法》，制定本制度。 The instrument cites the Law a second time for its source-record obligation (按照《统计法》的要求，为保障源头数据质量…). ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382698788146.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-enterprise-innovation-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为全面了解我国企业创新活动的开展情况…依照《中华人民共和国统计法》，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402386687038415.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-enterprise-innovation-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 本制度取得的主要统计资料按年度通过《中国统计年鉴》、《全国企业创新调查年鉴》、国家统计局官方网站等方式公布。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402386687038415.doc",
+   "evidence_quote": "通过《中国统计年鉴》、《全国企业创新调",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-rd-activity-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为全面了解我国企业研发活动的基本情况…依照《中华人民共和国统计法》规定，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402386274006110.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》规定，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-js-statistical-yearbook",
+   "target_report_id": "cn-nbs-agri-value-accounting-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: Jiangsu's chapter-10 简要说明 (农业) names the two instruments its agricultural production material is compiled from: 1．农业生产基本情况：根据《农林牧渔业统计报表制度》《农业产值与增加值核算统计报表制度》的有关资料整理提供。 The title has been on the nodeless list since round 30 for want of a publisher's page; Jiangsu's own 统计制度 catalogue is that page. ROUTE: first-party HTML on tj.jiangsu.gov.cn, read live 2026-09-10 from the cloud container (the host answered plainly; round 43's Knownsec block has decayed).",
+   "evidence_url": "http://tj.jiangsu.gov.cn/2025/nj10/nj1000.htm",
+   "evidence_quote": "《农林牧渔业统计报表制度》《农业产值与增加值核算统计报表制度》",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-cpi",
+   "target_report_id": "cn-nbs-price-circulation-consumption-system",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the instrument opens by naming the index it exists to compile — 调查目的：为编制居民消费价格指数，了解居民消费商品及服务价格变动情况… — and defines its scope as the 8 divisions and 268 basic classes the index is built from. The CPI release is the source; the survey system that collects its prices is the target. ROUTE: NBS attachment on its own 统计制度 landing page, a legacy binary .doc read via the round-44 CFB branch, live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402388028781035.doc",
+   "evidence_quote": "为编制居民消费价格指数",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-price-circulation-consumption-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 按照《国家统计局主要统计信息发布日程表》，通过国家统计局门户网站、国家统计局数据发布库、《中国统计年鉴》等统计出版物、新闻发布会…发布相关统计数据。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402388028781035.doc",
+   "evidence_quote": "《中国统计年鉴》等统计出版物",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-realestate-price-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为全面了解和掌握相关城市房地产价格变动情况，满足国家宏观调控需求，为社会公众提供基础统计信息，根据《中华人民共和国统计法》规定，特制定本统计报表制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402388524729931.doc",
+   "evidence_quote": "根据《中华人民共和国统计法》规定，特制定本统计报表制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-pmi-survey-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为了编制中国采购经理指数…依照《中华人民共和国统计法》的规定，结合国际通行规则，制定本调查制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402387042835023.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》的规定",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-agriculture-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为及时准确反映全国农林牧渔业生产经营活动情况…依照《中华人民共和国统计法》，制定本报表制度。 The node has been in the corpus since 2026-09-08 with no out-edge because NBS's landing page is a stub whose whole body is 具体内容见附件 — the attachment is the instrument, and it is a legacy binary .doc no run could read until this round. ROUTE: NBS attachment, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382070301473.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本报表制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-agriculture-reporting-system",
+   "target_report_id": "cn-gbt-4754-2017",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: 本制度执行国民经济行业分类（GB/T 4754—2017）等统一的国家统计分类和编码标准。 Note the EM DASH in NBS's own spelling of the number; the stored span is cut before it. ROUTE: NBS attachment, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382070301473.doc",
+   "evidence_quote": "本制度执行 国民经济行业分类",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-rural-statistical-yearbook",
+   "target_report_id": "cn-nbs-agriculture-reporting-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the instrument names the publications its results are released through, the China Rural Statistical Yearbook among them: 本报表制度所产生的统计成果，主要通过国家统计局的统计公报、新闻发布会、中国统计年鉴、中国农村统计年鉴、国家统计局官网或其它统计资料等形式对外发布。 NBS publishes both. The Rural Yearbook node had no edge at all before this. ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `quote-found-target-not-named` at coverage 1.00 — the quote is verbatim and the document is the instrument itself. NBS's WPS export splits the instrument's own title across Word run boundaries on the cover (农林牧渔业 统计报表制度, 固定资产投资 统计 报表 制度, 工业生产者价格 统计调查制度), and `stripHtml` puts a space at every run boundary, so `namesTarget` cannot see the title it is looking at — the round-42 whitespace-inside-a-CJK-title class, on the publisher's own document this time. Not gamed with a spaced alias, which that ruling forbids; the B is honest until the normaliser question is answered.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382070301473.doc",
+   "evidence_quote": "中国统计年鉴、中国农村统计年鉴",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-agri-output-price-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为客观反映农村经济发展成果、全国主要农产品生产者价格、集贸市场价格走势…依照《中华人民共和国统计法》的规定，制定本报表制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382443587100.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》的规定，制定本报表制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-agri-output-price-reporting-system",
+   "target_report_id": "cn-gbt-4754-2017",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: 本制度执行国民经济行业分类（GB/T 4754—2017）等统一的国家统计分类和编码标准。 Em dash in NBS's own number; span cut before it. ROUTE: NBS attachment, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382443587100.doc",
+   "evidence_quote": "本制度执行 国民经济行业分类",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-rural-statistical-yearbook",
+   "target_report_id": "cn-nbs-agri-output-price-reporting-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 本报表制度所产生的统计成果，主要通过国家统计局的统计公报、新闻发布会、中国统计年鉴、中国农村统计年鉴、中国农产品价格调查年鉴、国家统计局官网或其它统计资料等形式对外发布。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382443587100.doc",
+   "evidence_quote": "中国统计年鉴、中国农村统计年鉴",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-nbs-construction-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为了解全国建筑业企业生产经营的基本情况，为制定政策和计划、进行经济管理与调控提供依据，依照《中华人民共和国统计法》，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402382954425380.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-wage-reporting-system",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为及时、准确地搜集、整理法人单位从业人员人数及工资总额等方面的资料…根据《中华人民共和国统计法》，制定本制度。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385297682106.doc",
+   "evidence_quote": "根据《中华人民共和国统计法》，制定本制度",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-nbs-household-survey-scheme",
+   "target_report_id": "cn-statistics-law",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: 为全面、准确、及时了解全国和各地区城乡居民收入、消费及其他生活状况…依照《中华人民共和国统计法》规定，开展住户收支与生活状况调查（以下简称住户调查）。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402387662795559.doc",
+   "evidence_quote": "依照《中华人民共和国统计法》规定，开展住户收支与生活状况调查",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-household-survey-scheme",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 年度资料除上述途径外，还在次年通过统计公报、《中国统计年鉴》和《中国住户调查年鉴》公布。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `artefact-named-elsewhere-in-document` and that is the honest reading — this instrument IS the document, and its publication sentence calls itself 本制度, so no contiguous span can both state the dependency and name the target. The title is on the document's own cover, which is why the reason is `named-elsewhere` and not `target-not-named`. Not gamed: the span stays the sentence that carries the claim (§6, never edit a quote to move a grade).",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402387662795559.doc",
+   "evidence_quote": "《中国统计年鉴》和《中国住户调查年",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-fixed-investment-reporting-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 本制度取得的主要统计资料，月度资料将按照《国家统计局主要统计信息发布日程表》通过国家统计局网站发布，年度资料于年后通过《中国统计年鉴》等公布。 ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10. GRADE: the grader returns B `quote-found-target-not-named` at coverage 1.00 — the quote is verbatim and the document is the instrument itself. NBS's WPS export splits the instrument's own title across Word run boundaries on the cover (农林牧渔业 统计报表制度, 固定资产投资 统计 报表 制度, 工业生产者价格 统计调查制度), and `stripHtml` puts a space at every run boundary, so `namesTarget` cannot see the title it is looking at — the round-42 whitespace-inside-a-CJK-title class, on the publisher's own document this time. Not gamed with a spaced alias, which that ruling forbids; the B is honest until the normaliser question is answered.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402385912897550.doc",
+   "evidence_quote": "年后通过《中国统计年鉴》等公布",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-statistical-yearbook",
+   "target_report_id": "cn-nbs-ppi-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: 按照《国家统计局主要统计信息发布日程表》，通过国家统计局门户网站、国家统计局数据发布库、《中国统计年鉴》等统计出版物、新闻发布会…发布相关统计数据。 ROUTE: NBS attachment, read live 2026-09-10. GRADE: the grader returns B `quote-found-target-not-named` at coverage 1.00 — the quote is verbatim and the document is the instrument itself. NBS's WPS export splits the instrument's own title across Word run boundaries on the cover (农林牧渔业 统计报表制度, 固定资产投资 统计 报表 制度, 工业生产者价格 统计调查制度), and `stripHtml` puts a space at every run boundary, so `namesTarget` cannot see the title it is looking at — the round-42 whitespace-inside-a-CJK-title class, on the publisher's own document this time. Not gamed with a spaced alias, which that ruling forbids; the B is honest until the normaliser question is answered.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402388270123322.doc",
+   "evidence_quote": "《中国统计年鉴》等统计出版物",
+   "evidence_grade": "B"
+  },
+  {
+   "source_report_id": "cn-city-statistical-yearbook",
+   "target_report_id": "cn-nbs-city-development-monitoring-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the monitoring system names the publication its 275 indicators are released through — 主要数据通过《中国城市统计年鉴》或其他统计资料形式发布。 Both are NBS's; the City Yearbook node had one out-edge and no instrument behind it before this. ROUTE: NBS attachment on its own 统计制度 landing page, read live 2026-09-10.",
+   "evidence_url": "https://www.stats.gov.cn/sj/tjzd/202604/P020260402388775686091.doc",
+   "evidence_quote": "主要数据通过《中国城市统计年鉴》",
+   "evidence_grade": "A"
+  },
+  {
+   "source_report_id": "cn-xa-city-statistical-yearbook",
+   "target_report_id": "cn-nbs-integrated-survey-system",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: Xi'an's part-15 简要说明 (交通运输、邮电和信息化) states that its informatisation material is compiled from the integrated survey system's returns, naming it in full: 信息化资料主要根据《一套表统计调查制度》统计数据整理。 Round 31 recorded this as a MINT LEAD, not a refusal — 'none has a matching NBS landing page' — and the lead is resolved by this round's node, whose page is the provincial publishers' printing of the instrument. The line break falls between 主 and 要 in all three renderings, so the stored span starts at 根据. NOT the same instrument as the 《企业一套表统计调查制度》 Xi'an names in part 12 — a different title, refused below. ROUTE: first-party text PDF on tjj.xa.gov.cn, read live 2026-09-10 (the host reset two of three connections; the third served it).",
+   "evidence_url": "https://tjj.xa.gov.cn/tjnj/2025/zk/html/sm15.pdf",
+   "evidence_quote": "根据《一套表统计调查制度》统计数据整理",
+   "evidence_grade": "A"
+  }
+ ],
+ "_dropped": [
+  {
+   "report_id": "cn-xa-city-statistical-yearbook",
+   "candidate_target": "(NBS 企业一套表统计调查制度 / 工业统计报表制度)",
+   "reason": "note",
+   "note": "PARTLY RESOLVED, round 44. Xi'an part 15's 《一套表统计调查制度》 is now WIRED — the node cn-nbs-integrated-survey-system was minted this round off Guangdong's and Jiangsu's printings of the instrument, whose covers read 国家统计局制定. The other two titles in round 31's lead note STAY nodeless and are refused here on the same ground round 31 gave: part 12 says 根据国家统计局制定的《企业一套表统计调查制度》和《工业统计报表制度》, and neither title matches an instrument anyone has found a page for. 《企业一套表统计调查制度》 is not 《一套表统计调查制度》 — a four-character difference at the head of the title, and the two are not to be conflated (the 农业产值 look-alike class). 《工业统计报表制度》 is not NBS's 《工业统计调查制度》 (t20260402_1962932.html, minted this round as cn-nbs-industry-survey-system) — 报表 against 调查, and round 31 flagged exactly this trap. Compare character by character, never by eye."
+  },
+  {
+   "report_id": "cn-gd-statistical-yearbook",
+   "candidate_target": "(provincial 年定报制度目录 survey — HANDOFF 084 §3 [Agent] item 4)",
+   "reason": "note",
+   "note": "ANSWERED, round 44: YES — all three of Shandong, Jiangsu and Guangdong expose the Shanghai-shaped catalogue, and provincial instruments stop being a hunt. JIANGSU is the richest: 统计制度 at /col/col85333/ carries 26 instruments for the 2025年报/2026定报 cycle, one landing page each with the WHOLE instrument attached as .doc (art_85333_117374xx), plus the previous cycle beneath it — six more than Shanghai's 20. GUANGDONG splits it in two: 统计制度 → 国家统计调查项目 (/pc/, one page per year cycle, the whole 一套表统计调查制度 attached as a 1.3MB .docx) and 地方统计调查项目 (/zxdc555/, provincial and municipal instruments, one page each — 广东省海洋经济统计调查制度, 广东省海洋生产总值核算制度 and a long tail of municipal 妇女儿童发展状况 systems). SHANDONG's /col/col6112/ carries 14, but only NBS's own 主要内容 summaries, not the instruments. COVERS READ AS SHANGHAI'S DO: a national title reads 国家统计局制定 (一套表, 农林牧渔业) or 国家统计局制定/江苏省统计局补充、印制 (劳动工资, 农业产值与增加值核算); a title carrying the province's name reads 江苏省统计局制定 (江苏省部门综合统计报表制度) with no NBS line. Round 40's rule holds unchanged on a second and third province."
+  },
+  {
+   "report_id": "cn-nbs-statistical-units-basic-info-system",
+   "candidate_target": "(NBS 统计制度 listing — instruments left nodeless)",
+   "reason": "note",
+   "note": "THE LISTING IS COMPLETE AND ITS RANGE IS CLOSED: 24 instruments, article ids 1962929-1962952 with 1962953+ returning 404, every one carrying its 主要内容 as an attachment. Twelve were minted or already existed and are wired this round. FOUR ARE LEFT NODELESS AND HERE IS WHY, so no later round re-derives it: 部分服务行业规模以上企业统计报表制度 (1962936) publishes through 《统计公报》 and 《第三产业统计年鉴》 — the first is a bare generic title matching two different corpus nodes and the second has no node, so it would mint with zero edges; 农民工监测调查方案 (1962950) and 农民工市民化进程动态监测调查方案 (1962951) both publish only through 《年度全国农民工监测调查报告》, no node; 脱贫县农村住户监测调查方案 (1962952) cites 《中共中央 国务院关于实现巩固拓展脱贫攻坚成果同乡村振兴有效衔接的意见》, a Party-and-State-Council opinion with no node and no publisher page sought. 劳动力调查制度 (1962943, already a node) gains no legal_basis edge here either: it is made under 《国务院办公厅关于建立劳动力调查制度的通知》（国办发〔2004〕72号）, not directly under the Statistics Law, and that notice has no node. Each is a one-edge lead the moment its target exists."
+  },
+  {
+   "report_id": "cn-nbs-integrated-survey-system",
+   "candidate_target": "(第三产业统计年鉴 / 基本单位统计年鉴 / 中国住户调查年鉴 / 全国企业创新调查年鉴 / 中国农产品价格调查年鉴 / 国家统计局主要统计信息发布日程表)",
+   "reason": "note",
+   "note": "SIX NBS PUBLICATIONS NAMED BY THIS ROUND'S INSTRUMENTS WITH NO NODE TO TAKE THEM, each with its citation count from the 24-instrument listing: 《第三产业统计年鉴》 THREE (1962929 statistical units, 1962934 transport, 1962936 services), 《国家统计局主要统计信息发布日程表》 FOUR (1962939 fixed investment, 1962945 circulation prices, 1962946 producer prices, 1962947 real-estate prices — 1962947 names the 2026 edition by year), 《基本单位统计年鉴》 ONE, 《中国住户调查年鉴》 ONE, 《全国企业创新调查年鉴》 ONE, 《中国农产品价格调查年鉴》 ONE. Every one of them would be an immediate uses_data_from edge off a sentence already read and stored — the publication sentence names both ends — so the only thing missing is a first-party page for each publication. NBS's 统计出版物 listing (https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/, the round-42 find that produced 中国统计摘要) is where to look first."
+  }
+ ]
+}

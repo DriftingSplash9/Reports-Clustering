@@ -156,6 +156,11 @@ own. **This number goes stale faster than anything else in the file** — it is 
 paragraph §4 step 5b should check first, because "unstamped means not yet
 classified" only holds if the reader knows what is stamped.
 
+**Round 44 added the two §6 lines above (~1.1k) and removed nothing**, which the ledger below asks the next
+adding round to make up for; both are universal — one is a reader capability every lane inherits, the other a
+naming trap that had been sitting in this file marked "unswept" and is now answered. The China-specific
+detail behind both is in `notes/china-method-2026-09-09.md`, not here.
+
 **Add-and-remove ledger (PLAYBOOK.md §1 asks for it).** Rule 19 replaced nothing — no rule covered who authored the
 evidence. Rounds 38–40 each added §6/§7 lines and removed nothing, and said so in three paragraphs that sat here;
 **round 41 removed those three paragraphs and this one's predecessor (~1.4k) and added two §7 lines (~1.4k) —
@@ -232,7 +237,11 @@ one line each; open the file named at the end of the line for the evidence behin
 - A page's DECLARED CHARSET is honoured since 2026-09-08; before that a gb2312 page was not read
   as a bad quote, it was not read at all.
 - `namesTarget` strips ASCII parentheses BEFORE matching, so a non-Latin name living only inside
-  them is invisible to EVERY door including the CJK one. **The class is unswept.**
+  them is invisible to EVERY door including the CJK one. **The remedy is `title_aliases`, and it
+  bites hardest on PUBLICATION nodes titled `English Name (中文名)`** — five China publication nodes
+  gained their Chinese alias in round 44 after a Chinese-only document naming them in full graded
+  `target-not-named`. It had gone unnoticed because provincial yearbooks are bilingual and matched on
+  the English title. **Check the alias before writing a non-Latin quote against an English-titled node.**
 - A `HOST_INDEX_PREFIXES` entry is a PREFIX unless it says `exact: true`, and it will swallow real
   documents living beneath it.
 - The August 2026 bulk imports carry import habits worth knowing — grep before trusting.
@@ -246,7 +255,16 @@ one line each; open the file named at the end of the line for the evidence behin
   warning and that used to abort the grader's whole zip branch; a zip of `.docx` was invisible to it
   besides. Both fixed 2026-09-09 — recipe and diagnostics in `notes/techniques-cn-yearbooks-2026-09-08.md`.
 - A `.docx` read through `stripHtml` gets a SPACE at every Word run boundary, so the one-text-node
-  quote rule applies to Office documents exactly as it does to HTML.
+  quote rule applies to Office documents exactly as it does to HTML. **And a publisher's export can
+  split its OWN title that way** — NBS's WPS files render 农林牧渔业 统计报表制度 on the cover, which
+  `namesTarget` cannot see (round 44; three honest B `quote-found-target-not-named` edges).
+- **A LEGACY BINARY `.doc` IS READ SINCE 2026-09-10, and a `.docx` under a `.doc` NAME with it.** The
+  fetcher converts a Compound-File body with `soffice --convert-to docx`, and asks an archive whether it
+  holds `word/document.xml` rather than trusting the content-type. Each conversion gets its own
+  `-env:UserInstallation` profile — without it concurrent edges lose the LibreOffice lock and record
+  `empty:no-extractor` against a document that reads perfectly. Why it matters beyond China: an agency that
+  attaches its instrument to an otherwise empty landing page is a shape, not an accident, and every such
+  page graded `empty` before this.
 
 ---
 

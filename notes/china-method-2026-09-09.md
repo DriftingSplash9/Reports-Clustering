@@ -90,6 +90,52 @@ rather than left as "couldn't check".
   "needing a NON-NBS publisher's own page found", so no round ever searched stats.gov.cn for it. **Check who
   actually issued an instrument before deciding which site to search** — a 规定 issued as a 国家统计局令 is NBS's,
   whatever section of the corpus's notes it landed in.
+- **A FOURTH NBS LISTING, found round 42: `https://www.stats.gov.cn/fw/bmdcxmsp/bmzd/`** — 部门统计调查制度, the
+  departmental survey systems NBS APPROVES for other ministries under the Statistics Law, one landing page per
+  instrument with purpose, objects, scope, content, method and organisation inline. 36 pages (`index.html`,
+  `index_1.html` … `index_35.html`), 512 entries, many instruments in two or three editions (the date in the
+  path is the edition). It is where 《全国文化文物和旅游统计调查制度》 (文化和旅游部), 《市场监管统计调查制度》
+  (市场监管总局) and 《外商投资统计调查制度》 (商务部) were found and minted in one round after being filed for
+  four rounds as "needing a NON-NBS publisher's page" — the same mistake as 关于工资总额组成的规定, from the other
+  side: **an instrument another ministry ISSUES can still have its authoritative page on stats.gov.cn, because NBS
+  is the approving body.** Node caveat on each: issuer's page not found, URL on the approving host (rule 19). Also on
+  it, unwired: 教育事业综合统计调查制度, 民政事业统计调查制度, 海关统计调查制度, 全国卫生健康监督统计调查制度,
+  金融业综合统计制度, 交通运输综合统计调查制度, 对外承包工程业务统计调查制度 (NOT the 管理条例), 技术市场统计调查制度,
+  全国假日旅游统计调查制度. NOT on it under the cited title: 生态环境统计调查制度, 广播电视人口覆盖率统计技术标准和方法.
+  Grep the listing before concluding a departmental 统计调查制度 has no page.
+- **NBS's 统计出版物 listing `https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/` is where 中国统计摘要 lives** (round 42):
+  one page per published volume (编者, 出版社, ISBN, 出版时间, 内容简介), newest Abstract entry 2022. Three rounds
+  recorded "no NBS page" for it because nobody looked under 知识 → 统计出版物.
+- **EVERY PAGE ON NBS's 统计制度 LISTING HAS THE INSTRUMENT ATTACHED, AND THE PAGE ITSELF SAYS NOTHING**
+  (round 44). `https://www.stats.gov.cn/sj/tjzd/` — the listing round 30 learned to probe past — serves 24
+  instruments at ids **1962929-1962952** (1962953+ is 404, so the range is closed), and each page's whole body is
+  five characters: 具体内容见附件. The attachment is the instrument's 主要内容 and carries, in a fixed house form,
+  the three sentences this corpus wires on: **依照/根据《中华人民共和国统计法》，制定本制度** (legal basis),
+  **本制度执行国民经济行业分类（GB/T 4754—2017）等统一的国家统计分类和编码标准** (note the EM DASH in NBS's own
+  spelling), and **六、统计资料的报送和公布**, which names the publications the results appear in — that last one
+  gives a `uses_data_from` edge from the yearbook to the instrument, first-party at both ends. Fourteen rounds
+  passed with twelve of these instruments in the corpus and not one out-edge between them, and the reason was not
+  research: **the attachments are legacy binary `.doc` and the grader could not read one.** Fixed round 44 (see
+  the fetcher branches in `HANDOFF.md` §2). Grep the attachment, never the landing page.
+- **A CJK PUBLICATION NODE NEEDS ITS CHINESE TITLE IN `title_aliases`, OR A CHINESE DOCUMENT CANNOT NAME IT**
+  (round 44). `namesTarget` strips ASCII parentheses before matching, so a node titled `China Rural Statistical
+  Yearbook (中国农村统计年鉴)` is invisible to a document that names it in full in Chinese — the §6 line about
+  parentheses, met head-on. It had never bitten because the provincial yearbooks are BILINGUAL and matched on the
+  English title; NBS's instruments are Chinese-only. Five nodes gained an alias this round (中国统计年鉴,
+  中国农村统计年鉴, 中国县域统计年鉴, 中国城市统计年鉴, 中国能源统计年鉴), following cn-statistical-abstract's
+  中国统计摘要 from round 42. **Check the alias before writing a Chinese quote against an English-titled node.**
+- **TWO NBS INSTRUMENTS HAVE NO NBS PAGE AND THE PROVINCES PRINT THEM** (round 44) —
+  《一套表统计调查制度》, the integrated form set behind every above-threshold return, and
+  《农业产值与增加值核算统计报表制度》. Neither is on the 统计制度 listing and the site search is JS-driven and
+  returns nothing. Guangdong attaches the whole 一套表 instrument to `stats.gd.gov.cn/pc/content/post_4874105.html`
+  as a .docx and Jiangsu attaches the identical document at `art_85333_11737396`; Jiangsu attaches the agricultural
+  one at `art_85333_11737411`. Both covers read 国家统计局制定, so both are NBS nodes with the issuer-page caveat —
+  the round-40 precedent Thomas ruled, on a second and third province.
+- **CONCURRENT `soffice` CONVERSIONS EAT EACH OTHER** (round 44, measured). LibreOffice takes an exclusive lock on
+  `~/.config/libreoffice`, so with the grader at its default concurrency the first conversion wins and the rest exit
+  silently — the edge records `empty:no-extractor` against a document that reads perfectly, and WHICH edges fail
+  changes run to run (2 failures, then 5, over the same 39 edges). `-env:UserInstallation=file://<tmpdir>` per
+  conversion fixes it. If you ever convert in parallel outside the grader, do the same.
 - **A PROVINCIAL BUREAU PUBLISHES A 年定报制度目录, AND IT IS THE PORTAL FOR PROVINCIAL INSTRUMENTS** (round 40).
   Shanghai's is `https://tjj.sh.gov.cn/ndbzdml/index.html`: 20 numbered reporting systems for the 2025 年报/2026
   定报 cycle, each a landing page carrying the instrument itself as a first-party PDF. **Read the COVER of the
@@ -123,6 +169,24 @@ rather than left as "couldn't check".
   《文化及相关产业分类管理（经部门审批并领取营业性演出许可证），有观众席、(2018)》 is two columns
   interleaved, not a mangled title. Run both renderings before reading a title as garbled — and the
   grader reads three, so a title broken across the column break still grades A.
+- **WHITESPACE INSIDE A CJK TITLE DEFEATS namesTarget** (round 42). `normalizeForMatch` collapses runs of
+  whitespace to one space and never removes it, so a title the publisher's export split with a stray space
+  (Nanjing's 《三次产业 划分规定》, hesuan/2-4.html) or a PDF broke across a line in every rendering (Shandong's
+  《中国统计 / 摘要 2025》, sm23.pdf) matches nothing, and the edge grades **B `quote-found-target-not-named`**
+  with the title plainly on the page. Two edges carry it this round; do not add a spaced alias to game it — it
+  is a normaliser question for the renderer/tooling lane, and the B is honest until it is answered.
+- **A GENUINE ONE-DEFINITION PAGE UNDER 200 CHARACTERS GRADES C `empty:tiny-body`** (round 42). The fetcher's
+  wall gate treats any 200 with under 200 characters of extracted text as a shell; Shanghai's C1505 (港口货物吞吐量,
+  174 characters) is the publisher's real page and names 《运输货物分类和代码》 in full. Shanghai's per-indicator
+  ZBHTML pages will hit this again. Same answer: record the C with the reason, do not pad the page.
+- **Inside a ZIP, the grader reads html/txt/csv/md, then docx/pdf, then (since round 42) xlsx and legacy xls** —
+  the third pass converts .xls with one batched `soffice --headless --convert-to xlsx` per directory. Hubei's
+  table notes (xls only, no PDF in the zip) were unreadable to it before; Yunnan's graded in round 37 only
+  because its zip also ships the whole book as a PDF. A `[zip: …]` marker in a record now names the workbook.
+- **A FLAKY ARCHIVE HOST IS RESUMED, NOT CALLED DEAD** (round 42). stats.gd.gov.cn reset the 21.5 MB CD edition at
+  19,410,770 bytes on three consecutive grader runs and served the rest in seconds on a fresh connection; the
+  fetcher now retries an archive up to three times with `curl -C -` before recording `network:`, and the
+  archive ceiling is 600 s (was 300). Fourteen live Guangdong A edges would otherwise have re-graded C.
 - **The grader's CJK span floor is 10 characters, and a short Chinese title is under it** (round 38).
   `文化及相关产业分类` is 9 and graded **B `no-quoted-span`** with the document read perfectly and the
   title present; the same edge graded A the moment the stored span was widened to `指《文化及相关产业分类`.
