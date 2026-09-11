@@ -140,12 +140,10 @@ six e-GDDS edges turned on exactly that distinction (a membership is not a
 dependency), and the tag is what would have made the class visible four rounds
 earlier.
 
-**Coverage, so an absent tag is not misread: 302 edges are stamped** — 239 SELF-DECLARED,
-63 REGISTER, 0 THIRD-PARTY, recounted from `src/data/research/*.json` 2026-09-09 (round 39).
-*(This read 286 / 225 / 61 for part of one day, then 297 / 234 / 63 after round 38. Round 38 added 4
-and the count moved by 11, so that earlier figure was already behind its own round when written — which is the paragraph's own
-point, made twice now. Recount, do not trust either number: match `^(SELF-DECLARED|REGISTER|THIRD-PARTY):`
-against the head of every `basis`.)* *(This read "172 edges are
+**Coverage, so an absent tag is not misread: THIS FILE NO LONGER STATES THE FIGURE.** Recount it —
+match `^(SELF-DECLARED|REGISTER|THIRD-PARTY):` against the head of every `basis` in
+`src/data/research/*.json`. *(Stated a figure until 2026-09-10 and was found stale THREE times;
+the four wrong numbers and why they were inevitable are in `notes/doc-audit-2026-09-10.md` §1.)* *(This read "172 edges are
 stamped" from round 8 until the handoff-080 slow-layer sweep. The 172 was round 7's 101 tier
 edges into `imf-e-gdds` / `imf-sdds` / `imf-sdds-plus` plus round 8's 71 NSDP edges, and it went
 stale as later rounds stamped what they touched — which is the practice this paragraph asks for,
@@ -155,6 +153,9 @@ Stamp what you touch; nobody should run a corpus-wide stamping pass as a job of 
 own. **This number goes stale faster than anything else in the file** — it is the
 paragraph §4 step 5b should check first, because "unstamped means not yet
 classified" only holds if the reader knows what is stamped.
+
+**Round 45 added one §6 line above (~0.5k) and removed nothing** — a reader capability, so it binds every lane;
+the Guangzhou/listing specifics behind it went to `notes/china-method-2026-09-09.md`, not here.
 
 **Round 44 added the two §6 lines above (~1.1k) and removed nothing**, which the ledger below asks the next
 adding round to make up for; both are universal — one is a reader capability every lane inherits, the other a
@@ -181,7 +182,8 @@ one line each; open the file named at the end of the line for the evidence behin
 - `public/corpus-data.json` STRIPS `evidence_quote` — an edge read from it always looks unquoted.
 - Take grade counts from `npm run validate`, never from `public/corpus-data.json`.
 - `evidence_quote` IS the span — never run it through `extractQuotedSpans`.
-- Single quotes are not a span delimiter, and 476 live edges quote with them.
+- Single quotes are not a span delimiter, and **many live edges quote with them** *(the "476" that
+  stood here was round 5's backfill READ count, never a live count; `notes/doc-audit-2026-09-10.md` §3)*.
 - A node's TITLE is a matcher input, not just a label (≥60% contiguous run).
 - `normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold to ASCII.
 - Bytes that did not come from the cited URL on the live host cannot make an A.
@@ -258,6 +260,11 @@ one line each; open the file named at the end of the line for the evidence behin
   quote rule applies to Office documents exactly as it does to HTML. **And a publisher's export can
   split its OWN title that way** — NBS's WPS files render 农林牧渔业 统计报表制度 on the cover, which
   `namesTarget` cannot see (round 44; three honest B `quote-found-target-not-named` edges).
+- **A TRANSFER THAT STOPPED WITH BYTES ON DISK IS RESUMED, whatever its extension** (2026-09-10). Round 42 gave
+  archives a 600 s ceiling and three `curl -C -` retries; round 45 found the same failure on a 34.7 MB PDF that
+  `TIMEOUT_S` cut at 30.2 MB every time. The condition that is actually true is neither "archive" nor "PDF": **a
+  partial body means progress, and a dead host leaves none.** Consequence for a researcher: `network:curl-28` on a
+  big first-party document is now worth one re-run before you believe it.
 - **A LEGACY BINARY `.doc` IS READ SINCE 2026-09-10, and a `.docx` under a `.doc` NAME with it.** The
   fetcher converts a Compound-File body with `soffice --convert-to docx`, and asks an archive whether it
   holds `word/document.xml` rather than trusting the content-type. Each conversion gets its own
@@ -371,15 +378,19 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
   reads `n.source ?? n.source_report_id ?? null` (the `?? null` is load-bearing — `null ?? undefined`
   is `undefined`, and a caveat with a deliberately null endpoint must keep failing the check that
   exists to catch it). The shapes:
-  - `edge` / `source` / `target` — **the intended shape; write new notes this way.** 2,966 of them.
-  - `source_report_id` / `target_report_id` — 17 of them, first written 2026-09-07 and copied by
+  - `edge` / `source` / `target` — **the intended shape; write new notes this way.** The great
+    majority; **count them, never quote a figure.**
+  - `source_report_id` / `target_report_id` — **15 of them** *(read "17" until 2026-09-10, while
+    contradicting itself two sentences later; `notes/doc-audit-2026-09-10.md` §2)*, first written
+    2026-09-07 and copied by
     every CN round for two days. **Read correctly since 2026-09-09** (Thomas: *"teach the
     validator"*), and `validate` prints a `DROPPED-NOTE SHAPE` block naming them so the repair is
-    visible. **The 17 files are not to be rewritten.** *(What it cost while unread: `validate`
+    visible. **Those 15 files are not to be rewritten.** *(What it cost while unread: `validate`
     exited 1 on the one `resolved` entry in this shape, reporting `undefined -> undefined` about a
     note that was correct — and `disclosureByReport` skipped all 15 of them, understating five
     reports' disclosure counts in the app. The fix went at the loader for that second reason.)*
-  - `report_id` / `candidate_target` — 27 of them, **endpoint-free by design**, and normalisation
+  - `report_id` / `candidate_target` — **endpoint-free by design**, and the fastest-growing shape.
+    **Count, do not quote** *(this bullet's "27" was 55 nine days later)*. Normalisation
     correctly gives them null endpoints. They stay `reason: "note"` permanently; prepend
     "RESOLVED …" to the `note` instead of tagging one `"resolved"`, which would then fail the
     null-endpoint check exactly as it should.

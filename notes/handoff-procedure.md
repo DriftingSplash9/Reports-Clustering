@@ -6,12 +6,15 @@ research round was reading it to do something else. **The text below is byte-for
 said**, including its own line about being the only copy; that line is still true, this is now
 where the copy lives. `HANDOFF.md` §4 is a pointer to this file.
 
-**One thing the procedure now has to know about, added 2026-09-09 rather than silently changing
-the text below: the corpus lane is five files plus an index.** Step 5b sweeps the SLOW layer, and
-that layer is now `PLAYBOOK.md`, `PLAYBOOK-CORPUS.md` **and everything under `playbook/`**,
-`PLAYBOOK-RENDER.md`, `REPORTS.md`, `README.md`, `START-HERE.md`,
-`notes/standing-issues.md` — plus the two live worklists `notes/china-progress.md` and the
-techniques notes. Step 6's read-cost table must count the always-read set only, and say so.
+**The text below is NO LONGER byte-for-byte what §4 said** — it was until 2026-09-10, when Thomas
+merged the slow-layer sweep into the five-handoff review and retired the 20's routine. That change is
+marked in step 5 with the ruling that made it and the old shape it replaced. Everything else is
+unchanged.
+
+**The slow layer, for step 5b's list:** `PLAYBOOK.md`, `PLAYBOOK-CORPUS.md` **and everything under
+`playbook/`**, `PLAYBOOK-RENDER.md`, `REPORTS.md`, `README.md`, `START-HERE.md`,
+`notes/standing-issues.md` — plus the live worklists in `notes/` and the techniques notes. Step 6's
+read-cost table must count the always-read set only, and say so.
 
 ---
 
@@ -61,70 +64,86 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    earlier round — all leave. The round's project-memory entry is their
    record, and this file is state, not history. Nothing accumulates here
    by default; if you would not act on it next session, it goes.
-5. **Every fifth handoff, review the last five.** The trigger is
-   arithmetic, not memory: if the number you stamped in step 2 is
-   divisible by 5, run the review. (The count spans both filename shapes —
-   step 2 has the command.) Read this file's §2/§3 and the four archived
-   handoffs before it, and find the paragraphs that appear in all five
-   unchanged. Each one is then exactly one of three things. **Finished**
-   — delete it, memory is its record (step 4 already says so, and this
-   is the pass that catches what step 4 missed). **A restatement of a
-   playbook or a note** — delete it and let §1 route there instead; a
-   second copy of a rule is how the two drift apart. **A real open item
-   nobody has acted on in five handoffs** — it goes to
-   `notes/standing-issues.md`, which carries the bar in both directions.
-   That is a demotion, not a deletion: it was costing every agent a read
-   and buying nothing. **Introduced by Thomas, 2026-09-06**, from a
-   practice that worked on another project; the first review ran the same
-   day, off-cycle at 67, because §1-§3 was already over its own cap, and
-   what it removed is recorded in the §1 note. If a review finds nothing
-   to cut, say so and move on — "nothing" is a real answer, and forcing a
-   cut to justify the pass is how good state gets destroyed.
+5. **Every fifth handoff, sweep EVERYTHING — the fast layer and the slow layer
+   together.** The trigger is arithmetic, not memory: if the number you stamped in
+   step 2 is divisible by 5, run the whole of this step. (The count spans both
+   filename shapes — step 2 has the command.)
 
-5b. **Every twentieth handoff, sweep the SLOW layer.** Same arithmetic, a
-   different divisor: if the number you stamped in step 2 is divisible by
-   20, check `PLAYBOOK.md`, both lane playbooks, `REPORTS.md`, `README.md`,
-   `START-HERE.md` and `notes/standing-issues.md` **against what
-   `npm run validate` and the code actually say** — every count, every
-   closed union, every cross-reference, every "as of", every pointer into
-   `notes/` or `archive/`. Step 5 sweeps the fast layer against itself;
-   nothing swept these at all until 2026-09-07, and the first hand-run pass
-   found **seven live false statements** in files nobody had touched in
-   weeks — a settled question still described as open, two pointers to
-   things that no longer existed, three stale counts and a duplicated
-   procedure that had drifted from its own original. **Correct in place and
-   show the old wording**, the way `PLAYBOOK-RENDER.md`'s 2026-09-06 review
-   did: a doc that quietly changes its mind is harder to trust than one that
-   says what it got wrong. Record the pass in `notes/` as
-   `doc-audit-<date>.md`; the first is `notes/doc-audit-2026-09-07.md` and
-   it is the worked example of the format — section by section, every one
-   given EDIT / DROP / KEEP / MOVE with the exact replacement text.
+   ***(RULING, Thomas, 2026-09-10: "playbooks can be swept every fifth handoff too.
+   short answer: sweep everything every fifth handoff and don't worry about the 20th
+   handoff routine. I need to keep this under control more frequently." This step and
+   the old step 5b were separate until then — 5 swept the fast layer on the 5's and
+   5b swept the slow layer on the 20's, introduced 2026-09-07. They are now ONE step
+   on one divisor. Step number 5b is retired and not reused, so every existing
+   `§4 step 5b` reference in `notes/` and in the archive still resolves to something
+   — this paragraph. Nothing else about either pass changed; the two questions 5b
+   used to ask in its write-up are answered and gone, see the end of this step.)***
 
-   **Two questions to answer explicitly in every 5b pass, in the write-up:**
+   **5a — the fast layer, against itself.** Read this file's §2/§3 and the four
+   archived handoffs before it, and find the paragraphs that appear in all five
+   unchanged. Each one is then exactly one of three things. **Finished** — delete it,
+   memory is its record (step 4 already says so, and this is the pass that catches
+   what step 4 missed). **A restatement of a playbook or a note** — delete it and let
+   §1 route there instead; a second copy of a rule is how the two drift apart. **A
+   real open item nobody has acted on in five handoffs** — it goes to
+   `notes/standing-issues.md`, which carries the bar in both directions. That is a
+   demotion, not a deletion: it was costing every agent a read and buying nothing.
+   **Introduced by Thomas, 2026-09-06**, from a practice that worked on another
+   project; the first review ran the same day, off-cycle at 67, because §1-§3 was
+   already over its own cap, and what it removed is recorded in the §1 note.
 
-   - **Should this sweep happen more or less often than every 20?** Say what
-     the evidence was. Count the defects found and how old the oldest one
-     was: if the oldest defect predates the previous sweep by a long way, 20
-     is too slack; if the pass finds one or two trivia, it is too tight.
-   - **Does Thomas want a recap of the past sweeps across the last 100
-     handoffs?** Ask him, in §3, on any 5b where the archive has crossed a
-     new hundred. Five sweeps' worth of findings is enough to show whether
-     the same section keeps rotting, and that pattern is worth more than any
-     single sweep.
+   **MATCH ON SUBJECTS, NOT STRINGS** (handoff 085, 2026-09-10). Exact-text matching
+   across 081-085 found ONE surviving paragraph and it was a section heading; matching
+   by subject found FOUR threads — DSBB option E, FR, DE and the parked NSO nodes —
+   each reworded slightly every handoff and acted on in none of the five. A thread
+   that gets retyped each time is exactly what this pass exists to catch, and a diff
+   will never see it.
 
-   **The junk test, sharpened by Thomas 2026-09-08:** a paragraph earns its
-   place only if it helps a current or near-term task — not because writing it
-   down once might save a future round from re-solving the same one-off problem
-   later. An ever-growing pile of one-off tips and tricks (a host quirk, a
-   corner-case fix, a workaround for something that broke once) costs every
-   future round a read whether or not it is ever used again; letting a rare
-   problem recur and get re-solved when it actually recurs is cheaper than
-   carrying the note indefinitely just in case. On the 20's, cut this kind of
-   entry unless it has actually recurred — "still technically true" is not
-   the bar.
+   **5b — the slow layer, against the code.** Check `PLAYBOOK.md`, both lane
+   playbooks **and everything under `playbook/`**, `REPORTS.md`, `README.md`,
+   `START-HERE.md` and `notes/standing-issues.md` — plus the live worklists in
+   `notes/` — **against what `npm run validate` and the code actually say**: every
+   count, every closed union, every cross-reference, every "as of", every pointer into
+   `notes/` or `archive/`. 5a sweeps the fast layer against itself; nothing swept
+   these at all until 2026-09-07, and the first hand-run pass found **seven live false
+   statements** in files nobody had touched in weeks — a settled question still
+   described as open, two pointers to things that no longer existed, three stale counts
+   and a duplicated procedure that had drifted from its own original. **Correct in
+   place and show the old wording**, the way `PLAYBOOK-RENDER.md`'s 2026-09-06 review
+   did: a doc that quietly changes its mind is harder to trust than one that says what
+   it got wrong. **But keep the MARKER in the file and put the ACCOUNT in the audit
+   note** (added 2026-09-10, handoff 085): one clause saying the file changed its mind
+   and where the story is, not the paragraph of old figures and dates. Showing the
+   working in place added +1.4k to the largest always-read file in one pass, and at
+   every-five that lands four times as often — a sweep meant to keep the read path
+   under control must not be how it grows. Record the pass in `notes/` as
+   `doc-audit-<date>.md`; the first is
+   `notes/doc-audit-2026-09-07.md` and it is the worked example of the format — section
+   by section, every one given EDIT / DROP / KEEP / MOVE with the exact replacement
+   text.
 
-   Introduced by Thomas, 2026-09-07: *"the slow layer needs swept every 20
-   handoffs. do it on the 20's."*
+   **The junk test, sharpened by Thomas 2026-09-08:** a paragraph earns its place only
+   if it helps a current or near-term task — not because writing it down once might
+   save a future round from re-solving the same one-off problem later. An ever-growing
+   pile of one-off tips and tricks (a host quirk, a corner-case fix, a workaround for
+   something that broke once) costs every future round a read whether or not it is ever
+   used again; letting a rare problem recur and get re-solved when it actually recurs
+   is cheaper than carrying the note indefinitely just in case. **Cut this kind of
+   entry unless it has actually recurred — "still technically true" is not the bar.**
+
+   **Two things the old 5b asked and this step does NOT.** It asked, every pass,
+   whether the sweep should happen more or less often: **answered permanently on
+   2026-09-10 — every five, and don't ask again.** It also asked, on any pass where the
+   archive crossed a new hundred, whether Thomas wanted a recap of the past sweeps:
+   retired with the 20's routine. If a pattern across sweeps ever looks worth raising
+   — the same section rotting every time — raise it in §3 as its own finding, which is
+   what §3 is for.
+
+   **If a pass finds nothing to cut, say so and move on** — "nothing" is a real answer,
+   and forcing a cut to justify the pass is how good state gets destroyed. **At every
+   five rather than every twenty, most slow-layer passes SHOULD find little**; that is
+   the cadence working, not the pass failing.
+
 6. **Refresh the read-cost table in §1** and repeat those numbers to
    Thomas in the handoff message — it is how he sees bloat arriving:
    `wc -c HANDOFF.md CLAUDE.md PLAYBOOK.md PLAYBOOK-CORPUS.md

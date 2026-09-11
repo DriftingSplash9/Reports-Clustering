@@ -106,6 +106,31 @@ rather than left as "couldn't check".
 - **NBS's 统计出版物 listing `https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/` is where 中国统计摘要 lives** (round 42):
   one page per published volume (编者, 出版社, ISBN, 出版时间, 内容简介), newest Abstract entry 2022. Three rounds
   recorded "no NBS page" for it because nobody looked under 知识 → 统计出版物.
+- **THE VIEWER A BUREAU BUILDS IS NOT THE ONLY WAY IT PUBLISHES, AND THE VIEWER MAY SAY SO** (round 45, and it
+  cost Guangzhou four rounds). `tjj.gz.gov.cn`'s 统计年鉴 nav goes to a zTree app at
+  `/datav/admin/home/www_nj/` whose 43 year links carry no `href`, respond to no click and expose no API — a real
+  dead end, correctly recorded. **What nobody read was the viewer's own grey subtitle:** 历史统计年鉴下载请访问
+  【官网首页 > 统计业务 > 资源下载 > 统计年鉴电子资源】. That page (`/stats_newtjyw/zyxz/tjnjdzzz/`) publishes one
+  page per edition carrying the WHOLE yearbook twice — a zip of per-table `.xls` and a single complete PDF. Seven
+  edges. **Before recording a JS viewer as the obstacle, read the viewer's prose and walk the site's own
+  资源下载 / 电子资源 / 数据下载 branch.** Two further specifics: the host answers the CLOUD CONTAINER perfectly
+  (the "Chrome-only" verdict came from one Chrome session and was never re-probed), and **the `/attachment/` path
+  503s without a `Referer` header while the browse page does not** — a WAF shape worth trying anywhere an
+  attachment 503s under a page that loads.
+- **NBS's 统计出版物 LISTING IS SIXTEEN PAGES, NOT ONE** (round 45). `https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/`
+  paginates `index.html`, `index_1.html` … `index_15.html` — **271 entries**, one page per volume with compiling
+  department, ISBN, edition and a 内容简介. Round 42 read page one and found 中国统计摘要; round 44 assumed four
+  pages and left five publications "not on the listing". Three of them were. **Enumerate to the 404 before
+  concluding a publication has no NBS page** — the same discipline round 30 applied to the 统计制度 article-id
+  range. It is also where to upgrade a publication node whose URL is the bare host.
+- **THE NATIONAL YEARBOOK'S CHAPTER NOTES NAME THE MINISTRY PUBLICATION BEHIND EACH CHAPTER** (round 45), under
+  二、本篇的资料来源 and in a fixed form: 详细资料（分别）见《X》（编者）. Twelve of them across sm21-sm25 —
+  education ×2, health and social services ×4, culture and media ×3, labour and social security ×3, construction
+  and regions ×2 — each naming the publication AND its compiling body. **Wire these as `cites`, not
+  `uses_data_from`:** the sentence says the detail is to be found there, not that the yearbook's own figures were
+  taken from it, and both publications draw on the same ministry's returns. The same notes ALSO carry
+  由X部根据其《Y制度》汇总整理提供 sentences, and those ARE `uses_data_from` — the difference is whether the
+  sentence describes a transfer of data or a cross-reference.
 - **EVERY PAGE ON NBS's 统计制度 LISTING HAS THE INSTRUMENT ATTACHED, AND THE PAGE ITSELF SAYS NOTHING**
   (round 44). `https://www.stats.gov.cn/sj/tjzd/` — the listing round 30 learned to probe past — serves 24
   instruments at ids **1962929-1962952** (1962953+ is 404, so the range is closed), and each page's whole body is

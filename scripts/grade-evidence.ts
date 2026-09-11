@@ -67,7 +67,7 @@
  */
 import { execFile } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -1713,8 +1713,22 @@ async function fetchRaw(url: string): Promise<Fetched> {
     // fourteen Guangdong edges graded C on `network:curl-28` from a document
     // that is fine, and §7b's "never write a grade down on a bad network day"
     // only holds if the fetcher can tell a flaky host from a dead one.
+    //
+    // **AND A PARTIAL BODY IS RESUMED WHATEVER ITS EXTENSION** (2026-09-10, round
+    // 45). The archive test below was right about the failure and too narrow about
+    // the file: Guangzhou's city yearbook is ONE 34.7 MB PDF, and `TIMEOUT_S` cuts it
+    // at 30.2 MB every time — measured, twice — so seven live citations off a
+    // document that reads perfectly would have graded C `network:curl-28`. Raising
+    // the global budget was the wrong lever (it slows every dead host down); keying
+    // the ceiling on `.pdf` was too broad (600 PDFs, all re-graded on the next
+    // sweep). What is actually true is narrower than either: **a transfer that
+    // stopped with bytes already on disk was making progress, and a dead host leaves
+    // no partial body at all.** So the resume runs when the URL is an archive OR when
+    // `bodyPath` is non-empty, and `--speed-limit/--speed-time` still kills anything
+    // that has genuinely stalled. Bounded at three attempts, each on its own clock.
+    const partial = existsSync(bodyPath) && statSync(bodyPath).size > 0
     let resumed: typeof meta | null = null
-    if (/\.(zip|7z|tar\.gz|tgz)(\?|#|$)/i.test(url)) {
+    if (/\.(zip|7z|tar\.gz|tgz)(\?|#|$)/i.test(url) || partial) {
       for (let attempt = 0; attempt < 3 && !resumed; attempt++) {
         try {
           resumed = await run(['-C', '-'])

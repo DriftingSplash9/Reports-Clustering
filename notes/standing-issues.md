@@ -99,6 +99,30 @@ above describes option B, which was not the option taken. Kept here rather than 
 
 ---
 
+### FR — the France programme, four rounds in and paused
+*Demoted from `HANDOFF.md` §2 by the handoff-085 five-handoff review: present verbatim in 081-085 and
+not acted on in any of them.* 21 nodes from 9 across rounds 13, 14, 15 and 17. The GNI-inventory method
+is exhausted for this edition; **the live method is a third document naming a target by title**
+(`round15_fr_note_de_conjoncture_2026-09-07`), and the unspent stock is the Note de conjoncture's
+employment, enterprise, prices and international articles, none of which has been read against it.
+Also unresolved and separately recorded: DGDDI's monthly bulletin, refused across six candidate classes
+and looking structural (`round16_fr_dgddi_monthly_still_refused_2026-09-07`).
+
+### DE — finished as a programme, with one scope question left
+*Demoted from `HANDOFF.md` §2 by the handoff-085 review for the same reason.* 13 nodes → 46 across
+rounds 11, 12 and the two national-core rounds; **the programme is DONE and is not to be re-opened as
+one**. What remains is a single scope question — Chapter 10.3 of the Statistisches Jahrbuch, never
+scoped because rounds 11-12 took 10.1 and 10.2 and stopped. It needs a ruling from Thomas on whether
+10.3 is in scope at all, not research. That is why it belongs here and not in a todo list.
+
+### DSBB option E worklist — where the ~15 remaining pairs live
+*The `HANDOFF.md` §2 line was a restatement of the section above and was deleted by the handoff-085
+review; this is the pointer it should have been.* Worklist
+`Claude outputs/dsbb-pilot-2026-09-09/e-slice-tier1.json`, with all 684 SoM texts cached beside it.
+Each remaining pair needs its publisher's own page found: Bahamas' three trade products, Guatemala's
+*Boletín Estadístico*, Sri Lanka's *CBSL Annual Report*, Zimbabwe's three RBZ/ZIMSTAT products,
+Barbados' *Report of the Accountant General*, Tajikistan's national-accounts annual.
+
 ## Closed
 
 ### Research debt — 5 bare-homepage edges → FIXED 2026-09-06

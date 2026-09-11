@@ -70,10 +70,40 @@ are not**, and Shanghai was the one.
 and none of them needed anything cleverer than reading a redirect body or walking one level into
 政府信息公开.
 
-**City score after round 42: 4 wired (Nanjing 8, Wuhan 4, Xi'an 5, Suzhou 4 edges) · 1 IP-blocked (Shenzhen) · 5 still open
-(Guangzhou, Hangzhou, Chengdu, Chongqing, Beijing).** *(Read "3 wired · 1 read-and-empty (Suzhou)" from round 31 until round 41 opened Suzhou's zb layer.)*
+**City score after round 45: 5 wired (Guangzhou 7, Nanjing 8, Xi'an 5, Suzhou 4, Wuhan 4 edges) · 1 IP-blocked (Shenzhen) · 4 still open
+(Hangzhou, Chengdu, Chongqing, Beijing).** *(Guangzhou moved on 2026-09-10 — see the round-45 entry: the download page, not the zTree viewer.)* *(Read "3 wired · 1 read-and-empty (Suzhou)" from round 31 until round 41 opened Suzhou's zb layer.)*
 
 **Round 43 (2026-09-10) — the listing grep and the leftover layers:** NBS's 512-title 部门统计调查制度 listing was matched WITHOUT 《》 against 211 re-fetched documents (national sm+zb ALL 56 — zb10/zb27 now read, nothing in them; Shandong sm+zb; Hunan zb; Suzhou zb; Xi'an zb+sm16/17; Guangdong's 47 CD pages). ONE hit in the whole set, unrecorded since round 29: national sm04 → 《人力资源和社会保障统计调查制度》 (MOHRSS, **minted**, 1 edge). The five 'known unwired' listing titles are named by no swept yearbook. **Guangdong's indicators.html unbracketed sweep: settled negative.** The extracted text of all 211 documents is kept in `Claude outputs/cn-round43-2026-09-10/yearbook-text-2026-09-10.zip` so the next grep needs no refetch (Jiangsu/Nanjing/Jilin/Shanghai/Hubei/Yunnan/Wuhan are NOT in it). Chrome extension was down; Jiangsu was read in the built-in browser pane; the container was Knownsec-blocked on tj.jiangsu.gov.cn.
+
+**Round 45 (2026-09-10) — GUANGZHOU WIRED, and the chapter-note publications.** **The zTree viewer was never the
+only route.** `tjj.gz.gov.cn` answers Chrome AND the container (the container was never tried before — four rounds
+recorded "Chrome-only" from one Chrome session). Its 统计年鉴 nav goes to `/datav/admin/home/www_nj/`, a real dead
+end: 43 year links, none with an href, and clicking one navigates nowhere. **But that page's own grey subtitle says
+历史统计年鉴下载请访问【官网首页 > 统计业务 > 资源下载 > 统计年鉴电子资源】**, and
+`/stats_newtjyw/zyxz/tjnjdzzz/` publishes one page per edition — 2025 is `content/post_10602897.html` with the
+whole yearbook as a 6.6 MB zip of 367 per-table `.xls` (GBK filenames) AND as a single 34.7 MB PDF. **7 edges, all
+but one A**, off both: GB/T 4754 and 市场主体统计分类 (ch11 简要说明 + 指标解释), 建筑业统计报表制度 (ch12, 国家统计局
+和广东省统计局制定 — the Shanghai pattern), 住户收支与生活状况调查 (ch8, honest B — Guangzhou drops the trailing
+方案), 小企业会计准则 (指标解释 【营业利润】), and from the Excel edition 统计上大中小微型企业划分办法(2017) (table
+16-03 note) and 中国统计摘要 (table 19-05-1 note). **FETCH TRAP: the `/attachment/` path 503s without a Referer
+header; the browse page does not.** Refused: bare 《三次产业划分规定》 (fifth yearbook on that ground) and bare
+《国家危险废物名录》 (four editions). Nodeless lead: 《城市（县城）建设统计报表制度》, NOT the 和村镇建设 one.
+
+**And the national yearbook's chapter notes name the MINISTRY PUBLICATION behind each chapter** — under
+二、本篇的资料来源, in the form 详细资料（分别）见《X》（编者）. sm21 two, sm22 four, sm23 three, sm24 three, sm25
+two. Twelve first-party citations, never read as a class. Wired as **`cites`, not `uses_data_from`** — the yearbook
+says the detail is there, not that its figures came from there. Minted: 中国劳动统计年鉴, 中国教育经费统计年鉴,
+中国医疗保障统计年鉴, plus 中国卫生健康统计年鉴 which had been a node with no edge at all since August. **Eight are
+blocked only on the publisher's host** (moe/mca/cdpf/nppa/mct 000, acftu 412, nrta's stats portal a Vue shell) and
+their quotes are stored — HANDOFF §3 item 1. **NBS's 统计出版物 listing is SIXTEEN pages** (`index`, `index_1` …
+`index_15`, 271 entries), not the one round 42 read or the four round 44 assumed; that is where 中国第三产业统计年鉴
+(three citations) and 中国基本单位统计年鉴 came from, and four publication nodes had their bare-homepage URL upgraded
+to a real page. Also minted off it: 部分服务行业规模以上企业统计报表制度 (round 44 left it nodeless waiting on exactly
+this publication) and, from the 国家统计标准 listing, 统计单位划分及具体处理办法 (国统字〔2011〕96号, cited by the
+一套表 instrument). MOHURD's 城市（县城）和村镇建设统计调查制度 came off the 部门统计调查制度 listing, 2 edges.
+
+**Beijing failed a FIFTH time, in Chrome. Hangzhou, Chengdu, Hebei, Chongqing, Hainan, Guangxi and Jiangxi all
+failed again in both routes the same day; Anhui 403.** That set is not to be re-probed as a batch without a new route.
 
 **Round 44 (2026-09-10) — the provincial catalogues, and the NBS attachments behind them.** HANDOFF 084 §3
 item 4 asked whether Shandong, Jiangsu or Guangdong publishes a 年定报制度目录 like Shanghai's. **All three do.**
