@@ -5,7 +5,16 @@ readings and split them down"*). **Nothing here was reworded, cut or renumbered*
 byte-for-byte what it was inside that file, and its section headings are unchanged so every
 existing cross-reference still resolves.
 
-**Read this when:** the bytes did not come from a plain live fetch — a browser read, an archived copy, a token URL, a zip — or the grader and your hand grade disagree.
+**Read this when:** the bytes did not come from a plain live fetch — a browser read, an archived copy, a
+token URL, a zip — or the grader and your hand grade disagree. **This file owns every rule of the form
+"how the bytes arrived caps the grade".**
+
+**THE BOUNDARY, so nothing lands in the wrong file again** (stated 2026-09-11, after three entries had):
+**`corpus-naming.md` is POLICY — what counts as a citation at all, and it would be true if the grader did not
+exist.** **`corpus-evidence.md` is MECHANICS — how the grader and the matchers actually behave.**
+**`corpus-route.md` is what the ROUTE the bytes came by does to the grade.** **`corpus-hosts.md` is what a
+failed fetch does and does not prove.** **`corpus-nodes.md` is what is and is not a node.** If an entry would
+still be true with no tooling at all, it is policy; if it explains why a tool did something, it is mechanics.
 
 **You do not read this by default.** `PLAYBOOK-CORPUS.md` carries a one-line index of everything
 below; it tells you a ruling exists and what it decides, and you come here for the reasoning only
@@ -103,4 +112,37 @@ the regression is `quote-not-in-document` on a document the grader **read in
 full today**, the network is not the excuse — the quote written that round is
 reverted (the field must mean "this span is in the cited document") and the
 grade is left as it was. 29 reverted in round 5, listed with the reason.
+
+---
+
+## Moved here 2026-09-11 from `PLAYBOOK-CORPUS.md`'s index
+
+**Rounds 38-45 wrote full reasoning straight into the §6/§7 index lines**, which the 2026-09-09 split had
+just emptied — seventeen entries across the two sections had grown back into essays and carried 37% of that
+file. They are below, **byte-for-byte as they stood**, and the index now carries one line each pointing here.
+*(Thomas, 2026-09-11, on being shown the measurement: "do it". Full account: `notes/doc-audit-2026-09-11.md`.)*
+
+### A first-party ZIP is a direct read
+
+- **A first-party ZIP is a direct read, not a capped route** (2026-09-08) — name the inner path
+  in the basis.
+  *(The reader could not actually honour this until 2026-09-09: it walked html/txt/csv/md only, so a
+  yearbook shipped as a zip of `.docx` graded C on `empty:no-extractor`. Two provinces publish that
+  way. Fixed; the rule did not change.)*
+
+### Moved here 2026-09-11 — filed on the wrong side of the boundary
+
+*(The §6/§7 split of 2026-09-09 cut these files by SECTION NUMBER, not by question, so a few entries
+landed in the wrong one. Boundary now stated at the top of each file. `notes/doc-audit-2026-09-11.md`.)*
+
+- **Bytes that did not come from the cited URL on the live host cannot make an
+  A**, however cleanly the edge clears every other bar — §7's archived-copy
+  ruling, which every new fetch strategy inherits. A read in Thomas's own
+  Chrome IS the cited URL and is not a second route (§7). Record WHICH route in
+  the committed evidence record (`via:`).
+
+- **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
+  wall says only that this machine could not read it. A 404 says the citation
+  has rotted, which is exactly what the dead-URL debt list measures — grading it
+  off an archived copy hides link rot behind a good grade.
 

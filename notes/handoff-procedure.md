@@ -155,7 +155,9 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    go; if memory is down, park a note in `notes/` and say so here). A new
    standing rule or trap goes to whichever playbook binds it (`PLAYBOOK.md`
    §1 has the test). A design change goes to `notes/Midvamp - Revamp.md`
-   (or `REPORTS.md` if it changes direction).
+   (or `REPORTS.md` if it changes direction). **If the round created a file in
+   `notes/`, add its one line to `notes/README.md` in the same edit** — an
+   unindexed note that §1 does not name will not be found by the next agent.
 8. Never state git status here. Never delete anything on your own judgement.
    An agent may ASK for delete permission on a named folder — the user
    approves it once and it holds for the session — but the decision to

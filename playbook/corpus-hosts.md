@@ -5,7 +5,16 @@ readings and split them down"*). **Nothing here was reworded, cut or renumbered*
 byte-for-byte what it was inside that file, and its section headings are unchanged so every
 existing cross-reference still resolves.
 
-**Read this when:** a fetch failed, a host looks blocked, a URL looks dead, or you are about to record any of those as a fact about the world.
+**Read this when:** a fetch failed, a host looks blocked, a URL looks dead, or you are about to record any of
+those as a fact about the world. **This file owns what a failure does and does not PROVE**; what a successful
+but unusual route does to the grade is `corpus-route.md`.
+
+**THE BOUNDARY, so nothing lands in the wrong file again** (stated 2026-09-11, after three entries had):
+**`corpus-naming.md` is POLICY — what counts as a citation at all, and it would be true if the grader did not
+exist.** **`corpus-evidence.md` is MECHANICS — how the grader and the matchers actually behave.**
+**`corpus-route.md` is what the ROUTE the bytes came by does to the grade.** **`corpus-hosts.md` is what a
+failed fetch does and does not prove.** **`corpus-nodes.md` is what is and is not a node.** If an entry would
+still be true with no tooling at all, it is policy; if it explains why a tool did something, it is mechanics.
 
 **You do not read this by default.** `PLAYBOOK-CORPUS.md` carries a one-line index of everything
 below; it tells you a ruling exists and what it decides, and you come here for the reasoning only
@@ -79,6 +88,64 @@ when it binds the question in front of you. Every bullet here is a case where th
   it. They are data like any other and are verified and graded on the same rules as
   everything else.
 
+
+---
+
+---
+
+## Moved here 2026-09-11 from `PLAYBOOK-CORPUS.md`'s index
+
+**Rounds 38-45 wrote full reasoning straight into the §6/§7 index lines**, which the 2026-09-09 split had
+just emptied — seventeen entries across the two sections had grown back into essays and carried 37% of that
+file. They are below, **byte-for-byte as they stood**, and the index now carries one line each pointing here.
+*(Thomas, 2026-09-11, on being shown the measurement: "do it". Full account: `notes/doc-audit-2026-09-11.md`.)*
+
+### An instrument's PUBLISHER decides which site to search
+
+- **An instrument's PUBLISHER decides which site to search, and getting it wrong hides the page for rounds.**
+  Round 38 filed 《关于工资总额组成的规定》 among instruments needing "a NON-NBS publisher's own page found"; it is
+  国家统计局令第1号 of 1990 and NBS publishes its full text. Two rounds passed with nobody searching stats.gov.cn.
+  Check the issuing form — a 令, a 规定, a 通知, and who signed it — before concluding whose site to look on.
+
+### A national instrument may be published on a provincial site
+
+- **A first-party page for a NATIONAL instrument may live on a PROVINCIAL bureau's site**, and rule 19's
+  authorship-not-host principle covers it: read the cover, not the domain. Two hubs named by four yearbooks across
+  eleven rounds were minted 2026-09-09 (Thomas ruled) off Shanghai's printing of them, whose covers name NBS as the
+  formulating body. Record the caveat on the node when the issuer's own page has never been found.
+
+### A small body is a redirect
+
+- **A SMALL BODY IS A REDIRECT — read it, never record the byte count as a verdict.** A 71-byte,
+  625-byte or 954-byte 200 is a `window.location`, a `<p id="url">` in a hidden div, or a meta
+  refresh, and the thing you were looking for is one `cat` away. Cost so far: one province recorded
+  as an empty shell for a round, and NBS's whole 国家统计标准 listing missing from a tracker.
+  *(Restated here 2026-09-09 when `notes/china-progress.md` was split — it binds every fetch, not
+  just a Chinese one. Full account: `notes/china-method-2026-09-09.md`.)*
+
+### An archive that extracts to nothing
+
+- **An archive that extracts to nothing is not an empty archive.** `unzip` exits non-zero on a mere
+  warning and that used to abort the grader's whole zip branch; a zip of `.docx` was invisible to it
+  besides. Both fixed 2026-09-09 — recipe and diagnostics in `notes/techniques-cn-yearbooks-2026-09-08.md`.
+
+### A partial body is resumed, whatever the extension
+
+- **A TRANSFER THAT STOPPED WITH BYTES ON DISK IS RESUMED, whatever its extension** (2026-09-10). Round 42 gave
+  archives a 600 s ceiling and three `curl -C -` retries; round 45 found the same failure on a 34.7 MB PDF that
+  `TIMEOUT_S` cut at 30.2 MB every time. The condition that is actually true is neither "archive" nor "PDF": **a
+  partial body means progress, and a dead host leaves none.** Consequence for a researcher: `network:curl-28` on a
+  big first-party document is now worth one re-run before you believe it.
+
+### Legacy binary `.doc`, and `.docx` under a `.doc` name
+
+- **A LEGACY BINARY `.doc` IS READ SINCE 2026-09-10, and a `.docx` under a `.doc` NAME with it.** The
+  fetcher converts a Compound-File body with `soffice --convert-to docx`, and asks an archive whether it
+  holds `word/document.xml` rather than trusting the content-type. Each conversion gets its own
+  `-env:UserInstallation` profile — without it concurrent edges lose the LibreOffice lock and record
+  `empty:no-extractor` against a document that reads perfectly. Why it matters beyond China: an agency that
+  attaches its instrument to an otherwise empty landing page is a shape, not an accident, and every such
+  page graded `empty` before this.
 
 ---
 

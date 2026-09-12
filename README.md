@@ -118,13 +118,9 @@ START-HERE.md              plain-language explanation, for sending to people
 README.md                  this file
 
 notes/                     working notes read by task — `HANDOFF.md` §1 says
-                            which; `Midvamp - Revamp.md` is the plan of record,
-                            `techniques-*.md` the recipes, `routing-snapshot-*.md`
-                            dated host readings, `handoff-procedure.md` the full
-                            handoff steps (moved out of HANDOFF.md §4 2026-09-09),
-                            `china-progress.md` where the China programme got to
-                            (CLOSED and paused 2026-09-10; it read "the live China
-                            worklist" until then).
+                            which, and `notes/README.md` indexes every file in
+                            there, one line each. That index is the only list;
+                            this entry deliberately does not repeat it.
                             Round narratives live in project memory, not here.
 archive/                   every closed-out branch (AF/ EU/ NZ/ AU/ CA/) and
                             planning document, moved here whole once done, not

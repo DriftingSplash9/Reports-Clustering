@@ -69,13 +69,13 @@ with a file, the file wins.**
 
 ### Read cost — the bloat gauge, refreshed every handoff
 
-**THE NUMBER THOMAS ASKED FOR: a corpus round reads 6.9% of its context before he types a prompt, a
-renderer round 5.0%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
+**THE NUMBER THOMAS ASKED FOR: a corpus round reads 5.9% of its context before he types a prompt, a
+renderer round 5.1%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 13.7k + CORPUS index 28.2k + PLAYBOOK 11.5k + CLAUDE 1.5k | 54.9k | 13.7k | **6.9%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 40.3k | 10.1k | **5.0%** |
+| always: HANDOFF 14.4k + CORPUS index 19.7k + PLAYBOOK 11.5k + CLAUDE 1.5k | 47.1k | 11.8k | **5.9%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 41.0k | 10.2k | **5.1%** |
 | *was, at handoff 084 (+ rounds 43-45's mid-round edits)* | *64.1k / 49.9k* | *16.0k / 12.5k* | *8.0% / 6.2%* |
 | *was, at handoff 084 as written* | *58.5k / 46.5k* | *14.6k / 11.6k* | *7.3% / 5.8%* |
 
@@ -86,10 +86,14 @@ the programme, which is `PLAYBOOK.md` §1's second test working exactly as inten
 follows the lane being worked, and China is no longer one. The five-handoff review (step 5) removed
 three more paragraphs by demoting them to `notes/standing-issues.md`. `PLAYBOOK-CORPUS.md` is 28.0k
 and is now **twice** this file; **it is the largest always-read file by a wide margin and nothing
-sweeps a playbook** — its §2 is where the next cut has to come from, and that has been true for four
-handoffs running. **The 5b sweep added 0.2k to it even after its correction histories were moved to
-`notes/doc-audit-2026-09-10.md`** — that split is now a rule in the procedure, because at every-five a
-sweep that shows its working in place is itself a growth driver on the file it is meant to protect.
+sweeps a playbook** — its §2 is where the next cut has to come from, and that had been true for four
+handoffs running — **and the diagnosis was wrong every time.** Measured 2026-09-11: §2 was 27% of the file
+and **§6+§7, which are supposed to be INDEXES, were 62%**; 17 bullets of 73 carried 37% of it. Restructured
+the same day on Thomas's word: those 17 went to `playbook/` as one line each, the duplicated `_dropped` pair
+merged, rule 19's essay moved, the ledger paragraphs cut. **27.6k → 19.5k, and the file is no longer twice
+`HANDOFF.md`.** The rule that stops it regrowing — **an index line is one line, schema block excepted** — is
+§0 of that file now, because the 2026-09-09 split had no such rule and the index filled straight back up.
+Account: `notes/doc-audit-2026-09-11.md`.
 
 **On-demand sizes, 2026-09-10:** `playbook/` naming 15.3k, evidence 10.9k, nodes 9.2k, route 7.1k,
 hosts 5.7k; handoff procedure 9.5k; standing-issues 9.9k (+2.0k this handoff, by design); China
@@ -158,7 +162,7 @@ ordered for A.
 ### [Agent]
 
 **Nothing is queued. China is closed and the next programme is Thomas's call.** When it is made, the
-work starts from the workbook's shortlist and `notes/triage-2026-08-30`-style scoping, not from here.
+work starts from the workbook's shortlist and the triage classification in project memory (`triage_2026-08-30`), not from here.
 
 Standing, and none of it needs a round of its own:
 

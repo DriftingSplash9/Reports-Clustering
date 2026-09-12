@@ -5,7 +5,15 @@ readings and split them down"*). **Nothing here was reworded, cut or renumbered*
 byte-for-byte what it was inside that file, and its section headings are unchanged so every
 existing cross-reference still resolves.
 
-**Read this when:** you are deciding whether a document names the TARGET, or whether an edge clears the evidence bar at all.
+**Read this when:** you are deciding whether a document NAMES the target — a judgement about the document,
+not about the grader. **If your question is why the grader disagreed with you, that is `corpus-evidence.md`.**
+
+**THE BOUNDARY, so nothing lands in the wrong file again** (stated 2026-09-11, after three entries had):
+**`corpus-naming.md` is POLICY — what counts as a citation at all, and it would be true if the grader did not
+exist.** **`corpus-evidence.md` is MECHANICS — how the grader and the matchers actually behave.**
+**`corpus-route.md` is what the ROUTE the bytes came by does to the grade.** **`corpus-hosts.md` is what a
+failed fetch does and does not prove.** **`corpus-nodes.md` is what is and is not a node.** If an entry would
+still be true with no tooling at all, it is policy; if it explains why a tool did something, it is mechanics.
 
 **You do not read this by default.** `PLAYBOOK-CORPUS.md` carries a one-line index of everything
 below; it tells you a ruling exists and what it decides, and you come here for the reasoning only
@@ -227,4 +235,37 @@ fine). Every one of the six cites the agency ("Douanes / DSECE"), never the titl
 monthly release. Same shape as the ICLS ruling above: the refusals already in the data
 are the record, and a fifth round is waste. Detail: memory
 `round16_fr_dgddi_monthly_still_refused_2026-09-07`.
+
+---
+
+## Moved here 2026-09-11 from `PLAYBOOK-CORPUS.md`'s index
+
+**Rounds 38-45 wrote full reasoning straight into the §6/§7 index lines**, which the 2026-09-09 split had
+just emptied — seventeen entries across the two sections had grown back into essays and carried 37% of that
+file. They are below, **byte-for-byte as they stood**, and the index now carries one line each pointing here.
+*(Thomas, 2026-09-11, on being shown the measurement: "do it". Full account: `notes/doc-audit-2026-09-11.md`.)*
+
+### The instrument, not the citing sentence, proves who issued it
+
+- **CORRECTED 2026-09-09 (round 40): the ISSUER named in the CITING SENTENCE does NOT decide the
+  target — the instrument's own cover does.** *(This line read: "The ISSUER named in the sentence
+  decides the target, not the title. A provincial yearbook saying 上海市统计局制定的《固定资产投资统计
+  报表制度》 names the PROVINCE's instrument, which is a mint lead, not the identically-titled NBS
+  node. Two of Shanghai's four exact title matches were its own (round 39). Read the words before
+  the 《." It stood for one day.)* Round 40 opened both instruments in Shanghai's own 年定报制度目录
+  and both covers read 国家统计局制定 / 上海市统计局补充、印制 — as do 建筑业's and 劳动工资's, which
+  round 39 wired to NBS nodes off 国家统计局制定的. Thomas ruled 2026-09-09: wire all four to NBS.
+  **The rule now: a citing sentence proves a TITLE was used; only the instrument proves who ISSUED
+  it. Fetch the instrument before recording a look-alike or minting a provincial twin.** A provincial
+  bureau's 年定报制度目录 is where to fetch it, and its covers are unambiguous — one that really is the
+  province's says 上海市统计局制定 with no NBS line, and its title carries 上海市 too. Unaffected and
+  still true: the 农业产值 look-alike class, three yearbooks giving three titles for one apparent
+  instrument — compare character by character, never by eye.
+
+### Defining a series under a law vs reporting legal-publicity work
+
+- **A document that DEFINES a series' unit or scope under a law names the law as its basis; a bureau REPORTING
+  its legal-publicity work about the same law does not** (Thomas, 2026-09-10). Suzhou's 依照《中华人民共和国统计法》
+  规定，开展住户收支与生活状况调查的住户为调查户 is a `legal_basis` edge; Shandong's 统计事业发展综述 mentioning 《统计法》
+  is not (round 40's refusal stands). The test is the sentence's SUBJECT: the statistic, or the bureau's activities.
 

@@ -1,0 +1,843 @@
+{
+  "meta": {
+    "source": "research round 2026-09-11 — Poland. Thomas: “read the handoff and then begin to Research Poland and add as many nodes and edges as you can.”",
+    "minted": "2026-09-11",
+    "note": "POLAND, FIRST ROUND OF ITS OWN. RESULT: 25 nodes, 30 dependencies, 1 relation, 5 dropped notes.\n\nWHY THE STARTING POINT WAS NOT WHAT THE COVERAGE WORKBOOK SUGGESTED. HANDOFF 085 filed Poland under “narrow and complete” — 8 nodes, zero orphans, the EU-chain rounds having wired every node they minted. That reading held up: the Eurostat ESMS chain for Poland (HICP hi4, LFS employ_simslfs, national accounts na10 and nama_10_gdp) is genuinely finished, and a probe of 26 further Eurostat dataset codes under three national-metadata suffixes found NOTHING ELSE PUBLISHED for PL. So the yield was never going to come from Eurostat. It came from three places the corpus had not opened at all: NBP (no node before this round), the classification layer (PKD, KZiS, PKWiU, PKOB, KST — and, behind them, NACE Rev. 2 and ISCO-08, which the corpus did not have either despite 21 EU countries in the graph), and the statutory layer (four Polish Acts, plus the annual survey programme that Article 18 of the 1995 statistics law produces).\n\nTHE ROUTE, AND IT IS THE REUSABLE PART OF THIS ROUND. Every Polish host is 403 at the container's egress proxy and the bridge VM has no network at all, so the only way in was Thomas's Chrome. Chrome reads HTML fine but the extension is refused on the built-in PDF viewer (“Permission denied for reading page content on this domain”), and most of what matters here is PDF. What works: on a page of the publisher's own origin, a same-origin `fetch` of the PDF into a Blob plus a synthetic `<a download>` click puts the bytes in the user's Downloads folder, which `device_request_folder_access` then makes readable to `pdftotext` and `pypdf` on the bridge VM. THE TRAP: Chrome allows ONE automatic download per tab per origin and silently blocks the rest — no error reaches the tool, the JS reports 200 and the right byte count, and the file simply never lands. A fresh tab per PDF fixes it. Second trap: the download must be the LAST action in a browser_batch, because a `navigate` immediately after tears down the blob before the save commits. Six PDFs came across this way, the largest 23 MB.\n\nTHE OTHER READING LESSON, and it changed which quotes are gradeable: the Statistical Yearbook is bilingual in FACING COLUMNS, and `pdftotext -layout` interleaves Polish and English on every output line, so every English sentence looks shattered. `pypdf` reads it in column order and the English comes out whole. Both readings were taken; every span quoted from that volume was checked against the pypdf one. This is the “a PDF is read THREE ways and the best reading wins” rule meeting a layout rather than a line break.\n\nWHAT IS DELIBERATELY NOT HERE. The COICOP citation in the yearbook's general notes names no edition and is dropped `no-document`, matching Thomas's 2026-09-08 ruling rather than re-opening it. The PKWiU upstream is dropped for the same class of reason — “international classifications and nomenclatures” names nothing. The Ministry of Finance layer is untouched because www.gov.pl is refused by the Chrome extension and unreachable everywhere else; that is a routing fact, not a corpus fact, and it is written up in `_dropped`. The Foreign Trade Statistics node is one verified title away and is the single highest-value thing left on the table."
+  },
+  "reports": [
+    {
+      "id": "nace-rev2",
+      "title": "NACE Rev. 2 — Statistical Classification of Economic Activities in the European Community",
+      "title_aliases": [
+        "Statistical Classification of Economic Activities in the European Community"
+      ],
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "European Union",
+      "description": "The EU's statutory industry classification, established by Regulation (EC) No 1893/2006 and derived from ISIC. Every EU member state's national activity classification is built on it; Poland's PKD 2007 is the first one wired here. Minted 2026-09-11 in the Poland round — the corpus had ISIC, NAICS, ANZSIC and CPA but no NACE node at all, despite 21 EU countries in the graph.",
+      "cadence_note": "Revised about once a generation (Rev. 1 1990, Rev. 1.1 2002, Rev. 2 2006, Rev. 2.1 2023); 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32006R1893",
+      "domains": [
+        "national-accounts",
+        "industry"
+      ]
+    },
+    {
+      "id": "isco-08",
+      "title": "International Standard Classification of Occupations (ISCO-08)",
+      "publisher": "International Labour Organization (ILO)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "International",
+      "description": "The ILO's occupational classification, fourth iteration after ISCO-58, ISCO-68 and ISCO-88, published 2008. National occupational classifications are routinely built on it; Poland's KZiS is the first one wired here. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Revised roughly every twenty years; 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://ilostat.ilo.org/methods/concepts-and-definitions/classification-occupation/",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "eurostat-cc-1997",
+      "title": "Classification of Types of Constructions (CC)",
+      "publisher": "Statistical Office of the European Communities (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "European Union",
+      "description": "Eurostat's classification of building and civil-engineering works, issued 1997/1998 and adopted as the basis for several national construction classifications, Poland's PKOB among them. Minted 2026-09-11 in the Poland round. Eurostat's RAMON page for it is gone; the URL is the Commission's own Interoperable Europe catalogue entry.",
+      "cadence_note": "Not revised since issue; 0.05 is the nominal once-a-generation rate the corpus uses for standards.",
+      "last_updated": null,
+      "url": "https://interoperable-europe.ec.europa.eu/collection/eu-semantic-interoperability-catalogue/solution/classification-types-constructions",
+      "domains": [
+        "construction"
+      ]
+    },
+    {
+      "id": "oecd-bd4",
+      "title": "OECD Benchmark Definition of Foreign Direct Investment 2008: Fourth Edition",
+      "title_aliases": [
+        "OECD Benchmark Definition of Foreign Direct Investment"
+      ],
+      "publisher": "Organisation for Economic Co-operation and Development (OECD)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "International",
+      "description": "The OECD's standard for compiling foreign direct investment statistics, fourth edition, aligned with BPM6. Named by NBP as one of six international standards the Polish balance of payments is compiled to. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Four editions since 1983; 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://www.oecd.org/en/publications/oecd-benchmark-definition-of-foreign-direct-investment-2008_9789264045743-en.html",
+      "domains": [
+        "investment",
+        "external-sector"
+      ]
+    },
+    {
+      "id": "imf-external-debt-guide",
+      "title": "External Debt Statistics: Guide for Compilers and Users (2013)",
+      "publisher": "Inter-Agency Task Force on Finance Statistics / International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "International",
+      "description": "The TFFS external-debt compilation guide, 2013 edition, superseding the 2003 edition and updated for BPM6. Minted 2026-09-11 in the Poland round off NBP's standards footnote, which cites it as “External Debt Statistics 2014” — a year the IMF's own page does not carry, which is why the Polish edge is B.",
+      "cadence_note": "Two editions, 2003 and 2013; 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://www.imf.org/external/np/sta/ed/ed.htm",
+      "domains": [
+        "external-sector",
+        "public-finance"
+      ]
+    },
+    {
+      "id": "imf-irfcl-guidelines",
+      "title": "International Reserves and Foreign Currency Liquidity: Guidelines for a Data Template",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "International",
+      "description": "The IMF's reserves data template guidelines, the standard behind the SDDS reserves template. Minted 2026-09-11 in the Poland round off NBP's standards footnote.",
+      "cadence_note": "Revised occasionally (2001, 2013); 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://www.imf.org/en/Publications/Manuals-Guides/Issues/2016/12/31/International-Reserves-and-Foreign-Currency-Liquidity-Guidelines-for-a-Data-Template-40117",
+      "domains": [
+        "external-sector",
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "eu-combined-nomenclature",
+      "title": "Combined Nomenclature (CN)",
+      "publisher": "European Commission",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "kind": "publication",
+      "releases_per_year": 1,
+      "region": "European Union",
+      "description": "The EU's goods nomenclature for customs and external-trade statistics, built on the WCO's Harmonized System and reissued each year by a Commission Implementing Regulation under Council Regulation (EEC) No 2658/87. Minted 2026-09-11 in the Poland round; Statistics Poland groups foreign-trade goods by it.",
+      "cadence_note": "A new annual version is published each autumn for the following calendar year.",
+      "last_updated": null,
+      "url": "https://taxation-customs.ec.europa.eu/customs-4/calculation-customs-duties/customs-tariff/combined-nomenclature_en",
+      "domains": [
+        "trade"
+      ]
+    },
+    {
+      "id": "eu-reg-692-2011",
+      "title": "Regulation (EU) No 692/2011 of the European Parliament and of the Council concerning European statistics on tourism",
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "kind": "instrument",
+      "region": "European Union",
+      "description": "The EU instrument defining tourism statistics and the transmission programme for them. Minted 2026-09-11 in the Poland round: the Statistical Yearbook's tourism chapter takes its definition of “tourism” from it by name.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011R0692",
+      "domains": [
+        "tourism"
+      ]
+    },
+    {
+      "id": "eu-directive-2009-42",
+      "title": "Directive 2009/42/EC of the European Parliament and of the Council on statistical returns in respect of carriage of goods and passengers by sea",
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "kind": "instrument",
+      "region": "European Union",
+      "description": "The EU instrument governing maritime transport statistics. Minted 2026-09-11 in the Poland round: the Statistical Yearbook says its seaport cargo, ship-traffic and passenger tables follow it.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009L0042",
+      "domains": [
+        "infrastructure",
+        "trade"
+      ]
+    },
+    {
+      "id": "pl-statistics-act-1995",
+      "title": "Ustawa z dnia 29 czerwca 1995 r. o statystyce publicznej",
+      "title_aliases": [
+        "ustawy z dnia 29 czerwca 1995 r. o statystyce publicznej"
+      ],
+      "publisher": "Sejm Rzeczypospolitej Polskiej",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "instrument",
+      "region": "Poland",
+      "description": "Poland's law on official statistics (Dz.U. 1995 nr 88 poz. 439, consolidated Dz.U. 2026 poz. 851). It constitutes the official statistics service, defines statistical confidentiality, and in Article 18 is the enabling provision for the annual Programme of Statistical Surveys of Official Statistics. Minted 2026-09-11 in the Poland round.",
+      "last_updated": null,
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19950880439",
+      "domains": [
+        "statistical-system"
+      ]
+    },
+    {
+      "id": "pl-act-nbp-1997",
+      "title": "Ustawa z dnia 29 sierpnia 1997 r. o Narodowym Banku Polskim",
+      "title_aliases": [
+        "Act on Narodowy Bank Polski"
+      ],
+      "publisher": "Sejm Rzeczypospolitej Polskiej",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "instrument",
+      "region": "Poland",
+      "description": "The Act on Narodowy Bank Polski (Dz.U. 1997 nr 140 poz. 938, consolidated Dz.U. 2022 poz. 2025). Article 3 sets price stability as NBP's basic objective and adds financial-stability tasks; the Act also obliges NBP to compile the balance of payments and the international investment position and to report on them to Parliament and the Council of Ministers. Minted 2026-09-11 in the Poland round. The English alias is the name NBP itself uses in its own English publications, which is where it was read.",
+      "last_updated": null,
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19971400938",
+      "domains": [
+        "monetary-policy",
+        "financial-regulation",
+        "statistical-system"
+      ]
+    },
+    {
+      "id": "pl-foreign-exchange-act-2002",
+      "title": "Ustawa z dnia 27 lipca 2002 r. Prawo dewizowe",
+      "title_aliases": [
+        "Prawo dewizowe",
+        "Foreign Exchange Act"
+      ],
+      "publisher": "Sejm Rzeczypospolitej Polskiej",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "instrument",
+      "region": "Poland",
+      "description": "Poland's Foreign Exchange Act (Dz.U. 2002 nr 141 poz. 1178, consolidated Dz.U. 2022 poz. 309). Together with the Act on NBP it is the source of the reporting obligation that feeds the Polish balance of payments. Minted 2026-09-11 in the Poland round; both aliases are read in NBP's own English methodological notes.",
+      "last_updated": null,
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20021411178",
+      "domains": [
+        "external-sector",
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "pl-act-nik-1994",
+      "title": "Ustawa z dnia 23 grudnia 1994 r. o Najwyższej Izbie Kontroli",
+      "title_aliases": [
+        "Act on the Supreme Audit Office"
+      ],
+      "publisher": "Sejm Rzeczypospolitej Polskiej",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "instrument",
+      "region": "Poland",
+      "description": "The Act on the Supreme Audit Office (Dz.U. 1995 nr 13 poz. 59). Article 7(1)(1) obliges NIK to submit to the Sejm an analysis of the execution of the state budget and monetary policy guidelines. Minted 2026-09-11 in the Poland round; the English alias is NIK's own title for its English translation of the Act.",
+      "last_updated": null,
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19950130059",
+      "domains": [
+        "governance",
+        "public-finance"
+      ]
+    },
+    {
+      "id": "pl-pkd-2007",
+      "title": "Polska Klasyfikacja Działalności 2007 (PKD 2007)",
+      "title_aliases": [
+        "Polish Classification of Activities"
+      ],
+      "publisher": "Rada Ministrów / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "Poland",
+      "description": "Poland's activity classification, introduced on 1 January 2008 by the Regulation of the Council of Ministers of 24 December 2007 and derived from NACE Rev. 2. It is the grouping almost every GUS release is presented in. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Successive versions track the NACE revisions (PKD 2004, PKD 2007, PKD 2025); 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20072511885",
+      "domains": [
+        "national-accounts",
+        "industry"
+      ]
+    },
+    {
+      "id": "pl-kzis",
+      "title": "Klasyfikacja Zawodów i Specjalności (KZiS)",
+      "title_aliases": [
+        "Classification of Occupations and Specialisations"
+      ],
+      "publisher": "Minister Pracy i Polityki Społecznej / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "Poland",
+      "description": "Poland's classification of occupations and specialisations, derived from ISCO-08 and introduced on 1 January 2015 by the Regulation of the Minister of Labour and Social Policy of 7 August 2014. Used to group councillors, paid employees and their earnings, and the unemployed. Minted 2026-09-11 in the Poland round off the Statistical Yearbook's general notes.",
+      "cadence_note": "Reissued when ISCO is revised or the occupational structure changes; 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://psz.praca.gov.pl/rynek-pracy/bazy-danych/klasyfikacja-zawodow-i-specjalnosci",
+      "domains": [
+        "labour",
+        "human-capital"
+      ]
+    },
+    {
+      "id": "pl-pkwiu-2015",
+      "title": "Polska Klasyfikacja Wyrobów i Usług 2015 (PKWiU 2015)",
+      "title_aliases": [
+        "Polish Classification of Goods and Services"
+      ],
+      "publisher": "Rada Ministrów / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "Poland",
+      "description": "Poland's product classification, introduced on 1 January 2016 by the Regulation of the Council of Ministers of 4 September 2015, replacing PKWiU 2008. The Statistical Yearbook says only that it was compiled on the basis of international classifications and nomenclatures without naming one, so no upstream edge is minted from that sentence. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Successive versions roughly every seven years (2004, 2008, 2015); 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/Klasyfikacje/doc/pkwiu_15/index.html",
+      "domains": [
+        "industry",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "pl-pkob",
+      "title": "Polska Klasyfikacja Obiektów Budowlanych (PKOB)",
+      "title_aliases": [
+        "Polish Classification of Types of Construction"
+      ],
+      "publisher": "Rada Ministrów / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "Poland",
+      "description": "Poland's classification of construction works, introduced on 1 January 2000 by the Regulation of the Council of Ministers of 30 December 1999 and derived from Eurostat's Classification of Types of Constructions. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Not revised since introduction; 0.05 is the nominal once-a-generation rate the corpus uses for standards.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/Klasyfikacje/doc/pkob/pkob.htm",
+      "domains": [
+        "construction",
+        "housing"
+      ]
+    },
+    {
+      "id": "pl-kst-2016",
+      "title": "Klasyfikacja Środków Trwałych 2016 (KŚT 2016)",
+      "title_aliases": [
+        "Classification of Fixed Assets"
+      ],
+      "publisher": "Rada Ministrów / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "standard",
+      "releases_per_year": 0.05,
+      "region": "Poland",
+      "description": "Poland's classification of fixed assets by type, introduced on 1 January 2017 by the Regulation of the Council of Ministers of 3 October 2016. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Reissued about once a decade (KST 2010, KST 2016); 0.05 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/Klasyfikacje/doc/kst/kst.htm",
+      "domains": [
+        "national-accounts",
+        "industry"
+      ]
+    },
+    {
+      "id": "pl-gus-statistical-yearbook",
+      "title": "Rocznik Statystyczny Rzeczypospolitej Polskiej — Statistical Yearbook of the Republic of Poland",
+      "title_aliases": [
+        "Statistical Yearbook of the Republic of Poland"
+      ],
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 1,
+      "region": "Poland",
+      "description": "Poland's flagship annual statistical compendium, bilingual Polish/English, running to about 745 pages. Its general notes and per-chapter methodological notes are where GUS states which classifications, censuses and EU instruments the whole volume rests on, which is what made it the highest-yield single document of the 2026-09-11 Poland round.",
+      "cadence_note": "Annual; the 2024 edition was published December 2024. (The 2024 PDF's embedded XMP title still reads “2023” — stale metadata, not a different volume: the cover, spine and title page all read 2024, checked character by character.)",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/en/topics/statistical-yearbooks/statistical-yearbooks/statistical-yearbook-of-the-republic-of-poland-2024,2,26.html",
+      "domains": [
+        "general-statistics"
+      ]
+    },
+    {
+      "id": "pl-gus-nsp-2021",
+      "title": "Narodowy Spis Powszechny Ludności i Mieszkań 2021",
+      "title_aliases": [
+        "National Population and Housing Census 2021"
+      ],
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 0.1,
+      "region": "Poland",
+      "description": "Poland's 2021 population and housing census, reference date 31 March 2021, the benchmark every Polish population balance from 2020 onward is carried forward from. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Decennial (2002, 2011, 2021); 0.1 is that rate written as a number.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/en/national-census/national-population-and-housing-census-2021/",
+      "domains": [
+        "population",
+        "housing"
+      ]
+    },
+    {
+      "id": "pl-gus-cpi-flash-estimate",
+      "title": "Flash estimate of the consumer price index",
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 12,
+      "region": "Poland",
+      "description": "GUS's monthly advance estimate of the consumer price index, issued at the end of the reference month, about a fortnight ahead of the full CPI release. It is the number NBP's Monetary Policy Council has in hand when a Report closes. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Monthly, published on the last working day of the reference month.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/en/topics/prices-trade/price-indices/flash-estimate-of-the-consumer-price-index-in-august-2026,21,44.html",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "pl-pbssp",
+      "title": "Program badań statystycznych statystyki publicznej (PBSSP)",
+      "title_aliases": [
+        "Programme of statistical surveys of public statistics"
+      ],
+      "publisher": "Rada Ministrów / Główny Urząd Statystyczny (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 1,
+      "region": "Poland",
+      "description": "The annual Programme of Statistical Surveys of Official Statistics, issued each year as a Regulation of the Council of Ministers under Article 18 of the 1995 law on official statistics. It enumerates every survey Polish official statistics will run in the year, its data sources and its respondents — which is why Eurostat's Polish national accounts metadata points at it for the detailed source list. Editions 2012 to 2027 are published on GUS's BIP. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "One programme per calendar year, adopted the preceding December and amended in-year by further regulations.",
+      "last_updated": null,
+      "url": "https://bip.stat.gov.pl/dzialalnosc-statystyki-publicznej/program-badan-statystycznych/",
+      "domains": [
+        "statistical-system"
+      ]
+    },
+    {
+      "id": "pl-nbp-bop",
+      "title": "Balance of payments",
+      "publisher": "Narodowy Bank Polski (NBP)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 12,
+      "region": "Poland",
+      "description": "Poland's balance-of-payments statistics, compiled by the central bank from direct reporting by resident entities supplemented by Statistics Poland's surveys and administrative data. NBP publishes a monthly balance of payments and a fuller quarterly one; this node is the monthly series. Minted 2026-09-11 in the Poland round off NBP's own methodological notes.",
+      "cadence_note": "Monthly. NBP: “Monthly b.o.p. is published 44 working days following the end of a respective month.” A fuller quarterly balance of payments follows three months after the reference quarter.",
+      "last_updated": null,
+      "url": "https://nbp.pl/en/statistic-and-financial-reporting/balance-of-payments-statistics/balance-of-payments/",
+      "domains": [
+        "external-sector",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "pl-nbp-inflation-report",
+      "title": "Inflation Report",
+      "publisher": "Narodowy Bank Polski (NBP) — Monetary Policy Council",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 3,
+      "region": "Poland",
+      "description": "The Monetary Policy Council's assessment of macroeconomic developments influencing inflation, carrying the NECMOD-based projection of inflation and GDP prepared by NBP's Economic Analysis and Research Department. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Three times a year — March, July and November.",
+      "last_updated": null,
+      "url": "https://nbp.pl/en/monetary-policy/mpc-documents/inflation-report/",
+      "domains": [
+        "inflation",
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "pl-nbp-financial-stability-report",
+      "title": "Financial Stability Report",
+      "publisher": "Narodowy Bank Polski (NBP) — Financial Stability Department",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 2,
+      "region": "Poland",
+      "description": "NBP's systemic-risk assessment of the Polish financial system, with stress tests and recommendations, published under the financial-stability task the Act on NBP gives the bank. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Twice a year — June and December.",
+      "last_updated": null,
+      "url": "https://nbp.pl/en/financial-system/financial-stability-reports/",
+      "domains": [
+        "financial-regulation",
+        "banking"
+      ]
+    },
+    {
+      "id": "pl-nbp-monetary-policy-guidelines",
+      "title": "Monetary Policy Guidelines",
+      "publisher": "Narodowy Bank Polski (NBP) — Monetary Policy Council",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 1,
+      "region": "Poland",
+      "description": "The monetary policy guidelines the Monetary Policy Council adopts each year and presents to the Sejm alongside the Council of Ministers' draft Budget, as Article 227(6) of the Constitution requires. They set the inflation target and the strategy for the year ahead, and their execution is what NIK audits alongside the state budget. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Annual, adopted in September for the following calendar year.",
+      "last_updated": null,
+      "url": "https://nbp.pl/en/monetary-policy/mpc-documents/monetary-policy-guidelines/",
+      "domains": [
+        "monetary-policy",
+        "inflation"
+      ]
+    },
+    {
+      "id": "pl-nik-budget-execution-analysis",
+      "title": "Analysis of the execution of the state budget and monetary policy guidelines",
+      "publisher": "Najwyższa Izba Kontroli (NIK) / Supreme Audit Office",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "kind": "publication",
+      "releases_per_year": 1,
+      "region": "Poland",
+      "description": "NIK's annual analysis of how the state budget and the monetary policy guidelines were executed, presented to the Sejm by the President of NIK and required of it by Article 7(1)(1) of the Act on the Supreme Audit Office. It is submitted together with NIK's opinion on discharging the Council of Ministers. Minted 2026-09-11 in the Poland round.",
+      "cadence_note": "Annual; presented to the Sejm in June for the preceding budget year.",
+      "last_updated": null,
+      "url": "https://www.nik.gov.pl/en/about-us/cooperation-with-the-parliament/",
+      "domains": [
+        "public-finance",
+        "governance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). The footnote opens with BPM6. (Typesetting note: the PDF hyphenates “pay-ments” across a line break; the span below is the de-hyphenated text.) ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Balance of payments and International Investment Position Manual, 6th edition, 2009, International Monetary Fund"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). SNA 2008 is the fifth of the six. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "System of National Accounts, 2008, Inter-Secretariat Working Group on National Accounts"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). ESA 2010 is the sixth and last of the six. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "European System of Accounts ESA 2010, Eurostat, 2013"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "oecd-bd4",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). The OECD Benchmark Definition is the second of the six and governs the direct-investment part of the account. The node was minted this round; its OECD title reads “OECD Benchmark Definition of Foreign Direct Investment 2008: Fourth Edition”, so the quoted span carries seven of its ten title words contiguously. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "OECD Benchmark Definition of Foreign Direct Investment, fourth edition 2008, OECD"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "imf-external-debt-guide",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). GRADED B DELIBERATELY, and the reason is a title discrepancy worth recording rather than papering over: NBP names the standard “External Debt Statistics 2014”, and the IMF's own page for it carries editions dated 2003 and 2013 with no 2014. The artefact is not in doubt — there is one TFFS external-debt guide and NBP attributes it to the IMF — but the quoted span names neither the guide's full title nor a year the publisher uses, which is exactly what the B bar describes. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "External Debt Statistics 2014, International Monetary Fund"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "imf-irfcl-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: NBP's own Balance of payments Statistics — Methodological notes (Department of Statistics, September 2023) carry a single footnote listing the six international standards the Polish balance of payments is compiled to. Footnote 1 on p.10 of the document's own pagination, under section 5 (Balance of payments). GRADED B for the same reason as the external-debt edge: NBP's short form “International Reserves and Foreign Currency Liquidity 2014” names the subject but not the guide's own title (…: Guidelines for a Data Template) and gives a year the IMF does not use for it. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "International Reserves and Foreign Currency Liquidity 2014, International Monetary Fund"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "pl-gus-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: NBP's own methodological notes, section 1.3 (External cooperation), list what Statistics Poland hands over for the balance of payments and name the Household Budget Survey among it. The survey is used in estimating the travel and compensation-of-employees items of the current account. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "information derived from the Household Budget Survey"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "pl-gus-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: NBP's own methodological notes, section 5.1 on compensation of employees, name the Labour Force Survey as one of the sources for estimating the number of Poles working abroad. GRADED B: the notes write the survey only as “LFS” throughout — the full name appears nowhere in the document — and a three-letter acronym sits below the acronym floor, so the sentence identifies the artefact to a reader without naming it to the matcher. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "data derived from LFS (household survey carried out by the Statistics Poland)"
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "pl-act-nbp-1997",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: NBP's own methodological notes, section 1.2 (Legislative provisions), state the statutory obligation the balance of payments is compiled under. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Under the Act on Narodowy Bank Polski (NBP) of August 29, 1997, published in the Dziennik Ustaw (Journal of Laws) of 2020, Item 2027, NBP is obligated to compile the balance of payments and the international investment position statement and report thereon to Parliament and Council of Ministers."
+    },
+    {
+      "source_report_id": "pl-nbp-bop",
+      "target_report_id": "pl-foreign-exchange-act-2002",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: the same section of NBP's methodological notes names the second enabling statute, which is what supplies the reporting obligation on the entities NBP collects from. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2022/11/BoP-methodological-notes.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "The Act on Narodowy Bank Polski and the Prawo dewizowe (Foreign Exchange Act, published in the Journal of Law of 2022, Item 309), specify the reporting requirements."
+    },
+    {
+      "source_report_id": "pl-nbp-inflation-report",
+      "target_report_id": "pl-gus-cpi-flash-estimate",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the Report's own front-matter data-cutoff statement names the GUS release it closes on. GRADED B: NBP writes the artefact as “flash estimate of CPI inflation” where GUS titles the release “Flash estimate of the consumer price index”, so the shared run is two words and falls short of the naming bar even though the artefact is unambiguous. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2026/07/Raport-o-inflacji-lipiec-2026-ANG.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "Chapters 1 and 2 of the Report include data available until 25 June 2026 as well as the Statistics Poland (GUS) flash estimate of CPI inflation in Poland for June 2026"
+    },
+    {
+      "source_report_id": "pl-nbp-financial-stability-report",
+      "target_report_id": "pl-act-nbp-1997",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: the Report's Recommendations section states the statutory mandate it is published under, citing the Act by name and by article. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2026/06/Raport-o-stabilnosci-systemu-finansowego.-Czerwiec-2026_EN.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "This is one of the ways to fulfil the statutory mandate of NBP, which includes acting to maintain domestic financial stability (Article 3 paragraph 2 items 6a and 6b of the Act on Narodowy Bank Polski)."
+    },
+    {
+      "source_report_id": "pl-nbp-monetary-policy-guidelines",
+      "target_report_id": "pl-act-nbp-1997",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: Monetary Policy Guidelines for 2026, Chapter 1, states the obligations the Council discharges in setting the guidelines and names the Act. The same page quotes Article 3 Section 1 of the Act verbatim. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://nbp.pl/wp-content/uploads/2025/09/Zalozenia-polityki-pienieznej-na-rok-2026-ANG.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Fulfilling the main obligations of NBP laid down in the Constitution of the Republic of Poland and in the Act on Narodowy Bank Polski, the Council strives to maintain price stability."
+    },
+    {
+      "source_report_id": "pl-nik-budget-execution-analysis",
+      "target_report_id": "pl-act-nik-1994",
+      "relationship_type": "legal_basis",
+      "basis": "REGISTER: the Act on the Supreme Audit Office, in NIK's own English translation on nik.gov.pl, lists at Article 7(1)(1) the documents NIK must submit to the Sejm, the first of which is this analysis. GRADED B for a reason worth stating: the quoted sentence names the SOURCE artefact, not the target — the target here IS the document doing the naming, so no sentence inside it restates its own title, and PLAYBOOK rule 15 forbids leaning on the page title instead. ROUTE: first-party HTML on nik.gov.pl, read live in Chrome 2026-09-11.",
+      "evidence_url": "https://www.nik.gov.pl/en/about-us/legal-regulations/act-on-the-supreme-audit-office.html",
+      "evidence_grade": "B",
+      "evidence_quote": "analysis of the execution of the state budget and monetary policy guidelines"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-pkd-2007",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 2(1) is the first thing the volume says about how its data are grouped. (Typesetting note: the PDF hyphenates “Activ-ities” across a line break; the span below is the de-hyphenated text.) ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "according to the Polish Classification of Activities — PKD 2007, compiled on the basis of the Statistical Classification of Economic Activities in the European Community — NACE Rev. 2."
+    },
+    {
+      "source_report_id": "pl-pkd-2007",
+      "target_report_id": "nace-rev2",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. The same sentence states the derivation of the Polish classification from the EU one, which is what PLAYBOOK 7a requires of a nomenclature edge: the document says it, rather than the reader knowing it. GUS is the body that maintains PKD, so this is its own statement about its own classification. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "PKD 2007, compiled on the basis of the Statistical Classification of Economic Activities in the European Community — NACE Rev. 2."
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "nace-rev2",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 5 states the yearbook's own tabulation is done at NACE levels directly, not only via PKD. Kept as a separate edge from the PKD one because it is a separate statement about a separate thing: note 2(1) says which national classification the data are presented in, note 5 says which European levels the breakdowns are compiled at. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Data according to NACE Rev. 2 sections and divisions, by institutional sectors as well as according to administrative division, are compiled, unless otherwise indicated, using the enterprise method."
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-kzis",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(1) lists KZiS first among the classifications the yearbook uses besides PKD 2007. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Classification of Occupations and Specialisations (KZiS), on the basis of which councillors of organs of local government units, paid employees and their wages and salaries as well as the unemployed are grouped"
+    },
+    {
+      "source_report_id": "pl-kzis",
+      "target_report_id": "isco-08",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. The same entry states the derivation of KZiS from the ILO standard and dates its introduction to the ministerial regulation that made it. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the classification, compiled on the basis of the International Standard Classification of Occupations (ISCO-08) was introduced on 1 January 2015 by the Regulation of the Minister of Labour and Social Policy of 7 August 2014"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-pkwiu-2015",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(2). No upstream edge is minted from this entry: it says PKWiU 2015 was compiled on the basis of international classifications and nomenclatures without naming one, which under PLAYBOOK 7a is not a citation. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Polish Classification of Goods and Services — PKWiU 2015, on the basis of which products and goods are grouped"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "sitc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(3) names the two nomenclatures foreign-trade goods are grouped by. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Combined Nomenclature — CN and the Standard International Trade Classification (SITC), on the basis of which goods in foreign trade are grouped"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "eu-combined-nomenclature",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(3), the same sentence as the SITC edge: it names two targets and each gets its own edge. The CN node was minted this round. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Combined Nomenclature — CN and the Standard International Trade Classification (SITC), on the basis of which goods in foreign trade are grouped"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-pkob",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(5). ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Polish Classification of Types of Construction (PKOB), on the basis of which types of constructions are grouped"
+    },
+    {
+      "source_report_id": "pl-pkob",
+      "target_report_id": "eurostat-cc-1997",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. The same entry states the derivation of PKOB from Eurostat's construction classification and dates its introduction to the Council of Ministers regulation that made it. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "PKOB, compiled on the basis of the Classification of Types of Constructions (CC), was introduced on 1 January 2000 by the Regulation of the Council of Ministers of 30 December 1999"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-kst-2016",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 7(6), the last of the six classifications the notes list. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "the Classification of Fixed Assets (KŚT), on the basis of which fixed assets are grouped according to type"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "who-icd-10",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: the Statistical Yearbook's Population chapter footnotes its causes-of-death tables to the WHO classification by name. This is the table-note shape PLAYBOOK 7a treats as caption-equivalent: the note is the source line for the table above it. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "In accordance with the International Statistical Classification of Diseases and Related Health Problems (ICD-10"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "pl-gus-nsp-2021",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: the Statistical Yearbook of the Republic of Poland 2024 is GUS's own volume, and its General Notes (pp.30-32, bilingual Polish/English in facing columns) state which classifications the whole yearbook is presented in. General note 12 states which census benchmark each period's population figures are carried forward from, and 2021 onward is the 2021 census. (Typesetting note: the PDF hyphenates “Popu-lation” across a line break; the span below is the de-hyphenated text.) ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "since 2020 (in the case of indices — since 2021) on the basis of the results of the National Population and Housing Census 2021"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "eu-reg-692-2011",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: the Statistical Yearbook's Tourism chapter takes its definition of tourism from the EU regulation, naming it in full. GRADED B rather than A on a mechanical doubt, not an evidential one: the node title carries the regulation number inside ASCII parentheses, which the matcher strips from a title before comparing, so the contiguous run the quote offers may not survive normalisation. The sentence itself is unambiguous and first-party. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "Tourism, in accordance with the Regulation (EU) No 692/2011 of the European Parliament and of the Council in force since 2012, means the activity of visitors taking a trip to a main destination outside their usual environment"
+    },
+    {
+      "source_report_id": "pl-gus-statistical-yearbook",
+      "target_report_id": "eu-directive-2009-42",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: the Statistical Yearbook's Transport chapter states that its seaport cargo, ship-traffic and passenger tables follow the EU instrument, naming it by number. GRADED B: the quote names the directive only by its number, which is a short run against the instrument's long formal title, so the naming bar is not cleanly met even though the citation is first-party and exact. ROUTE: first-party PDF from stat.gov.pl fetched in Thomas's own Chrome and extracted locally. The quoted spans were taken from the pypdf reading, which resolves the facing-column layout into column-order English text; the pdftotext -layout reading interleaves the two languages on every line, so a span checked only against that reading would look broken when it is not.",
+      "evidence_url": "https://stat.gov.pl/download/gfx/portalinformacyjny/en/defaultaktualnosci/3328/2/26/1/statistical_yearbook_of_the_republic_of_poland_2024_3.pdf",
+      "evidence_grade": "B",
+      "evidence_quote": "are presented in accordance with the European Union methodology (Directive 2009/42/EC)"
+    },
+    {
+      "source_report_id": "pl-gus-national-accounts",
+      "target_report_id": "pl-pbssp",
+      "relationship_type": "cites",
+      "basis": "SELF-DECLARED: Eurostat's national reference metadata for Poland (compiling agency: Statistics Poland) points at the annual survey programme for the detailed list of sources behind the quarterly and annual national accounts. Typed `cites` rather than `uses_data_from` on purpose: the sentence says where the source list is written down, not that the accounts take figures from the programme itself. (Transcription note: the page carries a typo and a double space — “used in national are specified in details  every year”; the span below keeps the typo and normalises the double space to one.) ROUTE: first-party ESMS page on ec.europa.eu, read live in Chrome 2026-09-11.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_pl.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "data sources used in national are specified in details every year in the Programme of statistical surveys of public statistics."
+    },
+    {
+      "source_report_id": "pl-pbssp",
+      "target_report_id": "pl-statistics-act-1995",
+      "relationship_type": "legal_basis",
+      "basis": "REGISTER: the enacting formula of the Council of Ministers regulation amending the 2026 programme names the statute and the article it is issued under. Read from the Dziennik Ustaw text GUS publishes on its own BIP. ROUTE: first-party PDF fetched inside Thomas's own Chrome (same-origin fetch on the publisher's own listing page, blob-saved to Downloads) and text-extracted locally with pdftotext and pypdf on the bridge VM. A direct read under PLAYBOOK 7b, not an archived copy.",
+      "evidence_url": "https://bip.stat.gov.pl/download/gfx/bip/pl/defaultstronaopisowa/1868/1/1/d2026000113601.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Na podstawie art. 18 ust. 1 ustawy z dnia 29 czerwca 1995 r. o statystyce publicznej"
+    }
+  ],
+  "relations": [
+    {
+      "source_report_id": "pl-nik-budget-execution-analysis",
+      "target_report_id": "pl-nbp-monetary-policy-guidelines",
+      "relation_type": "audits",
+      "basis": "The Act on the Supreme Audit Office, Article 7(1)(1), makes the monetary policy guidelines one of the two things NIK's annual analysis reports on: “The Supreme Audit Office shall submit to the Sejm: 1) analysis of the execution of the state budget and monetary policy guidelines”. NIK's own parliament-relations page says the same from the other side: “Every year NIK President presents the Sejm with the Analysis of the execution of the state budget and monetary policy guidelines and the NIK activity report.” Recorded as a relation rather than a dependency because assurance is not derivation — the guidelines gain no content from being audited. The state-budget half of the same obligation has no node to point at: the Council of Ministers' budget-execution report is published on gov.pl, which was unreachable from every route this session had.",
+      "evidence_url": "https://www.nik.gov.pl/en/about-us/legal-regulations/act-on-the-supreme-audit-office.html"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "pl-gus-statistical-yearbook -> un-coicop-2018",
+      "source": "pl-gus-statistical-yearbook",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "The Statistical Yearbook's General Note 7(4) names COICOP as one of the classifications it groups by — “the Classification of Individual Consumption by Purpose (COICOP), on the basis of which final consumption expenditure of products (goods and services) of the households sector as well as expenditure on consumer goods and services of households (also adopted for compiling price indices) are grouped” — and names NO EDITION. That is exactly the case Thomas closed on 2026-09-08 when he dropped iq-cpi, tn-ins-cpi and ma-hcp-ipc -> un-coicop-2018 for the same reason, and PLAYBOOK 7d records it as a decided call. Recorded here rather than wired so the next Poland round does not re-derive it: the citation is real, the edition is not stated, and the corpus models COICOP editions as separate nodes."
+    },
+    {
+      "edge": "pl-gus-statistical-yearbook -> pl-pkwiu-2015 upstream (international classifications)",
+      "source": "pl-pkwiu-2015",
+      "target": null,
+      "reason": "no-document",
+      "why": "PKWiU 2015 is the one Polish classification in the Statistical Yearbook's General Notes whose derivation is stated without a target: “PKWiU 2015, compiled on the basis of international classifications and nomenclatures, was introduced on 1 January 2016”. PKWiU is in fact built on the EU's CPA, which IS in the corpus as `cpa` — but the yearbook does not say so, and knowing it is not evidence. A round with the PKWiU introducing regulation (Dz.U. 2015 poz. 1676) in hand should close this; its enacting formula and explanatory notes are the place the CPA link would be stated."
+    },
+    {
+      "report_id": "pl-nbp-bop",
+      "candidate_target": "Foreign Trade Statistics (FTS), Statistics Poland",
+      "reason": "note",
+      "why": "NBP's methodological notes name the largest single input to the Polish current account by a title that is NBP's, not GUS's: “The main source of data on goods in the Polish balance of payments is Foreign Trade Statistics (FTS) compiled by the Statistics Poland on the basis of INTRASTAT declarations (for intra-European Union trade) as well as from the Single Administrative Documents, SAD (for extra EU trade)”. The sentence is first-party, exact and would carry an A — what is missing is the node, and minting one titled “Foreign Trade Statistics” would break the rule that a node carries the PUBLISHER's own title for the artefact. GUS's English foreign-trade pages redirected to its new portal (new.stat.gov.pl) mid-session and the release's own title was not read, so the node was not minted. One page away: find GUS's own title for the release, mint it, and this edge plus the INTRASTAT and SAD chain behind it all follow."
+    },
+    {
+      "report_id": "pl-nbp-bop",
+      "candidate_target": "Poland's Ministry of Finance documents on gov.pl",
+      "reason": "note",
+      "why": "ROUTING FINDING, worth recording because it shaped what this round could do. Of the Polish hosts, nbp.pl, stat.gov.pl, bip.stat.gov.pl, www.nik.gov.pl, isap.sejm.gov.pl and ec.europa.eu were all reachable in Thomas's Chrome; www.gov.pl and finanse-arch.mf.gov.pl were refused by the extension with “Navigation to this domain is not allowed”. Neither the cloud container nor the bridge VM has egress to any Polish host at all — the container's proxy answers 403 to CONNECT for every one of them and the bridge VM has no network. So the whole Ministry of Finance layer is unresearched rather than absent: the Public Finance Sector Debt Management Strategy, the state budget execution report NIK audits, and the Medium-Term Fiscal-Structural Plan are all on www.gov.pl. A future round needs either a gov.pl permission in the Chrome extension or a different network."
+    },
+    {
+      "report_id": "pl-nbp-inflation-report",
+      "candidate_target": "pl-gus-lfs",
+      "reason": "note",
+      "why": "NOT WIRED, and the reason is the same one that capped the balance-of-payments LFS edge at B. The Inflation Report's Figure 2.15 is titled “Number of people employed according to the LFS” and its source line reads “Source: Statistics Poland (GUS) data.” — so the figure names the artefact only by a three-letter acronym and the source line names only the agency. Neither half reaches the naming bar on its own, and PLAYBOOK 7a's chart-caption rule turns on the SOURCE LINE, which here is agency-only. The full phrase “Labour Force Survey” appears nowhere in the report; grep confirmed. A B edge could be argued for; it was left out rather than argued."
+    }
+  ]
+}

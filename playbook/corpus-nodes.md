@@ -6,6 +6,14 @@ byte-for-byte what it was inside that file, and its section headings are unchang
 existing cross-reference still resolves.
 
 **Read this when:** you are MINTING a node, or about to re-open a question that may already be settled.
+**This file owns what IS and IS NOT a node**; whether a document names one is `corpus-naming.md`.
+
+**THE BOUNDARY, so nothing lands in the wrong file again** (stated 2026-09-11, after three entries had):
+**`corpus-naming.md` is POLICY — what counts as a citation at all, and it would be true if the grader did not
+exist.** **`corpus-evidence.md` is MECHANICS — how the grader and the matchers actually behave.**
+**`corpus-route.md` is what the ROUTE the bytes came by does to the grade.** **`corpus-hosts.md` is what a
+failed fetch does and does not prove.** **`corpus-nodes.md` is what is and is not a node.** If an entry would
+still be true with no tooling at all, it is policy; if it explains why a tool did something, it is mechanics.
 
 **You do not read this by default.** `PLAYBOOK-CORPUS.md` carries a one-line index of everything
 below; it tells you a ruling exists and what it decides, and you come here for the reasoning only
@@ -131,3 +139,34 @@ and `candidates-tier-wiring-2026-08-28.json`'s original Iraq entry (which had a 
 `HANDOFF.md` §3 and memory `round_coicop_ruling_2026-09-08` for the full record. Do not
 re-mint any of the three off the 2026-08-28/2026-09-06 precedent again — that precedent
 is what this ruling overturned.
+
+---
+
+## Moved here 2026-09-11 from `PLAYBOOK-CORPUS.md`'s index
+
+**Rounds 38-45 wrote full reasoning straight into the §6/§7 index lines**, which the 2026-09-09 split had
+just emptied — seventeen entries across the two sections had grown back into essays and carried 37% of that
+file. They are below, **byte-for-byte as they stood**, and the index now carries one line each pointing here.
+*(Thomas, 2026-09-11, on being shown the measurement: "do it". Full account: `notes/doc-audit-2026-09-11.md`.)*
+
+### A revising NOTICE does not mint an edition
+
+- **A revising NOTICE does not mint an edition** (Thomas, 2026-09-10). 国统设管函〔2018〕74号 revised
+  《三次产业划分规定（2012）》 onto GB/T 4754-2017 and NBS never retitled it: ONE node, the 2012 title, URL the 2012 text,
+  the notice recorded in the description. A citation DATED to the revision reaches the node; a bare title does not,
+  because it cannot say which state it means. Contrast GB/T 4754-2017, a real new edition with its own number.
+
+### 7d. Parked and closed → `playbook/corpus-nodes.md`
+
+### `RelationshipType` and the closed unions — the account
+
+- **`RelationshipType` is a closed 5-value union** (`calculated_from` /
+  `uses_data_from` / `methodology_depends_on` / `legal_basis` / `cites`).
+  *(Corrected 2026-09-06 — this bullet said "4-value" and omitted `legal_basis`
+  since the split; `types.ts` is the authority and ~10 live edges, the Japan
+  Statistics Act family among them, already use it. An agent trusting the old
+  count would have dropped a legitimate statutory edge.)* An off-union value →
+  NaN edge weight → NaN PageRank corpus-wide, silent and total. `Relation` is
+  only `audits`/`supersedes`. Same for `Domain` and every closed union: check
+  `types.ts` before inventing a value, cast rather than parse.
+

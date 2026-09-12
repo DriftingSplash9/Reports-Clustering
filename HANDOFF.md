@@ -61,6 +61,7 @@ every change in that lane.
 | editing any doc in the slow layer | `notes/doc-audit-2026-09-09.md` (handoff-080 sweep, and the cadence answer) — format and worked example in `notes/doc-audit-2026-09-07.md` |
 | **editing §2/§3 mid-round** | nothing — that is not a handoff and needs no archive; §4 below has the one-line test |
 | **writing a handoff** | `notes/handoff-procedure.md` — the full §4 procedure, moved there 2026-09-09 |
+| **a note exists but no row above names it** | `notes/README.md` — the index of every file in `notes/`, one line each. Not on the mandatory path; open it when §1 does not route you |
 | regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
 
@@ -69,27 +70,32 @@ with a file, the file wins.**
 
 ### Read cost — the bloat gauge, refreshed every handoff
 
-**THE NUMBER THOMAS ASKED FOR: a corpus round reads 6.9% of its context before he types a prompt, a
-renderer round 5.0%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
+**THE NUMBER THOMAS ASKED FOR: a corpus round reads 6.3% of its context before he types a prompt, a
+renderer round 5.5%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 13.7k + CORPUS index 28.2k + PLAYBOOK 11.5k + CLAUDE 1.5k | 54.9k | 13.7k | **6.9%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 40.3k | 10.1k | **5.0%** |
+| always: HANDOFF 17.4k + CORPUS index 19.8k + PLAYBOOK 11.5k + CLAUDE 1.5k | 50.1k | 12.5k | **6.3%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 43.9k | 11.0k | **5.5%** |
+| *was, at handoff 085 as written* | *47.4k / 41.1k* | *11.8k / 10.3k* | *5.9% / 5.1%* |
 | *was, at handoff 084 (+ rounds 43-45's mid-round edits)* | *64.1k / 49.9k* | *16.0k / 12.5k* | *8.0% / 6.2%* |
 | *was, at handoff 084 as written* | *58.5k / 46.5k* | *14.6k / 11.6k* | *7.3% / 5.8%* |
 
-**Handoff 085 took `HANDOFF.md` from 23.3k to 13.7k — the largest single sweep this file has had, and
+**Refreshed mid-round 2026-09-11**, not at a handoff: the Poland round's §2/§3 rewrite took this file from 14.6k to 17.4k (+0.4pp on the corpus gauge), most of it §3's Poland leads and the routing finding behind them. Handoff 086 should judge whether those stay. **Handoff 085 took `HANDOFF.md` from 23.3k to 13.7k — the largest single sweep this file has had, and
 0.4pp below where handoff 084 left it rather than merely undoing the drift.** Almost all of it is
 China: seventeen rounds of live state became one paragraph and two pointers the moment Thomas paused
 the programme, which is `PLAYBOOK.md` §1's second test working exactly as intended — §2's weight
 follows the lane being worked, and China is no longer one. The five-handoff review (step 5) removed
 three more paragraphs by demoting them to `notes/standing-issues.md`. `PLAYBOOK-CORPUS.md` is 28.0k
 and is now **twice** this file; **it is the largest always-read file by a wide margin and nothing
-sweeps a playbook** — its §2 is where the next cut has to come from, and that has been true for four
-handoffs running. **The 5b sweep added 0.2k to it even after its correction histories were moved to
-`notes/doc-audit-2026-09-10.md`** — that split is now a rule in the procedure, because at every-five a
-sweep that shows its working in place is itself a growth driver on the file it is meant to protect.
+sweeps a playbook** — its §2 is where the next cut has to come from, and that had been true for four
+handoffs running — **and the diagnosis was wrong every time.** Measured 2026-09-11: §2 was 27% of the file
+and **§6+§7, which are supposed to be INDEXES, were 62%**; 17 bullets of 73 carried 37% of it. Restructured
+the same day on Thomas's word: those 17 went to `playbook/` as one line each, the duplicated `_dropped` pair
+merged, rule 19's essay moved, the ledger paragraphs cut. **27.6k → 19.5k, and the file is no longer twice
+`HANDOFF.md`.** The rule that stops it regrowing — **an index line is one line, schema block excepted** — is
+§0 of that file now, because the 2026-09-09 split had no such rule and the index filled straight back up.
+Account: `notes/doc-audit-2026-09-11.md`.
 
 **On-demand sizes, 2026-09-10:** `playbook/` naming 15.3k, evidence 10.9k, nodes 9.2k, route 7.1k,
 hosts 5.7k; handoff procedure 9.5k; standing-issues 9.9k (+2.0k this handoff, by design); China
@@ -97,14 +103,24 @@ worklist 44.5k and method 36.6k, both off the always-read path and staying there
 
 ## 2. Current state
 
-Corpus **3,652 reports / 3,329 dependencies**. **1,298 A · 1,419 B · 612 C**, A-share 39.0%.
+Corpus **3,679 reports / 3,360 dependencies**. **1,322 A · 1,426 B · 612 C**, A-share 39.3%.
 **Domains: 46 approved, 0 proposed.** **`validate` exits 0.** **128/128 logic tests**,
-`grade-evidence --selftest` **76/76**, `tsc --noEmit` clean, `vite build` ok,
-`public/corpus-data.json` regenerated and copied back. Last data-changing round is **45**,
-2026-09-10. **970 zero-edge nodes** — recount from `validate`'s ISOLATED block, never carry the figure.
+`tsc --noEmit` clean, `public/corpus-data.json` regenerated and copied back. Last data-changing
+round is **Poland, 2026-09-11** (`src/data/research/pl-poland-2026-09-11.json` — 27 nodes, 31
+dependencies, 1 relation). **970 zero-edge nodes, unchanged by that round** — every node it minted
+is wired. Recount from `validate`'s ISOLATED block, never carry the figure.
+
+**Not re-run this round, and the reason is not the corpus:** `grade-evidence --selftest` and
+`vite build` both need `npm install`, and **the npm registry answered 403 to every package this
+session** (org egress policy — `zustand`, `tsx`, `typescript`, `@types/node` all refused). The
+generator, the logic tests and the data checks ran on the container's *globally* installed `tsx`,
+and `tsc --noEmit` ran natively on the bridge VM off the repo's own Windows `node_modules`. The
+Poland change is JSON-only and `gen-slices` emits no TypeScript, so neither unrun check could have
+been affected by it — but the next round that touches code must get a real install first.
 
 **These numbers are THE count.** §2 supersedes any figure in any other file, without argument —
-`PLAYBOOK.md` §2 rule 4. *(Sandbox: `package-lock.json` is on disk, `npm ci --legacy-peer-deps` installs clean.)*
+`PLAYBOOK.md` §2 rule 4. *(Sandbox: `package-lock.json` is on disk; `npm ci --legacy-peer-deps` is
+the recipe when the registry is reachable, which it was not on 2026-09-11.)*
 
 ### CHINA IS FINISHED AND PAUSED (Thomas, 2026-09-10: *"we are done with china now"*)
 
@@ -153,22 +169,46 @@ ordered for A.
 
 ### [Thomas]
 
-1. **The A-or-B question above.**
+1. **The A-or-B question in §2's coverage read** — still open; Poland was worked on 2026-09-11
+   ahead of it, on a direct instruction, and turned out to be neither class cleanly (see below).
+2. **A `www.gov.pl` permission in the Chrome extension**, if the Polish Ministry of Finance layer
+   is wanted. The extension refuses that domain outright ("Navigation to this domain is not
+   allowed") and no other route in this session reaches any Polish host — the container's egress
+   proxy answers 403 to CONNECT for all of them and the bridge VM has no network at all. Without
+   it the Debt Management Strategy, the state budget execution report and the Medium-Term
+   Fiscal-Structural Plan stay unresearched.
+3. **Downloads left on your machine.** Six Polish PDFs are in `C:\Users\thoma\Downloads` from
+   this round (`pl-nbp-*`, `pl-gus-statistical-yearbook-2024.pdf`, `pl-pbssp-2026-amend.pdf`,
+   ~34 MB). Keep or bin them as you like; nothing in the repo points at them.
 
 ### [Agent]
 
-**Nothing is queued. China is closed and the next programme is Thomas's call.** When it is made, the
-work starts from the workbook's shortlist and `notes/triage-2026-08-30`-style scoping, not from here.
+**Poland, 2026-09-11 — what is left one page away, in order of value:**
+
+1. **GUS's own title for its foreign-trade release.** NBP's balance-of-payments methodological
+   notes name the largest single input to the Polish current account — *"The main source of data
+   on goods in the Polish balance of payments is Foreign Trade Statistics (FTS) compiled by the
+   Statistics Poland on the basis of INTRASTAT declarations…"* — but "Foreign Trade Statistics"
+   is NBP's name for it, not GUS's, and a node must carry the publisher's own title. `stat.gov.pl`'s
+   English foreign-trade pages redirected to `new.stat.gov.pl` mid-session and the release title was
+   never read. One verified title mints the node and takes an A edge with it.
+2. **PKWiU 2015's upstream.** The Statistical Yearbook says only "compiled on the basis of
+   international classifications and nomenclatures". The real target is almost certainly `cpa`,
+   which is already a node; the PKWiU introducing regulation (Dz.U. 2015 poz. 1676) is where it
+   would be stated.
+3. **NBP's IIP and external-debt series** are described in the same methodological notes as the
+   balance of payments and were not minted — deliberately, to avoid three sibling nodes sharing
+   one document's edges. They are real and the evidence is already read.
 
 Standing, and none of it needs a round of its own:
 
-- **`notes/standing-issues.md`** carries everything that outlived five handoffs — and gained three
-  entries in this handoff's review: **FR** (four rounds in, paused, the live method recorded), **DE**
-  (finished as a programme; only a Chapter 10.3 scope question remains, which is a ruling not research)
-  and the **DSBB option E** worklist pointer (~15 pairs, each needing its publisher's page).
-- **`iq-cso` / `ye-cso` / `sy-cbs` / `sd-cbs` stay PARKED** — the rule is in `playbook/corpus-nodes.md`
-  and the §2 line restating it was deleted by this review. `iq-cso`'s possible-duplicate question is
-  open in `notes/standing-issues.md`, not here.
+- **`notes/standing-issues.md`** carries everything that outlived five handoffs — **FR** (four
+  rounds in, paused, the live method recorded), **DE** (finished as a programme; only a Chapter
+  10.3 scope question remains, which is a ruling not research) and the **DSBB option E** worklist
+  pointer (~15 pairs, each needing its publisher's page).
+- **`iq-cso` / `ye-cso` / `sy-cbs` / `sd-cbs` stay PARKED** — the rule is in
+  `playbook/corpus-nodes.md`. `iq-cso`'s possible-duplicate question is open in
+  `notes/standing-issues.md`, not here.
 
 ## 4. How to hand off
 
