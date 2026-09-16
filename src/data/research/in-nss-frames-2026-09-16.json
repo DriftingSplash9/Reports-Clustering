@@ -1,0 +1,147 @@
+{
+ "meta": {
+  "source": "research round 2026-09-16 — India, the NSS sampling-frame layer. Thomas: “honestly i doubt there is value in india, look for new edges and nodes anyway”.",
+  "minted": "2026-09-16",
+  "status": "ready to merge",
+  "note": "INDIA, AND THE DOUBT WAS HALF RIGHT. RESULT: 1 node, 10 dependencies, 3 dropped notes.\n\nWHY THE COVERAGE CHART OVERSELLS INDIA. It showed 37 zero-edge nodes. TWENTY-EIGHT of those carry their publisher's BARE HOMEPAGE as their own url, so they are not research waiting to happen, they are the August 2026 import's url-and-granularity defect wearing a research job's clothes. Only 8 orphans carry a real document url. That part of Thomas's doubt was correct and is why this round did not touch the state-level layer at all.\n\nWHERE THE VALUE ACTUALLY WAS, and it was not in the orphan list. The National Sample Survey family — PLFS, HCES, ASUSE and the NSS health round — publishes a full study description per survey on MoSPI's own microdata portal, and every one of them states its sampling frame in the same sentence: Urban Frame Survey blocks for urban, the Census 2011 village list for rural. The corpus already held the rural half and had never held the urban half. Minting `in-ufs` turned one node into four in-edges immediately, and the same four pages paid the Census 2011 node four more — eight edges off four fetches, which is the yield shape this project wants. Two further edges came from the IIP and ASI pages: the IIP's manufacturing weights are built on ASI results, and the ASI is conducted under the Collection of Statistics Act 2008.\n\nTHREE ORPHANS STOPPED BEING ORPHANS: `in-mospi-nss-health`, `in-mospi-asi` and `in-collection-of-statistics-act-2008` all had zero edges in either direction before this round.\n\nONE DIRECTION CORRECTION. The August import recorded `in-collection-of-statistics-act-2008 -> in-mospi-asi`, the Act depending on the survey. That is backwards and the note is rewritten `resolved` against the edge minted here.\n\nTHE ROUTE FINDING, which is worth more than this round. microdata.gov.in and censusindia.gov.in BOTH answer only with `curl -k`; a plain fetch gets nothing. So does mahades.maharashtra.gov.in, which a 2026-08-30 note records as 'fails DNS resolution'. These are certificate-chain gaps, not walls, and re-probing on that basis moved India's reachable-orphan count from the handful that round implied to 19 of 37. Details in notes/india-nss-frames-2026-09-16.md.\n\nEvery quote was verified against the exact `stripHtml` output the grader reads before the slice was written."
+ },
+ "reports": [
+  {
+   "id": "in-ufs",
+   "title": "Urban Frame Survey (UFS) Summary Data",
+   "title_aliases": [
+    "Urban Frame Survey",
+    "UFS"
+   ],
+   "publisher": "National Statistics Office, Ministry of Statistics and Programme Implementation",
+   "country": "IN",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 0.2,
+   "region": "India",
+   "description": "The urban half of the sampling frame behind every National Sample Survey. NSO's own microdata portal publishes it under this title with survey ID DDI-IND-NSO-UFS. It is minted here because four separate NSS survey pages — PLFS, HCES, ASUSE and the NSS health round — each name the UFS block list as the frame for their urban first-stage units, in the same sentence that names Census 2011 as the rural one: the corpus held the rural half (`in-census-2011`) and not the urban half. Minted 2026-09-16.",
+   "cadence_note": "UFS runs in roughly five-year cycles — ASUSE's own page names the live ones as 'UFS 2017-22 or UFS 2022-27', which is the only cadence statement any of the four pages makes, and 0.2 is that rate written as a number. The portal's own page carries no release schedule.",
+   "last_updated": null,
+   "url": "https://microdata.gov.in/nada/index.php/catalog/230",
+   "domains": [
+    "statistical-system",
+    "population"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "in-mospi-plfs",
+   "target_report_id": "in-ufs",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey, on MoSPI's own microdata portal, naming the Urban Frame Survey block list as the frame for its urban first-stage units. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. PLFS states it twice — the design paragraph also says 'The first stage units (FSU) were the Urban Frame Survey (UFS) blocks in urban areas and 2011 Population Census villages ... in rural areas'. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/284/study-description",
+   "evidence_grade": "A",
+   "evidence_quote": "The sampling frame for the urban sector is the list of Urban Frame Survey (UFS) blocks as per the latest UFS and for the rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-plfs",
+   "target_report_id": "in-census-2011",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey naming the Census 2011 village list as its rural sampling frame. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. The target is `in-census-2011` rather than the `in-census-india` series node because every one of these pages dates the citation — 'as per Census 2011' — and PLAYBOOK 7c says a citation dated to a specific edition reaches that edition's node. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain. GRADE: B, `quote-found-target-not-named`, and the grader is right. Coverage is 1.0 — the quote is verbatim — but every one of these four pages writes the target as 'Census 2011', while the node carries the publisher's fuller title 'Census of India 2011 — Primary Census Abstract'. The title-lead door needs 'Census of India 2011' and the run rule needs most of seven title words; 'Census 2011' clears neither. NOTHING WAS DONE ABOUT IT: adding 'Census 2011' as a `title_alias` would have taken all four of these to A in one edit, and that is exactly the shape PLAYBOOK forbids — editing to move a grade. A reader can see the document means this node; the grader reports that the node as titled is not named, which is a true statement about the document.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/284/study-description",
+   "evidence_grade": "B",
+   "evidence_quote": "The sampling frame for the urban sector is the list of Urban Frame Survey (UFS) blocks as per the latest UFS and for the rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-hces",
+   "target_report_id": "in-ufs",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey, on MoSPI's own microdata portal, naming the Urban Frame Survey block list as the frame for its urban first-stage units. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/237/study-description",
+   "evidence_grade": "A",
+   "evidence_quote": "The sampling frame for urban sector is the list of Urban Frame Survey (UFS) blocks as per latest Urban Frame Survey and for rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-hces",
+   "target_report_id": "in-census-2011",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey naming the Census 2011 village list as its rural sampling frame. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. The target is `in-census-2011` rather than the `in-census-india` series node because every one of these pages dates the citation — 'as per Census 2011' — and PLAYBOOK 7c says a citation dated to a specific edition reaches that edition's node. HCES uses the Census twice over: it is also the allocation base — 'The total sample size of 14,827FSUs has been allocated to State/UTs in proportion to Census 2011 population'. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain. GRADE: B, `quote-found-target-not-named`, and the grader is right. Coverage is 1.0 — the quote is verbatim — but every one of these four pages writes the target as 'Census 2011', while the node carries the publisher's fuller title 'Census of India 2011 — Primary Census Abstract'. The title-lead door needs 'Census of India 2011' and the run rule needs most of seven title words; 'Census 2011' clears neither. NOTHING WAS DONE ABOUT IT: adding 'Census 2011' as a `title_alias` would have taken all four of these to A in one edit, and that is exactly the shape PLAYBOOK forbids — editing to move a grade. A reader can see the document means this node; the grader reports that the node as titled is not named, which is a true statement about the document.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/237/study-description",
+   "evidence_grade": "B",
+   "evidence_quote": "The sampling frame for urban sector is the list of Urban Frame Survey (UFS) blocks as per latest Urban Frame Survey and for rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-asuse",
+   "target_report_id": "in-ufs",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey, on MoSPI's own microdata portal, naming the Urban Frame Survey block list as the frame for its urban first-stage units. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. ASUSE is the one page of the four that names the live UFS cycles, which is where this node's cadence comes from. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain. QUOTE CHOICE, CORRECTED BEFORE THE FINAL RUN: the first quote taken here was the sentence naming the live UFS cycles ('mostly, UFS 2017-22 or UFS 2022-27'), chosen because it is where this node's cadence comes from. It graded B `artefact-named-elsewhere-in-document` — that sentence writes the target as the bare acronym and the page spells 'Urban Frame Survey' out in a different paragraph. The quote is now ASUSE's own first-stage-unit statement, which names the target in full and is the primary statement of the dependency anyway; the cadence sentence stays in this node's `cadence_note`, which is where a cadence fact belongs.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/293/study-description",
+   "evidence_grade": "A",
+   "evidence_quote": "Urban sector: The First Stage Units (FSU) was the latest updated UFS (Urban Frame Survey) blocks."
+  },
+  {
+   "source_report_id": "in-mospi-asuse",
+   "target_report_id": "in-census-2011",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey naming the Census 2011 village list as its rural sampling frame. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. The target is `in-census-2011` rather than the `in-census-india` series node because every one of these pages dates the citation — 'as per Census 2011' — and PLAYBOOK 7c says a citation dated to a specific edition reaches that edition's node. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain. GRADE: B, `quote-found-target-not-named`, and the grader is right. Coverage is 1.0 — the quote is verbatim — but every one of these four pages writes the target as 'Census 2011', while the node carries the publisher's fuller title 'Census of India 2011 — Primary Census Abstract'. The title-lead door needs 'Census of India 2011' and the run rule needs most of seven title words; 'Census 2011' clears neither. NOTHING WAS DONE ABOUT IT: adding 'Census 2011' as a `title_alias` would have taken all four of these to A in one edit, and that is exactly the shape PLAYBOOK forbids — editing to move a grade. A reader can see the document means this node; the grader reports that the node as titled is not named, which is a true statement about the document.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/293/study-description",
+   "evidence_grade": "B",
+   "evidence_quote": "Census 2011 list of villages was used as the sampling frame for rural areas"
+  },
+  {
+   "source_report_id": "in-mospi-nss-health",
+   "target_report_id": "in-ufs",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey, on MoSPI's own microdata portal, naming the Urban Frame Survey block list as the frame for its urban first-stage units. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. This edge and its Census counterpart are the FIRST edges this node has ever had — it was one of India's 37 zero-edge nodes. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/290/study-description",
+   "evidence_grade": "A",
+   "evidence_quote": "The sampling frame for urban sector is the list of Urban Frame Survey (UFS) blocks as per latest Urban Frame Survey and for rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-nss-health",
+   "target_report_id": "in-census-2011",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: NSO's own study description for this survey naming the Census 2011 village list as its rural sampling frame. This is the NSS two-part sampling frame, stated in identical template wording on four different survey pages. Every one of the four was fetched and read separately rather than assumed from the template — the wording is common, the fact is each survey's own. The target is `in-census-2011` rather than the `in-census-india` series node because every one of these pages dates the citation — 'as per Census 2011' — and PLAYBOOK 7c says a citation dated to a specific edition reaches that edition's node. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain. GRADE: B, `quote-found-target-not-named`, and the grader is right. Coverage is 1.0 — the quote is verbatim — but every one of these four pages writes the target as 'Census 2011', while the node carries the publisher's fuller title 'Census of India 2011 — Primary Census Abstract'. The title-lead door needs 'Census of India 2011' and the run rule needs most of seven title words; 'Census 2011' clears neither. NOTHING WAS DONE ABOUT IT: adding 'Census 2011' as a `title_alias` would have taken all four of these to A in one edit, and that is exactly the shape PLAYBOOK forbids — editing to move a grade. A reader can see the document means this node; the grader reports that the node as titled is not named, which is a true statement about the document.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/290/study-description",
+   "evidence_grade": "B",
+   "evidence_quote": "The sampling frame for urban sector is the list of Urban Frame Survey (UFS) blocks as per latest Urban Frame Survey and for rural sector, it is the list of villages as per Census 2011"
+  },
+  {
+   "source_report_id": "in-mospi-iip",
+   "target_report_id": "in-mospi-asi",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: the IIP's own study description on MoSPI's microdata portal, on how the manufacturing weights are built. This is a WEIGHT-DERIVATION dependency, the strongest kind for an index — the ASI results are what apportions the manufacturing sector across NIC industry groups, not a passing citation. It also gives `in-mospi-asi` its first edge in either direction. GRADE: recorded B, and the reason is the grader's naming test rather than the evidence. This document calls the target 'ASI 2022-23' and never writes 'Annual Survey of Industries' in full anywhere on the page; a three-character parenthetical acronym is below the grader's four-character floor and cannot name the artefact through any door, so no quote on this page can clear the A bar. The quote was NOT widened to chase it — PLAYBOOK forbids editing a quote to move a grade, and nothing else on the page states the relationship. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/299/study-description",
+   "evidence_grade": "B",
+   "evidence_quote": "The overall weight of the manufacturing sector is apportioned to the industry groups at the 2-digit, 3-digit- and 4-digit level of the National Industrial Classification (NIC), on the basis of the Gross Value Added (GVA) based on the results of ASI 2022-23"
+  },
+  {
+   "source_report_id": "in-mospi-asi",
+   "target_report_id": "in-collection-of-statistics-act-2008",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the ASI's own study description stating the statute it is conducted under. THIS EDGE RUNS THE OPPOSITE WAY TO THE ONE THE AUGUST 2026 IMPORT RECORDED. `in-india-2026-08.json` carries a dropped note for `in-collection-of-statistics-act-2008 -> in-mospi-asi` — the Act depending on the survey — which is backwards: the survey is conducted under the Act, so the survey is the dependent. The corpus convention is the same one `eu-ecoicop -> eu-reg-2016-792` follows, the artefact pointing at the instrument that authorises it. That note is rewritten `resolved` against this edge, with its original text preserved. It was dropped 2026-09-04 for a dead indiacode.nic.in url; the dependency was real all along and is stated here by the publisher instead. NOTE ON THE TARGET NODE: its own `url` is still the rotted indiacode handle (re-probed 2026-09-16, still 404 while the host itself answers 200) — a node-url defect, separate from this edge and not fixed here. ROUTE: microdata.gov.in answers this container only with certificate verification skipped (`curl -k`); a plain fetch returns nothing at all. That is a chain problem on the host, the same shape a 2026-08 note already diagnosed for `censusindia.gov.in` (a missing eMudhra intermediate), NOT a wall — the page is a normal NADA study-description served by MoSPI's own microdata portal. Direct read of a first-party publisher; no archive in the chain.",
+   "evidence_url": "https://microdata.gov.in/nada/index.php/catalog/143/study-description",
+   "evidence_grade": "A",
+   "evidence_quote": "the survey is being conducted annually under the statutory provisions of the Collection of Statistics (COS) Act, 2008 and the rules framed there-under in 2011"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "in-mospi-asuse -> the Sixth Economic Census",
+   "source": "in-mospi-asuse",
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "A real, cleanly stated dependency with no node to point at. ASUSE's own study description: 'Auxiliary information such as number of workers, etc. available from Sixth Economic Census (EC) frame was used for stratification, sub-stratification and selection of FSUs in rural areas (except Kerala).' The Economic Census is a distinct NSO product and the microdata portal lists it as a collection, but no catalog study page for it was found in the listing this round, so there is no first-party url to carry a node. One page find closes this. Recorded rather than minted because a node needs the publisher's own page, not a mention inside another survey."
+  },
+  {
+   "edge": "in-mospi-iip / in-mospi-asi -> NIC-2008",
+   "source": null,
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "BOTH documents read this round cite NIC-2008 and the corpus has only NIC-2025 (`in-mospi-nic-2025`). The IIP page apportions weights 'at the 2-digit, 3-digit- and 4-digit level of the National Industrial Classification (NIC)' and the ASI page strata are 'State x District x Sector x 3 digit NIC-2008'. NOT WIRED TO `in-mospi-nic-2025`, which would be the wrong target: NIC-2008 and NIC-2025 are different editions of the classification and these surveys name the 2008 one. Minting NIC-2008 needs MoSPI's own page for it, and mospi.gov.in is a JavaScript single-page application that serves an identical 2,657-byte shell for every path this container requests — the classification volume is not reachable by curl. A browser round closes it."
+  },
+  {
+   "edge": "the four NSS surveys -> in-census-india (the series node)",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "Recorded so it is not re-proposed. Each of the four surveys names 'Census 2011' with the year attached, so the edges go to `in-census-2011`, not to the undated `in-census-india` series node. Both nodes exist and the distinction is deliberate (PLAYBOOK 7c). If a later round finds an NSS document citing the Census generically, that one belongs on the series node and both can be live without contradiction."
+  }
+ ]
+}

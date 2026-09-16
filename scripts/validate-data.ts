@@ -570,6 +570,59 @@ const kindCounts = new Map<string, number>()
 for (const r of reports) {
   kindCounts.set(r.kind, (kindCounts.get(r.kind) ?? 0) + 1)
 }
+/**
+ * NODE URL QUALITY — the same two tests the EVIDENCE block runs on an edge's
+ * `evidence_url`, applied to a report's own `url`. Added 2026-09-15.
+ *
+ * **Why it did not exist, and what that cost.** `isBareHost` and `isIndexPage`
+ * have guarded edge evidence since the 2026-08-31 audit, but nothing ever read
+ * `Report.url`, so a node could carry its publisher's HOMEPAGE as the document
+ * it stands for and no check anywhere would say so. Measured when this block
+ * was written: **1,041 of 3,666 nodes** did, and **459 of those were among the
+ * 970 zero-edge nodes** — i.e. roughly half the "unwired depth" backlog the
+ * coverage workbook ranks countries by is not a research backlog at all, it is
+ * a node whose document was never recorded. 38 Egyptian nodes share the single
+ * URL `https://www.capmas.gov.eg/`; 20 Indonesian ones share `www.bps.go.id`.
+ *
+ * All of it arrived in the August 2026 bulk import (`*-2026-08.json`), which is
+ * the same provenance `PLAYBOOK-CORPUS.md` §6 already warns to grep before
+ * trusting.
+ *
+ * **Warning, never an error, and deliberately so.** A thousand errors would
+ * turn `validate` red for weeks and the project's own history says a check
+ * nobody can get to zero stops being read. The number is the thing to watch:
+ * it should fall, and a round that RAISES it has recorded a homepage as a
+ * document. Same promotion gate as the EVIDENCE block above — when the orphan
+ * count reaches 0, make it an error.
+ */
+const nodeBareUrl = reports.filter((r) => r.url && isBareHost(r.url))
+const nodeIndexUrl = reports.filter((r) => r.url && !isBareHost(r.url) && isIndexPage(r.url))
+const nodeNoUrl = reports.filter((r) => !r.url)
+const wiredIds = new Set<string>()
+for (const d of dependencies) {
+  wiredIds.add(d.source_report_id)
+  wiredIds.add(d.target_report_id)
+}
+const bareOrphans = nodeBareUrl.filter((r) => !wiredIds.has(r.id))
+const nodeBareHosts = new Map<string, number>()
+for (const r of nodeBareUrl) nodeBareHosts.set(r.url, (nodeBareHosts.get(r.url) ?? 0) + 1)
+console.log(`NODE URLS — ${reports.length} reports, checked the way an edge's evidence_url is checked`)
+console.log(
+  nodeBareUrl.length === 0
+    ? '  ✓ no report carries a bare homepage as its own url'
+    : `  ! ${nodeBareUrl.length} carry a bare homepage as their own url — ${bareOrphans.length} of those have no edge in either direction, so the document behind them was never recorded`,
+)
+console.log(
+  nodeIndexUrl.length === 0
+    ? '  ✓ no report carries an index/listing page as its own url'
+    : `  ! ${nodeIndexUrl.length} carry an index/listing page as their own url`,
+)
+if (nodeNoUrl.length) console.log(`  ! ${nodeNoUrl.length} carry no url at all`)
+for (const [h, n] of [...nodeBareHosts].sort((a, b) => b[1] - a[1]).slice(0, 8)) {
+  console.log(`      ${String(n).padStart(4)}  ${h}`)
+}
+console.log('')
+
 console.log(`KIND — ${reports.length} reports by kind`)
 for (const k of REPORT_KINDS) console.log(`  ${String(kindCounts.get(k) ?? 0).padStart(4)}  ${k}`)
 const unknownKind = reports.length - REPORT_KINDS.reduce((n, k) => n + (kindCounts.get(k) ?? 0), 0)

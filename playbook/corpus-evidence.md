@@ -278,3 +278,46 @@ landed in the wrong one. Boundary now stated at the top of each file. `notes/doc
   gained their Chinese alias in round 44 after a Chinese-only document naming them in full graded
   `target-not-named`. It had gone unnoticed because provincial yearbooks are bilingual and matched on
   the English title. **Check the alias before writing a non-Latin quote against an English-titled node.**
+
+
+## A title-lead containing an abbreviated word can never fire (2026-09-15)
+
+**Measured, on one edge, and the mechanism is general.** `esa-2010 -> nace-rev2` was quoted from
+ESA 2010's own Annex A — *"The classification used for grouping local KAUs into industries is the
+NACE Rev. 2."* — coverage 1.0, the target named in full inside the quote as any reader would
+judge it. It graded **B `artefact-named-elsewhere-in-document`**.
+
+`nace-rev2`'s title is `NACE Rev. 2 — Statistical Classification of Economic Activities in the
+European Community`. The run rule needs about seven contiguous words of that title and the window
+has three, so the only door open is `title-lead`: the clause before the em dash, matched whole.
+And `title-lead` is the one door that compares two differently-processed strings.
+
+- The needle goes through `tokenise`, whose last step strips a leading or trailing `.`, `-` or `/`
+  off every token: `NACE Rev. 2` becomes `nace rev 2`.
+- The haystack goes through `normalizeForMatch` only, which folds accents, quotes, dashes and
+  whitespace and **keeps full stops**: the body reads `nace rev. 2`.
+- `hay.includes('nace rev 2')` is then false against a document that says exactly that.
+
+So **any node whose title-lead contains an abbreviation with a full stop — `Rev.`, `No.`, `Vol.`,
+`Ed.`, `Art.` — cannot be named through that door**, whatever the document says. The whitespace-
+insensitive second pass does not rescue it: it squashes spaces, not punctuation, so the needle is
+`nacerev2` and the haystack `nacerev.2`.
+
+**The remedy is a span carrying enough of the full title, not a doctored quote or a doctored
+title.** On the measured case the fix was a second fragment from Annex A 1.19 naming the
+classification in full, which cleared the run rule at eight of twelve words and took the edge to A.
+The alternative remedy — a `title_aliases` entry spelled without the stop — was NOT taken: an alias
+is for a name the publisher actually uses, and inventing `NACE Rev 2` to satisfy a matcher is the
+shape `PLAYBOOK-CORPUS.md` forbids when it says never edit to move a grade.
+
+**One thing this case also turned up, worth knowing before trusting a run-rule match on that
+node:** ESA 2010 writes the name as *"Statistical classification of economic activities in the
+European **Union**"* while the node carries *"European **Community**"*, which is Regulation (EC)
+No 1893/2006's own wording and the correct title. The eight shared words clear the 60% bar, so it
+costs nothing there — but a shorter span of that name would land on the wrong side of it.
+
+*(Add-and-remove, `PLAYBOOK.md` §1: this adds one index line to `PLAYBOOK-CORPUS.md` §6 and this
+section here. Nothing was removed, and the honest reason is that nothing in §6 is stale — the
+section was cut to index lines on 2026-09-11 and this is the first addition since. If it needs
+paying for later, the candidate is the pair of `_dropped`-shape lines, which the schema block at
+the end of that file already states in full.)*

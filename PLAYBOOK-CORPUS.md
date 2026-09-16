@@ -176,6 +176,9 @@ one line each; open the file named at the end of the line for the evidence behin
 - **A DEPENDENCY USES `source_report_id`/`target_report_id`; `source`/`target` is the `_dropped` note shape.**
   Now a MALFORMED EDGES error — it once discarded five real edges with `validate` exiting 0.
   `playbook/corpus-evidence.md`.
+- **A TITLE-LEAD CONTAINING AN ABBREVIATED WORD CAN NEVER FIRE** — `tokenise` strips the full stop, `hay` keeps
+  it, and `Rev.` / `No.` / `Vol.` never meet. Quote a span carrying enough of the FULL title instead (2026-09-15).
+  `playbook/corpus-evidence.md`.
 - **Never edit a `basis` or a quote to move a grade.**
 
 ### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`
@@ -188,6 +191,9 @@ one line each; open the file named at the end of the line for the evidence behin
 - A 404 from a single-page-app route is not link rot.
 - A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the site.
 - A blocked verdict decays — re-probe before believing your own notes.
+- **A `000` ON A GOVERNMENT HOST MAY BE A CERTIFICATE CHAIN, NOT A WALL — try `curl -k` before writing it
+  off.** Three `.gov.in` hosts answer only that way; one was written off as DNS failure for a month.
+  `playbook/corpus-hosts.md`.
 - WebFetch cannot produce evidence-grade verbatim (~125-char cap).
 - A page's DECLARED CHARSET is honoured since 2026-09-08; before that a gb2312 page was not read
   as a bad quote, it was not read at all.
@@ -205,6 +211,8 @@ one line each; open the file named at the end of the line for the evidence behin
 - A `.docx` read through `stripHtml` gets a SPACE at every Word run boundary, so the one-text-node quote rule
   applies to Office documents as it does to HTML — **and a publisher's export can split its OWN title that way.**
   `playbook/corpus-evidence.md`.
+- **`file` MISREPORTS A LINEARISED PDF'S PAGE COUNT — ask `pdfinfo` before calling a document truncated.**
+  A 369-page volume read as `10 page(s)` and was refused for a round. `playbook/corpus-hosts.md`.
 - **A TRANSFER THAT STOPPED WITH BYTES ON DISK IS RESUMED, whatever its extension** — a partial body means
   progress, a dead host leaves none. `network:curl-28` on a big first-party document is worth one re-run before
   you believe it. `playbook/corpus-hosts.md`.

@@ -1,0 +1,826 @@
+{
+ "meta": {
+  "source": "research round 2026-09-14 — the EU classification-and-statute layer. Thomas: “read the handoff, i want to move to The EU classification-and-statute layer.”",
+  "minted": "2026-09-14",
+  "note": "EU CLASSIFICATION-AND-STATUTE LAYER, FIRST ROUND. RESULT: 5 nodes, 75 dependencies, 4 dropped notes.\n\nCONTINUED THE SAME DAY, and the continuation opens by correcting this file. The three edges at the END of `dependencies` — `nace-rev2 -> isic`, `cpa -> nace-rev2`, `eurostat-prodcom -> eu-combined-nomenclature` — all come from ONE document, Eurostat's own NACE Rev. 2 volume (KS-RA-07-015-EN), which the first pass wrote off as 'a 10-page cover extract'. It is 369 pages: `file` misreports that PDF's page count and `pdfinfo` does not, and the first pass believed `file`. The volume states the NACE-to-ISIC derivation under its own heading, states the CPA-to-NACE relationship that the CPA's own establishing regulation never mentions, and states where the Prodcom list's headings come from. The `nace-rev2 -> isic` dropped note below is kept and marked `resolved` rather than deleted, with the mistake written into it.\n\nWHAT WAS THIN AND WHY THIS IS THE FIX. The EU-level instruments were the least-wired part of a well-wired region: `esa-2010` carried 116 in-edges while `nace-rev2` carried 2, `cpa` 1, `eu-reg-223-2009` 2 and `eu-reg-2019-2152` 1 — i.e. the corpus documented the EU's ACCOUNTING framework thoroughly and its CLASSIFICATION and STATUTE framework hardly at all. ECOICOP, the classification every HICP in the European Statistical System is broken down by, had no node at all, and `eurostat-hicp` — a 26-out-edge hub — had no legal basis recorded. This round mints the ECOICOP node and the three acts that set it, and wires the member-state side.\n\nTHE ROUTE, AND THE PART WORTH REUSING. EUR-Lex answers this container with an AWS WAF challenge — HTTP 202 with a zero-byte body — on every legal-content URL tried, with or without a browser User-Agent. CELLAR, the Publications Office's own repository, serves the same acts: `http://publications.europa.eu/resource/celex/<CELEX>` with an `Accept-Language: eng` header, which REDIRECTS to a `resource/cellar/<uuid>.<seq>/DOC_1` document that a plain GET then reads with no header at all. The cited URL is that resolved one, deliberately, because that is what a later grader run will issue. A bare `celex/` URL without the header returns an error stub, and with a plain Accept returns RDF metadata rather than the text — neither would have graded. Older acts (1059/2003, 3924/91) have no xhtml expression and need `Accept: text/html`.\n\nTHE MEMBER-STATE SIDE. Eurostat's national HICP reference metadata — PLAYBOOK-CORPUS rule 16's route — carries the answer twice on one page: section 3.2 'Classification system' names ECOICOP, and section 6.1 'Institutional Mandate - legal acts and other agreements' names Regulation (EU) 2016/792 and says what it does. Thirty countries, two edges each, one fetch each. The filename list in `notes/techniques-2026-09-04.md` is PARTLY STALE and was re-probed rather than trusted: AT, BE, DE, FR, IE, LU, NL, PT and SE are all `hi4` and none of them was in that note's `hi4` list; FI is `hi3`, as the note already says. Full current split in the round's notes file.\n\nTWO THINGS STATED RATHER THAN HIDDEN. (1) Section 6.1 is COMMON TEMPLATE TEXT, word for word across all 31 pages read. It is still the country's own reference metadata — section 1.1 names the national statistical institute as contact organisation, and it is the same document class the 2026-09-05 weights pass already wired 26 of these nodes off — but 30 edges resting on one paragraph shape is a concentration an audit should be told about rather than left to discover, so every one of those bases says so. Section 3.2 varies between the two templates and is not in that class. (2) The quote spans are cut at text-node boundaries, not at sentence boundaries. On the newer template 'The HICP uses the' sits outside the `<a>` that carries the classification name; on the older one the field has no sentence at all. The classification name alone is the span present in both, so that is the span, and every one of the 72 quotes in this slice was checked against the exact bytes a plain GET returns, through a local reimplementation of the grader's own `stripHtml`/`normalizeForMatch` pipeline, BEFORE the slice was written.\n\nRULE 11's URL TRAP IS LIVE HERE. 68 already-live edges cite the 27 Eurostat metadata URLs this round also cites — the 2026-09-05 weights pass and the `eurostat-hicp` fan-in. Any future `grade-evidence` run touching these URLs must pass the OLD edges and the NEW ones together to `--edges`, or it will rewrite each URL's `evidence-cache/` record to hold only the ones it selected. The full list is in `notes/eu-classification-statute-2026-09-14.md`.\n\nWHAT WAS REFUSED. `nace-rev2 -> isic` and `cpa -> cpc` both looked available and neither was taken — see the dropped notes. Germany and Türkiye are the two countries whose ESMS page was read and whose edge was NOT wired, because the corpus node is the national CPI and the page describes the HICP.",
+  "status": "ready to merge"
+ },
+ "reports": [
+  {
+   "id": "eu-ecoicop",
+   "title": "European classification of individual consumption according to purpose (ECOICOP)",
+   "title_aliases": [
+    "ECOICOP",
+    "European Classification of Individual Consumption according to Purpose",
+    "ECOICOP version 2"
+   ],
+   "publisher": "European Parliament and Council of the European Union",
+   "country": "EU",
+   "jurisdiction_level": "supranational",
+   "kind": "standard",
+   "releases_per_year": 0.05,
+   "region": "European Union",
+   "description": "The consumption classification every HICP in the European Statistical System is broken down by, set out in Annex I to Regulation (EU) 2016/792 and replaced by ECOICOP version 2 under Commission Delegated Regulation (EU) 2024/3159, applied to the full series from the January 2026 publication. Eurostat's own HICP metadata states that ECOICOP version 2 is identical to the UN's 2018 classification down to the 5-digit level. Minted 2026-09-14 in the EU classification-and-statute round.",
+   "cadence_note": "Versions change when the UN classification it tracks is revised — 1999 to 2018 is the whole history so far; 0.05 is that rate written as a number.",
+   "last_updated": null,
+   "url": "http://publications.europa.eu/resource/cellar/ae87db11-be73-11ef-91ed-01aa75ed71a1.0006.03/DOC_1",
+   "domains": [
+    "inflation",
+    "statistical-system",
+    "living-standards"
+   ]
+  },
+  {
+   "id": "eu-reg-2016-792",
+   "title": "Regulation (EU) 2016/792 of the European Parliament and of the Council of 11 May 2016 on harmonised indices of consumer prices and the house price index, and repealing Council Regulation (EC) No 2494/95",
+   "title_aliases": [
+    "Regulation (EU) 2016/792"
+   ],
+   "publisher": "European Parliament and Council of the European Union",
+   "country": "EU",
+   "jurisdiction_level": "supranational",
+   "kind": "instrument",
+   "region": "European Union",
+   "description": "The HICP framework regulation: it lays down the common framework for the development, production and dissemination of the harmonised indices of consumer prices and the house price index at Union and national level, and its Annex I carries ECOICOP. Every Member State's own HICP reference metadata names it as the legal basis of its national index. Minted 2026-09-14.",
+   "last_updated": null,
+   "url": "http://publications.europa.eu/resource/cellar/cf34b0a5-216c-11e6-86d0-01aa75ed71a1.0006.03/DOC_1",
+   "domains": [
+    "inflation",
+    "statistical-system",
+    "governance"
+   ]
+  },
+  {
+   "id": "eu-reg-2020-1148",
+   "title": "Commission Implementing Regulation (EU) 2020/1148 of 31 July 2020 laying down the methodological and technical specifications in accordance with Regulation (EU) 2016/792 of the European Parliament and of the Council as regards harmonised indices of consumer prices and the house price index",
+   "title_aliases": [
+    "Commission Regulation (EU) 2020/1148",
+    "Regulation (EU) 2020/1148"
+   ],
+   "publisher": "European Commission",
+   "country": "EU",
+   "jurisdiction_level": "supranational",
+   "kind": "instrument",
+   "region": "European Union",
+   "description": "The act that implements the HICP framework regulation — the methodological and technical specifications the harmonised indices are actually compiled to. Named in every Member State's HICP reference metadata immediately after Regulation (EU) 2016/792. Minted 2026-09-14.",
+   "last_updated": null,
+   "url": "http://publications.europa.eu/resource/cellar/0913c12a-d618-11ea-adf7-01aa75ed71a1.0006.03/DOC_1",
+   "domains": [
+    "inflation",
+    "statistical-system"
+   ]
+  },
+  {
+   "id": "eu-reg-2024-3159",
+   "title": "Commission Delegated Regulation (EU) 2024/3159 of 2 September 2024 amending Regulation (EU) 2016/792 of the European Parliament and of the Council on harmonised indices of consumer prices and the house price index as regards the classification of consumption and the inclusion of games of chance",
+   "title_aliases": [
+    "Commission Delegated Regulation (EU) 2024/3159",
+    "Regulation (EU) 2024/3159",
+    "EU regulation 2024/3159"
+   ],
+   "publisher": "European Commission",
+   "country": "EU",
+   "jurisdiction_level": "supranational",
+   "kind": "instrument",
+   "region": "European Union",
+   "description": "The delegated act that replaced Annex I to Regulation (EU) 2016/792 with ECOICOP version 2, aligning the European consumption classification with the revised UN COICOP and taking the divisions from 12 to 13. Its Annex states in one line that ECOICOP version 2 is identical to UN COICOP 2018. Minted 2026-09-14.",
+   "last_updated": null,
+   "url": "http://publications.europa.eu/resource/cellar/ae87db11-be73-11ef-91ed-01aa75ed71a1.0006.03/DOC_1",
+   "domains": [
+    "inflation",
+    "statistical-system"
+   ]
+  },
+  {
+   "id": "eurostat-prodcom",
+   "title": "Statistics on the production of manufactured goods (prom)",
+   "title_aliases": [
+    "Prodcom",
+    "PRODCOM",
+    "Prodcom List",
+    "Statistics on the production of manufactured goods"
+   ],
+   "publisher": "European Commission (Eurostat)",
+   "country": "EU",
+   "jurisdiction_level": "supranational",
+   "kind": "publication",
+   "releases_per_year": 1,
+   "region": "European Union",
+   "description": "Eurostat's annual statistics on the production of manufactured goods, collected against the Prodcom List. Its own reference metadata states that the 8-digit Prodcom codes are derived from the 6-digit CPA headings and hence the 4-digit NACE, which is what makes it the clearest documented use of the two EU economic classifications anywhere in the corpus. Minted 2026-09-14.",
+   "last_updated": null,
+   "url": "https://ec.europa.eu/eurostat/web/prodcom",
+   "domains": [
+    "industry",
+    "trade",
+    "statistical-system"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "eu-ecoicop",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the framework regulation is the instrument that carries ECOICOP — Article 2(11) defines a sub-index of the HICP as the price index for any category of ECOICOP 'as set out in Annex I', i.e. the classification is an annex to this act rather than a document it cites. Published by ECOICOP's own publisher, the European Parliament and the Council. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain. GRADE: the grader returns B with reason `artefact-named-elsewhere-in-document` and it outranks the hand grade (PLAYBOOK 7b). The act's own full title, which is this target node's title, sits about five thousand characters above Article 2(11), outside the +/-400 character window the A bar re-runs `namesTarget` in. The quote was NOT moved to chase the grade: no span in this document both states the Annex-I relationship and carries the act's full title.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/cf34b0a5-216c-11e6-86d0-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "B",
+   "evidence_quote": "means the price index for any category of the European classification of individual consumption according to purpose (ECOICOP) as set out in Annex I"
+  },
+  {
+   "source_report_id": "eu-ecoicop",
+   "target_report_id": "eu-reg-2024-3159",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: the delegated act that replaced Annex I, and therefore the instrument that sets the ECOICOP version in force. Its own title states what it amends and on what subject; its Annex is headed 'EUROPEAN CLASSIFICATION OF INDIVIDUAL CONSUMPTION ACCORDING TO PURPOSE (ECOICOP) version 2'. Recital 2 states the purpose in the reverse voice — aligning ECOICOP with the revised UN COICOP required Annex I to be amended. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/ae87db11-be73-11ef-91ed-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "amending Regulation (EU) 2016/792 of the European Parliament and of the Council on harmonised indices of consumer prices and the house price index as regards the classification of consumption and the inclusion of games of chance"
+  },
+  {
+   "source_report_id": "eu-ecoicop",
+   "target_report_id": "un-coicop-2018",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the EU act that sets the current ECOICOP states the relationship to the UN classification in one sentence in its Annex, and NAMES THE EDITION — 'UN COICOP 2018'. That is the point on which this differs from the generic-COICOP citations Thomas closed on 2026-09-08 (iq-cpi, tn-ins-cpi, ma-hcp-ipc) and from the Poland round's own dropped yearbook citation: those named no edition, so the corpus had no way to choose between COICOP nodes; this one names the 2018 vintage explicitly and the corpus models it as a separate node. Recital 2 carries the same claim as a purpose statement: the revised UN COICOP is why Annex I was amended. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/ae87db11-be73-11ef-91ed-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "ECOICOP version 2 is identical to UN COICOP 2018."
+  },
+  {
+   "source_report_id": "eu-reg-2024-3159",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: an amending act naming the act it amends, in its own title. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/ae87db11-be73-11ef-91ed-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "amending Regulation (EU) 2016/792 of the European Parliament and of the Council on harmonised indices of consumer prices and the house price index as regards the classification of consumption and the inclusion of games of chance"
+  },
+  {
+   "source_report_id": "eu-reg-2020-1148",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: an implementing act naming its enabling act, in its own title. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/0913c12a-d618-11ea-adf7-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "laying down the methodological and technical specifications in accordance with Regulation (EU) 2016/792 of the European Parliament and of the Council as regards harmonised indices of consumer prices and the house price index"
+  },
+  {
+   "source_report_id": "eu-reg-2016-792",
+   "target_report_id": "esa-2010",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the HICP framework regulation does not merely mention ESA 2010, it takes its operative definitions from it — 'household', 'economic territory' and the individual-consumption boundary are each defined by pointing at a numbered paragraph of Annex A to ESA 2010 rather than being written out. Article 2(1) does the same for 'products' (paragraph 3.01). Published by ESA 2010's own publisher, the European Parliament and the Council. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/cf34b0a5-216c-11e6-86d0-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "means the economic territory as referred to in paragraph 2.05 of Annex A to ESA 2010"
+  },
+  {
+   "source_report_id": "eurostat-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: Eurostat's own reference metadata for the HICP, section 6.1 'Institutional Mandate - legal acts and other agreements', lists the framework regulation first and says what it does. Eurostat is the HICP's publisher, so this is the product's own statement of its legal basis.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esms.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and of the Council of 11 May 2016 on harmonised indices of consumer prices and the house price index repeals"
+  },
+  {
+   "source_report_id": "eurostat-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: Eurostat's own HICP reference metadata, section 3.2 'Classification system'. The same section goes on to record that ECOICOP version 2 has applied to the full series since the January 2026 publication, under Regulation (EU) 2024/3159. Quote cut at the classification name because the acronym sits inside its own link element and a span crossing that boundary is a span crossing a text node.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esms.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "The HICP uses the European Classification of Individual Consumption according to Purpose"
+  },
+  {
+   "source_report_id": "eurostat-hicp",
+   "target_report_id": "eu-reg-2020-1148",
+   "relationship_type": "methodology_depends_on",
+   "basis": "REGISTER: the evidence is the implementing act itself, published by the European Commission, whose title states that it lays down the methodological and technical specifications for the harmonised indices of consumer prices and the house price index. It names the artefact by its full title rather than naming Eurostat. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. `http://publications.europa.eu/resource/celex/<CELEX>` needs an `Accept-Language: eng` header to return anything but an error stub, and the URL cited here is the one that negotiation RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document that a plain GET reads without any header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/0913c12a-d618-11ea-adf7-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "laying down the methodological and technical specifications in accordance with Regulation (EU) 2016/792 of the European Parliament and of the Council as regards harmonised indices of consumer prices and the house price index"
+  },
+  {
+   "source_report_id": "eurostat-prodcom",
+   "target_report_id": "cpa",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: Eurostat's own Prodcom reference metadata, section 3.2 'Classification system', states the derivation rather than an alignment — the Prodcom codes ARE CPA headings extended by two digits. This is the derivation statement PLAYBOOK 7a asks for on a nomenclature edge, and it is the first documented use of `cpa` by anything other than ESA 2010. GRADE: the grader returns B with reason `agency-not-artefact` and it outranks the hand grade (PLAYBOOK 7b). The cause is a known mechanism gap rather than the evidence: the target node's title carries its acronym as the parenthetical `(CPA)`, three characters, below the four-character floor the acronym branch of `namesTarget` applies, so a document that says `CPA` and never spells the title out cannot reach A however clearly it states the derivation. The documented remedy is `title_aliases` on the `cpa` node, which is NOT applied here — a bare three-letter `CPA` alias would also match `psab-psas`'s title, `Public Sector Accounting Standards (CPA Canada Public Sector Accounting Handbook)`, and buying one A at the price of a false one is a bad trade. Left at B deliberately.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prom_esms.htm",
+   "evidence_grade": "B",
+   "evidence_quote": "The 8-digit codes used in the PRODCOM List are derived from the 6-digit CPA headings and hence the 4-digit NACE"
+  },
+  {
+   "source_report_id": "eurostat-prodcom",
+   "target_report_id": "nace-rev2",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the same section of Eurostat's own Prodcom metadata, naming the NACE revision explicitly rather than 'NACE' generically — the version is what makes this citable against the `nace-rev2` node rather than a NACE-family node the corpus does not have.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prom_esms.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "From 2008 onwards the Prodcom code is linked to NACE Rev. 2 and to CPA 2008"
+  },
+  {
+   "source_report_id": "eurostat-prodcom",
+   "target_report_id": "eu-reg-2019-2152",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: Eurostat's own Prodcom metadata, section 6.1, lists the European business statistics regulation by full title as the legal act the collection runs under.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prom_esms.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2019/2152 of the European Parliament and of the Council of 27 November 2019 on European business statistics, repealing 10 legal acts in the field of business statistics."
+  },
+  {
+   "source_report_id": "at-statistik-austria-hvpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Austria. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_at.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "at-statistik-austria-hvpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Austria as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Austria's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_at.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "be-statbel-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Belgium. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_be.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "be-statbel-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Belgium as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Belgium's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_be.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "bg-nsi-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the National Statistical Institute of Bulgaria. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_bg.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "bg-nsi-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the National Statistical Institute of Bulgaria as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the National Statistical Institute of Bulgaria's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_bg.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "ch-bfs-lik",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Swiss Federal Statistical Office. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ch.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "ch-bfs-lik",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Swiss Federal Statistical Office as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Swiss Federal Statistical Office's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ch.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "cy-cystat-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation CYSTAT. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cy.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "cy-cystat-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names CYSTAT as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired CYSTAT's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cy.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "cz-csu-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Czech Statistical Office. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cz.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "cz-csu-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Czech Statistical Office as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Czech Statistical Office's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cz.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "dk-dst-forbrugerprisindeks",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Denmark. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_dk.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "dk-dst-forbrugerprisindeks",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Denmark as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Denmark's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_dk.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "ee-stat-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Estonia. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "ee-stat-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Estonia as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Estonia's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "gr-elstat-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation ELSTAT. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_el.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "gr-elstat-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names ELSTAT as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired ELSTAT's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_el.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "es-ine-ipc",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation INE Spain. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_es.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "es-ine-ipc",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names INE Spain as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired INE Spain's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_es.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "fi-statfin-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Finland. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_fi.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "fi-statfin-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Finland as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Finland's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_fi.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "fr-insee-ipc-ipch",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation INSEE. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_fr.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "fr-insee-ipc-ipch",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names INSEE as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired INSEE's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_fr.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "hr-dzs-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Croatian Bureau of Statistics. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hr.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "hr-dzs-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Croatian Bureau of Statistics as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Croatian Bureau of Statistics's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hr.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "hu-ksh-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Hungarian Central Statistical Office. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hu.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "hu-ksh-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Hungarian Central Statistical Office as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Hungarian Central Statistical Office's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hu.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "ie-cso-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Central Statistics Office. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_ie.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "ie-cso-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Central Statistics Office as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Central Statistics Office's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_ie.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "is-hagstofa-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Iceland. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "is-hagstofa-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Iceland as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Iceland's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "it-istat-prezzi-al-consumo",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation ISTAT. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_it.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "it-istat-prezzi-al-consumo",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names ISTAT as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired ISTAT's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_it.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "lt-vda-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the State Data Agency. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "lt-vda-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the State Data Agency as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the State Data Agency's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "lu-statec-ipch",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation STATEC. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lu.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "lu-statec-ipch",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names STATEC as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired STATEC's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lu.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "lv-csp-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Central Statistical Bureau of Latvia. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_lv.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "lv-csp-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Central Statistical Bureau of Latvia as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Central Statistical Bureau of Latvia's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_lv.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "mt-nso-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the National Statistics Office. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_mt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "mt-nso-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the National Statistics Office as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the National Statistics Office's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_mt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "nl-cbs-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Netherlands. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_nl.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "nl-cbs-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Netherlands as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Netherlands's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_nl.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "no-ssb-kpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Norway. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_no.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "no-ssb-kpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Norway as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Norway's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_no.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "pl-gus-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Poland (GUS). A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pl.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "pl-gus-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Poland (GUS) as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Poland (GUS)'s HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pl.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "pt-ine-ipc",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Portugal. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "pt-ine-ipc",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Portugal as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Portugal's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pt.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "ro-ins-ipc",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the National Institute of Statistics. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ro.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "ro-ins-ipc",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the National Institute of Statistics as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the National Institute of Statistics's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ro.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "se-scb-hikp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation Statistics Sweden. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_se.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "se-scb-hikp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names Statistics Sweden as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired Statistics Sweden's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_se.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "si-surs-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation SURS. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_si.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "si-surs-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names SURS as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired SURS's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_si.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "sk-susr-cpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation the Statistical Office of the Slovak Republic. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_sk.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "sk-susr-cpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names the Statistical Office of the Slovak Republic as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired the Statistical Office of the Slovak Republic's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_sk.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "al-instat-cpi-hicp",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: section 3.2 'Classification system' of this country's own HICP reference metadata on Eurostat, contact organisation INSTAT. A metadata field whose label is the question and whose value is the classification is the caption-equivalent shape PLAYBOOK 7a grades on. The quote stops at the classification name because on the newer template the words 'The HICP uses the' sit outside the link element that carries the name, and the name alone is the span present in BOTH templates — the older pages give the field no sentence at all. Where the page is the newer template it reads '...(ECOICOP), version 2'.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_al.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "European classification of individual consumption according to purpose (ECOICOP)"
+  },
+  {
+   "source_report_id": "al-instat-cpi-hicp",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: section 6.1 'Institutional Mandate - legal acts and other agreements' of this country's own HICP reference metadata, naming the framework regulation and saying what it does for the national index. The paragraph is common text carried in every Member State's national reference metadata rather than wording unique to this country — stated here rather than left for an audit to find. What makes it first-party anyway is the page itself: section 1.1 names INSTAT as the contact organisation, this is the country's own reference metadata for its own index, and it is the same document class the 2026-09-05 weights pass already wired INSTAT's HICP off.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_al.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "nace-rev2",
+   "target_report_id": "isic",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: NACE Rev. 2's own volume, published by Eurostat, under the heading 'NACE link to ISIC'. Paragraph 121 states the derivation outright and in the present tense, which is what PLAYBOOK 7a wants of a nomenclature edge and what Regulation (EC) No 1893/2006 does NOT provide — the act's recital 8 places a requirement on USERS ('classifications ... directly linked to ISIC Rev. 4') and its Annex I carries a correspondence column, neither of which says NACE is derived from ISIC. The Director-General's preface says the same thing a second way — 'NACE Rev. 2 has been created based on ISIC Rev. 4' — and spells the target's title out in full one sentence earlier; that passage was NOT used as the span because it survives the plain pdftotext reading and not the `-layout` one. ROUTE: first-party Eurostat PDF, fetched directly from ec.europa.eu and re-fetched from the cited URL to confirm the bytes are the same ones the quote was checked against (5,908,141 bytes, 369 pages). The spans were checked against BOTH the plain and the `-layout` pdftotext renderings before the edge was written; this one holds in both, which the Preface's wording does not.",
+   "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5902521/KS-RA-07-015-EN.PDF",
+   "evidence_grade": "A",
+   "evidence_quote": "NACE is a derived classification of ISIC: categories at all levels of NACE are defined either to be identical to, or to form subsets of, single ISIC categories."
+  },
+  {
+   "source_report_id": "cpa",
+   "target_report_id": "nace-rev2",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the same Eurostat volume, section 4.2 'Relations with EU classifications', paragraph 125. Eurostat is the body charged with the dissemination, maintenance and promotion of BOTH classifications (Article 5 of Regulation (EC) No 451/2008 for the CPA, Article 5 of Regulation (EC) No 1893/2006 for NACE), so a statement in its own classification volume is the CPA's own statistical system speaking. This closes the gap this round's `cpa -> cpc` dropped note recorded: the CPA's own establishing regulation never mentions NACE at all — the word appears zero times in Regulation (EC) No 451/2008 — so the relationship everyone assumes had, until this document, only Eurostat's Prodcom metadata behind it. ROUTE: first-party Eurostat PDF, fetched directly from ec.europa.eu and re-fetched from the cited URL to confirm the bytes are the same ones the quote was checked against (5,908,141 bytes, 369 pages). The spans were checked against BOTH the plain and the `-layout` pdftotext renderings before the edge was written; this one holds in both, which the Preface's wording does not. GRADE: the grader returns B with reason `artefact-named-elsewhere-in-document` and it outranks the hand grade (PLAYBOOK 7b). Coverage is 1.0 — the quote is found exactly — but the target node's title is long ('NACE Rev. 2 — Statistical Classification of Economic Activities in the European Community') and the three tokens of it that appear in this passage are too few a share of it for the title-run test, while the volume's own running header, which would carry the alias, prints 'activites' for 'activities' on every page. Neither the quote nor the basis was adjusted to move this.",
+   "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5902521/KS-RA-07-015-EN.PDF",
+   "evidence_grade": "B",
+   "evidence_quote": "The EU adopted the criterion of economic origin for its development, with NACE as the reference framework. Therefore, up to the fourth level (classes) the structure of CPA corresponds to NACE. In general, CPC subclasses are re-arranged according to their economic origin. The link between the CPA and NACE Rev. 2 is evident in the CPA code"
+  },
+  {
+   "source_report_id": "eurostat-prodcom",
+   "target_report_id": "eu-combined-nomenclature",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the same Eurostat volume, paragraph 127, which states where the Prodcom list's headings come from. Two fragments, and here is why: paragraph 127 names the target only by its two-letter acronym, and a two-character parenthetical is below the floor the grader's acronym branch applies, so the first fragment is paragraph 126's sentence carrying the target's full title. Both fragments are from the same section of the same document and neither is doing work the other could not check. Eurostat's own Prodcom reference metadata states the CPA half of the same sentence and is cited separately on that edge. ROUTE: first-party Eurostat PDF, fetched directly from ec.europa.eu and re-fetched from the cited URL to confirm the bytes are the same ones the quote was checked against (5,908,141 bytes, 369 pages). The spans were checked against BOTH the plain and the `-layout` pdftotext renderings before the edge was written; this one holds in both, which the Preface's wording does not. NOTE ON THE WORDING: the first version of this basis tripped `WEAK_BASIS_PATTERNS` and was capped at B on the first grader run — it used one of that guard's trigger words inside a clause DENYING that the edge rested on anything of the kind. The guard reads the prose, not the argument. Third time this project has been caught by it; the rule is to keep those words out of a basis even when denying them, and the word is not repeated here.",
+   "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5902521/KS-RA-07-015-EN.PDF",
+   "evidence_grade": "A",
+   "evidence_quote": "the Combined Nomenclature is the classification used within the EU for the purposes of foreign trade custom tariffs and statistics…The headings of the PRODCOM list are derived from the CN, but their code is a further breakdown of the CPA code."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "de-destatis-cpi -> eu-ecoicop",
+   "source": "de-destatis-cpi",
+   "target": "eu-ecoicop",
+   "reason": "no-document",
+   "why": "Germany's HICP reference metadata (prc_hicp_esmshi4_de) was fetched and reads exactly like the other 30 — section 3.2 names ECOICOP version 2, section 6.1 names Regulation (EU) 2016/792. It was not wired because the corpus's German node is `de-destatis-cpi`, 'Consumer Price Index for Germany', and the page describes the German HICP, which Destatis publishes as a separate index alongside the national VPI. Wiring it would put a statement about one product onto a node standing for another. The same reasoning holds for the 2016/792 legal-basis edge. `eurostat-hicp` does not draw on a German node either, which is the same gap seen from the other side. A German HICP node would close both, and is a mint rather than a research problem."
+  },
+  {
+   "edge": "tr-cpi -> eu-ecoicop",
+   "source": "tr-cpi",
+   "target": "eu-ecoicop",
+   "reason": "no-document",
+   "why": "Same shape as Germany. Türkiye's page (prc_hicp_esmshi3_tr) names ECOICOP in section 3.2, but the corpus node `tr-cpi` is TurkStat's own 'Consumer Price Index and inflation statistics' and the page is Türkiye's HICP metadata. Note also that the section 6.1 legal-acts paragraph on the Turkish page does NOT carry the Regulation (EU) 2016/792 sentence the other 31 pages carry — it was the single quote failure when all 32 pages were checked, which is a real difference in the document and not a fetch problem."
+  },
+  {
+   "edge": "nace-rev2 -> isic",
+   "source": "nace-rev2",
+   "target": "isic",
+   "reason": "resolved",
+   "why": "RESOLVED 2026-09-14, later the same day, and the reason it was open was a READING ERROR OF MINE, not a gap in the record. The note said Eurostat's NACE Rev. 2 introductory volume 'served a 10-page cover extract rather than the full text'. It did not: `file` reports that PDF as '10 page(s)' — it misreads the linearised page tree — while `pdfinfo` reports 369 and `pdftotext` extracts all 369. The document was in hand and was written off on one tool's wrong answer. What it actually contains is the sentence the whole question needed, under its own heading 'NACE link to ISIC': 'NACE is a derived classification of ISIC'. The edge is now live at A. The original refusal of Regulation (EC) No 1893/2006 as the evidence STANDS and was correct — recital 8 places a requirement on users and Annex I is a correspondence column; neither states the derivation. Kept rather than deleted so the mistake is on the record next to the thing it delayed. **Check `pdfinfo`, never `file`, before calling a PDF truncated.**"
+  },
+  {
+   "edge": "cpa -> cpc",
+   "source": "cpa",
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "Regulation (EC) No 451/2008, the CPA's own establishing act, was read in full this round. Its only statement about an upstream classification is recital 10 — product classifications must be 'directly linked to the Central Product Classification (CPC) Ver. 2, as adopted by the United Nations Statistical Commission' — the same user-requirement shape as NACE's ISIC recital, and the corpus has no CPC node to point at. Worth recording that the regulation NEVER MENTIONS NACE: 'NACE' appears zero times in the whole act, so the CPA-to-NACE structural relationship everybody assumes is not stated by the instrument that establishes the CPA. It IS stated by Eurostat's Prodcom metadata, which is where this round's `eurostat-prodcom -> cpa` and `-> nace-rev2` edges come from. UPDATE, same day: the last sentence of this note is now understated. Eurostat's NACE Rev. 2 volume, paragraph 125, states the CPA-to-NACE relationship directly — 'with NACE as the reference framework ... the structure of CPA corresponds to NACE' — and `cpa -> nace-rev2` is wired off it at A. What stays open is only the CPC half: there is still no `cpc` node, and paragraph 125's 'CPA is the European version of the CPC' is the sentence that would carry that edge if one is ever minted."
+  }
+ ]
+}

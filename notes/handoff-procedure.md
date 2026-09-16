@@ -61,7 +61,7 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    test). Keep this §4 verbatim so the next agent knows the procedure.
 4. **Sweep what is finished out.** A todo that is done, a lever that is
    settled and already described in §2, a "Settled:" entry from an
-   earlier round — all leave. The round's project-memory entry is their
+   earlier round — all leave. The archived handoff from step 1 is their
    record, and this file is state, not history. Nothing accumulates here
    by default; if you would not act on it next session, it goes.
 5. **Every fifth handoff, sweep EVERYTHING — the fast layer and the slow layer
@@ -82,8 +82,8 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    **5a — the fast layer, against itself.** Read this file's §2/§3 and the four
    archived handoffs before it, and find the paragraphs that appear in all five
    unchanged. Each one is then exactly one of three things. **Finished** — delete it,
-   memory is its record (step 4 already says so, and this is the pass that catches
-   what step 4 missed). **A restatement of a playbook or a note** — delete it and let
+   the archived handoffs are its record (step 4 already says so, and this is the pass
+   that catches what step 4 missed). **A restatement of a playbook or a note** — delete it and let
    §1 route there instead; a second copy of a rule is how the two drift apart. **A
    real open item nobody has acted on in five handoffs** — it goes to
    `notes/standing-issues.md`, which carries the bar in both directions. That is a
@@ -151,10 +151,12 @@ would be unrecoverable afterwards, not whether §1–§4 still exist.
    10k, trim before adding" until 2026-09-07; that cap is retired — §1 says so — and the
    two percentages below the table are what gets defended instead. Corrected in place
    rather than left to make a future round trim §2 for no reason.)*
-7. A finished round's story goes to **project memory** (write it as you
-   go; if memory is down, park a note in `notes/` and say so here). A new
-   standing rule or trap goes to whichever playbook binds it (`PLAYBOOK.md`
-   §1 has the test). A design change goes to `notes/Midvamp - Revamp.md`
+7. **A finished round's story is not written anywhere separate** (Thomas,
+   2026-09-15). Step 1 already copied this file to `archive/Previous Handoffs/`
+   before you rewrote it, so §2/§3 as they stood IS the record — the archive is
+   the diary series. A new standing rule or trap goes to whichever playbook binds
+   it (`PLAYBOOK.md` §1 has the test); a method, route or measurement goes to
+   `notes/`. A design change goes to `notes/Midvamp - Revamp.md`
    (or `REPORTS.md` if it changes direction). **If the round created a file in
    `notes/`, add its one line to `notes/README.md` in the same edit** — an
    unindexed note that §1 does not name will not be found by the next agent.

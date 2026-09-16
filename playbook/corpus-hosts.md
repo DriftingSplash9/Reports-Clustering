@@ -149,3 +149,55 @@ file. They are below, **byte-for-byte as they stood**, and the index now carries
 
 ---
 
+## `file` misreports a linearised PDF's page count (2026-09-14)
+
+**The claim "this PDF came back truncated" is a claim about your tool until you have checked it
+with the right one.** Eurostat's NACE Rev. 2 volume, `KS-RA-07-015-EN`, downloads as 5,908,141
+bytes and `file` describes it as `PDF document, version 1.6, 10 page(s)`. It is **369 pages**;
+`file` reads a count out of the linearisation header and gets it wrong on this class of file.
+`pdfinfo` reports 369 and `pdftotext` extracts all of it.
+
+What it cost: the 2026-09-14 EU round recorded `nace-rev2 -> isic` as unresolvable "pending one
+good fetch", in a `_dropped` note, in `notes/`, and in `HANDOFF.md` §3 — with the document already
+on disk. Opened on the next turn it gave **three** edges, including the upstream the corpus's
+most-cited classification had never had.
+
+**The check:** `pdfinfo <file> | grep Pages`, or simply run the extractor and count what comes out.
+`file` is for identifying a format, not for measuring a document.
+
+*Same family as the entries above it — a legacy `.doc` that would not convert, a zip that "extracted
+to nothing", a gb2312 page that "had no text". Nine-plus times now the corpus has been blamed for a
+reader's limitation. The novelty here is that the reader was right and the DESCRIBING tool was
+wrong, which is harder to notice because nothing failed.*
+
+**Add-and-remove (`PLAYBOOK.md` §1):** the index line this adds to `PLAYBOOK-CORPUS.md` §6 is two
+lines of ~230 characters. The removal candidate it is offered against is that section's
+`A 404 from a single-page-app route is not link rot` line, which has not been cited since the
+2026-09-09 split and describes a narrower case than the three redirect/shell lines around it — not
+removed here, because a line nobody has needed is not the same as a line nobody will need, and the
+call belongs to a sweep rather than to a research round.
+
+## A `000` may be a certificate chain, not a wall (2026-09-16)
+
+**Measured on three hosts in one afternoon, after a month of writing them off.** `microdata.gov.in`,
+`censusindia.gov.in` and `mahades.maharashtra.gov.in` all return *nothing* to a plain `curl` — no
+status, no body — and all three return **200 with a full body to `curl -k`**. They serve an
+incomplete certificate chain; the client, not the site, is refusing.
+
+**The diagnosis already existed and was never generalised.** A 2026-08 note worked out that
+`censusindia.gov.in` was failing on a local trust-store gap — a missing eMudhra emSign intermediate
+— and recovered that one host. Every later round still read `000` as dead. The cost is measurable:
+`mahades.maharashtra.gov.in` is recorded in a `_dropped` note as *"fails DNS resolution from the
+device-bridge network"*, and five Maharashtra orphan nodes sat behind it.
+
+**So: on any `000`, re-run with `-k` before recording a verdict**, and say which of the two you
+measured. A `-k` read is still a direct read of the live host — the corpus already treats it that
+way for the Rosstat regional sites — it is the CHAIN that is unverified, not the bytes.
+
+**The inverse also held the same day:** `des.assam.gov.in`, whose note says it was *"confirmed
+unreachable from a real Chrome browser on the user's own machine — a genuine network-level block"*,
+answered a plain fetch. Two different decay stories, one afternoon, one country.
+
+*(Add-and-remove, `PLAYBOOK.md` §1: adds one §6 index line and this section. Nothing removed — the
+nearest candidate is the older single-host eMudhra line, which this supersedes but which is in
+`notes/`, not in a playbook, so there is nothing here to cut.)*

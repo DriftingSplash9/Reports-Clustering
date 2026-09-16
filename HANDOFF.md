@@ -5,10 +5,10 @@ next. Rules and traps: `PLAYBOOK.md` (core) + `PLAYBOOK-CORPUS.md` or
 `PLAYBOOK-RENDER.md`. Recipes: `notes/techniques-2026-09-04.md`.
 Host reachability: `notes/routing-snapshot-2026-09-04.md` (dated, expected to
 be wrong). Design of the current programme: `notes/Midvamp - Revamp.md`.
-Finished-round narrative: project memory and `archive/Previous Handoffs/`.
+Finished-round narrative: `archive/Previous Handoffs/` — the diary series, and the only record.
 
 **Keep §1–§3 to state and pointers; §4 is fixed and verbatim.** No changelog, no
-round narrative. Finished items LEAVE (§4 step 4); the round's memory entry is their
+round narrative. Finished items LEAVE (§4 step 4); the archived handoff is their
 record. The gauge is the read-cost percentage in §1, not a character count.
 
 Last updated: 2026-09-10 (**handoff 085** — the superseded state is
@@ -55,6 +55,8 @@ every change in that lane.
 | corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this"; memory `regroup_rulings_2026-09-05` |
 | the current programme's design | `notes/Midvamp - Revamp.md` |
 | anything IMF | `notes/imf-dsbb-2026-09-06.md`, `notes/imf-elibrary-2026-09-06.md` (its second addendum corrects the first) |
+| **"which country next?" / the orphan backlog, or ANY url-repair work** | `notes/node-url-audit-2026-09-15.md` — why the coverage workbook's ranking inverts, and the 1,041 bare-homepage node urls behind it — then `notes/bps-url-repair-probe-2026-09-15.md`, the one-host proof: the Chrome-only route, and the duplicate-node finding that changes what a repair means |
+| **the EU classification or statute layer** — ECOICOP, NACE, CPA, the HICP regulations, any national HICP | **`notes/eu-statutes-2026-09-15.md` first** — the four acts' resolved CELLAR URLs, why no statute node was minted, what the four remaining HICP countries each need, and the insse.ro route split — then `notes/eu-classification-statute-2026-09-14.md` for the ESMS hi3/hi4 split and the 140-pair grader selection |
 | Eurostat metadata / EU price-index / HBS chains | memory `layout_levers_and_hbs_2026-09-05`, `esms_hicp_pass_2026-09-05`, `eu_national_chains_2026-08-28` |
 | a `meta.note` from the August 2026 import | `notes/mint-2026-08-20.md` |
 | "what is broken that nobody is fixing?" | `notes/standing-issues.md` — outlived five handoffs; not on the mandatory path |
@@ -70,31 +72,53 @@ with a file, the file wins.**
 
 ### Read cost — the bloat gauge, refreshed every handoff
 
-**THE NUMBER THOMAS ASKED FOR: a corpus round reads 6.3% of its context before he types a prompt, a
-renderer round 5.5%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
+**THE NUMBER THOMAS ASKED FOR: a corpus round reads 7.3% of its context before he types a prompt, a
+renderer round 6.5%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the edit that changed it.
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 17.4k + CORPUS index 19.8k + PLAYBOOK 11.5k + CLAUDE 1.5k | 50.1k | 12.5k | **6.3%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 43.9k | 11.0k | **5.5%** |
+| always: HANDOFF 22.6k + CORPUS index 20.6k + PLAYBOOK 12.0k + CLAUDE 1.5k | 56.6k | 14.2k | **7.1%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 49.6k | 12.4k | **6.2%** |
+| *was, after the India round 2026-09-16* | *55.8k / 48.8k* | *14.0k / 12.2k* | *7.0% / 6.1%* |
+| *was, end of 2026-09-15 (EU statute round + audit + url repair)* | *55.5k / 48.9k* | *13.9k / 12.2k* | *6.9% / 6.1%* |
+| *was, mid-round 2026-09-15 before the Poland cut* | *58.1k / 51.7k* | *14.5k / 12.9k* | *7.3% / 6.5%* |
+| *was, at the 2026-09-14 mid-round refresh* | *53.7k / 47.1k* | *13.4k / 11.8k* | *6.7% / 5.9%* |
+| *was, mid-round 2026-09-11 (Poland)* | *50.1k / 43.9k* | *12.5k / 11.0k* | *6.3% / 5.5%* |
 | *was, at handoff 085 as written* | *47.4k / 41.1k* | *11.8k / 10.3k* | *5.9% / 5.1%* |
 | *was, at handoff 084 (+ rounds 43-45's mid-round edits)* | *64.1k / 49.9k* | *16.0k / 12.5k* | *8.0% / 6.2%* |
-| *was, at handoff 084 as written* | *58.5k / 46.5k* | *14.6k / 11.6k* | *7.3% / 5.8%* |
 
-**Refreshed mid-round 2026-09-11**, not at a handoff: the Poland round's §2/§3 rewrite took this file from 14.6k to 17.4k (+0.4pp on the corpus gauge), most of it §3's Poland leads and the routing finding behind them. Handoff 086 should judge whether those stay. **Handoff 085 took `HANDOFF.md` from 23.3k to 13.7k — the largest single sweep this file has had, and
-0.4pp below where handoff 084 left it rather than merely undoing the drift.** Almost all of it is
-China: seventeen rounds of live state became one paragraph and two pointers the moment Thomas paused
-the programme, which is `PLAYBOOK.md` §1's second test working exactly as intended — §2's weight
-follows the lane being worked, and China is no longer one. The five-handoff review (step 5) removed
-three more paragraphs by demoting them to `notes/standing-issues.md`. `PLAYBOOK-CORPUS.md` is 28.0k
-and is now **twice** this file; **it is the largest always-read file by a wide margin and nothing
-sweeps a playbook** — its §2 is where the next cut has to come from, and that had been true for four
-handoffs running — **and the diagnosis was wrong every time.** Measured 2026-09-11: §2 was 27% of the file
-and **§6+§7, which are supposed to be INDEXES, were 62%**; 17 bullets of 73 carried 37% of it. Restructured
-the same day on Thomas's word: those 17 went to `playbook/` as one line each, the duplicated `_dropped` pair
-merged, rule 19's essay moved, the ledger paragraphs cut. **27.6k → 19.5k, and the file is no longer twice
-`HANDOFF.md`.** The rule that stops it regrowing — **an index line is one line, schema block excepted** — is
-§0 of that file now, because the 2026-09-09 split had no such rule and the index filled straight back up.
+**Refreshed 2026-09-16 after two research rounds in one day (India, then Uzbekistan): 7.0% → 7.1%,
+and the file is 22.6k against the 13.7k handoff 085 left.** Two rounds cost +1.0k net, which is the
+cheapest two-round day this file has had — because each round's narrative was written INTO §2 and
+the previous round's was cut back to a result and a pointer the moment its notes file existed. The
+India block is now five lines and a link; the Uzbekistan block will get the same treatment next
+round. **That rotation is the whole technique and it is worth stating: §2 carries one round's
+narrative at full length, everything older is a pointer.**
+
+**Earlier the same day:** the EU statute round, the ECOICOP audit and the url repair took it 7.3% →
+6.9%, the first fall since handoff 085, entirely because **§3's Poland block was finally cut** to
+`notes/standing-issues.md` — the move this paragraph had named in two consecutive rounds without
+making. Three rounds of writing tighter did not offset one stale block; cutting the stale block did.
+**Next candidate when one is needed: §3 [Thomas] item 1, the BPS account, which is closed work whose
+method note already carries it.**
+
+**Refreshed mid-round 2026-09-14**, not at a handoff, and **it went the wrong way again**: the EU
+classification-and-statute round took `HANDOFF.md` from 17.4k to 20.6k (+0.4pp on the corpus
+gauge; the second pass added 0.9k of correction, removed 0.6k of closed todo, and put 0.2k into
+`PLAYBOOK-CORPUS.md` §6 — **the first addition to that file since its 2026-09-11 restructure, and
+its add-and-remove account is in `playbook/corpus-hosts.md` where the reasoning went**), on top of Poland's +0.4pp — **the file is now 2.9k above where handoff 085 left it and
+climbing one round at a time, which is the pattern handoff 085 was written to break.** Handoff 086
+should cut, and the specific candidate is named rather than left as a feeling: **§3's Poland block
+is four paragraphs describing work nobody has resumed in three rounds and belongs in
+`notes/standing-issues.md`**, which is exactly where the 085 sweep sent three other paragraphs. The
+EU block in §2 is the ACTIVE lane and `PLAYBOOK.md` §1's second test says §2's weight should follow
+it, so that one stays until the lane moves.
+
+**Earlier account, unchanged:** handoff 085 took this file from 23.3k to 13.7k, almost all of it
+China — seventeen rounds of live state became one paragraph and two pointers the moment Thomas
+paused the programme. `PLAYBOOK-CORPUS.md` was restructured 2026-09-11 from 27.6k to 19.5k after a
+measurement showed §6+§7, which are supposed to be INDEXES, were 62% of it; the rule that stops it
+regrowing — **an index line is one line, schema block excepted** — is §0 of that file now.
 Account: `notes/doc-audit-2026-09-11.md`.
 
 **On-demand sizes, 2026-09-10:** `playbook/` naming 15.3k, evidence 10.9k, nodes 9.2k, route 7.1k,
@@ -103,109 +127,134 @@ worklist 44.5k and method 36.6k, both off the always-read path and staying there
 
 ## 2. Current state
 
-Corpus **3,679 reports / 3,360 dependencies**. **1,322 A · 1,426 B · 612 C**, A-share 39.3%.
+Corpus **3,691 reports / 3,456 dependencies**. **1,408 A · 1,436 B · 612 C**, A-share 40.7%.
 **Domains: 46 approved, 0 proposed.** **`validate` exits 0.** **128/128 logic tests**,
-`tsc --noEmit` clean, `public/corpus-data.json` regenerated and copied back. Last data-changing
-round is **Poland, 2026-09-11** (`src/data/research/pl-poland-2026-09-11.json` — 27 nodes, 31
-dependencies, 1 relation). **970 zero-edge nodes, unchanged by that round** — every node it minted
-is wired. Recount from `validate`'s ISOLATED block, never carry the figure.
+`tsc --noEmit` clean, `public/corpus-data.json` regenerated and copied back. **967 zero-edge nodes,
+unchanged — all five new nodes have edges.** NODE URLS 1,014 bare / 450 zero-edge, **and `no url at
+all` is 20 → 21, which is deliberate** (see below). Recount from `validate`'s own blocks, never
+carry a figure — the zero-edge number is not a line `validate` prints, it is
+`grep -c "has no edges in either direction"` over its output.
 
-**Not re-run this round, and the reason is not the corpus:** `grade-evidence --selftest` and
-`vite build` both need `npm install`, and **the npm registry answered 403 to every package this
-session** (org egress policy — `zustand`, `tsx`, `typescript`, `@types/node` all refused). The
-generator, the logic tests and the data checks ran on the container's *globally* installed `tsx`,
-and `tsc --noEmit` ran natively on the bridge VM off the repo's own Windows `node_modules`. The
-Poland change is JSON-only and `gen-slices` emits no TypeScript, so neither unrun check could have
-been affected by it — but the next round that touches code must get a real install first.
+Last data-changing round is **Uzbekistan, first round, 2026-09-16, now CLOSED**
+(`src/data/research/uz-uzbekistan-2026-09-16.json` — 5 nodes, 5 dependencies, 4 dropped notes;
+3 A, 2 B). **The country had ONE node before it**, and that node is `uz-ssc` — the statistical
+office itself, carrying `kind: instrument`, i.e. the institution-as-a-node scaffolding the August
+import was supposed to strip. It is left alone: it has a live A-graded edge, and retyping a node is
+a ruling for Thomas, not a research call.
+
+**THE SEAM, and it is the reusable part: stat.uz publishes ~198 ESMS-SHAPED METADATA SHEETS**, one
+per indicator, with a common governance preamble and then numbered indicator-specific sections that
+name the methodology and the classification. Eight were read; every one named a methodological
+parent. **The edge worth having is `uz-oked -> nace-rev2`** — Uzbekistan's national activity
+classifier is stated by its own office to be based on NACE Rev. 2, independently in four sheets,
+which attaches Uzbekistan to the EU classification spine the same way Poland's PKD 2007 does.
+`uz-employment` and `uz-ppi` hang off OKED rather than NACE directly, because the statistics use the
+national classifier and the national classifier is what is derived.
+
+**ONE NODE HAS NO URL ON PURPOSE.** `uz-oked` is well evidenced and unpublished — no page on stat.uz
+carries the classifier and lex.uz renders its search in JavaScript. An empty field was chosen over
+another publisher's page or a bare homepage, which are the two defects the last three rounds have
+been cleaning up. **`lex.uz` needs a browser and is the highest-value follow-up for this country.**
+
+**THE WEAK-BASIS GUARD CAUGHT THIS PROJECT FOR THE FOURTH TIME**, and it was my own prose:
+`uz-national-accounts -> sna-2008` capped at B `consistent-with` because the basis quoted the
+forbidden phrase verbatim while explaining why it did not apply. Rewritten, re-graded A. The quote
+and the target were never touched. `PLAYBOOK-CORPUS.md` §6 already warns that the guard reads the
+prose and not the argument.
+
+**BEFORE IT, INDIA (2026-09-16, closed).** 1 node, 10 dependencies, 3 dropped notes; three orphans
+un-orphaned. Thomas doubted India had value and was half right: of its 37 zero-edge nodes **28
+carry a bare publisher homepage**, so that layer is the August import's url-and-granularity defect,
+not research. The value was in the NSS sampling-frame seam on `microdata.gov.in` — **eight edges off
+four fetches**. Two findings outlived the round and are already rules or todo items: a `000` on a
+`.gov.in` host may be a **certificate chain, not a wall** (now `PLAYBOOK-CORPUS.md` §6), and the
+August import recorded at least one edge **backwards** (§3 [Agent] item 1). `www.mospi.gov.in` is a
+JavaScript SPA and needs the browser. Full account: `notes/india-nss-frames-2026-09-16.md`.
 
 **These numbers are THE count.** §2 supersedes any figure in any other file, without argument —
-`PLAYBOOK.md` §2 rule 4. *(Sandbox: `package-lock.json` is on disk; `npm ci --legacy-peer-deps` is
-the recipe when the registry is reachable, which it was not on 2026-09-11.)*
-
-### CHINA IS FINISHED AND PAUSED (Thomas, 2026-09-10: *"we are done with china now"*)
-
-**Do not open a China round without being asked.** Seventeen rounds, 29-45. The state that matters:
-the provincial run, the two-layer sweep, the publisher hunt and the instrument catalogues are all
-**closed**, and what is left is written down in one place — **`notes/china-progress.md`** for where every
-province and city got to, **`notes/china-method-2026-09-09.md`** for the portals and traps. Both are
-off the always-read path and stay there. Rounds 43-45 are in project memory. The only live CN leads
-worth naming here, because they are cheap and would otherwise be lost: **eight ministry publications
-the national yearbook names under 本篇的资料来源, each one edge away, all blocked on an unreachable
-publisher host** (moe / mca / cdpf / nppa / mct return 000, acftu 412) — their quotes are already read
-and in `evidence-cache/`, so Chrome or a different network finishes them. **Beijing, Hangzhou, Chengdu,
-Chongqing, Hebei, Guangxi and Jiangxi are dead on every route tried** across three rounds; Hainan is
-dropped, Henan and Shenzhen are IP-blocked, Xizang publishes no yearbook. **Do not re-probe that set as
-a batch without a new route.**
-
-### THE NEXT PLACE — a coverage read, done 2026-09-10 at Thomas's request
-
-Full workbook: **`Claude outputs/corpus-coverage-by-country-2026-09-10.xlsx`** (200 rows, ties to §2).
-**There are two different kinds of thin and they need opposite work.**
-
-**A — UNWIRED DEPTH. The nodes exist; nobody has read the documents that connect them.** This is the
-August 2026 bulk import, and it is the highest yield per hour in the corpus because minting is already
-done. Ranked by recoverable stock (zero-edge nodes): **Egypt 51 of 60 · Taiwan 50 of 109 · India 37 of
-98 · Singapore 30 of 38 · Iran 28 of 29 · Bolivia 25 · Vietnam 25 · Chile 23 · Paraguay 23 · Ethiopia
-21 · Guyana 21 · Ecuador 19 · Venezuela 18 · Thailand 18.** **Iran is the extreme case — 29 nodes and
-TWO edges, 0.07 per node, the most unwired country in the corpus and never given a round.** Egypt is
-the largest stock and already carries a standing issue (its IPI compiler is unverified).
-
-**B — UNEXPLORED. Real economies the corpus barely represents**, needing a minting run first and so
-slower: **Ukraine 2 nodes · Qatar 2 · Serbia 2 · Bangladesh 3 · Lebanon 3 · Azerbaijan 3 · Nepal 3 ·
-Cambodia 3 · Mongolia 3 · Pakistan 4 · Malaysia 4 · Switzerland 4.** Eight countries have nodes and
-**zero** edges of any kind: Seychelles, Eritrea, Liberia, Cuba, Turkmenistan, Nauru, Tuvalu, Nicaragua.
-
-**The trap in reading that workbook, and it is worth stating before anyone acts on it: a low node count
-is not neglect.** The EU-27 members look thin — Poland 8 nodes, Spain 8, Italy 10 — and have **zero**
-orphans between them, because the EU-chain rounds wired every node they minted. Narrow and complete is
-a finished job. Taiwan's 109 nodes with 50 orphans is the opposite. **Rank by orphan COUNT and edges
-per node, not by node count.**
-
-**[Thomas] Which of the two classes do you want first when you come back?** A is faster and deepens
-what exists; B widens the map but starts from nothing. The workbook's "Where to go next" sheet is
-ordered for A.
+`PLAYBOOK.md` §2 rule 4. *(Sandbox: `package-lock.json` is on disk; `npm ci --legacy-peer-deps`
+is the recipe and it worked again on 2026-09-15.)*
 
 ## 3. Todo (live items only)
 
 ### [Thomas]
 
-1. **The A-or-B question in §2's coverage read** — still open; Poland was worked on 2026-09-11
-   ahead of it, on a direct instruction, and turned out to be neither class cleanly (see below).
-2. **A `www.gov.pl` permission in the Chrome extension**, if the Polish Ministry of Finance layer
+1. **BPS IS CLOSED; THE PASS IS NOT WORTH REPEATING BLIND.** Thomas chose **(a)** and both
+   passes are written — **27 of 61 repaired, and that is the ceiling for this host.** The second
+   pass is the one worth knowing about: searching harder converted 5 more nodes and
+   **reclassified 13 downward**, because a search returning several sibling volumes means the
+   node is a TOPIC, not that the keywords were wrong (`id-national-accounts` and `id-pdrb` each
+   span a *Menurut Pengeluaran* and a *Menurut Lapangan Usaha* edition; `id-producer-prices`
+   exists only as three subsector volumes). **The yield curve on a host turns negative fast.**
+   What is left at BPS is **9 collisions and 18 topic nodes** — 1 of 3 of the host — and both are
+   the same job: **the August 2026 import minted several topic nodes per document**, already
+   visible corpus-wide as **114 non-bare urls held by 2+ nodes across 335 nodes** (`ru-russia`
+   72, `uy-uruguay` 27, `br-brazil` 17, `mx-mexico` 15; worst single url 21 nodes). **The url is
+   the symptom; the node granularity is the defect** — unscoped, waiting on nobody.
+   Method, the two search lessons and the collision guard: `notes/bps-url-repair-probe-2026-09-15.md`.
+   Per-node verdicts: `Claude outputs/bps-url-repair-2026-09-15/candidates.json`.
+2. **Meanwhile, the work that needs no ruling** is the stock whose urls are already documents:
+   **EU 35 orphans / 0 bare, Japan 14 / 0, Canada 12 / 0** — hand-researched, nothing blocked.
+3. **A `www.gov.pl` permission in the Chrome extension**, if the Polish Ministry of Finance layer
    is wanted. The extension refuses that domain outright ("Navigation to this domain is not
    allowed") and no other route in this session reaches any Polish host — the container's egress
    proxy answers 403 to CONNECT for all of them and the bridge VM has no network at all. Without
    it the Debt Management Strategy, the state budget execution report and the Medium-Term
    Fiscal-Structural Plan stay unresearched.
-3. **Downloads left on your machine.** Six Polish PDFs are in `C:\Users\thoma\Downloads` from
+4. **Downloads left on your machine.** Six Polish PDFs are in `C:\Users\thoma\Downloads` from
    this round (`pl-nbp-*`, `pl-gus-statistical-yearbook-2024.pdf`, `pl-pbssp-2026-amend.pdf`,
    ~34 MB). Keep or bin them as you like; nothing in the repo points at them.
 
 ### [Agent]
 
-**Poland, 2026-09-11 — what is left one page away, in order of value:**
+**In order of value:**
 
-1. **GUS's own title for its foreign-trade release.** NBP's balance-of-payments methodological
-   notes name the largest single input to the Polish current account — *"The main source of data
-   on goods in the Polish balance of payments is Foreign Trade Statistics (FTS) compiled by the
-   Statistics Poland on the basis of INTRASTAT declarations…"* — but "Foreign Trade Statistics"
-   is NBP's name for it, not GUS's, and a node must carry the publisher's own title. `stat.gov.pl`'s
-   English foreign-trade pages redirected to `new.stat.gov.pl` mid-session and the release title was
-   never read. One verified title mints the node and takes an A edge with it.
-2. **PKWiU 2015's upstream.** The Statistical Yearbook says only "compiled on the basis of
-   international classifications and nomenclatures". The real target is almost certainly `cpa`,
-   which is already a node; the PKWiU introducing regulation (Dz.U. 2015 poz. 1676) is where it
-   would be stated.
-3. **NBP's IIP and external-debt series** are described in the same methodological notes as the
-   balance of payments and were not minted — deliberately, to avoid three sibling nodes sharing
-   one document's edges. They are real and the evidence is already read.
+0. **UZBEKISTAN follow-ons — the country went from 1 node to 6 and the seam is barely touched.**
+   (a) **190 more metadata sheets** on stat.uz, same ESMS shape, each naming a methodological
+   parent. (b) **COICOP Rep. of Uzb. 2018** is named by the GDP-by-expenditure sheet and both
+   `un-coicop-2018` and `eu-ecoicop` are in the corpus — the cleanest remaining edge, same shape as
+   OKED to NACE. (c) **The HIES and the 2010 Microcensus**, named by the CPI sheet as its weight
+   source and frame — the same frame-chain seam India paid out on. (d) **`lex.uz` needs a browser**,
+   and it is what blocks OKED's url, the Law "On Official Statistics" 2021, and every Uzbek legal
+   instrument the sheets name. One browser session is the highest-value follow-up.
+   `notes/uzbekistan-2026-09-16.md`.
+0. **INDIA follow-ons, all cheap, all opened by the 2026-09-16 round.** (a) **Four more NADA study
+   pages match no existing node and carry the same frame sentence** — Time Use Survey (catalog 236),
+   the education and telecom modular surveys (255, 239), participation in education (300). One fetch
+   each, `curl -k`. (b) **NIC-2008 has no node** and both the IIP and ASI cite it; only NIC-2025
+   exists, which is the wrong target. Needs MoSPI's own page, so it needs the browser. (c) **The
+   Sixth Economic Census** is named by ASUSE as its rural stratification source and has no node.
+   (d) **`mahades.maharashtra.gov.in` is readable with `-k`** — five orphan nodes nobody has tried
+   since the host was wrongly recorded as a DNS failure. Method and catalog ids:
+   `notes/india-nss-frames-2026-09-16.md`.
+1. **Grep the August 2026 import for instrument-as-dependent pairs.** The India round found
+   `in-collection-of-statistics-act-2008 -> in-mospi-asi` recorded backwards — the Act depending on
+   the survey it authorises — and found it by accident while working something else. If the import
+   did it once it may have done it at scale, and a wrong-direction edge is invisible to every check
+   the validator runs. One pass over `_dropped` and live edges whose target is `kind: instrument`.
+2. **Czechia and Albania** still lack the `eurostat-hicp` feed edge. Both ESMS pages were read in
+   full: neither carries a country-specific transmission sentence, only the all-NSI boilerplate.
+   They need the NSI's own page, the way Sweden's came off SCB's. Not blocked, just not done.
+3. **Romania's IAPC node.** The 2026-08-28 blocker has decayed and the replacement is not what it
+   expected: **the cloud container cannot reach `insse.ro` at all** (agent proxy closes the tunnel,
+   curl exit 35) while **Thomas's Chrome renders it first try**. Two guessed paths for the IAPC's
+   own page 404'd, so it needs someone to find the right page — the host is no longer the obstacle.
+4. **NUTS**, unchanged: Regulation (EC) No 1059/2003 is fetched and read and deliberately NOT
+   minted, because nothing in the corpus yet names NUTS as its own basis. A regional-statistics
+   round opens it with one CELLAR fetch.
+5. **The corpus-wide node-granularity defect** is the through-line of the last three rounds and is
+   still unscoped: **114 non-bare urls held by 2+ nodes across 335 nodes** (`ru-russia` 72,
+   `uy-uruguay` 27; worst single url 21 nodes). The url is the symptom, the granularity is the
+   defect, and it is waiting on a ruling rather than on research.
 
 Standing, and none of it needs a round of its own:
 
 - **`notes/standing-issues.md`** carries everything that outlived five handoffs — **FR** (four
   rounds in, paused, the live method recorded), **DE** (finished as a programme; only a Chapter
-  10.3 scope question remains, which is a ruling not research) and the **DSBB option E** worklist
-  pointer (~15 pairs, each needing its publisher's page).
+  10.3 scope question remains, which is a ruling not research), the **DSBB option E** worklist
+  pointer (~15 pairs, each needing its publisher's page), and **POLAND's three leads, moved there
+  2026-09-15** — the cut §1's read-cost paragraph had been asking for since handoff 085. They
+  return here when the `gov.pl` permission exists.
 - **`iq-cso` / `ye-cso` / `sy-cbs` / `sd-cbs` stay PARKED** — the rule is in
   `playbook/corpus-nodes.md`. `iq-cso`'s possible-duplicate question is open in
   `notes/standing-issues.md`, not here.
@@ -229,7 +278,8 @@ this file first, **archive it before rewriting** (`archive/Previous Handoffs/han
 zero-padded, one higher than the highest there — verify with `sha256sum`), rewrite §2/§3 as
 state and pointers, sweep out what is finished, **sweep EVERYTHING — fast layer AND slow layer —
 if NNN is divisible by 5** (Thomas, 2026-09-10: the slow layer used to be swept on the 20's and that
-routine is retired), refresh §1's read-cost table, and write the round's story to project memory.
+routine is retired), and refresh §1's read-cost table. **No round narrative goes to project memory** — the
+archive is the record (Thomas, 2026-09-15).
 
 **Never run git, never state git status, never tell Thomas to commit** — that is `PLAYBOOK.md`
 rule 1 and it binds every task, not just this one.

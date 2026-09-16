@@ -17,6 +17,13 @@ agent.
 | file | k | open it when |
 |---|---|---|
 | `techniques-2026-09-04.md` | 18.0 | fetching, capturing or extracting anything. The general recipe set |
+| `node-url-audit-2026-09-15.md` | 6.5 | scoping ANY orphan/coverage round: 32% of node urls are not documents, the workbook's ranking inverts by readable stock, and the two probe traps that nearly cost a round |
+| `bps-url-repair-probe-2026-09-15.md` | 8.7 | doing or planning a per-host url repair: the Chrome-only route into bps.go.id, the search-form method, and why only 27 of 61 nodes could be repaired — the second pass reclassified 13 downward, and 114 non-bare urls are already shared by 335 nodes |
+| `eu-classification-statute-2026-09-14.md` | 7.2 | anything EU classification or statute: the CELLAR route for legal acts, the current ESMS hi3/hi4 split, and the 140-pair grader selection rule 11 needs |
+| `eu-statutes-2026-09-15.md` | 6.7 | anything EU statute or national HICP: the four acts' resolved CELLAR URLs, why three of them are already nodes and no statute node was minted, what Germany / Türkiye / Czechia / Albania / Romania each need, and the insse.ro container-vs-Chrome split |
+| `ecoicop-target-audit-2026-09-15.md` | 6.5 | before touching any national HICP edge, or re-asking whether the 09-14 ECOICOP wiring landed on the right nodes: the 31-country table, the one mismatch (RO), and the five nodes whose own url is a Eurostat metadata page — a shape the NODE URLS check cannot see |
+| `india-nss-frames-2026-09-16.md` | 6.3 | anything India, or any `.gov.in` host returning 000: the `curl -k` certificate finding and which 13 hosts are still dead, why the coverage chart oversells India's 37 orphans, the microdata.gov.in NADA study-description seam with its catalog ids, and the August import's instrument-direction error |
+| `uzbekistan-2026-09-16.md` | 4.7 | anything Uzbekistan or Central Asia: stat.uz's ~198 ESMS-shaped metadata sheets and how to use them, the `¬–` pdftotext artefact that costs coverage, why lex.uz is unusable without a browser, and the four edges that are one fetch away |
 | `techniques-cn-yearbooks-2026-09-08.md` | 7.8 | working any Chinese statistical yearbook |
 | `china-method-2026-09-09.md` | 36.6 | anything China — the portals, the shapes, the traps |
 | `imf-elibrary-2026-09-06.md` | 7.7 | anything IMF. Its second addendum corrects the first |

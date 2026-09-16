@@ -1,0 +1,192 @@
+{
+ "meta": {
+  "source": "research round 2026-09-16 — Uzbekistan, first round. Thomas: “lets take a look at uzbeckistan”.",
+  "minted": "2026-09-16",
+  "status": "ready to merge",
+  "note": "UZBEKISTAN, FIRST ROUND. RESULT: 5 nodes, 5 dependencies, 4 dropped notes. The country had ONE node before this — `uz-ssc`, which is the statistical office itself carrying `kind: instrument`, i.e. the institution-as-a-node scaffolding the August import was supposed to strip. So this is a minting round, not a wiring one, and the coverage workbook said as much: 1 node against a category-median expectation of about 13 for a country of 37 million.\n\nTHE SEAM. stat.uz publishes ~198 English-language METADATA SHEETS, one per indicator, and they are ESMS-shaped — a common governance preamble followed by numbered indicator-specific sections that name the methodology, the classification and the legal basis. That is the same shape Eurostat's national reference metadata has, and it is the same reason it pays: several answers per fetch, from the publisher's own documents. Eight sheets were read this round.\n\nTHE EDGE WORTH HAVING is `uz-oked -> nace-rev2`. Uzbekistan's national activity classifier is stated by its own statistical office to be based on NACE Rev. 2, independently in four sheets, which attaches Uzbekistan to the EU classification spine the 2026-09-14 round built — the same shape as Poland's PKD 2007. `uz-employment` and `uz-ppi` then hang off OKED rather than off NACE directly, because the statistics use the national classifier and the national classifier is what is derived; skipping the middle would state a derivation no document states.\n\nONE NODE HAS NO URL ON PURPOSE. `uz-oked` is well evidenced and unpublished: no page on stat.uz carries the classifier itself and lex.uz is unreadable from here. An empty field was chosen over another publisher's page or a bare homepage, which are the two defects the last three rounds have been cleaning up. The `_dropped` entry says exactly what was tried.\n\nWHAT WAS REFUSED: the BPM6 edge ('brought into line with' is agreement language), the UN Vital Statistics recommendations (the corpus's lookalike node is the Census one — a wrong target), and any edge off the sheets' common governance preamble, which describes the agency rather than the statistic.\n\nEvery quote was verified against the exact text the grader reads before the slice was written."
+ },
+ "reports": [
+  {
+   "id": "uz-cpi",
+   "title": "Consumer price index",
+   "title_aliases": [
+    "Consumer price index (CPI), Uzbekistan"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 12,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's consumer price index. The Committee's own metadata sheet states the series was introduced in January 1994 with IMF technical assistance and that the current methodology — regional specific weights, imputed calculation of missing prices — has been in use since January 2023. Its weights come from the Household Income and Expenditure Survey, whose sampling frame the sheet says is based on the 2010 Microcensus (16,000 households, 1,339 surveyed monthly); neither of those is a node yet. Minted 2026-09-16, in the first Uzbekistan round. NAMING NOTE, and it applies to every node in this slice: these 2022-23 sheets call the publisher the 'Statistics Agency under the President of the Republic of Uzbekistan', while stat.uz's current masthead reads 'National Committee of the Republic of Uzbekistan on Statistics'. The body was renamed; the corpus already carries the newer name on `uz-ssc`, so the newer name is used and the documents' own wording is recorded here rather than silently reconciled.",
+   "cadence_note": "Monthly. The metadata sheet's dissemination section describes a monthly bulletin; the Committee also runs a published release calendar.",
+   "last_updated": null,
+   "url": "https://stat.uz/img/61-tseny_consumer-price-index-en_p73978.pdf",
+   "domains": [
+    "inflation"
+   ]
+  },
+  {
+   "id": "uz-national-accounts",
+   "title": "National Accounts",
+   "title_aliases": [
+    "National accounts of Uzbekistan"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 4,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's national accounts. The Committee's own metadata sheet lists the accounts compiled by activity and institutional sector, records that a Tourism Satellite Account has been implemented, and that owner-occupied housing services are valued by the user cost method and FISIM computed — both stated as done in accordance with SNA 2008. Minted 2026-09-16. NAMING NOTE, and it applies to every node in this slice: these 2022-23 sheets call the publisher the 'Statistics Agency under the President of the Republic of Uzbekistan', while stat.uz's current masthead reads 'National Committee of the Republic of Uzbekistan on Statistics'. The body was renamed; the corpus already carries the newer name on `uz-ssc`, so the newer name is used and the documents' own wording is recorded here rather than silently reconciled.",
+   "cadence_note": "The sheet states GDP is generated 'on an annual and quarterly basis'; 4 is the quarterly rate.",
+   "last_updated": null,
+   "url": "https://stat.uz/img/83-sns_national-accounts-en_p14787.pdf",
+   "domains": [
+    "national-accounts"
+   ]
+  },
+  {
+   "id": "uz-employment",
+   "title": "Employment",
+   "title_aliases": [
+    "Employment, Uzbekistan"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 4,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's employment statistics, compiled on the balance of labour resources. The Committee's own metadata sheet gives the series back to 1991, names the Labour Code and the 1992 Law 'On employment of the population' among its legal bases, and records the 2016-17 switch from the Soviet-era OKONKh classifier to OKED rev. 2. Minted 2026-09-16. NAMING NOTE, and it applies to every node in this slice: these 2022-23 sheets call the publisher the 'Statistics Agency under the President of the Republic of Uzbekistan', while stat.uz's current masthead reads 'National Committee of the Republic of Uzbekistan on Statistics'. The body was renamed; the corpus already carries the newer name on `uz-ssc`, so the newer name is used and the documents' own wording is recorded here rather than silently reconciled.",
+   "cadence_note": "Quarterly, on the balance of labour resources; the sheet gives no explicit frequency statement, so 4 follows the reporting pattern it describes rather than a stated rate.",
+   "last_updated": null,
+   "url": "https://stat.uz/images/uploads/docs/29___Employment_en.pdf",
+   "domains": [
+    "labour"
+   ]
+  },
+  {
+   "id": "uz-ppi",
+   "title": "Industrial products producer price index",
+   "title_aliases": [
+    "Producer price index, Uzbekistan",
+    "PPI"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 12,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's producer price index for industrial products. The Committee's own metadata sheet gives a consecutive monthly series since 1994 and scopes observation to OKED sections B, C, D and E — mining and quarrying, manufacturing, electricity and gas, water supply and waste management. Minted 2026-09-16. NAMING NOTE, and it applies to every node in this slice: these 2022-23 sheets call the publisher the 'Statistics Agency under the President of the Republic of Uzbekistan', while stat.uz's current masthead reads 'National Committee of the Republic of Uzbekistan on Statistics'. The body was renamed; the corpus already carries the newer name on `uz-ssc`, so the newer name is used and the documents' own wording is recorded here rather than silently reconciled.",
+   "cadence_note": "'Consecutive monthly PPI series have been available since 1994' — the sheet's own words.",
+   "last_updated": null,
+   "url": "https://stat.uz/img/Docs/62-tseny_industrial-products-producer-price-index-en_p24074.pdf",
+   "domains": [
+    "inflation",
+    "industry"
+   ]
+  },
+  {
+   "id": "uz-oked",
+   "title": "National Classifier of Types of Economic Activities (OKED rev. 2)",
+   "title_aliases": [
+    "National Classifier of Economic Activities OKED rev. 2",
+    "National Classification on kinds of Economic Activities of the Republic of Uzbekistan",
+    "National Classification on kinds of Economic Activities",
+    "OKED"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "standard",
+   "releases_per_year": 0.05,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's national activity classification, in use since 2016-17 in place of the Soviet-era OKONKh, and stated by the Committee's own documents to be based on NACE Rev. 2. THIS NODE CARRIES NO `url`, DELIBERATELY. Four separate first-party metadata sheets name it — employment, wages, the GDP deflator and the PPI — and two of them state the NACE derivation outright, so the artefact is well evidenced; but no page on stat.uz publishes the classifier itself (the Statistical classifications link resolves to a commodity-classification service, and lex.uz's search is JavaScript-driven and unreadable here). Attaching another publisher's page would have repeated the defect the 2026-09-15 ECOICOP audit found, and a bare stat.uz homepage would have repeated the August-import defect, so the field is left empty and the gap is stated. 20 corpus nodes already carry no url; this is the 21st and it is the only honest option until the classifier's own page is found. Minted 2026-09-16. NAMING NOTE, and it applies to every node in this slice: these 2022-23 sheets call the publisher the 'Statistics Agency under the President of the Republic of Uzbekistan', while stat.uz's current masthead reads 'National Committee of the Republic of Uzbekistan on Statistics'. The body was renamed; the corpus already carries the newer name on `uz-ssc`, so the newer name is used and the documents' own wording is recorded here rather than silently reconciled.",
+   "cadence_note": "A generational classification, revised with its NACE parent; rev. 2 has been in force since 2016. 0.05 matches `nace-rev2`, which it is derived from.",
+   "last_updated": null,
+   "domains": [
+    "industry",
+    "statistical-system"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "uz-cpi",
+   "target_report_id": "cpi-manual",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the Committee's own CPI metadata sheet, section 2.1.1. The evidence is the Committee's own English-language metadata sheet for this indicator, one of ~198 published under stat.uz's Metadata section. They are ESMS-shaped: a common governance preamble, then numbered indicator-specific sections (2.1 Concepts and definitions, 2.2 Scope, 2.3.1 Classification/sectorization). The quote is taken from the indicator-specific half, never the preamble. WHICH EDITION, AND WHY IT IS THE 2020 ONE: the document renders the title as 'Guide to the Consumer Price Index: Theory and practice', which are the 2004 edition's words, but gives the year as 2020 and lists the six publishers as IMF, OECD, Eurostat, UNECE, World Bank and ILO. `cpi-manual` (Concepts and Methods, 2020) carries exactly that publisher set including UNECE; `cpi-manual-2004` carries 'United Nations' instead. Two of three signals — year and authorship — point at 2020 and only the translated title phrase points at 2004, so the target is the 2020 manual. THE EDGE COMPRESSES ONE LINK, stated plainly rather than hidden: the sentence runs CPI -> national Methodological Provisions (Resolution No. 33 of 27 September 2022) -> the international manual. The Provisions have no node and no retrievable url, so they are recorded in `_dropped` and this edge spans them. If the Provisions are ever minted, this edge should be split in two. ROUTE: stat.uz answers this container on a plain fetch; the metadata sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain. GRADE: B, `quote-found-target-not-named`, and it is the correct answer. Coverage is 1.0 but the document calls the manual 'Guide to the Consumer Price Index: Theory and practice' and the node carries its real title, 'Consumer Price Index Manual: Concepts and Methods'. The grader is reporting a true fact about the document — it does not name the artefact as its publisher titles it. Nothing was done to move this: the edition reasoning above stands on the year and the six-publisher list, not on the title.",
+   "evidence_url": "https://stat.uz/img/61-tseny_consumer-price-index-en_p73978.pdf",
+   "evidence_grade": "B",
+   "evidence_quote": "the CPI is formed in accordance with the Methodological Provisions for organizing monitoring of consumer prices (tariffs) for goods and services and calculating consumer price indices (approved by Resolution of the State Statistics Committee No. 33 of September 27, 2022), developed on the basis of the “Guide to the Consumer Price Index: Theory and practice” (IMF, OECD, Eurostat, UNECE, World Bank and ILO, 2020)"
+  },
+  {
+   "source_report_id": "uz-national-accounts",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the Committee's own national-accounts metadata sheet, section 2.1.1, stating the compilation standard in the present tense. The evidence is the Committee's own English-language metadata sheet for this indicator, one of ~198 published under stat.uz's Metadata section; they are ESMS-shaped, and the quote is taken from the indicator-specific half rather than the common governance preamble. THE PHRASING MATTERS AND IS THE RIGHT KIND: 'in accordance with the recommendations of' is the compiler stating what it complies with, which is a dependency. That is a different thing from the agreement language that has refused `esa-2010 -> sna-2008` four times over. The sheet repeats it twice more in the same voice — FISIM 'implemented in accordance with the SNA 2008', and owner-occupied housing valued by the user cost method 'in accordance with the recommendations of the SNA - 2008 manual'. NOT TAKEN from the same sheet: the sentence about export-import transactions being 'brought into line with' BPM data, which is agreement language, so `imf-bpm6` gets no edge. BASIS PROSE NOTE: this paragraph was rewritten before the final grader run. The first version quoted the forbidden phrase verbatim while explaining why it did NOT apply here, and `WEAK_BASIS_PATTERNS` matched it and capped the edge at B `consistent-with`. PLAYBOOK-CORPUS §6 warns that the guard reads the prose and not the argument, and records three earlier times this project was caught by it; this is the fourth. The quote and the target were never touched. ROUTE: stat.uz answers this container on a plain fetch; the metadata sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/img/83-sns_national-accounts-en_p14787.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "The Agency generates GDP on an annual and quarterly basis, in accordance with the recommendations of the System of National Accounts (SNA) 2008."
+  },
+  {
+   "source_report_id": "uz-employment",
+   "target_report_id": "uz-oked",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the Committee's own employment metadata sheet, section 2.3.1 Classification/sectorization, naming the classifier its industry breakdown runs on and dating the switch to January 2017. The evidence is the Committee's own English-language metadata sheet for this indicator, one of ~198 published under stat.uz's Metadata section. They are ESMS-shaped: a common governance preamble, then numbered indicator-specific sections (2.1 Concepts and definitions, 2.2 Scope, 2.3.1 Classification/sectorization). The quote is taken from the indicator-specific half, never the preamble. NOT WIRED DIRECTLY TO `nace-rev2`: the statistic uses OKED, and OKED is what is based on NACE. Skipping the national classifier would state a derivation the document does not — the two-step chain is the finding, and it is wired as two edges. ROUTE: stat.uz answers this container on a plain fetch; the metadata sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/images/uploads/docs/29___Employment_en.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "The breakdown is carried out until 2016 according to the national classifier, from January 2017 by type of economic activity in accordance with the National Classifier of Economic Activities OKED rev. 2 (NACE rev. 2)."
+  },
+  {
+   "source_report_id": "uz-oked",
+   "target_report_id": "nace-rev2",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: Uzbekistan's own statistical office stating that its national activity classifier is based on NACE Rev. 2, in the comparability section of its employment metadata sheet. PLAYBOOK 7a asks that the document STATE the derivation rather than leaving the reader to know it, and this one does: 'based on NACE rev. 2'. It is stated independently in at least four of the Committee's sheets — employment, wages, the GDP deflator and the PPI — which is why the node was minted on it despite having no page of its own. THIS IS THE ROUND'S MOST USEFUL EDGE: it attaches Uzbekistan to the EU classification spine that the 2026-09-14 and 2026-09-16 rounds have been building out, the same shape as Poland's PKD 2007. ROUTE: stat.uz answers this container on a plain fetch; the metadata sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain. GRADE: B, `quote-found-target-not-named`, coverage 1.0, and this is the trap this project documented eleven days ago hitting its own author. `nace-rev2`'s title-lead is 'NACE Rev. 2'; `tokenise` strips the full stop to make 'nace rev 2' while the haystack keeps it as 'nace rev. 2', so the title-lead door cannot fire on any document that writes the name the normal way. See PLAYBOOK-CORPUS §6, 'A TITLE-LEAD CONTAINING AN ABBREVIATED WORD CAN NEVER FIRE', and `playbook/corpus-evidence.md` for the mechanism. The documented remedy is a span carrying enough of the FULL title — 'Statistical Classification of Economic Activities in the European Community' — and no Uzbek sheet writes that, so there is no such span to take. B is the ceiling here, on evidence a reader would call A.",
+   "evidence_url": "https://stat.uz/images/uploads/docs/29___Employment_en.pdf",
+   "evidence_grade": "B",
+   "evidence_quote": "since 2016 - in the structure of types of economic activities (according to the National Classifier of Types of Economic Activities (OKED, rev. 2), based on NACE rev. 2)"
+  },
+  {
+   "source_report_id": "uz-ppi",
+   "target_report_id": "uz-oked",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the Committee's own PPI metadata sheet, comparability section, on the classifier the index has been structured by since 2016. The evidence is the Committee's own English-language metadata sheet for this indicator, one of ~198 published under stat.uz's Metadata section. They are ESMS-shaped: a common governance preamble, then numbered indicator-specific sections (2.1 Concepts and definitions, 2.2 Scope, 2.3.1 Classification/sectorization). The quote is taken from the indicator-specific half, never the preamble. The scope section says the same thing operationally — observation covers enterprises whose main activity falls in OKED sections B, C, D and E. NOTE ON THE TARGET'S TITLE: this sheet renders the classifier as 'National Classification on kinds of Economic Activities of the Republic of Uzbekistan' while the employment sheet renders it 'National Classifier of Types of Economic Activities (OKED, rev. 2)'. Same classifier, two English translations of one Uzbek title; both are carried in the node's `title_aliases` so either spelling reaches it. ROUTE: stat.uz answers this container on a plain fetch; the metadata sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain. QUOTE TRIMMED BEFORE THE FINAL RUN: the first span began at 'Until 2016, the PPI was formed...' and graded B `partial-quote` at coverage 0.93. `pdftotext` renders the dash in 'since 2016 – in the structure' as the two characters '¬–', a soft-hyphen artefact that no normalisation in the grader folds away, so any span crossing it loses those characters. The span now starts after it and covers 1.0. Nothing about the claim changed.",
+   "evidence_url": "https://stat.uz/img/Docs/62-tseny_industrial-products-producer-price-index-en_p24074.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "in the structure of types of economic activity (according to the National Classification on kinds of Economic Activities of the Republic of Uzbekistan, based on NACE rev.2)."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "uz-cpi -> the Methodological Provisions (Resolution of the State Statistics Committee No. 33, 27 Sept 2022)",
+   "source": "uz-cpi",
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "The national instrument that sits between the Uzbek CPI and the international manual. The CPI sheet names it in full — 'Methodological Provisions for organizing monitoring of consumer prices (tariffs) for goods and services and calculating consumer price indices (approved by Resolution of the State Statistics Committee No. 33 of September 27, 2022)' — so the publisher's own title is in hand. No node, because no url is: the instrument is not on stat.uz and lex.uz's search is JavaScript-driven and returned nothing readable to this container. CONSEQUENCE, stated so it is not discovered later as a surprise: `uz-cpi -> cpi-manual` spans this instrument in one edge. When the Provisions get a node, that edge should become two."
+  },
+  {
+   "edge": "uz-oked has no first-party url",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "Recorded because a node with an empty `url` looks like an oversight and this one is a decision. Four of the Committee's metadata sheets name OKED and two state its NACE derivation, so the artefact is not in doubt. What is missing is a page that PUBLISHES it. Tried and failed 2026-09-16: stat.uz's 'Statistical classifications' link resolves to /en/interactive-services/classification-of-commodities, which is a commodity-classification service and carries no OKED content; classifier.stat.uz does not resolve; two guessed stat.uz classifier paths 404'd; lex.uz answers 200 but renders its search by JavaScript and its API rejects a direct query. The alternatives were worse than an empty field — another publisher's page repeats the defect the ECOICOP audit found, and a bare homepage repeats the August-import defect. ONE BROWSER SESSION on lex.uz probably closes this."
+  },
+  {
+   "edge": "uz-population -> UN Principles and Recommendations for Vital Statistics",
+   "source": null,
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "Found while sweeping the metadata sheets and NOT taken, because the obvious target is the wrong one. The population sheet names 'Principles and Recommendations for Vital Statistics, approved by the UN Statistical [Commission]'. The corpus holds `un-census-principles` — 'Principles and Recommendations for Population and Housing Censuses' — which is a DIFFERENT UN document with a similar name. Wiring to it would be a wrong-target edge of exactly the kind rule 14 caught for Romania. The Vital Statistics recommendations need their own node, and a population node for Uzbekistan needs minting first."
+  },
+  {
+   "edge": "uz-ssc is an agency node, not an artefact",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "Uzbekistan's only pre-existing node is `uz-ssc`, titled 'National Committee of the Republic of Uzbekistan on Statistics' — the same string as its own `publisher` field — and carries `kind: \"instrument\"`. It is the statistical office, not an instrument and not a publication. The August 2026 import's own mint note says 'geography- and institution-as-a-node scaffolding stripped'; this one survived the strip. It is left alone here because retyping or retiring a node with a live edge (`uz-ssc -> imf-e-gdds`, graded A) is a ruling for Thomas, not a research decision — PLAYBOOK 7c retired the analytical meta-node sweep deliberately and says not to extend it by keyword. Flagged so the next Uzbekistan round does not build on it by accident."
+  }
+ ]
+}

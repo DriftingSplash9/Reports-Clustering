@@ -180,8 +180,13 @@ the session has stopped accumulating and started circling.
 **Process rule.** `HANDOFF.md` stays short — edit its Current State/Todo
 directly (overwrite, don't append) each turn. **The handoff procedure itself is
 `HANDOFF.md` §4 and is not repeated here**, including why it is archive-first.
-A new standing rule or trap goes here, not `HANDOFF.md`. Project memory: write
-entries as you go; if it refuses, park a note in `notes/` and flag it in
-`HANDOFF.md`.
+A new standing rule or trap goes here, not `HANDOFF.md`. **Round narrative is NOT
+written to project memory** (Thomas, 2026-09-15: the archived handoffs are *"a series
+of diarys"* and are the record). What a round leaves behind is a trap or rule in
+whichever playbook binds it, a method or route in `notes/`, and its state in
+`HANDOFF.md` §2/§3 — which the next handoff archives verbatim before rewriting.
+*(Removed 2026-09-15: "Project memory: write entries as you go; if it refuses, park a
+note in `notes/` and flag it in `HANDOFF.md`." It manufactured a second, unswept copy
+of every round; that copy reached 59k in three weeks and had been condensed twice.)*
 
 ---

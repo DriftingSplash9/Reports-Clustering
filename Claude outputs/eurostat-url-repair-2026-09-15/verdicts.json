@@ -1,0 +1,51 @@
+{
+ "round": "eurostat-url-repair-2026-09-15",
+ "question": "five ECOICOP-wired nodes carry a Eurostat ESMS metadata page as their own url; replace each with the publisher's own page named inside that same document",
+ "result": {
+  "repaired": 2,
+  "refused": 3
+ },
+ "nodes": [
+  {
+   "id": "ee-stat-hicp",
+   "verdict": "REPAIRED",
+   "was": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm",
+   "now": "https://www.stat.ee/en/metadata/20407",
+   "named_at": "ESMS 10.3 — 'IA023: HARMONIZED INDEX OF CONSUMER PRICES ... Statistical database' and the stat.ee CPI metadata page",
+   "why": "200. Statistics Estonia's own page, opening 'The Consumer Price Index (CPI), the Harmonised Index of Consumer Prices (HICP) and the Harmonized Index of Consumer Prices with Constant Taxes (HICP-CT)' — exactly this combined node's scope. The andmed.stat.ee IA023 table named in the same section answered HTTP 500 and was not used. Cited url is the redirect target, because that is what a plain GET reads."
+  },
+  {
+   "id": "is-hagstofa-hicp",
+   "verdict": "REPAIRED",
+   "was": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm",
+   "now": "https://statice.is/statistics/economy/prices/hicp/",
+   "named_at": "ESMS 10.3 — 'HICP - Statistics Iceland'",
+   "why": "200, page title 'HICP - Statistics Iceland'. 10.2 confirms the series lives there: 'A special press release of HICP is not published in Iceland but data are updated on the website, statice.is'."
+  },
+  {
+   "id": "hr-dzs-hicp",
+   "verdict": "REFUSED — no such page exists",
+   "was": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hr.htm",
+   "candidates": [
+    "https://podaci.dzs.hr/en/statistics/prices/",
+    "https://web.dzs.hr/PXWeb/Menu.aspx?px_language=en&px_type=PX&px_db=Cijene"
+   ],
+   "why": "Croatia's ESMS 10.1 says the HICP 'is published together with the CPI in the form of the first release' — there is no separate DZS HICP page to point at. The prices section page fetched 200 at 1.35 MB and carries NO link whose url or text matches 'harmoni' anywhere; it is a section listing in substance even though isIndexPage does not flag it. The PXWeb menu is a database menu. Swapping a precise foreign-published document for a vaguer first-party listing is not a repair. The honest fix for this node is a specific First Release url, which needs a DZS read this round did not do."
+  },
+  {
+   "id": "lt-vda-hicp",
+   "verdict": "REFUSED — unverifiable this session",
+   "was": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm",
+   "candidate": "https://osp.stat.gov.lt/documents/10180/11840852/The_methodology_for_compiling_the_harmonised_index_of_consumer_prices_2023-12.pdf/294d471a-2eca-48ae-9a1c-67533eceded3",
+   "why": "The only link in Lithuania's whole ESMS page that names the artefact — 'The Methodology for Compiling the Harmonised Index of Consumer Prices'. It answers HTTP 403 to this container. Chrome was tried and the extension was not connected this session. The other three osp.stat.gov.lt links on the page are a release calendar, the portal homepage (bare) and an SPA database route. ONE Chrome fetch closes this; the candidate url is recorded so nobody re-derives it."
+  },
+  {
+   "id": "sk-susr-cpi",
+   "verdict": "REFUSED — the repair would make the count worse",
+   "was": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esmshi3_sk.htm",
+   "candidate": "http://datacube.statistics.sk/#!/view/en/VBD_INTERN/sp0017ms/v_sp0017ms_00_00_00_en",
+   "why": "The only first-party link in Slovakia's 10.x block. Run through the repo's OWN isBareHost it comes back BARE: everything after '#' is a fragment, so the path is '/'. Repairing to it would ADD one to the 1,014 bare-url count while appearing to fix something. Refused on measurement, not taste."
+  }
+ ],
+ "instrument_note": "Every NODE URLS figure is identical before and after — 1,014 bare, 126 index, 20 missing, 451 zero-edge-and-bare. That is the finding, not a disappointment: a foreign-publisher document is invisible to both checks, which is why this class was never counted."
+}

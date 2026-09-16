@@ -266,9 +266,17 @@ The rule that survives in the playbook is only the ranking — go here before th
 own site. **These filenames are the part that rots and that is why they live here:**
 FI moved from `hi4` to `hi3` between 2026-08-28 and 2026-09-05.
 
-- `prc_hicp_esmshi4_<cc>.htm` — PL, EL, ES, HU, HR, BG, LT
-- `prc_hicp_esmshi3_<cc>.htm` — SK, SI, EE, LV, MT, CY, IS, CZ, DK, IT, NO, RO, CH, TR, AL
+- `prc_hicp_esmshi4_<cc>.htm` — **AT, BE, BG, DE, EL, ES, FR, HR, HU, IE, LT, LU, NL, PL, PT, SE**
+- `prc_hicp_esmshi3_<cc>.htm` — **AL, CH, CY, CZ, DK, EE, FI, IS, IT, LV, MT, NO, RO, SI, SK, TR**
 - FI is `hi3` since 2026-09-05; try `hi4` first and fall back. **Greece is `_el`, not `_gr`.**
+- **Both lists re-probed 2026-09-14, all 32 fetched.** They previously read *"PL, EL, ES, HU, HR,
+  BG, LT"* and *"SK, SI, EE, LV, MT, CY, IS, CZ, DK, IT, NO, RO, CH, TR, AL"* — **AT, BE, DE, FR,
+  IE, LU, NL, PT and SE were in NEITHER list** and are all `hi4`. A body under ~20 kB is a miss,
+  not a page.
+- **Section 3.2 "Classification system" names ECOICOP and section 6.1 "Institutional Mandate -
+  legal acts and other agreements" names Regulation (EU) 2016/792** — two edges per fetch beside
+  the weights field. §6.1 is common template text word for word across all pages except Türkiye's,
+  which does not carry the sentence at all. Worked in `notes/eu-classification-statute-2026-09-14.md`.
 - **Section 18.1.1 "Weights"** is where the weight-source sentence lives. Memory
   `esms_hicp_pass_2026-09-05` has the whole pass, including the trap that
   Switzerland's sentence is in 18.1.1.1 rather than 18.1.1.
@@ -276,6 +284,21 @@ FI moved from `hi4` to `hi3` between 2026-08-28 and 2026-09-05.
   source" as an explicit Y/N field. There is no such page for Iceland.
 - **No government-finance equivalent exists** — `gov_10dd_*_esms_<cc>.htm` 404s
   everywhere tried. For deficit and debt, go to the NSI's own EDP release page.
+- **There is no national ESMS for any other domain either** — `nama_10_esms_<cc>`, `sbs_esms_<cc>`
+  and `sts_esms_<cc>` all 404 (probed 2026-09-14). The EU-LEVEL pages (`prom_esms`,
+  `nama_10_gdp_esms`) do exist and are first-party Eurostat statements about Eurostat's own
+  products — `prom_esms` §3.2 is where the corpus's only stated CPA and NACE Rev. 2 derivations
+  come from.
+
+## EU legal acts: EUR-Lex is WAF-blocked, CELLAR is not (2026-09-14)
+
+`eur-lex.europa.eu/legal-content/...` answers this container **HTTP 202, zero bytes,
+`x-amzn-waf-action: challenge`**, with or without a browser User-Agent. Read the act from CELLAR
+instead: `publications.europa.eu/resource/celex/<CELEX>` **with `Accept-Language: eng`** (without
+it you get an error stub; with a plain Accept you get RDF), then **cite the URL that redirects
+to** — `resource/cellar/<uuid>.<seq>/DOC_1`, which a plain GET reads with no headers, which is
+what a later grader run issues. Acts too old for an xhtml expression need `Accept: text/html`.
+Full recipe and the three worked CELEX numbers: `notes/eu-classification-statute-2026-09-14.md`.
 
 ## Host workarounds for an unreachable NSO (moved from `PLAYBOOK-CORPUS.md` rule 17, 2026-09-07)
 
@@ -289,3 +312,23 @@ three host workarounds wearing a rule's clothes. Its number stays retired.
   an NSO's own pages are blocked — it supplied Iraq's and Vietnam's ICLS edges.
 - The old ILO microdata catalogue (`webapps.ilo.org/surveyLib`) is retired; do not
   send a round at it.
+
+## Driving a client-rendered catalogue search in Chrome (added 2026-09-15, from bps.go.id)
+
+When a publisher's catalogue renders its result rows only after hydration — a Next.js
+server-action POST, no usable `?keyword=` URL, no sitemap — neither curl nor an in-page
+`fetch()` sees a single row. **Drive the site's own search form instead:** set
+`input[name=...]` through `Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set`,
+dispatch `input`, then `form.requestSubmit()`, and read the rendered anchors.
+
+Two mechanics that decide whether this is a four-minute job or a stalled one:
+
+- **Wait on a `MutationObserver`, never a `setTimeout` poll.** A backgrounded tab throttles
+  timers to about 1/sec, which turned a 10 s wait into minutes and looked like a hung page.
+  The observer is not throttled: ~3.3 s per query against ~10 s.
+- **Never `await` the whole loop in one tool call** — the CDP `Runtime.evaluate` ceiling is 45 s.
+  Start it as `window.__job = (async()=>{...})()`, return immediately, and poll a counter.
+
+**And a found title is not a repair.** Match on the publisher's own title prefix, then check the
+candidate url against every live node's url before writing — see
+`notes/bps-url-repair-probe-2026-09-15.md` for the collision that finding cost.

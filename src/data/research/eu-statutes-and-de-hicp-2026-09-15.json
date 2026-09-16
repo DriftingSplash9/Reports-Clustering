@@ -1,0 +1,131 @@
+{
+ "meta": {
+  "source": "research round 2026-09-15 — the EU statute layer and the German HICP. Thomas: “do 1”, on the handoff's EU follow-on items (statutes one fetch each; the German HICP node).",
+  "minted": "2026-09-15",
+  "note": "EU STATUTE LAYER, SECOND ROUND, AND IT CAME BACK SMALLER THAN THE TODO PREDICTED. RESULT: 1 node, 6 dependencies, 6 dropped notes. The todo expected statute nodes for 549/2013, 451/2008 and 1893/2006 with the classifications wired to them. All four acts were fetched and read in full from CELLAR; three of them are ALREADY in the corpus as the classification node itself, pointed at that act's own URL, so minting them again would have duplicated `esa-2010`, `cpa` and `nace-rev2`. The first `_dropped` entry carries that reasoning and the reason the ECOICOP precedent does not transfer. What the reading did buy: `esa-2010 -> nace-rev2`, a lead open since the esa2010-methodology-stack round and closed here at A, and `eu-reg-2019-2152 -> eu-reg-223-2009`, the first out-edge that node has ever had. GERMANY IS MINTED AND TÜRKIYE IS REFUSED, though the todo called them the same shape: Destatis gave the German HVPI its own topic page on 10 September 2026, five days before this round, while Eurostat's Turkish metadata states in section 10.1 that TurkStat publishes no HICP release at all. Romania's feed edge was proposed and refused by rule 14 against a 2026-08-28 note that had the better information — the target would have been wrong. Every quote in this file was verified against the exact `stripHtml` output the grader reads before it was stored.\n\nGRADING. All six edges graded A, `quote-found-artefact-named`, on a live re-fetch. Rule 11's URL trap applies here and was handled rather than noticed afterwards: the French ESMS page this round cites already backs FOUR live edges, so the grader run selected those four alongside this round's six — ten pairs in one run — and all ten came back A, with the French group's cache windows intact. Selection file: `Claude outputs/eu-statute-round-2026-09-15/grade-selection.json`. Two hand grades were raised to A by the grader and one edge was re-quoted before the final run; both are written into the bases rather than left to be inferred.",
+  "status": "ready to merge"
+ },
+ "reports": [
+  {
+   "id": "de-destatis-hvpi",
+   "title": "Harmonisierter Verbraucherpreisindex (HVPI) — Germany's Harmonised Index of Consumer Prices",
+   "title_aliases": [
+    "Harmonisierter Verbraucherpreisindex",
+    "Harmonised Index of Consumer Prices for Germany"
+   ],
+   "publisher": "Statistisches Bundesamt (Destatis)",
+   "country": "DE",
+   "jurisdiction_level": "federal",
+   "kind": "publication",
+   "releases_per_year": 12,
+   "region": "Germany",
+   "description": "Germany's harmonised index, distinct from the national Verbraucherpreisindex that `de-destatis-cpi` carries. Destatis gave it its own topic page on 10 September 2026 — before that the HICP content sat under the CPI page, which is why this corpus held only the national index. Destatis's own quality-report extract states what it is for: 'The consumer prices recorded are used to calculate the HICP which is in turn used for the calculation of an inflation standard to measure price stability in the economy of the euro area ... The HICP is one of the convergence criteria on which the decision on including a given Member State in the euro area is based.' The page carries the German weighting pattern broken down by the thirteen ECOICOP Version 2 divisions. Minted 2026-09-15; it is the German in-edge `eurostat-hicp` had never had.",
+   "cadence_note": "Monthly, on Destatis's CPI/HICP release pattern — a preliminary estimate near the end of the reference month and final results in the middle of the following month; the 10 September 2026 item on this page reports the August 2026 figure.",
+   "last_updated": null,
+   "url": "https://www.destatis.de/EN/Themes/Economy/Prices/HICP/_node.html",
+   "domains": [
+    "inflation"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "esa-2010",
+   "target_report_id": "nace-rev2",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: ESA 2010's own Annex A, Chapter 2, on the classification of local KAUs into industries — the document is Regulation (EU) No 549/2013, published by ESA 2010's own publisher, the European Parliament and the Council. This CLOSES a lead open since the esa2010-methodology-stack round, which recorded the edge `no-node-yet` because no NACE node existed; `nace-rev2` was minted in the Poland round on 2026-09-11 and the note is rewritten `resolved` in that file. The quote chosen is Annex A 2.147's flat statement rather than Annex A 1.22 ('The ESA 2010 contains EU-specific classifications, e.g. ... NACE Rev. 2 for industries'), which the live `esa-2010 -> cpa` edge already cites and which qualifies its own claim with a parenthetical about harmonisation. Relationship type is `methodology_depends_on` rather than the `legal_basis` the sibling `esa-2010 -> cpa` edge carries: NACE is the classification ESA's industry accounts are built on, not the act ESA rests on. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. The cited URL is the one an `Accept: application/xhtml+xml` + `Accept-Language: eng` negotiation on `publications.europa.eu/resource/celex/<CELEX>` RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document a plain GET reads with no header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain; `playbook/corpus-route.md`'s B cap is for archived snapshots and does not apply. QUOTE SHAPE, AND WHY IT IS TWO FRAGMENTS: the second fragment alone graded B `artefact-named-elsewhere-in-document` at coverage 1.0. `nace-rev2`'s title-lead is 'NACE Rev. 2', which `tokenise` reduces to three tokens, and the run rule needs about seven contiguous words of the full title — so a window carrying only the short name cannot name the target however clearly a reader sees it. The first fragment is Annex A 1.19's statement that the ESA employs the classification, and it carries the statutory name in full. WORTH KNOWING BEFORE ANYONE RE-READS THIS: ESA 2010 writes that name as 'Statistical classification of economic activities in the European UNION', while the node carries 'European COMMUNITY', which is Regulation (EC) No 1893/2006's own wording and the right title for the node. The run rule clears the 60% bar on the eight words the two spellings share, so the mismatch costs nothing here — but a future edge resting on a shorter span of that name may land on the wrong side of it. Both fragments are from the same act and neither is doing work the other could not check: the first names the artefact, the second states what ESA uses it for. Graded A, `quote-found-artefact-named`, on a live re-fetch 2026-09-15.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/41239b25-9bba-4c36-9b25-926d90511bb3.0007.02/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "the ESA 2010 employs concepts and classifications (e.g. Statistical classification of economic activities in the European Union…The classification used for grouping local KAUs into industries is the NACE Rev. 2."
+  },
+  {
+   "source_report_id": "eu-reg-2019-2152",
+   "target_report_id": "eu-reg-223-2009",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the European business statistics Regulation naming the framework Regulation as its own reference framework, in its own recitals, published by its own publisher. `eu-reg-2019-2152` had NO out-edges before this — it was a pure sink with two in-edges. The sentence states a dependency rather than a status (rule 19's second consequence): 'constitutes the reference framework FOR THIS REGULATION' is the EBS act placing itself under 223/2009, not a membership claim. Recital 8 says the same thing more weakly ('provides a reference framework for European statistics') and was not used. Type is `methodology_depends_on`, matching the live `esa-2010 -> eu-reg-223-2009` edge, which is the same shape on the same target. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. The cited URL is the one an `Accept: application/xhtml+xml` + `Accept-Language: eng` negotiation on `publications.europa.eu/resource/celex/<CELEX>` RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document a plain GET reads with no header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain; `playbook/corpus-route.md`'s B cap is for archived snapshots and does not apply.",
+   "evidence_url": "http://publications.europa.eu/resource/cellar/fcfa2418-209c-11ea-95ab-01aa75ed71a1.0006.03/DOC_1",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EC) No 223/2009 constitutes the reference framework for this Regulation, including as regards the protection of confidential data"
+  },
+  {
+   "source_report_id": "de-destatis-hvpi",
+   "target_report_id": "eu-ecoicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED, and deliberately not taken from Eurostat. Destatis's own HICP topic page states the implementation as a completed fact in its 17 July 2026 notice, and the same page prints the German weighting pattern under the heading 'according to ECOICOP: Version 2' with all thirteen divisions. Rule 19's first consequence says prefer the self-declared document even where a register would grade the same, and Eurostat's German reference metadata would have graded the same: its section 3.2 carries the template sentence 'The HICP uses the European classification of individual consumption according to purpose (ECOICOP), version 2', the identical span the other 31 national ECOICOP edges cite. Both documents were read; this one is Germany's own statistical office speaking about its own index. The target is named through its `ECOICOP version 2` alias, which the act minting ECOICOP established.",
+   "evidence_url": "https://www.destatis.de/EN/Themes/Economy/Prices/HICP/_node.html",
+   "evidence_grade": "A",
+   "evidence_quote": "The new ECOICOP Version 2 classification has been implemented in the HICP"
+  },
+  {
+   "source_report_id": "de-destatis-hvpi",
+   "target_report_id": "eu-reg-2016-792",
+   "relationship_type": "legal_basis",
+   "basis": "SELF-DECLARED: Eurostat's German HICP reference metadata, section 6.1 'Institutional Mandate - legal acts and other agreements'. Eurostat compiles and publishes the national reference metadata for the HICP it aggregates, so this is the European Statistical System stating the legal basis of the German index. The span is the one all 31 already-live national `-> eu-reg-2016-792` edges use, quoted at the same text-node boundaries for the same reason: `stripHtml` puts a space where every tag was, and section 6.1 is common template text word for word across the pages that carry it. Germany's page also carries a 6.1.1 'Legal acts - deviations' paragraph recording Eurostat's 2023 compliance finding against Germany; it is a compliance note on this same legal framework, not a separate dependency, and no edge is drawn from it.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_de.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "Regulation (EU) 2016/792 of the European Parliament and the Council of 11 May 2016 (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT"
+  },
+  {
+   "source_report_id": "eurostat-hicp",
+   "target_report_id": "de-destatis-hvpi",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: published by the source's own publisher — Eurostat's German HICP reference metadata, section 3.5 on the statistical unit and transmission. Germany is the largest economy in the euro area and `eurostat-hicp` has never carried a German in-edge, because the corpus held only `de-destatis-cpi`, which is the national VPI and not what Eurostat aggregates. The quote is Germany-specific, unlike the all-NSI transmission sentence the 2026-08-28 Austrian edge had to fall back on and caveated at the time. Destatis's own page states the same relationship from the other end — 'It is aggregated to obtain a consumer price index each for the European Monetary Union, the European Union and also the European Economic Area' — and is cited on this node's other edges. GRADE: hand-graded B on the expectation that a transmission sentence naming 'HICP sub-indices' would not name the German node; the grader returned A, `quote-found-artefact-named`, and on a new edge it outranks the hand grade (PLAYBOOK 7b). The grade recorded here is the grader's.",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_de.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "At least all HICP sub-indices with a weight accounting for more than one part of a thousand of total expenditure (two parts of a thousand of seasonal products during a typical in-season period) are transmitted to Eurostat"
+  },
+  {
+   "source_report_id": "eurostat-hicp",
+   "target_report_id": "fr-insee-ipc-ipch",
+   "relationship_type": "uses_data_from",
+   "basis": "SELF-DECLARED: Eurostat's French HICP reference metadata. France was one of four countries wired to ECOICOP and to the framework regulation in the 2026-09-14 round while still missing the feed edge that 26 of its peers carry — a gap in the aggregate, not in France. The sentence is France-specific and names the ECOICOP/HICP sub-indices it transmits, which is stronger than the general all-NSI transmission sentence several of the 2026-08-28 edges rest on. The target node is INSEE's combined IPC/IPCH release, so the harmonised series and the national one share a node here and no wrong-target question arises — unlike Romania, where they do not; see the `_dropped` entry below. GRADE: hand-graded B, for the same reason and with the same outcome as the German edge above — the grader returned A, `quote-found-artefact-named`, and outranks the hand grade on a new edge (PLAYBOOK 7b).",
+   "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_fr.htm",
+   "evidence_grade": "A",
+   "evidence_quote": "All ECOICOP/HICP sub-indices whose weights represent for more than one thousandth of the total expenditure covered by the HICP (except for the sub-categories mentioned above) are transmitted to Eurostat on a monthly basis"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "eu-reg-549-2013, eu-reg-451-2008 and eu-reg-1893-2006 as nodes of their own",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "THE ROUND'S CENTRAL NEGATIVE RESULT, and it contradicts the todo item that opened the round. `HANDOFF.md` §3 said 'the other EU statutes are one fetch each now that the route works — 549/2013 (ESA), 451/2008 (CPA), 2019/2152 (EBS) and 223/2009', expecting statute nodes to be minted and the classifications wired to them on the `eu-ecoicop -> eu-reg-2016-792` precedent. All four were fetched and read in full this round. THREE OF THE FOUR ACTS ARE ALREADY IN THE CORPUS AS THE CLASSIFICATION NODE ITSELF, and minting them again would manufacture the exact duplicate-node defect `notes/bps-url-repair-probe-2026-09-15.md` recorded on the other side of the corpus. The evidence is each node's own `url` field: `esa-2010` carries `eur-lex.europa.eu/eli/reg/2013/549` and its description opens 'enacted as Regulation (EU) No 549/2013' and quotes that act's Article 1(2); `cpa` carries `eur-lex.europa.eu/eli/reg/2008/451`, is `kind: instrument`, is published by 'European Parliament and Council of the European Union' and quotes Article 1(1) in its description; `nace-rev2` carries `CELEX:32006R1893` and its description opens 'established by Regulation (EC) No 1893/2006'. A separate `eu-reg-549-2013` node would be a second node for one document, pointed at the same URL, competing for the 117 in-edges `esa-2010` already holds. THE ECOICOP PRECEDENT DOES NOT TRANSFER, and the difference is worth stating because it is what makes ECOICOP the exception rather than the template: ECOICOP is one ANNEX of Regulation (EU) 2016/792, and that act does a great deal besides carrying it — it is the whole HICP framework, and 34 nodes cite it as their legal basis without citing ECOICOP. Annex A of Regulation (EU) No 549/2013 IS the ESA 2010 methodology and the act does almost nothing else. Same for 1893/2006 and NACE, and for 451/2008 and the CPA. WHAT THE FETCHES BOUGHT INSTEAD, and it was not nothing: the ESA act closed `esa-2010 -> nace-rev2`, open as a lead since the esa2010-methodology-stack round, and the EBS act gave `eu-reg-2019-2152` the first out-edge it has ever had. 223/2009 is the fourth act and is already a node, correctly — it is a framework statute that no classification is an annex to. It yielded nothing new: its only upstream candidates are the European Statistics Code of Practice, refused on the record in esa2010-quality-reporting.json for language the Code itself chose ('COMPLEMENTS the extensive legal framework'), and the UN Fundamental Principles, which recital 9 says 'should also be taken into account' — hortatory, and §7a's assertion-only shape."
+  },
+  {
+   "edge": "a Turkish HICP node, and `tr-* -> eu-ecoicop`",
+   "source": null,
+   "target": null,
+   "reason": "unpublishable-source",
+   "why": "REFUSED, and the reason is a property of Türkiye rather than of the evidence. `HANDOFF.md` §3 item 2 said Türkiye 'is the same shape' as Germany — ESMS page read and quotable, national CPI node in the corpus, two edges waiting on a harmonised node being minted. It is not the same shape. Eurostat's Turkish HICP metadata, section 10.1, says it outright: 'However, no separate news release is published for the HICP. HICP data are transmitted directly to Eurostat, which disseminates the figures on its own platform according to the established release calendar.' TurkStat publishes no Turkish HICP — the series exists only as Eurostat output — so a node carrying the publisher's own title for the artefact (§7a) cannot be minted, because the putative publisher publishes no such artefact. That is `unpublishable-source` by its own definition. Germany is the opposite case and is why the two were worth separating: Destatis gave the German HVPI its own topic page on 10 September 2026, five days before this round. WIRING `tr-cpi` INSTEAD WAS CONSIDERED AND REFUSED for the reason the 2026-09-14 round refused it: the node is the national CPI and the page describes the HICP. The closest the page comes is section 6.1's 'HICP indices for Türkiye are calculated at the ECOICOP 5-digit level ... as Türkiye's national CPI is also compiled at the same level of detail', which states a shared level of detail and leaves the national index's own classification to be inferred. §7a does not allow that, and it does not need to be: `tr-cpi -> un-coicop-2018` is already live and answers the classification question for the national index."
+  },
+  {
+   "edge": "CORRECTION to the 2026-09-14 round's claim about Türkiye's section 6.1",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "`notes/eu-classification-statute-2026-09-14.md` §2 records, and `HANDOFF.md` §3 repeats, that Türkiye's ESMS page 'does NOT carry the 2016/792 sentence — that was the single failure when all 32 pages were checked, and it is a real difference in the document.' THE PAGE DOES CARRY THE REGULATION; what it does not carry is the template WORDING. Re-fetched 2026-09-15, section 6.1 reads: 'The Harmonised Indices of Consumer Prices (HICPs) are harmonised measures of inflation required under the Treaty on the Functioning of the European Union (TFEU). The legal basis for the establishment of a harmonised methodology for compiling HICPs is provided by Regulation (EU) 2016/792 of the European Parliament and of the Council.' The other 31 pages say 'Regulation (EU) 2016/792 ... (OJ L 135) sets the legal basis for establishing a harmonised methodology for the compilation of the HICP and the HICP-CT'. Türkiye's page is written fresh rather than from the template — it also adds a national paragraph on Statistical Law No. 5429 — and a check that searched for the template span would report it missing. The finding changes nothing this round, because the refusal above is about the SOURCE node and not the evidence, but a future round should not re-derive it: the correct statement is 'Türkiye's page is not template text', not 'Türkiye's page omits the regulation'. Bears on rule 16 generally — an ESMS field can be present and unrecognisable to a span search at the same time."
+  },
+  {
+   "edge": "eurostat-hicp -> ro-ins-ipc",
+   "source": "eurostat-hicp",
+   "target": null,
+   "reason": "wrong-target",
+   "why": "PROPOSED THIS ROUND AND REFUSED BY RULE 14, which is the rule working exactly as written. Romania is one of the four countries wired to ECOICOP and to the framework regulation while missing the feed edge, and Eurostat's Romanian metadata carries a clean country-specific sentence for it: 'The indices are transmitted to Eurostat and published each month, according to the pre-announced schedule, in general between 14 and 16 days after the month in question.' The edge was NOT minted because eu-national-chains-2026-08-28.json already carries a `no-node-yet` note saying why: 'Romania's IAPC (Indicele Armonizat al Preturilor de Consum) is a distinct series from the national IPC and is what Eurostat aggregates, but no IAPC node could be minted'. `ro-ins-ipc` is the national IPC. The older note has the better information and the edge would have had the wrong target. ROUTE UPDATE, because the older note's blocker has decayed and the replacement is not what it expected: it recorded 'insse.ro returned ROBOTS_DISALLOWED / robots.txt ConnectTimeout on roughly 8 of 14 attempts' and advised a retry. Re-probed 2026-09-15 from two machines. The cloud container cannot reach insse.ro at all — the egress proxy closes the tunnel mid-exchange on every attempt, curl exit 35, which is a statement about this container and not about the site. THOMAS'S CHROME REACHES IT AND RENDERS IT: `insse.ro/cms/ro/content/ipc-serii-de-date` returned its real article text on the first try. Two guessed paths for the IAPC's own page 404'd, so the node still needs someone to find the right page, but the host is no longer the obstacle and the browser is the route. WHAT THIS OPENS, and it is bigger than one edge: if Romania publishes the IAPC as a series distinct from the IPC, then `ro-ins-ipc -> eu-ecoicop` and `ro-ins-ipc -> eu-reg-2016-792`, both minted 2026-09-14 off a metadata page that describes the HARMONISED index, may sit on the wrong node — the same mismatch that made this round refuse to wire `de-destatis-cpi` and `tr-cpi`. Rule 13 says caveat and defer rather than override, so neither edge is touched here. The question is how many of the 31 national ECOICOP edges point at a national CPI node whose harmonised index is a separate published series; it is a measurement, not a round, and it is in `HANDOFF.md` §3."
+  },
+  {
+   "edge": "eurostat-hicp -> cz-csu-cpi, eurostat-hicp -> al-instat-cpi-hicp",
+   "source": "eurostat-hicp",
+   "target": null,
+   "reason": "no-document",
+   "why": "The other two of the four countries wired to ECOICOP without a feed edge. Both ESMS pages were fetched and read in full on 2026-09-15 and NEITHER carries a country-specific transmission sentence. The only occurrence of 'Eurostat' in a transmission context on either page is the common all-NSI boilerplate — 'In line with the Community legal framework and the European Statistics Code of Practice Eurostat disseminates European statistics on Eurostat's website' — which is about dissemination by Eurostat, not transmission to it, and is on all 32 pages. The Czech page's one sub-index sentence is a NEGATIVE ('Sub-indices that may account for more than one part in thousand not produced and transmitted, because exact information is not available'), which the grader's A bar would read as presence and which §6 already records as a way it has gone wrong once. The 2026-08-28 Austrian edge shows the alternative — fall back to the general all-NSI sentence and caveat it — and that was not repeated here: a generic sentence supports a generic claim. Both need the NSI's own page, the way Sweden's edge was taken off SCB's HIKP page. Not blocked, just not done."
+  },
+  {
+   "edge": "de-destatis-hvpi -> de-destatis-cpi",
+   "source": "de-destatis-hvpi",
+   "target": "de-destatis-cpi",
+   "reason": "no-document",
+   "why": "Looked for while minting the German HICP node, because the Austrian pair records the relationship on its node ('Die beiden Indizes VPI und HVPI verwenden dieselben Preisdaten werden aber mit unterschiedlichen Gewichten berechnet') and the German pair is the same arrangement. Destatis's HICP page says the two indices SHARE A PRICE COLLECTION, not that one feeds the other: 'The consumer prices recorded are used to calculate the HICP', and, on the weighting change, 'Due to the differences in the calculation formulas between CPI and HICP, the use of the 3-year average for the CPI remains in place.' A shared input is not a dependency between the two publications — the price collection is the common upstream of both, and it is not itself a published release. The honest shape would be two edges from a price-collection node that does not exist and could not be minted (`unpublishable-source`), which is why nothing is drawn. Worth knowing before someone re-proposes it from the Austrian precedent: Austria's sentence says the two indices use the same price data, which is the same fact, and the Austrian node does not carry that edge either."
+  }
+ ]
+}
