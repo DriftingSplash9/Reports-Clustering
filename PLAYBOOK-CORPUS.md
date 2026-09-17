@@ -176,9 +176,9 @@ one line each; open the file named at the end of the line for the evidence behin
 - **A DEPENDENCY USES `source_report_id`/`target_report_id`; `source`/`target` is the `_dropped` note shape.**
   Now a MALFORMED EDGES error — it once discarded five real edges with `validate` exiting 0.
   `playbook/corpus-evidence.md`.
-- **A TITLE-LEAD CONTAINING AN ABBREVIATED WORD CAN NEVER FIRE** — `tokenise` strips the full stop, `hay` keeps
-  it, and `Rev.` / `No.` / `Vol.` never meet. Quote a span carrying enough of the FULL title instead (2026-09-15).
-  `playbook/corpus-evidence.md`.
+- **A TITLE-LEAD OR ALIAS CONTAINING ANY ABBREVIATION CAN NEVER FIRE** — `tokenise` strips the full stop, `hay`
+  keeps it, so `Rev.` `No.` `Vol.` `Rep.` `Uzb.` never meet. **Three edges in two days, on two continents.** Quote a
+  span carrying enough of the FULL title; if none exists, B is the ceiling. `playbook/corpus-evidence.md`.
 - **Never edit a `basis` or a quote to move a grade.**
 
 ### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`

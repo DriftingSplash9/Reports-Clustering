@@ -1,0 +1,106 @@
+{
+ "meta": {
+  "source": "research round 2026-09-16 (continuation) — Uzbekistan, the classification layer. Thomas: “carry on”.",
+  "minted": "2026-09-16",
+  "status": "ready to merge",
+  "note": "UZBEKISTAN, SECOND PASS, straight off the first round's own todo. RESULT: 1 node, 5 dependencies, 3 dropped notes.\n\nWHAT IT ADDS. The first pass attached Uzbekistan to NACE through `uz-oked`. This one attaches it to the UN consumption classification through `uz-coicop`, on a sentence that states the derivation outright rather than leaving it to be assumed — 'COICOP RU 2018 ... which is based on the UN international standard'. The same two-step shape is used deliberately in both places: the statistic depends on the NATIONAL classifier and the national classifier is what is derived from the international one, so nothing is wired straight from a statistic to a UN or EU standard. `uz-national-accounts` picked up three edges from sheets already in hand — to the national COICOP, to COFOG, and to `uz-oked`, which is now a three-statistic hub.\n\nA BROWSER SESSION ON lex.uz WAS THE FIRST ROUND'S NAMED TOP FOLLOW-UP AND IT CAME BACK NEGATIVE, which is the useful part. Searched in Thomas's own Chrome: OKED returns 91 acts that mention it and no classifier; the COICOP RU 2018 classifier returns nothing at all. Uzbek classifiers are almost certainly Uzstandard O'z DSt standards rather than legal acts, so lex.uz was the wrong place and standart.uz is the lead. Both classifier nodes therefore keep an empty `url`, and the `_dropped` note records the full search so nobody repeats it.\n\nONE EDGE WAS PROPOSED AND REFUSED: `uz-cpi -> the HIES`. The sheet says the HIES frame rests on the 2010 Microcensus and separately that CPI weights come from consumption expenditure data, but never joins them. That join is the reader's, not the publisher's.\n\nEvery quote verified against the exact text the grader reads before the slice was written."
+ },
+ "reports": [
+  {
+   "id": "uz-coicop",
+   "title": "Classification of Individual Consumption According to Purpose of the Republic of Uzbekistan 2018 (COICOP RU 2018)",
+   "title_aliases": [
+    "COICOP RU 2018",
+    "COICOP RU Classifier 2018",
+    "COICOP Rep. of Uzbekistan 2018",
+    "COICOP Rep. of Uzbekistan Classifier 2018",
+    "COICOP Rep. of Uzb. 2018",
+    "COICOP Rep. of Uzb 2018"
+   ],
+   "publisher": "National Committee of the Republic of Uzbekistan on Statistics",
+   "country": "UZ",
+   "jurisdiction_level": "federal",
+   "kind": "standard",
+   "releases_per_year": 0.05,
+   "region": "Uzbekistan",
+   "description": "Uzbekistan's national consumption classification, in force for the CPI since 2021 and for national accounts' final consumption expenditure. The Committee's own CPI metadata sheet states its parentage outright — it is based on the UN's COICOP 2018 — which is the derivation PLAYBOOK 7a asks a document to state rather than leave the reader to know. The same sheet records that a retrospective recalculation of the 2020 CPI into COICOP RU 2018 groups was carried out so long-term indices stay comparable. LIKE `uz-oked`, THIS NODE CARRIES NO `url`: the classifier is named by at least three of the Committee's sheets and published nowhere reachable — see the `_dropped` note, which records what was searched. Minted 2026-09-16.",
+   "cadence_note": "A generational classification tracking its UN parent; the 2018 version replaced a national classification introduced in household surveys in April 2000. 0.05 matches `un-coicop-2018`, which it derives from.",
+   "last_updated": null,
+   "domains": [
+    "inflation",
+    "living-standards",
+    "statistical-system"
+   ]
+  }
+ ],
+ "dependencies": [
+  {
+   "source_report_id": "uz-coicop",
+   "target_report_id": "un-coicop-2018",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: Uzbekistan's own statistical office stating that its national consumption classifier is based on the UN standard, in the classification section of its CPI metadata sheet. This is the shape PLAYBOOK 7a requires of a nomenclature edge — the document STATES the derivation ('which is based on the UN international standard') and names the parent in full rather than by acronym, so the reader is not being asked to supply the link. It is the COICOP counterpart of this country's `uz-oked -> nace-rev2` edge and attaches Uzbekistan to the second of the two international classification spines. The evidence is the Committee's own English-language metadata sheet, one of ~198 under stat.uz's Metadata section; the quote is from the indicator-specific half, never the common governance preamble. ROUTE: stat.uz answers this container on a plain fetch; the sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/img/61-tseny_consumer-price-index-en_p73978.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "To aggregate the CPI, the Classification of Individual Consumption According to Purpose of the Republic of Uzbekistan 2018 (COICOP RU 2018) is used, which is based on the UN international standard - Classification of Individual Consumption According to Purpose (COICOP) 2018."
+  },
+  {
+   "source_report_id": "uz-cpi",
+   "target_report_id": "uz-coicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the CPI metadata sheet's revision section, dating the switch. Wired to the NATIONAL classifier rather than to `un-coicop-2018` directly, for the same reason `uz-employment` is wired to `uz-oked` and not to `nace-rev2`: the index is aggregated on the national classification, and the national classification is what is derived from the UN standard. Compressing the two steps would state a derivation no document states. The evidence is the Committee's own English-language metadata sheet, one of ~198 under stat.uz's Metadata section; the quote is from the indicator-specific half, never the common governance preamble. ROUTE: stat.uz answers this container on a plain fetch; the sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/img/61-tseny_consumer-price-index-en_p73978.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "Since 2021, the CPI has been formed on the basis of the COICOP RU Classifier 2018."
+  },
+  {
+   "source_report_id": "uz-national-accounts",
+   "target_report_id": "uz-coicop",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the Committee's metadata sheet for GDP by the expenditure approach, classification section. CITED TO A DIFFERENT SHEET FROM THIS NODE'S OWN `url`, deliberately: `uz-national-accounts` is the national accounts as a whole and the expenditure approach is one of its components, so the component's sheet is the publisher documenting a part of the artefact this node stands for. The parent 'National Accounts' sheet names COICOP too, but undated and alongside COFOG and COPNI in one list; this sheet names the national 2018 classifier specifically, which is the precise target. The evidence is the Committee's own English-language metadata sheet, one of ~198 under stat.uz's Metadata section; the quote is from the indicator-specific half, never the common governance preamble. ROUTE: stat.uz answers this container on a plain fetch; the sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain. GRADE: B, `artefact-named-elsewhere-in-document`, coverage 1.0 — and it is the abbreviated-title-lead trap for the THIRD time in two days. This sheet writes the classifier as 'COICOP Rep. of Uzb. 2018', which is carried in the node's `title_aliases` verbatim; `tokenise` strips the stops to 'coicop rep of uzb 2018' while the haystack keeps 'coicop rep. of uzb. 2018', so the title-lead door cannot fire. The same document's other mention ('COICOP Rep. of Uzb 2018', one stop fewer) fails the same way. There is no span on the page that would clear it, so B is the ceiling. PLAYBOOK-CORPUS §6's line for this trap named 'Rev. / No. / Vol.'; 'Rep.' and 'Uzb.' show it is ANY abbreviation, and the line has been widened to say so.",
+   "evidence_url": "https://stat.uz/images/uploads/docs/81__GDP_calculated_by_the_expenditure_approach_en.pdf",
+   "evidence_grade": "B",
+   "evidence_quote": "When assessing GDP by the expenditure approach, the classifier of individual consumption by purpose is used to classify final consumption expenditures (COICOP Rep. of Uzb. 2018)."
+  },
+  {
+   "source_report_id": "uz-national-accounts",
+   "target_report_id": "un-cofog-1999",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the national-accounts metadata sheet listing the international classifications used for final consumption expenditure. THE CITATION IS UNDATED — the sheet writes 'Classification of Functions of Government' (COFOG) with no vintage — and `un-cofog-1999` is the corpus's only COFOG node and already carries the `esa-2010` edge, so it is the target by default rather than by the dated-citation rule. Recorded because a later round that mints a newer COFOG should revisit this edge rather than assume it was checked. COPNI is named in the same sentence and has no node; it is not wired. GRADE: A, `quote-found-artefact-named`, AND MY PREDICTION WAS WRONG. I expected B `target-not-named`, reasoning that the sheet omits the 'the' from the node's title and that the missing word would drop the contiguous run below the 60% bar. The grader found the artefact anyway. Recorded rather than quietly deleted, because a wrong prediction about the matcher is worth as much to the next round as a right one: the run rule is more forgiving of a DROPPED word than I assumed, and the place to check that assumption is `namesTarget`, not a guess. The evidence is the Committee's own English-language metadata sheet, one of ~198 under stat.uz's Metadata section; the quote is from the indicator-specific half, never the common governance preamble. ROUTE: stat.uz answers this container on a plain fetch; the sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/img/83-sns_national-accounts-en_p14787.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "When assessing final consumption expenditures, international classifications are used as classification: “Classification of Individual Consumption by Purpose” (COICOP), “Classification of Functions of Government” (COFOG), “Classification of the Purposes of Non-Profit Institutions Serving Households” (COPNI)."
+  },
+  {
+   "source_report_id": "uz-national-accounts",
+   "target_report_id": "uz-oked",
+   "relationship_type": "methodology_depends_on",
+   "basis": "SELF-DECLARED: the national-accounts metadata sheet on the industry classification behind the production measure of GDP. This is the fifth of the Committee's sheets to name the national activity classifier and the third distinct statistic to depend on it, which is what turned `uz-oked` from a mention into a hub. Note the rendering: this sheet writes 'the national classification on kinds of economic activities of the Republic of Uzbekistan', a third English spelling of the same Uzbek title, already carried in the node's `title_aliases`. The evidence is the Committee's own English-language metadata sheet, one of ~198 under stat.uz's Metadata section; the quote is from the indicator-specific half, never the common governance preamble. ROUTE: stat.uz answers this container on a plain fetch; the sheets are ordinary PDFs read with `pdftotext -layout`. Direct read of a first-party publisher, no archive in the chain.",
+   "evidence_url": "https://stat.uz/img/83-sns_national-accounts-en_p14787.pdf",
+   "evidence_grade": "A",
+   "evidence_quote": "When assessing GDP using the production method, the national classification on kinds of economic activities of the Republic of Uzbekistan is used as an industry classification."
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "a first-party url for uz-coicop and uz-oked",
+   "source": null,
+   "target": null,
+   "reason": "note",
+   "why": "THE SECOND URL-LESS CLASSIFIER NODE FOR THIS COUNTRY, and at that point it stops being an accident and becomes a fact about Uzbekistan worth recording: ITS STATISTICAL CLASSIFIERS ARE NAMED BY EVERY METADATA SHEET AND PUBLISHED NOWHERE REACHABLE. Searched 2026-09-16, and this is the list so a later round does not repeat it. stat.uz: the 'Statistical classifications' link resolves to /en/interactive-services/classification-of-commodities, a commodity service with no OKED or COICOP content; classifier.stat.uz does not resolve; two guessed classifier paths 404'd. lex.uz, IN THOMAS'S CHROME rather than from this container, where its JavaScript search does run: a search for OKED returns 91 acts that MENTION it and no classifier document, and a search for the COICOP RU 2018 classifier returns 'По Вашему запросу ничего не найдено' — nothing at all. THE LIKELY REASON, and the lead for whoever picks this up: Uzbek national classifiers are O'z DSt standards registered by the Uzstandard Agency, not legal acts, so lex.uz is the wrong place to look and standart.uz is the right one. Until then both nodes carry an empty `url` rather than another publisher's page or a bare homepage, which are the two defects the 2026-09-15 rounds were cleaning up."
+  },
+  {
+   "edge": "uz-national-accounts -> COPNI",
+   "source": "uz-national-accounts",
+   "target": null,
+   "reason": "no-node-yet",
+   "why": "Named in the same sentence as COICOP and COFOG on the national-accounts sheet — 'Classification of the Purposes of Non-Profit Institutions Serving Households' (COPNI) — and not wired, because the corpus has no COPNI node. One of the three classifications in that list is now an edge, one is an edge to a dated node by default, and this one is a lead. A COPNI node would also take an in-edge from ESA 2010, which names it in the same breath (see the esa2010 slice's own classification list), so it is worth more than one country."
+  },
+  {
+   "edge": "uz-cpi -> the Household Income and Expenditure Survey / the 2010 Microcensus",
+   "source": "uz-cpi",
+   "target": null,
+   "reason": "no-document",
+   "why": "Proposed and REFUSED on the evidence, which is worth recording because the pieces look like they fit. The CPI sheet says the HIES sampling frame 'is based on the 2010 Microcensus' and, separately, that 'CPI weights are determined based on data on consumption expenditures'. It never says the CPI weights come FROM the HIES. Joining those two sentences is the reader's inference, not the publisher's statement, and PLAYBOOK 7a does not allow it. A sheet for the household budget survey itself, or a weights note, would close it in one fetch — and unlike the classifiers, the survey is a published product the Committee could plausibly have a page for."
+  }
+ ]
+}

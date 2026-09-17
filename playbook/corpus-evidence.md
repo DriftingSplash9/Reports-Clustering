@@ -280,7 +280,7 @@ landed in the wrong one. Boundary now stated at the top of each file. `notes/doc
   the English title. **Check the alias before writing a non-Latin quote against an English-titled node.**
 
 
-## A title-lead containing an abbreviated word can never fire (2026-09-15)
+## A title-lead or alias containing ANY abbreviation can never fire (2026-09-15, widened 2026-09-16)
 
 **Measured, on one edge, and the mechanism is general.** `esa-2010 -> nace-rev2` was quoted from
 ESA 2010's own Annex A — *"The classification used for grouping local KAUs into industries is the
@@ -321,3 +321,34 @@ section here. Nothing was removed, and the honest reason is that nothing in §6 
 section was cut to index lines on 2026-09-11 and this is the first addition since. If it needs
 paying for later, the candidate is the pair of `_dropped`-shape lines, which the schema block at
 the end of that file already states in full.)*
+
+### Widened 2026-09-16: it is not just the title-lead, and not just `Rev.`
+
+Two more edges hit this within a day of it being written down, which is why the §6 line now says *any*
+abbreviation rather than listing three.
+
+- **`uz-oked -> nace-rev2`.** Uzbekistan's statistical office states its classifier is 'based on NACE
+  rev. 2'. Same `Rev.` failure as the ESA case, in a different country, on a different continent —
+  and this time there was **no rescue span**: no Uzbek document writes NACE's full statutory title,
+  so the edge is capped at B on evidence a reader would call A.
+- **`uz-national-accounts -> uz-coicop`.** This one is the important variant, because it was NOT the
+  title-lead. The node's own title is spelled out in full; the failing match was a **`title_aliases`
+  entry**, `COICOP Rep. of Uzb. 2018`, carried verbatim from the publisher. Aliases go through the
+  same `tokenise` as the title, so **an alias is exactly as vulnerable**, and an alias copied
+  faithfully from a document is if anything MORE likely to carry abbreviations than a node title an
+  editor wrote out.
+
+**So the rule is about the matcher, not about titles.** Any name — title, title-lead, or alias —
+that contains a word ending in a full stop cannot be matched through the run or lead doors against a
+document that writes it the same way. Adding more aliases does not help; adding a
+stop-less alias would be editing to move a grade.
+
+**What to do:** check for a full stop in the name before predicting a grade, look for a span carrying
+the fullest form of the title the document offers, and if there is none, write the B and say why in
+the basis. Three of these are now recorded with that reasoning; a fourth should not need re-deriving.
+
+*(One prediction in the same round went the other way and is worth the same shelf space:
+`uz-national-accounts -> un-cofog-1999` was hand-graded B on the theory that a DROPPED word — the
+document writes 'Classification of Functions of Government' against the node's 'Classification of
+the Functions of Government' — would break the contiguous run below 60%. It graded **A**. The run
+rule tolerates a dropped word better than assumed. Check `namesTarget` rather than guessing.)*

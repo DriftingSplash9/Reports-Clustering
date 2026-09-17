@@ -73,3 +73,56 @@ import's mint note says institution-as-a-node scaffolding was stripped; this one
 **Left alone on purpose**: it has a live A-graded edge to `imf-e-gdds`, and retiring or retyping a
 node is a ruling for Thomas rather than a research decision. Flagged so the next round does not
 build on it by accident.
+
+---
+
+# Second pass, same day — the classification layer
+
+`src/data/research/uz-classifications-2026-09-16.json`: 1 node (`uz-coicop`), 5 dependencies, 3
+dropped notes. It took §4's first two items off this note's own list.
+
+## lex.uz — the named top follow-up, and it came back NEGATIVE
+
+Searched in Thomas's Chrome, where lex.uz's JavaScript search actually runs:
+
+- **`ОКЭД`** → 91 documents, every one an act that *mentions* the classifier. No classifier document.
+- **`КИПЦ РУ 2018`** → *«По Вашему запросу ничего не найдено»*. Nothing at all.
+
+**lex.uz was the wrong place and this note said the right thing for the wrong reason.** Uzbek
+national classifiers are almost certainly **O'z DSt standards registered by the Uzstandard Agency**,
+not legal acts — lex.uz carries acts. **The lead is `standart.uz`, not lex.uz.** Do not repeat the
+lex.uz search.
+
+So `uz-coicop` joins `uz-oked` with an empty `url`, and at two nodes it stops being an accident:
+**Uzbekistan's statistical classifiers are named by every metadata sheet and published nowhere
+reachable.** That is a fact about the country, recorded as one.
+
+## What the second pass wired
+
+The first pass attached Uzbekistan to **NACE** via `uz-oked`. This one attaches it to the **UN
+consumption classification** via `uz-coicop`, on a sentence that states the derivation outright:
+*"COICOP RU 2018 ... which is based on the UN international standard"*. Both use the same two-step
+shape on purpose — the statistic depends on the NATIONAL classifier, and the national classifier is
+what derives from the international one. **Nothing is wired straight from a statistic to a UN or EU
+standard**, because no document states that.
+
+`uz-national-accounts` took three edges from sheets already in hand (national COICOP, COFOG,
+`uz-oked`), which makes **`uz-oked` a three-statistic hub**.
+
+## Refused
+
+`uz-cpi -> the HIES`. The CPI sheet says the HIES frame rests on the 2010 Microcensus, and
+separately that CPI weights come from consumption expenditure data. **It never joins them.** That
+join is the reader's. A household-budget-survey sheet or a weights note closes it in one fetch, and
+unlike the classifiers the survey is a product the Committee plausibly has a page for.
+
+## Two grader results, one of each kind
+
+- **The abbreviation trap bit twice more** — `uz-oked -> nace-rev2` and, more usefully,
+  `uz-national-accounts -> uz-coicop`, where the failing match was a **`title_aliases` entry**
+  (`COICOP Rep. of Uzb. 2018`) rather than the title-lead. Aliases go through the same `tokenise`,
+  so they are exactly as vulnerable. `PLAYBOOK-CORPUS.md` §6 has been widened from "`Rev.`/`No.`/
+  `Vol.`" to any abbreviation.
+- **One prediction went the other way.** `uz-national-accounts -> un-cofog-1999` was hand-graded B
+  on the theory that a DROPPED word would break the run below 60%. It graded **A**. The run rule
+  tolerates a dropped word better than assumed — check `namesTarget` rather than guessing.

@@ -77,8 +77,9 @@ renderer round 6.5%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the ed
 
 | | chars | tokens | % |
 |---|---|---|---|
-| always: HANDOFF 22.6k + CORPUS index 20.6k + PLAYBOOK 12.0k + CLAUDE 1.5k | 56.6k | 14.2k | **7.1%** |
-| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 49.6k | 12.4k | **6.2%** |
+| always: HANDOFF 23.5k + CORPUS index 20.6k + PLAYBOOK 12.0k + CLAUDE 1.5k | 57.6k | 14.4k | **7.2%** |
+| always: HANDOFF + RENDER 13.6k + PLAYBOOK + CLAUDE | 50.6k | 12.6k | **6.3%** |
+| *was, after the first Uzbekistan pass 2026-09-16* | *56.6k / 49.6k* | *14.2k / 12.4k* | *7.1% / 6.2%* |
 | *was, after the India round 2026-09-16* | *55.8k / 48.8k* | *14.0k / 12.2k* | *7.0% / 6.1%* |
 | *was, end of 2026-09-15 (EU statute round + audit + url repair)* | *55.5k / 48.9k* | *13.9k / 12.2k* | *6.9% / 6.1%* |
 | *was, mid-round 2026-09-15 before the Poland cut* | *58.1k / 51.7k* | *14.5k / 12.9k* | *7.3% / 6.5%* |
@@ -87,13 +88,17 @@ renderer round 6.5%.** Chars ÷ 4 over a 200k-token window, `wc -c` after the ed
 | *was, at handoff 085 as written* | *47.4k / 41.1k* | *11.8k / 10.3k* | *5.9% / 5.1%* |
 | *was, at handoff 084 (+ rounds 43-45's mid-round edits)* | *64.1k / 49.9k* | *16.0k / 12.5k* | *8.0% / 6.2%* |
 
-**Refreshed 2026-09-16 after two research rounds in one day (India, then Uzbekistan): 7.0% → 7.1%,
-and the file is 22.6k against the 13.7k handoff 085 left.** Two rounds cost +1.0k net, which is the
-cheapest two-round day this file has had — because each round's narrative was written INTO §2 and
-the previous round's was cut back to a result and a pointer the moment its notes file existed. The
-India block is now five lines and a link; the Uzbekistan block will get the same treatment next
-round. **That rotation is the whole technique and it is worth stating: §2 carries one round's
-narrative at full length, everything older is a pointer.**
+**Refreshed after the Uzbekistan continuation: 7.2%, +0.1pp on a day that ran THREE rounds** (India,
+then Uzbekistan twice). The file is 23.5k against the 13.7k handoff 085 left. It did NOT hold flat, and the reason is worth naming: three rounds of narrative in one file even with the rotation applied. It crept only 0.1pp
+because **§2 carries ONE round's narrative at full length and
+everything older becomes a pointer.** India went to five lines and a link as soon as its notes file
+existed; the two Uzbekistan passes were merged into one block rather than kept as two, because they
+are one day's work on one country and the second pass's findings supersede the first's open
+questions. **That rotation is the whole technique** — this file grows when a round is written beside
+the last one instead of over it.
+
+**The cut still owed:** §3 [Thomas] item 1, the BPS account, which is closed work whose method note
+already carries it. Handoff 086 should take it along with anything else §3 has finished.
 
 **Earlier the same day:** the EU statute round, the ECOICOP audit and the url repair took it 7.3% →
 6.9%, the first fall since handoff 085, entirely because **§3's Poland block was finally cut** to
@@ -127,40 +132,46 @@ worklist 44.5k and method 36.6k, both off the always-read path and staying there
 
 ## 2. Current state
 
-Corpus **3,691 reports / 3,456 dependencies**. **1,408 A · 1,436 B · 612 C**, A-share 40.7%.
+Corpus **3,692 reports / 3,461 dependencies**. **1,412 A · 1,437 B · 612 C**, A-share 40.8%.
 **Domains: 46 approved, 0 proposed.** **`validate` exits 0.** **128/128 logic tests**,
 `tsc --noEmit` clean, `public/corpus-data.json` regenerated and copied back. **967 zero-edge nodes,
-unchanged — all five new nodes have edges.** NODE URLS 1,014 bare / 450 zero-edge, **and `no url at
-all` is 20 → 21, which is deliberate** (see below). Recount from `validate`'s own blocks, never
+unchanged across both Uzbekistan passes.** NODE URLS 1,014 bare / 450 zero-edge, **and `no url at all` is
+20 → 22, both of them deliberate** (see below). Recount from `validate`'s own blocks, never
 carry a figure — the zero-edge number is not a line `validate` prints, it is
 `grep -c "has no edges in either direction"` over its output.
 
-Last data-changing round is **Uzbekistan, first round, 2026-09-16, now CLOSED**
-(`src/data/research/uz-uzbekistan-2026-09-16.json` — 5 nodes, 5 dependencies, 4 dropped notes;
-3 A, 2 B). **The country had ONE node before it**, and that node is `uz-ssc` — the statistical
+Last data-changing round is **Uzbekistan, 2026-09-16, TWO PASSES, both CLOSED** —
+`uz-uzbekistan-2026-09-16.json` (5 nodes, 5 dependencies, 4 dropped notes) and
+`uz-classifications-2026-09-16.json` (1 node, 5 dependencies, 3 dropped notes). **The country went
+from 1 node to 7 and from 1 edge to 11.** **The country had ONE node before it**, and that node is `uz-ssc` — the statistical
 office itself, carrying `kind: instrument`, i.e. the institution-as-a-node scaffolding the August
 import was supposed to strip. It is left alone: it has a live A-graded edge, and retyping a node is
 a ruling for Thomas, not a research call.
 
 **THE SEAM, and it is the reusable part: stat.uz publishes ~198 ESMS-SHAPED METADATA SHEETS**, one
-per indicator, with a common governance preamble and then numbered indicator-specific sections that
-name the methodology and the classification. Eight were read; every one named a methodological
-parent. **The edge worth having is `uz-oked -> nace-rev2`** — Uzbekistan's national activity
-classifier is stated by its own office to be based on NACE Rev. 2, independently in four sheets,
-which attaches Uzbekistan to the EU classification spine the same way Poland's PKD 2007 does.
-`uz-employment` and `uz-ppi` hang off OKED rather than NACE directly, because the statistics use the
-national classifier and the national classifier is what is derived.
+per indicator, each naming its methodology and classification. Ten were read across the two passes
+and every one paid. **Uzbekistan now hangs off both classification spines** — NACE through
+`uz-oked`, UN COICOP through `uz-coicop`, each minted on a sentence stating the derivation outright.
+Both use the same two-step shape deliberately: the statistic depends on the NATIONAL classifier and
+the national classifier is what derives from the international one, so **nothing is wired straight
+from a statistic to a UN or EU standard**. `uz-oked` is already a three-statistic hub.
 
-**ONE NODE HAS NO URL ON PURPOSE.** `uz-oked` is well evidenced and unpublished — no page on stat.uz
-carries the classifier and lex.uz renders its search in JavaScript. An empty field was chosen over
-another publisher's page or a bare homepage, which are the two defects the last three rounds have
-been cleaning up. **`lex.uz` needs a browser and is the highest-value follow-up for this country.**
+**TWO NODES HAVE NO URL ON PURPOSE, AND AT TWO IT IS A FINDING: Uzbekistan's statistical classifiers
+are named by every metadata sheet and published nowhere reachable.** The first pass named *one
+browser session on lex.uz* as this country's top follow-up; **it was done and came back negative** —
+in Chrome, `ОКЭД` returns 91 acts that merely mention the classifier and `КИПЦ РУ 2018` returns
+nothing. **lex.uz carries acts; Uzbek classifiers are Uzstandard O'z DSt standards, so the lead is
+`standart.uz`.** Do not repeat the lex.uz search.
 
-**THE WEAK-BASIS GUARD CAUGHT THIS PROJECT FOR THE FOURTH TIME**, and it was my own prose:
-`uz-national-accounts -> sna-2008` capped at B `consistent-with` because the basis quoted the
-forbidden phrase verbatim while explaining why it did not apply. Rewritten, re-graded A. The quote
-and the target were never touched. `PLAYBOOK-CORPUS.md` §6 already warns that the guard reads the
-prose and not the argument.
+**TWO GRADER LESSONS, both now in `PLAYBOOK-CORPUS.md` §6.** The abbreviation trap bit twice more
+and the rule is widened from `Rev.`/`No.`/`Vol.` to **any** abbreviation — and a **`title_aliases`
+entry is exactly as vulnerable as the title**, since aliases go through the same `tokenise`. Three
+edges in two days on two continents. Separately, **the weak-basis guard caught this project for the
+fourth time and it was my own prose**: `uz-national-accounts -> sna-2008` capped at B
+`consistent-with` because the basis quoted the forbidden phrase while explaining why it did not
+apply. Rewritten, re-graded A; quote and target untouched.
+
+Full account, both passes: `notes/uzbekistan-2026-09-16.md`.
 
 **BEFORE IT, INDIA (2026-09-16, closed).** 1 node, 10 dependencies, 3 dropped notes; three orphans
 un-orphaned. Thomas doubted India had value and was half right: of its 37 zero-edge nodes **28
@@ -209,15 +220,15 @@ is the recipe and it worked again on 2026-09-15.)*
 
 **In order of value:**
 
-0. **UZBEKISTAN follow-ons — the country went from 1 node to 6 and the seam is barely touched.**
-   (a) **190 more metadata sheets** on stat.uz, same ESMS shape, each naming a methodological
-   parent. (b) **COICOP Rep. of Uzb. 2018** is named by the GDP-by-expenditure sheet and both
-   `un-coicop-2018` and `eu-ecoicop` are in the corpus — the cleanest remaining edge, same shape as
-   OKED to NACE. (c) **The HIES and the 2010 Microcensus**, named by the CPI sheet as its weight
-   source and frame — the same frame-chain seam India paid out on. (d) **`lex.uz` needs a browser**,
-   and it is what blocks OKED's url, the Law "On Official Statistics" 2021, and every Uzbek legal
-   instrument the sheets name. One browser session is the highest-value follow-up.
-   `notes/uzbekistan-2026-09-16.md`.
+0. **UZBEKISTAN follow-ons.** (a) **`standart.uz`, not lex.uz** — the two classifier nodes
+   (`uz-oked`, `uz-coicop`) carry no url because Uzbek classifiers are Uzstandard standards rather
+   than legal acts; the lex.uz search is done and negative, do not repeat it. (b) **~190 more
+   metadata sheets** on stat.uz, same ESMS shape, each naming a methodological parent — ten read so
+   far. (c) **A household-budget-survey sheet or weights note** closes `uz-cpi -> the HIES`, refused
+   this round because the CPI sheet names the HIES frame and the weight source in separate sentences
+   and never joins them. (d) **COPNI has no node** and is named beside COICOP and COFOG on the
+   national-accounts sheet — it would also take an in-edge from ESA 2010, so it is worth more than
+   one country. `notes/uzbekistan-2026-09-16.md`.
 0. **INDIA follow-ons, all cheap, all opened by the 2026-09-16 round.** (a) **Four more NADA study
    pages match no existing node and carry the same frame sentence** — Time Use Survey (catalog 236),
    the education and telecom modular surveys (255, 239), participation in education (300). One fetch
