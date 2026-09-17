@@ -38,7 +38,11 @@ let cached: Promise<AssembledCorpus> | null = null
 
 export function loadCorpusData(): Promise<AssembledCorpus> {
   if (!cached) {
-    cached = fetch('/corpus-data.json')
+    // Root-absolute '/corpus-data.json' only works when the app is served
+    // from the domain root. The WordPress deploy lives under
+    // /wp-content/themes/.../assets/report-graph/, where it 404s. BASE_URL is
+    // whatever --base was built with ('/' in dev), so this is correct in both.
+    cached = fetch(import.meta.env.BASE_URL + 'corpus-data.json')
       .then((res) => {
         if (!res.ok) {
           throw new Error(`corpus-data.json: HTTP ${res.status} ${res.statusText}`)
