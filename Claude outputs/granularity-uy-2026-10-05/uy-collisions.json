@@ -1,0 +1,355 @@
+{
+ "slice": "uy-uruguay-2026-08",
+ "groups": 2,
+ "nodes": 27,
+ "detail": [
+  {
+   "url": "https://www.gub.uy/instituto-nacional-estadistica",
+   "n": 21,
+   "nodes": [
+    {
+     "id": "uy-ech",
+     "title": "Encuesta Continua de Hogares (ECH) / Continuous Household Survey",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Continuous household survey that is the primary source for labour-market indicators, household income, and income-based poverty and inequality measurement. National coverage with Montevideo / Interior domains.",
+     "out": [],
+     "in": [
+      "uy-bps [uses_data_from B]",
+      "uy-pobreza [uses_data_from C]",
+      "uy-ipm [uses_data_from C]",
+      "uy-gini [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-pobreza",
+     "title": "Pobreza por el método del ingreso / Income poverty",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Official income-poverty and indigency incidence, calculated by comparing household income (from ECH) with nationally defined poverty and indigency lines. Published with Montevideo / Interior and other breakdowns.",
+     "out": [
+      "uy-ech [uses_data_from C]",
+      "uy-lineas-pobreza [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-lineas-pobreza",
+     "title": "Líneas de pobreza e indigencia",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Monetary values of the poverty and indigency lines (per capita / household), differentiated for Montevideo and the Interior and updated with price information.",
+     "out": [
+      "uy-ipc [uses_data_from C]"
+     ],
+     "in": [
+      "uy-pobreza [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-ipc",
+     "title": "Índice de Precios al Consumo (IPC) / Consumer Price Index",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
+     "out": [],
+     "in": [
+      "uy-asignaciones [methodology_depends_on B]",
+      "uy-jubilaciones [methodology_depends_on B]",
+      "uy-lineas-pobreza [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-censo",
+     "title": "Censo de Población y Vivienda / Population and Housing Census",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys.",
+     "out": [],
+     "in": [
+      "uy-bps [uses_data_from B]",
+      "uy-canelones [uses_data_from C]",
+      "uy-salto [uses_data_from C]",
+      "uy-montevideo [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-ipm",
+     "title": "Índice de Pobreza Multidimensional (IPM)",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Official multidimensional poverty index capturing deprivations across multiple dimensions beyond income. Complements the income-poverty series.",
+     "out": [
+      "uy-ech [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-ivfim",
+     "title": "Índice de Volumen Físico de la Industria Manufacturera (IVFIM)",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Monthly physical-volume index of manufacturing production. Principal high-frequency industrial-activity indicator.",
+     "out": [
+      "uy-eaae [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-eaae",
+     "title": "Encuesta Anual de Actividad Económica (EAAE)",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Annual structural business survey covering value added, employment, investment and other variables across economic activities.",
+     "out": [],
+     "in": [
+      "uy-ivfim [methodology_depends_on B]"
+     ]
+    },
+    {
+     "id": "uy-montevideo",
+     "title": "Montevideo — capital statistical identity",
+     "kind": "publication",
+     "publisher": "INE",
+     "part_of": "uy-ech",
+     "in_slice": true,
+     "description": "Capital city and primary urban economy. Core domain for ECH labour, income and poverty analysis. Higher average incomes than the Interior but also elevated poverty incidence in peripheral areas.",
+     "out": [
+      "uy-censo [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-artigas",
+     "title": "Departamento de Artigas — high-poverty border contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Northern border department with among the highest poverty incidence in the 2025 departmental results.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-rivera",
+     "title": "Departamento de Rivera — high-poverty border contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Northern border department with elevated poverty incidence. Completes the northern border contrast set.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-cerro-largo",
+     "title": "Departamento de Cerro Largo — high-poverty border contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Northeastern border department with elevated poverty incidence.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-colonia",
+     "title": "Departamento de Colonia — low-poverty contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Southern department with among the lowest poverty incidence in the 2025 results.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-pobreza-departamental",
+     "title": "Pobreza por departamento (INE)",
+     "kind": "publication",
+     "publisher": "INE",
+     "part_of": "uy-pobreza",
+     "in_slice": true,
+     "description": "Official departmental tabulations of income poverty. Primary source for the inter-departmental poverty gradient.",
+     "out": [],
+     "in": [
+      "uy-cerro-largo [uses_data_from B]",
+      "uy-rivera [uses_data_from B]",
+      "uy-colonia [uses_data_from B]",
+      "uy-flores [uses_data_from B]",
+      "uy-maldonado [uses_data_from B]",
+      "uy-artigas [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-maldonado",
+     "title": "Departamento de Maldonado — low-poverty southern contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Southern coastal department with among the lowest poverty incidence. Completes the low-poverty southern set alongside Colonia.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-canelones",
+     "title": "Departamento de Canelones — core metropolitan periphery",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Large department surrounding Montevideo. Intermediate poverty and inequality; important demographic and economic weight in the greater capital region.",
+     "out": [
+      "uy-censo [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-gini",
+     "title": "Coeficiente de Gini / Income inequality",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Official Gini coefficient of income inequality, calculated from ECH income data. Published nationally and by department.",
+     "out": [
+      "uy-ech [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-empleo",
+     "title": "Indicadores de empleo y desempleo (ECH)",
+     "kind": "publication",
+     "publisher": "INE",
+     "part_of": "uy-ech",
+     "in_slice": true,
+     "description": "Labour-force indicators from the ECH: employment rate, unemployment rate, activity rate, and related quality-of-employment measures.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "uy-construccion",
+     "title": "Actividad de la construcción / Construction activity",
+     "kind": "publication",
+     "publisher": "INE / BPS / MEF",
+     "in_slice": true,
+     "description": "Statistics of construction activity, employment and related permits. Cyclically sensitive sector tracked via employment, permits and investment indicators.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "uy-flores",
+     "title": "Departamento de Flores — low-poverty interior contrast",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Small interior department with among the lowest poverty and inequality incidence.",
+     "out": [
+      "uy-pobreza-departamental [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-salto",
+     "title": "Departamento de Salto — northern interior",
+     "kind": "publication",
+     "publisher": "INE",
+     "in_slice": true,
+     "description": "Northern interior department with elevated inequality and intermediate-to-higher poverty relative to the southern core.",
+     "out": [
+      "uy-censo [uses_data_from C]"
+     ],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.gub.uy/ministerio-economia-finanzas",
+   "n": 6,
+   "nodes": [
+    {
+     "id": "uy-presupuesto",
+     "title": "Presupuesto Nacional / National Budget",
+     "kind": "publication",
+     "publisher": "Ministerio de Economía y Finanzas",
+     "in_slice": true,
+     "description": "Annual national budget law and subsequent execution reports covering revenues and expenditure of the central government.",
+     "out": [],
+     "in": [
+      "uy-dgi [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "uy-educacion-salud",
+     "title": "Gasto público en educación y salud",
+     "kind": "publication",
+     "publisher": "Ministerio de Economía y Finanzas / INE",
+     "part_of": "uy-presupuesto",
+     "in_slice": true,
+     "description": "Public expenditure on education and health as reflected in the national budget and related functional statistics. Complements household-survey education and health modules.",
+     "out": [
+      "uy-cuentas-nacionales [uses_data_from C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-deuda-publica",
+     "title": "Deuda pública / Public debt statistics",
+     "kind": "publication",
+     "publisher": "Ministerio de Economía y Finanzas / BCU",
+     "in_slice": true,
+     "description": "Stock and flow statistics of central-government and public-sector debt (external and domestic). Key sustainability indicator.",
+     "out": [
+      "imf-gfsm [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "uy-zonas-francas",
+     "title": "Régimen de Zonas Francas",
+     "kind": "publication",
+     "publisher": "Dirección Nacional de Zonas Francas / MEF",
+     "in_slice": true,
+     "description": "Free-zone regime offering tax and customs incentives for industrial, commercial and services activities. Strategic instrument for logistics, manufacturing and global-services investment.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "uy-promocion-inversiones",
+     "title": "Ley de Promoción de Inversiones / COMAP regime",
+     "kind": "publication",
+     "publisher": "MEF / COMAP",
+     "in_slice": true,
+     "description": "General investment-promotion regime granting tax benefits (IRAE, wealth tax, import duties, VAT credits) for declared investment projects. Administered through COMAP.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "uy-china-relacion",
+     "title": "Relación comercial y estratégica con China",
+     "kind": "instrument",
+     "publisher": "Gobierno del Uruguay / China",
+     "in_slice": true,
+     "description": "Strategic partnership and intensive bilateral trade relationship with China (top export destination). Includes dairy-protocol and broader economic cooperation; FTA negotiations and RCEP interest under discussion.",
+     "out": [
+      "uy-comercio-exterior [methodology_depends_on C]"
+     ],
+     "in": []
+    }
+   ]
+  }
+ ]
+}

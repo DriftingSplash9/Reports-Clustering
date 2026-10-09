@@ -2,7 +2,28 @@
  "meta": {
   "source": "august-2026-import/consolidated/mx-mexico.json",
   "minted": "2026-08-20",
-  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md",
+  "merged": {
+   "_note": "Node-granularity merge, 2026-10-05 (Thomas, ruling (a): one node per document). Old id -> survivor, with the old title. Not title_aliases: the August 2026 import's topic names. Retired records: notes/retired-nodes-2026-10-05-mx.json. Account: notes/granularity-mx-2026-10-05.md.",
+   "map": {
+    "mx-enigh-salud": {
+     "into": "mx-enigh",
+     "title": "ENIGH — Gasto de los hogares en cuidados de la salud / Household health expenditure (from ENIGH)"
+    },
+    "mx-enigh-transferencias": {
+     "into": "mx-enigh",
+     "title": "ENIGH — Ingresos por transferencias / Transfer income (from ENIGH)"
+    },
+    "mx-igae-actividades": {
+     "into": "mx-igae",
+     "title": "IGAE por actividad económica / Global Indicator of Economic Activity by activity"
+    },
+    "mx-cdmx-cngmd-alcaldias": {
+     "into": "mx-cngmd",
+     "title": "CNGMD — Demarcaciones territoriales (alcaldías) de la Ciudad de México"
+    }
+   }
+  }
  },
  "reports": [
   {
@@ -1105,28 +1126,6 @@
    "kind": "publication"
   },
   {
-   "id": "mx-enigh-salud",
-   "title": "ENIGH — Gasto de los hogares en cuidados de la salud / Household health expenditure (from ENIGH)",
-   "publisher": "INEGI",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "Component of the Encuesta Nacional de Ingresos y Gastos de los Hogares that measures out-of-pocket health spending by households. Used to track catastrophic health expenditure, impoverishment due to health costs, and the distribution of the health-financing burden.",
-   "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/enigh/",
-   "domains": [
-    "health"
-   ],
-   "_batch": [
-    "2026-08-13_Mexico-batch4.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Critical for ‘medical transfers’ and financial-protection analysis. 2024 ENIGH results show average quarterly household health spending rising in real terms; analyses (México Evalúa, CIEP) document increases in catastrophic health expenditure and the regressive burden on lower-income deciles. Complements the CSSSM (which also records household health spending) and ENSANUT (service utilisation).",
-   "last_updated": null,
-   "part_of": "mx-enigh",
-   "kind": "publication"
-  },
-  {
    "id": "mx-encig",
    "title": "Encuesta Nacional de Calidad e Impacto Gubernamental (ENCIG) / National Survey of Governmental Quality and Impact",
    "publisher": "INEGI",
@@ -1586,7 +1585,7 @@
    "region": "Mexico",
    "description": "Annual institutional-sector accounts within the Sistema de Cuentas Nacionales de México (non-financial corporations, financial corporations, general government, households, non-profit institutions serving households, rest of the world). Provide the full sequence of current and accumulation accounts by sector.",
    "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/scnm/",
+   "url": "https://www.inegi.org.mx/programas/si/",
    "domains": [
     "national-accounts"
    ],
@@ -1597,7 +1596,8 @@
    "_notes": "Detailed layer of the SCNM. Explicitly listed in methodology documents as part of the accounts produced under SNA 2008. Essential for fiscal, household-income and financial-balance analysis that goes beyond GDP aggregates.",
    "last_updated": null,
    "part_of": "mx-scnm",
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.inegi.org.mx/programas/scnm/"
   },
   {
    "id": "mx-mip",
@@ -1838,28 +1838,6 @@
    "kind": "publication"
   },
   {
-   "id": "mx-enigh-transferencias",
-   "title": "ENIGH — Ingresos por transferencias / Transfer income (from ENIGH)",
-   "publisher": "INEGI",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "Component of ENIGH that captures current transfers received by households (government social programmes, remittances, private transfers, etc.). Central for analysing the impact of Bienestar pensions and other social transfers on household income and poverty.",
-   "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/enigh/",
-   "domains": [
-    "living-standards"
-   ],
-   "_batch": [
-    "2026-08-13_Mexico-batch7.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Direct statistical counterpart to the programme-side beneficiary counts of the Pensión para el Bienestar and related schemes. Used in distributional and poverty-impact analysis.",
-   "last_updated": null,
-   "part_of": "mx-enigh",
-   "kind": "publication"
-  },
-  {
    "id": "mx-scnm-cou",
    "title": "Cuadros de Oferta y Utilización (COU) / Supply and Use Tables",
    "publisher": "INEGI",
@@ -1868,7 +1846,7 @@
    "region": "Mexico",
    "description": "Annual (and benchmark) Supply and Use Tables that form the core balancing framework of the Sistema de Cuentas Nacionales de México. Source of GDP by production, expenditure and income approaches at detailed product and industry level.",
    "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/scnm/",
+   "url": "https://www.inegi.org.mx/programas/cou/",
    "domains": [
     "national-accounts"
    ],
@@ -1878,7 +1856,8 @@
    "_shape": "own-cadence",
    "_notes": "Foundational tables from which many satellite accounts and short-term indicators are derived or benchmarked. Explicitly referenced in tourism, health and other satellite-account methodologies.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.inegi.org.mx/programas/scnm/"
   },
   {
    "id": "mx-scnm-pib-trimestral",
@@ -2082,7 +2061,7 @@
    "region": "Mexico",
    "description": "Satellite account measuring the economic contribution of non-profit institutions serving households within the national-accounts framework.",
    "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/scnm/",
+   "url": "https://www.inegi.org.mx/programas/isfl/",
    "domains": [
     "national-accounts"
    ],
@@ -2092,7 +2071,8 @@
    "_shape": "own-cadence",
    "_notes": "One of the standard suite of Mexican satellite accounts (with tourism, health, culture, unpaid work, environment). Completes the institutional coverage of the SCNM.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.inegi.org.mx/programas/scnm/"
   },
   {
    "id": "mx-edos-defunciones",
@@ -2154,27 +2134,6 @@
    ],
    "_shape": "own-cadence",
    "_notes": "Soft short-term indicator that complements the hard quantitative surveys (EMIM, EMEC, EMS, ENEC). Used in cyclical analysis alongside Banxico and private-sector confidence measures.",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "mx-igae-actividades",
-   "title": "IGAE por actividad económica / Global Indicator of Economic Activity by activity",
-   "publisher": "INEGI",
-   "country": "MX",
-   "jurisdiction_level": "federal",
-   "region": "Mexico",
-   "description": "Detailed activity breakdown of the monthly Global Indicator of Economic Activity (primary, secondary, tertiary and selected sub-activities).",
-   "releases_per_year": 12,
-   "url": "https://www.inegi.org.mx/temas/igae/",
-   "domains": [
-    "national-accounts"
-   ],
-   "_batch": [
-    "2026-08-13_Mexico-batch8.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "More granular view of the headline IGAE already listed. Useful as a distinct analytical product even though it is derived from the same underlying framework.",
    "last_updated": null,
    "kind": "publication"
   },
@@ -2250,7 +2209,7 @@
    "region": "Mexico",
    "description": "Annual census of the federal judiciary (SCJN, electoral tribunal, circuit and district courts under the CJF, agrarian tribunals). Covers structure, caseload, resources and related functions. Complements the state impartición census (CNIJE).",
    "releases_per_year": 1,
-   "url": "https://www.inegi.org.mx/programas/cnije/",
+   "url": "https://www.inegi.org.mx/programas/cnijf/",
    "domains": [
     "governance"
    ],
@@ -2260,7 +2219,8 @@
    "_shape": "own-cadence",
    "_notes": "Clarifies the federal courts node previously bundled with the state one. 2025 results include SCJN caseload (e.g. ~16 370 jurisdictional matters in 2024), amparo volumes in circuit and district courts, and overall federal + state judicial budget and staffing figures.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.inegi.org.mx/programas/cnije/"
   },
   {
    "id": "mx-cdmx-pj-anuario",
@@ -2282,27 +2242,6 @@
    "_shape": "own-cadence",
    "_notes": "Strong local judicial product. 2024 edition contains 284 indicators with historical series. Also publishes higher-frequency ‘Justicia en cifras’ snapshots. Direct municipal/state-level justice node for the capital.",
    "_jurisdiction_level_original": "state",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "mx-cdmx-cngmd-alcaldias",
-   "title": "CNGMD — Demarcaciones territoriales (alcaldías) de la Ciudad de México",
-   "publisher": "INEGI",
-   "country": "MX",
-   "jurisdiction_level": "municipal",
-   "region": "Ciudad de México",
-   "description": "Component of the Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales focused on the 16 alcaldías of CDMX. Covers integration of the alcaldía councils, human/material/budgetary resources, and performance in government, public security, civil protection, civic justice, water/sanitation and solid waste.",
-   "releases_per_year": 0.5,
-   "url": "https://www.inegi.org.mx/programas/cngmd/",
-   "domains": [
-    "general-statistics"
-   ],
-   "_batch": [
-    "2026-08-13_Mexico-batch9-judicial-cdmx.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Primary structural source for the 16 alcaldías. Biennial. Treats alcaldías as the municipal-level unit for CDMX. Essential for any zoom into Iztapalapa, Gustavo A. Madero, Álvaro Obregón, etc.",
    "last_updated": null,
    "kind": "publication"
   },
@@ -2774,11 +2713,12 @@
    "evidence_url": "https://www.inegi.org.mx/programas/cngmd/",
    "basis": "CNGMD is the principal structural statistical source for each alcaldía.",
    "source_report_id": "mx-alcaldia-iztapalapa",
-   "target_report_id": "mx-cdmx-cngmd-alcaldias",
+   "target_report_id": "mx-cngmd",
    "_batch": [
     "2026-08-13_Mexico-batch9-judicial-cdmx.json"
    ],
-   "evidence_grade": "C"
+   "evidence_grade": "C",
+   "_repointed_from": "mx-alcaldia-iztapalapa -> mx-cdmx-cngmd-alcaldias (2026-10-05, node-granularity merge)"
   },
   {
    "relationship_type": "uses_data_from",

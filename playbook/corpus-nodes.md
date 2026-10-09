@@ -101,6 +101,17 @@ evidenced, and rule 13's don't-silently-override is the reason the second one di
 replace the first when it was minted. Do not open a pass to deduplicate them, and do
 not treat a country that has one as already wired for the other.
 
+**ONE NODE PER DOCUMENT** (Thomas, 2026-10-05, ruling (a) on the August 2026 import's granularity defect).
+Where several topic nodes stand for one document, they merge into the node that carries the document's own
+title; a topic that is not one document has its edges re-pointed at the documents their evidence names. Why:
+splitting a document understates it by more than the division (the V0.11 measurement in `types.ts`'s `part_of`
+comment), so the defect distorts the ranking, not just the url field. **A shared url is a lead, not a verdict** —
+in the Brazil pilot 11 of 17 colliding nodes were merges, 4 were distinct documents with a wrong url, 1 a survey
+module. Retired ids go to the slice's `meta.merged` and a `notes/retired-nodes-<date>.json`, never to
+`title_aliases`. **A recurring node's url is its LATEST EDITION page** (Thomas, 2026-10-05), not a series list
+or a methodology book. Open: whether a survey MODULE is a document (`HANDOFF.md` §3). Method and instruments:
+`notes/granularity-pilot-br-2026-10-05.md`.
+
 ### 7d. Parked and closed
 
 **Parked.** `diary.csv` moved to `PLAYBOOK.md` (it binds any task, not just corpus

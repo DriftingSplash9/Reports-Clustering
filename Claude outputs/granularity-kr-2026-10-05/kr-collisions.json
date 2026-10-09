@@ -1,0 +1,171 @@
+{
+ "slice": "kr-south-korea-2026-08",
+ "groups": 2,
+ "nodes": 12,
+ "detail": [
+  {
+   "url": "https://www.bok.or.kr/eng",
+   "n": 10,
+   "nodes": [
+    {
+     "id": "kr-national-accounts-bok",
+     "title": "Korean System of National Accounts / GDP and related aggregates (국민계정)",
+     "kind": "standard",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Quarterly and annual national accounts compiled by the Bank of Korea in accordance with international standards (SNA). Includes GDP by production, expenditure and income approaches, institutional-sector accounts, and related aggregates.",
+     "out": [
+      "imf-sdds [methodology_depends_on A]",
+      "sna-2008 [methodology_depends_on A]",
+      "kr-mining-manufacturing-survey [uses_data_from B]",
+      "kr-balance-of-payments [uses_data_from B]",
+      "kr-grdp-regional-accounts [legal_basis B]",
+      "kr-construction-statistics [uses_data_from B]"
+     ],
+     "in": [
+      "kr-population-census [uses_data_from B]",
+      "kr-north-korea-statistics [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "kr-balance-of-payments",
+     "title": "Balance of Payments and International Investment Position",
+     "kind": "publication",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Monthly / quarterly balance-of-payments statistics and related external accounts compiled according to BPM6. Includes current account, capital and financial account, and international investment position.",
+     "out": [
+      "imf-bpm6 [methodology_depends_on B]"
+     ],
+     "in": [
+      "kr-national-accounts-bok [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "kr-bok",
+     "title": "Bank of Korea (한국은행) — statistical function",
+     "kind": "instrument",
+     "publisher": "Bank of Korea",
+     "in_slice": true,
+     "description": "Central bank with primary responsibility for national accounts, flow of funds, balance of payments, monetary and financial statistics, and related macroeconomic indicators. Complements KOSTAT in the production of official economic statistics.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "kr-ppi",
+     "title": "Producer Price Index (생산자물가지수)",
+     "kind": "publication",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Monthly index of prices received by domestic producers for their output. Complements the CPI as the main producer-side inflation measure.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "kr-financial-statement-analysis",
+     "title": "Financial Statement Analysis (기업경영분석) — Bank of Korea",
+     "kind": "instrument",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Annual (with related quarterly elements) analysis of the financial statements of Korean corporations, covering sales, profitability, stability, growth and financial ratios by industry and firm size. Long-running series (published since 1960) that provides the empirical basis for assessing corporate-sector health, including large business groups.",
+     "out": [
+      "isic [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "kr-monetary-aggregates",
+     "title": "Monetary and Liquidity Aggregates (M1, M2, Lf, L)",
+     "kind": "publication",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Monthly statistics on narrow money (M1), broad money (M2), liquidity of financial institutions (Lf) and overall liquidity (L). Core monetary indicators used for policy analysis and financial-stability assessment.",
+     "out": [
+      "imf-mfsmcg-2016 [legal_basis B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "kr-flow-of-funds",
+     "title": "Flow of Funds Accounts / Financial Accounts",
+     "kind": "publication",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Quarterly and annual flow-of-funds / financial accounts showing the financial assets and liabilities of institutional sectors and the inter-sectoral financial flows.",
+     "out": [
+      "sna-2008 [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "kr-input-output",
+     "title": "Input-Output Tables / Inter-industry relations tables",
+     "kind": "instrument",
+     "publisher": "Bank of Korea (BOK) / Statistics Korea",
+     "in_slice": true,
+     "description": "Periodic detailed input-output tables showing inter-industry transactions, value added and final demand. Used for multiplier analysis, supply-chain studies and the compilation of national accounts.",
+     "out": [
+      "sna-2008 [methodology_depends_on A]"
+     ],
+     "in": []
+    },
+    {
+     "id": "kr-financial-stability",
+     "title": "Financial Stability Report and related BOK financial-system statistics",
+     "kind": "instrument",
+     "publisher": "Bank of Korea (BOK)",
+     "in_slice": true,
+     "description": "Periodic Financial Stability Report together with underlying statistics on household debt, corporate credit, bank soundness, non-bank financial institutions and systemic-risk indicators.",
+     "out": [
+      "basel-iii [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "kr-external-debt-reserves",
+     "title": "External debt and foreign-reserve statistics",
+     "kind": "publication",
+     "publisher": "Bank of Korea (BOK) / Ministry of Economy and Finance",
+     "in_slice": true,
+     "description": "Statistics on gross and net external debt by sector and maturity, together with official foreign-exchange reserve holdings and related external-vulnerability indicators.",
+     "out": [
+      "imf-bpm6 [methodology_depends_on B]",
+      "imf-sdds [cites A]"
+     ],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://kostat.go.kr/portal/eng/pressreleases/2/1/index.board",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "kr-mining-manufacturing-survey",
+     "title": "Monthly Survey of Mining and Manufacturing (광업제조업동향조사) / Industrial Production Index",
+     "kind": "publication",
+     "publisher": "Statistics Korea (KOSTAT)",
+     "in_slice": true,
+     "description": "Monthly survey of production, shipments and inventories in mining and manufacturing, used to compile the Index of Industrial Production and related short-term indicators.",
+     "out": [],
+     "in": [
+      "kr-national-accounts-bok [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "kr-industrial-production-detail",
+     "title": "Index of Industrial Production and related short-term industrial indicators (detailed)",
+     "kind": "publication",
+     "publisher": "Statistics Korea (KOSTAT)",
+     "in_slice": true,
+     "description": "Detailed monthly indices of industrial production, shipments and inventories, with breakdowns by industry (including semiconductors and other key sectors). Extends the core Mining & Manufacturing Survey node.",
+     "out": [
+      "kr-national-business-survey [uses_data_from B]",
+      "kr-grdp-regional-accounts [uses_data_from A]"
+     ],
+     "in": []
+    }
+   ]
+  }
+ ]
+}

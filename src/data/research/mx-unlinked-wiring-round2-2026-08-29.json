@@ -144,14 +144,15 @@
       "evidence_quote": "Para la selección de la muestra se utilizó el Marco Nacional de Viviendas 2012 del INEGI, construido a partir de la información cartográfica y demográfica que se obtuvo del Censo de Población y Vivienda 2010."
     },
     {
-      "source_report_id": "mx-igae-actividades",
+      "source_report_id": "mx-igae",
       "target_report_id": "mx-scnm",
       "relationship_type": "methodology_depends_on",
       "basis": "INEGI's IGAE methodology document states IGAE (including its by-activity breakdown) is built using the same conceptual/methodological framework used for the Goods and Services Accounts of the SCNM.",
       "evidence_url": "https://www.inegi.org.mx/contenidos/programas/igae/2013/doc/met_igae.pdf",
       "evidence": "documented",
       "evidence_grade": "A",
-      "evidence_quote": "Las mediciones se realizan a partir de los criterios metodológicos del año base 2013 del Sistema de Cuentas Nacionales de México y sustituyen a los cálculos que se habían publicado con base en los precios del año 2008."
+      "evidence_quote": "Las mediciones se realizan a partir de los criterios metodológicos del año base 2013 del Sistema de Cuentas Nacionales de México y sustituyen a los cálculos que se habían publicado con base en los precios del año 2008.",
+      "_repointed_from": "mx-igae-actividades -> mx-scnm (2026-10-05, node-granularity merge)"
     },
     {
       "source_report_id": "mx-emoe",
@@ -375,14 +376,14 @@
       "source": "mx-enigh-salud",
       "target": "mx-enigh",
       "reason": "note",
-      "why": "Not minted as a dependency edge -- mx-enigh-salud is already modeled as part_of mx-enigh (containment metadata, not a RelationshipType edge; a dependency edge between a node and its container is a validator error, PLAYBOOK rule 12). The underlying fact this round's research confirmed is real (ENIGH 2024's own results report tabulates household health-care spending as a line item of the same survey) -- it is just already represented structurally rather than as an edge."
+      "why": "RESOLVED by the 2026-10-05 merge — mx-enigh-salud was merged into mx-enigh, so the containment this note recorded is now one node. [2026-10-05: mx-enigh-salud merged into mx-enigh — node-granularity ruling (a), one node per document; notes/granularity-mx-2026-10-05.md.] Original note: Not minted as a dependency edge -- mx-enigh-salud is already modeled as part_of mx-enigh (containment metadata, not a RelationshipType edge; a dependency edge between a node and its container is a validator error, PLAYBOOK rule 12). The underlying fact this round's research confirmed is real (ENIGH 2024's own results report tabulates household health-care spending as a line item of the same survey) -- it is just already represented structurally rather than as an edge."
     },
     {
       "edge": "mx-enigh-transferencias -> mx-enigh",
       "source": "mx-enigh-transferencias",
       "target": "mx-enigh",
       "reason": "note",
-      "why": "Same shape as mx-enigh-salud -> mx-enigh: already part_of mx-enigh. ENIGH 2024's results report tabulates transfer income as a line item of the same survey -- structural containment, not a dependency edge."
+      "why": "RESOLVED by the 2026-10-05 merge — mx-enigh-transferencias was merged into mx-enigh, so the containment this note recorded is now one node. [2026-10-05: mx-enigh-transferencias merged into mx-enigh — node-granularity ruling (a), one node per document; notes/granularity-mx-2026-10-05.md.] Original note: Same shape as mx-enigh-salud -> mx-enigh: already part_of mx-enigh. ENIGH 2024's results report tabulates transfer income as a line item of the same survey -- structural containment, not a dependency edge."
     },
     {
       "edge": "mx-scnm-sectores-institucionales -> mx-scnm",
@@ -490,18 +491,18 @@
       "why": "Same mx-cnijf/mx-cnije confusion as mx-cnijf->mx-guerrero-judicial above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
     },
     {
-      "edge": "mx-igae-actividades->sna-2008",
-      "source": "mx-igae-actividades",
+      "edge": "mx-igae->sna-2008",
+      "source": "mx-igae",
       "target": "sna-2008",
       "reason": "resolved",
-      "why": "RESOLVED, though the JS-rendering diagnosis was correct — inegi.org.mx/temas/igae/ genuinely is a 4,267-byte React shell. The route around it is INEGI's monthly IGAE boletín PDF, which carries a full FICHA METODOLÓGICA in plain text: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017\" (https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf, confirmed in a second independent issue). Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+      "why": "RESOLVED, though the JS-rendering diagnosis was correct — inegi.org.mx/temas/igae/ genuinely is a 4,267-byte React shell. The route around it is INEGI's monthly IGAE boletín PDF, which carries a full FICHA METODOLÓGICA in plain text: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017\" (https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf, confirmed in a second independent issue). Edge minted. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29. [2026-10-05: mx-igae-actividades merged into mx-igae — node-granularity ruling (a), one node per document; notes/granularity-mx-2026-10-05.md.] DUPLICATE REMOVED 2026-10-05: the live edge mx-igae-actividades -> sna-2008 (methodology_depends_on, B, evidence_url https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf) became mx-igae -> sna-2008 when mx-igae-actividades was merged into mx-igae, and that pair is already live — same IGAE boletín, same claim, counted twice. Removed from the graph; full record in notes/retired-nodes-2026-10-05-mx.json."
     },
     {
-      "edge": "mx-igae-actividades->naics",
-      "source": "mx-igae-actividades",
+      "edge": "mx-igae->naics",
+      "source": "mx-igae",
       "target": "naics",
       "reason": "resolved",
-      "why": "RESOLVED via the same boletín ficha: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" Edge minted. The same ficha also yielded a third edge, mx-igae-actividades -> mx-enoe, from its Fuentes row. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
+      "why": "RESOLVED via the same boletín ficha: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" Edge minted. The same ficha also yielded a third edge, mx-igae-actividades -> mx-enoe, from its Fuentes row. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29. [2026-10-05: mx-igae-actividades merged into mx-igae — node-granularity ruling (a), one node per document; notes/granularity-mx-2026-10-05.md.]"
     },
     {
       "edge": "mx-encig->mx-censo-poblacion",

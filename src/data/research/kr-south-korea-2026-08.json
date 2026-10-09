@@ -2,7 +2,16 @@
  "meta": {
   "source": "august-2026-import/consolidated/kr-south-korea.json",
   "minted": "2026-08-20",
-  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md",
+  "merged": {
+   "_note": "Node-granularity merge, 2026-10-05 (Thomas: \"2 merge\" — the Monthly Survey of Mining and Manufacturing and the Index of Industrial Production derived from it are one node). Old id -> survivor, with the old title (not a title_alias). Retired record: notes/retired-nodes-2026-10-05-kr.json. Account: notes/granularity-kr-2026-10-05.md.",
+   "map": {
+    "kr-industrial-production-detail": {
+     "into": "kr-mining-manufacturing-survey",
+     "title": "Index of Industrial Production and related short-term industrial indicators (detailed)"
+    }
+   }
+  }
  },
  "reports": [
   {
@@ -164,7 +173,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Quarterly and annual national accounts compiled by the Bank of Korea in accordance with international standards (SNA). Includes GDP by production, expenditure and income approaches, institutional-sector accounts, and related aggregates.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11064531",
    "domains": [
     "national-accounts"
    ],
@@ -178,7 +187,10 @@
    "last_updated": null,
    "_cadence_resolution": "unknown",
    "_cadence_evidence": "bok.or.kr/eng retrieved, but its release listing (Apr 2026) contains no national accounts / GDP item, no stated periodicity and no link to a publication calendar; nothing to count.",
-   "kind": "standard"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/",
+   "_kind_original": "standard",
+   "releases_per_year": 4
   },
   {
    "id": "kr-balance-of-payments",
@@ -188,7 +200,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Monthly / quarterly balance-of-payments statistics and related external accounts compiled according to BPM6. Includes current account, capital and financial account, and international investment position.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11064447",
    "domains": [
     "external-sector",
     "trade"
@@ -204,7 +216,8 @@
    "_cadence_resolution": "recurring",
    "_cadence_evidence": "BOK release list shows 'Balance of Payments during February 2026 (preliminary)' published 8 April 2026 - one release per reference month.",
    "releases_per_year": 12,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/"
   },
   {
    "id": "kr-mining-manufacturing-survey",
@@ -215,7 +228,7 @@
    "region": "Republic of Korea",
    "description": "Monthly survey of production, shipments and inventories in mining and manufacturing, used to compile the Index of Industrial Production and related short-term indicators.",
    "releases_per_year": 12,
-   "url": "https://kostat.go.kr/portal/eng/pressReleases/2/1/index.board",
+   "url": "https://mods.go.kr/board.es?mid=a20103030000&bid=11721&list_no=447252&act=view",
    "domains": [
     "industry"
    ],
@@ -226,7 +239,8 @@
    "_notes": "Key short-term activity indicator for Korea’s manufacturing-heavy economy (semiconductors, autos, shipbuilding, etc.). Parallel to Japan’s Current Survey of Production / IIP cluster.",
    "_jurisdiction_level_original": "national",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://kostat.go.kr/portal/eng/pressReleases/2/1/index.board"
   },
   {
    "id": "kr-kosis",
@@ -292,7 +306,7 @@
    "region": "Republic of Korea",
    "description": "Monthly index of prices received by domestic producers for their output. Complements the CPI as the main producer-side inflation measure.",
    "releases_per_year": 12,
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11064860",
    "domains": [
     "inflation"
    ],
@@ -303,7 +317,8 @@
    "_notes": "Important for national-accounts deflation, margin analysis and understanding cost-push pressures in Korea’s export-oriented manufacturing sector. Parallel to Japan’s CGPI.",
    "_jurisdiction_level_original": "national",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/"
   },
   {
    "id": "kr-trade-statistics",
@@ -336,7 +351,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Annual (with related quarterly elements) analysis of the financial statements of Korean corporations, covering sales, profitability, stability, growth and financial ratios by industry and firm size. Long-running series (published since 1960) that provides the empirical basis for assessing corporate-sector health, including large business groups.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/singl/newsDataEng/list.do?menuNo=400222",
    "domains": [
     "general-statistics"
    ],
@@ -350,7 +365,10 @@
    "last_updated": null,
    "_cadence_resolution": "unknown",
    "_cadence_evidence": "bok.or.kr/eng retrieved but shows no Financial Statement Analysis release, no stated frequency and no release calendar.",
-   "kind": "instrument"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/",
+   "_kind_original": "instrument",
+   "releases_per_year": 1
   },
   {
    "id": "kr-vital-statistics",
@@ -427,29 +445,6 @@
    "_cadence_resolution": "unknown",
    "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result.",
    "kind": "instrument"
-  },
-  {
-   "id": "kr-industrial-production-detail",
-   "title": "Index of Industrial Production and related short-term industrial indicators (detailed)",
-   "publisher": "Statistics Korea (KOSTAT)",
-   "country": "KR",
-   "jurisdiction_level": "federal",
-   "region": "Republic of Korea",
-   "description": "Detailed monthly indices of industrial production, shipments and inventories, with breakdowns by industry (including semiconductors and other key sectors). Extends the core Mining & Manufacturing Survey node.",
-   "releases_per_year": 12,
-   "url": "https://kostat.go.kr/portal/eng/pressReleases/2/1/index.board",
-   "domains": [
-    "industry",
-    "semiconductors"
-   ],
-   "_batch": [
-    "2026-08-14_SouthKorea-batch2.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Deepens the short-term activity coverage. Semiconductor and related electronics components are critical to Korea’s industrial cycle and export performance; these detailed series are closely watched by markets and policymakers.",
-   "_jurisdiction_level_original": "national",
-   "last_updated": null,
-   "kind": "publication"
   },
   {
    "id": "kr-seoul-capital-area",
@@ -582,7 +577,7 @@
    "region": "Republic of Korea",
    "description": "Monthly statistics on narrow money (M1), broad money (M2), liquidity of financial institutions (Lf) and overall liquidity (L). Core monetary indicators used for policy analysis and financial-stability assessment.",
    "releases_per_year": 12,
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11064734",
    "domains": [
     "monetary-policy"
    ],
@@ -593,7 +588,8 @@
    "_notes": "Primary monetary statistics from the central bank. Continuously watched alongside policy rates and credit indicators. Parallel to Japan’s Monetary Base and related BOJ monetary series.",
    "_jurisdiction_level_original": "national",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/"
   },
   {
    "id": "kr-flow-of-funds",
@@ -604,7 +600,7 @@
    "region": "Republic of Korea",
    "description": "Quarterly and annual flow-of-funds / financial accounts showing the financial assets and liabilities of institutional sectors and the inter-sectoral financial flows.",
    "releases_per_year": 4,
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11062627",
    "domains": [
     "general-statistics"
    ],
@@ -615,7 +611,8 @@
    "_notes": "Complements the national accounts and Financial Statement Analysis with a full sectoral balance-sheet picture. Useful for analysing household debt, corporate leverage and the financial position of large business groups.",
    "_jurisdiction_level_original": "national",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/"
   },
   {
    "id": "kr-education-statistics",
@@ -985,7 +982,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Periodic detailed input-output tables showing inter-industry transactions, value added and final demand. Used for multiplier analysis, supply-chain studies and the compilation of national accounts.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?menuNo=400423&nttId=11064896",
    "domains": [
     "general-statistics"
    ],
@@ -999,7 +996,10 @@
    "last_updated": null,
    "_cadence_resolution": "unknown",
    "_cadence_evidence": "bok.or.kr/eng retrieved but shows no input-output / inter-industry table release, no benchmark cycle statement and no release calendar.",
-   "kind": "instrument"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/",
+   "_kind_original": "instrument",
+   "releases_per_year": 1
   },
   {
    "id": "kr-north-korea-statistics",
@@ -1199,7 +1199,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Periodic Financial Stability Report together with underlying statistics on household debt, corporate credit, bank soundness, non-bank financial institutions and systemic-risk indicators.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/singl/newsDataEng/list.do?menuNo=400219",
    "domains": [
     "financial-regulation",
     "public-finance",
@@ -1215,7 +1215,10 @@
    "last_updated": null,
    "_cadence_resolution": "unknown",
    "_cadence_evidence": "bok.or.kr/eng retrieved but no Financial Stability Report item appears in its release list and no publication frequency or calendar is stated on the page.",
-   "kind": "instrument"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/",
+   "_kind_original": "instrument",
+   "releases_per_year": 2
   },
   {
    "id": "kr-external-debt-reserves",
@@ -1225,7 +1228,7 @@
    "jurisdiction_level": "federal",
    "region": "Republic of Korea",
    "description": "Statistics on gross and net external debt by sector and maturity, together with official foreign-exchange reserve holdings and related external-vulnerability indicators.",
-   "url": "https://www.bok.or.kr/eng/",
+   "url": "https://www.bok.or.kr/eng/main/contents.do?menuNo=400196",
    "domains": [
     "external-sector"
    ],
@@ -1240,7 +1243,8 @@
    "_cadence_resolution": "recurring",
    "_cadence_evidence": "BOK release list shows 'Official Foreign Reserves (March 2026)' published 3 April 2026 - one release per reference month; no separate external-debt release or frequency stated on the page.",
    "releases_per_year": 12,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.bok.or.kr/eng/"
   }
  ],
  "dependencies": [

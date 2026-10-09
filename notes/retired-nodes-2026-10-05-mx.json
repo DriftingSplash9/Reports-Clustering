@@ -1,0 +1,195 @@
+{
+  "_note": "Four Mexico nodes merged away 2026-10-05 under the node-granularity ruling (a), one node per document — notes/granularity-mx-2026-10-05.md. Records verbatim as they stood in src/data/research/mx-mexico-2026-08.json. Live edges: 3 re-pointed to the survivor (they carry _repointed_from); 2 removed as DUPLICATES of pairs the survivor mx-igae already held (recorded in duplicate_edges_removed and noted as 'resolved' in _dropped). Reversible: paste back from here. Pre-change copies of the four touched slices: _to_delete/mx-*.pre-merge-2026-10-05.json.",
+  "merged_into": {
+    "mx-enigh-salud": "mx-enigh",
+    "mx-enigh-transferencias": "mx-enigh",
+    "mx-igae-actividades": "mx-igae",
+    "mx-cdmx-cngmd-alcaldias": "mx-cngmd"
+  },
+  "merged_nodes": [
+    {
+      "id": "mx-enigh-salud",
+      "title": "ENIGH — Gasto de los hogares en cuidados de la salud / Household health expenditure (from ENIGH)",
+      "publisher": "INEGI",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Component of the Encuesta Nacional de Ingresos y Gastos de los Hogares that measures out-of-pocket health spending by households. Used to track catastrophic health expenditure, impoverishment due to health costs, and the distribution of the health-financing burden.",
+      "releases_per_year": 1,
+      "url": "https://www.inegi.org.mx/programas/enigh/",
+      "domains": [
+        "health"
+      ],
+      "_batch": [
+        "2026-08-13_Mexico-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical for ‘medical transfers’ and financial-protection analysis. 2024 ENIGH results show average quarterly household health spending rising in real terms; analyses (México Evalúa, CIEP) document increases in catastrophic health expenditure and the regressive burden on lower-income deciles. Complements the CSSSM (which also records household health spending) and ENSANUT (service utilisation).",
+      "last_updated": null,
+      "part_of": "mx-enigh",
+      "kind": "publication"
+    },
+    {
+      "id": "mx-enigh-transferencias",
+      "title": "ENIGH — Ingresos por transferencias / Transfer income (from ENIGH)",
+      "publisher": "INEGI",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Component of ENIGH that captures current transfers received by households (government social programmes, remittances, private transfers, etc.). Central for analysing the impact of Bienestar pensions and other social transfers on household income and poverty.",
+      "releases_per_year": 1,
+      "url": "https://www.inegi.org.mx/programas/enigh/",
+      "domains": [
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-13_Mexico-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Direct statistical counterpart to the programme-side beneficiary counts of the Pensión para el Bienestar and related schemes. Used in distributional and poverty-impact analysis.",
+      "last_updated": null,
+      "part_of": "mx-enigh",
+      "kind": "publication"
+    },
+    {
+      "id": "mx-igae-actividades",
+      "title": "IGAE por actividad económica / Global Indicator of Economic Activity by activity",
+      "publisher": "INEGI",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Detailed activity breakdown of the monthly Global Indicator of Economic Activity (primary, secondary, tertiary and selected sub-activities).",
+      "releases_per_year": 12,
+      "url": "https://www.inegi.org.mx/temas/igae/",
+      "domains": [
+        "national-accounts"
+      ],
+      "_batch": [
+        "2026-08-13_Mexico-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "More granular view of the headline IGAE already listed. Useful as a distinct analytical product even though it is derived from the same underlying framework.",
+      "last_updated": null,
+      "kind": "publication"
+    },
+    {
+      "id": "mx-cdmx-cngmd-alcaldias",
+      "title": "CNGMD — Demarcaciones territoriales (alcaldías) de la Ciudad de México",
+      "publisher": "INEGI",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Ciudad de México",
+      "description": "Component of the Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales focused on the 16 alcaldías of CDMX. Covers integration of the alcaldía councils, human/material/budgetary resources, and performance in government, public security, civil protection, civic justice, water/sanitation and solid waste.",
+      "releases_per_year": 0.5,
+      "url": "https://www.inegi.org.mx/programas/cngmd/",
+      "domains": [
+        "general-statistics"
+      ],
+      "_batch": [
+        "2026-08-13_Mexico-batch9-judicial-cdmx.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary structural source for the 16 alcaldías. Biennial. Treats alcaldías as the municipal-level unit for CDMX. Essential for any zoom into Iztapalapa, Gustavo A. Madero, Álvaro Obregón, etc.",
+      "last_updated": null,
+      "kind": "publication"
+    }
+  ],
+  "live_edges_before": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inegi.org.mx/programas/cngmd/",
+      "basis": "CNGMD is the principal structural statistical source for each alcaldía.",
+      "source_report_id": "mx-alcaldia-iztapalapa",
+      "target_report_id": "mx-cdmx-cngmd-alcaldias",
+      "_batch": [
+        "2026-08-13_Mexico-batch9-judicial-cdmx.json"
+      ],
+      "evidence_grade": "C"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEGI's monthly IGAE boletín carries a full FICHA METODOLÓGICA in plain text, which states the indicator follows the international national-accounts guidelines of the 2008 SNA. Verbatim: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017.\" The round-2 diagnosis that inegi.org.mx/temas/igae/ is a JavaScript shell was correct — it is a 4,267-byte React shell — but the boletín PDF is the route around it, and the same sentence appears in an independent second issue (igae2025_07.pdf).",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same IGAE ficha metodológica states that volume indices are computed for 664 activity classes of SCIAN 2018 — the Mexican national version of NAICS — which the sector and subsector aggregates of the 'por actividad' breakdown are built from. Verbatim: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" The SCIAN-as-national-NAICS identification is the corpus's own, recorded in the naics node's description.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "mx-enoe",
+      "relationship_type": "uses_data_from",
+      "basis": "The IGAE ficha's Fuentes row names ENOE among the monthly INEGI statistics that feed the indicator. Verbatim: \"Estadísticas mensuales que elabora el Instituto, como la Encuesta Mensual de la Industria Manufacturera (EMIM), Encuesta Nacional de Empresas Constructoras (ENEC), Encuesta Mensual sobre Empresas Comerciales (EMEC), Encuesta Mensual de Servicios (EMS), estadística de la Industria Minerometalúrgica (EIMM) y la Encuesta Nacional de Ocupación y Empleo (ENOE), los índices nacionales de precios y los registros administrativos, así como las estadísticas económicas y sociales compiladas por el Instituto.\"",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented",
+      "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "mx-scnm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEGI's IGAE methodology document states IGAE (including its by-activity breakdown) is built using the same conceptual/methodological framework used for the Goods and Services Accounts of the SCNM.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/igae/2013/doc/met_igae.pdf",
+      "evidence": "documented",
+      "evidence_grade": "A",
+      "evidence_quote": "Las mediciones se realizan a partir de los criterios metodológicos del año base 2013 del Sistema de Cuentas Nacionales de México y sustituyen a los cálculos que se habían publicado con base en los precios del año 2008."
+    }
+  ],
+  "duplicate_edges_removed": [
+    {
+      "slice": "mx-browser-unblock-2026-08-29.json",
+      "edge": {
+        "source_report_id": "mx-igae-actividades",
+        "target_report_id": "sna-2008",
+        "relationship_type": "methodology_depends_on",
+        "basis": "INEGI's monthly IGAE boletín carries a full FICHA METODOLÓGICA in plain text, which states the indicator follows the international national-accounts guidelines of the 2008 SNA. Verbatim: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017.\" The round-2 diagnosis that inegi.org.mx/temas/igae/ is a JavaScript shell was correct — it is a 4,267-byte React shell — but the boletín PDF is the route around it, and the same sentence appears in an independent second issue (igae2025_07.pdf).",
+        "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+        "evidence": "documented",
+        "evidence_grade": "B"
+      }
+    },
+    {
+      "slice": "mx-browser-unblock-2026-08-29.json",
+      "edge": {
+        "source_report_id": "mx-igae-actividades",
+        "target_report_id": "mx-enoe",
+        "relationship_type": "uses_data_from",
+        "basis": "The IGAE ficha's Fuentes row names ENOE among the monthly INEGI statistics that feed the indicator. Verbatim: \"Estadísticas mensuales que elabora el Instituto, como la Encuesta Mensual de la Industria Manufacturera (EMIM), Encuesta Nacional de Empresas Constructoras (ENEC), Encuesta Mensual sobre Empresas Comerciales (EMEC), Encuesta Mensual de Servicios (EMS), estadística de la Industria Minerometalúrgica (EIMM) y la Encuesta Nacional de Ocupación y Empleo (ENOE), los índices nacionales de precios y los registros administrativos, así como las estadísticas económicas y sociales compiladas por el Instituto.\"",
+        "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+        "evidence": "documented",
+        "evidence_grade": "B"
+      }
+    }
+  ],
+  "url_repairs": [
+    {
+      "id": "mx-scnm-sectores-institucionales",
+      "old": "https://www.inegi.org.mx/programas/scnm/",
+      "new": "https://www.inegi.org.mx/programas/si/"
+    },
+    {
+      "id": "mx-scnm-cou",
+      "old": "https://www.inegi.org.mx/programas/scnm/",
+      "new": "https://www.inegi.org.mx/programas/cou/"
+    },
+    {
+      "id": "mx-cuenta-isfl",
+      "old": "https://www.inegi.org.mx/programas/scnm/",
+      "new": "https://www.inegi.org.mx/programas/isfl/"
+    },
+    {
+      "id": "mx-cnijf",
+      "old": "https://www.inegi.org.mx/programas/cnije/",
+      "new": "https://www.inegi.org.mx/programas/cnijf/"
+    }
+  ]
+}

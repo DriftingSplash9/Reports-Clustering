@@ -1,0 +1,257 @@
+{
+ "slice": "mx-mexico-2026-08",
+ "groups": 6,
+ "nodes": 16,
+ "detail": [
+  {
+   "url": "https://www.inegi.org.mx/programas/cnije",
+   "n": 4,
+   "nodes": [
+    {
+     "id": "mx-guerrero-judicial",
+     "title": "Poder Judicial / Fiscalía del Estado de Guerrero — statistical presence",
+     "kind": "publication",
+     "publisher": "Poder Judicial del Estado de Guerrero / Fiscalía General del Estado",
+     "in_slice": true,
+     "description": "State justice and prosecution institutions. Data appear mainly through national CNIJE / CNPJE rather than rich independent local yearbooks.",
+     "out": [
+      "mx-cnije [cites B]",
+      "mx-cnpje [cites B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "mx-oaxaca-judicial",
+     "title": "Poder Judicial / Fiscalía del Estado de Oaxaca — statistical presence",
+     "kind": "publication",
+     "publisher": "Poder Judicial del Estado de Oaxaca / Fiscalía General del Estado de Oaxaca",
+     "in_slice": true,
+     "description": "State justice and prosecution institutions. Data appear mainly through national CNIJE / CNPJE rather than rich independent local yearbooks.",
+     "out": [
+      "mx-cnije [cites B]",
+      "mx-cnpje [cites B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "mx-cnije",
+     "title": "Censo Nacional de Impartición de Justicia Estatal (CNIJE) / National Census of State Justice Administration",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Census of state-level justice institutions (courts, related bodies). Provides structural and workload statistics for the state justice system.",
+     "out": [],
+     "in": [
+      "mx-cdmx-pj-anuario [uses_data_from C]",
+      "mx-guerrero-judicial [cites B]",
+      "mx-oaxaca-judicial [cites B]"
+     ]
+    },
+    {
+     "id": "mx-cnijf",
+     "title": "Censo Nacional de Impartición de Justicia Federal (CNIJF) / National Census of Federal Justice Administration",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Annual census of the federal judiciary (SCJN, electoral tribunal, circuit and district courts under the CJF, agrarian tribunals). Covers structure, caseload, resources and related functions. Complements the state impartición census (CNIJE).",
+     "out": [
+      "mx-lsnieg [cites B]"
+     ],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.inegi.org.mx/programas/enigh",
+   "n": 3,
+   "nodes": [
+    {
+     "id": "mx-enigh",
+     "title": "Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH) / National Survey of Household Income and Expenditure",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Household income and expenditure survey. Primary source for the structure of household consumption used in CPI basket and weight updates (most recent major INPC update 2024 drew on Seasonal ENIGH 2022). Also central for poverty and distribution analysis.",
+     "out": [],
+     "in": [
+      "mx-scnm [uses_data_from A]",
+      "mx-tuxtla [uses_data_from A]",
+      "mx-pension-bienestar-mujeres [cites A]",
+      "mx-inpc [uses_data_from B]",
+      "mx-pobreza-multidimensional [uses_data_from B]",
+      "mx-pension-bienestar-adultos [uses_data_from C]",
+      "mx-chiapas-pobreza-report [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "mx-enigh-salud",
+     "title": "ENIGH — Gasto de los hogares en cuidados de la salud / Household health expenditure (from ENIGH)",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "part_of": "mx-enigh",
+     "in_slice": true,
+     "description": "Component of the Encuesta Nacional de Ingresos y Gastos de los Hogares that measures out-of-pocket health spending by households. Used to track catastrophic health expenditure, impoverishment due to health costs, and the distribution of the health-financing burden.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "mx-enigh-transferencias",
+     "title": "ENIGH — Ingresos por transferencias / Transfer income (from ENIGH)",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "part_of": "mx-enigh",
+     "in_slice": true,
+     "description": "Component of ENIGH that captures current transfers received by households (government social programmes, remittances, private transfers, etc.). Central for analysing the impact of Bienestar pensions and other social transfers on household income and poverty.",
+     "out": [],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.inegi.org.mx/programas/scnm",
+   "n": 3,
+   "nodes": [
+    {
+     "id": "mx-scnm-sectores-institucionales",
+     "title": "Cuentas por Sectores Institucionales (SCNM) / Institutional Sector Accounts",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "part_of": "mx-scnm",
+     "in_slice": true,
+     "description": "Annual institutional-sector accounts within the Sistema de Cuentas Nacionales de México (non-financial corporations, financial corporations, general government, households, non-profit institutions serving households, rest of the world). Provide the full sequence of current and accumulation accounts by sector.",
+     "out": [
+      "sna-2008 [methodology_depends_on C]"
+     ],
+     "in": []
+    },
+    {
+     "id": "mx-scnm-cou",
+     "title": "Cuadros de Oferta y Utilización (COU) / Supply and Use Tables",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Annual (and benchmark) Supply and Use Tables that form the core balancing framework of the Sistema de Cuentas Nacionales de México. Source of GDP by production, expenditure and income approaches at detailed product and industry level.",
+     "out": [
+      "mx-scnm [calculated_from A]"
+     ],
+     "in": [
+      "mx-mip [calculated_from B]"
+     ]
+    },
+    {
+     "id": "mx-cuenta-isfl",
+     "title": "Cuenta Satélite de las Instituciones sin Fines de Lucro / Satellite Account of Non-Profit Institutions",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Satellite account measuring the economic contribution of non-profit institutions serving households within the national-accounts framework.",
+     "out": [
+      "sna-2008 [methodology_depends_on B]",
+      "mx-scnm [methodology_depends_on C]"
+     ],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.inegi.org.mx/temas/igae",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "mx-igae",
+     "title": "Indicador Global de la Actividad Económica (IGAE) / Global Indicator of Economic Activity",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Monthly short-term indicator of overall economic activity, conceptually aligned with the production-side GDP of the SCNM. Part of the suite of short-term economic indicators published by INEGI.",
+     "out": [
+      "sna-2008 [methodology_depends_on B]",
+      "mx-emim [uses_data_from A]",
+      "mx-enec [uses_data_from A]",
+      "mx-emec [uses_data_from A]",
+      "mx-ems [uses_data_from A]",
+      "mx-enoe [uses_data_from A]"
+     ],
+     "in": [
+      "mx-scnm-pib-trimestral [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "mx-igae-actividades",
+     "title": "IGAE por actividad económica / Global Indicator of Economic Activity by activity",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Detailed activity breakdown of the monthly Global Indicator of Economic Activity (primary, secondary, tertiary and selected sub-activities).",
+     "out": [
+      "sna-2008 [methodology_depends_on B]",
+      "naics [methodology_depends_on B]",
+      "mx-enoe [uses_data_from B]",
+      "mx-scnm [methodology_depends_on A]"
+     ],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.inegi.org.mx/programas/cngmd",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "mx-cngmd",
+     "title": "Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de México (CNGMD)",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Periodic census of municipal governments and Mexico City territorial demarcations covering structure, resources, public services, security, justice and other municipal functions. Primary structural source for municipal-level public administration statistics.",
+     "out": [],
+     "in": [
+      "mx-municipio-zapopan [uses_data_from C]"
+     ]
+    },
+    {
+     "id": "mx-cdmx-cngmd-alcaldias",
+     "title": "CNGMD — Demarcaciones territoriales (alcaldías) de la Ciudad de México",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Component of the Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales focused on the 16 alcaldías of CDMX. Covers integration of the alcaldía councils, human/material/budgetary resources, and performance in government, public security, civil protection, civic justice, water/sanitation and solid waste.",
+     "out": [],
+     "in": [
+      "mx-alcaldia-iztapalapa [uses_data_from C]"
+     ]
+    }
+   ]
+  },
+  {
+   "url": "https://www.inegi.org.mx/programas/natalidad",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "mx-edos-nacimientos",
+     "title": "Estadísticas de Nacimientos / Birth Statistics",
+     "kind": "publication",
+     "publisher": "INEGI",
+     "in_slice": true,
+     "description": "Vital statistics of registered births. Companion series to death statistics within the vital-registration system.",
+     "out": [
+      "mx-registro-civil [uses_data_from B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "mx-registro-civil",
+     "title": "Registro Civil de México — Actas del Estado Civil",
+     "kind": "instrument",
+     "publisher": "Secretaría de Gobernación / Oficialías del Registro Civil (RENAPO)",
+     "in_slice": false,
+     "description": "Mexico's federated civil-registration system that issues birth, death and marriage certificates; INEGI compiles copies of these records to build the country's vital statistics.",
+     "out": [],
+     "in": [
+      "mx-edos-nacimientos [uses_data_from B]"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+  "_note": "Two Uruguay nodes removed 2026-10-05, both verbatim as they stood in src/data/research/uy-uruguay-2026-08.json. (1) uy-pobreza-departamental MERGED into uy-pobreza under the node-granularity ruling (a), one node per document: its 6 live in-edges were re-pointed (they carry _repointed_from), none lost; live_edges_before records them as they stood. (2) uy-china-relacion RETIRED on Thomas's ruling of 2026-10-05 as a bilateral-relationship framing, the class retired 2026-08-29/31 (playbook/corpus-nodes.md §7c); its one edge is in edges_removed and is NOT in the graph any more. Reversible: paste a record back, restore edges from here. Pre-change copies of both slices: _to_delete/uy-*.pre-merge-2026-10-05.json. Account: notes/granularity-uy-2026-10-05.md. ADDED 2026-10-06: uy-educacion-salud merged into uy-presupuesto (Thomas: uy-presupuesto is the annual Rendición de Cuentas); its one edge re-pointed. uy-presupuesto and uy-ipc retitled to their publishers' titles.",
+  "merged_into": {
+    "uy-pobreza-departamental": "uy-pobreza",
+    "uy-educacion-salud": "uy-presupuesto"
+  },
+  "merged_nodes": [
+    {
+      "id": "uy-pobreza-departamental",
+      "title": "Pobreza por departamento (INE)",
+      "publisher": "INE",
+      "country": "UY",
+      "jurisdiction_level": "provincial",
+      "region": "Uruguay",
+      "description": "Official departmental tabulations of income poverty. Primary source for the inter-departmental poverty gradient.",
+      "releases_per_year": 1,
+      "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "domains": [
+        "poverty",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-13_Uruguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key homogeneity-test product. 2025 extremes: Artigas, Rivera, Cerro Largo highest; San José, Maldonado, Colonia, Flores lowest. National persons under LP ~16.6%.",
+      "last_updated": null,
+      "part_of": "uy-pobreza",
+      "kind": "publication"
+    },
+    {
+      "id": "uy-educacion-salud",
+      "title": "Gasto público en educación y salud",
+      "publisher": "Ministerio de Economía y Finanzas / INE",
+      "country": "UY",
+      "jurisdiction_level": "federal",
+      "region": "Uruguay",
+      "description": "Public expenditure on education and health as reflected in the national budget and related functional statistics. Complements household-survey education and health modules.",
+      "releases_per_year": 1,
+      "url": "https://www.gub.uy/ministerio-economia-finanzas/",
+      "domains": [
+        "public-finance",
+        "education",
+        "health"
+      ],
+      "_batch": [
+        "2026-08-13_Uruguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Education and health are major and constitutionally prioritised functional allocations. Continuously tracked in budget execution and social-policy analysis.",
+      "last_updated": null,
+      "part_of": "uy-presupuesto",
+      "kind": "publication"
+    }
+  ],
+  "live_edges_before": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "basis": "Artigas’s high poverty ranking is derived from the departmental poverty tabulations.",
+      "source_report_id": "uy-artigas",
+      "target_report_id": "uy-pobreza",
+      "_batch": [
+        "2026-08-13_Uruguay-batch3-metro-trade-social.json"
+      ],
+      "evidence_grade": "C",
+      "_repointed_from": "uy-artigas -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-cerro-largo",
+      "target_report_id": "uy-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "La incidencia de la pobreza presenta una distribución heterogénea en el territorio nacional. Los mayores valores se registran en los departamentos de Artigas, Rivera y Cerro Largo.",
+      "evidence_url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/HTML/ECH/Pobreza/2024/Estimacion%20de%20la%20pobreza%20por%20el%20metodo%20de%20ingreso%20anual%202024.html",
+      "evidence_grade": "B",
+      "_repointed_from": "uy-cerro-largo -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-rivera",
+      "target_report_id": "uy-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "La incidencia de la pobreza presenta una distribución heterogénea en el territorio nacional. Los mayores valores se registran en los departamentos de Artigas, Rivera y Cerro Largo.",
+      "evidence_url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/HTML/ECH/Pobreza/2024/Estimacion%20de%20la%20pobreza%20por%20el%20metodo%20de%20ingreso%20anual%202024.html",
+      "evidence_grade": "B",
+      "_repointed_from": "uy-rivera -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-colonia",
+      "target_report_id": "uy-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "Por otra parte, los niveles más bajos corresponden a los departamentos de Flores, San José, Colonia y Maldonado.",
+      "evidence_url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/HTML/ECH/Pobreza/2024/Estimacion%20de%20la%20pobreza%20por%20el%20metodo%20de%20ingreso%20anual%202024.html",
+      "evidence_grade": "B",
+      "_repointed_from": "uy-colonia -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-flores",
+      "target_report_id": "uy-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "Por otra parte, los niveles más bajos corresponden a los departamentos de Flores, San José, Colonia y Maldonado.",
+      "evidence_url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/HTML/ECH/Pobreza/2024/Estimacion%20de%20la%20pobreza%20por%20el%20metodo%20de%20ingreso%20anual%202024.html",
+      "evidence_grade": "B",
+      "_repointed_from": "uy-flores -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-maldonado",
+      "target_report_id": "uy-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "Por otra parte, los niveles más bajos corresponden a los departamentos de Flores, San José, Colonia y Maldonado.",
+      "evidence_url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/HTML/ECH/Pobreza/2024/Estimacion%20de%20la%20pobreza%20por%20el%20metodo%20de%20ingreso%20anual%202024.html",
+      "evidence_grade": "B",
+      "_repointed_from": "uy-maldonado -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
+    },
+    {
+      "source_report_id": "uy-educacion-salud",
+      "target_report_id": "uy-cuentas-nacionales",
+      "relationship_type": "uses_data_from",
+      "basis": "En 2023 se destinó el 4,9% del PIB a la educación, superando el 4,7% del año 2019.",
+      "evidence_url": "https://www.gub.uy/ministerio-economia-finanzas/comunicacion/publicaciones/exposicion-motivos-rc-2023/54-educacion-cultura/542-gasto-publico",
+      "evidence_grade": "C"
+    }
+  ],
+  "retired_relationship_nodes": [
+    {
+      "id": "uy-china-relacion",
+      "title": "Relación comercial y estratégica con China",
+      "publisher": "Gobierno del Uruguay / China",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Uruguay / Asia",
+      "description": "Strategic partnership and intensive bilateral trade relationship with China (top export destination). Includes dairy-protocol and broader economic cooperation; FTA negotiations and RCEP interest under discussion.",
+      "url": "https://www.gub.uy/ministerio-economia-finanzas/",
+      "domains": [
+        "trade",
+        "investment"
+      ],
+      "_batch": [
+        "2026-08-13_Uruguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "De-facto structural trade partner. Continuously cited in export-performance analysis even in the absence of a comprehensive bilateral FTA; dairy protocol and strategic-partnership language are recurring reference points.",
+      "_referenced_by": [
+        "Export statistics (China often #1 destination for beef, soy, pulp)",
+        "Strategic-partnership and Belt-and-Road references",
+        "Policy debate on Asia diversification and possible FTA/RCEP path"
+      ],
+      "last_updated": null,
+      "kind": "instrument"
+    }
+  ],
+  "edges_removed": [
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.gub.uy/ministerio-economia-finanzas/",
+      "basis": "China is a top export destination; the bilateral relationship structures a large share of merchandise trade.",
+      "source_report_id": "uy-china-relacion",
+      "target_report_id": "uy-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Uruguay-batch6-international-industrial.json"
+      ],
+      "evidence_grade": "C"
+    }
+  ],
+  "url_repairs": [
+    {
+      "id": "uy-ech",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/encuesta-continua-hogares"
+    },
+    {
+      "id": "uy-pobreza",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/estimacion-pobreza-metodo-del-ingreso-ano-2025"
+    },
+    {
+      "id": "uy-lineas-pobreza",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/datos-y-estadisticas/estadisticas/pobreza"
+    },
+    {
+      "id": "uy-ipc",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/indice-precios-consumo"
+    },
+    {
+      "id": "uy-censo",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/censosphv"
+    },
+    {
+      "id": "uy-ipm",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/pobreza-multidimensional-2025"
+    },
+    {
+      "id": "uy-ivfim",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/indice-volumen-fisico-industria-manufacturera"
+    },
+    {
+      "id": "uy-eaae",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/Encuesta-Anual-Actividad-Econ%C3%B3mica"
+    },
+    {
+      "id": "uy-gini",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/indicadores-distribucion-del-ingreso-ano-2025"
+    },
+    {
+      "id": "uy-empleo",
+      "old": "https://www.gub.uy/instituto-nacional-estadistica/",
+      "new": "https://www.gub.uy/instituto-nacional-estadistica/datos-y-estadisticas/estadisticas/series-historicas-actividad-empleo-desempleo"
+    }
+  ]
+}

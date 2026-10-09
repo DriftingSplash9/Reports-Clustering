@@ -180,6 +180,8 @@ one line each; open the file named at the end of the line for the evidence behin
   keeps it, so `Rev.` `No.` `Vol.` `Rep.` `Uzb.` never meet. **Three edges in two days, on two continents.** Quote a
   span carrying enough of the FULL title; if none exists, B is the ceiling. `playbook/corpus-evidence.md`.
 - **Never edit a `basis` or a quote to move a grade.**
+- **`--write` rewrites the whole slice at indent 2** (`grade-evidence.ts:3600`) — on an indent-1 slice that is a whole-file
+  diff. Re-serialise at the slice's own indent afterwards and check the content is identical. `playbook/corpus-evidence.md`.
 
 ### Claims about the world that are really claims about your tools → `playbook/corpus-hosts.md`
 
@@ -269,6 +271,8 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - Analytical meta-nodes: 5 retired, sweep deliberately stopped — **do not extend by keyword**.
 - **Never sweep the "— high/low-poverty contrast" nodes.** They are real jurisdictions.
 - A country may carry TWO tier edges (REGISTER + SELF-DECLARED); both stay, no dedupe pass.
+- **ONE NODE PER DOCUMENT** (Thomas, 2026-10-05) — topic siblings sharing a document merge; classify a shared url
+  first, it is not always a duplicate; a recurring node's url is its latest edition page. `playbook/corpus-nodes.md`.
 - **A revising NOTICE does not mint an edition** (Thomas, 2026-09-10). A citation DATED to the revision reaches
   the node; a bare title does not. Contrast a real new edition with its own number. `playbook/corpus-nodes.md`.
 

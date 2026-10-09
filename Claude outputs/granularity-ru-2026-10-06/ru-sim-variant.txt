@@ -1,0 +1,45 @@
+EDGES — 18 touched
+  DROP self-loop                     ru-rosstat-industrial-production-subjects-appendix -> ru-rosstat-industrial-production-russia  =>  ru-rosstat-industrial-production-russia -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  REPOINT                            ru-chelyabinskstat-oblast-statistical-yearbook -> ru-rosstat-industrial-production-subjects-appendix  =>  ru-chelyabinskstat-oblast-statistical-yearbook -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-construction-subjects-appendix -> ru-rosstat-construction-russia  =>  ru-rosstat-construction-russia -> ru-rosstat-construction-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-transport-subjects-appendix -> ru-rosstat-transport-russia  =>  ru-rosstat-transport-russia -> ru-rosstat-transport-russia  [uses_data_from C]
+  REPOINT                            ru-krasnoyarskstat-krai-statistical-yearbook -> ru-rosstat-industrial-production-subjects-appendix  =>  ru-krasnoyarskstat-krai-statistical-yearbook -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-healthcare-subjects-appendix -> ru-rosstat-healthcare-russia  =>  ru-rosstat-healthcare-russia -> ru-rosstat-healthcare-russia  [uses_data_from C]
+  REPOINT                            ru-rosstat-healthcare-subjects-appendix -> ru-rosstat-municipal-indicators-database  =>  ru-rosstat-healthcare-russia -> ru-rosstat-municipal-indicators-database  [uses_data_from C]
+  REPOINT                            ru-mosstat-moscow-statistical-yearbook -> ru-rosstat-healthcare-subjects-appendix  =>  ru-mosstat-moscow-statistical-yearbook -> ru-rosstat-healthcare-russia  [uses_data_from C]
+  DROP duplicate                     ru-cbr-banking-supervision-framework -> ru-86-fz-2002-central-bank  =>  ru-cbr-annual-report -> ru-86-fz-2002-central-bank  [legal_basis B]
+  REPOINT                            ru-cbr-banking-supervision-framework -> ru-395-1-banks-banking-activities  =>  ru-cbr-annual-report -> ru-395-1-banks-banking-activities  [cites B]
+  REPOINT                            ru-cbr-national-payment-system-oversight -> ru-161-fz-2011-national-payment-system  =>  ru-cbr-annual-report -> ru-161-fz-2011-national-payment-system  [legal_basis C]
+  DROP duplicate                     ru-cbr-national-payment-system-oversight -> ru-86-fz-2002-central-bank  =>  ru-cbr-annual-report -> ru-86-fz-2002-central-bank  [legal_basis B]
+  REPOINT                            ru-cbr-key-rate-corridor -> ru-cbr-monetary-policy-guidelines  =>  ru-cbr-annual-report -> ru-cbr-monetary-policy-guidelines  [methodology_depends_on C]
+  DROP duplicate                     ru-cbr-dfa-market -> ru-86-fz-2002-central-bank  =>  ru-cbr-annual-report -> ru-86-fz-2002-central-bank  [legal_basis B]
+  REPOINT                            ru-cbr-payment-system-indicators -> ru-161-fz-2011-national-payment-system  =>  ru-cbr-statistical-bulletin -> ru-161-fz-2011-national-payment-system  [legal_basis C]
+  REPOINT                            ru-cbr-sbp-faster-payments -> ru-cbr-payment-system-indicators  =>  ru-cbr-sbp-faster-payments -> ru-cbr-statistical-bulletin  [uses_data_from C]
+  DROP self-loop                     ru-cbr-brps-payment-system -> ru-cbr-payment-system-indicators  =>  ru-cbr-statistical-bulletin -> ru-cbr-statistical-bulletin  [uses_data_from C]
+  REPOINT                            ru-cbr-digital-ruble-platform -> ru-cbr-national-payment-system-oversight  =>  ru-cbr-digital-ruble-platform -> ru-cbr-annual-report  [cites B]
+
+NODES — 3674 -> 3664; edges 3456 -> 3448
+
+ru-rosstat-industrial-production-russia: rank 76 -> 79   authority 0.05919 -> 0.05763   (sum of the 2 parts before: 0.10654)
+   retired ru-rosstat-industrial-production-subjects-appendix was rank 108, authority 0.04735
+
+ru-rosstat-construction-russia: rank 182 -> 323   authority 0.03448 -> 0.02420   (sum of the 2 parts before: 0.04839)
+   retired ru-rosstat-construction-subjects-appendix was rank 2002, authority 0.01391
+
+ru-rosstat-transport-russia: rank 2003 -> 3360   authority 0.01391 -> 0.00800   (sum of the 2 parts before: 0.02783)
+   retired ru-rosstat-transport-subjects-appendix was rank 2004, authority 0.01391
+
+ru-rosstat-healthcare-russia: rank 115 -> 103   authority 0.04485 -> 0.04863   (sum of the 2 parts before: 0.07291)
+   retired ru-rosstat-healthcare-subjects-appendix was rank 249, authority 0.02806
+
+ru-cbr-statistical-bulletin: rank 2021 -> 326   authority 0.01391 -> 0.02420   (sum of the 3 parts before: 0.06231)
+   retired ru-cbr-payment-system-indicators     was rank 183, authority 0.03448
+   retired ru-cbr-brps-payment-system           was rank 2036, authority 0.01391
+
+ru-cbr-annual-report: rank 128 -> 133   authority 0.04256 -> 0.04137   (sum of the 5 parts before: 0.09821)
+   retired ru-cbr-banking-supervision-framework was rank 2018, authority 0.01391
+   retired ru-cbr-national-payment-system-oversight was rank 2020, authority 0.01391
+   retired ru-cbr-key-rate-corridor             was rank 2025, authority 0.01391
+   retired ru-cbr-dfa-market                    was rank 2034, authority 0.01391
+
+corpus-wide: 22 of 3664 surviving nodes change AUTHORITY by more than 1%; largest 73.9% (ru-cbr-statistical-bulletin)

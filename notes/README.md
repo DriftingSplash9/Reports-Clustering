@@ -19,6 +19,12 @@ agent.
 | `techniques-2026-09-04.md` | 18.0 | fetching, capturing or extracting anything. The general recipe set |
 | `node-url-audit-2026-09-15.md` | 6.5 | scoping ANY orphan/coverage round: 32% of node urls are not documents, the workbook's ranking inverts by readable stock, and the two probe traps that nearly cost a round |
 | `bps-url-repair-probe-2026-09-15.md` | 8.7 | doing or planning a per-host url repair: the Chrome-only route into bps.go.id, the search-form method, and why only 27 of 61 nodes could be repaired — the second pass reclassified 13 downward, and 114 non-bare urls are already shared by 335 nodes |
+| `granularity-pilot-br-2026-10-05.md` | 7.0 | the node-granularity repair (ruling (a), one node per document, 2026-10-05): the Brazil dry run — a shared url is not always a duplicate, the classify step, the edge and `_dropped` consequences of a merge, and the measured rank effect. Instruments: `scripts/measure-url-collisions.ts`, `scripts/simulate-merge.ts` |
+| `granularity-uy-2026-10-05.md` | 7 | the Uruguay dry run under ruling (a): both colliding urls are agency homepages, ONE merge (departmental poverty into the annual poverty report, rank 2,280 → 55), verified INE product urls, and five questions |
+| `granularity-mx-2026-10-05.md` | 5 | the Mexico dry run under ruling (a): three real merges (ENIGH components, IGAE by activity, CNGMD's CDMX part), two duplicate edges, four INEGI url repairs — and INEGI's soft-404 (a wrong slug answers 200) |
+| `granularity-kr-2026-10-05.md` | 4 | the Korea dry run under ruling (a): no merges — ten BOK products on the BOK homepage, and a survey-vs-index pair a 2026-08-29 round deliberately kept apart; four questions |
+| `granularity-cn-2026-10-05.md` | 5 | the China dry run under ruling (a) (opened on request; China stays paused): no merge — nine NBS releases on a DEAD index url get edition pages, and the labour-force survey-vs-instrument pair needs a ruling |
+| `granularity-ru-2026-10-06.md` | 7 | the Russia dry run under ruling (a): 72 nodes — six merges (Rosstat appendices into their handbooks, two tables into the CBR Statistical Bulletin), a four-node variant, and 46 url repairs still to locate; Rosstat needs `curl -k` |
 | `eu-classification-statute-2026-09-14.md` | 7.2 | anything EU classification or statute: the CELLAR route for legal acts, the current ESMS hi3/hi4 split, and the 140-pair grader selection rule 11 needs |
 | `eu-statutes-2026-09-15.md` | 6.7 | anything EU statute or national HICP: the four acts' resolved CELLAR URLs, why three of them are already nodes and no statute node was minted, what Germany / Türkiye / Czechia / Albania / Romania each need, and the insse.ro container-vs-Chrome split |
 | `ecoicop-target-audit-2026-09-15.md` | 6.5 | before touching any national HICP edge, or re-asking whether the 09-14 ECOICOP wiring landed on the right nodes: the 31-country table, the one mismatch (RO), and the five nodes whose own url is a Eurostat metadata page — a shape the NODE URLS check cannot see |
@@ -74,6 +80,11 @@ Open only to reverse something or to check what a past change did.
 |---|---|---|
 | `retired-nodes-2026-08-29.json` | 124 | nodes retired as duplicates. Full records, so the merge is reversible |
 | `retired-nodes-2026-08-31.json` | 187 | the 32 agreement nodes retired under ruling 2-A |
+| `retired-nodes-2026-10-05.json` | 22 | the 11 Brazil nodes retired by the node-granularity merge (ruling (a)), verbatim, with the live edges as they stood before re-pointing |
+| `retired-nodes-2026-10-05-uy.json` | 9 | Uruguay: `uy-pobreza-departamental` merged into `uy-pobreza`, and `uy-china-relacion` retired as a bilateral-relationship framing with its one edge, both verbatim |
+| `retired-nodes-2026-10-05-mx.json` | 12 | Mexico: four nodes merged away (ENIGH's two components, IGAE by activity, CNGMD's CDMX part), verbatim, plus the two duplicate edges removed |
+| `retired-nodes-2026-10-05-kr.json` | 6 | Korea: the industrial-production index merged into the mining-and-manufacturing survey, verbatim, plus the 9 BOK url repairs and the 4 kind retypes with the evidence for each `releases_per_year` |
+| `retired-nodes-2026-10-06-ru.json` | 16 | Russia: four Rosstat appendices and two CBR bulletin tables merged away, verbatim, with the five self-loop edges removed |
 | `schema-validator-round-2026-09-03-fold-editions.json` | 33 | nodes folded into editions by the schema round |
 | `schema-validator-round-2026-09-03-migration.py` | 18 | the migration script that round ran. Applied once |
 | `publisher-cleanup-2026-08-31.json` | 32 | publisher strings rewritten, before and after |

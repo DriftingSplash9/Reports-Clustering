@@ -1,0 +1,32 @@
+EDGES — 11 touched
+  DROP self-loop                     ru-rosstat-industrial-production-subjects-appendix -> ru-rosstat-industrial-production-russia  =>  ru-rosstat-industrial-production-russia -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  REPOINT                            ru-chelyabinskstat-oblast-statistical-yearbook -> ru-rosstat-industrial-production-subjects-appendix  =>  ru-chelyabinskstat-oblast-statistical-yearbook -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-construction-subjects-appendix -> ru-rosstat-construction-russia  =>  ru-rosstat-construction-russia -> ru-rosstat-construction-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-transport-subjects-appendix -> ru-rosstat-transport-russia  =>  ru-rosstat-transport-russia -> ru-rosstat-transport-russia  [uses_data_from C]
+  REPOINT                            ru-krasnoyarskstat-krai-statistical-yearbook -> ru-rosstat-industrial-production-subjects-appendix  =>  ru-krasnoyarskstat-krai-statistical-yearbook -> ru-rosstat-industrial-production-russia  [uses_data_from C]
+  DROP self-loop                     ru-rosstat-healthcare-subjects-appendix -> ru-rosstat-healthcare-russia  =>  ru-rosstat-healthcare-russia -> ru-rosstat-healthcare-russia  [uses_data_from C]
+  REPOINT                            ru-rosstat-healthcare-subjects-appendix -> ru-rosstat-municipal-indicators-database  =>  ru-rosstat-healthcare-russia -> ru-rosstat-municipal-indicators-database  [uses_data_from C]
+  REPOINT                            ru-mosstat-moscow-statistical-yearbook -> ru-rosstat-healthcare-subjects-appendix  =>  ru-mosstat-moscow-statistical-yearbook -> ru-rosstat-healthcare-russia  [uses_data_from C]
+  REPOINT                            ru-cbr-payment-system-indicators -> ru-161-fz-2011-national-payment-system  =>  ru-cbr-statistical-bulletin -> ru-161-fz-2011-national-payment-system  [legal_basis C]
+  REPOINT                            ru-cbr-sbp-faster-payments -> ru-cbr-payment-system-indicators  =>  ru-cbr-sbp-faster-payments -> ru-cbr-statistical-bulletin  [uses_data_from C]
+  DROP self-loop                     ru-cbr-brps-payment-system -> ru-cbr-payment-system-indicators  =>  ru-cbr-statistical-bulletin -> ru-cbr-statistical-bulletin  [uses_data_from C]
+
+NODES — 3674 -> 3668; edges 3456 -> 3451
+
+ru-rosstat-industrial-production-russia: rank 76 -> 79   authority 0.05919 -> 0.05763   (sum of the 2 parts before: 0.10654)
+   retired ru-rosstat-industrial-production-subjects-appendix was rank 108, authority 0.04735
+
+ru-rosstat-construction-russia: rank 182 -> 346   authority 0.03448 -> 0.02420   (sum of the 2 parts before: 0.04839)
+   retired ru-rosstat-construction-subjects-appendix was rank 2002, authority 0.01391
+
+ru-rosstat-transport-russia: rank 2003 -> 3364   authority 0.01391 -> 0.00800   (sum of the 2 parts before: 0.02783)
+   retired ru-rosstat-transport-subjects-appendix was rank 2004, authority 0.01391
+
+ru-rosstat-healthcare-russia: rank 115 -> 103   authority 0.04485 -> 0.04863   (sum of the 2 parts before: 0.07291)
+   retired ru-rosstat-healthcare-subjects-appendix was rank 249, authority 0.02806
+
+ru-cbr-statistical-bulletin: rank 2021 -> 349   authority 0.01391 -> 0.02420   (sum of the 3 parts before: 0.06231)
+   retired ru-cbr-payment-system-indicators     was rank 183, authority 0.03448
+   retired ru-cbr-brps-payment-system           was rank 2036, authority 0.01391
+
+corpus-wide: 17 of 3668 surviving nodes change AUTHORITY by more than 1%; largest 73.9% (ru-cbr-statistical-bulletin)

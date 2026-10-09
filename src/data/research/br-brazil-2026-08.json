@@ -2,7 +2,56 @@
  "meta": {
   "source": "august-2026-import/consolidated/br-brazil.json",
   "minted": "2026-08-20",
-  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md",
+  "merged": {
+   "_note": "Node-granularity merge, 2026-10-05 (Thomas, ruling (a): one node per document). Old id -> survivor, with the old title. These titles are NOT title_aliases — they are the August 2026 import's topic names, not names the document is printed under. Full retired records: notes/retired-nodes-2026-10-05.json. Account: notes/granularity-pilot-br-2026-10-05.md.",
+   "map": {
+    "br-ibge-contas-regionais-estados": {
+     "into": "br-ibge-contas-regionais",
+     "title": "Contas Regionais do Brasil – Unidades da Federação (PIB Estadual)"
+    },
+    "br-ibge-pib-municipio-sao-paulo": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de São Paulo (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-rio": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município do Rio de Janeiro (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-bh": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Belo Horizonte (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-manaus": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Manaus (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-porto-alegre": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Porto Alegre (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-curitiba": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Curitiba (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-recife": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Recife (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-florianopolis": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Florianópolis (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-fortaleza": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Fortaleza (IBGE Contas Regionais)"
+    },
+    "br-ibge-pib-municipio-brasilia": {
+     "into": "br-ibge-pib-municipios",
+     "title": "PIB do Município de Brasília (IBGE Contas Regionais)"
+    }
+   }
+  }
  },
  "reports": [
   {
@@ -257,7 +306,7 @@
    "domains": [
     "national-accounts"
    ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
+   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9054-contas-regionais-do-brasil.html",
    "source_kind": "official",
    "_batch": [
     "2026-08-17_Brazil-domestic-batch1.json"
@@ -265,7 +314,8 @@
    "_jurisdiction_level_original": "national",
    "_source_kind_original": "official-publication",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html"
   },
   {
    "id": "br-epe-balanco-energetico-nacional",
@@ -534,29 +584,6 @@
    "source_kind": "official",
    "_batch": [
     "2026-08-17_Brazil-domestic-batch2-sectoral.json"
-   ],
-   "_jurisdiction_level_original": "national",
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-contas-regionais-estados",
-   "title": "Contas Regionais do Brasil – Unidades da Federação (PIB Estadual)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "federal",
-   "region": "Brazil",
-   "description": "Annual regional accounts providing Gross Domestic Product, value added by major sectors, and related aggregates for each of the 27 Federation Units (states + DF). Compiled in methodological partnership with state statistical offices under a uniform SNA-consistent framework linked to the national Sistema de Contas Nacionais. Forms the principal official series for inter-state comparison and the bridge from national to state economic activity. Municipal GDP series are produced in the same programme.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-contas-regionais",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch3-states.json"
    ],
    "_jurisdiction_level_original": "national",
    "_source_kind_original": "official-publication",
@@ -876,116 +903,6 @@
    "kind": "publication"
   },
   {
-   "id": "br-ibge-pib-municipio-sao-paulo",
-   "title": "PIB do Município de São Paulo (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "São Paulo",
-   "description": "Municipal Gross Domestic Product estimate for the City of São Paulo produced within the IBGE Contas Regionais / PIB dos Municípios programme. São Paulo municipality accounts for approximately 9.7% of Brazilian GDP and roughly one-third of the state of São Paulo’s GDP. Forms the direct vertical link from the municipal to the state and national accounts.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch4-cities.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-rio",
-   "title": "PIB do Município do Rio de Janeiro (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Rio de Janeiro",
-   "description": "Municipal Gross Domestic Product estimate for the City of Rio de Janeiro within the IBGE Contas Regionais programme. Second-largest municipal economy in Brazil (≈3.8% of national GDP). Provides the official municipal-to-state vertical bridge for Rio de Janeiro.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch4-cities.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-bh",
-   "title": "PIB do Município de Belo Horizonte (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Belo Horizonte",
-   "description": "Municipal Gross Domestic Product estimate for Belo Horizonte within the IBGE Contas Regionais programme. One of the ten largest municipal economies in Brazil. Links the capital of Minas Gerais into the state and national accounts hierarchy.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch4-cities.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-manaus",
-   "title": "PIB do Município de Manaus (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Manaus",
-   "description": "Municipal Gross Domestic Product estimate for Manaus within the IBGE Contas Regionais programme (in partnership with SUFRAMA for Free Trade Zone activity). Manaus accounts for roughly 80% of Amazonas state GDP and is among the ten largest municipal economies nationally. Provides the Amazon metropolitan contrast node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch4-cities.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-porto-alegre",
-   "title": "PIB do Município de Porto Alegre (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Porto Alegre",
-   "description": "Municipal Gross Domestic Product estimate for Porto Alegre within the IBGE Contas Regionais programme. Capital of Rio Grande do Sul and one of the larger southern municipal economies. Completes the vertical chain from municipal to state (DEE) to national accounts for the southern high-output node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch4-cities.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
    "id": "br-stn-resultado-tesouro-nacional",
    "title": "Resultado do Tesouro Nacional (RTN)",
    "publisher": "Secretaria do Tesouro Nacional (STN)",
@@ -1068,7 +985,7 @@
     "education",
     "industry"
    ],
-   "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+   "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar",
    "source_kind": "official",
    "_batch": [
     "2026-08-17_Brazil-domestic-batch5-fiscal-education-health.json"
@@ -1076,7 +993,8 @@
    "_jurisdiction_level_original": "national",
    "_source_kind_original": "official-census",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica"
   },
   {
    "id": "br-ibge-pns",
@@ -1114,7 +1032,7 @@
     "health",
     "education"
    ],
-   "url": "https://www.ibge.gov.br/estatisticas/sociais/educacao.html",
+   "url": "https://www.ibge.gov.br/estatisticas/sociais/educacao/9134-pesquisa-nacional-de-saude-do-escolar.html",
    "source_kind": "official",
    "_batch": [
     "2026-08-17_Brazil-domestic-batch5-fiscal-education-health.json"
@@ -1122,7 +1040,8 @@
    "_jurisdiction_level_original": "national",
    "_source_kind_original": "official-survey",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.ibge.gov.br/estatisticas/sociais/educacao.html"
   },
   {
    "id": "br-ibge-pnad-educacao",
@@ -1138,7 +1057,7 @@
     "living-standards",
     "labour"
    ],
-   "url": "https://www.ibge.gov.br/estatisticas/sociais/educacao.html",
+   "url": "https://www.ibge.gov.br/estatisticas/sociais/educacao/17270-pnad-continua.html?edicao=47159",
    "source_kind": "official",
    "part_of": "br-ibge-pnad-continua",
    "_batch": [
@@ -1147,7 +1066,8 @@
    "_jurisdiction_level_original": "national",
    "_source_kind_original": "official-survey",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.ibge.gov.br/estatisticas/sociais/educacao.html"
   },
   {
    "id": "br-bcb-nota-fiscal-abaixo-linha",
@@ -1287,50 +1207,6 @@
    "kind": "publication"
   },
   {
-   "id": "br-ibge-pib-municipio-curitiba",
-   "title": "PIB do Município de Curitiba (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Curitiba",
-   "description": "Municipal Gross Domestic Product estimate for Curitiba within the IBGE Contas Regionais / PIB dos Municípios programme. Capital of Paraná and one of the larger southern municipal economies; anchors the vertical chain for the PR state node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch6-more-states-higher-ed.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-recife",
-   "title": "PIB do Município de Recife (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Recife",
-   "description": "Municipal Gross Domestic Product estimate for Recife within the IBGE Contas Regionais programme. Capital of Pernambuco and principal metropolitan economy of the state; provides the municipal anchor for the PE North-East contrast node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch6-more-states-higher-ed.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
    "id": "br-inep-censo-educacao-superior",
    "title": "Censo da Educação Superior",
    "publisher": "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP / MEC)",
@@ -1375,28 +1251,6 @@
     "2026-08-17_Brazil-domestic-batch6-more-states-higher-ed.json"
    ],
    "_jurisdiction_level_original": "national",
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-florianopolis",
-   "title": "PIB do Município de Florianópolis (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Florianópolis",
-   "description": "Municipal Gross Domestic Product estimate for Florianópolis within the IBGE Contas Regionais programme. Capital of Santa Catarina; anchors the vertical chain for the SC state node alongside larger industrial municipalities (Joinville, Itajaí).",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch6-more-states-higher-ed.json"
-   ],
    "_source_kind_original": "official-publication",
    "last_updated": null,
    "kind": "publication"
@@ -1512,50 +1366,6 @@
    ],
    "_jurisdiction_level_original": "state",
    "_source_kind_original": "official-release",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-fortaleza",
-   "title": "PIB do Município de Fortaleza (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Fortaleza",
-   "description": "Municipal Gross Domestic Product estimate for Fortaleza within the IBGE Contas Regionais programme. Capital of Ceará and principal metropolitan economy of the state; anchors the vertical chain for the CE North-East contrast node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch7-residual.json"
-   ],
-   "_source_kind_original": "official-publication",
-   "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "br-ibge-pib-municipio-brasilia",
-   "title": "PIB do Município de Brasília (IBGE Contas Regionais)",
-   "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-   "country": "BR",
-   "jurisdiction_level": "municipal",
-   "region": "Brasília",
-   "description": "Municipal Gross Domestic Product estimate for Brasília (essentially coincident with the Distrito Federal in statistical practice) within the IBGE Contas Regionais programme. One of the largest municipal economies and the institutional capital node.",
-   "releases_per_year": 1,
-   "domains": [
-    "national-accounts"
-   ],
-   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "source_kind": "official",
-   "part_of": "br-ibge-pib-municipios",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch7-residual.json"
-   ],
-   "_source_kind_original": "official-publication",
    "last_updated": null,
    "kind": "publication"
   },
@@ -1753,17 +1563,6 @@
    "evidence_grade": "B"
   },
   {
-   "source_report_id": "br-ibge-sistema-contas-nacionais",
-   "target_report_id": "br-ibge-contas-regionais",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Contas Regionais do Brasil and the municipal GDP series are compiled consistently with the national Sistema de Contas Nacionais and follow the same SNA 2008 framework and methodological principles.",
-   "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais.html",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch1.json"
-   ],
-   "evidence_grade": "B"
-  },
-  {
    "source_report_id": "br-ibge-pnad-continua",
    "target_report_id": "br-ibge-sistema-contas-nacionais",
    "relationship_type": "uses_data_from",
@@ -1940,18 +1739,7 @@
    "evidence_grade": "B"
   },
   {
-   "source_report_id": "br-ibge-contas-regionais-estados",
-   "target_report_id": "br-ibge-pib-municipios",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Municipal GDP estimates are produced within the same Contas Regionais programme and share the same conceptual framework, classifications and balancing procedures as the state-level accounts.",
-   "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
-   "_batch": [
-    "2026-08-17_Brazil-domestic-batch3-states.json"
-   ],
-   "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "br-ibge-contas-regionais-estados",
+   "source_report_id": "br-ibge-contas-regionais",
    "target_report_id": "br-rs-dee-pib",
    "relationship_type": "methodology_depends_on",
    "basis": "The DEE/SPGG of Rio Grande do Sul calculates state and municipal PIB in explicit methodological partnership with IBGE Contas Regionais.",
@@ -1959,7 +1747,8 @@
    "_batch": [
     "2026-08-17_Brazil-domestic-batch3-states.json"
    ],
-   "evidence_grade": "B"
+   "evidence_grade": "B",
+   "_repointed_from": "br-ibge-contas-regionais-estados -> br-rs-dee-pib (2026-10-05, node-granularity merge)"
   },
   {
    "source_report_id": "br-ibge-pib-municipios",
@@ -1974,14 +1763,15 @@
   },
   {
    "source_report_id": "br-rs-dee-pib",
-   "target_report_id": "br-ibge-pib-municipio-porto-alegre",
+   "target_report_id": "br-ibge-pib-municipios",
    "relationship_type": "uses_data_from",
    "basis": "DEE Rio Grande do Sul calculates state and municipal PIB in partnership with IBGE; the Porto Alegre municipal figure is a core input to the state series.",
    "evidence_url": "https://visualiza.dee.rs.gov.br/pib/",
    "_batch": [
     "2026-08-17_Brazil-domestic-batch4-cities.json"
    ],
-   "evidence_grade": "B"
+   "evidence_grade": "B",
+   "_repointed_from": "br-rs-dee-pib -> br-ibge-pib-municipio-porto-alegre (2026-10-05, node-granularity merge)"
   },
   {
    "source_report_id": "br-stn-resultado-tesouro-nacional",
@@ -2050,7 +1840,7 @@
    "evidence_grade": "B"
   },
   {
-   "source_report_id": "br-ibge-contas-regionais-estados",
+   "source_report_id": "br-ibge-contas-regionais",
    "target_report_id": "br-pr-ipardes-pib",
    "relationship_type": "methodology_depends_on",
    "basis": "IPARDES calculates the Paraná PIB series in explicit methodological cooperation with the IBGE Contas Regionais programme; state results are reconciled to national totals.",
@@ -2058,7 +1848,8 @@
    "_batch": [
     "2026-08-17_Brazil-domestic-batch6-more-states-higher-ed.json"
    ],
-   "evidence_grade": "B"
+   "evidence_grade": "B",
+   "_repointed_from": "br-ibge-contas-regionais-estados -> br-pr-ipardes-pib (2026-10-05, node-granularity merge)"
   },
   {
    "source_report_id": "br-inep-censo-escolar",
@@ -2072,7 +1863,7 @@
    "evidence_grade": "B"
   },
   {
-   "source_report_id": "br-ibge-contas-regionais-estados",
+   "source_report_id": "br-ibge-contas-regionais",
    "target_report_id": "br-df-ipedf-pib",
    "relationship_type": "methodology_depends_on",
    "basis": "IPEDF is the official IBGE partner for Contas Regionais in the Distrito Federal and produces the DF PIB under that system (plus an independent quarterly series).",
@@ -2080,7 +1871,8 @@
    "_batch": [
     "2026-08-17_Brazil-domestic-batch7-residual.json"
    ],
-   "evidence_grade": "B"
+   "evidence_grade": "B",
+   "_repointed_from": "br-ibge-contas-regionais-estados -> br-df-ipedf-pib (2026-10-05, node-granularity merge)"
   },
   {
    "source_report_id": "br-mtur-anuario-turismo",
@@ -2149,25 +1941,25 @@
  ],
  "_dropped": [
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-sp-seade-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-sp-seade-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-sp-seade-pib",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.seade.gov.br/. Original basis: \"SEADE produces the São Paulo state PIB series in methodological partnership with IBGE under the national Contas Regionais programme; state results are reconciled to the national totals.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.seade.gov.br/. Original basis: \"SEADE produces the São Paulo state PIB series in methodological partnership with IBGE under the national Contas Regionais programme; state results are reconciled to the national totals.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-mg-fjp-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-mg-fjp-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-mg-fjp-pib",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://fjp.mg.gov.br/. Original basis: \"Fundação João Pinheiro calculates Minas Gerais PIB as part of the IBGE Contas Regionais partnership; the state series is consistent with and contributes to the national regional accounts.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://fjp.mg.gov.br/. Original basis: \"Fundação João Pinheiro calculates Minas Gerais PIB as part of the IBGE Contas Regionais partnership; the state series is consistent with and contributes to the national regional accounts.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-am-sedecti-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-am-sedecti-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-am-sedecti-pib",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.sedecti.am.gov.br/. Original basis: \"Amazonas state PIB estimates published by SEDECTI are aligned with the IBGE Contas Regionais framework and the national regional accounts programme (including SUFRAMA partnership for the Manaus Free Trade Zone).\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.sedecti.am.gov.br/. Original basis: \"Amazonas state PIB estimates published by SEDECTI are aligned with the IBGE Contas Regionais framework and the national regional accounts programme (including SUFRAMA partnership for the Manaus Free Trade Zone).\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
    "edge": "br-sp-seade-pib -> br-sp-seade-indicadores",
@@ -2184,18 +1976,18 @@
    "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://fjp.mg.gov.br/. Original basis: \"The detailed Contas Regionais de Minas Gerais publication expands and documents the high-frequency PIB estimates produced by the same institution under the same methodological framework.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
   },
   {
-   "edge": "br-sp-seade-pib -> br-ibge-pib-municipio-sao-paulo",
+   "edge": "br-sp-seade-pib -> br-ibge-pib-municipios",
    "source": "br-sp-seade-pib",
-   "target": "br-ibge-pib-municipio-sao-paulo",
+   "target": "br-ibge-pib-municipios",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.seade.gov.br/. Original basis: \"State-level SEADE PIB aggregates and analyses the municipal GDP building blocks (including the City of São Paulo) produced under the IBGE Contas Regionais programme.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.seade.gov.br/. Original basis: \"State-level SEADE PIB aggregates and analyses the municipal GDP building blocks (including the City of São Paulo) produced under the IBGE Contas Regionais programme.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-pib-municipio-sao-paulo merged into br-ibge-pib-municipios — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
-   "edge": "br-am-sedecti-pib -> br-ibge-pib-municipio-manaus",
+   "edge": "br-am-sedecti-pib -> br-ibge-pib-municipios",
    "source": "br-am-sedecti-pib",
-   "target": "br-ibge-pib-municipio-manaus",
+   "target": "br-ibge-pib-municipios",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.sedecti.am.gov.br/. Original basis: \"Manaus dominates Amazonas state GDP; the municipal estimate under IBGE Contas Regionais is the principal building block for the SEDECTI state PIB series.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.sedecti.am.gov.br/. Original basis: \"Manaus dominates Amazonas state GDP; the municipal estimate under IBGE Contas Regionais is the principal building block for the SEDECTI state PIB series.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-pib-municipio-manaus merged into br-ibge-pib-municipios — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
    "edge": "br-ibge-censo-demografico -> br-sp-observasampa",
@@ -2212,18 +2004,18 @@
    "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.data.rio/. Original basis: \"DATA.Rio / Instituto Pereira Passos publishes Censo 2022 aggregates by bairro, Região Administrativa and Área de Planejamento, performing municipal territorial attribution on top of the IBGE census frame.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-sc-seplan-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-sc-seplan-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-sc-seplan-pib",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.seplan.sc.gov.br/. Original basis: \"SEPLAN-SC produces Santa Catarina PIB estimates and municipal analyses within the framework of the IBGE Contas Regionais partnership.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.seplan.sc.gov.br/. Original basis: \"SEPLAN-SC produces Santa Catarina PIB estimates and municipal analyses within the framework of the IBGE Contas Regionais partnership.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-pe-condepe-fidem",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-pe-condepe-fidem",
+   "source": "br-ibge-contas-regionais",
    "target": "br-pe-condepe-fidem",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.condepefidem.pe.gov.br/. Original basis: \"CONDEPE/FIDEM economic and population statistics for Pernambuco are aligned with IBGE Contas Regionais and demographic frameworks.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.condepefidem.pe.gov.br/. Original basis: \"CONDEPE/FIDEM economic and population statistics for Pernambuco are aligned with IBGE Contas Regionais and demographic frameworks.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
    "edge": "br-pr-ipardes-pib -> br-pr-ipardes-parana-em-numeros",
@@ -2233,11 +2025,11 @@
    "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ipardes.pr.gov.br/. Original basis: \"The Paraná em Números interactive panel incorporates and contextualises the state and municipal PIB series produced by the same institution.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-ce-ipece-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-ce-ipece-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-ce-ipece-pib",
    "reason": "no-document",
-   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ipece.ce.gov.br/. Original basis: \"IPECE calculates the Ceará PIB series within the IBGE Contas Regionais partnership framework.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+   "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ipece.ce.gov.br/. Original basis: \"IPECE calculates the Ceará PIB series within the IBGE Contas Regionais partnership framework.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage. [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
    "edge": "br-ibge-sistema-contas-nacionais -> brics-jsp",
@@ -2317,18 +2109,18 @@
    "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/28920-contas-de-ecossistemas.html. Original basis: \"The Contas Econômicas Ambientais are constructed as an extension of the Sistema de Contas Nacionais under the SEEA framework, ensuring conceptual and classification consistency with the core economic accounts while adding physical and monetary environmental dimensions.\""
   },
   {
-   "edge": "br-ibge-sistema-contas-nacionais -> br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-sistema-contas-nacionais -> br-ibge-contas-regionais",
    "source": "br-ibge-sistema-contas-nacionais",
-   "target": "br-ibge-contas-regionais-estados",
+   "target": "br-ibge-contas-regionais",
    "reason": "deferred",
-   "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais.html. Original basis: \"The Contas Regionais for Federation Units are compiled under a uniform methodology that is fully consistent with, and constrained by, the national Sistema de Contas Nacionais (SNA 2008 framework).\""
+   "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais.html. Original basis: \"The Contas Regionais for Federation Units are compiled under a uniform methodology that is fully consistent with, and constrained by, the national Sistema de Contas Nacionais (SNA 2008 framework).\" [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.] The merge made this note and the LIVE edge br-ibge-sistema-contas-nacionais -> br-ibge-contas-regionais (methodology_depends_on, B, evidence_url https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais.html) one pair; the live twin rested on the same kind of \"compiled consistently with\" basis, so Thomas ruled 2026-10-05 to defer it too, under the same F-03 ruling. Its basis, verbatim: \"Contas Regionais do Brasil and the municipal GDP series are compiled consistently with the national Sistema de Contas Nacionais and follow the same SNA 2008 framework and methodological principles.\""
   },
   {
-   "edge": "br-ibge-contas-regionais-estados -> br-ba-sei-pib",
-   "source": "br-ibge-contas-regionais-estados",
+   "edge": "br-ibge-contas-regionais -> br-ba-sei-pib",
+   "source": "br-ibge-contas-regionais",
    "target": "br-ba-sei-pib",
    "reason": "deferred",
-   "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: methodology_depends_on. Original evidence_url: http://www.ba.gov.br/sei/pib-estadual-trimestral. Original basis: \"SEI Bahia produces the state PIB series that feeds into and is consistent with the IBGE Contas Regionais for Bahia.\""
+   "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: methodology_depends_on. Original evidence_url: http://www.ba.gov.br/sei/pib-estadual-trimestral. Original basis: \"SEI Bahia produces the state PIB series that feeds into and is consistent with the IBGE Contas Regionais for Bahia.\" [Endpoint re-pointed 2026-10-05: br-ibge-contas-regionais-estados merged into br-ibge-contas-regionais — node-granularity ruling (a), one node per document; notes/granularity-pilot-br-2026-10-05.md.]"
   },
   {
    "edge": "br-ibge-pim-pf -> br-ibge-sistema-contas-nacionais",
@@ -2350,6 +2142,13 @@
    "target": "br-bcb-nota-fiscal-abaixo-linha",
    "reason": "deferred",
    "why": "DEFERRED (2026-09-03 schema+validator round, independent audit 2026-09-02 finding A5): 'analytically complementary ... reference each other' is the 'consistent with' shape the 2026-08-31 audit ruled out (PLAYBOOK) -- basis describes two measures used alongside one another, not a computational or methodological dependency of one on the other. Original entry preserved verbatim: relationship_type=cites, evidence_url='https://www.gov.br/tesouronacional/pt-br/estatisticas-fiscais-e-planejamento/resultado-do-tesouro-nacional-rtn', evidence_quote=None."
+  },
+  {
+   "edge": "br-ibge-contas-regionais -> br-ibge-pib-municipios",
+   "source": "br-ibge-contas-regionais",
+   "target": "br-ibge-pib-municipios",
+   "reason": "note",
+   "why": "CONTAINMENT, NOT A DEPENDENCY — removed from the graph 2026-10-05. Was live as br-ibge-contas-regionais-estados -> br-ibge-pib-municipios (methodology_depends_on, B); the node-granularity merge (ruling (a), Thomas 2026-10-05) folded -estados into br-ibge-contas-regionais, which br-ibge-pib-municipios is part_of, and a dependency between a node and its part_of container is a validator error (PLAYBOOK-CORPUS rule 12). Original evidence_url: https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html. Original basis: \"Municipal GDP estimates are produced within the same Contas Regionais programme and share the same conceptual framework, classifications and balancing procedures as the state-level accounts.\""
   }
  ]
 }

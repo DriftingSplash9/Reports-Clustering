@@ -148,31 +148,12 @@ from being an error. The check still fires; it is no longer clean, and that is
 correct.* Three of the six came back with the evidence being weaker than the
 citation looked, and those are a live-edge decision in `HANDOFF.md` §3.
 
-## Poland, 2026-09-11 — three leads, unresumed for four rounds
+## Poland, 2026-09-11 — RETURNED to `HANDOFF.md` §3 on 2026-10-06
 
-**MOVED HERE FROM `HANDOFF.md` §3 ON 2026-09-15**, which is where the read-cost paragraph in that
-file's §1 has been asking for it since handoff 085 — four paragraphs describing work nobody has
-picked up across the EU classification round, the BPS url repair and this one. Nothing about the
-three leads has changed; they are real, the evidence for two of them is already read, and they are
-waiting on one thing that is not research. **The blocker is `HANDOFF.md` §3 [Thomas] item 3: a
-`www.gov.pl` permission in the Chrome extension.** The extension refuses that domain outright
-("Navigation to this domain is not allowed"), the container's egress proxy answers 403 to CONNECT
-for every Polish host, and the bridge VM has no network at all — so no route in any session
-reaches them. Text as it stood in `HANDOFF.md`, verbatim:
-
-**Poland, 2026-09-11 — still open, unchanged by this round:**
-
-1. **GUS's own title for its foreign-trade release.** NBP's balance-of-payments methodological
-   notes name it as the largest single input to the Polish current account, but "Foreign Trade
-   Statistics" is NBP's name for it and a node must carry the publisher's own title.
-   `stat.gov.pl`'s English pages redirected to `new.stat.gov.pl` mid-session.
-2. **PKWiU 2015's upstream** — the target is almost certainly `cpa`, stated in the introducing
-   regulation (Dz.U. 2015 poz. 1676). Note that `cpa` now has a second in-edge from
-   `eurostat-prodcom`, so it is no longer a one-edge node.
-3. **NBP's IIP and external-debt series** — real, evidence already read, deliberately not minted.
-
-*(Return route: when the `gov.pl` permission exists, this block goes back to `HANDOFF.md` §3 as an
-active lane. Until then it is here and off the always-read path.)*
+*(This block sat here from 2026-09-15 waiting on a `www.gov.pl` permission in the Chrome extension. On 2026-10-06
+`https://www.gov.pl/web/finanse` loaded in Chrome with no prompt, so by the block's own return route it went back to
+`HANDOFF.md` §3 as an active lane. The three leads went with it, verbatim, into the handoff-087 §3; once
+that handoff is superseded they are in its archived copy.)*
 
 *(When an item is fixed or ruled out, its line moves here with the date and the
 reason, and is deleted at the following review.)*

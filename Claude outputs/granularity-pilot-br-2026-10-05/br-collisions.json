@@ -1,0 +1,242 @@
+{
+ "slice": "br-brazil-2026-08",
+ "groups": 3,
+ "nodes": 17,
+ "detail": [
+  {
+   "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html",
+   "n": 13,
+   "nodes": [
+    {
+     "id": "br-ibge-contas-regionais",
+     "title": "Contas Regionais do Brasil",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "in_slice": true,
+     "description": "Regional accounts system providing Gross Domestic Product and related aggregates for the Federation Units (states and Federal District) and, at a more detailed level, for municipalities (Produto Interno Bruto dos Municípios). Compiled consistently with the national Sistema de Contas Nacionais and SNA 2008. Annual publication. Forms the principal vertical bridge from national to state and municipal economic activity measures.",
+     "out": [
+      "sna-2008 [methodology_depends_on B]"
+     ],
+     "in": [
+      "br-ibge-sistema-contas-nacionais [methodology_depends_on B]"
+     ]
+    },
+    {
+     "id": "br-ibge-contas-regionais-estados",
+     "title": "Contas Regionais do Brasil – Unidades da Federação (PIB Estadual)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-contas-regionais",
+     "in_slice": true,
+     "description": "Annual regional accounts providing Gross Domestic Product, value added by major sectors, and related aggregates for each of the 27 Federation Units (states + DF). Compiled in methodological partnership with state statistical offices under a uniform SNA-consistent framework linked to the national Sistema de Contas Nacionais. Forms the principal official series for inter-state comparison and the bridge from national to state economic activity. Municipal GDP series are produced in the same programme.",
+     "out": [
+      "br-ibge-pib-municipios [methodology_depends_on B]",
+      "br-rs-dee-pib [methodology_depends_on B]",
+      "br-pr-ipardes-pib [methodology_depends_on B]",
+      "br-df-ipedf-pib [methodology_depends_on B]"
+     ],
+     "in": []
+    },
+    {
+     "id": "br-ibge-pib-municipios",
+     "title": "Produto Interno Bruto dos Municípios",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-contas-regionais",
+     "in_slice": true,
+     "description": "Annual estimates of municipal Gross Domestic Product and value added by major sectors for all Brazilian municipalities, produced by IBGE in partnership with state statistical offices and SUFRAMA. Fully consistent with the Contas Regionais and national accounts methodologies. Provides the finest geographic resolution of economic activity and the vertical link from state to municipal level.",
+     "out": [
+      "br-sp-seade-pib [uses_data_from C]"
+     ],
+     "in": [
+      "br-ibge-contas-regionais-estados [methodology_depends_on B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-sao-paulo",
+     "title": "PIB do Município de São Paulo (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for the City of São Paulo produced within the IBGE Contas Regionais / PIB dos Municípios programme. São Paulo municipality accounts for approximately 9.7% of Brazilian GDP and roughly one-third of the state of São Paulo’s GDP. Forms the direct vertical link from the municipal to the state and national accounts.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "br-ibge-pib-municipio-rio",
+     "title": "PIB do Município do Rio de Janeiro (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for the City of Rio de Janeiro within the IBGE Contas Regionais programme. Second-largest municipal economy in Brazil (≈3.8% of national GDP). Provides the official municipal-to-state vertical bridge for Rio de Janeiro.",
+     "out": [],
+     "in": [
+      "br-rj-ceperj-anuario [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-bh",
+     "title": "PIB do Município de Belo Horizonte (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Belo Horizonte within the IBGE Contas Regionais programme. One of the ten largest municipal economies in Brazil. Links the capital of Minas Gerais into the state and national accounts hierarchy.",
+     "out": [],
+     "in": [
+      "br-mg-fjp-pib [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-manaus",
+     "title": "PIB do Município de Manaus (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Manaus within the IBGE Contas Regionais programme (in partnership with SUFRAMA for Free Trade Zone activity). Manaus accounts for roughly 80% of Amazonas state GDP and is among the ten largest municipal economies nationally. Provides the Amazon metropolitan contrast node.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "br-ibge-pib-municipio-porto-alegre",
+     "title": "PIB do Município de Porto Alegre (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Porto Alegre within the IBGE Contas Regionais programme. Capital of Rio Grande do Sul and one of the larger southern municipal economies. Completes the vertical chain from municipal to state (DEE) to national accounts for the southern high-output node.",
+     "out": [],
+     "in": [
+      "br-rs-dee-pib [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-curitiba",
+     "title": "PIB do Município de Curitiba (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Curitiba within the IBGE Contas Regionais / PIB dos Municípios programme. Capital of Paraná and one of the larger southern municipal economies; anchors the vertical chain for the PR state node.",
+     "out": [],
+     "in": [
+      "br-pr-ipardes-pib [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-recife",
+     "title": "PIB do Município de Recife (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Recife within the IBGE Contas Regionais programme. Capital of Pernambuco and principal metropolitan economy of the state; provides the municipal anchor for the PE North-East contrast node.",
+     "out": [],
+     "in": []
+    },
+    {
+     "id": "br-ibge-pib-municipio-florianopolis",
+     "title": "PIB do Município de Florianópolis (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Florianópolis within the IBGE Contas Regionais programme. Capital of Santa Catarina; anchors the vertical chain for the SC state node alongside larger industrial municipalities (Joinville, Itajaí).",
+     "out": [],
+     "in": [
+      "br-sc-seplan-pib [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-fortaleza",
+     "title": "PIB do Município de Fortaleza (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Fortaleza within the IBGE Contas Regionais programme. Capital of Ceará and principal metropolitan economy of the state; anchors the vertical chain for the CE North-East contrast node.",
+     "out": [],
+     "in": [
+      "br-ce-ipece-pib [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-ibge-pib-municipio-brasilia",
+     "title": "PIB do Município de Brasília (IBGE Contas Regionais)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pib-municipios",
+     "in_slice": true,
+     "description": "Municipal Gross Domestic Product estimate for Brasília (essentially coincident with the Distrito Federal in statistical practice) within the IBGE Contas Regionais programme. One of the largest municipal economies and the institutional capital node.",
+     "out": [],
+     "in": [
+      "br-df-ipedf-pib [uses_data_from B]"
+     ]
+    }
+   ]
+  },
+  {
+   "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "br-inep-censo-escolar",
+     "title": "Censo Escolar da Educação Básica",
+     "kind": "publication",
+     "publisher": "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP / MEC)",
+     "in_slice": true,
+     "description": "Annual census of basic education (educação infantil, ensino fundamental, ensino médio, educação profissional, EJA) covering enrolments, teachers, school managers and schools. Produces the Sinopse Estatística da Educação Básica, technical notes, microdata and derived indicators. Principal structural source for the Brazilian education system and input into education-related components of national and social statistics.",
+     "out": [
+      "br-inep-censo-educacao-superior [cites B]"
+     ],
+     "in": [
+      "br-ibge-censo-demografico [uses_data_from B]"
+     ]
+    },
+    {
+     "id": "br-inep-sinopse-educacao-basica",
+     "title": "Sinopse Estatística da Educação Básica",
+     "kind": "publication",
+     "publisher": "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP / MEC)",
+     "part_of": "br-inep-censo-escolar",
+     "in_slice": true,
+     "description": "Annual statistical synopsis derived from the Censo Escolar da Educação Básica, presenting summarised tables and indicators on enrolments, teachers, schools and education stages. Principal published tabular product of the school census and widely used reference for education planning and research.",
+     "out": [],
+     "in": []
+    }
+   ]
+  },
+  {
+   "url": "https://www.ibge.gov.br/estatisticas/sociais/educacao.html",
+   "n": 2,
+   "nodes": [
+    {
+     "id": "br-ibge-pense",
+     "title": "Pesquisa Nacional de Saúde do Escolar (PeNSE)",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE) in partnership with Ministério da Saúde and Ministério da Educação",
+     "in_slice": true,
+     "description": "National school-based survey of risk and protective factors for adolescent health. Fifth edition (2024) provides updated prevalence and distribution of behaviours and conditions among Brazilian schoolchildren. Supports the Ministry of Health’s surveillance system for adolescent health and informs education and health policy.",
+     "out": [
+      "who-gshs [legal_basis A]"
+     ],
+     "in": []
+    },
+    {
+     "id": "br-ibge-pnad-educacao",
+     "title": "PNAD Contínua – Módulo Anual de Educação",
+     "kind": "publication",
+     "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+     "part_of": "br-ibge-pnad-continua",
+     "in_slice": true,
+     "description": "Annual education module of the continuous PNAD Contínua, collected in the second quarter, expanding the basic education questions of the core questionnaire. Provides detailed indicators on school attendance, educational attainment, literacy and related characteristics for the population aged 5 and over. Complements the structural Censo Escolar with household-based education statistics.",
+     "out": [],
+     "in": []
+    }
+   ]
+  }
+ ]
+}

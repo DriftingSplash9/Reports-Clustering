@@ -3,31 +3,14 @@
   "reports": [],
   "dependencies": [
     {
-      "source_report_id": "mx-igae-actividades",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "INEGI's monthly IGAE boletín carries a full FICHA METODOLÓGICA in plain text, which states the indicator follows the international national-accounts guidelines of the 2008 SNA. Verbatim: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017.\" The round-2 diagnosis that inegi.org.mx/temas/igae/ is a JavaScript shell was correct — it is a 4,267-byte React shell — but the boletín PDF is the route around it, and the same sentence appears in an independent second issue (igae2025_07.pdf).",
-      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
-      "evidence": "documented",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "mx-igae-actividades",
+      "source_report_id": "mx-igae",
       "target_report_id": "naics",
       "relationship_type": "methodology_depends_on",
       "basis": "The same IGAE ficha metodológica states that volume indices are computed for 664 activity classes of SCIAN 2018 — the Mexican national version of NAICS — which the sector and subsector aggregates of the 'por actividad' breakdown are built from. Verbatim: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" The SCIAN-as-national-NAICS identification is the corpus's own, recorded in the naics node's description.",
       "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
       "evidence": "documented",
-      "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "mx-igae-actividades",
-      "target_report_id": "mx-enoe",
-      "relationship_type": "uses_data_from",
-      "basis": "The IGAE ficha's Fuentes row names ENOE among the monthly INEGI statistics that feed the indicator. Verbatim: \"Estadísticas mensuales que elabora el Instituto, como la Encuesta Mensual de la Industria Manufacturera (EMIM), Encuesta Nacional de Empresas Constructoras (ENEC), Encuesta Mensual sobre Empresas Comerciales (EMEC), Encuesta Mensual de Servicios (EMS), estadística de la Industria Minerometalúrgica (EIMM) y la Encuesta Nacional de Ocupación y Empleo (ENOE), los índices nacionales de precios y los registros administrativos, así como las estadísticas económicas y sociales compiladas por el Instituto.\"",
-      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
-      "evidence": "documented",
-      "evidence_grade": "B"
+      "evidence_grade": "B",
+      "_repointed_from": "mx-igae-actividades -> naics (2026-10-05, node-granularity merge)"
     },
     {
       "source_report_id": "mx-tuxtla",
@@ -151,6 +134,13 @@
       "target": "mx-censos-economicos",
       "reason": "resolved",
       "why": "RESOLVED 2026-08-30 (Thomas ruling): a chart/figure-source line clears this corpus's evidence bar -- edge minted (uses_data_from), see this file's `dependencies`. Original entry follows.\n\nStill not minted, but the access block is gone and the remaining objection is evidentiary. The Programa de Gobierno 2024-2027 (https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf) does carry \"Fuente: ... Instituto Nacional de Estadística y Geografía [INEGI] (2003, 2008, 2013, 2018). Sistema Automatizado de Información Censal (SAIC). Censos Económicos.\" — but only as a chart caption under the employment-by-sector figure, not as a sentence in body text. Left for a ruling on whether a figure-source line alone clears the bar."
+    },
+    {
+      "edge": "mx-igae -> mx-enoe",
+      "source": "mx-igae",
+      "target": "mx-enoe",
+      "reason": "resolved",
+      "why": "RESOLVED — the pair is live. DUPLICATE REMOVED 2026-10-05: the live edge mx-igae-actividades -> mx-enoe (uses_data_from, B, evidence_url https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf) became mx-igae -> mx-enoe when mx-igae-actividades was merged into mx-igae, and that pair is already live — same IGAE boletín, same claim, counted twice. Removed from the graph; full record in notes/retired-nodes-2026-10-05-mx.json."
     }
   ]
 }

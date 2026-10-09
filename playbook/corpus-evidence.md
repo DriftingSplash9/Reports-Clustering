@@ -352,3 +352,10 @@ the basis. Three of these are now recorded with that reasoning; a fourth should 
 document writes 'Classification of Functions of Government' against the node's 'Classification of
 the Functions of Government' — would break the contiguous run below 60%. It graded **A**. The run
 rule tolerates a dropped word better than assumed. Check `namesTarget` rather than guessing.)*
+
+### `--write` reformats an indent-1 slice (2026-10-06)
+
+`grade-evidence.ts` writes every slice it touches as `JSON.stringify(json, null, 2)` plus a newline (line 3600). The
+August 2026 import's slices are indent 1 with no trailing newline, so a three-edge `--write` on `ru-russia-2026-08.json`
+turned the whole file into a diff. Afterwards, re-serialise at the slice's own indent and confirm the parsed content is
+identical before moving on; the Russia granularity round did exactly that (`notes/granularity-ru-2026-10-06.md`).

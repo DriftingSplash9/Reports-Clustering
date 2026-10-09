@@ -1,0 +1,47 @@
+cn groups 2 nodes 11
+
+## 9  https://www.stats.gov.cn/english/pressrelease
+  cn-cpi                                   [publication] | Consumer Price Index (CPI) (居民消费价格指数)
+      Official measure of changes in the prices of a fixed basket of consumer goods and services purchased by urban and rural households. Compiled as a chained Laspeyres index. Base year
+      OUT cn-household-income-expenditure [methodology_depends_on B]
+      IN  cn-statistical-yearbook [uses_data_from C]
+      IN  cn-stat-communique [uses_data_from B]
+  cn-industrial-value-added                [publication] | Value-added of Industry (Industrial Production) above Designated Size
+      Key high-frequency indicator of industrial output measuring the year-on-year growth rate of value added of industrial enterprises above designated size (principal business revenue 
+      OUT cn-ppi [methodology_depends_on C]
+      IN  cn-stat-communique [uses_data_from B]
+      IN  cn-gdp-national-accounts [uses_data_from B]
+  cn-ppi                                   [publication] | Producer Price Index for Industrial Products (PPI) (工业生产者出厂价格指数)
+      Monthly index measuring changes in the ex-factory prices of industrial products. Covers mining, manufacturing and utilities. Includes means of production and consumer goods sub-ind
+      IN  cn-stat-communique [uses_data_from B]
+      IN  cn-statistical-yearbook [uses_data_from C]
+      IN  cn-industrial-value-added [methodology_depends_on C]
+  cn-fai                                   [publication] | Investment in Fixed Assets (excluding rural households)
+      Monthly cumulative series measuring capital expenditure on construction and purchase of fixed assets by enterprises, institutions and government units (excluding rural household in
+      OUT cn-real-estate-investment [uses_data_from C]
+      IN  cn-stat-communique [uses_data_from B]
+      IN  cn-gdp-national-accounts [uses_data_from B]
+  cn-retail-sales                          [publication] | Total Retail Sales of Consumer Goods
+      Monthly indicator of domestic consumption measuring the sum of retail sales of consumer goods sold by all sectors to urban and rural residents and social groups. Includes breakdown
+      IN  cn-stat-communique [uses_data_from B]
+      IN  cn-gdp-national-accounts [uses_data_from C]
+  cn-real-estate-investment                [publication] | Investment in Real Estate Development
+      Monthly series on investment by real-estate development enterprises, floor space under construction, newly started and completed, sales of commercial buildings (area and value), an
+      IN  cn-fai [uses_data_from C]
+  cn-grain-production                      [publication] | Bulletin on the National Grain Production
+      Annual (and seasonal) official bulletin reporting total grain sown area, yield per unit area and total production, with breakdowns by season (summer grains, early rice, autumn grai
+      IN  cn-stat-communique [uses_data_from B]
+  cn-rd-expenditure                        [publication] | National Expenditures on Science and Technology / R&D Expenditure Statistics
+      Annual statistical communiqué and detailed tables on research and experimental development (R&D) expenditure, intensity (R&D/GDP), breakdown by activity type (basic research, appli
+      OUT oecd-frascati-manual [methodology_depends_on B]
+      OUT cn-gdp-national-accounts [calculated_from B]
+  cn-energy-production-monthly             [publication] | Energy Production (monthly)
+      Monthly release of major energy production indicators including raw coal, crude oil, natural gas and electricity generation (thermal, hydro, nuclear, wind, solar). Part of the regu
+
+## 2  https://www.stats.gov.cn/sj/tjzd/202604/t20260402_1962943.html
+  cn-nbs-lfs-reporting-system              [instrument] | 劳动力调查制度 (Labour Force Survey System)
+      The NBS instrument governing China's labour force survey — sampling, questionnaire, periodicity and reporting. Distinct from the survey itself (cn-labour-force-survey): this is the
+      IN  cn-statistical-yearbook [uses_data_from A]
+  cn-labour-force-survey                   [publication] | National Labour Force Survey (劳动力调查)
+      NBS's monthly household labour-force survey (劳动力调查), the statistical survey system (统计调查制度) approved by the State Council under which employment and unemployment data are collected
+      IN  cn-urban-surveyed-unemployment [uses_data_from A]

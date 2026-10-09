@@ -2,7 +2,26 @@
  "meta": {
   "source": "august-2026-import/consolidated/uy-uruguay.json",
   "minted": "2026-08-20",
-  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md",
+  "merged": {
+   "_note": "Node-granularity merge, 2026-10-05 (Thomas, ruling (a): one node per document). Old id -> survivor, with the old title. Not a title_alias: the August 2026 import's topic name, not a name the document is printed under. The departmental results are a section (\"Distribución territorial de la pobreza\") of INE's annual Estimación de la pobreza por el método del ingreso. Retired record: notes/retired-nodes-2026-10-05-uy.json. Account: notes/granularity-uy-2026-10-05.md.",
+   "map": {
+    "uy-pobreza-departamental": {
+     "into": "uy-pobreza",
+     "title": "Pobreza por departamento (INE)"
+    },
+    "uy-educacion-salud": {
+     "into": "uy-presupuesto",
+     "title": "Gasto público en educación y salud"
+    }
+   }
+  },
+  "retired": {
+   "_note": "uy-china-relacion retired 2026-10-05 on Thomas's ruling (\"retire the China node too\"), as a bilateral-relationship framing — the treaty/agreement class retired 2026-08-29/31 (playbook/corpus-nodes.md §7c). Its one edge was removed with it. Record verbatim: notes/retired-nodes-2026-10-05-uy.json.",
+   "ids": [
+    "uy-china-relacion"
+   ]
+  }
  },
  "reports": [
   {
@@ -14,7 +33,7 @@
    "region": "Uruguay",
    "description": "Continuous household survey that is the primary source for labour-market indicators, household income, and income-based poverty and inequality measurement. National coverage with Montevideo / Interior domains.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/encuesta-continua-hogares",
    "domains": [
     "labour",
     "poverty",
@@ -26,7 +45,8 @@
    "_shape": "own-cadence",
    "_notes": "Central social and labour survey. Continuous high-frequency operation. Official source for both labour statistics and monetary poverty. Recent poverty (persons) in the mid-to-high teens percent range under the updated methodology.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-pobreza",
@@ -37,7 +57,7 @@
    "region": "Uruguay",
    "description": "Official income-poverty and indigency incidence, calculated by comparing household income (from ECH) with nationally defined poverty and indigency lines. Published with Montevideo / Interior and other breakdowns.",
    "releases_per_year": 2,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/estimacion-pobreza-metodo-del-ingreso-ano-2025",
    "domains": [
     "poverty",
     "living-standards"
@@ -48,7 +68,8 @@
    "_shape": "own-cadence",
    "_notes": "Headline social indicator. 2025: persons under the poverty line ~16.6–17.7% depending on semester; indigency ~1.5–1.8%. Methodology updated in recent years (new baskets and economies of scale). Uruguay records among the lower income-poverty rates in the region.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-lineas-pobreza",
@@ -59,7 +80,7 @@
    "region": "Uruguay",
    "description": "Monetary values of the poverty and indigency lines (per capita / household), differentiated for Montevideo and the Interior and updated with price information.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www5.ine.gub.uy/documents/Demograf%C3%ADayEESS/SERIES%20Y%20OTROS/ECH/Series%20hist%C3%B3ricas/Pobreza/CBA_LP_LI%20M2017.xls",
    "domains": [
     "poverty",
     "inflation"
@@ -70,18 +91,19 @@
    "_shape": "own-cadence",
    "_notes": "Direct input into the poverty measurement. Separate lines for Montevideo and Interior reflect cost-of-living differences.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-ipc",
-   "title": "Índice de Precios al Consumo (IPC) / Consumer Price Index",
+   "title": "Índice de Precios del Consumo (IPC) / Consumer Price Index",
    "publisher": "INE",
    "country": "UY",
    "jurisdiction_level": "federal",
    "region": "Uruguay",
    "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/indice-precios-consumo",
    "domains": [
     "inflation"
    ],
@@ -91,7 +113,10 @@
    "_shape": "own-cadence",
    "_notes": "Flagship price statistic. Direct input into monetary-policy analysis by the Banco Central del Uruguay and into the updating of poverty lines.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "_title_original": "Índice de Precios al Consumo (IPC) / Consumer Price Index",
+   "_retitle_reason": "Retitled 2026-10-06 on Thomas's ruling: INE's own page is titled \"Índice de Precios del Consumo (IPC)\"; the August 2026 import wrote \"al Consumo\". Old title in _title_original."
   },
   {
    "id": "uy-cuentas-nacionales",
@@ -145,7 +170,7 @@
    "region": "Uruguay",
    "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys.",
    "releases_per_year": 0.1,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/censosphv",
    "domains": [
     "population",
     "housing"
@@ -156,7 +181,8 @@
    "_shape": "own-cadence",
    "_notes": "Foundational demographic product. Continuously cited by ECH design and poverty analysis.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-ipm",
@@ -167,7 +193,7 @@
    "region": "Uruguay",
    "description": "Official multidimensional poverty index capturing deprivations across multiple dimensions beyond income. Complements the income-poverty series.",
    "releases_per_year": 1,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/pobreza-multidimensional-2025",
    "domains": [
     "poverty",
     "living-standards"
@@ -178,7 +204,8 @@
    "_shape": "own-cadence",
    "_notes": "Complementary structural poverty measure. Recent estimates place multidimensional poverty in the high teens percent range, with higher incidence outside Montevideo and among children and Afro-descendant populations.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-bop",
@@ -303,7 +330,7 @@
    "region": "Uruguay",
    "description": "Monthly physical-volume index of manufacturing production. Principal high-frequency industrial-activity indicator.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/indice-volumen-fisico-industria-manufacturera",
    "domains": [
     "industry"
    ],
@@ -313,7 +340,8 @@
    "_shape": "own-cadence",
    "_notes": "Core short-term industry product. Published with variants (with/without refinery, core). Companion indices track hours worked and employment in manufacturing.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-carne",
@@ -393,7 +421,7 @@
    "region": "Uruguay",
    "description": "Annual structural business survey covering value added, employment, investment and other variables across economic activities.",
    "releases_per_year": 1,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/Encuesta-Anual-Actividad-Econ%C3%B3mica",
    "domains": [
     "industry",
     "services"
@@ -404,7 +432,8 @@
    "_shape": "own-cadence",
    "_notes": "Structural complement to the high-frequency IVFIM and national accounts. Provides detailed activity-level value-added and employment data.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-montevideo",
@@ -513,38 +542,15 @@
    "kind": "publication"
   },
   {
-   "id": "uy-pobreza-departamental",
-   "title": "Pobreza por departamento (INE)",
-   "publisher": "INE",
-   "country": "UY",
-   "jurisdiction_level": "provincial",
-   "region": "Uruguay",
-   "description": "Official departmental tabulations of income poverty. Primary source for the inter-departmental poverty gradient.",
-   "releases_per_year": 1,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
-   "domains": [
-    "poverty",
-    "living-standards"
-   ],
-   "_batch": [
-    "2026-08-13_Uruguay-batch3-metro-trade-social.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Key homogeneity-test product. 2025 extremes: Artigas, Rivera, Cerro Largo highest; San José, Maldonado, Colonia, Flores lowest. National persons under LP ~16.6%.",
-   "last_updated": null,
-   "part_of": "uy-pobreza",
-   "kind": "publication"
-  },
-  {
    "id": "uy-presupuesto",
-   "title": "Presupuesto Nacional / National Budget",
+   "title": "Rendición de Cuentas y Balance de Ejecución Presupuestal",
    "publisher": "Ministerio de Economía y Finanzas",
    "country": "UY",
    "jurisdiction_level": "federal",
    "region": "Uruguay",
    "description": "Annual national budget law and subsequent execution reports covering revenues and expenditure of the central government.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/ministerio-economia-finanzas/",
+   "url": "https://www.gub.uy/ministerio-economia-finanzas/politicas-y-gestion/rendicion-cuentas-balance-ejecucion-presupuestal-ejercicio-2025",
    "domains": [
     "public-finance"
    ],
@@ -554,31 +560,10 @@
    "_shape": "own-cadence",
    "_notes": "Operational fiscal framework. Links tax and other revenues with functional spending on education, health, social protection and investment.",
    "last_updated": null,
-   "kind": "publication"
-  },
-  {
-   "id": "uy-educacion-salud",
-   "title": "Gasto público en educación y salud",
-   "publisher": "Ministerio de Economía y Finanzas / INE",
-   "country": "UY",
-   "jurisdiction_level": "federal",
-   "region": "Uruguay",
-   "description": "Public expenditure on education and health as reflected in the national budget and related functional statistics. Complements household-survey education and health modules.",
-   "releases_per_year": 1,
-   "url": "https://www.gub.uy/ministerio-economia-finanzas/",
-   "domains": [
-    "public-finance",
-    "education",
-    "health"
-   ],
-   "_batch": [
-    "2026-08-13_Uruguay-batch3-metro-trade-social.json"
-   ],
-   "_shape": "own-cadence",
-   "_notes": "Education and health are major and constitutionally prioritised functional allocations. Continuously tracked in budget execution and social-policy analysis.",
-   "last_updated": null,
-   "part_of": "uy-presupuesto",
-   "kind": "publication"
+   "kind": "publication",
+   "_title_original": "Presupuesto Nacional / National Budget",
+   "_url_original": "https://www.gub.uy/ministerio-economia-finanzas/",
+   "_retitle_reason": "Retitled 2026-10-06: Thomas ruled the node is the annual Rendición de Cuentas, not the five-year Presupuesto Nacional law (its own description reads \"annual national budget law and subsequent execution reports\"); a node carries the publisher's own title (PLAYBOOK-CORPUS §7a). Old title in _title_original."
   },
   {
    "id": "uy-lacteos",
@@ -742,7 +727,7 @@
    "region": "Uruguay",
    "description": "Official Gini coefficient of income inequality, calculated from ECH income data. Published nationally and by department.",
    "releases_per_year": 1,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/indicadores-distribucion-del-ingreso-ano-2025",
    "domains": [
     "poverty",
     "living-standards"
@@ -753,7 +738,8 @@
    "_shape": "own-cadence",
    "_notes": "Companion inequality indicator to the poverty series. 2025 national Gini ~0.40. Montevideo, Salto and Canelones among the highest departmental inequality.",
    "last_updated": null,
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-empleo",
@@ -764,7 +750,7 @@
    "region": "Uruguay",
    "description": "Labour-force indicators from the ECH: employment rate, unemployment rate, activity rate, and related quality-of-employment measures.",
    "releases_per_year": 12,
-   "url": "https://www.gub.uy/instituto-nacional-estadistica/",
+   "url": "https://www.gub.uy/instituto-nacional-estadistica/comunicacion/publicaciones/actividad-empleo-desempleo-ech-agosto-2026",
    "domains": [
     "labour"
    ],
@@ -775,7 +761,8 @@
    "_notes": "Primary high-frequency labour indicators. Derived from the same continuous household survey that underpins the poverty series.",
    "last_updated": null,
    "part_of": "uy-ech",
-   "kind": "publication"
+   "kind": "publication",
+   "_url_original": "https://www.gub.uy/instituto-nacional-estadistica/"
   },
   {
    "id": "uy-bps",
@@ -1070,32 +1057,6 @@
    "_notes": "Institutional interface between the international agreements / incentive regimes and private investors and exporters. Continuously cited in FDI and export-strategy analysis.",
    "last_updated": null,
    "kind": "publication"
-  },
-  {
-   "id": "uy-china-relacion",
-   "title": "Relación comercial y estratégica con China",
-   "publisher": "Gobierno del Uruguay / China",
-   "country": "INT",
-   "jurisdiction_level": "international",
-   "region": "Uruguay / Asia",
-   "description": "Strategic partnership and intensive bilateral trade relationship with China (top export destination). Includes dairy-protocol and broader economic cooperation; FTA negotiations and RCEP interest under discussion.",
-   "url": "https://www.gub.uy/ministerio-economia-finanzas/",
-   "domains": [
-    "trade",
-    "investment"
-   ],
-   "_batch": [
-    "2026-08-13_Uruguay-batch6-international-industrial.json"
-   ],
-   "_shape": "recurring-citation",
-   "_notes": "De-facto structural trade partner. Continuously cited in export-performance analysis even in the absence of a comprehensive bilateral FTA; dairy protocol and strategic-partnership language are recurring reference points.",
-   "_referenced_by": [
-    "Export statistics (China often #1 destination for beef, soy, pulp)",
-    "Strategic-partnership and Belt-and-Road references",
-    "Policy debate on Asia diversification and possible FTA/RCEP path"
-   ],
-   "last_updated": null,
-   "kind": "instrument"
   }
  ],
  "dependencies": [
@@ -1148,11 +1109,12 @@
    "evidence_url": "https://www.gub.uy/instituto-nacional-estadistica/",
    "basis": "Artigas’s high poverty ranking is derived from the departmental poverty tabulations.",
    "source_report_id": "uy-artigas",
-   "target_report_id": "uy-pobreza-departamental",
+   "target_report_id": "uy-pobreza",
    "_batch": [
     "2026-08-13_Uruguay-batch3-metro-trade-social.json"
    ],
-   "evidence_grade": "C"
+   "evidence_grade": "C",
+   "_repointed_from": "uy-artigas -> uy-pobreza-departamental (2026-10-05, node-granularity merge)"
   },
   {
    "relationship_type": "uses_data_from",
@@ -1173,17 +1135,6 @@
    "target_report_id": "uy-ech",
    "_batch": [
     "2026-08-13_Uruguay-batch4-dairy-fiscal.json"
-   ],
-   "evidence_grade": "C"
-  },
-  {
-   "relationship_type": "methodology_depends_on",
-   "evidence_url": "https://www.gub.uy/ministerio-economia-finanzas/",
-   "basis": "China is a top export destination; the bilateral relationship structures a large share of merchandise trade.",
-   "source_report_id": "uy-china-relacion",
-   "target_report_id": "uy-comercio-exterior",
-   "_batch": [
-    "2026-08-13_Uruguay-batch6-international-industrial.json"
    ],
    "evidence_grade": "C"
   }
