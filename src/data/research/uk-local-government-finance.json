@@ -2,7 +2,7 @@
   "_slice": "uk-local-government-finance",
   "_researched": "2026-08-05",
   "_status": "NEW 2026-08-05. Depth pass on the United Kingdom — the corpus's first non-EU-member municipal/regional government-finance chain, following the Netherlands pass the same day. UK chosen (of Switzerland, Norway, UK scouted) for zero language barrier and for being the corpus's only *former* EU member. SWEPT 2026-08-09 (dropped-sweep, long tail): all 4 _dropped entries read in full. Entry 1 (CYPS RNF annex) independently re-verified this session (direct fetch, not subagent) -- the three named datasets confirmed, no codes found, verdict unchanged. Entries 0, 2, 3 already correctly reasoned (0 resolved by the gb-ukspf-succession.json relation, cross-referenced in its own text; 2 and 3 real CIPFA-adjacent distinctions, no new evidence surfaced). No reports or dependencies changed.",
-  "_note": "Three general-purpose subagents researched this in parallel (Fair Funding Review 2.0 Technical Annexes / RO returns; CIPFA Code and council accounts / VOA valuation chain; RO-returns methodology / UKSPF-EU-structural-funds succession), briefed with this project's extraction rules. EVERY quote below marked 'VERIFIED DIRECTLY' was independently re-confirmed by this session against the primary source's own raw text (legislation.gov.uk and gov.uk HTML stripped of tags, or PDFs downloaded and text-extracted with pypdf) — the same discipline applied to the Netherlands pass the same day, after that session found AI-summarized WebFetch quotes are not reliably verbatim. Two council-accounts quotes (Wolverhampton) and all legislation.gov.uk / gov.uk statistics-page quotes were re-verified; one alternate council (York) reported by a subagent was NOT independently re-verified and is not used as edge evidence, only noted.",
+  "_note": "Three general-purpose subagents researched this in parallel (Fair Funding Review 2.0 Technical Annexes / RO returns; CIPFA Code and council accounts / VOA valuation chain; RO-returns methodology / UKSPF-EU-structural-funds succession), briefed with this project's extraction rules. EVERY quote below marked 'VERIFIED DIRECTLY' was independently re-confirmed by this session against the primary source's own raw text (legislation.gov.uk and gov.uk HTML stripped of tags, or PDFs downloaded and text-extracted with pypdf) — the same discipline applied to the Netherlands pass the same day, after that session found AI-summarized WebFetch quotes are not reliably verbatim. Two council-accounts quotes (Wolverhampton) and all legislation.gov.uk / gov.uk statistics-page quotes were re-verified; one alternate council (York) reported by a subagent was NOT independently re-verified and is not used as edge evidence, only noted. gb-voa-rating-lists split 2026-10-18 into the Local Non-Domestic Rating List (same id) and gb-voa-council-tax-valuation-list.",
   "reports": [
     {
       "id": "gb-mhclg-asc-rnf-annex",
@@ -274,14 +274,14 @@
     },
     {
       "id": "gb-voa-rating-lists",
-      "title": "Local Non-Domestic Rating List / Council Tax Valuation List",
+      "title": "Local Non-Domestic Rating List",
       "publisher": "Valuation Office Agency (VOA)",
       "country": "GB",
       "jurisdiction_level": "institutional",
-      "region": "England",
-      "description": "The national property-valuation function underlying both Council Tax bands and Business Rates rateable values — the UK functional equivalent of the Netherlands' `nl-wet-woz` and Ontario's `mpac-assessment`. Legal basis, VERIFIED DIRECTLY (legislation.gov.uk): Local Government Finance Act 1992 ss.20-23 (Council Tax valuation lists) and Local Government Finance Act 1988 ss.41, 61 and Sch.6 (business-rates rating lists and the 'rateable value' definition). NOTE ON NAMING: neither Act uses the literal string 'Valuation Office Agency' in the sections checked — both instead say 'the Commissioners of Inland Revenue' / 'the valuation officer' / 'listing officer'. 'Valuation Office Agency' as a literal name only appears in downstream documents (see `uk-stevenage-nndr1`) — flagged per this project's own tense/naming-precision convention rather than silently modernised.",
-      "releases_per_year": 1,
-      "cadence_note": "Business-rates rating lists are compiled on a multi-year revaluation cycle (1988 Act s.41(2): 1 April 1990 and every fifth year after, subject to later amendment); Council Tax valuation lists are maintained continuously. Filed as annual as the nearest practical cadence.",
+      "region": "England and Wales",
+      "description": "SPLIT 2026-10-18 (Thomas: 'split gb-voa-rating-lists into the Council Tax Valuation List and the Local Non-Domestic Rating List'): until then one node bundled both VOA lists under the title 'Local Non-Domestic Rating List / Council Tax Valuation List', against the one-node-per-document ruling (2026-10-05), and its own release_schedule note flagged it. This id keeps the business-rates list; the Council Tax list is now `gb-voa-council-tax-valuation-list`. The Valuation Office Agency's rating lists of non-domestic properties and their rateable values, the base on which business rates are charged. Compiled at each revaluation and in force from 1 April of the revaluation year: 2023, then 2026, every three years under the Non-Domestic Rating Act 2023. Legal basis, VERIFIED DIRECTLY in the August 2026 round (legislation.gov.uk): Local Government Finance Act 1988 ss.41, 61 and Sch.6. The url is the VOA's own rating list downloads page.",
+      "releases_per_year": 0.33,
+      "cadence_note": "Compiled at each revaluation, every three years since the Non-Domestic Rating Act 2023 (2023, 2026, next 2029); amended continuously in between. 0.33 is that cycle written as a rate.",
       "release_schedule": {
         "kind": "stated-rule",
         "entries": [
@@ -294,17 +294,43 @@
           }
         ],
         "rule": "Non-Domestic Rating Act 2023: from Royal Assent, business rates (non-domestic rating list) revaluations occur every 3 years rather than every 5, beginning with the list compiled 1 April 2026. New rating lists are compiled and come into force on 1 April in the revaluation year.",
-        "source_url": "https://www.gov.uk/government/publications/42023-the-non-domestic-rating-act-2023/42023-the-non-domestic-rating-act-2023",
-        "note": "This corpus entry appears to bundle two distinct VOA products. (1) The Local Non-Domestic Rating List (business rates) now revalues every 3 years per the Non-Domestic Rating Act 2023 (2023 -> 2026 -> next 2029); the 2026 list was already compiled/in force by 1 April 2026, before today's date (2026-08-11), so the next compiled list is due 1 April 2029. (2) The Council Tax Valuation List (domestic property bands) has no fixed statutory revaluation cycle in England (irregular, last fully revalued 1991/2003 in Wales); Wales is separately pursuing a council tax revaluation reform (targeting new valuation lists around 2028) via the Local Government Finance (Wales) Bill, but as of this research no confirmed in-force date was found for that Welsh council tax revaluation - it remains a policy proposal under legislative development, not a scheduled release. If these are meant to be split into two separate corpus entries, the non-domestic rating list has the clearer stated-rule schedule (above); the council tax valuation list would be closer to 'irregular' (England) or a not-yet-finalized reform timeline (Wales)."
+        "source_url": "https://www.gov.uk/government/publications/42023-the-non-domestic-rating-act-2023/42023-the-non-domestic-rating-act-2023"
       },
       "last_updated": null,
-      "url": "https://www.gov.uk/government/organisations/valuation-office-agency",
+      "url": "https://voaratinglists.blob.core.windows.net/html/rlidata.htm",
       "domains": [
         "assessment",
         "taxation",
         "municipal-finance"
       ],
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "non-domestic rating list",
+        "local rating list"
+      ]
+    },
+    {
+      "id": "gb-voa-council-tax-valuation-list",
+      "title": "Council Tax Valuation List",
+      "publisher": "Valuation Office Agency (VOA)",
+      "country": "GB",
+      "jurisdiction_level": "institutional",
+      "region": "England and Wales",
+      "description": "SPLIT 2026-10-18 (Thomas: 'split gb-voa-rating-lists into the Council Tax Valuation List and the Local Non-Domestic Rating List'): until then one node bundled both VOA lists under the title 'Local Non-Domestic Rating List / Council Tax Valuation List', against the one-node-per-document ruling (2026-10-05), and its own release_schedule note flagged it. The Valuation Office Agency's lists placing every domestic property in England and Wales in a Council Tax band: 1 April 1991 values in England, 1 April 2003 in Wales. They are maintained continuously and altered as properties change. HM Land Registry's UK House Price Index takes its England and Wales property attributes from it. Legal basis, VERIFIED DIRECTLY in the August 2026 round (legislation.gov.uk): Local Government Finance Act 1992 ss.20-23. The url is GOV.UK's 'Check your Council Tax band' service, the list's public face; it links its service as 'on the Council Tax valuation list'.",
+      "releases_per_year": 1,
+      "cadence_note": "Maintained continuously, with no fixed revaluation cycle in England (Wales is legislating for a revaluation). 1 is a nominal rate, as the bundled node had.",
+      "last_updated": null,
+      "url": "https://www.gov.uk/council-tax-bands",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ],
+      "kind": "publication",
+      "title_aliases": [
+        "Council Tax valuation list",
+        "Council Tax valuation lists"
+      ]
     },
     {
       "id": "gb-stevenage-nndr1",
@@ -390,9 +416,10 @@
       "source_report_id": "gb-stevenage-nndr1",
       "target_report_id": "gb-voa-rating-lists",
       "relationship_type": "uses_data_from",
-      "basis": "VERIFIED DIRECTLY (22-page PDF downloaded, pypdf full-text extracted). \"The NNDR1 contains details of the rateable values shown for the authority's local rating list at 31 December...\" and, separately: \"Business Rates revaluation. The Valuation Office Agency has also updated the rateable values of all non-domestic properties in England and Wales, with new values taking effect from 1 April 2026. These are based on rental values as of 1 April 2024.\" This is the only document found this session (of Wolverhampton's and Stevenage's own texts) that names 'Valuation Office Agency' as a literal string — see `uk-voa-rating-lists`'s own NOTES field.",
+      "basis": "VERIFIED DIRECTLY (22-page PDF downloaded, pypdf full-text extracted). \"The NNDR1 contains details of the rateable values shown for the authority's local rating list at 31 December...\" and, separately: \"Business Rates revaluation. The Valuation Office Agency has also updated the rateable values of all non-domestic properties in England and Wales, with new values taking effect from 1 April 2026. These are based on rental values as of 1 April 2024.\" This is the only document found this session (of Wolverhampton's and Stevenage's own texts) that names 'Valuation Office Agency' as a literal string — see `uk-voa-rating-lists`'s own NOTES field. Re-graded 2026-10-18 after the split (dry run, --edges): A, quote-found-artefact-named, naming alias1:title-run:2/3, from the span the basis quotes ('the authority's local rating list'). It was B. The grade rose because the split gave the node the alias 'local rating list', the NNDR1's own name for the list. The 1988 Act's wording was not re-read this round. Thomas can reverse it if he reads that as moving a grade. evidence_quote added 2026-10-18, verbatim from the PDF re-read live (HTTP 200, paragraph on the NNDR1); the edge had carried its quote only inside the basis, with an ellipsis.",
       "evidence_url": "https://www.stevenage.gov.uk/documents/committee-services/forward-plan/non-domestic-rates-ndr-2026-27-tax-base.pdf",
-      "evidence_grade": "B"
+      "evidence_grade": "A",
+      "evidence_quote": "The NNDR1 contains details of the rateable values shown for the authority’s local rating list at 31 December"
     }
   ],
   "_dropped": [

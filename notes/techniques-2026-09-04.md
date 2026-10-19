@@ -280,6 +280,20 @@ FI moved from `hi4` to `hi3` between 2026-08-28 and 2026-09-05.
 - **Section 18.1.1 "Weights"** is where the weight-source sentence lives. Memory
   `esms_hicp_pass_2026-09-05` has the whole pass, including the trap that
   Switzerland's sentence is in 18.1.1.1 rather than 18.1.1.
+- **House price index: `prc_hpi_inx_esmshpi_<cc>.htm`** under `/cache/metadata/EN/` (2026-10-17, 29 countries; no `_el`).
+  The EU-level page is `prc_hpi_inx_esms.htm`, NOT `prc_hpi_esms.htm`, which is 404; the filename was found through the
+  dataset's SDMX dataflow (`/api/dissemination/sdmx/2.1/dataflow/ESTAT/prc_hpi_q`), which carries its metadata link.
+  §6.1 names the legal acts, §10.6/§11/§12.1 name the Handbook where a country does. Unlike the HICP pages, §6.1 is NOT
+  template text: it differs country by country.
+- **Statistics Finland documentation: read the FINNISH page too** (2026-10-18).
+  `stat.fi/fi/dokumentaatio/tilastojen-dokumentaatio/<code>` carried a Handbook sentence its English twin
+  (`/en/documentation/documentation-of-statistics/<code>`) does not. But Finnish case endings ("rakennuskustannusindeksiin")
+  defeat the title matcher, so when both pages say it, cite the one whose quote carries the title in base form.
+- **Statistical Office of the SR (slovak.statistics.sk) report urls** (2026-10-18): the portal's links end in a
+  session-encoded `!ut/p/z1/…` tail. Cut everything after the report's id, giving
+  `/wps/portal/ext/products/informationmessages/inf_sprava_detail/<uuid>/`, which redirects to the report in a browser.
+  curl gets a 403 on it, so check it in the browser pane. To find a report, set the Information reports Catalogue to 50 per
+  page and search the link text: its keyword search did not filter, and the list switches to Slovak titles.
 - `employ_simslfs_<cc>.htm` answers "is the LFS the national-accounts employment
   source" as an explicit Y/N field. There is no such page for Iceland.
 - **No government-finance equivalent exists** — `gov_10dd_*_esms_<cc>.htm` 404s

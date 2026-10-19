@@ -269,3 +269,12 @@ file. They are below, **byte-for-byte as they stood**, and the index now carries
   规定，开展住户收支与生活状况调查的住户为调查户 is a `legal_basis` edge; Shandong's 统计事业发展综述 mentioning 《统计法》
   is not (round 40's refusal stands). The test is the sentence's SUBJECT: the statistic, or the bureau's activities.
 
+
+### A citation dated to the wrong edition caps at B
+
+- **A citation that dates the target to a year that is not the node's edition caps the edge at B, even when the
+  grader says A** (Thomas, 2026-10-18). The grader matches the title and cannot see the year. The CBRT's RPPI metadata
+  cites "Eurostat (2011), Handbook on Residential Property Prices Indices" for the 2013 edition: B
+  (`tr-cbrt-rppi -> rppi-handbook`). NBP's "External Debt Statistics 2014" for the 2013 guide was the first case
+  (`imf-external-debt-guide`). A link or title that matches the node does not lift the cap. Say in the basis that the
+  hand grade overrides the grader, and why.

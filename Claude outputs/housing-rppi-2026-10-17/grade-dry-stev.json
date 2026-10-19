@@ -1,0 +1,66 @@
+{
+  "results": [
+    {
+      "source": "gb-stevenage-nndr1",
+      "target": "gb-voa-rating-lists",
+      "file": "uk-local-government-finance.json",
+      "basis": "VERIFIED DIRECTLY (22-page PDF downloaded, pypdf full-text extracted). \"The NNDR1 contains details of the rateable values shown for the authority's local rating list at 31 December...\" and, separately: \"Business Rates revaluation. The Valuation Office Agency has also updated the rateable values of all non-domestic properties in England and Wales, with new values taking effect from 1 April 2026. These are based on rental values as of 1 April 2024.\" This is the only document found this session (of Wolverhampton's and Stevenage's own texts) that names 'Valuation Office Agency' as a literal string — see `uk-voa-rating-lists`'s own NOTES field. Re-graded 2026-10-18 after the split (dry run, --edges): A, quote-found-artefact-named, naming alias1:title-run:2/3, from the span the basis quotes ('the authority's local rating list'). It was B. The grade rose because the split gave the node the alias 'local rating list', the NNDR1's own name for the list. The 1988 Act's wording was not re-read this round. Thomas can reverse it if he reads that as moving a grade. evidence_quote added 2026-10-18, verbatim from the PDF re-read live (HTTP 200, paragraph on the NNDR1); the edge had carried its quote only inside the basis, with an ellipsis.",
+      "evidenceUrl": "https://www.stevenage.gov.uk/documents/committee-services/forward-plan/non-domestic-rates-ndr-2026-27-tax-base.pdf",
+      "evidenceQuote": "The NNDR1 contains details of the rateable values shown for the authority’s local rating list at 31 December",
+      "targetReport": {
+        "id": "gb-voa-rating-lists",
+        "title": "Local Non-Domestic Rating List",
+        "publisher": "Valuation Office Agency (VOA)",
+        "country": "GB",
+        "jurisdiction_level": "institutional",
+        "region": "England and Wales",
+        "description": "SPLIT 2026-10-18 (Thomas: 'split gb-voa-rating-lists into the Council Tax Valuation List and the Local Non-Domestic Rating List'): until then one node bundled both VOA lists under the title 'Local Non-Domestic Rating List / Council Tax Valuation List', against the one-node-per-document ruling (2026-10-05), and its own release_schedule note flagged it. This id keeps the business-rates list; the Council Tax list is now `gb-voa-council-tax-valuation-list`. The Valuation Office Agency's rating lists of non-domestic properties and their rateable values, the base on which business rates are charged. Compiled at each revaluation and in force from 1 April of the revaluation year: 2023, then 2026, every three years under the Non-Domestic Rating Act 2023. Legal basis, VERIFIED DIRECTLY in the August 2026 round (legislation.gov.uk): Local Government Finance Act 1988 ss.41, 61 and Sch.6. The url is the VOA's own rating list downloads page.",
+        "releases_per_year": 0.33,
+        "cadence_note": "Compiled at each revaluation, every three years since the Non-Domestic Rating Act 2023 (2023, 2026, next 2029); amended continuously in between. 0.33 is that cycle written as a rate.",
+        "release_schedule": {
+          "kind": "stated-rule",
+          "entries": [
+            {
+              "from": "2029-04-01",
+              "to": "2029-04-01",
+              "precision": "day",
+              "covers": "Next compiled Local Non-Domestic Rating List (England and Wales), 2029 revaluation",
+              "evidence": "implied"
+            }
+          ],
+          "rule": "Non-Domestic Rating Act 2023: from Royal Assent, business rates (non-domestic rating list) revaluations occur every 3 years rather than every 5, beginning with the list compiled 1 April 2026. New rating lists are compiled and come into force on 1 April in the revaluation year.",
+          "source_url": "https://www.gov.uk/government/publications/42023-the-non-domestic-rating-act-2023/42023-the-non-domestic-rating-act-2023"
+        },
+        "last_updated": null,
+        "url": "https://voaratinglists.blob.core.windows.net/html/rlidata.htm",
+        "domains": [
+          "assessment",
+          "taxation",
+          "municipal-finance"
+        ],
+        "kind": "publication",
+        "title_aliases": [
+          "non-domestic rating list",
+          "local rating list"
+        ]
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "stevenage.gov.uk",
+      "status": 200,
+      "finalUrl": "https://www.stevenage.gov.uk/documents/committee-services/forward-plan/non-domestic-rates-ndr-2026-27-tax-base.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 27695,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "The NNDR1 contains details of the rateable values shown for the authority’s local rating list at 31 December",
+      "naming": "alias1:title-run:2/3",
+      "window": "The Business Rates Retention Scheme which commenced on 1 April 2013\r\n          requires the Cabinet to formally approve the NNDR1 by the 31 January\r\n          immediately preceding the financial year to which it relates. The NNDR1\r\n          contains details of the rateable values shown for the authority's local rating list\r\n          at 31 December and enables the Council to calculate the expected income in\r\n          respect of business rates for the year, a proportion of which the Council has\r\n          retained from 2013/14 onwards. 3.2.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    }
+  ]
+}

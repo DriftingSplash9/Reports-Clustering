@@ -133,9 +133,9 @@
     },
     {
       "source_report_id": "gb-ons-ukhpi",
-      "target_report_id": "gb-voa-rating-lists",
+      "target_report_id": "gb-voa-council-tax-valuation-list",
       "relationship_type": "uses_data_from",
-      "basis": "RESEARCHED 2026-09-06 (ONS registers round). The UK HPI's own quality and methodology page names the Council Tax Valuation List by title as the main source of the property-attribute data fed into the hedonic regression. Wires a node the corpus already held but had only in an English local-government-finance context. Read live from the cited URL (HTTP 200), quote verbatim.",
+      "basis": "RESEARCHED 2026-09-06 (ONS registers round). The UK HPI's own quality and methodology page names the Council Tax Valuation List by title as the main source of the property-attribute data fed into the hedonic regression. Wires a node the corpus already held but had only in an English local-government-finance context. Read live from the cited URL (HTTP 200), quote verbatim. RE-POINTED 2026-10-18 from the bundled `gb-voa-rating-lists` to the new Council Tax node, when that node was split; the quote names the Council Tax Valuation list. Re-graded 2026-10-18 after the split (dry run, --edges, with gb-ons-ukhpi -> rppi-handbook, which shares the url): A, quote-found-artefact-named, naming title-run:4/4. The bundled title had graded B agency-not-artefact; the stored A had been a hand grade.",
       "evidence_url": "https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology",
       "evidence_quote": "The main source of property attributes data that is used to supplement house price data for England and Wales is administrative data taken from the Council Tax Valuation list maintained by the Valuation Office Agency (VOA).",
       "evidence_grade": "A"
@@ -213,11 +213,11 @@
       "why": "REFUSED 2026-09-06 — the document says the opposite, and this is the round's most useful negative. ONS's CPIH housing methodology page explicitly excludes house prices from CPIH: 'OOH measures do not seek to capture increases in house prices. The inclusion of an asset price and therefore capital gains are generally defined as being out of scope of any kind of consumer price index. ... Property price changes are instead measured in the UK House Price Index.' The only documented CPIH-family use of UK HPI is in the net acquisitions index, discontinued from March 2020 — a different publication. The CPI bulletin names the UK HPI only in its 'Related links' block, which is navigation, not sourcing. The real CPI source edge is to the Price Index of Private Rents, minted this round."
     },
     {
-      "edge": "gb-ons-pipr -> gb-voa-rating-lists",
+      "edge": "gb-ons-pipr -> gb-voa-council-tax-valuation-list",
       "source": "gb-ons-pipr",
-      "target": "gb-voa-rating-lists",
+      "target": "gb-voa-council-tax-valuation-list",
       "reason": "no-document",
-      "why": "NEAR MISS 2026-09-06, flagged rather than forced. The PIPR QMI's Table 1 has a column headed 'Valuation Office Council Tax' with note 1 reading 'The linking rate to HM Revenue and Customs Valuation Office Council Tax has increased over time...'. Under the 2026-09-06 ruling a methodology table cell naming a source counts, so the shape qualifies — but the string is 'Valuation Office Council Tax', not the artefact title 'Council Tax Valuation List', so the agency-not-artefact rule was applied strictly. PIPR's own rental data come from VOA Rent Officers administering Housing Benefit and Universal Credit, a different VOA function from the rating and council tax valuation lists. Wants a sentence naming the list."
+      "why": "RE-POINTED 2026-10-18 to the new Council Tax node (split from gb-voa-rating-lists). Re-checked against the new title: the table still writes 'Valuation Office Council Tax', which does not name the list, so the refusal stands. Original entry follows. NEAR MISS 2026-09-06, flagged rather than forced. The PIPR QMI's Table 1 has a column headed 'Valuation Office Council Tax' with note 1 reading 'The linking rate to HM Revenue and Customs Valuation Office Council Tax has increased over time...'. Under the 2026-09-06 ruling a methodology table cell naming a source counts, so the shape qualifies — but the string is 'Valuation Office Council Tax', not the artefact title 'Council Tax Valuation List', so the agency-not-artefact rule was applied strictly. PIPR's own rental data come from VOA Rent Officers administering Housing Benefit and Universal Credit, a different VOA function from the rating and council tax valuation lists. Wants a sentence naming the list."
     },
     {
       "edge": "gb-ons-ashe / gb-ons-bres -> gb-ons-labour-market-overview (either direction)",

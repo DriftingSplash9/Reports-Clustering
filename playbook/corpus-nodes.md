@@ -109,8 +109,23 @@ comment), so the defect distorts the ranking, not just the url field. **A shared
 in the Brazil pilot 11 of 17 colliding nodes were merges, 4 were distinct documents with a wrong url, 1 a survey
 module. Retired ids go to the slice's `meta.merged` and a `notes/retired-nodes-<date>.json`, never to
 `title_aliases`. **A recurring node's url is its LATEST EDITION page** (Thomas, 2026-10-05), not a series list
-or a methodology book. Open: whether a survey MODULE is a document (`HANDOFF.md` §3). Method and instruments:
+or a methodology book. Open: whether a survey MODULE is a document (`HANDOFF.md` §3).
+
+**`housing-policy`: what ACTS on the housing, rental or mortgage market** (Thomas, 2026-10-17). A domain, carried
+ALONGSIDE the node's existing one, so the channel is the intersection (`housing-policy` ∩ `taxation`, ∩
+`financial-regulation`, ∩ `benefits` …); `housing` keeps meaning MEASUREMENT of the market. **The bar: tag only when the
+node's own document is about that market** — in its scope, not merely a possible effect — so a general policy-rate
+decision, an immigration target or an income tax is NOT tagged and shows through its edges instead. **General property
+taxes ARE tagged** (ruling (a)): the residential class rate is in the document. First pass and its classification:
+`notes/housing-policy-dryrun-2026-10-17.md`. Method and instruments:
 `notes/granularity-pilot-br-2026-10-05.md`.
+
+**A national house price index is a node only if the country publishes it itself** (Thomas, 2026-10-17, ruling on
+lane 0a step 2). Where Eurostat is the only publisher of a country's HPI (IE, EE, SE, DK, CZ: "managed by Eurostat", or a
+database series with no national release), mint nothing. The country's own counterpart index, if it has one, is the
+node: `ie-cso-rppi` is the example. **Where a country publishes several national indices and no total** (FI, FR, NO), mint
+**each national index its HPI metadata names**, one node per document. A legal-basis edge then needs a document that
+ties THAT index to the act, so the HPI metadata's §6.1 does not wire a component on its own.
 
 ### 7d. Parked and closed
 

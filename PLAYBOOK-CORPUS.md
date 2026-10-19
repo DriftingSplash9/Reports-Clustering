@@ -251,6 +251,7 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
   its legal-publicity work about the same law does not** (Thomas, 2026-09-10). The test is the sentence's
   SUBJECT: the statistic, or the bureau's activities. `playbook/corpus-naming.md`.
 - **CLOSED, do not re-derive per country:** the ICLS class; DGDDI's monthly bulletin.
+- **A citation dated to the wrong edition caps at B** (Thomas, 2026-10-18), whatever the grader says. `playbook/corpus-naming.md`.
 
 ### 7b. What the route does to the grade → `playbook/corpus-route.md`
 
@@ -273,6 +274,9 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - A country may carry TWO tier edges (REGISTER + SELF-DECLARED); both stay, no dedupe pass.
 - **ONE NODE PER DOCUMENT** (Thomas, 2026-10-05) — topic siblings sharing a document merge; classify a shared url
   first, it is not always a duplicate; a recurring node's url is its latest edition page. `playbook/corpus-nodes.md`.
+- **`housing-policy` tags what ACTS on the housing/rental/mortgage market** (Thomas, 2026-10-17), only when the node's own
+  document is about that market; general property taxes included. `playbook/corpus-nodes.md`.
+- **A national HPI is a node only if the country publishes it** (Thomas, 2026-10-17); no total, so mint each named national index. `playbook/corpus-nodes.md`.
 - **A revising NOTICE does not mint an edition** (Thomas, 2026-09-10). A citation DATED to the revision reaches
   the node; a bare title does not. Contrast a real new edition with its own number. `playbook/corpus-nodes.md`.
 

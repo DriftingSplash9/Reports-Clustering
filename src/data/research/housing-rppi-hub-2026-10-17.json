@@ -1,0 +1,80 @@
+{
+  "_slice": "housing-rppi-hub-2026-10-17",
+  "_researched": "2026-10-17",
+  "_note": "Thomas, 2026-10-17: 'start lane 0a step 1: mint the RPPI Handbook hub and wire national house-price indices to it.' HANDOFF §3 item 0a, step (1). Mints the Handbook as a standard hub and wires the national house-price indices whose OWN documents name it: the UK HPI (already a node) and Ireland's RPPI (minted here, with its EU legal basis). Every document was fetched live from this machine on 2026-10-17.",
+  "reports": [
+    {
+      "id": "rppi-handbook",
+      "title": "Handbook on Residential Property Prices Indices (RPPIs)",
+      "publisher": "Eurostat, ILO, IMF, OECD, UNECE and the World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The international methodological handbook for residential property (house) price indices, 2013 edition, published by Eurostat (catalogue KS-RA-12-022) and copyrighted jointly by the European Union, the International Labour Organization, the International Monetary Fund, the OECD, the UN Economic Commission for Europe and the World Bank. It covers the uses of RPPIs, stratification, hedonic regression, repeat-sales and appraisal-based methods, the land/structures split, data sources and recommendations. The publisher's own title spells it 'Prices Indices'; citing documents usually write 'Price Indices'. Minted 2026-10-17 as the hub of the housing research lane.",
+      "releases_per_year": 0.05,
+      "cadence_note": "One edition so far (2013); 0.05 is a once-a-generation revision rate written as a number.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/ks-ra-12-022",
+      "domains": [
+        "housing",
+        "statistical-system"
+      ],
+      "kind": "standard",
+      "title_aliases": [
+        "Handbook on Residential Property Price Indices",
+        "Residential Property Price Index handbook",
+        "RPPI Handbook"
+      ]
+    },
+    {
+      "id": "ie-cso-rppi",
+      "title": "Residential Property Price Index",
+      "publisher": "Central Statistics Office (CSO)",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "Ireland's monthly index of house and apartment price inflation for households buying on the open market. First published in March 2011 (backdated to January 2005); since September 2016 it is compiled from stamp duty returns covering the whole residential market, using a hedonic regression. The CSO's quality report (SIMS 2024) lists the Handbook on Residential Property Price Indices under its methodology documentation and states the CSO has adopted the standards of Regulation (EU) 2016/792.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-rppi/residentialpropertypriceindexaugust2026/",
+      "domains": [
+        "housing",
+        "inflation"
+      ],
+      "kind": "publication",
+      "title_aliases": [
+        "RPPI"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gb-ons-ukhpi",
+      "target_report_id": "rppi-handbook",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-17 (housing lane 0a step 1). The UK HPI's own quality and methodology page (HM Land Registry, §2.5 Concepts and definitions) states the index is calculated following the Eurostat RPPI handbook, linking to Eurostat's KS-RA-12-022 page. Read live from the cited URL (HTTP 200), quote verbatim. The same page's description of the hedonic method also points to 'the Handbook on Residential Property Price Index' on OECD iLibrary. Grader 2026-10-17 (dry run, --edges): A, quote-found-artefact-named, naming title-run:4/6.",
+      "evidence_url": "https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology",
+      "evidence_quote": "The UK HPI is calculated following recommended international best practice as defined in the Eurostat Residential Property Price Index handbook",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ie-cso-rppi",
+      "target_report_id": "rppi-handbook",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-17 (housing lane 0a step 1). The CSO's own RPPI quality report (SIMS 2024), section 12.6 'Documentation on Methodology', lists the Handbook by title with its Eurostat PDF link as documentation of the methodology used to compile the index. A methodology-documentation listing, not a sentence stating compliance, so it carries less than the UK edge's wording. Read live from the cited PDF (HTTP 200), quote verbatim. Grader 2026-10-17 (dry run, --edges): A, quote-found-artefact-named, naming title-run:4/6.",
+      "evidence_url": "https://www.cso.ie/en/media/csoie/methods/residentialpropertypriceindex/RPPI_SIMS_2024.pdf",
+      "evidence_quote": "Handbook on Residential Property Price Indices",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ie-cso-rppi",
+      "target_report_id": "eu-reg-2016-792",
+      "relationship_type": "legal_basis",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-17 (housing lane 0a step 1). The CSO's own RPPI quality report (SIMS 2024), section 8.1 'Legal Acts and other agreements', states there are no national regulations for the RPPI and that the CSO has adopted the standards of Regulation (EU) 2016/792 on HICPs and the house price index. Read live from the cited PDF (HTTP 200), quote verbatim. Grader 2026-10-17 (dry run, --edges): A, quote-found-artefact-named, naming legal:regulation 2016/792.",
+      "evidence_url": "https://www.cso.ie/en/media/csoie/methods/residentialpropertypriceindex/RPPI_SIMS_2024.pdf",
+      "evidence_quote": "the CSO has adopted HICP standards as defined by Regulation (EU) 2016/792 on harmonised indices of consumer prices and the house price index",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": []
+}

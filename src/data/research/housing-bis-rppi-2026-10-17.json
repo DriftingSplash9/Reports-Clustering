@@ -1,0 +1,56 @@
+{
+  "_slice": "housing-bis-rppi-2026-10-17",
+  "_researched": "2026-10-17",
+  "_note": "Thomas, 2026-10-17: 'start lane 0a step 3: the BIS residential property price database and its per-country documentation.' Source: the BIS's own 'Selected residential property prices - data documentation' (last updated 31 July 2026), the only per-country documentation the BIS publishes as a document; the detailed data set's documentation PDF answered 404 and the data.bis.org pages are a JavaScript app. Its source table names an AGENCY for almost every country, which does not name the artefact (PLAYBOOK-CORPUS 7a), so only two edges wire. The agency-only rows are recorded below as one note, with the corpus node each would reach if a document named it.",
+  "reports": [
+    {
+      "id": "bis-selected-rppi",
+      "title": "Selected residential property prices",
+      "publisher": "Bank for International Settlements (BIS)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The BIS's quarterly data set of one representative residential property price series per jurisdiction (about 60 countries plus two regional aggregates), chosen as the indicator closest to nationwide coverage and published in nominal and real terms (real = deflated by the CPI), index 2010 = 100, with a quarterly statistical release. It is back-calculated with the BIS long historical series for 18 advanced and five emerging economies. The BIS states it chose the series in consultation with national central banks and following the RPPI Handbook's recommendations. A separate detailed data set (more than 300 series) is not a node. The url is the BIS Data Portal's topic page, a JavaScript app; the documentation PDF is the readable document. Minted 2026-10-17.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://data.bis.org/topics/RPP",
+      "domains": [
+        "housing"
+      ],
+      "kind": "publication",
+      "title_aliases": [
+        "Selected residential property prices data set",
+        "BIS residential property prices"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bis-selected-rppi",
+      "target_report_id": "rppi-handbook",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-17 (housing lane 0a step 3). The BIS's own data documentation for the selected series states that in selecting them it relied on the Handbook's recommendations. Read live from the cited PDF (HTTP 200), quote verbatim. Grader 2026-10-17 (dry run, --edges): A, quote-found-artefact-named, naming title-run:6/6.",
+      "evidence_url": "https://www.bis.org/statistics/pp_selected_documentation.pdf",
+      "evidence_quote": "relied on the recommendations of the Handbook on Residential Property Prices Indices",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bis-selected-rppi",
+      "target_report_id": "de-destatis-hpi",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-17 (housing lane 0a step 3). The BIS documentation's source table gives Germany's series from Q1 2014 as the Federal Statistical Office's House Price Index, by name; earlier segments are vdpResearch and bulwiengesa data. Read live from the cited PDF (HTTP 200), quote verbatim. Grader 2026-10-17 (dry run, --edges): A, quote-found-artefact-named, naming alias1:title-run:3/3.",
+      "evidence_url": "https://www.bis.org/statistics/pp_selected_documentation.pdf",
+      "evidence_quote": "From Q1 2014 onwards: House Price Index (Federal Statistical Office)",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bis-selected-rppi -> (per-country agency-only sources)",
+      "source": "bis-selected-rppi",
+      "target": null,
+      "reason": "note",
+      "why": "RESEARCHED 2026-10-17 (housing lane 0a step 3). The BIS documentation's 'Data sources and compilation' table names only the AGENCY for almost every country (e.g. 'Source Statistics Finland', 'Source Croatian Bureau of Statistics', 'Source Central Bureau of Statistics' for Israel), and naming the agency does not name the artefact (PLAYBOOK-CORPUS 7a). Agency-only rows whose likely corpus node already exists, NOT wired: AT (Central Bank of the Republic of Austria, not Statistik Austria, so not at-statistik-hpi), BE (Statistics Belgium -> be-statbel-hpi), CH (Federal Statistical Office -> ch-fso-impi), CY (Central Bank of Cyprus, not CYSTAT), ES (Eurostat based on INE data -> es-ine-ipv), FI (Statistics Finland; FI has two component nodes), FR (INSEE; FR has two nodes), GB (Office for National Statistics; gb-ons-ukhpi is published by HM Land Registry), HR (-> hr-dzs-hpi), IE (Central Statistics Office -> ie-cso-rppi), IL (Central Bureau of Statistics -> il-dwellings-price-index), IT (Bank of Italy, not Istat), KR (Kookmin Bank / Korea Appraisal Board), LV (Latvijas Statistika -> lv-csb-hpi), MT (National Statistics Office Malta -> mt-nso-rppi), NL (Statistics Netherlands -> nl-cbs-hpi), NO (Statistics Norway; two component nodes), PL (Central Statistical Office of Poland -> pl-gus-residential-premises-price-indices), PT (Instituto Nacional de Estatistica -> pt-ine-hpi), SI (-> si-surs-residential-housing-price-indices), CN (National Bureau of Statistics of China). A future round can wire any of these from a document that names the BIS's input series by title, such as a BIS detailed-series metadata page, if one can be read. Two rows DO name an artefact with no node yet: CA ('Residential Property Price Index' for Q1 2017-Q4 2021, the Statistics Canada index, and 'MLS Home Price Index' from Q1 2022, CREA's commercial index) and XM ('Eurostat's House Price Index' from Q3 2021). Those are no-node-yet leads for step (4)."
+    }
+  ]
+}

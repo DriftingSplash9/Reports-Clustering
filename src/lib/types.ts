@@ -546,6 +546,7 @@ export type Domain =
   | 'housing'                   // added 2026-08-18 (Thomas, on reviewing the August 2026 import's 985 raw tags): 34 nodes — housing stock, building permits and real estate.
   | 'tourism'                   // added 2026-08-18 (Thomas, on reviewing the August 2026 import's 985 raw tags): 30 nodes — arrivals and tourism revenue.
   | 'general-statistics'    // added 2026-08-18 (Thomas, on review): general multi-domain statistical compendia — state/provincial yearbooks, district handbooks, 'X in numbers' abstracts. 39 first customers across the Brazil, India and Chile slices, which had no honest tag at all: naming the individual domains a yearbook covers would be asserting content nobody checked.
+  | 'housing-policy'        // added 2026-10-17 (Thomas): anything that ACTS on the housing, rental or mortgage market — mortgage and credit rules, housing and property taxes, rent supports, rent and tenancy regulation, supply and land use, public and social housing. Tagged only when the node's own document is about that market (the bar); general property taxes count (ruling (a)). Carried ALONGSIDE the node's existing domain, so the channel is the intersection. 'housing' keeps meaning MEASUREMENT of the market. notes/housing-policy-dryrun-2026-10-17.md.
 
 /** See the cast-not-parsed note under `SOURCE_KINDS`. */
 export const DOMAINS: readonly Domain[] = [
@@ -595,6 +596,7 @@ export const DOMAINS: readonly Domain[] = [
   'housing',
   'tourism',
   'general-statistics',
+  'housing-policy',
 ]
 
 /**
