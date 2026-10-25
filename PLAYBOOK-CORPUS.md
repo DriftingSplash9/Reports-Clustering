@@ -176,9 +176,10 @@ one line each; open the file named at the end of the line for the evidence behin
 - **A DEPENDENCY USES `source_report_id`/`target_report_id`; `source`/`target` is the `_dropped` note shape.**
   Now a MALFORMED EDGES error — it once discarded five real edges with `validate` exiting 0.
   `playbook/corpus-evidence.md`.
-- **A TITLE-LEAD OR ALIAS CONTAINING ANY ABBREVIATION CAN NEVER FIRE** — `tokenise` strips the full stop, `hay`
-  keeps it, so `Rev.` `No.` `Vol.` `Rep.` `Uzb.` never meet. **Three edges in two days, on two continents.** Quote a
-  span carrying enough of the FULL title; if none exists, B is the ceiling. `playbook/corpus-evidence.md`.
+- **FIXED 2026-10-25: punctuation in a title no longer breaks a match.** `namesTarget`'s flattened pass tokenises the
+  document the way the title is tokenised, so commas, brackets, hyphens and abbreviation stops (`Rev.` `No.` `Uzb.`)
+  meet; selftest guards it. *(Was: "A TITLE-LEAD OR ALIAS CONTAINING ANY ABBREVIATION CAN NEVER FIRE … if none exists,
+  B is the ceiling.")* `playbook/corpus-evidence.md`.
 - **Never edit a `basis` or a quote to move a grade.**
 - **`--write` rewrites the whole slice at indent 2** (`grade-evidence.ts:3600`) — on an indent-1 slice that is a whole-file
   diff. Re-serialise at the slice's own indent afterwards and check the content is identical. `playbook/corpus-evidence.md`.
@@ -252,6 +253,7 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
   SUBJECT: the statistic, or the bureau's activities. `playbook/corpus-naming.md`.
 - **CLOSED, do not re-derive per country:** the ICLS class; DGDDI's monthly bulletin.
 - **A citation dated to the wrong edition caps at B** (Thomas, 2026-10-18), whatever the grader says. `playbook/corpus-naming.md`.
+- **A publisher's own number for one member of a set names the set** (Thomas, 2026-10-25): "IFRS 9" names `ifrs`; graded by hand. `playbook/corpus-naming.md`.
 
 ### 7b. What the route does to the grade → `playbook/corpus-route.md`
 

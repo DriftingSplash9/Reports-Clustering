@@ -615,6 +615,39 @@ export function namesTarget(
       break
     }
   }
+  // **PUNCTUATION-FLATTENED PASS** (2026-10-25, Thomas: "go with your
+  // recommendations"). A title's words come from `tokenise`, which drops commas,
+  // brackets and quotes, but `hay` keeps them — so a document citing a title
+  // VERBATIM, comma and all, could never be matched across the comma.
+  // `uz-unemployment -> icls-work-statistics-resolution` quotes "Resolution
+  // concerning statistics of work, employment and labour underutilization" word
+  // for word and graded `agency-not-artefact`; the same text without the comma
+  // runs 9/10, and the node's own title given as the text ran only 6/10. This pass
+  // tokenises the body exactly as the title is tokenised and asks again. It runs
+  // only after the spaced pass has failed, so it can never lower a score or change
+  // a `how` that already matched; `-flat` in `how` says which pass fired.
+  if (!artefact) {
+    const flat = tokenise(body).join(' ')
+    for (let i = 0; i < names.length && !artefact; i++) {
+      const noParens = names[i].replace(/\([^)]*\)/g, ' ')
+      const words = tokenise(noParens)
+      const tag = i === 0 ? '' : `alias${i}:`
+      if (words.length) {
+        const run = longestRun(words, flat)
+        if (run >= 2 && run / words.length >= 0.6) {
+          artefact = true
+          how = `${tag}title-run-flat:${run}/${words.length}`
+          break
+        }
+      }
+      const lead = tokenise(noParens.split(/[—–\-,;:\/|]/)[0] ?? '')
+      if (lead.length >= 3 && flat.includes(lead.join(' '))) {
+        artefact = true
+        how = `${tag}title-lead-flat`
+        break
+      }
+    }
+  }
   // **WHITESPACE-INSENSITIVE SECOND PASS** (Thomas, 2026-09-04, ruling on the
   // transport round's finding 1). `locateQuote` has had one since round 5 and
   // `namesTarget` did not, so a document whose quote matched at coverage 1.00
@@ -2859,6 +2892,12 @@ function selftest(): void {
       { title: 'Data Standard Extended (SDDS Extended)', publisher: 'x', url: '' }).artefact
     && !namesTarget('under SDDS Plus Extra rules',
       { title: 'Data Standard Plus Extra (SDDS Plus Extra)', publisher: 'x', url: '' }).artefact)
+  t('a title quoted verbatim, comma and all, names the artefact (flattened pass)',
+    namesTarget('the ILO Resolution concerning statistics of work, employment and labour underutilization, adopted by the 19th ICLS',
+      { title: 'ICLS Resolution concerning statistics of work, employment and labour underutilization', publisher: 'International Labour Organization', url: '' }).how === 'title-run-flat:9/10')
+  t('the flattened pass does not invent a match from scattered words',
+    !namesTarget('statistics of employment, and work on labour, are separate',
+      { title: 'ICLS Resolution concerning statistics of work, employment and labour underutilization', publisher: 'x', url: '' }).artefact)
   t('the second pass does not invent a match that is not there',
     locateQuote('the weights come from the household budget survey',
       'this document is about something else entirely and says nothing of the kind').coverage < 0.55)

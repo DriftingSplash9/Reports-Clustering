@@ -30,3 +30,23 @@ Thomas: "lets deal with the 490 nodes marked wrongly". The handoff's "~490" was 
 - Every moved node carries `_kind_original: "instrument"`; slices backed up to `_to_delete/*.bak-2026-10-25b/c/d`.
 - validate exit 0 before and after each step; final KIND 2,758 publication · 155 standard · 808 instrument; reports,
   edges and grades unchanged (3,721 / 3,501; 1,491 A · 1,425 B · 585 C); tsc clean.
+
+# The naming fixes (Thomas: "go with your recommendations")
+
+- Aliases: `gb-voa-rating-lists` lost "non-domestic rating list"; `cpa` gained "Classification of Products by Activity"
+  (PKWiU 2015, Dz.U. 2015 poz. 1676, annex §4.2); `cmhc-rental-market-survey` gained "Rental Market Survey" (O. Reg. 367/11).
+  Live dry run of all seven edges into the three nodes: PKWiU → CPA B → A (alias1 5/5), Ontario → CMHC B → A (alias1 3/3),
+  Stevenage A (alias1 is now "local rating list", 3/3); Manitoba and Nova Scotia → CMHC stay B (not named); PRODCOM → CPA
+  stays B; ESA 2010 → CPA unread (EUR-Lex 202), stays B.
+- Rule 11 slip and repair: the first run graded one edge per shared url and rewrote the PKWiU (4 edges) and prom_esms
+  (3 edges) evidence records with one window each, and replaced EUR-Lex's 200 record with a 202. All three restored from
+  git; then every edge on the two shared urls was re-graded together, leaving 4 and 3 windows. A later VLGGC 403 record
+  was restored the same way.
+- Comma fix: measured BEFORE on the cached window of each of the 2,924 live edges that has one, then after. 6 newly named,
+  0 un-named, 29 `how` labels changed. Live re-grade with all url neighbours: four B → A (uz-unemployment → ICLS, flat 9/10;
+  uz-national-accounts → uz-coicop; zw-auditor-general → Urban Councils Act, flat 6/7; gl-selvstyrelov → Danish price
+  assumptions); the VLGGC pair answered a Cloudflare challenge. Two A's needed `evidence_quote`, filled from the grader's
+  own matched span (coverage 1.00; the Danish one cut to its first two whole sentences, since the span is truncated at 300).
+- Ruling recorded: a publisher's own number for a member of a set names the set; Basel → IFRS A by hand.
+- Guards (not shipped): A 27 (26 A), narrow A 7 (6 A), B 39 (36 A). Lists in `naming-guards-2026-10-25.json`.
+- validate exit 0: 1,498 A · 1,418 B · 585 C; 3,721 / 3,501; 990 zero-edge. selftest 78/78. tsc clean.

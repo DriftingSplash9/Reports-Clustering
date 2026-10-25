@@ -278,3 +278,14 @@ file. They are below, **byte-for-byte as they stood**, and the index now carries
   (`tr-cbrt-rppi -> rppi-handbook`). NBP's "External Debt Statistics 2014" for the 2013 guide was the first case
   (`imf-external-debt-guide`). A link or title that matches the node does not lift the cap. Say in the basis that the
   hand grade overrides the grader, and why.
+
+### A numbered member names its set
+
+- **A publisher's own number for one member of a set names the set** (Thomas, 2026-10-25). The Basel Framework's
+  LEV30.8 footnote 3 conditions an exclusion on "the IFRS 9 criteria for derecognition and, where applicable, IFRS 10 for
+  deconsolidation"; IFRS 9 and IFRS 10 are the IASB's own designations for two standards inside the IFRS Accounting
+  Standards, so `bis-basel-framework -> ifrs` is A. Three conditions: the number is the SET PUBLISHER's designation
+  (IFRS 9, IAS 1, IPSAS 17), not a paragraph or section number of the citing document; the target node stands for the
+  set, not for another member; and no node exists for the member itself — if one is minted, the citation names that
+  node instead. The grader cannot see this (an acronym may not be an alias, `types.ts`), so the grade is by hand:
+  name this ruling in the basis.
