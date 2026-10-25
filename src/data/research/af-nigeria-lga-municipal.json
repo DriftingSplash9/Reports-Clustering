@@ -89,14 +89,6 @@
       "basis": "The Lagos Auditor-General's report lists 'Statutory Allocation' as a distinct revenue column for each LGA — the State Joint Local Government Account's Federation Account-derived component, which the Allocation of Revenue Act governs the terms of. No formula/percentage is itself quoted in this report, so 'cites' rather than 'calculated_from'.",
       "evidence_url": "https://lagosmepb.org/wp-content/uploads/2021/05/280921-2020-Revenue-and-Expenditure.pdf",
       "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "ng-constitution-1999-section162",
-      "target_report_id": "ng-allocation-of-revenue-act",
-      "relationship_type": "cites",
-      "basis": "Section 162(3) directly anticipates the Allocation of Revenue Act by describing distribution 'on such terms and in such manner as may be prescribed by the National Assembly' — the Constitution establishes the obligation, the Act (already in corpus) supplies the actual formula.",
-      "evidence_url": "https://nigeriarights.gov.ng/files/constitution.pdf",
-      "evidence_grade": "B"
     }
   ],
   "_dropped": [
@@ -120,6 +112,21 @@
       "target": null,
       "reason": "no-document",
       "why": "Unlike the Lagos and Kano documents, Osun's Auditor-General report's Note 1 table gives only a bare 'TOTAL REVENUE' figure per LGA, without breaking out a named 'Statutory Allocation' or 'Federal Allocation' line — no citation of the Allocation of Revenue Act or FAAC by name was found in the extracted text, so no edge is drawn from this specific document."
+    },
+    {
+      "edge": "ng-constitution-1999-section162 -> ng-allocation-of-revenue-act",
+      "source": "ng-constitution-1999-section162",
+      "target": "ng-allocation-of-revenue-act",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: instrument-as-dependent — an Act, constitution or regulation recorded as depending on the report, plan or agency it requires or creates; the basis itself says the instrument is the source of the obligation, so the real dependency runs the other way. The edge's own basis said: \"the Constitution establishes the obligation, the Act (already in corpus) supplies the actual formula\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "ng-constitution-1999-section162",
+        "target_report_id": "ng-allocation-of-revenue-act",
+        "relationship_type": "cites",
+        "basis": "Section 162(3) directly anticipates the Allocation of Revenue Act by describing distribution 'on such terms and in such manner as may be prescribed by the National Assembly' — the Constitution establishes the obligation, the Act (already in corpus) supplies the actual formula.",
+        "evidence_url": "https://nigeriarights.gov.ng/files/constitution.pdf",
+        "evidence_grade": "B"
+      }
     }
   ]
 }

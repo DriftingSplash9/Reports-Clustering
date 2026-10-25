@@ -93,13 +93,22 @@ each grew in the 2026-10-17 round.)*
 
 ## 2. Current state
 
-Corpus **3,720 reports / 3,533 dependencies**, recounted by `npm run validate` on 2026-10-24 (cloud container).
-**1,486 A · 1,446 B · 601 C**, A-share 42.1%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
-**128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated (all 2026-10-24). **964 zero-edge
+Corpus **3,720 reports / 3,495 dependencies**, recounted by `npm run validate` on 2026-10-25 (cloud container).
+**1,486 A · 1,424 B · 585 C**, A-share 42.5%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
+**128/128 logic tests**, `public/corpus-data.json` regenerated (2026-10-25; `tsc --noEmit` last run 2026-10-24). **990 zero-edge
 nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
-prints. NODE URLS **1,015 bare / 450 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
+prints. NODE URLS **1,015 bare / 453 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
 Recount from the tools, never carry a figure.
+
+**Since it: the direction-suspect ruling, 2026-10-25** (Thomas: *"-drop -drop -drop"*, one per class). All 38 edges of
+`Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json` moved from `dependencies` to their slices' `_dropped`
+(34 `wrong-direction`, the 4 containment edges `note`), each with its live record verbatim under `original_edge`; 13
+slices, backed up to `_to_delete/*.bak-2026-10-25`. 38 fewer edges (22 B, 16 C, no A); none was flipped. **26 nodes
+lost their only edges** and are now zero-edge — seven Japanese (three Basic Acts, two White Papers, the energy plan and
+the statistics master plan), six Indian district and state reports, three Russian, two each Brazilian, Korean and
+Taiwanese, one each Chinese, Ethiopian, Nigerian and Saudi. The list, and every dropped edge: `Claude outputs/cloud-2026-10-24/direction-drop-2026-10-25.json`.
+Any of them needs a document stating the right direction before it is wired again.
 
 **Last round: the agent todo list, 2026-10-24 — worked from a claude.ai cloud container, not this machine** (Thomas:
 *"go ahead with the agent todo list"*). +16 nodes, +29 dependencies. **TLS verification stayed on throughout:** the
@@ -124,9 +133,9 @@ standart.uz) were not read, and India was not attempted. Everything read, tried 
 - **Negatives recorded** in their slices: Japan's RPPI method PDFs never name the Handbook; GUS's foreign-trade release is
   not titled the way NBP names it; three more CZSO documents say nothing about transmitting the HICP.
 
-**What it found that is not an edit.** Three questions for Thomas, §3. The backwards-edge scan (§3 [Thomas] 1) read every
-instrument → publication edge and every edge whose basis says the source FEEDS the target. Along the way it showed that
-`kind: instrument` is a contaminated class (§3 [Thomas] 2). **The `housing-policy` filter was confirmed at tier 4** in the
+**What it found that is not an edit.** Three questions for Thomas, one ruled since. The backwards-edge scan read every
+instrument → publication edge and every edge whose basis says the source FEEDS the target (ruled and dropped 2026-10-25,
+above). Along the way it showed that `kind: instrument` is a contaminated class (§3 [Thomas] 1). **The `housing-policy` filter was confirmed at tier 4** in the
 running app (dev server + `scripts/renderer/` method, headless): "50 shown · 3708 in this tier · filter hiding 3658". The
 settled render draws 45; the other 5 are zero-edge nodes shelved under "Unlinked", so the counter includes nodes that
 are not in the scene. Screenshot in the round's output folder.
@@ -142,18 +151,11 @@ is the recipe and it worked again on 2026-10-24.)*
 
 ### [Thomas]
 
-1. **38 live edges whose own `basis` states the opposite direction** —
-   `Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json`; nothing was changed. 10 have an Act or constitution
-   recorded as depending on the report, plan or agency it requires or creates (Japan's Basic Acts → their White Papers,
-   Taiwan's Statistics Act → DGBAS …); 24 have an input recorded as the consumer (Brazil's PNAD Contínua, PIA, PAC, PAIC,
-   RTN → SCN; Russian sector volumes → GRP; Indian district reports → state surveys …); 4 are containment. All B or C; 34
-   from the August import; no reverse edge exists for any. The 2026-09-04 JP/KR and 2026-09-05 India flips were made on
-   your ruling; the same is needed here: flip, drop, or leave.
-2. **`kind: instrument` holds ~490 nodes that are not instruments** — surveys, censuses, classifications, agencies, BOP. The
+1. **`kind: instrument` holds ~490 nodes that are not instruments** — surveys, censuses, classifications, agencies, BOP. The
    2026-09-03 backfill set every node without `releases_per_year` to `instrument` (`types.ts`, comment on `kind`). Recount:
    kind `instrument` whose title carries no legal word (Act, Law, Regulation, Decree, Order, Code …). A data fix per
    `types.ts`, but a `publication` must carry `releases_per_year`, so it is a ruling on how, not a sweep to start unasked.
-3. **Aliases that would move grades.** `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B → A on 2026-10-18 through alias
+2. **Aliases that would move grades.** `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B → A on 2026-10-18 through alias
    `non-domestic rating list` matching only "rating list" (`tokenise` keeps "non-domestic" whole, so 2 of 3 tokens), not
    through `local rating list` as its basis says; that alias names the artefact on any text with "rating list", the VOA's
    central list included. Four edges sit at B for the same kind of reason and an alias would lift each:
@@ -217,7 +219,7 @@ Standing, and none of it needs a round of its own:
 - **`iq-cso` / `ye-cso` / `sy-cbs` / `sd-cbs` stay PARKED** — the rule is in
   `playbook/corpus-nodes.md`. `iq-cso`'s possible-duplicate question is open in
   `notes/standing-issues.md`, not here. **`uz-ssc`** (the statistics office carried as `kind: instrument`) is the same kind
-  of node and falls under §3 [Thomas] 2.
+  of node and falls under §3 [Thomas] 1.
 
 ## 4. How to hand off
 

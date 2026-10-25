@@ -725,17 +725,6 @@
    "evidence_grade": "C"
   },
   {
-   "source_report_id": "et-livestock-survey",
-   "target_report_id": "et-gdp-national-accounts",
-   "relationship_type": "uses_data_from",
-   "basis": "Livestock production and product utilisation data contribute to agricultural value-added in the national accounts.",
-   "evidence_url": "https://ess.gov.et/agriculture/",
-   "_batch": [
-    "2026-08-17_Ethiopia-domestic-batch2-sectoral.json"
-   ],
-   "evidence_grade": "C"
-  },
-  {
    "source_report_id": "et-commercial-farms-survey",
    "target_report_id": "et-gdp-national-accounts",
    "relationship_type": "uses_data_from",
@@ -1169,6 +1158,24 @@
    "target": "et-nbe-bop",
    "reason": "deferred",
    "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://nbe.gov.et/publications-statistics/statistics/. Original basis: \"Net foreign assets and reserve movements in the monetary survey are consistent with the external accounts compiled in the Balance of Payments.\""
+  },
+  {
+   "edge": "et-livestock-survey -> et-gdp-national-accounts",
+   "source": "et-livestock-survey",
+   "target": "et-gdp-national-accounts",
+   "reason": "wrong-direction",
+   "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Livestock production and product utilisation data contribute to agricultural value-added in the national accounts.\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+   "original_edge": {
+    "source_report_id": "et-livestock-survey",
+    "target_report_id": "et-gdp-national-accounts",
+    "relationship_type": "uses_data_from",
+    "basis": "Livestock production and product utilisation data contribute to agricultural value-added in the national accounts.",
+    "evidence_url": "https://ess.gov.et/agriculture/",
+    "_batch": [
+     "2026-08-17_Ethiopia-domestic-batch2-sectoral.json"
+    ],
+    "evidence_grade": "C"
+   }
   }
  ]
 }

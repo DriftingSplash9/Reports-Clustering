@@ -3355,15 +3355,6 @@
    "evidence_grade": "B"
   },
   {
-   "source_report_id": "tw-statistics-act",
-   "target_report_id": "tw-dgbas",
-   "relationship_type": "methodology_depends_on",
-   "basis": "The Statistics Act designates the central accounting/statistics agency as administrator of the Basic National Census.",
-   "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
-   "evidence_quote": "基本國勢調查由中央主計機關主辦。",
-   "evidence_grade": "C"
-  },
-  {
    "source_report_id": "tw-trade-statistics",
    "target_report_id": "tw-national-accounts",
    "relationship_type": "calculated_from",
@@ -3470,15 +3461,6 @@
    "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
    "evidence_quote": "七、家庭收支調查統計。",
    "evidence_grade": "A"
-  },
-  {
-   "source_report_id": "tw-climate-change-act",
-   "target_report_id": "tw-ghg-inventory",
-   "relationship_type": "methodology_depends_on",
-   "basis": "The Climate Change Response Act requires the competent authority to compile national emissions statistics and establish the GHG inventory.",
-   "evidence_url": "https://oaout.moenv.gov.tw/law/LawContent.aspx?id=GL005511",
-   "evidence_quote": "中央主管機關應定期統計全國排放量，建立國家溫室氣體排放清冊；並每三年編撰溫室氣體國家報告",
-   "evidence_grade": "B"
   }
  ],
  "_dropped": [
@@ -3544,6 +3526,38 @@
    "target": "tw-minimum-wage",
    "reason": "wrong-direction",
    "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-household-income-expenditure (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '七、家庭收支調查統計。' — the wage deliberation uses the Family Income and Expenditure Survey."
+  },
+  {
+   "edge": "tw-statistics-act -> tw-dgbas",
+   "source": "tw-statistics-act",
+   "target": "tw-dgbas",
+   "reason": "wrong-direction",
+   "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: instrument-as-dependent — an Act, constitution or regulation recorded as depending on the report, plan or agency it requires or creates; the basis itself says the instrument is the source of the obligation, so the real dependency runs the other way. The edge's own basis said: \"The Statistics Act designates the central accounting/statistics agency as administrator of the Basic National Census.\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+   "original_edge": {
+    "source_report_id": "tw-statistics-act",
+    "target_report_id": "tw-dgbas",
+    "relationship_type": "methodology_depends_on",
+    "basis": "The Statistics Act designates the central accounting/statistics agency as administrator of the Basic National Census.",
+    "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
+    "evidence_quote": "基本國勢調查由中央主計機關主辦。",
+    "evidence_grade": "C"
+   }
+  },
+  {
+   "edge": "tw-climate-change-act -> tw-ghg-inventory",
+   "source": "tw-climate-change-act",
+   "target": "tw-ghg-inventory",
+   "reason": "wrong-direction",
+   "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: instrument-as-dependent — an Act, constitution or regulation recorded as depending on the report, plan or agency it requires or creates; the basis itself says the instrument is the source of the obligation, so the real dependency runs the other way. The edge's own basis said: \"The Climate Change Response Act requires the competent authority to compile national emissions statistics and establish the GHG inventory.\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+   "original_edge": {
+    "source_report_id": "tw-climate-change-act",
+    "target_report_id": "tw-ghg-inventory",
+    "relationship_type": "methodology_depends_on",
+    "basis": "The Climate Change Response Act requires the competent authority to compile national emissions statistics and establish the GHG inventory.",
+    "evidence_url": "https://oaout.moenv.gov.tw/law/LawContent.aspx?id=GL005511",
+    "evidence_quote": "中央主管機關應定期統計全國排放量，建立國家溫室氣體排放清冊；並每三年編撰溫室氣體國家報告",
+    "evidence_grade": "B"
+   }
   }
  ]
 }
