@@ -93,15 +93,27 @@ each grew in the 2026-10-17 round.)*
 
 ## 2. Current state
 
-Corpus **3,720 reports / 3,495 dependencies**, recounted by `npm run validate` on 2026-10-25 (cloud container).
-**1,486 A · 1,424 B · 585 C**, A-share 42.5%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
-**128/128 logic tests**, `public/corpus-data.json` regenerated (2026-10-25; `tsc --noEmit` last run 2026-10-24). **990 zero-edge
+Corpus **3,721 reports / 3,501 dependencies**, recounted by `npm run validate` on 2026-10-25 (cloud container).
+**1,491 A · 1,425 B · 585 C**, A-share 42.6%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
+**128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated (all 2026-10-25). **990 zero-edge
 nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
 prints. NODE URLS **1,015 bare / 453 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
 Recount from the tools, never carry a figure.
 
-**Since it: the direction-suspect ruling, 2026-10-25** (Thomas: *"-drop -drop -drop"*, one per class). All 38 edges of
+**Latest: the international standard-setters round, 2026-10-25** (Thomas: *"start 1"*, on the recommendation to begin
+with IFRS and FATF from `REPORTS.md`'s "not yet run" table). New slice `intl-ifrs-2026-10-25.json`: **`ifrs`, the IASB's
+IFRS Accounting Standards**, titled from ifrs.org, alias "International Financial Reporting Standards" (the Foundation's own
+registered name). **6 in-edges, 5 A and 1 B**, all `methodology_depends_on` and SELF-DECLARED, from documents already in the
+corpus: the IPSASB's Preface (¶13, IPSAS keep IFRS's "accounting treatment and original text"), NDB's and LGFA's annual
+reports, Wolverhampton's Statement of Accounts, the XRB's framework page and the Basel leverage-ratio standard (LEV30.8
+fn 3, IFRS 9/10). Weighted authority ranks it #24 against raw in-degree #83 (validate's `?` list); one of its six sources, `ipsas`, is weighted #14 itself.
+It connected no zero-edge node: all six sources already had edges. **FATF: no node.** The only corpus document naming
+it, NDB's AML policy, names the body and borrows its definition, never the Recommendations, so a node would sit isolated.
+Negatives in the slice: the NBE annual report (255 pp) never says IFRS; Watercare applies PBE Standards; the QSFS names no
+standard. Log: `Claude outputs/cloud-2026-10-24/session-log-2026-10-24.md`, grader output beside it.
+
+**Before it, same day: the direction-suspect ruling, 2026-10-25** (Thomas: *"-drop -drop -drop"*, one per class). All 38 edges of
 `Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json` moved from `dependencies` to their slices' `_dropped`
 (34 `wrong-direction`, the 4 containment edges `note`), each with its live record verbatim under `original_edge`; 13
 slices, backed up to `_to_delete/*.bak-2026-10-25`. 38 fewer edges (22 B, 16 C, no A); none was flipped. **26 nodes
@@ -133,7 +145,7 @@ standart.uz) were not read, and India was not attempted. Everything read, tried 
 - **Negatives recorded** in their slices: Japan's RPPI method PDFs never name the Handbook; GUS's foreign-trade release is
   not titled the way NBP names it; three more CZSO documents say nothing about transmitting the HICP.
 
-**What it found that is not an edit.** Three questions for Thomas, one ruled since. The backwards-edge scan read every
+**What it found that is not an edit.** Three questions for Thomas, one ruled since (§3 [Thomas] 1–2 are the other two). The backwards-edge scan read every
 instrument → publication edge and every edge whose basis says the source FEEDS the target (ruled and dropped 2026-10-25,
 above). Along the way it showed that `kind: instrument` is a contaminated class (§3 [Thomas] 1). **The `housing-policy` filter was confirmed at tier 4** in the
 running app (dev server + `scripts/renderer/` method, headless): "50 shown · 3708 in this tier · filter hiding 3658". The
@@ -161,11 +173,27 @@ is the recipe and it worked again on 2026-10-24.)*
    central list included. Four edges sit at B for the same kind of reason and an alias would lift each:
    `pl-pkwiu-2015 -> cpa`, `on-portable-housing-benefit -> cmhc-rental-market-survey`, and the two
    `-> icls-work-statistics-resolution` edges from Uzbekistan (the sheets put a comma inside the title). No alias was added.
+3. **The same miss in a TITLE, measured 2026-10-25 — the second time, so truth rule 5 says it belongs in code.** `ifrs`
+   carries its publisher's title, "IFRS Accounting Standards", and its last two words are 2 of 3 tokens, so ANY text with
+   "accounting standards" names it: a control sentence about "applicable accounting standards issued by the national board"
+   scored `title-run:2/3`. The grader gave `bis-basel-framework -> ifrs` an A off "the lease accounting standards" in a
+   nearby FAQ; it is hand-graded B and says why. Wolverhampton and the XRB matched the same way but carry the full alias in
+   the quote, so their A's stand. Two questions: (a) should `namesTarget` refuse a 2-token run whose words are generic
+   (`accounting standards`, `rating list`)? That changes grades corpus-wide, so it is yours. (b) Does a standard's number
+   inside the set ("IFRS 9", "IFRS 10") name the set? The Basel quote names nothing else.
 
 ### [Agent]
 
 **In order of value:**
 
+0. **International standard-setters, continued** (`REPORTS.md`'s "not yet run" table; IFRS done 2026-10-25, FATF has no
+   citing document). Untested and with no node: **ISO** (3166/4217 — an edition question first: citations rarely date them),
+   the **FSB / IOSCO / IAIS**, **Codex**, the **G20 Data Gaps Initiative**. Start each from the corpus side: grep for the
+   body, read the citing document, mint only if something names the artefact. IFRS leads in
+   `intl-ifrs-2026-10-25.json`'s `_dropped`: the CIPFA Code's own basis (cipfa.org gave this container a Cloudflare
+   challenge, so it needs Thomas's browser); `nz-watercare-annual-report -> nz-xrb-a1`, the zero-edge Watercare node's
+   edge, quote already read; `nz-lgfa-annual-report`'s url answers 403 (the reports moved to
+   `/investors/publications/annual-report`). The IMF's MFSMCG 2016 was not read (www.imf.org 403).
 1. **Housing — the open leads of lane 0a and the `housing-policy` follow-ons.** (a) A national balance-sheet node would
    take the NHPI's stock-deflation use (StatCan; a note in `housing-national-gaps-2026-10-17.json`).
    (b) `cmhc-starts-completions-survey` is unwired: nothing read names a statistic built on it. (c) Korea's RPPI node url is

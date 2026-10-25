@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "source": "research round 2026-10-25 — international standard-setters not yet tested (REPORTS.md, 'Bodies worth the same test and not yet run'). Thomas, 2026-10-25: \"start 1\", on the recommendation to begin with IFRS and FATF.",
+    "minted": "2026-10-25",
+    "note": "IFRS FIRST PASS. RESULT: 1 node, 6 dependencies, 6 dropped notes. The IASB's standards had no node: a 2026-08 note on `psab-psas -> ifrs` (international-frameworks.json) said no node in the graph was governed by them. Six documents already in the corpus, each read in this cloud container on 2026-10-25 with TLS verification on, say in their own words that they are prepared on IFRS or built from it: the IPSASB's Preface, NDB's and LGFA's annual reports, Wolverhampton's Statement of Accounts, the XRB's Accounting Standards Framework and the Basel Framework's leverage-ratio standard. FATF: no node minted. The only corpus document that mentions it, NDB's anti-money-laundering policy, names the Task Force as a body and borrows its definition; it never names the FATF Recommendations, so a FATF node would have had no edge (see _dropped)."
+  },
+  "reports": [
+    {
+      "id": "ifrs",
+      "title": "IFRS Accounting Standards",
+      "title_aliases": [
+        "International Financial Reporting Standards"
+      ],
+      "publisher": "International Accounting Standards Board (IASB), IFRS Foundation",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "kind": "standard",
+      "region": "International",
+      "description": "The accounting standards issued by the International Accounting Standards Board, the standard-setting board of the IFRS Foundation: the IFRS and IAS standards and their Interpretations, used for the financial statements of companies and other entities. Not the IFRS Sustainability Disclosure Standards (issued by the ISSB) and not the separate IFRS for SMEs Accounting Standard. Title as ifrs.org uses it: 'IFRS Accounting Standards are developed by the International Accounting Standards Board (IASB).' The alias is the IFRS Foundation's own name for the standards, listed among its registered trade marks on every ifrs.org page ('International Financial Reporting Standards®'), and is how LGFA's annual report, Wolverhampton's Statement of Accounts and the XRB's framework page name them. Both ifrs.org pages HTTP 200 on 2026-10-25. Minted 2026-10-25 in the international standard-setters round.",
+      "releases_per_year": 1,
+      "cadence_note": "The IASB issues new and amended Standards on a rolling basis. The IFRS Accounting Standards Navigator on ifrs.org offers each year's set by year (2021 to 2026), as 'Issued Standards' and 'Required Standards'.",
+      "last_updated": null,
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/",
+      "domains": [
+        "financial-regulation",
+        "governance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ipsas",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. The IPSASB's own Preface to its standards (June 2026 edition, ¶13, 'Development') says how IPSAS are written: the IPSASB adapts the IASB's standards to a public sector context and, 'wherever possible', keeps their accounting treatment and original text unless a significant public sector issue warrants a departure. The IPSASB's IPSAS–IFRS alignment dashboard (Q3 2026, ipsasb.org) maps each IPSAS to the IFRS or IAS it is based on. ROUTE: the Preface PDF from IFAC's own file store, linked from the 2026 Handbook page on ipsasb.org (HTTP 200, 8 pages), read in the cloud container with TLS verification on; quote verbatim. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming title-run:3/3.",
+      "evidence_url": "https://ifacweb.blob.core.windows.net/publicfiles/2026-08/A07_IPSASB_Preface_June%202026.pdf",
+      "evidence_quote": "In undertaking that process, the IPSASB attempts, wherever possible, to maintain the accounting treatment and original text of the IFRS Accounting Standards",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "ndb-annual-report",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. The Annual Report 2024 carries the Bank's annual financial statements, headed '(Prepared in accordance with IFRS Accounting Standards)'; note 2, 'Application of IFRS Accounting Standards', opens with the quoted sentence, and the independent auditor's opinion is given 'in accordance with IFRS Accounting Standards as issued by the International Accounting Standards Board (IASB)'. ROUTE: NDB's own PDF from ndb.int (HTTP 200, 168 pages), the same file the node's live edge to the NDB Agreement cites, read in the cloud container with TLS verification on; quote verbatim. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming title-run:3/3.",
+      "evidence_url": "https://www.ndb.int/wp-content/uploads/2025/12/NDB_AnnualReport2024_10Dec25.pdf",
+      "evidence_quote": "The annual financial statements of the Bank have been prepared in accordance with IFRS Accounting Standards.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "nz-lgfa-annual-report",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. The Annual Report 2026's statement of compliance says LGFA's financial statements are prepared under NZ GAAP, comply with NZ IFRS as a Tier 1 for-profit entity, and also comply with International Financial Reporting Standards; the auditor's opinion repeats both. ROUTE: LGFA's own PDF from lgfa.co.nz (HTTP 200, 86 pages), linked from its annual-report page, read in the cloud container with TLS verification on; quote verbatim. The node's own url (…/investors/annual-reports-and-statement-intent) answered this container HTTP 403 'Access Denied' on 2026-10-25; the reports now list at /investors/publications/annual-report. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming alias1:title-run:4/4.",
+      "evidence_url": "https://www.lgfa.co.nz/sites/default/files/2026-08/lgfa_annualreport_2026-zz.pdf",
+      "evidence_quote": "The financial statements also comply with International Financial Reporting Standards (IFRS).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "gb-wolverhampton-statement-of-accounts",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. Accounting policy 1, 'General principles', says the Council prepares its Statement of Accounts 'in accordance with proper accounting practices' and names what they comprise: the CIPFA Code and the Service Reporting Code of Practice, supported by IFRS. Distinct from the live `gb-wolverhampton-statement-of-accounts -> gb-cipfa-code` edge, which the same sentence also carries. ROUTE: the Council's own PDF from wolverhampton.gov.uk (HTTP 200, 311 pages), the node's own url and the file its Code edge cites, read in the cloud container with TLS verification on; quote verbatim. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming title-run:2/3. That 2/3 is the title's last two words, 'Accounting Standards', which match any text using the phrase (a control sentence naming no IFRS at all also scored title-run:2/3), so it is not what carries the grade: the quote itself names the standards by the alias in full, which `namesTarget` reads as alias1:title-run:4/4 on the cached window.",
+      "evidence_url": "https://www.wolverhampton.gov.uk/sites/default/files/2026-01/SoA%202024-25%20FINAL%20for%20publication%20Update.pdf",
+      "evidence_quote": "These practices primarily comprise the Code of Practice on Local Authority Accounting in the United Kingdom 2024-2025 and the Service Reporting Code of Practice 2024-2025, supported by International Financial Reporting Standards (IFRS).",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "nz-xrb-a1",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. The XRB's Accounting Standards Framework page, the node's own url, states the basis for developing each suite of accounting standards it allocates entities to: for-profit entities' standards are based on International Financial Reporting Standards, public benefit entities' on IPSAS. XRB A1's own text (standards.xrb.govt.nz, HTTP 200) defines the Tier 1 for-profit requirements as NZ IFRS. ROUTE: xrb.govt.nz (HTTP 200), read in the cloud container with TLS verification on; quote verbatim from one list item, ending before the bracketed gloss. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming title-run:2/3 — the generic 'accounting standards' run (see the Wolverhampton edge in this slice). The quote itself names the standards by the alias in full, alias1:title-run:4/4 on the cached window, so A stands on the alias.",
+      "evidence_url": "https://www.xrb.govt.nz/standards/accounting-standards/accounting-standards-framework/",
+      "evidence_quote": "For-profit entities — accounting standards are based on International Financial Reporting Standards",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "bis-basel-framework",
+      "target_report_id": "ifrs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-25. The Basel Framework's leverage ratio standard, LEV30.8 footnote 3, lets a bank exclude fiduciary assets from the leverage ratio exposure measure only where they meet the IFRS 9 derecognition criteria and, where applicable, IFRS 10's deconsolidation test. CAP30.8 does the same for capital deductions: banks reporting under local GAAP may use 'the IFRS definition of intangible assets' (the CAP standard PDF, bis.org, HTTP 200). ROUTE: the LEV standard PDF from bis.org (HTTP 200, 35 pages), read in the cloud container with TLS verification on; quote verbatim. The framework's old /basel_framework/chapter/ urls now redirect to /committees/bcbs/basel-framework/. Grader 2026-10-25 (dry run, --edges): A, quote-found-artefact-named, naming title-run:2/3. HAND GRADE B OVERRIDES IT: the run came from 'the revisions to the lease accounting standards' in an FAQ a few hundred characters after the quote, inside the grader's window, which matches the title's generic last two words and is not a citation of IFRS (a control sentence naming no IFRS at all scores the same). The quote names IFRS 9 and IFRS 10 by number; neither the title nor the alias is in it, and an acronym may not be an alias (`types.ts`, `title_aliases` rule 3). So B, quote-found-target-not-named, until Thomas rules on whether a standard's number inside the set names the set.",
+      "evidence_url": "https://www.bis.org/committees/bcbs/basel-framework/LEV/standard.pdf",
+      "evidence_quote": "can be excluded from the leverage ratio exposure measure provided that the assets meet the IFRS 9 criteria for derecognition and, where applicable, IFRS 10 for deconsolidation",
+      "evidence_grade": "B"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "et-nbe-annual-report -> ifrs",
+      "source": "et-nbe-annual-report",
+      "target": "ifrs",
+      "reason": "no-document",
+      "why": "READ 2026-10-25, NOT FOUND. The National Bank of Ethiopia's Annual Report 2024/25 (nbe.gov.et/wp-content/uploads/2026/07/Annual-Report-2024-2025.pdf, 255 pages, 51 MB) has no occurrence of 'IFRS', 'International Financial Reporting' or 'IPSAS' in its extracted text. ROUTE: a whole-file transfer was reset twice (curl error 35, connection reset), so the file was fetched in byte ranges from the same url (HTTP 206) and reassembled to its stated Content-Length. The node stays zero-edge."
+    },
+    {
+      "edge": "nz-watercare-annual-report -> ifrs",
+      "source": "nz-watercare-annual-report",
+      "target": "ifrs",
+      "reason": "wrong-target",
+      "why": "READ 2026-10-25. Watercare's Annual Report 2025/2026 (assets.watercare.co.nz, HTTP 200, 109 pages) names a different framework: 'The group is a Tier 1 public benefit entity and, in preparing these financial statements, has applied PBE Standards based on International Public Sector Accounting Standards.' Not IFRS. A LEAD, not wired this round because it is outside the standard-setters scope: the same report says 'Watercare is a public-sector public benefit entity (PBE) as defined under the External Reporting Board (XRB) Standard A1', which is a `nz-watercare-annual-report -> nz-xrb-a1` edge for the zero-edge Watercare node."
+    },
+    {
+      "edge": "statcan-qsfs -> ifrs",
+      "source": "statcan-qsfs",
+      "target": "ifrs",
+      "reason": "no-document",
+      "why": "READ 2026-10-25. The QSFS IMDB record (www23.statcan.gc.ca, SDDS 2501, HTTP 200) says that from the first quarter of 2020 the questionnaires 'were updated to better align with actual accounting standards' and names no standard. The questionnaires themselves were not read."
+    },
+    {
+      "edge": "gb-cipfa-code -> ifrs",
+      "source": "gb-cipfa-code",
+      "target": "ifrs",
+      "reason": "unreadable-source",
+      "why": "NOT READ 2026-10-25. The node's url on cipfa.org answered this cloud container HTTP 403 with a Cloudflare challenge page ('Just a moment... Enable JavaScript and cookies to continue'); it was not worked around. A claim about this container on this day, not the site. Wolverhampton's own accounts say its proper practices comprise the Code 'supported by International Financial Reporting Standards (IFRS)' — that is the council speaking, and it is carried on Wolverhampton's own edge, not on the Code's. The Code's own statement of its basis needs Thomas's browser or another host."
+    },
+    {
+      "edge": "ndb-anti-corruption-policy-2016 -> (FATF Recommendations, no node)",
+      "source": "ndb-anti-corruption-policy-2016",
+      "target": null,
+      "reason": "no-document",
+      "why": "READ 2026-10-25. NDB's Anti-Corruption, Anti-Fraud and Anti-Money Laundering Policy (ndb.int PDF, HTTP 200, 26 pages) mentions the Task Force once: 'According to the Financial Action Task Force (FATF), Money Laundering (ML) is the processing of criminal proceeds in order to disguise their illegal origin.' That names the body and borrows its definition; nothing in the policy names the FATF Recommendations. Naming the agency is not naming the artefact, so no edge — and since this is the only document in the corpus that mentions the FATF (corpus grep 2026-10-25: 'FATF', 'Financial Action Task Force', 'money laundering'), no FATF node was minted rather than leave a permanently isolated one. NDB's Annual Report 2024 has no FATF mention either."
+    },
+    {
+      "edge": "bis-basel-framework -> ifrs (Basel CAP90, expected credit loss)",
+      "source": "bis-basel-framework",
+      "target": "ifrs",
+      "reason": "caveat",
+      "why": "READ 2026-10-25, CAVEAT ON THE LIVE EDGE. CAP90.7's transitional arrangement is for 'the application of expected credit loss (ECL) accounting' and names no accounting standard, so it is not part of the evidence; the live edge rests on LEV30.8 footnote 3 and CAP30.8. Basel standard PDFs scanned (bis.org, HTTP 200), counting text lines that carry 'IFRS' or 'International Financial Reporting': CAP 3, DIS 8, LEV 3, OPE 2, RBC 2; CRE, LCR, LEX, MAR, NSF, SCO and SRP none. Requests for CCR, CVA and LIQ at /<code>/standard.pdf answered HTTP 500, so those were not read."
+    }
+  ]
+}
