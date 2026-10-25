@@ -94,14 +94,27 @@ each grew in the 2026-10-17 round.)*
 ## 2. Current state
 
 Corpus **3,721 reports / 3,501 dependencies**, recounted by `npm run validate` on 2026-10-25 (cloud container).
-**1,491 A · 1,425 B · 585 C**, A-share 42.6%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
+**1,498 A · 1,418 B · 585 C**, A-share 42.8%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
 **128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated (all 2026-10-25). **990 zero-edge
 nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
 prints. NODE URLS **1,015 bare / 453 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
 KIND **2,758 publication · 155 standard · 808 instrument** (`validate`'s KIND block). Recount from the tools, never carry a figure.
 
-**Latest: the `kind: instrument` re-sort, 2026-10-25** (Thomas: *"lets deal with the 490 nodes marked wrongly"*, then three
+**Latest: the naming fixes, 2026-10-25** (Thomas: *"go with your recommendations"*, on the alias and title-run
+questions). **Aliases:** `gb-voa-rating-lists` lost `non-domestic rating list` (the VOA's family name for both its lists;
+"rating list" matched any list); `cpa` took "Classification of Products by Activity" and `cmhc-rental-market-survey`
+"Rental Market Survey", each in print and noted on the node. **Code:** `namesTarget` gained a punctuation-flattened pass,
+so a comma, bracket, hyphen or abbreviation stop in a document no longer breaks a title run (selftest 78/78; the
+abbreviation trap in `PLAYBOOK-CORPUS.md` §6 is marked fixed). **Ruling:** a publisher's own number for one member of a
+set names the set (`playbook/corpus-naming.md`), so `bis-basel-framework -> ifrs` is A by hand. **Grades:** 7 edges B → A —
+PKWiU → CPA, Ontario's portable housing benefit → CMHC, Basel → IFRS, and four the comma fix lifted (Uzbek unemployment →
+ICLS, Uzbek national accounts → COICOP, Zimbabwe's Auditor-General → Urban Councils Act, Greenland → Danish price
+assumptions); Stevenage stays A, now on `local rating list` itself. Every re-grade was a live dry run with all edges on
+the url together; three evidence-cache records a failed fetch had overwritten were restored from git. Guards measured,
+not shipped: §3 [Thomas] 1.
+
+**Before it, same day: the `kind: instrument` re-sort, 2026-10-25** (Thomas: *"lets deal with the 490 nodes marked wrongly"*, then three
 rulings). All 931 `instrument` nodes were sorted (`Claude outputs/cloud-2026-10-24/instrument-kind-review-2026-10-25.json`):
 the title rules put 289 as laws and 89 as other one-off documents (both rightly `instrument`), 78 as methodology
 documents, 325 as recurring outputs, 95 as not documents and 55 nowhere; hand checks then moved nodes between classes. **Done:** 89 moved to `standard` (69 hand-checked from the
@@ -176,25 +189,28 @@ is the recipe and it worked again on 2026-10-24.)*
 
 ### [Thomas]
 
-1. **Aliases that would move grades.** `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B → A on 2026-10-18 through alias
-   `non-domestic rating list` matching only "rating list" (`tokenise` keeps "non-domestic" whole, so 2 of 3 tokens), not
-   through `local rating list` as its basis says; that alias names the artefact on any text with "rating list", the VOA's
-   central list included. Four edges sit at B for the same kind of reason and an alias would lift each:
-   `pl-pkwiu-2015 -> cpa`, `on-portable-housing-benefit -> cmhc-rental-market-survey`, and the two
-   `-> icls-work-statistics-resolution` edges from Uzbekistan (the sheets put a comma inside the title). No alias was added.
-2. **The same miss in a TITLE, measured 2026-10-25 — the second time, so truth rule 5 says it belongs in code.** `ifrs`
-   carries its publisher's title, "IFRS Accounting Standards", and its last two words are 2 of 3 tokens, so ANY text with
-   "accounting standards" names it: a control sentence about "applicable accounting standards issued by the national board"
-   scored `title-run:2/3`. The grader gave `bis-basel-framework -> ifrs` an A off "the lease accounting standards" in a
-   nearby FAQ; it is hand-graded B and says why. Wolverhampton and the XRB matched the same way but carry the full alias in
-   the quote, so their A's stand. Two questions: (a) should `namesTarget` refuse a 2-token run whose words are generic
-   (`accounting standards`, `rating list`)? That changes grades corpus-wide, so it is yours. (b) Does a standard's number
-   inside the set ("IFRS 9", "IFRS 10") name the set? The Basel quote names nothing else.
+1. **No code guard against ordinary-word matches — a hand re-check instead?** Measured offline on the 2,924 live edges
+   with a cached quote window (`Claude outputs/cloud-2026-10-24/naming-guards-2026-10-25.json`). Option A (a two-word
+   match needs a non-generic word) refuses 27, 26 of them A — but 21 are national-accounts nodes whose real title IS
+   "National accounts", matched in full. Option B (a title of three words or fewer must match in full) refuses 39, 36 A,
+   mostly genuine short citations ("assessment roll", "GB/T 4754-2017"). A narrow A (partial two-word matches only)
+   refuses 7, and its windows split: likely false — `statcan-gdp-monthly -> statcan-cpi` ("Wholesale Services Price
+   Index"), `eurostat-hicp -> ie-cso-cpi` (the MUICP sentence), possibly `bea-pce -> bls-cpi` ("an appropriate price
+   index"); genuine — `bls-cpi -> bls-cex` ("Consumer Expenditure (CE) survey"), `ck-budget-estimates ->
+   ck-national-accounts`. **Recommendation: ship no guard; re-grade by hand the narrow-A edges plus the B list's weak
+   matches (the three `-> eu-reg-2023-1470` and one `-> eu-reg-2020-1148` matched only "commission regulation";
+   `br-fpe-dn-tcu -> br-ibge-estimativas-populacao` on "da população").** Each would keep its A only if its own document
+   names the target in full.
 
 ### [Agent]
 
 **In order of value:**
 
+00. **Re-grades this container could not do** (2026-10-25): `au-vlggc-annual-allocation-report ->
+   au-vlggc-agi-questionnaire` (B; the comma fix names it on the cached window, but the VLGGC docx answered a Cloudflare
+   challenge); edges the abbreviation trap held at B may lift on a re-grade, e.g. `esa-2010 -> nace-rev2` (EUR-Lex answers
+   HTTP 202 empty here); `eurostat-prodcom -> nace-rev2` is stored A but its quote was not found on today's `prom_esms`
+   page — re-read before trusting it.
 0a. **Release rates for the recurring outputs still marked `instrument`** (Thomas's ruling 2026-10-25: research, edges
    first, switch only with a rate sourced from the publisher's own pages, into `_cadence_evidence`; never the import's
    `_cadence_original`). **201 nodes, 105 with edges**, ordered in `Claude outputs/cloud-2026-10-24/rate-worklist-2026-10-25.json`.

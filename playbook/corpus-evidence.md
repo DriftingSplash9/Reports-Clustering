@@ -282,6 +282,17 @@ landed in the wrong one. Boundary now stated at the top of each file. `notes/doc
 
 ## A title-lead or alias containing ANY abbreviation can never fire (2026-09-15, widened 2026-09-16)
 
+**FIXED 2026-10-25 in code** (Thomas: "go with your recommendations"). `namesTarget` now has a punctuation-flattened
+pass: when the spaced pass fails, it tokenises the document exactly as the title is tokenised and asks again, so a
+comma, bracket, hyphen or abbreviation stop in the document no longer breaks the run. It reports itself as
+`title-run-flat` / `title-lead-flat`, runs only after the spaced pass has failed (it cannot lower a score), and the
+selftest carries a case for it and one against invented matches. Measured on the 2,924 live edges with a cached window:
+6 newly named, none un-named. On a live re-grade, four of those six moved B → A (`uz-unemployment ->
+icls-work-statistics-resolution`, `uz-national-accounts -> uz-coicop`, `zw-auditor-general-local-authorities-2023 ->
+zw-urban-councils-act`, `gl-selvstyrelov -> dk-pris-og-loenforudsaetninger`); the other two are on one VLGGC document
+that answered the cloud container with a Cloudflare challenge (one already A; `au-vlggc-annual-allocation-report ->
+au-vlggc-agi-questionnaire` is B and waits for a machine that can read it). The account below is kept as the record of the defect.
+
 **Measured, on one edge, and the mechanism is general.** `esa-2010 -> nace-rev2` was quoted from
 ESA 2010's own Annex A — *"The classification used for grouping local KAUs into industries is the
 NACE Rev. 2."* — coverage 1.0, the target named in full inside the quote as any reader would
