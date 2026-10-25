@@ -50,3 +50,18 @@ Thomas: "lets deal with the 490 nodes marked wrongly". The handoff's "~490" was 
 - Ruling recorded: a publisher's own number for a member of a set names the set; Basel → IFRS A by hand.
 - Guards (not shipped): A 27 (26 A), narrow A 7 (6 A), B 39 (36 A). Lists in `naming-guards-2026-10-25.json`.
 - validate exit 0: 1,498 A · 1,418 B · 585 C; 3,721 / 3,501; 990 zero-edge. selftest 78/78. tsc clean.
+
+# The generic-match re-check (Thomas: "go")
+
+- Twelve edges: narrow-guard list (7) and the guard-B list's weak matches (5). Eight settled from their quotes alone:
+  `bls-cpi -> bls-cex` ("Consumer Expenditure (CE) survey"), `ck-budget-estimates -> ck-national-accounts` (chart source
+  line), `nz-xrb-a1 -> ifrs` (alias in full), the three `-> eu-reg-2023-1470` and `no-ssb-new-dwellings-price-index ->
+  eu-reg-2020-1148` (each quote carries the regulation's number); `ee-statistics-estonia-national-accounts -> ee-stat-hbs`
+  was already B.
+- Four read live (dry run with every edge on each url, 10 edges, all HTTP 200) and then by hand in the ±400-character
+  window: `statcan-gdp-monthly -> statcan-cpi` genuine (quote: "Consumer price indexes ... Record no. 2301");
+  `bea-pce -> bls-cpi` genuine ("the closest matching price index is a consumer price index or indexes", next sentence);
+  `eurostat-hicp -> ie-cso-cpi` A → B (windows of both quoted sentences name MUICP / HICP / CPI only; "Consumer Price
+  Index" five times on the page, all outside); `br-fpe-dn-tcu -> br-ibge-estimativas-populacao` A → B (IBGE named, the
+  estimates described, never titled).
+- validate exit 0: 1,496 A · 1,420 B · 585 C.

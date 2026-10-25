@@ -94,14 +94,22 @@ each grew in the 2026-10-17 round.)*
 ## 2. Current state
 
 Corpus **3,721 reports / 3,501 dependencies**, recounted by `npm run validate` on 2026-10-25 (cloud container).
-**1,498 A · 1,418 B · 585 C**, A-share 42.8%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
+**1,496 A · 1,420 B · 585 C**, A-share 42.7%. **Domains: 47 approved, 0 proposed.** **`validate` exits 0.**
 **128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated (all 2026-10-25). **990 zero-edge
 nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
 prints. NODE URLS **1,015 bare / 453 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
 KIND **2,758 publication · 155 standard · 808 instrument** (`validate`'s KIND block). Recount from the tools, never carry a figure.
 
-**Latest: the naming fixes, 2026-10-25** (Thomas: *"go with your recommendations"*, on the alias and title-run
+**Latest: the generic-match re-check, 2026-10-25** (Thomas: *"go"*, on the recommendation to ship no code guard and
+re-check the suspect A grades by hand). Twelve edges from `naming-guards-2026-10-25.json`: ten keep their grade, because
+their own document names the target in full (the quote or its ±400-character window has the full title, the CPI's record
+number, or the regulation's number); `ee-statistics-estonia-national-accounts -> ee-stat-hbs` was already B. **Two A → B by
+hand**, each basis saying why: `eurostat-hicp -> ie-cso-cpi` (the windows name the MUICP, "the HICP" and "the CPI", never
+"Consumer Price Index") and `br-fpe-dn-tcu -> br-ibge-estimativas-populacao` (the decision names IBGE and describes the
+figure, never "Estimativas da População"). No code guard shipped.
+
+**Before it, same day: the naming fixes, 2026-10-25** (Thomas: *"go with your recommendations"*, on the alias and title-run
 questions). **Aliases:** `gb-voa-rating-lists` lost `non-domestic rating list` (the VOA's family name for both its lists;
 "rating list" matched any list); `cpa` took "Classification of Products by Activity" and `cmhc-rental-market-survey`
 "Rental Market Survey", each in print and noted on the node. **Code:** `namesTarget` gained a punctuation-flattened pass,
@@ -112,7 +120,7 @@ PKWiU → CPA, Ontario's portable housing benefit → CMHC, Basel → IFRS, and 
 ICLS, Uzbek national accounts → COICOP, Zimbabwe's Auditor-General → Urban Councils Act, Greenland → Danish price
 assumptions); Stevenage stays A, now on `local rating list` itself. Every re-grade was a live dry run with all edges on
 the url together; three evidence-cache records a failed fetch had overwritten were restored from git. Guards measured,
-not shipped: §3 [Thomas] 1.
+not shipped; the hand re-check that replaced them is above.
 
 **Before it, same day: the `kind: instrument` re-sort, 2026-10-25** (Thomas: *"lets deal with the 490 nodes marked wrongly"*, then three
 rulings). All 931 `instrument` nodes were sorted (`Claude outputs/cloud-2026-10-24/instrument-kind-review-2026-10-25.json`):
@@ -189,18 +197,7 @@ is the recipe and it worked again on 2026-10-24.)*
 
 ### [Thomas]
 
-1. **No code guard against ordinary-word matches — a hand re-check instead?** Measured offline on the 2,924 live edges
-   with a cached quote window (`Claude outputs/cloud-2026-10-24/naming-guards-2026-10-25.json`). Option A (a two-word
-   match needs a non-generic word) refuses 27, 26 of them A — but 21 are national-accounts nodes whose real title IS
-   "National accounts", matched in full. Option B (a title of three words or fewer must match in full) refuses 39, 36 A,
-   mostly genuine short citations ("assessment roll", "GB/T 4754-2017"). A narrow A (partial two-word matches only)
-   refuses 7, and its windows split: likely false — `statcan-gdp-monthly -> statcan-cpi` ("Wholesale Services Price
-   Index"), `eurostat-hicp -> ie-cso-cpi` (the MUICP sentence), possibly `bea-pce -> bls-cpi` ("an appropriate price
-   index"); genuine — `bls-cpi -> bls-cex` ("Consumer Expenditure (CE) survey"), `ck-budget-estimates ->
-   ck-national-accounts`. **Recommendation: ship no guard; re-grade by hand the narrow-A edges plus the B list's weak
-   matches (the three `-> eu-reg-2023-1470` and one `-> eu-reg-2020-1148` matched only "commission regulation";
-   `br-fpe-dn-tcu -> br-ibge-estimativas-populacao` on "da população").** Each would keep its A only if its own document
-   names the target in full.
+None open (the last, the generic-match guard, was answered 2026-10-25: no guard, a hand re-check; see §2).
 
 ### [Agent]
 
