@@ -277,6 +277,8 @@ one specific edge's fate — the data's own `_dropped`/live entry is that record
 - **`housing-policy` tags what ACTS on the housing/rental/mortgage market** (Thomas, 2026-10-17), only when the node's own
   document is about that market; general property taxes included. `playbook/corpus-nodes.md`.
 - **A national HPI is a node only if the country publishes it** (Thomas, 2026-10-17); no total, so mint each named national index. `playbook/corpus-nodes.md`.
+- **`kind: instrument` is re-sorted by hand, never swept** (Thomas, 2026-10-25): methodology documents → `standard`;
+  recurring outputs → `publication` only with a publisher-sourced rate; non-documents listed, not changed. `playbook/corpus-nodes.md`.
 - **A revising NOTICE does not mint an edition** (Thomas, 2026-09-10). A citation DATED to the revision reaches
   the node; a bare title does not. Contrast a real new edition with its own number. `playbook/corpus-nodes.md`.
 
