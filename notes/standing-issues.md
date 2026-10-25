@@ -39,6 +39,42 @@ or empty-bodied to every route tried (the CAPMAS static pages return HTTP 200 wi
 here until either host answers or someone finds a third-party first-party
 republication.
 
+### 126 `kind: instrument` nodes that are not documents — listed, not changed
+*Placed here directly by Thomas's ruling, 2026-10-25 ("List them only"), not by the five-handoff review.*
+Found while sorting all 931 `kind: instrument` nodes (`Claude outputs/cloud-2026-10-24/instrument-kind-review-2026-10-25.json`).
+No `ReportKind` fits them, and the meta-node ruling (`playbook/corpus-nodes.md`) forbids sweeping by keyword, so each
+waits for its own call under ONE NODE PER DOCUMENT: keep, re-point its edges at the document its evidence names, or
+retire. Counts are edges in either direction at 2026-10-25.
+- **Statistics offices, statistical systems, similar bodies and one portal, 55** — the same class as the institutions below, found
+  inside the "recurring output" group because their titles say Statistics. `sd-cbs`, `sy-cbs` and `ye-cso` are three of
+  the four PARKED NSOs (`playbook/corpus-nodes.md`); `asean-acss` and `af-nsia` carry no rate on purpose (their own
+  `cadence_note`): `af-nsia` `ag-statistics-division` `am-armstat` `ar-sen` `asean-acss` `az-ssc` `bb-bss` `bd-bbs`
+  `bh-iga` `bn-deps` `bs-bnsi` `bt-nsb` `by-belstat` `bz-sib` `fj-bos` `gcc-stat` `ge-geostat` `ht-ihsi` `jm-statin`
+  `jo-dos` `jp-estat` `jp-sbj` `kg-nsc` `kh-nis` `ki-nso` `kr-kostat` `kw-csb` `kz-bns` `la-lsb` `lc-cso` `mn-nso`
+  `mv-mbs` `my-dosm` `np-nso` `nr-bos` `om-ncsi` `pg-nso` `pk-pbs` `qa-nsc` `sb-sinso` `sd-cbs` `sy-cbs`
+  `tj-agency-statistics` `to-stats-dept` `tt-cso` `tv-csd` `vu-bos` `ws-sbs` `ye-cso`; and by hand, `uz-ssc`
+  `tm-turkmenstat` `spc-sdd` `sica-centroestad` `py-itaipu` `ru-minzdrav-policy-role`.
+- **Institutions, 19 (12 with edges)** — legitimate by design (`af-nsia` is the shape; the four parked NSOs are the
+  precedent), only the kind label is wrong: `int-eccb` `int-caricom` `gt-ine` `hn-ine` `ni-inide` `cr-inec` `pa-inec`
+  `tl-inetl` `ir-sci` `ir-cbi` `th-nso` `th-bot` `ve-ine` `pftac` `id-bph-migas` `id-ditjen-migas` `jp-nra`
+  `jp-reconstruction-agency` `ru-dia-deposit-insurance-agency`.
+- **Programmes and projects, 15 (7)** — a project is not its appraisal document: `bf-worldbank-safety-net-p124015`
+  `eg-takaful-karama-programme` `et-psnp5-worldbank-seasn` `et-upsnjp` `gh-leap-programme` `gh-gpsnp2-worldbank`
+  `gy-gas-to-energy` `gy-amaila` `ke-pwsd-ct-programme` `ng-nassp-su-worldbank` `sr-imf` `tn-mas-pnafn`
+  `tz-pssn-worldbank` `wb-chad-safety-nets-2016` `wb-chad-adaptive-safety-nets-2024`.
+- **Companies, 5 (2):** `id-pgn` `id-kai` `ve-chevron` `ve-majors-licenciados` `sr-financiamiento-staatsolie`.
+- **Places and resources, 5 (1):** `ar-rmba` `cl-gran-santiago` `bo-salar-uyuni` `ve-faja-orinoco` `tw-science-park-geography`.
+- **Topics, regimes and events, 24 (3)** — August-import framings: `ae-adia` `ae-opec-exit` `eg-moic-minimum-wage-2025`
+  `bo-relacion-brasil-energia` `bo-china-comercio` `cl-meta-inflacion` `co-meta-inflacion` `pe-meta-inflacion`
+  `py-meta-inflacion` `uy-meta-inflacion` `ec-dolarizacion` `id-msme-broader` `tr-ndc` `tw-cross-strait-finance`
+  `tw-art-energy-purchases` `tw-child-family-policy-response` `tw-export-controls-alignment` `tw-asymmetric-force-budget`
+  `ve-ofac-sanciones` `ve-relacion-eeuu-petroleo` `ve-relacion-china` `vn-digital-strategy` `vn-border-economic-zones`
+  `vn-china-connectivity`.
+- **Web pages, 3 (0)** — a pointer is not a source: `ml-bamako-district-site` `ug-kcca-revenue-sources` `so-slmof-portal`.
+
+The title rules first put 95 here; the other 24 are documents and are not on this list (eleven laws, which are right
+as `instrument`, and thirteen one-off reports, plans and audits).
+
 ### `naics` and `icd-10-ca` deliberately stay `kind: standard`
 *Demoted 2026-09-06 after 5 handoffs. First carried 2026-09-04.*
 Both are classification instruments and both were deliberately left as `standard`

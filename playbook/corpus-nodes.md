@@ -127,6 +127,17 @@ node: `ie-cso-rppi` is the example. **Where a country publishes several national
 **each national index its HPI metadata names**, one node per document. A legal-basis edge then needs a document that
 ties THAT index to the act, so the HPI metadata's §6.1 does not wire a component on its own.
 
+**`kind: instrument` is re-sorted by hand, never swept** (Thomas, 2026-10-25, ruling on the sort of all 931 `instrument`
+nodes, `Claude outputs/cloud-2026-10-24/instrument-kind-review-2026-10-25.json`). The 2026-09-03 backfill made every node
+without `releases_per_year` an `instrument`, so the kind held laws, methodologies, recurring releases and things that are
+not documents at all. **A classification, manual, methodology or statistical survey/reporting system is `standard`**, and
+needs no rate. **A recurring output becomes `publication` only with a release rate sourced from its publisher's own pages**,
+written into `_cadence_evidence` — never taken from the August import's `_cadence_original`, which is a claim, not a
+source. **A node that is not a document** (an institution, project, company, place or topic) keeps its kind and waits for
+a one-node-per-document call (`notes/standing-issues.md`). Laws and other one-off documents (declarations, MoUs,
+policies, strategies, one-off studies) stay `instrument`. Every node moved carries `_kind_original: "instrument"`. The
+open worklist, nodes with edges first: `Claude outputs/cloud-2026-10-24/rate-worklist-2026-10-25.json`.
+
 ### 7d. Parked and closed
 
 **Parked.** `diary.csv` moved to `PLAYBOOK.md` (it binds any task, not just corpus

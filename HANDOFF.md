@@ -99,9 +99,22 @@ Corpus **3,721 reports / 3,501 dependencies**, recounted by `npm run validate` o
 nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
 prints. NODE URLS **1,015 bare / 453 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
-Recount from the tools, never carry a figure.
+KIND **2,758 publication · 155 standard · 808 instrument** (`validate`'s KIND block). Recount from the tools, never carry a figure.
 
-**Latest: the international standard-setters round, 2026-10-25** (Thomas: *"start 1"*, on the recommendation to begin
+**Latest: the `kind: instrument` re-sort, 2026-10-25** (Thomas: *"lets deal with the 490 nodes marked wrongly"*, then three
+rulings). All 931 `instrument` nodes were sorted (`Claude outputs/cloud-2026-10-24/instrument-kind-review-2026-10-25.json`):
+the title rules put 289 as laws and 89 as other one-off documents (both rightly `instrument`), 78 as methodology
+documents, 325 as recurring outputs, 95 as not documents and 55 nowhere; hand checks then moved nodes between classes. **Done:** 89 moved to `standard` (69 hand-checked from the
+title sort — classifications, manuals, the 21 EDP inventories, Rosstat methodologies, China's 调查制度 — plus China's 18
+报表制度 and two IMF/StatCan methodology documents; nine look-alikes stayed `instrument`: three Commission regulations, a
+UEMOA règlement, a Russian resolution, two Rosstat orders, Sudan's budget guidelines and China's hazardous-waste catalogue).
+**34 moved to `publication` with a sourced rate:** the 29 ESS peer-review documents at 0.13 (Eurostat's own page: rounds
+2006-08, 2013-15, 2021-23) and the CZ, FR, IT, EE and DK EDP notifications at 2 (Regulation 479/2009 Art. 3(1), read from
+CELLAR, plus each national page). Every moved node carries `_kind_original: "instrument"`. **Listed, not changed:** 126
+non-document nodes in `notes/standing-issues.md`. The ruling is `playbook/corpus-nodes.md` §7c; the open rate worklist is
+§3 [Agent] 0a. Edges and grades unchanged. Log: `Claude outputs/cloud-2026-10-24/session-log-2026-10-25.md`.
+
+**Before it, same day: the international standard-setters round, 2026-10-25** (Thomas: *"start 1"*, on the recommendation to begin
 with IFRS and FATF from `REPORTS.md`'s "not yet run" table). New slice `intl-ifrs-2026-10-25.json`: **`ifrs`, the IASB's
 IFRS Accounting Standards**, titled from ifrs.org, alias "International Financial Reporting Standards" (the Foundation's own
 registered name). **6 in-edges, 5 A and 1 B**, all `methodology_depends_on` and SELF-DECLARED, from documents already in the
@@ -145,9 +158,9 @@ standart.uz) were not read, and India was not attempted. Everything read, tried 
 - **Negatives recorded** in their slices: Japan's RPPI method PDFs never name the Handbook; GUS's foreign-trade release is
   not titled the way NBP names it; three more CZSO documents say nothing about transmitting the HICP.
 
-**What it found that is not an edit.** Three questions for Thomas, one ruled since (§3 [Thomas] 1–2 are the other two). The backwards-edge scan read every
+**What it found that is not an edit.** Three questions for Thomas, all ruled since. The backwards-edge scan read every
 instrument → publication edge and every edge whose basis says the source FEEDS the target (ruled and dropped 2026-10-25,
-above). Along the way it showed that `kind: instrument` is a contaminated class (§3 [Thomas] 1). **The `housing-policy` filter was confirmed at tier 4** in the
+above). Along the way it showed that `kind: instrument` is a contaminated class (re-sorted 2026-10-25, above). **The `housing-policy` filter was confirmed at tier 4** in the
 running app (dev server + `scripts/renderer/` method, headless): "50 shown · 3708 in this tier · filter hiding 3658". The
 settled render draws 45; the other 5 are zero-edge nodes shelved under "Unlinked", so the counter includes nodes that
 are not in the scene. Screenshot in the round's output folder.
@@ -163,17 +176,13 @@ is the recipe and it worked again on 2026-10-24.)*
 
 ### [Thomas]
 
-1. **`kind: instrument` holds ~490 nodes that are not instruments** — surveys, censuses, classifications, agencies, BOP. The
-   2026-09-03 backfill set every node without `releases_per_year` to `instrument` (`types.ts`, comment on `kind`). Recount:
-   kind `instrument` whose title carries no legal word (Act, Law, Regulation, Decree, Order, Code …). A data fix per
-   `types.ts`, but a `publication` must carry `releases_per_year`, so it is a ruling on how, not a sweep to start unasked.
-2. **Aliases that would move grades.** `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B → A on 2026-10-18 through alias
+1. **Aliases that would move grades.** `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B → A on 2026-10-18 through alias
    `non-domestic rating list` matching only "rating list" (`tokenise` keeps "non-domestic" whole, so 2 of 3 tokens), not
    through `local rating list` as its basis says; that alias names the artefact on any text with "rating list", the VOA's
    central list included. Four edges sit at B for the same kind of reason and an alias would lift each:
    `pl-pkwiu-2015 -> cpa`, `on-portable-housing-benefit -> cmhc-rental-market-survey`, and the two
    `-> icls-work-statistics-resolution` edges from Uzbekistan (the sheets put a comma inside the title). No alias was added.
-3. **The same miss in a TITLE, measured 2026-10-25 — the second time, so truth rule 5 says it belongs in code.** `ifrs`
+2. **The same miss in a TITLE, measured 2026-10-25 — the second time, so truth rule 5 says it belongs in code.** `ifrs`
    carries its publisher's title, "IFRS Accounting Standards", and its last two words are 2 of 3 tokens, so ANY text with
    "accounting standards" names it: a control sentence about "applicable accounting standards issued by the national board"
    scored `title-run:2/3`. The grader gave `bis-basel-framework -> ifrs` an A off "the lease accounting standards" in a
@@ -186,7 +195,17 @@ is the recipe and it worked again on 2026-10-24.)*
 
 **In order of value:**
 
-0. **International standard-setters, continued** (`REPORTS.md`'s "not yet run" table; IFRS done 2026-10-25, FATF has no
+0a. **Release rates for the recurring outputs still marked `instrument`** (Thomas's ruling 2026-10-25: research, edges
+   first, switch only with a rate sourced from the publisher's own pages, into `_cadence_evidence`; never the import's
+   `_cadence_original`). **201 nodes, 105 with edges**, ordered in `Claude outputs/cloud-2026-10-24/rate-worklist-2026-10-25.json`.
+   The top of it: `tw-household-registration-stats` (7 edges), `cemac-inflation-note` (6), `vn-national-accounts` (6),
+   `tr-bop` (5), the ES/NL/LT deficit-and-debt nodes (not notifications: BdE is quarterly plus monthly), `th-bop`. Many
+   are August-import topic nodes whose landing page states no frequency; 87 already carry `_cadence_resolution: unknown`
+   from an earlier try. Some on the list are one-off documents the title rules misread (`in-fc15/16-report`,
+   `ru-rosstat-vpn-2020-results`, `bw-statsbots-cpi-technical-report-2018`): those stay `instrument`. China's 报表制度 now
+   sit as `standard` with no rate; each edition's title covers one statistical year (2025年统计年报和2026年定期统计报表),
+   a lead for a rate if a second year's edition is found.
+0b. **International standard-setters, continued** (`REPORTS.md`'s "not yet run" table; IFRS done 2026-10-25, FATF has no
    citing document). Untested and with no node: **ISO** (3166/4217 — an edition question first: citations rarely date them),
    the **FSB / IOSCO / IAIS**, **Codex**, the **G20 Data Gaps Initiative**. Start each from the corpus side: grep for the
    body, read the citing document, mint only if something names the artefact. IFRS leads in
@@ -247,7 +266,7 @@ Standing, and none of it needs a round of its own:
 - **`iq-cso` / `ye-cso` / `sy-cbs` / `sd-cbs` stay PARKED** — the rule is in
   `playbook/corpus-nodes.md`. `iq-cso`'s possible-duplicate question is open in
   `notes/standing-issues.md`, not here. **`uz-ssc`** (the statistics office carried as `kind: instrument`) is the same kind
-  of node and falls under §3 [Thomas] 1.
+  of node and is on the 2026-10-25 non-document list there.
 
 ## 4. How to hand off
 

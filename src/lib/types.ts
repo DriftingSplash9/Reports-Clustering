@@ -775,7 +775,9 @@ export interface Report {
    * everything else (no `releases_per_year`) → `instrument`. Cast, not
    * parsed, so a wrong first guess is a data fix, not a schema break — see
    * `notes/schema-validator-round-2026-09-03-migration.py` for the exact
-   * rule and its per-file effect.
+   * rule and its per-file effect. Re-sorted by hand from 2026-10-25
+   * (Thomas's ruling, `playbook/corpus-nodes.md` §7c): a node moved off
+   * `instrument` carries `_kind_original: "instrument"`.
    */
   kind: ReportKind
   /**
