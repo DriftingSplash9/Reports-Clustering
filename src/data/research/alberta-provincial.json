@@ -144,14 +144,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "ab-tbf-fiscal-plan",
-      "target_report_id": "ab-tbf-economic-outlook",
-      "relationship_type": "calculated_from",
-      "basis": "The economic outlook is a chapter of the fiscal plan and supplies the growth, employment, inflation and energy price assumptions from which every revenue line is forecast.",
-      "evidence_url": "https://www.alberta.ca/budget-documents",
-      "evidence_grade": "B"
-    },
-    {
       "source_report_id": "ab-tbf-fiscal-update",
       "target_report_id": "ab-tbf-fiscal-plan",
       "relationship_type": "uses_data_from",
@@ -172,6 +164,23 @@
       "basis": "Grant rates in the Funding Manual for School Authorities are set by the K-12 education allocation voted in the provincial budget; the manual distributes the envelope the fiscal plan establishes.",
       "evidence_url": "https://www.alberta.ca/k-12-education-funding-framework",
       "evidence_grade": "C"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ab-tbf-fiscal-plan -> ab-tbf-economic-outlook",
+      "source": "ab-tbf-fiscal-plan",
+      "target": "ab-tbf-economic-outlook",
+      "reason": "note",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: containment — containment recorded as a dependency; the basis describes one product as a part or chapter of the other, which is `part_of` territory, not a dependency. The edge's own basis said: \"The economic outlook is a chapter of the fiscal plan\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "ab-tbf-fiscal-plan",
+        "target_report_id": "ab-tbf-economic-outlook",
+        "relationship_type": "calculated_from",
+        "basis": "The economic outlook is a chapter of the fiscal plan and supplies the growth, employment, inflation and energy price assumptions from which every revenue line is forecast.",
+        "evidence_url": "https://www.alberta.ca/budget-documents",
+        "evidence_grade": "B"
+      }
     }
   ]
 }

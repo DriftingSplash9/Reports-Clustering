@@ -783,17 +783,6 @@
     "sg-batch-03.json"
    ],
    "evidence_grade": "B"
-  },
-  {
-   "source_report_id": "sg-external-debt",
-   "target_report_id": "sg-international-investment-position",
-   "relationship_type": "methodology_depends_on",
-   "basis": "External debt statistics form a key component of the liabilities side of the International Investment Position and are compiled on a consistent BPM6 conceptual framework with the IIP and Balance of Payments.",
-   "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/SGP/category/EXD00",
-   "_batch": [
-    "sg-batch-04.json"
-   ],
-   "evidence_grade": "B"
   }
  ],
  "_dropped": [
@@ -957,6 +946,24 @@
    "target": "sg-ssic-2025",
    "reason": "no-document",
    "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.singstat.gov.sg/standards/standards-and-classifications/ssic returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"sg-enterprise-landscape\", target_report_id=\"sg-ssic-2025\", relationship_type=\"legal_basis\", basis=\"Enterprise counts and sectoral breakdowns are classified according to the Singapore Standard Industrial Classification.\", evidence_url=\"https://www.singstat.gov.sg/standards/standards-and-classifications/ssic\", _batch=[\"sg-batch-07.json\"], evidence_grade=\"C\"."
+  },
+  {
+   "edge": "sg-external-debt -> sg-international-investment-position",
+   "source": "sg-external-debt",
+   "target": "sg-international-investment-position",
+   "reason": "note",
+   "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: containment — containment recorded as a dependency; the basis describes one product as a part or chapter of the other, which is `part_of` territory, not a dependency. The edge's own basis said: \"External debt statistics form a key component of the liabilities side of the International Investment Position\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+   "original_edge": {
+    "source_report_id": "sg-external-debt",
+    "target_report_id": "sg-international-investment-position",
+    "relationship_type": "methodology_depends_on",
+    "basis": "External debt statistics form a key component of the liabilities side of the International Investment Position and are compiled on a consistent BPM6 conceptual framework with the IIP and Balance of Payments.",
+    "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/SGP/category/EXD00",
+    "_batch": [
+     "sg-batch-04.json"
+    ],
+    "evidence_grade": "B"
+   }
   }
  ]
 }

@@ -1825,17 +1825,6 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "in-jaipur-district-ddp",
-      "target_report_id": "in-rajasthan-economic-review",
-      "relationship_type": "uses_data_from",
-      "basis": "Jaipur District Domestic Product and related district tables feed into the Rajasthan Economic Review.",
-      "evidence_url": "https://desddp.rajasthan.gov.in/Publications.aspx",
-      "_batch": [
-        "2026-08-17_India-domestic-batch10-municipal.json"
-      ],
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "in-mospi-national-accounts-statistics",
       "target_report_id": "in-mospi-asuse",
       "relationship_type": "uses_data_from",
@@ -2038,17 +2027,6 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "in-bengaluru-urban-statistical-report",
-      "target_report_id": "in-karnataka-economic-survey",
-      "relationship_type": "uses_data_from",
-      "basis": "Bengaluru Urban district statistical material feeds into and is summarised within the statewide Karnataka Economic Survey and related DES publications.",
-      "evidence_url": "https://bengaluruurban.nic.in/en/document-category/statistical-report",
-      "_batch": [
-        "2026-08-17_India-domestic-batch7-defence-regional-municipal.json"
-      ],
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "in-chhattisgarh-economic-survey",
       "target_report_id": "in-state-gsdp-series",
       "relationship_type": "uses_data_from",
@@ -2083,17 +2061,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "in-pune-dsa",
-      "target_report_id": "in-maharashtra-economic-survey",
-      "relationship_type": "uses_data_from",
-      "basis": "Pune District Social and Economic Review supplies district-level indicators that feed into the statewide Maharashtra Economic Survey.",
-      "evidence_url": "https://mahades.maharashtra.gov.in/district.do?districtname=PUNE",
-      "_batch": [
-        "2026-08-17_India-domestic-batch9-cities-power.json"
-      ],
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "in-surat-district-stats",
       "target_report_id": "in-gujarat-socio-economic-review",
       "relationship_type": "uses_data_from",
@@ -2114,17 +2081,6 @@
         "2026-08-17_India-domestic-batch9-cities-power.json"
       ],
       "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "in-cea-power-supply",
-      "target_report_id": "in-cea-electricity-statistics",
-      "relationship_type": "uses_data_from",
-      "basis": "Monthly Power Supply Position data feed into the annual All India Electricity Statistics – General Review.",
-      "evidence_url": "https://cea.nic.in/power-supply/?lang=en",
-      "_batch": [
-        "2026-08-17_India-domestic-batch9-cities-power.json"
-      ],
-      "evidence_grade": "B"
     }
   ],
   "_dropped": [
@@ -2393,6 +2349,78 @@
       "target": "in-census-india",
       "reason": "no-document",
       "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.indiacode.nic.in/handle/123456789/1519?view_type=search returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"in-census-act-1948\", target_report_id=\"in-census-india\", relationship_type=\"methodology_depends_on\", basis=\"The Census of India is conducted under the legal authority and procedural framework established by the Census Act, 1948 and the rules made thereunder.\", evidence_url=\"https://www.indiacode.nic.in/handle/123456789/1519?view_type=search\", _batch=[\"2026-08-17_India-domestic-batch1.json\"], evidence_grade=\"C\"."
+    },
+    {
+      "edge": "in-jaipur-district-ddp -> in-rajasthan-economic-review",
+      "source": "in-jaipur-district-ddp",
+      "target": "in-rajasthan-economic-review",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Jaipur District Domestic Product and related district tables feed into the Rajasthan Economic Review.\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "in-jaipur-district-ddp",
+        "target_report_id": "in-rajasthan-economic-review",
+        "relationship_type": "uses_data_from",
+        "basis": "Jaipur District Domestic Product and related district tables feed into the Rajasthan Economic Review.",
+        "evidence_url": "https://desddp.rajasthan.gov.in/Publications.aspx",
+        "_batch": [
+          "2026-08-17_India-domestic-batch10-municipal.json"
+        ],
+        "evidence_grade": "C"
+      }
+    },
+    {
+      "edge": "in-bengaluru-urban-statistical-report -> in-karnataka-economic-survey",
+      "source": "in-bengaluru-urban-statistical-report",
+      "target": "in-karnataka-economic-survey",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Bengaluru Urban district statistical material feeds into and is summarised within the statewide Karnataka Economic Survey\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "in-bengaluru-urban-statistical-report",
+        "target_report_id": "in-karnataka-economic-survey",
+        "relationship_type": "uses_data_from",
+        "basis": "Bengaluru Urban district statistical material feeds into and is summarised within the statewide Karnataka Economic Survey and related DES publications.",
+        "evidence_url": "https://bengaluruurban.nic.in/en/document-category/statistical-report",
+        "_batch": [
+          "2026-08-17_India-domestic-batch7-defence-regional-municipal.json"
+        ],
+        "evidence_grade": "C"
+      }
+    },
+    {
+      "edge": "in-pune-dsa -> in-maharashtra-economic-survey",
+      "source": "in-pune-dsa",
+      "target": "in-maharashtra-economic-survey",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"supplies district-level indicators that feed into the statewide Maharashtra Economic Survey\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "in-pune-dsa",
+        "target_report_id": "in-maharashtra-economic-survey",
+        "relationship_type": "uses_data_from",
+        "basis": "Pune District Social and Economic Review supplies district-level indicators that feed into the statewide Maharashtra Economic Survey.",
+        "evidence_url": "https://mahades.maharashtra.gov.in/district.do?districtname=PUNE",
+        "_batch": [
+          "2026-08-17_India-domestic-batch9-cities-power.json"
+        ],
+        "evidence_grade": "C"
+      }
+    },
+    {
+      "edge": "in-cea-power-supply -> in-cea-electricity-statistics",
+      "source": "in-cea-power-supply",
+      "target": "in-cea-electricity-statistics",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Monthly Power Supply Position data feed into the annual All India Electricity Statistics\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "in-cea-power-supply",
+        "target_report_id": "in-cea-electricity-statistics",
+        "relationship_type": "uses_data_from",
+        "basis": "Monthly Power Supply Position data feed into the annual All India Electricity Statistics – General Review.",
+        "evidence_url": "https://cea.nic.in/power-supply/?lang=en",
+        "_batch": [
+          "2026-08-17_India-domestic-batch9-cities-power.json"
+        ],
+        "evidence_grade": "B"
+      }
     }
   ]
 }

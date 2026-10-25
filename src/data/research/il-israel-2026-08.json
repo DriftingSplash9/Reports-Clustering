@@ -627,17 +627,6 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "il-foreign-trade-statistics",
-      "target_report_id": "il-balance-of-payments",
-      "relationship_type": "uses_data_from",
-      "basis": "Monthly goods trade data feed into the goods component of the quarterly Balance of Payments; full goods-and-services aggregates appear in the BOP while the monthly series focus on goods.",
-      "evidence_url": "https://www.cbs.gov.il/en/mediarelease/Pages/2026/Israel-Foreign-Trade-in-Goods-by-Country-February-2026.aspx",
-      "_batch": [
-        "il-batch-02.json"
-      ],
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "il-population-estimates",
       "target_report_id": "il-statistical-abstract",
       "relationship_type": "uses_data_from",
@@ -702,17 +691,6 @@
         "il-batch-03.json"
       ],
       "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "il-industrial-production-index",
-      "target_report_id": "il-national-accounts-gdp",
-      "relationship_type": "uses_data_from",
-      "basis": "Industrial production volume measures contribute to the production-side estimates of GDP and appear among the short-term activity indicators used in national-accounts compilation.",
-      "evidence_url": "https://www.cbs.gov.il/en/Pages/Main-Indicators.aspx",
-      "_batch": [
-        "il-batch-03.json"
-      ],
-      "evidence_grade": "C"
     },
     {
       "source_report_id": "il-average-wages",
@@ -867,6 +845,44 @@
         "il-batch-07.json"
       ],
       "evidence_grade": "B"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "il-foreign-trade-statistics -> il-balance-of-payments",
+      "source": "il-foreign-trade-statistics",
+      "target": "il-balance-of-payments",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Monthly goods trade data feed into the goods component of the quarterly Balance of Payments\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "il-foreign-trade-statistics",
+        "target_report_id": "il-balance-of-payments",
+        "relationship_type": "uses_data_from",
+        "basis": "Monthly goods trade data feed into the goods component of the quarterly Balance of Payments; full goods-and-services aggregates appear in the BOP while the monthly series focus on goods.",
+        "evidence_url": "https://www.cbs.gov.il/en/mediarelease/Pages/2026/Israel-Foreign-Trade-in-Goods-by-Country-February-2026.aspx",
+        "_batch": [
+          "il-batch-02.json"
+        ],
+        "evidence_grade": "C"
+      }
+    },
+    {
+      "edge": "il-industrial-production-index -> il-national-accounts-gdp",
+      "source": "il-industrial-production-index",
+      "target": "il-national-accounts-gdp",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"Industrial production volume measures contribute to the production-side estimates of GDP\". It was graded C and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "il-industrial-production-index",
+        "target_report_id": "il-national-accounts-gdp",
+        "relationship_type": "uses_data_from",
+        "basis": "Industrial production volume measures contribute to the production-side estimates of GDP and appear among the short-term activity indicators used in national-accounts compilation.",
+        "evidence_url": "https://www.cbs.gov.il/en/Pages/Main-Indicators.aspx",
+        "_batch": [
+          "il-batch-03.json"
+        ],
+        "evidence_grade": "C"
+      }
     }
   ]
 }

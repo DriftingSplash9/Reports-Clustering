@@ -133,3 +133,11 @@ round's own record of what was read and decided, for the archive.
 - 0d India, 3 Romania, 5(a) Russian urls: hosts unreachable from this container (above).
 - 4 NUTS: waits for a regional-statistics round, per the handoff.
 - 5(b) further url-collision countries and 6 the EU/JP/CA orphan stock: not reached this session.
+
+## 2026-10-25 — the direction-suspect ruling
+
+- Thomas: "-drop -drop -drop", one per class of `direction-suspect-2026-10-24.json`.
+- All 38 edges moved to `_dropped` in 13 slices (34 `wrong-direction`, 4 containment as `note`), live record kept under
+  `original_edge`; slices backed up to `_to_delete/*.bak-2026-10-25` first. None flipped.
+- `npm run validate` exit 0 before and after: 3,533 → 3,495 dependencies; 1,486 A · 1,424 B · 585 C; zero-edge 964 → 990.
+- Every dropped edge and the 26 newly zero-edge nodes: `direction-drop-2026-10-25.json` in this folder.

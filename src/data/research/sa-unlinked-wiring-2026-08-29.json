@@ -22,14 +22,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "sa-oil-production",
-      "target_report_id": "sa-national-accounts",
-      "relationship_type": "methodology_depends_on",
-      "basis": "GASTAT's Methodology and Quality Report of Oil and Gas Statistics 2025, under 'Coherence - National Accounts', states: \"The Oil and Gas Statistics data are integrated with the requirements of the National Accounts through the use of approved statistical classifications and concepts, supporting the consistency of energy data with related economic indicators. In addition, some publication indicators, such as production data and foreign trade data for refined petroleum products, can be used as supporting and reference data within the framework of compiling related economic indicators.\" This states oil production statistics are compiled to be coherent with, and feed into, National Accounts classifications/concepts.",
-      "evidence_url": "https://www.stats.gov.sa/en/w/methodology-and-quality-report-of-oil-and-gas-statistics-2025",
-      "evidence_grade": "B"
-    },
-    {
       "source_report_id": "sa-oil-exports",
       "target_report_id": "sa-national-accounts",
       "relationship_type": "methodology_depends_on",
@@ -83,6 +75,21 @@
       "target": "sa-population",
       "reason": "note",
       "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): sa-ghg carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://unfccc.int/sites/default/files/resource/7123846_Saudi%20Arabia-NC4-1-Fourth%20National%20Communication%20NC4%20Kingdom%20of%20Saudi%20Arabia%20March%202022.pdf. Original basis: \"Saudi Arabia's Fourth National Communication (NC4) to the UNFCCC — the underlying national submission behind the compiled GHG-profile figures represented by the sa-ghg node — states in its National Circumstances chapter: \"The total population of Saudi Arabia in 2019 stands at 34.2 million out of which males were 19.7 million and females are 14.5 million.\" cited to (GASTAT, 2019), with further demographic detail also cited to GASTAT 2018/2019. This shows the national GHG-inventory report draws its population figures (needed for per-capita emissions and national-circumstances framing) directly from GASTAT population statistics.\""
+    },
+    {
+      "edge": "sa-oil-production -> sa-national-accounts",
+      "source": "sa-oil-production",
+      "target": "sa-national-accounts",
+      "reason": "wrong-direction",
+      "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: input-recorded-as-consumer — an input recorded as the consumer; the basis itself says the source FEEDS or SUPPLIES the target, so the real dependency runs the other way. The edge's own basis said: \"oil production statistics are compiled to be coherent with, and feed into, National Accounts\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+      "original_edge": {
+        "source_report_id": "sa-oil-production",
+        "target_report_id": "sa-national-accounts",
+        "relationship_type": "methodology_depends_on",
+        "basis": "GASTAT's Methodology and Quality Report of Oil and Gas Statistics 2025, under 'Coherence - National Accounts', states: \"The Oil and Gas Statistics data are integrated with the requirements of the National Accounts through the use of approved statistical classifications and concepts, supporting the consistency of energy data with related economic indicators. In addition, some publication indicators, such as production data and foreign trade data for refined petroleum products, can be used as supporting and reference data within the framework of compiling related economic indicators.\" This states oil production statistics are compiled to be coherent with, and feed into, National Accounts classifications/concepts.",
+        "evidence_url": "https://www.stats.gov.sa/en/w/methodology-and-quality-report-of-oil-and-gas-statistics-2025",
+        "evidence_grade": "B"
+      }
     }
   ]
 }

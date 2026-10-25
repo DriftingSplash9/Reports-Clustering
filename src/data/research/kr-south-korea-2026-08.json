@@ -1249,15 +1249,6 @@
  ],
  "dependencies": [
   {
-   "source_report_id": "kr-statistics-act",
-   "target_report_id": "kr-kostat",
-   "relationship_type": "cites",
-   "basis": "KOSIS states Korea's official statistics, including designated statistics administered by KOSTAT, are approved under Article 18/20 of the Statistics Act.",
-   "evidence_url": "https://kosis.kr/eng/aboutKosis/officialStatisticsStatus.do",
-   "evidence_quote": "officially approved under the Article 18 (or Article 20) of the Statistics Act.",
-   "evidence_grade": "B"
-  },
-  {
    "source_report_id": "kr-national-accounts-bok",
    "target_report_id": "kr-mining-manufacturing-survey",
    "relationship_type": "uses_data_from",
@@ -1383,6 +1374,22 @@
    "target": "kr-gender-statistics",
    "reason": "wrong-direction",
    "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now kr-gender-statistics -> kr-eaps (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. e-나라지표's women's economic-activity indicator lists '자료 출처 : 경제활동인구조사' — the gender statistics draw on the EAPS."
+  },
+  {
+   "edge": "kr-statistics-act -> kr-kostat",
+   "source": "kr-statistics-act",
+   "target": "kr-kostat",
+   "reason": "wrong-direction",
+   "why": "DROPPED 2026-10-25 on Thomas's ruling ('drop' for all three classes of the direction-suspect list, Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json). Class: instrument-as-dependent — an Act, constitution or regulation recorded as depending on the report, plan or agency it requires or creates; the basis itself says the instrument is the source of the obligation, so the real dependency runs the other way. The edge's own basis said: \"approved under Article 18/20 of the Statistics Act\". It was graded B and no edge in the reverse direction existed. Not flipped: the ruling is to drop, and a reverse edge would need its own document. The original live record is kept verbatim under `original_edge`.",
+   "original_edge": {
+    "source_report_id": "kr-statistics-act",
+    "target_report_id": "kr-kostat",
+    "relationship_type": "cites",
+    "basis": "KOSIS states Korea's official statistics, including designated statistics administered by KOSTAT, are approved under Article 18/20 of the Statistics Act.",
+    "evidence_url": "https://kosis.kr/eng/aboutKosis/officialStatisticsStatus.do",
+    "evidence_quote": "officially approved under the Article 18 (or Article 20) of the Statistics Act.",
+    "evidence_grade": "B"
+   }
   }
  ]
 }
