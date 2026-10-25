@@ -1,0 +1,91 @@
+{
+  "results": [
+    {
+      "source": "esa-2010",
+      "target": "nace-rev2",
+      "file": "eu-statutes-and-de-hicp-2026-09-15.json",
+      "basis": "SELF-DECLARED: ESA 2010's own Annex A, Chapter 2, on the classification of local KAUs into industries — the document is Regulation (EU) No 549/2013, published by ESA 2010's own publisher, the European Parliament and the Council. This CLOSES a lead open since the esa2010-methodology-stack round, which recorded the edge `no-node-yet` because no NACE node existed; `nace-rev2` was minted in the Poland round on 2026-09-11 and the note is rewritten `resolved` in that file. The quote chosen is Annex A 2.147's flat statement rather than Annex A 1.22 ('The ESA 2010 contains EU-specific classifications, e.g. ... NACE Rev. 2 for industries'), which the live `esa-2010 -> cpa` edge already cites and which qualifies its own claim with a parenthetical about harmonisation. Relationship type is `methodology_depends_on` rather than the `legal_basis` the sibling `esa-2010 -> cpa` edge carries: NACE is the classification ESA's industry accounts are built on, not the act ESA rests on. ROUTE: EUR-Lex answers this container with an AWS WAF challenge (HTTP 202, zero bytes) on every legal-content URL tried, so the act was read from CELLAR, the Publications Office's own repository. The cited URL is the one an `Accept: application/xhtml+xml` + `Accept-Language: eng` negotiation on `publications.europa.eu/resource/celex/<CELEX>` RESOLVES to — a `resource/cellar/<uuid>/DOC_1` document a plain GET reads with no header at all, which is what a later grader run will issue. First-party publisher, direct read, no archive in the chain; `playbook/corpus-route.md`'s B cap is for archived snapshots and does not apply. QUOTE SHAPE, AND WHY IT IS TWO FRAGMENTS: the second fragment alone graded B `artefact-named-elsewhere-in-document` at coverage 1.0. `nace-rev2`'s title-lead is 'NACE Rev. 2', which `tokenise` reduces to three tokens, and the run rule needs about seven contiguous words of the full title — so a window carrying only the short name cannot name the target however clearly a reader sees it. The first fragment is Annex A 1.19's statement that the ESA employs the classification, and it carries the statutory name in full. WORTH KNOWING BEFORE ANYONE RE-READS THIS: ESA 2010 writes that name as 'Statistical classification of economic activities in the European UNION', while the node carries 'European COMMUNITY', which is Regulation (EC) No 1893/2006's own wording and the right title for the node. The run rule clears the 60% bar on the eight words the two spellings share, so the mismatch costs nothing here — but a future edge resting on a shorter span of that name may land on the wrong side of it. Both fragments are from the same act and neither is doing work the other could not check: the first names the artefact, the second states what ESA uses it for. Graded A, `quote-found-artefact-named`, on a live re-fetch 2026-09-15.",
+      "evidenceUrl": "http://publications.europa.eu/resource/cellar/41239b25-9bba-4c36-9b25-926d90511bb3.0007.02/DOC_1",
+      "evidenceQuote": "the ESA 2010 employs concepts and classifications (e.g. Statistical classification of economic activities in the European Union…The classification used for grouping local KAUs into industries is the NACE Rev. 2.",
+      "targetReport": {
+        "id": "nace-rev2",
+        "title": "NACE Rev. 2 — Statistical Classification of Economic Activities in the European Community",
+        "title_aliases": [
+          "Statistical Classification of Economic Activities in the European Community"
+        ],
+        "publisher": "European Parliament and Council of the European Union",
+        "country": "EU",
+        "jurisdiction_level": "supranational",
+        "kind": "standard",
+        "releases_per_year": 0.05,
+        "region": "European Union",
+        "description": "The EU's statutory industry classification, established by Regulation (EC) No 1893/2006 and derived from ISIC. Every EU member state's national activity classification is built on it; Poland's PKD 2007 is the first one wired here. Minted 2026-09-11 in the Poland round — the corpus had ISIC, NAICS, ANZSIC and CPA but no NACE node at all, despite 21 EU countries in the graph.",
+        "cadence_note": "Revised about once a generation (Rev. 1 1990, Rev. 1.1 2002, Rev. 2 2006, Rev. 2.1 2023); 0.05 is that rate written as a number.",
+        "last_updated": null,
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32006R1893",
+        "domains": [
+          "national-accounts",
+          "industry"
+        ]
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "publications.europa.eu",
+      "status": 200,
+      "finalUrl": "http://publications.europa.eu/resource/cellar/41239b25-9bba-4c36-9b25-926d90511bb3.0007.02/DOC_1",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 2410683,
+      "extractor": "html",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "the ESA 2010 employs concepts and classifications (e.g. Statistical classification of economic activities in the European Union…The classification used for grouping local KAUs into industries is the NACE Rev. 2.",
+      "naming": "title-run:8/12",
+      "window": "1.22 The concepts in the ESA 2010 are harmonised with those in other social and economic statistics because the ESA 2010 employs concepts and classifications (e.g. Statistical classification of economic activities in the European Union ‧NACE rev.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    },
+    {
+      "source": "esa-2010",
+      "target": "un-copni-1999",
+      "file": "uz-metadata-sheets-2026-10-24.json",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-24, closing the second half of the COPNI lead (uz-classifications-2026-09-16.json said 'A COPNI node would also take an in-edge from ESA 2010'). ESA 2010 itself — Regulation (EU) No 549/2013, Annex A — lists COPNI among the functional classifications it uses, ¶23.05, and ¶22.17 says 'For describing and analysing the expenditure of private non-profit institutions serving households, COPNI is used.' ¶23.01 adds that the ESA's classifications are 'fully in line with' COPNI among others. ROUTE: CELLAR's English expression of the act (HTTP 200, 15.8 MB), as the slice's other ESA edges cite; EUR-Lex answers this container HTTP 202 with no body. Quote verbatim from ¶23.05.",
+      "evidenceUrl": "http://publications.europa.eu/resource/cellar/41239b25-9bba-4c36-9b25-926d90511bb3.0007.02/DOC_1",
+      "evidenceQuote": "Apart from COFOC and Coicop, the functional classifications include also COPNI (classification of the purposes of non-profit institutions serving households) and COPP (classification of outlays of producers by purpose).",
+      "targetReport": {
+        "id": "un-copni-1999",
+        "title": "Classification of the Purposes of Non-Profit Institutions Serving Households (COPNI)",
+        "publisher": "United Nations Statistics Division",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "kind": "standard",
+        "region": "International",
+        "description": "The United Nations classification of the outlays of non-profit institutions serving households by purpose. One of the four classifications of expenditure according to purpose published together as Statistical Papers Series M No. 84 (ST/ESA/STAT/SER.M/84), with COFOG, COICOP and COPP. UNSD's classification registry records it as operational, adopted 1999 and published 2000 (read 2026-10-24, HTTP 200). Minted 2026-10-24: Uzbekistan's national-accounts sheet names it beside COICOP and COFOG, which closed the `uz-national-accounts -> COPNI` lead.",
+        "cadence_note": "Not a periodic release. Adopted 1999, published 2000 in Series M No. 84; no later revision is recorded in the registry.",
+        "last_updated": null,
+        "url": "https://unstats.un.org/unsd/classifications/Family/Detail/6",
+        "domains": [
+          "national-accounts"
+        ]
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "publications.europa.eu",
+      "status": 200,
+      "finalUrl": "http://publications.europa.eu/resource/cellar/41239b25-9bba-4c36-9b25-926d90511bb3.0007.02/DOC_1",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 2410683,
+      "extractor": "html",
+      "via": "",
+      "quote": "yes",
+      "coverage": 1,
+      "bestSpan": "Apart from COFOC and Coicop, the functional classifications include also COPNI (classification of the purposes of non-profit institutions serving households) and COPP (classification of outlays of producers by purpose).",
+      "naming": "title-run:9/9",
+      "window": "23.05 Apart from COFOC and Coicop, the functional classifications include also COPNI (classification of the purposes of non-profit institutions serving households) and COPP (classification of outlays of producers by purpose). These classifications are used for functional analysis of the expenditure by corporations, government, households and non-profit institutions serving households and for functional satellite accounts.",
+      "grade": "A",
+      "reason": "quote-found-artefact-named"
+    }
+  ]
+}

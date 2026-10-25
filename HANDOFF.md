@@ -14,7 +14,8 @@ record. The gauge is the read-cost percentage in §1, not a character count.
 Last updated: 2026-10-17 (**handoff 088** — the superseded state is
 `archive/Previous Handoffs/handoff088.md`, copied and sha256-verified before this rewrite; the archive now
 holds 88 files. **88 is not divisible by 5, so no sweep ran; the next full sweep is handoff 090.** Follows the
-`housing-policy` round, 2026-10-17.)
+`housing-policy` round, 2026-10-17. §2 and §3 were then edited mid-round on 2026-10-24 by a cloud session working the
+agent todo list; no handoff was written, so 088 is still the last archived state.)
 
 ---
 
@@ -91,13 +92,22 @@ grew this round.)*
 
 ## 2. Current state
 
-Corpus **3,704 reports / 3,504 dependencies**, recounted by `npm run validate` on 2026-10-18 after lane 0a steps (1)-(4), Slovakia, Türkiye, Finland, France and the VOA split. **1,463 A · 1,439 B ·
-602 C**, A-share 41.8%. **Domains: 47 approved, 0 proposed** (`housing-policy` added 2026-10-17). **`validate` exits 0.**
-**128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated (all 2026-10-18). **965 zero-edge
-nodes** — recounted as `grep -c "has no edges in either direction"` over `validate`'s output; it is not a line `validate`
-prints. NODE URLS **1,015 bare / 450 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
+Corpus **3,720 reports / 3,533 dependencies**, recounted by `npm run validate` on 2026-10-24 after the cloud session's
+round (next paragraph). **1,486 A · 1,446 B · 601 C**, A-share 42.1%. **Domains: 47 approved, 0 proposed** (`housing-policy`
+added 2026-10-17). **`validate` exits 0.** **128/128 logic tests**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated
+(all 2026-10-24, in the cloud container). **964 zero-edge nodes** — recounted as `grep -c "has no edges in either direction"`
+over `validate`'s output; it is not a line `validate` prints. NODE URLS **1,015 bare / 450 zero-edge, 96 index-page, 23 with no url** (three deliberate: Uzbekistan's two
 classifiers and `cn-labour-force-survey`). Url collisions **86 groups / 224 nodes** (`scripts/measure-url-collisions.ts`).
 Recount from the tools, never carry a figure.
+
+**This round, in progress: the cloud session of 2026-10-24** (Thomas: *"go ahead with the agent todo list"*), worked from a
+claude.ai cloud container, not this machine. +16 nodes, +29 dependencies across four new or touched slices:
+`pl-finance-ministry-2026-10-24.json` (Poland's Ministry of Finance layer), `uz-metadata-sheets-2026-10-24.json` (all 216
+stat.uz metadata sheets read; four new UN hubs: Vital Statistics Rev. 3, IRTS 2008, IRES, COPNI), plus edges in
+`housing-national-gaps`, `pl-poland`, `eu-statutes-and-de-hicp` and `h1-housing-benefits`. **TLS verification stayed on**: the
+grader's `-k` retry (`grade-evidence.ts:1746`) was neutralised by a session-only `curl` wrapper, so hosts with broken chains
+(`.gov.in`, standart.uz) were not read. Item 1's scan produced a ruling list, not edits. What was read, tried and graded:
+`Claude outputs/cloud-2026-10-24/session-log-2026-10-24.md`; grader outputs in the same folder.
 
 **Last round: `housing-policy`, 2026-10-17 — CLOSED; a tagging round, no node or edge changed.** Thomas asked to single out
 anything that influences the housing and rental markets, not only price or rent controls. **Two tags, one per meaning:**
@@ -144,7 +154,22 @@ is the recipe and it worked again on 2026-09-15.)*
 
 ### [Thomas]
 
-Nothing is waiting on a ruling.
+1. **38 live edges whose own `basis` states the opposite direction** — `Claude outputs/cloud-2026-10-24/direction-suspect-2026-10-24.json`
+   (item 1's scan; nothing changed). 10 have an Act or constitution recorded as depending on the report, plan or agency it
+   requires or creates (Japan's Basic Acts → their White Papers, Taiwan's Statistics Act → DGBAS …); 24 have an input recorded
+   as the consumer (Brazil's PNAD Contínua, PIA, PAC, PAIC, RTN → SCN; Russian sector volumes → GRP; Indian district reports →
+   state surveys …); 4 are containment. All B or C; 34 from the August import; no reverse edge exists for any. The 2026-09-04
+   JP/KR flips and the 2026-09-05 India flips were made on your ruling; the same is needed here: flip, drop, or leave.
+2. **`kind: instrument` holds ~490 nodes that are not instruments** — surveys, censuses, classifications, agencies, BOP. The
+   2026-09-03 backfill set every node without `releases_per_year` to `instrument` (`types.ts`, comment on `kind`). Recount: kind
+   `instrument` whose title carries no legal word (Act, Law, Regulation, Decree, Order, Code …). A data fix per `types.ts`, but
+   a `publication` must carry `releases_per_year`, so it is a ruling on how, not a sweep to start unasked.
+3. **Aliases that would move grades** — `gb-stevenage-nndr1 -> gb-voa-rating-lists` went B→A on 2026-10-18 through alias
+   `non-domestic rating list` matching only "rating list" (2 of its 3 tokens), not `local rating list` as its basis says; that
+   alias fires on any text with "rating list", the VOA's central list included. Three edges from this round sit at B for the
+   same kind of reason and an alias would lift each: `pl-pkwiu-2015 -> cpa` ("Classification of Products by Activity"),
+   `on-portable-housing-benefit -> cmhc-rental-market-survey` ("the rental market survey conducted annually by the Canada
+   Mortgage and Housing Corporation"), and the two ICLS edges (title written with a comma). No alias was added.
 
 ### [Agent]
 
@@ -232,7 +257,19 @@ Nothing is waiting on a ruling.
    unwired: nothing read names a statistic built on it. **Leads:** a national balance-sheet node would take the NHPI's stock-deflation
    use (a `no-document` note in the slice), and the CPI rent-component methodology was not reached. New nodes take
    `housing` or `housing-policy` under the existing bar. `notes/housing-policy-dryrun-2026-10-17.md`.
-0b. **POLAND — RETURNED 2026-10-06; the blocker is gone.** `https://www.gov.pl/web/finanse` loaded in Chrome with no
+   **2026-10-24 (cloud):** `statcan-cpi -> statcan-lfs` (A; the CPI paper ¶5.25, rent prices "come from the Labour Force
+   Survey") and `statcan-national-accounts -> statcan-nhpi` (A; the macro-accounts User Guide's Table 7.1 deflator) are live;
+   the old `no-document` note on the second is `resolved`. The NHPI's stock-deflation use still wants a balance-sheet node.
+   **Japan is negative:** MLIT's RPPI method PDFs (EN and JA) never name the Handbook and the BIS row is agency-only; note in
+   the hub slice, no node. Eurostat's `prc_hpi_esms.htm` 404 is moot (`eurostat-hpi` reads `prc_hpi_inx_esms.htm`). Korea's REB
+   host closed the tunnel from the cloud container.
+0b. **POLAND — WORKED 2026-10-24 (cloud), what is left:** the state budget execution report (page found, PDF not opened)
+   and the Public Finance Act's CPI-indexation rules (consolidated text answered 403), both leads in
+   `pl-finance-ministry-2026-10-24.json`; lead 3 below untouched. **Done:** the Debt Management Strategy and the MTFSP are
+   minted and wired (3 A edges, plus the Public Finance Act and Regulation (EU) 2024/1263 as nodes); lead 1 is NEGATIVE (GUS
+   titles its release "Obroty towarowe handlu zagranicznego ogółem i według krajów", not NBP's "Foreign Trade Statistics");
+   lead 2 is wired (`pl-pkwiu-2015 ->` NACE A, CN A, CPA B, PKD 2007 B, from Dz.U. 2015 poz. 1676 §4.2). The text below is the
+   item as it stood. **POLAND — RETURNED 2026-10-06; the blocker is gone.** `https://www.gov.pl/web/finanse` loaded in Chrome with no
    prompt. Two layers. **The Ministry of Finance layer**, never researched: the Debt Management Strategy (the Council of
    Ministers adopted *"Strategię zarządzania długiem sektora finansów publicznych w latach 2027-2030"* on 29.09.2026, per
    the ministry's own news list), the state budget execution report, and the Medium-Term Fiscal-Structural Plan. **And the
@@ -245,7 +282,11 @@ Nothing is waiting on a ruling.
       regulation (Dz.U. 2015 poz. 1676). Note that `cpa` now has a second in-edge from
       `eurostat-prodcom`, so it is no longer a one-edge node.
    3. **NBP's IIP and external-debt series** — real, evidence already read, deliberately not minted.
-0c. **UZBEKISTAN follow-ons.** (a) **`standart.uz`, not lex.uz** — the two classifier nodes
+0c. **UZBEKISTAN follow-ons — (b) and (d) DONE 2026-10-24 (cloud)**: all 216 sheets fetched and searched; 8 indicator nodes
+   and 4 UN hubs minted, 19 edges (15 A) in `uz-metadata-sheets-2026-10-24.json`, COPNI wired from Uzbekistan and from ESA 2010.
+   Still open: (a) standart.uz fails TLS verification from the cloud container too; (c) the current CPI sheet (p82574) still
+   says only "special surveys"; ISCED 2011 (four sheets name it) wants a node, but UNESCO's title could not be read from the
+   container. About twenty more demographic sheets wire the same way if minted. As it stood: (a) **`standart.uz`, not lex.uz** — the two classifier nodes
    (`uz-oked`, `uz-coicop`) carry no url because Uzbek classifiers are Uzstandard standards rather
    than legal acts; the lex.uz search is done and negative, do not repeat it. (b) **~190 more
    metadata sheets** on stat.uz, same ESMS shape, each naming a methodological parent — ten read so
@@ -253,34 +294,48 @@ Nothing is waiting on a ruling.
    because the CPI sheet names the HIES frame and the weight source in separate sentences and never
    joins them. (d) **COPNI has no node** and is named beside COICOP and COFOG on the
    national-accounts sheet — it would also take an in-edge from ESA 2010. `notes/uzbekistan-2026-09-16.md`.
-0d. **INDIA follow-ons, all cheap.** (a) **Four more NADA study pages match no existing node and carry the
+0d. **INDIA follow-ons, all cheap** — not attempted 2026-10-24: every `.gov.in` host fails TLS verification from the cloud
+   container, and the `-k` recipe was not used there. On this machine the recipe stands. (a) **Four more NADA study pages match no existing node and carry the
    same frame sentence** — Time Use Survey (catalog 236), the education and telecom modular surveys (255,
    239), participation in education (300). One fetch each, `curl -k`. (b) **NIC-2008 has no node** and both
    the IIP and ASI cite it; only NIC-2025 exists, which is the wrong target. Needs MoSPI's own page, so the
    browser. (c) **The Sixth Economic Census** is named by ASUSE as its rural stratification source and has
    no node. (d) **`mahades.maharashtra.gov.in` is readable with `-k`** — five orphan nodes nobody has tried.
    `notes/india-nss-frames-2026-09-16.md`.
-1. **Grep the August 2026 import for instrument-as-dependent pairs.** The India round found
+1. **DONE 2026-10-24 as a scan; the result is [Thomas] item 1.** As it stood: **Grep the August 2026 import for instrument-as-dependent pairs.** The India round found
    `in-collection-of-statistics-act-2008 -> in-mospi-asi` recorded backwards — the Act depending on
    the survey it authorises. If the import did it once it may have done it at scale, and a
    wrong-direction edge is invisible to every check the validator runs. One pass over `_dropped` and
    live edges whose target is `kind: instrument`. **The granularity round raises the odds:** the same
    import recorded containment as a dependency at least five times (the Rosstat appendices).
-2. **Czechia and Albania** still lack the `eurostat-hicp` feed edge. Both ESMS pages were read in
+2. **Czechia only, since 2026-10-24**: `eurostat-hicp -> al-instat-cpi-hicp` is live at B, from INSTAT's own release footnote
+   (Eurostat publishes INSTAT's indices rounded), which implies the transmission rather than stating it. Three more CZSO
+   documents were read and none says CZSO transmits (note in `eu-statutes-and-de-hicp-2026-09-15.json`). As it stood:
+   **Czechia and Albania** still lack the `eurostat-hicp` feed edge. Both ESMS pages were read in
    full: neither carries a country-specific transmission sentence, only the all-NSI boilerplate.
    They need the NSI's own page, the way Sweden's came off SCB's.
-3. **Romania's IAPC node.** The cloud container cannot reach `insse.ro` (curl exit 35) while Thomas's
+3. **Romania's IAPC node.** (Re-probed 2026-10-24 from a different cloud container: the proxy tunnel to `insse.ro` closed, same
+   result.) The cloud container cannot reach `insse.ro` (curl exit 35) while Thomas's
    Chrome renders it first try. Two guessed paths for the IAPC's own page 404'd, so it needs someone
    to find the right page — the host is no longer the obstacle.
 4. **NUTS**, unchanged: Regulation (EC) No 1059/2003 is fetched and read and deliberately NOT
    minted, because nothing in the corpus yet names NUTS as its own basis. A regional-statistics
    round opens it with one CELLAR fetch.
-5. **Granularity leftovers.** (a) Two urls blocked on THIS machine's route, not on the sites:
+5. **Granularity leftovers.** (a) Two urls blocked on THIS machine's route, not on the sites (and on the 2026-10-24 cloud
+   container's too, where both tunnels closed):
    `ru-med-socio-economic-development-forecast` (`economy.gov.ru`) and `ru-dia-deposit-insurance-agency` → its own
    homepage `www.asv.org.ru` (an institution's url is its homepage; it will add 1 to the bare-homepage count, by
    design). Not written blind. (b) **86 url groups / 224 nodes still collide corpus-wide**; the six done were the largest.
    Any further country: dry-run with the two scripts, classify first, write, re-grade.
-5b. **`housing-policy` follow-ons** (domain added and 49 nodes tagged 2026-10-17). (a) Two C edges whose formula is already
+5b. **`housing-policy` follow-ons — 2026-10-24 (cloud):** (a) the Ontario edge is B, re-cited to the regulation's own Word copy
+   (`ontario.ca/laws/docs/110367_e.doc`, quote verbatim), so only the LA/amlegal edge still needs your browser; a headless
+   render of amlegal was refused as bot-check circumvention and not retried. (b) both urls still 404; Edmonton's bylaw lookup
+   fills from data the page does not expose, and LIRS's legislation page has no Land Use Charge Law. (c) CONFIRMED: tier 4 with
+   every country opened and only `housing-policy` selected reads "50 shown · 3708 in this tier · filter hiding 3658" (50 now,
+   with `fhfa-conforming-loan-limits`), and the settled render shows the Canadian and US clusters; 45 are drawn and the other 5
+   are zero-edge nodes shelved under "Unlinked", so the counter counts nodes that are not in the scene. Screenshot:
+   `Claude outputs/cloud-2026-10-24/housing-policy-everything-tier.png`. (d) not touched. As it stood:
+   **`housing-policy` follow-ons** (domain added and 49 nodes tagged 2026-10-17). (a) Two C edges whose formula is already
    verbatim in the basis need a browser read for an `evidence_quote`: `on-portable-housing-benefit -> cmhc-rental-market-survey`
    (Ontario e-Laws) and `la-city-rso-allowable-increase -> bls-cpi-los-angeles` (amlegal, Cloudflare). (b) Two dead node urls:
    `ng-lagos-luc-law-2018`, `edmonton-tax-rate-bylaw` (404). (c) **Confirm the 49 at the "Everything" tier** with the browser pane VISIBLE (a hidden pane throttles the
