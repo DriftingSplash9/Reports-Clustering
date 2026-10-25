@@ -141,3 +141,26 @@ round's own record of what was read and decided, for the archive.
   `original_edge`; slices backed up to `_to_delete/*.bak-2026-10-25` first. None flipped.
 - `npm run validate` exit 0 before and after: 3,533 → 3,495 dependencies; 1,486 A · 1,424 B · 585 C; zero-edge 964 → 990.
 - Every dropped edge and the 26 newly zero-edge nodes: `direction-drop-2026-10-25.json` in this folder.
+
+## 2026-10-25 — international standard-setters: IFRS and FATF
+
+- Thomas: "start 1" — the `REPORTS.md` "not yet run" bodies, IFRS and FATF first.
+- Corpus scan (grep over every slice): no node for FSB, IOSCO, IAIS, FATF, ISO, IFRS, Codex or the G20 DGI. IFRS mentions:
+  six slices, among them a 2026-08 note `psab-psas -> ifrs` (wrong-target) saying no node is governed by IFRS. FATF: none;
+  "money laundering" only in the NDB AML policy node.
+- IFRS title from ifrs.org (HTTP 200): "IFRS Accounting Standards"; "International Financial Reporting Standards®" is in
+  the Foundation's own trade-mark list on every page. The Navigator offers yearly sets 2021–2026, Issued and Required.
+- Read and wired (all TLS on, all HTTP 200): IPSASB Preface June 2026 (8 pp, ¶13); NDB Annual Report 2024 (168 pp, note 2);
+  LGFA Annual Report 2026 (86 pp); Wolverhampton SoA 2024-25 (311 pp, policy 1); xrb.govt.nz framework page; Basel LEV
+  standard PDF (35 pp, LEV30.8 fn 3). Basel's old /basel_framework/chapter/ urls redirect to /committees/bcbs/basel-framework/.
+- Read, no edge: NBE Annual Report 2024/25 (255 pp; fetched in 4 MB byte ranges after two connection resets; no "IFRS");
+  Watercare Annual Report 2025/26 (PBE Standards based on IPSAS; XRB A1 lead); QSFS IMDB (no named standard); NDB AML
+  policy (FATF as a body only); Basel CAP90 (ECL accounting, no standard named).
+- Not read: cipfa.org (Cloudflare challenge, 403, not worked around); www.imf.org MFSMCG PDF (403); lgfa.co.nz's old
+  annual-reports url (403 "Access Denied" — the page moved).
+- Grader dry run (`--edges`, 8 pairs including the two live edges sharing the NDB and Wolverhampton urls): 7 A, 1 C (the
+  C is the existing unquoted `ndb-annual-report -> brics-ndb-agreement-2014`, already C). Output: `grade-ifrs-2026-10-25.json`.
+- The title hazard: `namesTarget` on a control sentence with no IFRS in it ("applicable accounting standards issued by the
+  national board") returns `title-run:2/3`. Basel's A came that way, from "the lease accounting standards" in an FAQ, so it
+  is hand-graded B. On the cached windows, Wolverhampton and XRB name the alias 4/4, so their A's stand.
+- validate exit 0: 3,721 reports, 3,501 dependencies, 1,491 A · 1,425 B · 585 C, 990 zero-edge; tsc clean.
