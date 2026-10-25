@@ -310,6 +310,24 @@
       "evidence_url": "https://www.tcmb.gov.tr/wps/wcm/connect/b8f5d6e6-2a1e-4b8d-8b9b-d83199181600/RPPI-Metadata.pdf?MOD=AJPERES",
       "evidence_quote": "Eurostat (2011), Handbook on Residential Property Prices Indices",
       "evidence_grade": "B"
+    },
+    {
+      "source_report_id": "statcan-cpi",
+      "target_report_id": "statcan-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-24 (housing lane 0a, the CPI rent-component lead). Statistics Canada's own CPI Reference Paper (Catalogue 62-553-X, 2023), paragraph 5.25, says the rent price index takes its prices from the Labour Force Survey (footnote 46: 'Statistics Canada, Survey 3701'); paragraph 7.23 adds that the rent index's hedonic model is estimated on monthly cross-sections of the LFS data. Read live from the cited PDF (HTTP 200), quote verbatim. Grader 2026-10-24 (dry run, --edges, with the slice's other three statcan-cpi edges on the same PDF so the evidence-cache record keeps all four): A, quote-found-artefact-named, naming title-run:3/3.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62-553-x/62-553-x2023001-eng.pdf",
+      "evidence_quote": "The prices used to calculate the rent price index come from the Labour Force Survey, which uses a probabilistic sample.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "statcan-nhpi",
+      "relationship_type": "uses_data_from",
+      "basis": "SELF-DECLARED: RESEARCHED 2026-10-24 (housing lane 0a, the NHPI national-accounts lead). Statistics Canada's own 'User Guide: Canadian System of Macroeconomic Accounts' (Catalogue 13-606-G), section 7.4.2 'Income and expenditure accounts deflation', says the GDP-by-expenditure table of the income and expenditure accounts (this node, IMDB record 1901) is deflated mostly by price indexes, and its Table 7.1 'Level of detail in the compilation of real GDP' gives 'NHPI, MLS' as the 'Main deflator source' for residential structures investment expenditure. The table's footnote expands it: \"NHPI = new housing price index\". A methodology table cell naming a source grades as a caption (PLAYBOOK-CORPUS 7a). The guide's chapters date from 2016, some updated 22 February 2021; it is still the current edition on Statistics Canada's site. The 'MLS' in the same cell is NOT wired: the footnote calls it the 'multiple listing service price index', which is not the title of CREA's MLS Home Price Index (crea-mls-hpi). Read live from the cited PDF (HTTP 200), quote verbatim from the table row. Grader 2026-10-24 (dry run, --edges): A, quote-found-artefact-named, naming title-run:4/4 (the footnote's expansion, within the ±400-character window of the table row).",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/13-606-g/13-606-g2016001-eng.pdf",
+      "evidence_quote": "Residential structures investment expenditure 3 NHPI, MLS",
+      "evidence_grade": "A"
     }
   ],
   "_dropped": [
@@ -317,8 +335,8 @@
       "edge": "statcan-national-accounts -> statcan-nhpi",
       "source": "statcan-national-accounts",
       "target": "statcan-nhpi",
-      "reason": "no-document",
-      "why": "RESEARCHED 2026-10-17 (housing lane 0a step 4). The NHPI's own IMDB page says the series are used by 'Canada's System of Macroeconomic Accounts' to deflate the national housing stock. That names the whole accounts system, not the 'National Economic Accounts (Quarterly)' release this node is. A stock-deflation use belongs to the national balance sheet accounts, which have no node. A lead if one is minted."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-10-24: the edge is now live, from a different document. Statistics Canada's User Guide to the Canadian System of Macroeconomic Accounts (13-606-G), Table 7.1, names the NHPI as the main deflator for residential structures investment in real GDP by expenditure, which is this node's release. The stock-deflation use below is still unwired: no national balance sheet node exists. ORIGINAL NOTE: RESEARCHED 2026-10-17 (housing lane 0a step 4). The NHPI's own IMDB page says the series are used by 'Canada's System of Macroeconomic Accounts' to deflate the national housing stock. That names the whole accounts system, not the 'National Economic Accounts (Quarterly)' release this node is. A stock-deflation use belongs to the national balance sheet accounts, which have no node. A lead if one is minted."
     },
     {
       "edge": "tr-cbrt-rppi -> (TURKSTAT household numbers)",

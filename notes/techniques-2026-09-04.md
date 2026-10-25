@@ -55,6 +55,11 @@ and copy it back to the mounted repo afterwards (`public/` is not symlinked).
   `.evidence-fulltext/`, or you are re-grading the old failure.
 - **A WAF block looks like content at a glance** — HTTP 200 with a JS-challenge
   shell. Confirm with `file` on the downloaded body, not the status code.
+- **Ontario e-Laws (`ontario.ca/laws/regulation/<id>`) is a JavaScript shell to curl;
+  the same act as Word is at `ontario.ca/laws/docs/<id>_e.doc`** (HTTP 200 on
+  2026-10-24, no challenge), and the grader reads `.doc`. Cite the Word copy and say
+  so in the basis. Hit twice: the 2026-10-17 node checks and
+  `on-portable-housing-benefit -> cmhc-rental-market-survey`.
 - **Archived snapshots**: fetch with the `id_` suffix (`web/<ts>id_/<url>`) or
   the archive's own toolbar becomes text you are matching quotes against.
   Gate every availability lookup through one global ~1.2 s throttle, retry a
